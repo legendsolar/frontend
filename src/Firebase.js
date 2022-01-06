@@ -22,7 +22,6 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 const auth = getAuth();
-connectAuthEmulator(auth, "http://localhost:9099");
 
 const AuthContext = createContext();
 
@@ -46,7 +45,10 @@ const useAuthState = () => {
 // Get a reference to the database service
 const database = getDatabase(firebaseApp);
 
-connectDatabaseEmulator(database, "localhost", 9000);
-
+const emulator = false;
+if (emulator) {
+    connectAuthEmulator(auth, "http://localhost:9099");
+    connectDatabaseEmulator(database, "localhost", 9000);
+}
 // Export Firebase singletons
 export { firebaseApp, database, auth };
