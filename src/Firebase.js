@@ -1,11 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase, connectDatabaseEmulator } from "firebase/database";
-import { getAuth, connectAuthEmulator } from "firebase/auth";
 
-const auth = getAuth();
-connectAuthEmulator(auth, "http://localhost:9099");
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import {
+    getAuth,
+    onAuthStateChanged,
+    connectAuthEmulator,
+} from "firebase/auth";
+import { useState, useEffect, useContext, createContext } from "react";
+
 const firebaseConfig = {
     apiKey: "AIzaSyD9tNHU9n8yCQPaydXlu7WQro1SN6qVKfI",
     authDomain: "legends-alpha.firebaseapp.com",
@@ -15,9 +18,30 @@ const firebaseConfig = {
     appId: "1:187562843550:web:fdf935a6ac55836623ca8f",
     measurementId: "${config.measurementId}",
 };
-
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
+
+const auth = getAuth();
+connectAuthEmulator(auth, "http://localhost:9099");
+
+const AuthContext = createContext();
+
+const AuthContextProvider = (props) => {
+    const [user, setUser] = useState();
+    const [error, setError] = useState();
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(getAuth(), setUser, setError);
+        return () => unsubscribe();
+    }, []);
+
+    return <AuthContext.Provider value={{ user, error }} {...props} />;
+};
+
+const useAuthState = () => {
+    const auth = useContext(AuthContext);
+    return { ...auth, isAuthenticated: auth.user != null };
+};
 
 // Get a reference to the database service
 const database = getDatabase(firebaseApp);
