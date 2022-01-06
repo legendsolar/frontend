@@ -14,7 +14,7 @@ function UserHome(props) {
     const [snapshots, loading, error] = useList(ref(database, "users"));
 
     if (!user) {
-        return <div>Error, User Not Signed In</div>;
+        return <div>Error, You're Not Signed In</div>;
     }
 
     return (
