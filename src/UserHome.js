@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { getAuth } from "firebase/auth";
-import { auth, database } from "./Firebase";
+import { auth, database, firebaseApp } from "./Firebase";
 import NavBar from "./NavBar";
 import { Container, Stack } from "react-bootstrap";
 import { useList } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
 
 function UserHome(props) {
-    const auth = getAuth();
+    const auth = getAuth(firebaseApp);
     const user = auth.currentUser;
 
     const [snapshots, loading, error] = useList(ref(database, "users"));

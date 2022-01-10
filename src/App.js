@@ -3,6 +3,7 @@ import SignIn from "./SignIn";
 import UserHome from "./UserHome";
 import { getAuth } from "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { firebaseApp } from "./Firebase";
 
 const routes = {
     "/": () => <UserHome />,
@@ -10,7 +11,7 @@ const routes = {
 };
 
 function App() {
-    const auth = getAuth();
+    const auth = getAuth(firebaseApp);
     const user = auth.currentUser;
 
     const routes = {
