@@ -1,6 +1,7 @@
 import { useRoutes } from "hookrouter";
 import SignIn from "./SignIn";
 import UserHome from "./UserHome";
+import { getAuth } from "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const routes = {
