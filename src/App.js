@@ -9,6 +9,13 @@ const routes = {
 };
 
 function App() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    const routes = {
+        "/": () => (user ? <UserHome /> : <SignIn />),
+        "/signIn": () => <SignIn />,
+    };
     const routeResult = useRoutes(routes);
 
     return routeResult || <div>Not found</div>;
