@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../hooks/use_auth";
 import { navigate } from "hookrouter";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -19,8 +19,8 @@ function NavBar(props) {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <Button color="inherit">Your Rooftop</Button>
-                    <Button color="inherit">Settings</Button>
+                    <Button color="inherit">Portfolio</Button>
+                    <Button color="inherit">Account</Button>
                     <Button onClick={logOut} color="inherit">
                         Logout
                     </Button>

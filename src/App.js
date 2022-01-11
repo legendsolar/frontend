@@ -1,5 +1,5 @@
-import AppRouter from "./components/AppRouter";
-import { ProvideAuth, useAuth } from "./hooks/useAuth";
+import { ProvideAuth, useAuth } from "./hooks/use_auth";
+import AppRouter from "./routes/AppRouter";
 
 function App() {
     return (

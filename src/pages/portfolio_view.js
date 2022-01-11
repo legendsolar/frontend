@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { getAuth } from "firebase/auth";
 import { auth, database, firebaseApp } from "../Firebase";
-import NavBar from "./NavBar";
+import NavBar from "../components/nav_bar";
 import { Container, Stack } from "react-bootstrap";
 import { useList } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../hooks/use_auth";
 
-function UserDashboard(props) {
+function PortfolioView(props) {
     const auth = useAuth();
     const user = auth.user;
 
@@ -41,6 +41,6 @@ function UserDashboard(props) {
     );
 }
 
-UserDashboard.propTypes = {};
+PortfolioView.propTypes = {};
 
-export default UserDashboard;
+export default PortfolioView;

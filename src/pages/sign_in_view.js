@@ -1,6 +1,4 @@
-// Import FirebaseAuth and firebase.
 import React from "react";
-import firebase from "firebase/compat/app";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,10 +11,10 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { getAuth } from "firebase/auth";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../hooks/use_auth";
 import { navigate } from "hookrouter/dist/router";
 
-function SignIn() {
+function SignInView() {
     const auth = useAuth();
 
     const handleSubmit = (event) => {
@@ -44,6 +42,7 @@ function SignIn() {
                 noValidate
                 sx={{ mt: 1 }}
             >
+                <h2>Legends Wireframe App</h2>
                 <TextField
                     margin="normal"
                     required
@@ -64,10 +63,10 @@ function SignIn() {
                     id="password"
                     autoComplete="current-password"
                 />
-                <FormControlLabel
+                {/* <FormControlLabel
                     control={<Checkbox value="remember" color="primary" />}
                     label="Remember me"
-                />
+                /> */}
                 <Button
                     type="submit"
                     fullWidth
@@ -76,7 +75,7 @@ function SignIn() {
                 >
                     Sign In
                 </Button>
-                <Grid container>
+                {/* <Grid container>
                     <Grid item xs>
                         <Link href="#" variant="body2">
                             Forgot password?
@@ -87,10 +86,10 @@ function SignIn() {
                             {"Don't have an account? Sign Up"}
                         </Link>
                     </Grid>
-                </Grid>
+                </Grid> */}
             </Box>
         </div>
     );
 }
 
-export default SignIn;
+export default SignInView;

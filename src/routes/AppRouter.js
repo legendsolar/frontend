@@ -1,10 +1,10 @@
 import { useRoutes } from "hookrouter";
-import SignIn from "./SignIn";
-import UserDashboard from "./UserDashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ProvideAuth, useAuth } from "../hooks/useAuth";
+import { ProvideAuth, useAuth } from "../hooks/use_auth";
 import { navigate } from "hookrouter/dist/router";
 import { useRedirect } from "hookrouter";
+import PortfolioView from "../pages/portfolio_view";
+import SignInView from "../pages/sign_in_view";
 
 function AppRouter() {
     const auth = useAuth();
@@ -15,8 +15,8 @@ function AppRouter() {
     useRedirect(user ? "/signIn" : "/", user ? "/" : "/signIn");
 
     const routes = {
-        "/": () => <UserDashboard />,
-        "/signIn": () => <SignIn />,
+        "/": () => <PortfolioView />,
+        "/signIn": () => <SignInView />,
     };
 
     const routeResult = useRoutes(routes);
