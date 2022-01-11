@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { getAuth } from "firebase/auth";
 import { useAuth } from "../hooks/useAuth";
+import { navigate } from "hookrouter/dist/router";
 
 function SignIn() {
     const auth = useAuth();
@@ -27,10 +28,12 @@ function SignIn() {
         const password = data.get("password");
 
         if (email && password) {
-            auth.signIn(email, password);
+            auth.signin(email, password);
         } else {
             // TODO log failure
         }
+
+        navigate("/");
     };
 
     return (

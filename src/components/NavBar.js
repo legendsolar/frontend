@@ -11,10 +11,9 @@ import IconButton from "@mui/material/IconButton";
 function NavBar(props) {
     const auth = useAuth();
 
-    function logOut() {
-        auth.signOut();
-        navigate("/signIn");
-    }
+    const logOut = () => {
+        auth.signout();
+    };
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -22,7 +21,9 @@ function NavBar(props) {
                 <Toolbar>
                     <Button color="inherit">Your Rooftop</Button>
                     <Button color="inherit">Settings</Button>
-                    <Button color="inherit">Logout</Button>
+                    <Button onClick={logOut} color="inherit">
+                        Logout
+                    </Button>
                 </Toolbar>
             </AppBar>
         </Box>
