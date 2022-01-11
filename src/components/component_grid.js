@@ -2,14 +2,18 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import Container from "@mui/material/Container";
-import UserPaper from "./user_paper";
+import UserDebugPaper from "./user_debug_paper";
+import UserAssetDebugPaper from "./user_asset_debug";
 
 function ComponentGrid(props) {
     return (
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={8} lg={9}>
-                    <UserPaper></UserPaper>
+                    <UserDebugPaper></UserDebugPaper>
+                </Grid>
+                <Grid item xs={12} md={8} lg={9}>
+                    <UserAssetDebugPaper></UserAssetDebugPaper>
                 </Grid>
                 {/* Chart */}
                 <Grid item xs={12} md={8} lg={9}>

@@ -13,7 +13,7 @@ import { Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import ComponentGrid from "./component_grid";
 
-function UserPaper(props) {
+function UserDebugPaper(props) {
     const auth = useAuth();
     const user = auth.user;
 
@@ -28,11 +28,11 @@ function UserPaper(props) {
                 color="text.secondary"
                 gutterBottom
             >
-                User Info
+                User Debug Info
             </Typography>
             <Typography variant="body2">{user.email}</Typography>
             <Typography variant="body2">{user.uid}</Typography>
         </Paper>
     );
 }
-export default UserPaper;
+export default UserDebugPaper;
