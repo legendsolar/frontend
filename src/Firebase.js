@@ -21,26 +21,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
-const auth = getAuth();
-
-const AuthContext = createContext();
-
-const AuthContextProvider = (props) => {
-    const [user, setUser] = useState();
-    const [error, setError] = useState();
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(getAuth(), setUser, setError);
-        return () => unsubscribe();
-    }, []);
-
-    return <AuthContext.Provider value={{ user, error }} {...props} />;
-};
-
-const useAuthState = () => {
-    const auth = useContext(AuthContext);
-    return { ...auth, isAuthenticated: auth.user != null };
-};
+const auth = getAuth(firebaseApp);
 
 // Get a reference to the database service
 const database = getDatabase(firebaseApp);
