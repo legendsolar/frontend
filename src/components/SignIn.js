@@ -1,7 +1,6 @@
 // Import FirebaseAuth and firebase.
 import React from "react";
 import firebase from "firebase/compat/app";
-import { auth } from "../Firebase";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,12 +12,27 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-
-const handleSubmit = () => {
-    console.log("testing");
-};
+import { getAuth } from "firebase/auth";
+import { useAuth } from "../hooks/useAuth";
 
 function SignIn() {
+    const auth = useAuth();
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        console.log("email: " + data.get("email"));
+        console.log("password: " + data.get("password"));
+        const email = data.get("email");
+        const password = data.get("password");
+
+        if (email && password) {
+            auth.signIn(email, password);
+        } else {
+            // TODO log failure
+        }
+    };
+
     return (
         <div>
             <Box

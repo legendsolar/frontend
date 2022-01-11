@@ -22,11 +22,13 @@ export const useAuth = () => {
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
     const [user, setUser] = useState(null);
+    const [isAuthenticating, setIsAuthenticating] = useState(true);
     // Wrap any Firebase methods we want to use making sure ...
     // ... to save the user to state.
     const signIn = (email, password) => {
         signInWithEmailAndPassword(auth, email, password).then((response) => {
             setUser(response.user);
+            setIsAuthenticating(false);
             return response.user;
         });
     };
@@ -35,6 +37,7 @@ function useProvideAuth() {
         createUserWithEmailAndPassword(auth, email, password).then(
             (response) => {
                 setUser(response.user);
+                setIsAuthenticating(false);
                 return response.user;
             }
         );
@@ -42,6 +45,7 @@ function useProvideAuth() {
 
     const signOut = () => {
         return signOut(auth).then(() => {
+            setIsAuthenticating(false);
             setUser(null);
         });
     };
@@ -68,6 +72,10 @@ function useProvideAuth() {
     // ... latest auth object.
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
+            console.log("user auth state changed");
+            console.log(user);
+
+            setIsAuthenticating(false);
             setUser(user);
         });
 
@@ -76,6 +84,7 @@ function useProvideAuth() {
     }, []);
     // Return the user object and auth methods
     return {
+        isAuthenticating,
         user,
         signIn,
         signUp,

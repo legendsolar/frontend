@@ -1,26 +1,26 @@
 import { useRoutes } from "hookrouter";
 import SignIn from "./SignIn";
-import UserHome from "./UserHome";
+import UserDashboard from "./UserDashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ProvideAuth, useAuth } from "../hooks/useAuth";
-
-const routes = {
-    "/": () => <UserHome />,
-    "/signIn": () => <SignIn />,
-};
 
 function AppRouter() {
     const auth = useAuth();
     const user = auth.user;
+    const isAuthenticating = auth.isAuthenticating;
 
     const routes = {
-        "/": () => (user ? <UserHome /> : <SignIn />),
+        "/": () => (user ? <UserDashboard /> : <SignIn />),
         "/signIn": () => <SignIn />,
-        "/userhome": () => <UserHome />,
+        "/userhome": () => <UserDashboard />,
     };
     const routeResult = useRoutes(routes);
 
-    return routeResult || <div>Not found</div>;
+    if (isAuthenticating) {
+        return <div>Loading...</div>;
+    } else {
+        return routeResult || <div>Not found</div>;
+    }
 }
 
 export default AppRouter;

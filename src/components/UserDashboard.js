@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { getAuth } from "firebase/auth";
 import { auth, database, firebaseApp } from "../Firebase";
-import NavBar from "../NavBar";
+import NavBar from "./NavBar";
 import { Container, Stack } from "react-bootstrap";
 import { useList } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/useAuth";
 
-function UserHome(props) {
+function UserDashboard(props) {
     const auth = useAuth();
     const user = auth.user;
 
@@ -23,6 +23,7 @@ function UserHome(props) {
     return (
         <div>
             <NavBar></NavBar>
+            {/* <NavBar></NavBar>
             <h3> User Info</h3>
             <Stack>
                 <div>user uid: {user.uid}</div>
@@ -35,11 +36,11 @@ function UserHome(props) {
 
             <h3>Assets Performance</h3>
 
-            <Container></Container>
+            <Container></Container> */}
         </div>
     );
 }
 
-UserHome.propTypes = {};
+UserDashboard.propTypes = {};
 
-export default UserHome;
+export default UserDashboard;
