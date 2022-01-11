@@ -12,11 +12,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { getAuth } from "firebase/auth";
 import { useAuth } from "../hooks/use_auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function SignInView() {
     const auth = useAuth();
     const navigate = useNavigate();
+    const { state } = useLocation();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -27,12 +28,16 @@ function SignInView() {
         const password = data.get("password");
 
         if (email && password) {
-            auth.signin(email, password);
+            auth.signin(email, password)
+                .then(() => {
+                    navigate(state?.path || "/");
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         } else {
             // TODO log failure
         }
-
-        navigate("/");
     };
 
     return (
