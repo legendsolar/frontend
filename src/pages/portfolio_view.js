@@ -3,10 +3,14 @@ import PropTypes from "prop-types";
 import { getAuth } from "firebase/auth";
 import { auth, database, firebaseApp } from "../Firebase";
 import NavBar from "../components/nav_bar";
-import { Container, Stack } from "react-bootstrap";
 import { useList } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Link from "@mui/material/Link";
+import Container from "@mui/material/Container";
+import ComponentGrid from "../components/component_grid";
 
 function PortfolioView(props) {
     const auth = useAuth();
@@ -23,20 +27,7 @@ function PortfolioView(props) {
     return (
         <div>
             <NavBar></NavBar>
-            {/* <NavBar></NavBar>
-            <h3> User Info</h3>
-            <Stack>
-                <div>user uid: {user.uid}</div>
-                <div>user email: {user.email}</div>
-            </Stack>
-
-            <h3>Production Overview</h3>
-
-            <Stack></Stack>
-
-            <h3>Assets Performance</h3>
-
-            <Container></Container> */}
+            <ComponentGrid></ComponentGrid>
         </div>
     );
 }
