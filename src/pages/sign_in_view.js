@@ -12,10 +12,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { getAuth } from "firebase/auth";
 import { useAuth } from "../hooks/use_auth";
-import { navigate } from "hookrouter/dist/router";
+import { useNavigate } from "react-router-dom";
 
 function SignInView() {
     const auth = useAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -75,18 +76,18 @@ function SignInView() {
                 >
                     Sign In
                 </Button>
-                {/* <Grid container>
+                <Grid container>
                     <Grid item xs>
                         <Link href="#" variant="body2">
                             Forgot password?
                         </Link>
                     </Grid>
                     <Grid item>
-                        <Link href="#" variant="body2">
+                        <Link href="/signup" variant="body2">
                             {"Don't have an account? Sign Up"}
                         </Link>
                     </Grid>
-                </Grid> */}
+                </Grid>
             </Box>
         </div>
     );
