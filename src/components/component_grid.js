@@ -4,6 +4,8 @@ import Link from "@mui/material/Link";
 import Container from "@mui/material/Container";
 import UserDebugPaper from "./user_debug_paper";
 import UserAssetDebugPaper from "./user_asset_debug";
+import AssetLiveViewDebug from "./asset_live_view_debug";
+import MetricGauge from "./gauges/MetricGauge";
 
 function ComponentGrid(props) {
     return (
@@ -14,6 +16,12 @@ function ComponentGrid(props) {
                 </Grid>
                 <Grid item xs={12} md={8} lg={9}>
                     <UserAssetDebugPaper></UserAssetDebugPaper>
+                </Grid>
+                <Grid item xs={12} md={8} lg={9}>
+                    <AssetLiveViewDebug></AssetLiveViewDebug>
+                </Grid>
+                <Grid item xs={12} md={8} lg={9}>
+                    <MetricGauge></MetricGauge>
                 </Grid>
                 {/* Chart */}
                 <Grid item xs={12} md={8} lg={9}>
