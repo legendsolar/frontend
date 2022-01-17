@@ -27,18 +27,10 @@ function AssetLiveViewDebug(props) {
     let formattedDate = "";
 
     if (assetProdSummarySnap && !assetProdSummaryLoading) {
-        console.log(
-            assetProdSummarySnap.val(),
-            assetProdError,
-            assetProdSummaryLoading
-        );
-
         watts = assetProdSummarySnap.val().recent.watts;
         lastUpdateTime = new Date(
             parseInt(assetProdSummarySnap.val().recent.time)
         );
-        console.log(lastUpdateTime);
-        console.log(parseInt(assetProdSummarySnap.val().recent.time));
         formattedDate = format(lastUpdateTime, "Pp");
     }
 

@@ -41,7 +41,7 @@ function MetricGauge(props) {
     const stroke_l = liveProduction_w * stroke_total_l * 0.75;
 
     return (
-        <Paper sx={{ minWidth: 275 }}>
+        <Paper sx={{ minWidth: 275, p: 2 }}>
             <Grid container>
                 <Grid item xs={6}>
                     <Typography>Generation</Typography>
@@ -101,8 +101,10 @@ function MetricGauge(props) {
                 <Grid item xs={2}>
                     <Typography>95 kW</Typography>
                 </Grid>
-                <div>State: {liveProduction_w}</div>;<div>Angle: {angle}</div>;
-                <div>circle: {stroke_total_l}</div>
+                <Typography sx={{ fontSize: 8 }}>
+                    <div>state: {liveProduction_w}</div>;
+                    <div>angle: {angle}</div>;
+                </Typography>
             </Grid>
         </Paper>
     );

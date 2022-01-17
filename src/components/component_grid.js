@@ -23,6 +23,12 @@ function ComponentGrid(props) {
                 <Grid item xs={4}>
                     <MetricGauge></MetricGauge>
                 </Grid>
+                <Grid item xs={4}>
+                    <MetricGauge></MetricGauge>
+                </Grid>
+                <Grid item xs={4}>
+                    <MetricGauge></MetricGauge>
+                </Grid>
                 {/* Chart */}
                 <Grid item xs={12} md={8} lg={9}>
                     <Paper
