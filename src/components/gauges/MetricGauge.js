@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import useInterval from "../../hooks/use_interval";
 import { useObject } from "react-firebase-hooks/database";
 import BoltIcon from "@mui/icons-material/Bolt";
+import styles from "./MetricGauge.module.css";
 
 function MetricGauge(props) {
     const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
@@ -44,24 +45,17 @@ function MetricGauge(props) {
     return (
         <Paper sx={{ minWidth: 275 }}>
             <div>
-                <div
-                    style={{
-                        border: "2px solid red",
-                        display: "inline-block",
-                        width: "200px",
-                        height: "200px",
-                        position: "relative",
-                        display: "inline-block",
-                    }}
-                >
+                <div className={styles.gauge}>
                     <svg
+                        className={styles.svgElement}
                         style={{
                             border: "2px solid gold",
                             position: "absolute",
+                            width: "100%",
+                            height: "100%",
                             left: "0",
                             right: "0",
                         }}
-                        viewBox="0 0 200 200"
                     >
                         <g style={{ transform: "translate(50%, 50%)" }}>
                             <g
@@ -116,8 +110,12 @@ function MetricGauge(props) {
                     <div
                         style={{
                             width: "100%",
-                            height: "200 px",
+                            height: "100%",
                             border: "2px solid green",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}
                     >
                         <BoltIcon />
