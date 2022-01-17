@@ -35,13 +35,15 @@ function AssetLiveViewDebug(props) {
     }
 
     return (
-        <Paper sx={{ minWidth: 275 }}>
+        <Paper sx={{ minWidth: 275, p: 2 }}>
             <Typography
                 sx={{ fontSize: 14 }}
                 color="text.secondary"
                 gutterBottom
             >
-                {assetProdSummaryLoading ? "Asset Data Loading" : "Asset Live"}
+                {assetProdSummaryLoading
+                    ? "Asset Data Loading"
+                    : "Asset Debug Live"}
             </Typography>
 
             <Typography
@@ -58,6 +60,14 @@ function AssetLiveViewDebug(props) {
                 gutterBottom
             >
                 {"Last updated: " + formattedDate}
+            </Typography>
+
+            <Typography
+                sx={{ fontSize: 12 }}
+                color="text.secondary"
+                gutterBottom
+            >
+                {"Asset ID: " + assetId}
             </Typography>
         </Paper>
     );

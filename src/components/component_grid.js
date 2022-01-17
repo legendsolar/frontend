@@ -11,23 +11,20 @@ function ComponentGrid(props) {
     return (
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-                <Grid item xs={12} md={8} lg={9}>
+                <Grid item xs={8}>
                     <UserDebugPaper></UserDebugPaper>
                 </Grid>
-                <Grid item xs={12} md={8} lg={9}>
-                    <UserAssetDebugPaper></UserAssetDebugPaper>
-                </Grid>
-                <Grid item xs={12} md={8} lg={9}>
+                <Grid item xs={4}>
                     <AssetLiveViewDebug></AssetLiveViewDebug>
                 </Grid>
                 <Grid item xs={4}>
-                    <MetricGauge></MetricGauge>
+                    <MetricGauge assetId="-MtUpMiLZ0cvkQ-Dok2z"></MetricGauge>
                 </Grid>
                 <Grid item xs={4}>
-                    <MetricGauge></MetricGauge>
+                    <MetricGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></MetricGauge>
                 </Grid>
                 <Grid item xs={4}>
-                    <MetricGauge></MetricGauge>
+                    <MetricGauge assetId="-MtUbIFv67HYfn235K8L"></MetricGauge>
                 </Grid>
                 {/* Chart */}
                 <Grid item xs={12} md={8} lg={9}>

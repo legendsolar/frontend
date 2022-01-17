@@ -22,7 +22,7 @@ function UserDebugPaper(props) {
     }
 
     return (
-        <Paper sx={{ minWidth: 275 }}>
+        <Paper sx={{ minWidth: 275, p: 2 }}>
             <Typography
                 sx={{ fontSize: 14 }}
                 color="text.secondary"
@@ -31,7 +31,7 @@ function UserDebugPaper(props) {
                 User Debug Info
             </Typography>
             <Typography variant="body2">{user.email}</Typography>
-            <Typography variant="body2">{user.uid}</Typography>
+            <Typography variant="body2">{"id: " + user.uid}</Typography>
         </Paper>
     );
 }

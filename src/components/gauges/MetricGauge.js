@@ -14,26 +14,27 @@ import useInterval from "../../hooks/use_interval";
 import { useObject } from "react-firebase-hooks/database";
 import BoltIcon from "@mui/icons-material/Bolt";
 import styles from "./MetricGauge.module.css";
+import { format } from "date-fns";
 
 function MetricGauge(props) {
-    const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
+    const assetId = props.assetId;
 
     const [assetProdSummarySnap, assetProdSummaryLoading, assetProdError] =
         useObject(ref(database, "production/" + assetId + "/summary"));
 
-    const [liveProduction_w, setLiveProduction_w] = useState(0);
+    let watts = 0;
+    let lastUpdateTime = 0;
+    let formattedDate = "";
 
-    if (!assetProdSummaryLoading && !assetProdError) {
-        // setLiveProduction_w(assetProdSummarySnap.recent.watts);
+    if (assetProdSummarySnap && !assetProdSummaryLoading) {
+        watts = assetProdSummarySnap.val().recent.watts;
+        lastUpdateTime = new Date(
+            parseInt(assetProdSummarySnap.val().recent.time)
+        );
+        formattedDate = format(lastUpdateTime, "Pp");
     }
 
-    useInterval(() => {
-        if (liveProduction_w > 1) {
-            setLiveProduction_w(0);
-        } else {
-            setLiveProduction_w(liveProduction_w + 0.004);
-        }
-    }, 30);
+    const liveProduction_w = watts / 5000;
 
     const angle = 135 + liveProduction_w * 270;
     const circleRadius = 40;
@@ -44,10 +45,10 @@ function MetricGauge(props) {
         <Paper sx={{ minWidth: 275, p: 2 }}>
             <Grid container>
                 <Grid item xs={6}>
-                    <Typography>Generation</Typography>
+                    <Typography variant="h6">Generation</Typography>
                 </Grid>
                 <Grid item xs={6}>
-                    <Typography>1:32 PM</Typography>
+                    <Typography>{format(new Date(), "p")}</Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container justifyContent="center" direction="row">
@@ -81,9 +82,9 @@ function MetricGauge(props) {
 
                                         <rect
                                             x="30"
-                                            y="-2"
+                                            y="-1"
                                             width="20"
-                                            height="4"
+                                            height="2"
                                             fill="black"
                                             transform={`rotate(${angle})`}
                                         ></rect>
@@ -91,7 +92,9 @@ function MetricGauge(props) {
                                 </svg>
                                 <div className={styles.center}>
                                     <BoltIcon />
-                                    <Typography>KILOWATTS</Typography>
+                                    <Typography sx={{ fontSize: 12 }}>
+                                        KILOWATTS
+                                    </Typography>
                                 </div>
                             </div>
                         </Grid>
@@ -99,11 +102,11 @@ function MetricGauge(props) {
                 </Grid>
                 <Grid item xs={10}></Grid>
                 <Grid item xs={2}>
-                    <Typography>95 kW</Typography>
+                    <Typography>{watts.toFixed(0)} kW</Typography>
                 </Grid>
                 <Typography sx={{ fontSize: 8 }}>
                     <div>state: {liveProduction_w}</div>;
-                    <div>angle: {angle}</div>;
+                    <div>angle: {angle}</div>;<div>asset id: {assetId}</div>;
                 </Typography>
             </Grid>
         </Paper>
