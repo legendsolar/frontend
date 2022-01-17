@@ -14,6 +14,7 @@ import { Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import ComponentGrid from "./component_grid";
 import { useObject } from "react-firebase-hooks/database";
+import { format } from "date-fns";
 
 function AssetLiveViewDebug(props) {
     const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
@@ -22,6 +23,8 @@ function AssetLiveViewDebug(props) {
         useObject(ref(database, "production/" + assetId + "/summary"));
 
     let watts = 0;
+    let lastUpdateTime = 0;
+    let formattedDate = "";
 
     if (assetProdSummarySnap && !assetProdSummaryLoading) {
         console.log(
@@ -31,6 +34,12 @@ function AssetLiveViewDebug(props) {
         );
 
         watts = assetProdSummarySnap.val().recent.watts;
+        lastUpdateTime = new Date(
+            parseInt(assetProdSummarySnap.val().recent.time)
+        );
+        console.log(lastUpdateTime);
+        console.log(parseInt(assetProdSummarySnap.val().recent.time));
+        formattedDate = format(lastUpdateTime, "Pp");
     }
 
     return (
@@ -49,6 +58,14 @@ function AssetLiveViewDebug(props) {
                 gutterBottom
             >
                 {watts} W
+            </Typography>
+
+            <Typography
+                sx={{ fontSize: 12 }}
+                color="text.secondary"
+                gutterBottom
+            >
+                {"Last updated: " + formattedDate}
             </Typography>
         </Paper>
     );
