@@ -7,6 +7,7 @@ import { Typography } from "@mui/material";
 import { useObject } from "react-firebase-hooks/database";
 import styles from "./metric_gauge.module.css";
 import { format } from "date-fns";
+import LivePill from "../pills/live_pill";
 
 function MetricGauge(props) {
     const assetId = props.assetId;
@@ -48,7 +49,7 @@ function MetricGauge(props) {
                             </Typography>
                         </Grid>
                         <Grid item>
-                            <Typography>{format(new Date(), "p")}</Typography>
+                            <LivePill></LivePill>
                         </Grid>
                     </Grid>
                 </Grid>

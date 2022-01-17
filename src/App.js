@@ -26,6 +26,11 @@ const globalTheme = createTheme({
             fontWeight: 600,
             fontSize: "10px",
         },
+        pillLabel: {
+            fontFamily: "Azeret Mono",
+            fontWeight: 500,
+            fontSize: "9px",
+        },
     },
 });
 
