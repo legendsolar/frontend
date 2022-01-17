@@ -22,6 +22,7 @@
     "react-firebaseui": "^6.0.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "typeface-be-vietnam": "^1.1.13",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

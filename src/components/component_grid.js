@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import UserDebugPaper from "./user_debug_paper";
 import UserAssetDebugPaper from "./user_asset_debug";
 import AssetLiveViewDebug from "./asset_live_view_debug";
-import MetricGauge from "./gauges/MetricGauge";
+import MetricGauge from "./gauges/metric_gauge";
 
 function ComponentGrid(props) {
     return (

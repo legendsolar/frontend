@@ -1,7 +1,11 @@
 .gauge {
     width: 200px;
-    height: 200px;
+    height: 100px;
     position: relative;
+}
+
+.gaugeBottomLabels {
+    width: 200px;
 }
 
 .svgElement {
@@ -17,18 +21,17 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
 }
 
 .centerTransform {
-    transform: translate(50%, 50%);
+    transform: translate(50%, 100%);
 }
 
 .filledArcs {
-    transform: rotate(135deg);
+    transform: rotate(180deg);
     fill: none;
-    stroke-width: 20;
 }
 
 .highlight {
