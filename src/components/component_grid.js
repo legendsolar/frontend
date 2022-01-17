@@ -20,7 +20,7 @@ function ComponentGrid(props) {
                 <Grid item xs={12} md={8} lg={9}>
                     <AssetLiveViewDebug></AssetLiveViewDebug>
                 </Grid>
-                <Grid item xs={12} md={8} lg={9}>
+                <Grid item xs={4}>
                     <MetricGauge></MetricGauge>
                 </Grid>
                 {/* Chart */}

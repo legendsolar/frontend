@@ -21,8 +21,6 @@ function MetricGauge(props) {
     const [assetProdSummarySnap, assetProdSummaryLoading, assetProdError] =
         useObject(ref(database, "production/" + assetId + "/summary"));
 
-    console.log("assets");
-
     const [liveProduction_w, setLiveProduction_w] = useState(0);
 
     if (!assetProdSummaryLoading && !assetProdError) {
@@ -38,93 +36,74 @@ function MetricGauge(props) {
     }, 30);
 
     const angle = 135 + liveProduction_w * 270;
-    const circle_r = 60;
-    const stroke_total_l = circle_r * Math.PI * 2;
+    const circleRadius = 40;
+    const stroke_total_l = circleRadius * Math.PI * 2;
     const stroke_l = liveProduction_w * stroke_total_l * 0.75;
 
     return (
         <Paper sx={{ minWidth: 275 }}>
-            <div>
-                <div className={styles.gauge}>
-                    <svg
-                        className={styles.svgElement}
-                        style={{
-                            border: "2px solid gold",
-                            position: "absolute",
-                            width: "100%",
-                            height: "100%",
-                            left: "0",
-                            right: "0",
-                        }}
-                    >
-                        <g style={{ transform: "translate(50%, 50%)" }}>
-                            <g
-                                stroke-width="20"
-                                fill="none"
-                                transform="rotate(135)"
-                            >
-                                <circle
-                                    cx="0%"
-                                    cy="0%"
-                                    r="60"
-                                    stroke="#F4F5F5"
-                                />
-                                <circle
-                                    cx="0"
-                                    cy="0"
-                                    r="60"
-                                    stroke-dasharray={`${stroke_l} ${stroke_total_l}`}
-                                    stroke="#EAB31E"
-                                />
-                            </g>
+            <Grid container>
+                <Grid item xs={6}>
+                    <Typography>Generation</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                    <Typography>1:32 PM</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Grid container justifyContent="center" direction="row">
+                        <Grid item>
+                            <div className={styles.gauge}>
+                                <svg
+                                    className={styles.svgElement}
+                                    viewBox="0 0 110 110"
+                                >
+                                    <g className={styles.centerTransform}>
+                                        <g className={styles.filledArcs}>
+                                            <circle
+                                                className={styles.background}
+                                                r={circleRadius}
+                                            />
+                                            <circle
+                                                className={styles.highlight}
+                                                r={circleRadius}
+                                                stroke-dasharray={`${stroke_l} ${stroke_total_l}`}
+                                            />
+                                        </g>
 
-                            <g stroke-width="1px">
-                                <circle
-                                    fill="none"
-                                    stroke="black"
-                                    cx="0%"
-                                    cy="0%"
-                                    r="50"
-                                ></circle>
-                                <circle
-                                    fill="none"
-                                    stroke="black"
-                                    cx="0%"
-                                    cy="0%"
-                                    r="70"
-                                ></circle>
-                            </g>
+                                        <g className={styles.arcOutline}>
+                                            <circle
+                                                r={circleRadius - 10}
+                                            ></circle>
+                                            <circle
+                                                r={circleRadius + 10}
+                                            ></circle>
+                                        </g>
 
-                            <rect
-                                x="50"
-                                y="-2"
-                                width="20"
-                                height="4"
-                                fill="black"
-                                transform={`rotate(${angle})`}
-                            ></rect>
-
-                            <g transform="scale(0.5 0.5)"></g>
-                        </g>
-                    </svg>
-                    <div
-                        style={{
-                            width: "100%",
-                            height: "100%",
-                            border: "2px solid green",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                    >
-                        <BoltIcon />
-                        <div>stuff</div>
-                    </div>
-                </div>
-            </div>
-            <div>State: {liveProduction_w}</div>;<div>Angle: {angle}</div>;
-            <div>circle: {stroke_total_l}</div>
+                                        <rect
+                                            x="30"
+                                            y="-2"
+                                            width="20"
+                                            height="4"
+                                            fill="black"
+                                            transform={`rotate(${angle})`}
+                                        ></rect>
+                                    </g>
+                                </svg>
+                                <div className={styles.center}>
+                                    <BoltIcon />
+                                    <Typography>KILOWATTS</Typography>
+                                </div>
+                            </div>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item xs={10}></Grid>
+                <Grid item xs={2}>
+                    <Typography>95 kW</Typography>
+                </Grid>
+                <div>State: {liveProduction_w}</div>;<div>Angle: {angle}</div>;
+                <div>circle: {stroke_total_l}</div>
+            </Grid>
         </Paper>
     );
 }

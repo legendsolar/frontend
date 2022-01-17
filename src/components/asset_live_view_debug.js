@@ -21,12 +21,16 @@ function AssetLiveViewDebug(props) {
     const [assetProdSummarySnap, assetProdSummaryLoading, assetProdError] =
         useObject(ref(database, "production/" + assetId + "/summary"));
 
-    console.log("assets");
+    let watts = 0;
 
-    const [liveProduction_w, setLiveProduction_w] = useState(0);
+    if (assetProdSummarySnap && !assetProdSummaryLoading) {
+        console.log(
+            assetProdSummarySnap.val(),
+            assetProdError,
+            assetProdSummaryLoading
+        );
 
-    if (!assetProdSummaryLoading && !assetProdError) {
-        setLiveProduction_w(assetProdSummarySnap.recent.watts);
+        watts = assetProdSummarySnap.val().recent.watts;
     }
 
     return (
@@ -36,7 +40,7 @@ function AssetLiveViewDebug(props) {
                 color="text.secondary"
                 gutterBottom
             >
-                Asset Live View
+                {assetProdSummaryLoading ? "Asset Data Loading" : "Asset Live"}
             </Typography>
 
             <Typography
@@ -44,7 +48,7 @@ function AssetLiveViewDebug(props) {
                 color="text.secondary"
                 gutterBottom
             >
-                {liveProduction_w} W
+                {watts} W
             </Typography>
         </Paper>
     );
