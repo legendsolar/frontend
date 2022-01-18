@@ -17,13 +17,13 @@ function ComponentGrid(props) {
                 <Grid item xs={4}>
                     <AssetLiveViewDebug></AssetLiveViewDebug>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6}>
                     <MetricGauge assetId="-MtUpMiLZ0cvkQ-Dok2z"></MetricGauge>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6}>
                     <MetricGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></MetricGauge>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6}>
                     <MetricGauge assetId="-MtUbIFv67HYfn235K8L"></MetricGauge>
                 </Grid>
                 {/* Chart */}

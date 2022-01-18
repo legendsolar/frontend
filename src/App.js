@@ -18,8 +18,8 @@ const globalTheme = createTheme({
         },
         unitMainDisplay: {
             fontWeight: 600,
-            fontSize: "35px",
-            lineHeight: "25px",
+            fontSize: "45px",
+            lineHeight: "30px",
         },
         unitLabel: {
             fontFamily: "Azeret Mono",
@@ -30,6 +30,16 @@ const globalTheme = createTheme({
             fontFamily: "Azeret Mono",
             fontWeight: 500,
             fontSize: "9px",
+        },
+    },
+    components: {
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "15px",
+                    boxShadow: "0px 0px 15px rgba(99, 110, 114, 0.5)",
+                },
+            },
         },
     },
 });

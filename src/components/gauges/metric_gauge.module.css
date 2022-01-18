@@ -1,11 +1,5 @@
 .gauge {
-    width: 200px;
-    height: 100px;
     position: relative;
-}
-
-.gaugeBottomLabels {
-    width: 200px;
 }
 
 .svgElement {
@@ -41,12 +35,3 @@
 .background {
     stroke: #F4F5f5
 }
-
-.arcOutline {
-    stroke-width: 1px;
-    stroke: black;
-    fill: none;
-}
-
-
-

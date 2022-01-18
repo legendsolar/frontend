@@ -31,18 +31,24 @@ function MetricGauge(props) {
     const gaugeAngleTravel = 176;
 
     const angle = 182 + liveProduction_w * gaugeAngleTravel;
-    const circleRadius = 75;
+    const circleRadius = 90 + 45;
     const stroke_total_l = circleRadius * Math.PI * 2;
     const stroke_l =
-        liveProduction_w * stroke_total_l * ((gaugeAngleTravel + 2) / 360);
-    const arc_width = 50;
+        liveProduction_w * stroke_total_l * ((gaugeAngleTravel + 2) / 360.0);
+    const arc_width = 90;
+    const width = 360;
+
     console.log(styles.filledArcs);
 
     return (
-        <Paper sx={{ minWidth: 275, p: 2 }}>
-            <Grid container width="200">
+        <Paper sx={{ p: 2 }}>
+            <Grid container sx={{ width: width + "px" }}>
                 <Grid item>
-                    <Grid container justifyContent="space-between">
+                    <Grid
+                        sx={{ width: width + "px" }}
+                        container
+                        justifyContent="space-between"
+                    >
                         <Grid item>
                             <Typography variant="dashboardHeader">
                                 Generation
@@ -54,10 +60,13 @@ function MetricGauge(props) {
                     </Grid>
                 </Grid>
                 <Grid item>
-                    <div className={styles.gauge}>
+                    <div
+                        className={styles.gauge}
+                        style={{ width: width, height: 184 }}
+                    >
                         <svg
                             className={styles.svgElement}
-                            viewBox="0 0 200 100"
+                            viewBox={`0 0 ${width} 184`}
                         >
                             <g className={styles.centerTransform}>
                                 <g
@@ -94,7 +103,7 @@ function MetricGauge(props) {
                         <Grid item>
                             <Typography variant="unitLabel">0 KW</Typography>
                         </Grid>
-                        <Grid item justifyContent="center">
+                        <Grid item>
                             <Typography variant="unitLabel">
                                 KILOWATTS
                             </Typography>
