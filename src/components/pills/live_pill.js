@@ -22,9 +22,11 @@ function LivePill(props) {
                     avatar={
                         <CircleIcon
                             fontSize="small"
-                            color="primary"
-                            sx={{
-                                fontSize: "9px ",
+                            color="action"
+                            style={{
+                                color: "green",
+                                width: "7px",
+                                height: "7px",
                             }}
                         />
                     }
@@ -33,6 +35,7 @@ function LivePill(props) {
                         textTransform: "uppercase",
                         fontFamily: "Azeret Mono",
                         fontSize: "9px",
+                        lineHeight: "10.5px",
                     }}
                 ></Chip>
             </Grid>

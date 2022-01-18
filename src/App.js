@@ -12,6 +12,7 @@ const globalTheme = createTheme({
     typography: {
         fontFamily: "Be Vietnam Pro",
         fontSize: "12px",
+        lineHeight: "12px",
         dashboardHeader: {
             fontWeight: 600,
             fontSize: "20ox",
@@ -27,9 +28,9 @@ const globalTheme = createTheme({
             fontSize: "10px",
         },
         pillLabel: {
-            fontFamily: "Azeret Mono",
-            fontWeight: 500,
-            fontSize: "9px",
+            fontWeight: 400,
+            fontSize: "6px",
+            lineHeight: "8px",
         },
     },
     components: {
@@ -38,6 +39,13 @@ const globalTheme = createTheme({
                 root: {
                     borderRadius: "15px",
                     boxShadow: "0px 0px 15px rgba(99, 110, 114, 0.5)",
+                },
+            },
+        },
+        MuiChip: {
+            styleOverrides: {
+                root: {
+                    height: "16px",
                 },
             },
         },
