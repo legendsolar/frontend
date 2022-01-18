@@ -6,6 +6,7 @@ import UserDebugPaper from "./user_debug_paper";
 import UserAssetDebugPaper from "./user_asset_debug";
 import AssetLiveViewDebug from "./asset_live_view_debug";
 import MetricGauge from "./gauges/metric_gauge";
+import MetricSummary from "./summary/metric_summary";
 
 function ComponentGrid(props) {
     return (
@@ -25,6 +26,9 @@ function ComponentGrid(props) {
                 </Grid>
                 <Grid item xs={6}>
                     <MetricGauge assetId="-MtUbIFv67HYfn235K8L"></MetricGauge>
+                </Grid>
+                <Grid item xs={6}>
+                    <MetricSummary></MetricSummary>
                 </Grid>
                 {/* Chart */}
                 <Grid item xs={12} md={8} lg={9}>

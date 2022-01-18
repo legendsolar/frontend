@@ -32,6 +32,17 @@ const globalTheme = createTheme({
             fontSize: "6px",
             lineHeight: "8px",
         },
+        metricName: {
+            fontFamily: "Azeret Mono",
+            fontWeight: 400,
+            fontSize: "12px",
+            lineHeight: "14px",
+        },
+        metricValue: {
+            fontWeight: 700,
+            fontSize: "12px",
+            lineHeight: "14px",
+        },
     },
     components: {
         MuiPaper: {
