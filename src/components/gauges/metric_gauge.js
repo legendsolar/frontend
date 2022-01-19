@@ -28,13 +28,13 @@ function MetricGauge(props) {
     }
 
     const liveProduction_w = watts / 5000;
-    const gaugeAngleTravel = 176;
+    const gaugeAngleTravel = 180;
 
-    const angle = 182 + liveProduction_w * gaugeAngleTravel;
+    const angle = 180 + liveProduction_w * gaugeAngleTravel;
     const circleRadius = 90 + 45;
     const stroke_total_l = circleRadius * Math.PI * 2;
     const stroke_l =
-        liveProduction_w * stroke_total_l * ((gaugeAngleTravel + 2) / 360.0);
+        liveProduction_w * stroke_total_l * (gaugeAngleTravel / 360.0);
     const arc_width = 90;
     const width = 360;
 

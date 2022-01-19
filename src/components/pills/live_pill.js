@@ -12,6 +12,7 @@ import { Box } from "@mui/material";
 function LivePill(props) {
     return (
         <Grid
+            container
             direction="column"
             justifyContent="flex-start"
             alignItems="flex-end"
@@ -39,7 +40,7 @@ function LivePill(props) {
                     }}
                 ></Chip>
             </Grid>
-            <Grid item>
+            <Grid item sx={{ display: "inline-block", lineHeight: "0" }}>
                 <Typography variant="pillLabel">updated 15 mins ago</Typography>
             </Grid>
         </Grid>

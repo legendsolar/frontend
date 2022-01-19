@@ -16,17 +16,15 @@ function NavBar(props) {
     };
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
-                    <Button color="inherit">Portfolio</Button>
-                    <Button color="inherit">Account</Button>
-                    <Button onClick={logOut} color="inherit">
-                        Logout
-                    </Button>
-                </Toolbar>
-            </AppBar>
-        </Box>
+        <AppBar position="static">
+            <Toolbar>
+                <Button color="inherit">Portfolio</Button>
+                <Button color="inherit">Account</Button>
+                <Button onClick={logOut} color="inherit">
+                    Logout
+                </Button>
+            </Toolbar>
+        </AppBar>
     );
 }
 
