@@ -186,7 +186,7 @@ const currentTimeTickDrawer = (chart, args, options) => {
     }
 };
 
-const ProductionWormGauge = (props) => {
+const ProductionWorm = (props) => {
     const chartDataTime_ms = props.chartDataTime;
     const chartData_W = props.chartData_W;
     const params = props.params;
@@ -199,10 +199,6 @@ const ProductionWormGauge = (props) => {
             lastValidDataIdx = i - 1;
         }
     });
-
-    if (!params) {
-        // params = defaultChartDisplayParams;
-    }
 
     const timeSeries = chartDataTime_ms.map((t) => {
         return t;
@@ -350,4 +346,4 @@ const ProductionWormGauge = (props) => {
     );
 };
 
-export default ProductionWormGauge;
+export default ProductionWorm;

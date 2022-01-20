@@ -1,8 +1,12 @@
-import ProductionWormGaugeAnimated from "./ProductionWormGaugeAnimated";
 import { timeInterpolatedValues, simSolarOutput } from "./Utility";
 import { easeInOutQuad } from "js-easing-functions";
 import { addHours } from "date-fns";
 import Paper from "@mui/material/Paper";
+import { useObject } from "react-firebase-hooks/database";
+import { ref } from "firebase/database";
+import { database } from "../../Firebase";
+import ProductionWorm from "./ProductionWorm";
+
 var tinycolor = require("tinycolor2");
 
 const defaultChartDisplayParams = {
@@ -69,15 +73,50 @@ const chartData = Array.from(Array(time_ms.length), (x, i) => {
 });
 
 function BasicProdWorm(props) {
-    return (
-        <Paper sx={{ p: 2 }}>
-            <ProductionWormGaugeAnimated
-                chartDataTime={time_ms}
-                chartData_W={chartData}
-                params={defaultChartDisplayParams}
-            />
-        </Paper>
+    const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
+
+    const [assetData, assetDataLoading, assetDataError] = useObject(
+        ref(database, "production/" + assetId + "/history_15min")
     );
+
+    if (assetDataLoading || assetDataError) {
+        return (
+            <Paper sx={{ p: 2 }}>
+                <ProductionWorm
+                    chartDataTime={time_ms}
+                    chartData_W={chartData}
+                    params={defaultChartDisplayParams}
+                />
+            </Paper>
+        );
+    } else {
+        const data = [];
+        const time = [];
+        var i = 0;
+        console.log(assetData.val());
+
+        Object.entries(assetData.val()).forEach((entry) => {
+            if (i < 150) {
+                const [t, d] = entry;
+                time.push(parseInt(t));
+                data.push(d);
+                i++;
+            }
+        });
+
+        console.log(data);
+        console.log(time);
+
+        return (
+            <Paper sx={{ p: 2 }}>
+                <ProductionWorm
+                    chartDataTime={time}
+                    chartData_W={data}
+                    params={defaultChartDisplayParams}
+                />
+            </Paper>
+        );
+    }
 }
 
 export default BasicProdWorm;
