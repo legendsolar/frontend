@@ -8,6 +8,18 @@ const globalTheme = createTheme({
         error: {
             main: "#B4615F",
         },
+        cashGreen: {
+            main: "#30A462",
+        },
+        carbonBlue: {
+            main: "#477FB2",
+        },
+        electricYellow: {
+            main: "#EAB31E",
+        },
+        inactive: {
+            main: "#636E72",
+        },
     },
     typography: {
         fontFamily: "Be Vietnam Pro",

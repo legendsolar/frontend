@@ -1,0 +1,25 @@
+.gauge {
+    display: flex;
+    flex-direction: column;
+    text-transform: none;
+}
+
+.on {
+  fill: #345d34;
+  color: #345d34;
+}
+
+.off {
+  fill: #CACACA;
+}
+
+.text {
+  font-size: 12px;
+  font-weight: bold; 
+  text-align: center;
+  font-family: 'Be Vietnam Pro', sans-serif; 
+}
+
+.barGauge {
+    margin-left: auto;
+}

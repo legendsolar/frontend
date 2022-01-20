@@ -26,8 +26,8 @@ function LivePill(props) {
                             color="action"
                             style={{
                                 color: "green",
-                                width: "7px",
-                                height: "7px",
+                                width: "10px",
+                                height: "10px",
                             }}
                         />
                     }

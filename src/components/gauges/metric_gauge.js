@@ -11,34 +11,49 @@ import LivePill from "../pills/live_pill";
 
 function MetricGauge(props) {
     const assetId = props.assetId;
+    const unit = props.unit;
+    const unitDescription = props.unitDescription;
+    const min = props.min;
+    const max = props.max;
+    const currentValue = props.currentValue;
+    const title = props.title;
+    const strokeColor = props.strokeColor;
+    const isLive = props.isLive;
+    const liveMessage = props.liveMessage;
 
-    const [assetProdSummarySnap, assetProdSummaryLoading, assetProdError] =
-        useObject(ref(database, "production/" + assetId + "/summary"));
+    // const useStyles = makeStyles((theme) => ({
+    //     gaugeStroke: {
+    //         stroke: theme.palette.text.primary,
+    //     },
+    // }));
 
-    let watts = 0;
-    let lastUpdateTime = 0;
-    let formattedDate = "";
+    // const classes = useStyles();
 
-    if (assetProdSummarySnap && !assetProdSummaryLoading) {
-        watts = assetProdSummarySnap.val().recent.watts;
-        lastUpdateTime = new Date(
-            parseInt(assetProdSummarySnap.val().recent.time)
-        );
-        formattedDate = format(lastUpdateTime, "Pp");
-    }
+    // const [assetProdSummarySnap, assetProdSummaryLoading, assetProdError] =
+    //     useObject(ref(database, "production/" + assetId + "/summary"));
 
-    const liveProduction_w = watts / 5000;
+    // let watts = 0;
+    // let lastUpdateTime = 0;
+    // let formattedDate = "";
+
+    // if (assetProdSummarySnap && !assetProdSummaryLoading) {
+    //     watts = assetProdSummarySnap.val().recent.watts;
+    //     lastUpdateTime = new Date(
+    //         parseInt(assetProdSummarySnap.val().recent.time)
+    //     );
+    //     formattedDate = format(lastUpdateTime, "Pp");
+    // }
+
+    const normalizedCurrentValue = currentValue / (max - min);
+
     const gaugeAngleTravel = 180;
-
-    const angle = 180 + liveProduction_w * gaugeAngleTravel;
+    const currentAngle = 180 + normalizedCurrentValue * gaugeAngleTravel;
     const circleRadius = 90 + 45;
-    const stroke_total_l = circleRadius * Math.PI * 2;
-    const stroke_l =
-        liveProduction_w * stroke_total_l * (gaugeAngleTravel / 360.0);
+    const strokeTotalLength = circleRadius * Math.PI * 2;
+    const strokeCurrentLength =
+        normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
     const arc_width = 90;
     const width = 360;
-
-    console.log(styles.filledArcs);
 
     return (
         <Paper sx={{ p: 2 }}>
@@ -51,7 +66,7 @@ function MetricGauge(props) {
                     >
                         <Grid item>
                             <Typography variant="dashboardHeader">
-                                Generation
+                                {title}
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -78,9 +93,9 @@ function MetricGauge(props) {
                                         r={circleRadius}
                                     />
                                     <circle
-                                        className={styles.highlight}
+                                        stroke={strokeColor}
                                         r={circleRadius}
-                                        stroke-dasharray={`${stroke_l} ${stroke_total_l}`}
+                                        stroke-dasharray={`${strokeCurrentLength} ${strokeTotalLength}`}
                                     />
                                 </g>
                                 <rect
@@ -89,27 +104,31 @@ function MetricGauge(props) {
                                     width={arc_width}
                                     height="4"
                                     fill="black"
-                                    transform={`rotate(${angle})`}
+                                    transform={`rotate(${currentAngle})`}
                                 ></rect>
                             </g>
                         </svg>
                         <div className={styles.center}>
                             <Typography variant="unitMainDisplay">
-                                {(watts / 1000).toFixed(1)}
+                                {currentValue.toFixed(1)}
                             </Typography>
                         </div>
                     </div>
                     <Grid container justifyContent="space-between">
                         <Grid item>
-                            <Typography variant="unitLabel">0 KW</Typography>
-                        </Grid>
-                        <Grid item>
                             <Typography variant="unitLabel">
-                                KILOWATTS
+                                {min + " " + unit}
                             </Typography>
                         </Grid>
                         <Grid item>
-                            <Typography variant="unitLabel">5 KW</Typography>
+                            <Typography variant="unitLabel">
+                                {unitDescription}
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="unitLabel">
+                                {max + " " + unit}
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Grid>
