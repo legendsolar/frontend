@@ -8,8 +8,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
+import { useNavigate } from "react-router-dom";
 function NavBar(props) {
     const auth = useAuth();
+    const navigate = useNavigate();
 
     const logOut = () => {
         auth.signout();
@@ -18,8 +20,22 @@ function NavBar(props) {
     return (
         <AppBar position="static">
             <Toolbar>
-                <Button color="inherit">Portfolio</Button>
-                <Button color="inherit">Account</Button>
+                <Button
+                    color="inherit"
+                    onClick={() => {
+                        navigate("/");
+                    }}
+                >
+                    Portfolio
+                </Button>
+                <Button
+                    color="inherit"
+                    onClick={() => {
+                        navigate("/user");
+                    }}
+                >
+                    Account
+                </Button>
                 <Button onClick={logOut} color="inherit">
                     Logout
                 </Button>

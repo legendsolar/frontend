@@ -6,6 +6,7 @@ import SignUpView from "../pages/sign_up_view";
 import { Link, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./protected-route";
 import UnprotectedRoute from "./unprotected-route";
+import AccountView from "../pages/account_view";
 
 function AppRouter() {
     const auth = useAuth();
@@ -43,6 +44,14 @@ function AppRouter() {
                             <UnprotectedRoute>
                                 <SignUpView />
                             </UnprotectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/user"
+                        element={
+                            <ProtectedRoute>
+                                <AccountView />
+                            </ProtectedRoute>
                         }
                     />
                 </Routes>

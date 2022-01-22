@@ -9,6 +9,7 @@ import MetricGauge from "./gauges/metric_gauge";
 import MetricSummary from "./summary/metric_summary";
 import useTheme from "@mui/material/styles/useTheme";
 import BasicProdWorm from "./worm/BasicProdWorm";
+import Worm from "./worm/Worm";
 
 function ComponentGrid(props) {
     const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
@@ -46,14 +47,7 @@ function ComponentGrid(props) {
                 </Grid>
                 {/* Chart */}
                 <Grid item xs={12} md={8} lg={9}>
-                    <Paper
-                        sx={{
-                            p: 2,
-                            display: "flex",
-                            flexDirection: "column",
-                            height: 240,
-                        }}
-                    ></Paper>
+                    <Worm></Worm>
                 </Grid>
                 {/* Recent Deposits */}
                 <Grid item xs={12} md={4} lg={3}>
