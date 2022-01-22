@@ -1,3 +1,6 @@
+import { useMemo } from "react";
+import * as d3 from "d3";
+
 const Axis = ({ domain = [0, 100], range = [10, 290] }) => {
     const ticks = useMemo(() => {
         const xScale = d3.scaleLinear().domain(domain).range(range);
@@ -40,3 +43,5 @@ const Axis = ({ domain = [0, 100], range = [10, 290] }) => {
         </svg>
     );
 };
+
+export default Axis;

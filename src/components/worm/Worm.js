@@ -8,49 +8,42 @@ import { database } from "../../Firebase";
 import ProductionWorm from "./ProductionWorm";
 import * as d3 from "d3";
 import { useChartDimensions } from "../../hooks/use_chart_dimensions";
+import { useMemo } from "react";
+import Axis from "./Axis";
 
 var tinycolor = require("tinycolor2");
 
 function Worm(props) {
-    const [ref, dms] = useChartDimensions(chartSettings);
+    const chartSettings = {
+        marginLeft: 0,
+        marginRight: 0,
+    };
+
     // todo not ideal
 
     const parseDate = (date) => new Date(date);
     const yAccessor = (d) => d["wattage"];
     const xAccessor = (d) => parseDate(d["time"]);
 
-    let dimWrapper = {
-        width: 400,
-        height: 200,
-        margins: {
-            top: 0,
-            right: 0,
-            bottom: 50,
-            left: 0,
-        },
-    };
+    const [ref, dms] = useChartDimensions(chartSettings);
 
-    let dimBound = {
-        width:
-            dimWrapper.width -
-            dimWrapper.margins.left -
-            dimWrapper.margins.right,
+    const yScale = useMemo(
+        () =>
+            d3
+                .scaleLinear()
+                .domain(d3.extent(data, yAccessor))
+                .range([dms.boundedHeight, 0]),
+        [dms.boundedHeight]
+    );
 
-        height:
-            dimWrapper.height -
-            dimWrapper.margins.top -
-            dimWrapper.margins.bottom,
-    };
-
-    const yScale = d3
-        .scaleLinear()
-        .domain(d3.extent(data, yAccessor))
-        .range([dimBound.height, 0]);
-
-    const xScale = d3
-        .scaleTime()
-        .domain(d3.extent(data, xAccessor))
-        .range([0, dimBound.width]);
+    const xScale = useMemo(
+        () =>
+            d3
+                .scaleTime()
+                .domain(d3.extent(data, xAccessor))
+                .range([0, dms.boundedWidth]),
+        [dms.boundedWidth]
+    );
 
     const lineGen = d3
         .line()
@@ -59,33 +52,53 @@ function Worm(props) {
 
     return (
         <Paper sx={{ p: 2 }}>
-            <svg
-                width={dimWrapper.width}
-                height={dimWrapper.height}
-                style={{ border: "1px red" }}
+            <div
+                className="Chart__wrapper"
+                ref={ref}
+                style={{ height: "200px" }}
             >
-                <g
-                    style={{
-                        transform: `translate(
-                    ${dimWrapper.margins.left},
-                    ${dimWrapper.margins.top}
-                )`,
-                    }}
-                ></g>
+                <svg width={dms.width} height={dms.height}>
+                    <g
+                        transform={`translate(${[
+                            dms.marginLeft,
+                            dms.marginTop,
+                        ].join(",")})`}
+                    >
+                        <rect
+                            width={dms.boundedWidth}
+                            height={dms.boundedHeight}
+                            fill="lavender"
+                        />
 
-                <rect
-                    x="0"
-                    width={dimBound.width}
-                    y={yScale(1000)}
-                    height={dimBound.height - yScale(1000)}
-                    fill="#EEE"
-                ></rect>
+                        <rect
+                            x="0"
+                            width={dms.boundedWidth}
+                            y={yScale(1000)}
+                            height={dms.boundedHeight - yScale(1000)}
+                            fill="#EEE"
+                        ></rect>
 
-                <path
-                    d={lineGen(data)}
-                    style={{ fill: "none", stroke: "#111", strokeWidth: 1 }}
-                ></path>
-            </svg>
+                        <path
+                            d={lineGen(data)}
+                            style={{
+                                fill: "none",
+                                stroke: "#111",
+                                strokeWidth: 1,
+                            }}
+                        ></path>
+                        <g
+                            transform={`translate(${[0, dms.boundedHeight].join(
+                                ","
+                            )})`}
+                        >
+                            <Axis
+                                domain={xScale.domain()}
+                                range={xScale.range()}
+                            />
+                        </g>
+                    </g>
+                </svg>
+            </div>
         </Paper>
     );
 }
@@ -103,7 +116,7 @@ const data = [
 
     {
         time: 1641764700000,
-        wattage: 0,
+        wattage: 500,
     },
 
     {
