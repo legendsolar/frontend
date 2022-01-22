@@ -5,9 +5,9 @@ const combineChartDimensions = (dimensions) => {
     const parsedDimensions = {
         ...dimensions,
         marginTop: dimensions.marginTop || 10,
-        marginRight: dimensions.marginRight || 10,
+        marginRight: dimensions.marginRight || 0,
         marginBottom: dimensions.marginBottom || 40,
-        marginLeft: dimensions.marginLeft || 75,
+        marginLeft: dimensions.marginLeft || 0,
     };
     return {
         ...parsedDimensions,

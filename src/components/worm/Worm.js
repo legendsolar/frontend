@@ -10,13 +10,15 @@ import * as d3 from "d3";
 import { useChartDimensions } from "../../hooks/use_chart_dimensions";
 import { useMemo } from "react";
 import Axis from "./Axis";
+import data from "./fake_data";
 
 var tinycolor = require("tinycolor2");
 
 function Worm(props) {
     const chartSettings = {
         marginLeft: 0,
-        marginRight: 0,
+        marginRight: 40,
+        marginTop: 0,
     };
 
     // todo not ideal
@@ -45,8 +47,12 @@ function Worm(props) {
         [dms.boundedWidth]
     );
 
+    const darkWattThreshold = 500;
+
     const lineGen = d3
         .line()
+        .curve(d3.curveBasis)
+        // .curve(d3.curveCardinal.tension(0.5))
         .x((d) => xScale(xAccessor(d)))
         .y((d) => yScale(yAccessor(d)));
 
@@ -65,16 +71,18 @@ function Worm(props) {
                         ].join(",")})`}
                     >
                         <rect
-                            width={dms.boundedWidth}
+                            width={dms.width}
                             height={dms.boundedHeight}
                             fill="lavender"
                         />
 
                         <rect
                             x="0"
-                            width={dms.boundedWidth}
-                            y={yScale(1000)}
-                            height={dms.boundedHeight - yScale(1000)}
+                            width={dms.width}
+                            y={yScale(darkWattThreshold)}
+                            height={
+                                dms.boundedHeight - yScale(darkWattThreshold)
+                            }
                             fill="#EEE"
                         ></rect>
 
@@ -83,7 +91,7 @@ function Worm(props) {
                             style={{
                                 fill: "none",
                                 stroke: "#111",
-                                strokeWidth: 1,
+                                strokeWidth: 3,
                             }}
                         ></path>
                         <g
@@ -102,27 +110,4 @@ function Worm(props) {
         </Paper>
     );
 }
-
-const data = [
-    {
-        time: 1641622500000,
-        wattage: 0,
-    },
-
-    {
-        time: 1641672900000,
-        wattage: 5000,
-    },
-
-    {
-        time: 1641764700000,
-        wattage: 500,
-    },
-
-    {
-        time: 1642194900000,
-        wattage: 4000,
-    },
-];
-
 export default Worm;
