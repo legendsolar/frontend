@@ -25,7 +25,7 @@ function ComponentGrid(props) {
                 <Grid item xs={4}>
                     <AssetLiveViewDebug></AssetLiveViewDebug>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item>
                     <MetricGauge
                         unit={"USD"}
                         unitDescription={"Dollars per hour"}
@@ -41,9 +41,6 @@ function ComponentGrid(props) {
                 </Grid>
                 <Grid item xs={6}>
                     <MetricSummary></MetricSummary>
-                </Grid>
-                <Grid item xs={6}>
-                    <BasicProdWorm></BasicProdWorm>
                 </Grid>
                 {/* Chart */}
                 <Grid item xs={12} md={8} lg={9}>

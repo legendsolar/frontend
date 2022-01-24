@@ -57,82 +57,84 @@ function MetricGauge(props) {
 
     return (
         <Paper sx={{ p: 2 }}>
-            <Grid container sx={{ width: width + "px" }}>
-                <Grid item>
-                    <Grid
-                        sx={{ width: width + "px" }}
-                        container
-                        justifyContent="space-between"
-                    >
-                        <Grid item>
-                            <Typography variant="dashboardHeader">
-                                {title}
-                            </Typography>
-                        </Grid>
-                        <Grid item>
-                            <LivePill></LivePill>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item>
-                    <div
-                        className={styles.gauge}
-                        style={{ width: width, height: 184 }}
-                    >
-                        <svg
-                            className={styles.svgElement}
-                            viewBox={`0 0 ${width} 184`}
+            <div style={{ width: "360px" }}>
+                <Grid container sx={{ width: width + "px" }}>
+                    <Grid item>
+                        <Grid
+                            sx={{ width: width + "px" }}
+                            container
+                            justifyContent="space-between"
                         >
-                            <g className={styles.centerTransform}>
-                                <g
-                                    className={styles.filledArcs}
-                                    style={{ strokeWidth: arc_width }}
-                                >
-                                    <circle
-                                        className={styles.background}
-                                        r={circleRadius}
-                                    />
-                                    <circle
-                                        stroke={strokeColor}
-                                        r={circleRadius}
-                                        stroke-dasharray={`${strokeCurrentLength} ${strokeTotalLength}`}
-                                    />
+                            <Grid item>
+                                <Typography variant="dashboardHeader">
+                                    {title}
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <LivePill></LivePill>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item>
+                        <div
+                            className={styles.gauge}
+                            style={{ width: width, height: 184 }}
+                        >
+                            <svg
+                                className={styles.svgElement}
+                                viewBox={`0 0 ${width} 184`}
+                            >
+                                <g className={styles.centerTransform}>
+                                    <g
+                                        className={styles.filledArcs}
+                                        style={{ strokeWidth: arc_width }}
+                                    >
+                                        <circle
+                                            className={styles.background}
+                                            r={circleRadius}
+                                        />
+                                        <circle
+                                            stroke={strokeColor}
+                                            r={circleRadius}
+                                            stroke-dasharray={`${strokeCurrentLength} ${strokeTotalLength}`}
+                                        />
+                                    </g>
+                                    <rect
+                                        x={circleRadius - arc_width / 2}
+                                        y="-2"
+                                        width={arc_width}
+                                        height="4"
+                                        fill="black"
+                                        transform={`rotate(${currentAngle})`}
+                                    ></rect>
                                 </g>
-                                <rect
-                                    x={circleRadius - arc_width / 2}
-                                    y="-2"
-                                    width={arc_width}
-                                    height="4"
-                                    fill="black"
-                                    transform={`rotate(${currentAngle})`}
-                                ></rect>
-                            </g>
-                        </svg>
-                        <div className={styles.center}>
-                            <Typography variant="unitMainDisplay">
-                                {currentValue.toFixed(1)}
-                            </Typography>
+                            </svg>
+                            <div className={styles.center}>
+                                <Typography variant="unitMainDisplay">
+                                    {currentValue.toFixed(1)}
+                                </Typography>
+                            </div>
                         </div>
-                    </div>
-                    <Grid container justifyContent="space-between">
-                        <Grid item>
-                            <Typography variant="unitLabel">
-                                {min + " " + unit}
-                            </Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant="unitLabel">
-                                {unitDescription}
-                            </Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant="unitLabel">
-                                {max + " " + unit}
-                            </Typography>
+                        <Grid container justifyContent="space-between">
+                            <Grid item>
+                                <Typography variant="unitLabel">
+                                    {min + " " + unit}
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant="unitLabel">
+                                    {unitDescription}
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant="unitLabel">
+                                    {max + " " + unit}
+                                </Typography>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
+            </div>
         </Paper>
     );
 }
