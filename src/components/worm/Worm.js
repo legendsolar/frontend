@@ -11,18 +11,57 @@ import { useChartDimensions } from "../../hooks/use_chart_dimensions";
 import { useMemo } from "react";
 import Axis from "./Axis";
 import data from "./fake_data";
+import { useTheme } from "@mui/material/styles";
+import { style } from "@mui/system";
 
 var tinycolor = require("tinycolor2");
 
+const defaultChartDisplayParams = {
+    timeAxisLabels: true,
+    currentTimeDisplay: false,
+
+    background: {
+        dayRegionColor: tinycolor("rgb(255,255,255)"),
+        nightRegionColor: tinycolor("rgb(243,243,243)"),
+    },
+
+    wormSunIcon: {
+        dayColor: tinycolor("rgb(250,223,79)"),
+        nightColor: tinycolor("rgb(33,30,32)"),
+        gradientSteps: [0.5, 1],
+        radius: 20,
+    },
+
+    worm: {
+        dayColor: tinycolor("#30A462"),
+        nightColor: tinycolor("rgb(33,30,32)"),
+        nightThreshold_W: 500,
+        width: 4.3,
+    },
+
+    dayNightIcons: {
+        rightMargin: 20,
+        iconSpacing: 8 + 8.5,
+        dayIconColor: tinycolor("rgb(243,243,243)"),
+        nightIconColor: tinycolor("rgb(243,243,243)"),
+        dayIconRadius: 8.5,
+        nightIconRadius: 8.5,
+    },
+
+    animation: {
+        time_s: 0,
+    },
+};
+
 function Worm(props) {
+    const styleOptions = defaultChartDisplayParams;
+
     const chartSettings = {
         marginLeft: 0,
-        marginRight: 40,
+        marginRight: 50,
         marginTop: 20,
         marginBottom: 30,
     };
-
-    // todo not ideal
 
     const parseDate = (date) => new Date(date);
     const yAccessor = (d) => d["wattage"];
@@ -48,7 +87,7 @@ function Worm(props) {
         [dms.boundedWidth]
     );
 
-    const darkWattThreshold = 500;
+    const dayNightThreshold = styleOptions.worm.nightThreshold_W;
 
     const lineGen = d3
         .line()
@@ -58,6 +97,10 @@ function Worm(props) {
         .y((d) => yScale(yAccessor(d)));
 
     const Sun = (props) => {
+        const sunStyle = styleOptions.wormSunIcon;
+        const lowAlphaSunColor = tinycolor(sunStyle.dayColor.toRgbString());
+        lowAlphaSunColor.setAlpha(0);
+
         return (
             <svg
                 //center
@@ -67,18 +110,24 @@ function Worm(props) {
                 height={props.height}
                 viewBox="0 0 20 20 "
             >
-                <circle r="10" cx="10" cy="10"></circle>
+                <radialGradient id="sunRadial">
+                    <stop offset={0} stopColor={sunStyle.dayColor}></stop>
+                    <stop offset={0.7} stopColor={sunStyle.dayColor}></stop>
+                    <stop
+                        offset={1}
+                        stopColor={lowAlphaSunColor.toRgbString()}
+                    ></stop>
+                </radialGradient>
+                <circle r="10" cx="10" cy="10" fill="url(#sunRadial)"></circle>
             </svg>
         );
     };
 
     const SunYPos = yScale(yAccessor(data[data.length - 1]));
     const SunXPos = xScale(xAccessor(data[data.length - 1]));
-    console.log(data[data.length - 1]);
-    console.log(SunYPos, SunXPos);
 
     return (
-        <Paper sx={{ p: 2 }}>
+        <Paper style={{ overflow: "hidden" }}>
             <div
                 className="Chart__wrapper"
                 ref={ref}
@@ -90,31 +139,43 @@ function Worm(props) {
                         gradientUnits="userSpaceOnUse"
                         x1="0"
                         x2="0"
-                        y1={yScale(darkWattThreshold - 10)}
-                        y2={yScale(darkWattThreshold + 10)}
+                        y1={yScale(dayNightThreshold - 10)}
+                        y2={yScale(dayNightThreshold + 10)}
                     >
-                        <stop offset={0} stopColor="blue"></stop>
-                        <stop offset={0.5} stopColor="blue"></stop>
-                        <stop offset={0.5} stopColor="red"></stop>
-                        <stop offset={1} stopColor="red"></stop>
+                        <stop
+                            offset={0}
+                            stopColor={styleOptions.worm.nightColor}
+                        ></stop>
+                        <stop
+                            offset={0.5}
+                            stopColor={styleOptions.worm.nightColor}
+                        ></stop>
+                        <stop
+                            offset={0.5}
+                            stopColor={styleOptions.worm.dayColor}
+                        ></stop>
+                        <stop
+                            offset={1}
+                            stopColor={styleOptions.worm.dayColor}
+                        ></stop>
                     </linearGradient>
 
                     <rect
                         width={dms.width}
                         height={dms.height}
-                        fill="lavender"
+                        fill={styleOptions.background.dayRegionColor}
                     />
 
                     <rect
                         x="0"
                         width={dms.width}
-                        y={yScale(darkWattThreshold) + dms.marginTop}
+                        y={yScale(dayNightThreshold) + dms.marginTop}
                         height={
                             dms.height -
-                            yScale(darkWattThreshold) -
+                            yScale(dayNightThreshold) -
                             dms.marginTop
                         }
-                        fill="#EEE"
+                        fill={styleOptions.background.nightRegionColor}
                     ></rect>
 
                     <g
@@ -123,20 +184,21 @@ function Worm(props) {
                             dms.marginTop,
                         ].join(",")})`}
                     >
-                        <Sun
-                            x={SunXPos}
-                            y={SunYPos}
-                            width={20}
-                            height={20}
-                        ></Sun>
                         <path
                             d={lineGen(data)}
                             style={{
                                 fill: "none",
                                 stroke: "url(#wormGradient)",
-                                strokeWidth: 3,
+                                strokeWidth: styleOptions.worm.width,
                             }}
                         ></path>
+
+                        <Sun
+                            x={SunXPos}
+                            y={SunYPos}
+                            width={styleOptions.wormSunIcon.radius}
+                            height={styleOptions.wormSunIcon.radius}
+                        ></Sun>
                         <g
                             transform={`translate(${[0, dms.boundedHeight].join(
                                 ","
