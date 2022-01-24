@@ -7,7 +7,7 @@ const Axis = ({ domain = [0, 100], range = [10, 290] }) => {
         const xScale = d3.scaleLinear().domain(domain).range(range);
 
         const width = range[1] - range[0];
-        const pixelsPerTick = 50;
+        const pixelsPerTick = 100;
         const numberOfTicksTarget = Math.max(
             1,
             Math.floor(width / pixelsPerTick)
