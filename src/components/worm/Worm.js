@@ -1,4 +1,4 @@
-import { timeInterpolatedValues, simSolarOutput } from "./Utility";
+import { timeInterpolatedValues, simSolarOutput, useInterval } from "./Utility";
 import { easeInOutQuad } from "js-easing-functions";
 import { addHours } from "date-fns";
 import Paper from "@mui/material/Paper";
@@ -8,7 +8,7 @@ import { database } from "../../Firebase";
 import ProductionWorm from "./ProductionWorm";
 import * as d3 from "d3";
 import { useChartDimensions } from "../../hooks/use_chart_dimensions";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import Axis from "./Axis";
 import data from "./fake_data";
 import { useTheme } from "@mui/material/styles";
@@ -56,6 +56,8 @@ const defaultChartDisplayParams = {
 
 function Worm(props) {
     const styleOptions = defaultChartDisplayParams;
+
+    const [dataIndex, setDataIndex] = useState(data.length - 10);
 
     const chartPath = useRef(null);
 
@@ -133,8 +135,15 @@ function Worm(props) {
         );
     };
 
-    const SunYPos = yScale(yAccessor(data[data.length - 1]));
-    const SunXPos = xScale(xAccessor(data[data.length - 1]));
+    useInterval(
+        () => {
+            setDataIndex(dataIndex + 1);
+        },
+        dataIndex < data.length - 1 ? 50 : null
+    );
+
+    const SunYPos = yScale(yAccessor(data[dataIndex]));
+    const SunXPos = xScale(xAccessor(data[dataIndex]));
 
     return (
         <Paper style={{ overflow: "hidden" }}>
@@ -143,18 +152,6 @@ function Worm(props) {
                 ref={ref}
                 style={{ height: "200px" }}
             >
-                <style>
-                    {`
-                    @keyframes draw_in {
-                            0% {
-                            stroke-dashoffset: ${pathLength / 2};
-                            }
-                            100% {
-                            stroke-dashoffset: 0;
-                            }
-                        }  
-                   `}
-                </style>
                 <svg width={dms.width} height={dms.height}>
                     <linearGradient
                         id="wormGradient"
@@ -208,14 +205,11 @@ function Worm(props) {
                     >
                         <path
                             ref={chartPath}
-                            d={lineGen(data)}
+                            d={lineGen(data.slice(0, dataIndex + 1))}
                             style={{
                                 fill: "none",
                                 stroke: "url(#wormGradient)",
                                 strokeWidth: styleOptions.worm.width,
-                                animation: "draw_in 5s",
-                                animationIterationCount: "infinite",
-                                strokeDasharray: pathLength,
                             }}
                             className={styles.myLine}
                         ></path>
