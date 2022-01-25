@@ -9,6 +9,9 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
+
+import Logo from "../assets/Logo.png";
+
 function NavBar(props) {
     const auth = useAuth();
     const navigate = useNavigate();
@@ -20,13 +23,22 @@ function NavBar(props) {
     return (
         <AppBar position="static">
             <Toolbar>
+                <Box
+                    component="img"
+                    sx={{
+                        maxWidth: 125,
+                        mr: "auto",
+                    }}
+                    alt="logo"
+                    src={Logo}
+                ></Box>
                 <Button
                     color="inherit"
                     onClick={() => {
                         navigate("/");
                     }}
                 >
-                    Portfolio
+                    <Typography variant="appBarHeader">Portfolio</Typography>
                 </Button>
                 <Button
                     color="inherit"
@@ -34,10 +46,10 @@ function NavBar(props) {
                         navigate("/user");
                     }}
                 >
-                    Account
+                    <Typography variant="appBarHeader">Account</Typography>
                 </Button>
                 <Button onClick={logOut} color="inherit">
-                    Logout
+                    <Typography variant="appBarHeader">Logout</Typography>
                 </Button>
             </Toolbar>
         </AppBar>

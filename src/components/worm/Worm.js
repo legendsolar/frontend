@@ -57,17 +57,6 @@ const defaultChartDisplayParams = {
 function Worm(props) {
     const styleOptions = defaultChartDisplayParams;
 
-    const [dataIndex, setDataIndex] = useState(data.length - 10);
-
-    const chartPath = useRef(null);
-
-    var pathLength = 100;
-
-    if (chartPath.current) {
-        pathLength = chartPath.current.getTotalLength();
-        // console.log(chartPath.getTotalLength());
-    }
-
     const chartSettings = {
         marginLeft: 0,
         marginRight: 50,
@@ -135,15 +124,8 @@ function Worm(props) {
         );
     };
 
-    useInterval(
-        () => {
-            setDataIndex(dataIndex + 1);
-        },
-        dataIndex < data.length - 1 ? 50 : null
-    );
-
-    const SunYPos = yScale(yAccessor(data[dataIndex]));
-    const SunXPos = xScale(xAccessor(data[dataIndex]));
+    const SunYPos = yScale(yAccessor(data[data.length - 1]));
+    const SunXPos = xScale(xAccessor(data[data.length - 1]));
 
     return (
         <Paper style={{ overflow: "hidden" }}>
@@ -204,8 +186,7 @@ function Worm(props) {
                         ].join(",")})`}
                     >
                         <path
-                            ref={chartPath}
-                            d={lineGen(data.slice(0, dataIndex + 1))}
+                            d={lineGen(data)}
                             style={{
                                 fill: "none",
                                 stroke: "url(#wormGradient)",

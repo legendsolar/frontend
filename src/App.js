@@ -2,8 +2,9 @@ import { ProvideAuth, useAuth } from "./hooks/use_auth";
 import AppRouter from "./routes/app-router";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
+import { deepmerge } from "@mui/utils";
 
-const globalTheme = createTheme({
+const colorThemeOptions = {
     palette: {
         error: {
             main: "#B4615F",
@@ -39,6 +40,11 @@ const globalTheme = createTheme({
             fontWeight: 600,
             fontSize: "10px",
         },
+        appBarHeader: {
+            fontFamily: "Azeret Mono",
+            fontWeight: 600,
+            fontSize: "12px",
+        },
         pillLabel: {
             fontWeight: 400,
             fontSize: "6px",
@@ -56,12 +62,23 @@ const globalTheme = createTheme({
             lineHeight: "14px",
         },
     },
+};
+
+const componentThemeOptions = {
     components: {
         MuiPaper: {
             styleOverrides: {
                 root: {
                     borderRadius: "15px",
                     boxShadow: "0px 0px 15px rgba(99, 110, 114, 0.5)",
+                },
+            },
+        },
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "0px",
+                    backgroundColor: colorThemeOptions.palette.inactive.main,
                 },
             },
         },
@@ -73,7 +90,11 @@ const globalTheme = createTheme({
             },
         },
     },
-});
+};
+
+const globalTheme = createTheme(
+    deepmerge(colorThemeOptions, componentThemeOptions)
+);
 
 function App() {
     return (
