@@ -17,7 +17,7 @@ import { useObject } from "react-firebase-hooks/database";
 import { format } from "date-fns";
 
 function AssetLiveViewDebug(props) {
-    const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
+    const assetId = "-MuCmzKbnofQ9TY_sIp9";
 
     const [assetProdSummarySnap, assetProdSummaryLoading, assetProdError] =
         useObject(ref(database, "production/" + assetId + "/summary"));
@@ -27,7 +27,7 @@ function AssetLiveViewDebug(props) {
     let formattedDate = "";
 
     if (assetProdSummarySnap && !assetProdSummaryLoading) {
-        watts = assetProdSummarySnap.val().recent.watts;
+        watts = assetProdSummarySnap.val().recent.wattage;
         lastUpdateTime = new Date(
             parseInt(assetProdSummarySnap.val().recent.time)
         );
@@ -51,7 +51,7 @@ function AssetLiveViewDebug(props) {
                 color="text.secondary"
                 gutterBottom
             >
-                {watts} W
+                {(watts / 1000).toFixed(2)} kW
             </Typography>
 
             <Typography

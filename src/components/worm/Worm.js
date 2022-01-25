@@ -8,11 +8,12 @@ import { database } from "../../Firebase";
 import ProductionWorm from "./ProductionWorm";
 import * as d3 from "d3";
 import { useChartDimensions } from "../../hooks/use_chart_dimensions";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import Axis from "./Axis";
 import data from "./fake_data";
 import { useTheme } from "@mui/material/styles";
 import { style } from "@mui/system";
+import styles from "./Worm.module.css";
 
 var tinycolor = require("tinycolor2");
 
@@ -55,6 +56,15 @@ const defaultChartDisplayParams = {
 
 function Worm(props) {
     const styleOptions = defaultChartDisplayParams;
+
+    const chartPath = useRef(null);
+
+    var pathLength = 100;
+
+    if (chartPath.current) {
+        pathLength = chartPath.current.getTotalLength();
+        // console.log(chartPath.getTotalLength());
+    }
 
     const chartSettings = {
         marginLeft: 0,
@@ -133,6 +143,18 @@ function Worm(props) {
                 ref={ref}
                 style={{ height: "200px" }}
             >
+                <style>
+                    {`
+                    @keyframes draw_in {
+                            0% {
+                            stroke-dashoffset: ${pathLength / 2};
+                            }
+                            100% {
+                            stroke-dashoffset: 0;
+                            }
+                        }  
+                   `}
+                </style>
                 <svg width={dms.width} height={dms.height}>
                     <linearGradient
                         id="wormGradient"
@@ -185,12 +207,17 @@ function Worm(props) {
                         ].join(",")})`}
                     >
                         <path
+                            ref={chartPath}
                             d={lineGen(data)}
                             style={{
                                 fill: "none",
                                 stroke: "url(#wormGradient)",
                                 strokeWidth: styleOptions.worm.width,
+                                animation: "draw_in 5s",
+                                animationIterationCount: "infinite",
+                                strokeDasharray: pathLength,
                             }}
+                            className={styles.myLine}
                         ></path>
 
                         <Sun
@@ -199,6 +226,7 @@ function Worm(props) {
                             width={styleOptions.wormSunIcon.radius}
                             height={styleOptions.wormSunIcon.radius}
                         ></Sun>
+
                         <g
                             transform={`translate(${[0, dms.boundedHeight].join(
                                 ","
