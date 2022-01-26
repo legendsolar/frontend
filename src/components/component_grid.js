@@ -31,10 +31,10 @@ function ComponentGrid(props) {
                     <EarningsGauge assetId="-MuCmzKbnofQ9TY_sIp9"></EarningsGauge>
                 </Grid>
                 <Grid item>
-                    <CarbonGauge assetId="-MuCmzKbnofQ9TY_sIp9"></CarbonGauge>
+                    <CarbonGauge assetId="-MuCq8nkhE8gqGrdG9Ta"></CarbonGauge>
                 </Grid>
                 <Grid item>
-                    <GenerationGauge assetId="-MuCmzKbnofQ9TY_sIp9"></GenerationGauge>
+                    <GenerationGauge assetId="-MuCqDzSoaF0yXWZbouB"></GenerationGauge>
                 </Grid>
                 <Grid item xs={6}>
                     <MetricSummary></MetricSummary>

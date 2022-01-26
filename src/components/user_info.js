@@ -4,12 +4,12 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import useTheme from "@mui/material/styles/useTheme";
 import { ButtonGroup } from "@mui/material";
-import { ref, set } from "firebase/database";
+import { get, ref, set } from "firebase/database";
 import { database } from "../Firebase";
 import { useAuth } from "../hooks/use_auth";
 import { Button, Typography } from "@mui/material";
 import { TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
@@ -59,6 +59,21 @@ function BasicTabs() {
     };
 
     const [formValues, setFormValues] = useState(startingValues);
+
+    useEffect(() => {
+        // set initial to saved values
+        get(ref(database, "users/" + user.uid + "/info"))
+            .then((userInfoSnapshot) => {
+                if (userInfoSnapshot && userInfoSnapshot.exists()) {
+                    console.log(userInfoSnapshot.val());
+                    setFormValues(userInfoSnapshot.val());
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                throw error;
+            });
+    }, []);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
