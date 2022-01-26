@@ -5,11 +5,13 @@ import Container from "@mui/material/Container";
 import UserDebugPaper from "./user_debug_paper";
 import UserAssetDebugPaper from "./user_asset_debug";
 import AssetLiveViewDebug from "./asset_live_view_debug";
-import MetricGauge from "./gauges/metric_gauge";
 import MetricSummary from "./summary/metric_summary";
 import useTheme from "@mui/material/styles/useTheme";
 import BasicProdWorm from "./worm/BasicProdWorm";
 import Worm from "./worm/Worm";
+import EarningsGauge from "./gauges/earning_gauge";
+import CarbonGauge from "./gauges/carbon_gauge";
+import GenerationGauge from "./gauges/generation_gauge";
 
 function ComponentGrid(props) {
     const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
@@ -26,18 +28,13 @@ function ComponentGrid(props) {
                     <AssetLiveViewDebug></AssetLiveViewDebug>
                 </Grid>
                 <Grid item>
-                    <MetricGauge
-                        unit={"USD"}
-                        unitDescription={"Dollars per hour"}
-                        min={0}
-                        max={225}
-                        currentValue={5}
-                        title="Earnings"
-                        strokeColor={"#30A462"}
-                        isLive={true}
-                        liveMessage="updated 15 min ago"
-                        assetId="-MtUpMiLZ0cvkQ-Dok2z"
-                    ></MetricGauge>
+                    <EarningsGauge assetId="-MuCmzKbnofQ9TY_sIp9"></EarningsGauge>
+                </Grid>
+                <Grid item>
+                    <CarbonGauge assetId="-MuCmzKbnofQ9TY_sIp9"></CarbonGauge>
+                </Grid>
+                <Grid item>
+                    <GenerationGauge assetId="-MuCmzKbnofQ9TY_sIp9"></GenerationGauge>
                 </Grid>
                 <Grid item xs={6}>
                     <MetricSummary></MetricSummary>

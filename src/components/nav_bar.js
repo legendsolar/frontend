@@ -48,7 +48,12 @@ function NavBar(props) {
                 >
                     <Typography variant="appBarHeader">Account</Typography>
                 </Button>
-                <Button onClick={logOut} color="inherit">
+                <Button
+                    onClick={logOut}
+                    color="inherit"
+                    variant="outlined"
+                    sx={{ ml: 2 }}
+                >
                     <Typography variant="appBarHeader">Logout</Typography>
                 </Button>
             </Toolbar>

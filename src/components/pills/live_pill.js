@@ -41,7 +41,7 @@ function LivePill(props) {
                 ></Chip>
             </Grid>
             <Grid item sx={{ display: "inline-block", lineHeight: "0" }}>
-                <Typography variant="pillLabel">updated 15 mins ago</Typography>
+                <Typography variant="pillLabel">{props.message}</Typography>
             </Grid>
         </Grid>
     );

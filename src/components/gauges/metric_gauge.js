@@ -10,39 +10,16 @@ import { format } from "date-fns";
 import LivePill from "../pills/live_pill";
 
 function MetricGauge(props) {
-    const assetId = props.assetId;
-    const unit = props.unit;
-    const unitDescription = props.unitDescription;
+    const unit = props.displayOptions.unit;
+    const unitDescription = props.displayOptions.unitDescription;
+    const title = props.displayOptions.title;
+    const strokeColor = props.displayOptions.strokeColor;
+
     const min = props.min;
     const max = props.max;
-    const currentValue = props.currentValue;
-    const title = props.title;
-    const strokeColor = props.strokeColor;
     const isLive = props.isLive;
     const liveMessage = props.liveMessage;
-
-    // const useStyles = makeStyles((theme) => ({
-    //     gaugeStroke: {
-    //         stroke: theme.palette.text.primary,
-    //     },
-    // }));
-
-    // const classes = useStyles();
-
-    // const [assetProdSummarySnap, assetProdSummaryLoading, assetProdError] =
-    //     useObject(ref(database, "production/" + assetId + "/summary"));
-
-    // let watts = 0;
-    // let lastUpdateTime = 0;
-    // let formattedDate = "";
-
-    // if (assetProdSummarySnap && !assetProdSummaryLoading) {
-    //     watts = assetProdSummarySnap.val().recent.watts;
-    //     lastUpdateTime = new Date(
-    //         parseInt(assetProdSummarySnap.val().recent.time)
-    //     );
-    //     formattedDate = format(lastUpdateTime, "Pp");
-    // }
+    const currentValue = props.currentValue;
 
     const normalizedCurrentValue = currentValue / (max - min);
 
@@ -71,7 +48,7 @@ function MetricGauge(props) {
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <LivePill></LivePill>
+                                <LivePill message={liveMessage}></LivePill>
                             </Grid>
                         </Grid>
                     </Grid>
