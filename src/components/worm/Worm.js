@@ -10,10 +10,9 @@ import * as d3 from "d3";
 import { useChartDimensions } from "../../hooks/use_chart_dimensions";
 import { useMemo, useRef, useState } from "react";
 import Axis from "./Axis";
-import data from "./fake_data";
 import { useTheme } from "@mui/material/styles";
 import { style } from "@mui/system";
-import styles from "./Worm.module.css";
+import styles from "./worm.module.css";
 
 var tinycolor = require("tinycolor2");
 
@@ -63,6 +62,8 @@ function Worm(props) {
         marginTop: 20,
         marginBottom: 30,
     };
+
+    const data = props.data;
 
     const parseDate = (date) => new Date(date);
     const yAccessor = (d) => d["wattage"];
@@ -192,7 +193,6 @@ function Worm(props) {
                                 stroke: "url(#wormGradient)",
                                 strokeWidth: styleOptions.worm.width,
                             }}
-                            className={styles.myLine}
                         ></path>
 
                         <Sun

@@ -3,7 +3,6 @@ import React from "react";
 import { database } from "../../Firebase";
 import { ref } from "firebase/database";
 import { useObject } from "react-firebase-hooks/database";
-
 import { differenceInMinutes } from "date-fns";
 
 function LiveMetricGauge(props) {

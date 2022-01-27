@@ -8,7 +8,7 @@ import AssetLiveViewDebug from "./asset_live_view_debug";
 import MetricSummary from "./summary/metric_summary";
 import useTheme from "@mui/material/styles/useTheme";
 import BasicProdWorm from "./worm/BasicProdWorm";
-import Worm from "./worm/Worm";
+import WormLive from "./worm/worm_live";
 import EarningsGauge from "./gauges/earning_gauge";
 import CarbonGauge from "./gauges/carbon_gauge";
 import GenerationGauge from "./gauges/generation_gauge";
@@ -41,7 +41,7 @@ function ComponentGrid(props) {
                 </Grid>
                 {/* Chart */}
                 <Grid item xs={12} md={8} lg={9}>
-                    <Worm></Worm>
+                    <WormLive assetId="-MtUbBNCnoz0VdTQ_m-O"></WormLive>
                 </Grid>
                 {/* Recent Deposits */}
                 <Grid item xs={12} md={4} lg={3}>
