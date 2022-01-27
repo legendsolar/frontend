@@ -89,6 +89,15 @@ const componentThemeOptions = {
                 },
             },
         },
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    fontFamily: "Azeret Mono",
+                    fontWeight: 600,
+                    fontSize: "12px",
+                },
+            },
+        },
     },
 };
 

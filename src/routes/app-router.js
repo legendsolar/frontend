@@ -1,12 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useAuth } from "../hooks/use_auth";
-import PortfolioView from "../pages/portfolio_view";
-import SignInView from "../pages/sign_in_view";
-import SignUpView from "../pages/sign_up_view";
+import PortfolioView from "../views/portfolio_view";
+import SignInView from "../views/sign_in_view";
+import SignUpView from "../views/sign_up_view";
 import { Link, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./protected-route";
 import UnprotectedRoute from "./unprotected-route";
-import AccountView from "../pages/account_view";
+import AccountView from "../views/account_view";
+import TransactionView from "../views/transactions_view";
 
 function AppRouter() {
     const auth = useAuth();
@@ -51,6 +52,15 @@ function AppRouter() {
                         element={
                             <ProtectedRoute>
                                 <AccountView />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/transactions"
+                        element={
+                            <ProtectedRoute>
+                                <TransactionView />
                             </ProtectedRoute>
                         }
                     />
