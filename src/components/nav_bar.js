@@ -8,13 +8,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import Logo from "../assets/Logo.png";
 
 function NavBar(props) {
     const auth = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const logOut = () => {
         auth.signout();
@@ -37,6 +38,7 @@ function NavBar(props) {
                     onClick={() => {
                         navigate("/");
                     }}
+                    sx={{ ml: 2 }}
                 >
                     <Typography variant="appBarHeader">Portfolio</Typography>
                 </Button>
@@ -45,8 +47,19 @@ function NavBar(props) {
                     onClick={() => {
                         navigate("/user");
                     }}
+                    sx={{ ml: 2 }}
                 >
                     <Typography variant="appBarHeader">Account</Typography>
+                </Button>
+
+                <Button
+                    color="inherit"
+                    onClick={() => {
+                        navigate("/transactions");
+                    }}
+                    sx={{ ml: 2 }}
+                >
+                    <Typography variant="appBarHeader">Transactions</Typography>
                 </Button>
                 <Button
                     onClick={logOut}

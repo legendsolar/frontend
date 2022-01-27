@@ -59,8 +59,6 @@ export default function WormLive(props) {
     } else if (assetProdSnap && !assetProdLoading && !assetProdError) {
         // transform into array for d3 to process
         data = Object.values(assetProdSnap.val());
-        // setData(Object.values(assetProdSnap.val()));
-        console.log(data);
     } else {
         error = true;
     }

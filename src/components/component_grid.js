@@ -21,11 +21,13 @@ function ComponentGrid(props) {
     return (
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-                <Grid item xs={8}>
-                    <UserDebugPaper></UserDebugPaper>
+                {/* Chart */}
+                <Grid item xs={8} md={8} lg={8}>
+                    <WormLive assetId="-MtUbBNCnoz0VdTQ_m-O"></WormLive>
                 </Grid>
+
                 <Grid item xs={4}>
-                    <AssetLiveViewDebug></AssetLiveViewDebug>
+                    <AssetLiveViewDebug assetId="-MtUbBNCnoz0VdTQ_m-O"></AssetLiveViewDebug>
                 </Grid>
                 <Grid item>
                     <EarningsGauge assetId="-MuCmzKbnofQ9TY_sIp9"></EarningsGauge>
@@ -39,30 +41,8 @@ function ComponentGrid(props) {
                 <Grid item xs={6}>
                     <MetricSummary></MetricSummary>
                 </Grid>
-                {/* Chart */}
-                <Grid item xs={12} md={8} lg={9}>
-                    <WormLive assetId="-MtUbBNCnoz0VdTQ_m-O"></WormLive>
-                </Grid>
-                {/* Recent Deposits */}
-                <Grid item xs={12} md={4} lg={3}>
-                    <Paper
-                        sx={{
-                            p: 2,
-                            display: "flex",
-                            flexDirection: "column",
-                            height: 240,
-                        }}
-                    ></Paper>
-                </Grid>
-                {/* Recent Orders */}
                 <Grid item xs={12}>
-                    <Paper
-                        sx={{
-                            p: 2,
-                            display: "flex",
-                            flexDirection: "column",
-                        }}
-                    ></Paper>
+                    <UserDebugPaper></UserDebugPaper>
                 </Grid>
             </Grid>
         </Container>

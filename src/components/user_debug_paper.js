@@ -1,25 +1,25 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { getAuth } from "firebase/auth";
 import { auth, database, firebaseApp } from "../Firebase";
-import NavBar from "./nav_bar";
-import { useList } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import { Typography } from "@mui/material";
-import Container from "@mui/material/Container";
-import ComponentGrid from "./component_grid";
+import { useObject } from "react-firebase-hooks/database";
 
 function UserDebugPaper(props) {
     const auth = useAuth();
     const user = auth.user;
 
-    if (!user) {
+    const [userDataSnap, userDataLoading, userDataError] = useObject(
+        ref(database, "users/" + user.uid)
+    );
+
+    if (!userDataSnap || userDataLoading) {
         return <> </>;
     }
+
+    const userData = userDataSnap.val().info;
+    const userMetaData = userDataSnap.val().metadata;
 
     return (
         <Paper sx={{ minWidth: 275, p: 2 }}>
@@ -30,8 +30,42 @@ function UserDebugPaper(props) {
             >
                 User Debug Info
             </Typography>
-            <Typography variant="body2">{user.email}</Typography>
-            <Typography variant="body2">{"id: " + user.uid}</Typography>
+
+            <Typography
+                sx={{ fontSize: 12 }}
+                color="text.secondary"
+                gutterBottom
+            >
+                Email
+            </Typography>
+
+            <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
+                {user.email}
+            </Typography>
+
+            <Typography
+                sx={{ fontSize: 12 }}
+                color="text.secondary"
+                gutterBottom
+            >
+                Address
+            </Typography>
+
+            <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
+                {`${userData.streetAddress}, ${userData.city}, ${userData.state}`}
+            </Typography>
+
+            <Typography
+                sx={{ fontSize: 12 }}
+                color="text.secondary"
+                gutterBottom
+            >
+                Last Log In
+            </Typography>
+
+            <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
+                {`${userMetaData.lastSignInTime}`}
+            </Typography>
         </Paper>
     );
 }

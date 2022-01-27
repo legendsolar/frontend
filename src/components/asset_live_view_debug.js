@@ -17,10 +17,14 @@ import { useObject } from "react-firebase-hooks/database";
 import { format } from "date-fns";
 
 function AssetLiveViewDebug(props) {
-    const assetId = "-MuCmzKbnofQ9TY_sIp9";
+    const assetId = props.assetId;
 
     const [assetProdSummarySnap, assetProdSummaryLoading, assetProdError] =
         useObject(ref(database, "production/" + assetId + "/summary"));
+
+    const [assetInfoSnap, assetInfoLoading, assetInfoError] = useObject(
+        ref(database, "assets/" + assetId + "/")
+    );
 
     let watts = 0;
     let lastUpdateTime = 0;
@@ -34,16 +38,31 @@ function AssetLiveViewDebug(props) {
         formattedDate = format(lastUpdateTime, "Pp");
     }
 
+    var location = "unknown";
+    var name = "unknown";
+
+    if (assetInfoSnap && !assetInfoLoading) {
+        const assetInfo = assetInfoSnap.val();
+        location = `${assetInfo.address.city}, ${assetInfo.address.state}`;
+        name = assetInfo.name;
+    }
+
     return (
         <Paper sx={{ minWidth: 275, p: 2 }}>
             <Typography
-                sx={{ fontSize: 14 }}
+                sx={{ fontSize: 18 }}
                 color="text.secondary"
                 gutterBottom
             >
-                {assetProdSummaryLoading
-                    ? "Asset Data Loading"
-                    : "Asset Debug Live"}
+                {name}
+            </Typography>
+
+            <Typography
+                sx={{ fontSize: 12 }}
+                color="text.secondary"
+                gutterBottom
+            >
+                Current Production
             </Typography>
 
             <Typography
@@ -67,7 +86,15 @@ function AssetLiveViewDebug(props) {
                 color="text.secondary"
                 gutterBottom
             >
-                {"Asset ID: " + assetId}
+                {"Location: " + location}
+            </Typography>
+
+            <Typography
+                sx={{ fontSize: 12 }}
+                color="text.secondary"
+                gutterBottom
+            >
+                {"ID: " + assetId}
             </Typography>
         </Paper>
     );
