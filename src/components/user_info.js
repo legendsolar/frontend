@@ -109,6 +109,7 @@ function BasicTabs() {
         >
             <Tabs
                 value={value}
+                sx={{ width: 400, maxWidth: 400 }}
                 onChange={handleChange}
                 aria-label="basic tabs example"
                 orientation="vertical"
@@ -187,10 +188,10 @@ function BasicTabs() {
                 </Button>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                Accreditation has been verified
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Item Three
+                ... Coming soon ...
             </TabPanel>
         </Box>
     );

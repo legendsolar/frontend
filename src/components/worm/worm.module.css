@@ -1,0 +1,13 @@
+/* @keyframes draw_in {
+    0% {
+       stroke-dashoffset: 100%;
+    }
+    100% {
+       stroke-dashoffset: 0%;
+    }
+ } */
+ .myLine {
+    /* animation: draw_in 5s;
+    animation-iteration-count: infinite; */
+    stroke-dasharray: 285%;
+ }
