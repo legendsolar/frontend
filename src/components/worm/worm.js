@@ -4,6 +4,9 @@ import { useChartDimensions } from "../../hooks/use_chart_dimensions";
 import { useMemo, useRef, useState } from "react";
 import WormAxis from "./worm_axis";
 import fakeData from "./fake_data";
+import { format } from "date-fns";
+import { Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 
 var tinycolor = require("tinycolor2");
 
@@ -50,11 +53,11 @@ function Worm(props) {
     const chartSettings = {
         marginLeft: 0,
         marginRight: 60,
-        marginTop: 20,
+        marginTop: 10,
         marginBottom: 30,
     };
 
-    const data = fakeData;
+    const data = props.data;
 
     const parseDate = (date) => new Date(date);
     const yAccessor = (d) => d["wattage"];
@@ -85,7 +88,6 @@ function Worm(props) {
     const lineGen = d3
         .line()
         .curve(d3.curveBasis)
-        // .curve(d3.curveCardinal.tension(0.5))
         .x((d) => xScale(xAccessor(d)))
         .y((d) => yScale(yAccessor(d)));
 
@@ -121,6 +123,10 @@ function Worm(props) {
 
     return (
         <Paper style={{ overflow: "hidden" }}>
+            <Stack sx={{ p: 2 }} direction="row" justifyContent="space-between">
+                <Typography variant="dashboardHeader">Productivity</Typography>
+                <Typography>{format(new Date(), "p")}</Typography>
+            </Stack>
             <div
                 className="Chart__wrapper"
                 ref={ref}

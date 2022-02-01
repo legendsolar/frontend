@@ -49,5 +49,9 @@ export default function WormLive(props) {
             });
     }, []);
 
+    if (loading || error) {
+        return <></>;
+    }
+
     return <Worm data={data} loading={loading} error={error}></Worm>;
 }

@@ -9,7 +9,6 @@ const WormAxis = ({
     xAccessor,
     yAccessor,
 }) => {
-    console.log("worm axis");
     const ticks = useMemo(() => {
         const xScale = d3.scaleLinear().domain(domain).range(range);
 
@@ -19,7 +18,6 @@ const WormAxis = ({
 
         const ticks = {};
 
-        console.log(data);
         // find daily max
         data.forEach((d) => {
             const date = format(new Date(xAccessor(d)), "P");
