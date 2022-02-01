@@ -13,6 +13,7 @@ import EarningsGauge from "./gauges/earning_gauge";
 import CarbonGauge from "./gauges/carbon_gauge";
 import GenerationGauge from "./gauges/generation_gauge";
 import Weather from "./weather";
+import DividendWidget from "./dividends/dividend_widget";
 
 import {
     EarningsCumulativeImpact,
@@ -59,6 +60,9 @@ function ComponentGrid(props) {
                 </Grid>
                 <Grid item xs={6}>
                     <Weather></Weather>
+                </Grid>
+                <Grid item xs={6}>
+                    <DividendWidget></DividendWidget>
                 </Grid>
                 <Grid item xs={12}>
                     <UserDebugPaper></UserDebugPaper>
