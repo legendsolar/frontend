@@ -20,8 +20,6 @@ function UserAssetDebugPaper(props) {
     const [userAssetSnapshots, userAssetSnapshotsLoading, userAssetError] =
         useList(ref(database, "users/" + user.uid + "/assets"));
 
-    console.log("assets");
-
     if (!userAssetSnapshotsLoading && !userAssetError) {
         userAssetSnapshots.map((v) => {
             console.log(v.val());

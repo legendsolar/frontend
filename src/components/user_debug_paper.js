@@ -22,7 +22,6 @@ function UserDebugPaper(props) {
 
     const userData = userDatabaseObj.info;
 
-    console.log(userData);
     const userMetaData = userDataSnap.metadata;
 
     return (

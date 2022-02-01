@@ -19,7 +19,6 @@ function DividendWidget(props) {
     }
 
     if (dividendsSnap) {
-        console.log("dividends");
         console.log(dividendsSnap);
     }
 

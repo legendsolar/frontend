@@ -11,7 +11,6 @@ function loadWeatherPromise(apiKey, lat, long) {
             return response.json();
         })
         .then((data) => {
-            console.log(data);
             return data;
         });
 }
@@ -22,8 +21,6 @@ function Weather(props) {
     useEffect(() => {
         loadWeatherPromise(openWeatherApiKey, 40.712778, -74.006111).then(
             (response) => {
-                console.log("not sure");
-                console.log(response);
                 setWeatherObj(response);
             }
         );

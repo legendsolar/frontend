@@ -1,18 +1,9 @@
-import { timeInterpolatedValues, simSolarOutput, useInterval } from "./Utility";
-import { easeInOutQuad } from "js-easing-functions";
-import { addHours } from "date-fns";
 import Paper from "@mui/material/Paper";
-import { useObject } from "react-firebase-hooks/database";
-import { ref } from "firebase/database";
-import { database } from "../../Firebase";
-import ProductionWorm from "./ProductionWorm";
 import * as d3 from "d3";
 import { useChartDimensions } from "../../hooks/use_chart_dimensions";
 import { useMemo, useRef, useState } from "react";
-import Axis from "./Axis";
-import { useTheme } from "@mui/material/styles";
-import { style } from "@mui/system";
-import styles from "./worm.module.css";
+import WormAxis from "./worm_axis";
+import fakeData from "./fake_data";
 
 var tinycolor = require("tinycolor2");
 
@@ -58,12 +49,12 @@ function Worm(props) {
 
     const chartSettings = {
         marginLeft: 0,
-        marginRight: 50,
+        marginRight: 60,
         marginTop: 20,
         marginBottom: 30,
     };
 
-    const data = props.data;
+    const data = fakeData;
 
     const parseDate = (date) => new Date(date);
     const yAccessor = (d) => d["wattage"];
@@ -127,9 +118,6 @@ function Worm(props) {
 
     const SunYPos = yScale(yAccessor(data[data.length - 1]));
     const SunXPos = xScale(xAccessor(data[data.length - 1]));
-
-    console.log("why u no redraw");
-    console.log(data);
 
     return (
         <Paper style={{ overflow: "hidden" }}>
@@ -210,9 +198,12 @@ function Worm(props) {
                                 ","
                             )})`}
                         >
-                            <Axis
+                            <WormAxis
                                 domain={xScale.domain()}
                                 range={xScale.range()}
+                                data={data}
+                                xAccessor={xAccessor}
+                                yAccessor={yAccessor}
                             />
                         </g>
                     </g>
