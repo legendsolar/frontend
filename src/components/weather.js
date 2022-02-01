@@ -44,11 +44,7 @@ function Weather(props) {
                 "& .MuiTextField-root": { m: 1 },
             }}
         >
-            <Typography
-                sx={{ fontSize: 18 }}
-                color="text.secondary"
-                gutterBottom
-            >
+            <Typography variant="dashboardHeader" gutterBottom>
                 New York, NY
             </Typography>
 

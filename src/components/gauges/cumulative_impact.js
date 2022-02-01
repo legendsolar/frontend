@@ -58,11 +58,7 @@ function CumulativeImpact(props) {
 
     return (
         <Paper sx={{ p: 2 }}>
-            <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-            >
+            <Typography variant="dashboardHeader" gutterBottom>
                 {displayOptions.title}
             </Typography>
 
