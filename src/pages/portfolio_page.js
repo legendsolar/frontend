@@ -11,6 +11,7 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import Container from "@mui/material/Container";
 import ComponentGrid from "../components/component_grid";
+import Footer from "../components/footer";
 
 function PortfolioView(props) {
     const auth = useAuth();
@@ -28,6 +29,7 @@ function PortfolioView(props) {
         <div>
             <NavBar></NavBar>
             <ComponentGrid></ComponentGrid>
+            <Footer></Footer>
         </div>
     );
 }

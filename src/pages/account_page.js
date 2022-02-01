@@ -12,6 +12,7 @@ import Link from "@mui/material/Link";
 import Container from "@mui/material/Container";
 import ComponentGrid from "../components/component_grid";
 import UserInfo from "../components/user_info";
+import Footer from "../components/footer";
 
 function AccountView(props) {
     const auth = useAuth();
@@ -29,6 +30,7 @@ function AccountView(props) {
         <div>
             <NavBar></NavBar>
             <UserInfo></UserInfo>
+            <Footer></Footer>
         </div>
     );
 }
