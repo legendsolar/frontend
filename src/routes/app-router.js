@@ -1,13 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useAuth } from "../hooks/use_auth";
-import PortfolioView from "../views/portfolio_view";
-import SignInView from "../views/sign_in_view";
-import SignUpView from "../views/sign_up_view";
+import PortfolioView from "../pages/portfolio_page";
+import SignInView from "../pages/sign_in_page";
+import SignUpView from "../pages/sign_up_page";
 import { Link, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./protected-route";
 import UnprotectedRoute from "./unprotected-route";
-import AccountView from "../views/account_view";
-import TransactionView from "../views/transactions_view";
+import AccountView from "../pages/account_page";
+import TransactionView from "../pages/transactions_page";
 
 function AppRouter() {
     const auth = useAuth();
