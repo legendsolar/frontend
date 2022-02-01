@@ -12,6 +12,7 @@ import WormLive from "./worm/worm_live";
 import EarningsGauge from "./gauges/earning_gauge";
 import CarbonGauge from "./gauges/carbon_gauge";
 import GenerationGauge from "./gauges/generation_gauge";
+import Weather from "./weather";
 
 function ComponentGrid(props) {
     const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
@@ -40,6 +41,9 @@ function ComponentGrid(props) {
                 </Grid>
                 <Grid item xs={6}>
                     <MetricSummary></MetricSummary>
+                </Grid>
+                <Grid item xs={6}>
+                    <Weather></Weather>
                 </Grid>
                 <Grid item xs={12}>
                     <UserDebugPaper></UserDebugPaper>

@@ -128,6 +128,9 @@ function Worm(props) {
     const SunYPos = yScale(yAccessor(data[data.length - 1]));
     const SunXPos = xScale(xAccessor(data[data.length - 1]));
 
+    console.log("why u no redraw");
+    console.log(data);
+
     return (
         <Paper style={{ overflow: "hidden" }}>
             <div
