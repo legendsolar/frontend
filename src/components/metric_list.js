@@ -1,0 +1,21 @@
+import { Stack, Typography, Tooltip } from "@mui/material";
+
+const MetricList = (props) => {
+    return (
+        <Stack spacing={2} sx={{ mt: 2, mb: 2 }}>
+            {props.valuePairs &&
+                props.valuePairs.map(({ metric, value }) => (
+                    <Stack direction="row" justifyContent={"space-between"}>
+                        <Tooltip title="How is this calculated?">
+                            <Typography variant="unitLabel">
+                                {metric}
+                            </Typography>
+                        </Tooltip>
+                        <Typography variant="unitValue">{value}</Typography>
+                    </Stack>
+                ))}
+        </Stack>
+    );
+};
+
+export default MetricList;

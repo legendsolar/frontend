@@ -1,85 +1,85 @@
 import React from "react";
-import { auth, database, firebaseApp } from "../../Firebase";
-import { ref } from "firebase/database";
+import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
-import { useObject } from "react-firebase-hooks/database";
 import styles from "./metric_gauge.module.css";
-import { format } from "date-fns";
 import LivePill from "../pills/live_pill";
+const tinycolor = require("tinycolor2");
 
-function MetricGauge(props) {
-    const unit = props.displayOptions.unit;
-    const unitDescription = props.displayOptions.unitDescription;
-    const title = props.displayOptions.title;
-    const strokeColor = props.displayOptions.strokeColor;
+function MetricGauge({
+    min,
+    max,
+    currentValue,
+    unitOpts,
 
-    const min = props.min;
-    const max = props.max;
-    const isLive = props.isLive;
-    const liveMessage = props.liveMessage;
-    const currentValue = props.currentValue;
-
+    circleRadius,
+    arcWidth,
+    componentWidth,
+    gaugeAngleTravel,
+}) {
     const normalizedCurrentValue = currentValue / (max - min);
 
-    const gaugeAngleTravel = 180;
     const currentAngle = 180 + normalizedCurrentValue * gaugeAngleTravel;
-    const circleRadius = 90 + 45;
     const strokeTotalLength = circleRadius * Math.PI * 2;
     const strokeCurrentLength =
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
-    const arc_width = 90;
-    const width = 360;
 
     return (
         <Paper sx={{ p: 2 }}>
-            <div style={{ width: "360px" }}>
-                <Grid container sx={{ width: width + "px" }}>
+            <div style={{ width: componentWidth + "px" }}>
+                <Grid container sx={{ width: componentWidth + "px" }}>
                     <Grid item>
                         <Grid
-                            sx={{ width: width + "px" }}
+                            sx={{ width: componentWidth + "px" }}
                             container
                             justifyContent="space-between"
                         >
                             <Grid item>
                                 <Typography variant="dashboardHeader">
-                                    {title}
+                                    {unitOpts.title}
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <LivePill message={liveMessage}></LivePill>
+                                <LivePill
+                                    message={unitOpts.liveMessage}
+                                ></LivePill>
                             </Grid>
                         </Grid>
                     </Grid>
                     <Grid item>
                         <div
                             className={styles.gauge}
-                            style={{ width: width, height: 184 }}
+                            style={{
+                                width: componentWidth,
+                                height: 184,
+                            }}
                         >
                             <svg
                                 className={styles.svgElement}
-                                viewBox={`0 0 ${width} 184`}
+                                viewBox={`0 0 ${componentWidth} 184`}
                             >
                                 <g className={styles.centerTransform}>
                                     <g
                                         className={styles.filledArcs}
-                                        style={{ strokeWidth: arc_width }}
+                                        style={{
+                                            strokeWidth: arcWidth,
+                                        }}
                                     >
                                         <circle
                                             className={styles.background}
                                             r={circleRadius}
                                         />
                                         <circle
-                                            stroke={strokeColor}
+                                            stroke={unitOpts.strokeColor}
                                             r={circleRadius}
                                             stroke-dasharray={`${strokeCurrentLength} ${strokeTotalLength}`}
                                         />
                                     </g>
                                     <rect
-                                        x={circleRadius - arc_width / 2}
+                                        x={circleRadius - arcWidth / 2}
                                         y="-2"
-                                        width={arc_width}
+                                        width={arcWidth}
                                         height="4"
                                         fill="black"
                                         transform={`rotate(${currentAngle})`}
@@ -95,17 +95,17 @@ function MetricGauge(props) {
                         <Grid container justifyContent="space-between">
                             <Grid item>
                                 <Typography variant="unitLabel">
-                                    {min + " " + unit}
+                                    {min + " " + unitOpts.unit}
                                 </Typography>
                             </Grid>
                             <Grid item>
                                 <Typography variant="unitLabel">
-                                    {unitDescription}
+                                    {unitOpts.unitDescription}
                                 </Typography>
                             </Grid>
                             <Grid item>
                                 <Typography variant="unitLabel">
-                                    {max + " " + unit}
+                                    {max + " " + unitOpts.unit}
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -115,4 +115,29 @@ function MetricGauge(props) {
         </Paper>
     );
 }
+
+MetricGauge.propTypes = {
+    min: PropTypes.number.isRequired,
+    max: PropTypes.number.isRequired,
+    currentValue: PropTypes.number.isRequired,
+    unitOpts: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        liveMessage: PropTypes.string.isRequired,
+        unit: PropTypes.string.isRequired,
+        unitDescription: PropTypes.string.isRequired,
+        strokeColor: PropTypes.string.isRequired,
+    }).isRequired,
+    // Optional
+    circleRadius: PropTypes.number,
+    arcWidth: PropTypes.number,
+    gaugeAngleTravel: PropTypes.number,
+    componentWidth: PropTypes.number,
+};
+
+MetricGauge.defaultProps = {
+    circleRadius: 90 + 45,
+    arcWidth: 90,
+    componentWidth: 360,
+    gaugeAngleTravel: 180,
+};
 export default MetricGauge;

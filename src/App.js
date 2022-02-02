@@ -40,6 +40,10 @@ const colorThemeOptions = {
             fontWeight: 600,
             fontSize: "10px",
         },
+        unitValue: {
+            fontWeight: 700,
+            fontSize: "10px",
+        },
         appBarHeader: {
             fontFamily: "Azeret Mono",
             fontWeight: 600,

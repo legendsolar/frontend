@@ -4,13 +4,10 @@ import { database } from "../../Firebase";
 import { ref } from "firebase/database";
 import { useObject } from "react-firebase-hooks/database";
 import { differenceInMinutes } from "date-fns";
+import PropTypes from "prop-types";
 
-function LiveMetricGauge(props) {
-    const assetId = props.assetId;
-    const unitConversionFactor_kW = props.unitConversionFactor_kW;
-    const displayOptions = props.displayOptions;
-
-    var error = true;
+const LiveMetricGauge = ({ assetId, unitConversionFactor_kW, unitOpts }) => {
+    var error = false;
     var loading = true;
     var currentValue_kW = 0;
     var currentValue_unit = 0;
@@ -49,16 +46,93 @@ function LiveMetricGauge(props) {
         error = true;
     }
 
+    unitOpts.liveMessage = `updated ${lastUpdateMinAgo} mins ago`;
+
     return (
         <MetricGauge
-            displayOptions={displayOptions}
+            unitOpts={unitOpts}
             min={0}
             max={max}
             currentValue={currentValue_unit}
-            isLive={true}
-            liveMessage={`updated ${lastUpdateMinAgo} mins ago`}
         ></MetricGauge>
     );
-}
+};
 
-export default LiveMetricGauge;
+LiveMetricGauge.propTypes = {
+    assetId: PropTypes.string.isRequired,
+    unitConversionFactor_kW: PropTypes.number.isRequired,
+    unitOpts: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        unit: PropTypes.string.isRequired,
+        unitDescription: PropTypes.string.isRequired,
+        strokeColor: PropTypes.string.isRequired,
+    }).isRequired,
+};
+
+const CarbonGauge = ({ assetId }) => {
+    const factor = 0.1;
+    const unitOpts = {
+        unit: "LBS",
+        unitDescription: "Pounds per hour",
+        title: "Carbon Aversion",
+        strokeColor: "#477FB2",
+    };
+
+    return (
+        <LiveMetricGauge
+            unitConversionFactor_kW={factor}
+            assetId={assetId}
+            unitOpts={unitOpts}
+        ></LiveMetricGauge>
+    );
+};
+
+CarbonGauge.propTypes = {
+    assetId: PropTypes.string.isRequired,
+};
+
+const GenerationGauge = ({ assetId }) => {
+    const factor = 0.1;
+    const unitOpts = {
+        unit: "KW",
+        unitDescription: "KILOWATTS",
+        title: "Generation",
+        strokeColor: "#EAB31E",
+    };
+
+    return (
+        <LiveMetricGauge
+            unitConversionFactor_kW={factor}
+            assetId={assetId}
+            unitOpts={unitOpts}
+        ></LiveMetricGauge>
+    );
+};
+
+GenerationGauge.propTypes = {
+    assetId: PropTypes.string.isRequired,
+};
+
+const EarningsGauge = ({ assetId }) => {
+    const factor = 0.1;
+    const unitOpts = {
+        unit: "USD",
+        unitDescription: "Dollars per hour",
+        title: "Earnings",
+        strokeColor: "#30A462",
+    };
+
+    return (
+        <LiveMetricGauge
+            unitConversionFactor_kW={factor}
+            assetId={assetId}
+            unitOpts={unitOpts}
+        ></LiveMetricGauge>
+    );
+};
+
+EarningsGauge.propTypes = {
+    assetId: PropTypes.string.isRequired,
+};
+
+export { LiveMetricGauge, CarbonGauge, GenerationGauge, EarningsGauge };
