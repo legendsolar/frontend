@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import { Typography } from "@mui/material";
 import styles from "./metric_gauge.module.css";
 import LivePill from "../pills/live_pill";
@@ -92,23 +93,19 @@ function MetricGauge({
                                 </Typography>
                             </div>
                         </div>
-                        <Grid container justifyContent="space-between">
-                            <Grid item>
-                                <Typography variant="unitLabel">
-                                    {min + " " + unitOpts.unit}
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="unitLabel">
-                                    {unitOpts.unitDescription}
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="unitLabel">
-                                    {max + " " + unitOpts.unit}
-                                </Typography>
-                            </Grid>
-                        </Grid>
+                        <Stack direction="row" justifyContent="space-between">
+                            <Typography variant="unitLabel">
+                                {min + " " + unitOpts.unit}
+                            </Typography>
+
+                            <Typography variant="unitLabel" align="center">
+                                {unitOpts.unitDescription}
+                            </Typography>
+
+                            <Typography variant="unitLabel">
+                                {max + " " + unitOpts.unit}
+                            </Typography>
+                        </Stack>
                     </Grid>
                 </Grid>
             </div>

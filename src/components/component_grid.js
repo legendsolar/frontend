@@ -19,7 +19,7 @@ import {
     EarningsCumulativeImpact,
     GenerationCumulativeImpact,
     CarbonCumulativeImpact,
-} from "./gauges/cumulative_impact";
+} from "./gauges/live_cumulative_impact";
 
 function ComponentGrid(props) {
     const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
