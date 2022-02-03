@@ -21,7 +21,7 @@ function NavBar(props) {
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
-                    sx={{ mt: "30px", ml: "80px" }}
+                    sx={{ mt: "30px", ml: "80px", mr: "80px", width: "100%" }}
                 >
                     <Box
                         component="img"

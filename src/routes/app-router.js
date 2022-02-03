@@ -9,6 +9,8 @@ import UnprotectedRoute from "./unprotected-route";
 import AccountView from "../pages/account_page";
 import TransactionView from "../pages/transactions_page";
 
+import LoadingView from "../views/loading_view";
+
 import DesignSysDemo from "../debug/design_sys_demo";
 
 function AppRouter() {
@@ -20,7 +22,7 @@ function AppRouter() {
     const unprotectedRoutes = ["/signIn", "/signUp", "/forgotPassword"];
 
     if (isAuthenticating) {
-        return <div>Loading...</div>;
+        return <LoadingView></LoadingView>;
     } else {
         return (
             <div>
