@@ -19,7 +19,7 @@ const TransferComponent = ({ title, amount, source, destination, date }) => {
                     sx={{ height: "90px" }}
                     direction="row"
                     justifyContent="space-between"
-                    alignContent="center"
+                    alignItems="center"
                 ></Stack>
             </Container>
 

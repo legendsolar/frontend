@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import MetricList from "./metric_list";
-import { Typography } from "@mui/material";
+import { Typography, Container } from "@mui/material";
 import { useObject } from "react-firebase-hooks/database";
 
 const QuickAccountSummary = (props) => {
@@ -28,12 +28,22 @@ const QuickAccountSummary = (props) => {
     const userMetaData = userDataSnap.metadata;
 
     return (
-        <Paper sx={{ width: 400, p: 2, height: 650 }}>
-            <Stack>
-                <Typography sx={{ fontSize: 14 }} variant="unitMainDisplay">
-                    15 Panels
-                </Typography>
-                <Divider />
+        <Paper>
+            <Stack sx={{ p: 2 }}>
+                <Stack direction="row" justifyContent="space-between">
+                    <Typography>15 Panels</Typography>
+
+                    <Typography>6 Kw</Typography>
+                </Stack>
+
+                <Stack direction="row" justifyContent="space-between">
+                    <Typography>$750 per panel</Typography>
+
+                    <Typography>$11,250 total investment</Typography>
+                </Stack>
+            </Stack>
+            <Divider />
+            <Stack sx={{ p: 2 }}>
                 <Typography sx={{ fontSize: 14 }} variant="unitMainDisplay">
                     All time impact
                 </Typography>
@@ -44,7 +54,9 @@ const QuickAccountSummary = (props) => {
                         { metric: "CARBON AVERTED", value: "235 LBS" },
                     ]}
                 ></MetricList>
-                <Divider />
+            </Stack>
+            <Divider />
+            <Stack sx={{ p: 2 }}>
                 <Typography sx={{ fontSize: 14 }} variant="unitMainDisplay">
                     Financial Return
                 </Typography>
@@ -56,44 +68,6 @@ const QuickAccountSummary = (props) => {
                     ]}
                 ></MetricList>
             </Stack>
-
-            <Typography
-                sx={{ fontSize: 12 }}
-                color="text.secondary"
-                gutterBottom
-            >
-                Email
-            </Typography>
-
-            <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
-                {user.email}
-            </Typography>
-
-            <Typography
-                sx={{ fontSize: 12 }}
-                color="text.secondary"
-                gutterBottom
-            >
-                Address
-            </Typography>
-
-            <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
-                {userData
-                    ? `${userData.streetAddress}, ${userData.city}, ${userData.state}`
-                    : "error"}
-            </Typography>
-
-            <Typography
-                sx={{ fontSize: 12 }}
-                color="text.secondary"
-                gutterBottom
-            >
-                Last Log In
-            </Typography>
-
-            <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
-                {userMetaData ? `${userMetaData.lastSignInTime}` : "error"}
-            </Typography>
         </Paper>
     );
 };
