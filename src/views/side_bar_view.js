@@ -1,5 +1,6 @@
 import { Drawer, Box } from "@mui/material";
 import NavBar from "../components/nav_bar";
+import { ErrorBoundary } from "@sentry/react";
 
 const SideBarNavView = (props) => {
     return (
@@ -20,7 +21,7 @@ const SideBarNavView = (props) => {
                 variant="permanent"
                 anchor="left"
             >
-                {props.drawer}
+                <ErrorBoundary>{props.drawer}</ErrorBoundary>
             </Drawer>
 
             <Box
@@ -30,7 +31,7 @@ const SideBarNavView = (props) => {
                     mr: "40px",
                 }}
             >
-                {props.mainContent}
+                <ErrorBoundary>{props.mainContent}</ErrorBoundary>
             </Box>
         </Box>
     );

@@ -114,12 +114,12 @@ const typographyOptions = {
 
 const componentOptions = {
     components: {
+        // Careful, MuiPaper is consistently used for AppBar ect
         MuiPaper: {
             styleOverrides: {
                 root: {
                     borderRadius: "15px",
                     boxShadow: "0px 0px 15px rgba(99, 110, 114, 0.5)",
-                    margin: "15px",
                 },
             },
         },
