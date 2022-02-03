@@ -30,6 +30,11 @@ const colorThemeOptions = {
             fontWeight: 600,
             fontSize: "20ox",
         },
+        mainDisplay: {
+            fontWeight: 600,
+            fontSize: "25px",
+            lineHeight: "30px",
+        },
         unitMainDisplay: {
             fontWeight: 600,
             fontSize: "45px",

@@ -11,9 +11,9 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import Container from "@mui/material/Container";
 import ComponentGrid from "../components/component_grid";
-import Footer from "../components/footer";
+import DefaultView from "../views/default_view";
 
-function PortfolioView(props) {
+function PortfolioPage(props) {
     const auth = useAuth();
     const user = auth.user;
 
@@ -26,14 +26,12 @@ function PortfolioView(props) {
     }
 
     return (
-        <div>
-            <NavBar></NavBar>
+        <DefaultView>
             <ComponentGrid></ComponentGrid>
-            <Footer></Footer>
-        </div>
+        </DefaultView>
     );
 }
 
-PortfolioView.propTypes = {};
+PortfolioPage.propTypes = {};
 
-export default PortfolioView;
+export default PortfolioPage;

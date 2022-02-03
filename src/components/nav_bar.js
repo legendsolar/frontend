@@ -1,13 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useAuth } from "../hooks/use_auth";
-import { navigate } from "hookrouter";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import Logo from "../assets/Logo.png";
@@ -17,12 +14,12 @@ function NavBar(props) {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const logOut = () => {
-        auth.signout();
-    };
-
     return (
-        <AppBar position="static">
+        <AppBar
+            position="static"
+            // change to fixed to fix with drawer
+            sx={{ height: "150px", zIndex: 1 }}
+        >
             <Toolbar>
                 <Box
                     component="img"
@@ -33,42 +30,46 @@ function NavBar(props) {
                     alt="logo"
                     src={Logo}
                 ></Box>
-                <Button
-                    color="inherit"
-                    onClick={() => {
-                        navigate("/");
-                    }}
-                    sx={{ ml: 2 }}
-                >
-                    <Typography variant="appBarHeader">Portfolio</Typography>
-                </Button>
-                <Button
-                    color="inherit"
-                    onClick={() => {
-                        navigate("/user");
-                    }}
-                    sx={{ ml: 2 }}
-                >
-                    <Typography variant="appBarHeader">Account</Typography>
-                </Button>
+                {auth.user && (
+                    <>
+                        <Button
+                            color="inherit"
+                            onClick={() => {
+                                navigate("/");
+                            }}
+                            sx={{ ml: 2 }}
+                        >
+                            <Typography variant="appBarHeader">
+                                Portfolio
+                            </Typography>
+                        </Button>
 
-                <Button
-                    color="inherit"
-                    onClick={() => {
-                        navigate("/transactions");
-                    }}
-                    sx={{ ml: 2 }}
-                >
-                    <Typography variant="appBarHeader">Transactions</Typography>
-                </Button>
-                <Button
-                    onClick={logOut}
-                    color="inherit"
-                    variant="outlined"
-                    sx={{ ml: 2 }}
-                >
-                    <Typography variant="appBarHeader">Logout</Typography>
-                </Button>
+                        <Button
+                            color="inherit"
+                            onClick={() => {
+                                navigate("/transactions");
+                            }}
+                            sx={{ ml: 2 }}
+                        >
+                            <Typography variant="appBarHeader">
+                                Transactions
+                            </Typography>
+                        </Button>
+
+                        <Button
+                            color="inherit"
+                            variant="outlined"
+                            onClick={() => {
+                                navigate("/user");
+                            }}
+                            sx={{ ml: 2 }}
+                        >
+                            <Typography variant="appBarHeader">
+                                Account
+                            </Typography>
+                        </Button>
+                    </>
+                )}
             </Toolbar>
         </AppBar>
     );

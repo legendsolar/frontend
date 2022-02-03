@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useAuth } from "../hooks/use_auth";
-import PortfolioView from "../pages/portfolio_page";
+import PortfolioPage from "../pages/portfolio_page";
 import SignInView from "../pages/sign_in_page";
 import SignUpView from "../pages/sign_up_page";
 import { Link, Routes, Route } from "react-router-dom";
@@ -27,7 +27,7 @@ function AppRouter() {
                         path="/"
                         element={
                             <ProtectedRoute>
-                                <PortfolioView />
+                                <PortfolioPage />
                             </ProtectedRoute>
                         }
                     />

@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import { getAuth } from "firebase/auth";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate, useLocation } from "react-router-dom";
+import NavBar from "../components/nav_bar";
 
 function SignInView() {
     const auth = useAuth();
@@ -42,6 +43,7 @@ function SignInView() {
 
     return (
         <div>
+            <NavBar></NavBar>
             <Box
                 component="form"
                 onSubmit={handleSubmit}
