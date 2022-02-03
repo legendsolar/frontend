@@ -4,6 +4,7 @@ import { Button, Stack, Typography, Toolbar, Box, AppBar } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import Logo from "../assets/Logo.png";
+import { redirectToHomePage } from "../webflow/webflowLinking";
 
 function NavBar(props) {
     const auth = useAuth();
@@ -78,7 +79,7 @@ function NavBar(props) {
                         <Button
                             color="inherit"
                             onClick={() => {
-                                navigate("/");
+                                redirectToHomePage();
                             }}
                             variant="light"
                         >
