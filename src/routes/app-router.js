@@ -9,6 +9,8 @@ import UnprotectedRoute from "./unprotected-route";
 import AccountView from "../pages/account_page";
 import TransactionView from "../pages/transactions_page";
 
+import DesignSysDemo from "../debug/design_sys_demo";
+
 function AppRouter() {
     const auth = useAuth();
     const user = auth.user;
@@ -48,7 +50,7 @@ function AppRouter() {
                         }
                     />
                     <Route
-                        path="/user"
+                        path="/account"
                         element={
                             <ProtectedRoute>
                                 <AccountView />
@@ -64,6 +66,9 @@ function AppRouter() {
                             </ProtectedRoute>
                         }
                     />
+
+                    {/* Debug */}
+                    <Route path="/designSysDemo" element={<DesignSysDemo />} />
                 </Routes>
             </div>
         );

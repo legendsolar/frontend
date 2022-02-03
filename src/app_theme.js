@@ -23,10 +23,6 @@ const colorOptions = {
             dark: whiteFog,
             contrastText: "#fff",
         },
-        green: {
-            main: legendaryGreen,
-            contrastText: "#fff",
-        },
         dark: {
             main: "#000",
             contrastText: "#FFF",
@@ -35,20 +31,36 @@ const colorOptions = {
             main: "#FFF",
             contrastText: "#000",
         },
-        cashGreen: {
-            main: "#30A462",
+        legendaryGreen: {
+            main: legendaryGreen,
+            contrastText: "#fff",
         },
-        carbonBlue: {
-            main: "#477FB2",
+        whiteHaze: {
+            main: whiteHaze,
         },
-        electricYellow: {
-            main: "#EAB31E",
+        whiteFog: {
+            main: whiteFog,
+        },
+        blackDusk: {
+            main: blackDusk,
+        },
+        blackDawn: {
+            main: blackDawn,
+        },
+        skyBlue: {
+            main: skyBlue,
+        },
+        grassGreen: {
+            main: grassGreen,
+        },
+        pencilYellow: {
+            main: pencilYellow,
+        },
+        eraserRed: {
+            main: eraserRed,
         },
         inactive: {
             main: "#636E72",
-        },
-        blacks: {
-            main: "636E72",
         },
     },
 };
@@ -59,15 +71,17 @@ const typographyOptions = {
         fontSize: "12px",
         lineHeight: "12px",
         headline1: {
-            fontWeight: 700,
-            fontSize: "60ox",
+            fontFamily: "Be Vietnam Pro",
+            fontWeight: 600,
+            fontSize: "60px",
+            lineHeight: "76px",
         },
         subtitle1: {
             fontWeight: 600,
-            fontSize: "20ox",
+            fontSize: "20px",
         },
         body1: {
-            fontSize: "20ox",
+            fontSize: "20px",
         },
         headline2: {
             fontWeight: "bold",
@@ -105,6 +119,7 @@ const componentOptions = {
                 root: {
                     borderRadius: "15px",
                     boxShadow: "0px 0px 15px rgba(99, 110, 114, 0.5)",
+                    margin: "15px",
                 },
             },
         },
@@ -123,11 +138,43 @@ const componentOptions = {
             },
         },
         MuiButton: {
+            variants: [
+                {
+                    props: { color: "dark" },
+                    style: {
+                        backgroundColor: colorOptions.palette.dark.main,
+                        color: colorOptions.palette.dark.contrastText,
+                    },
+                },
+                {
+                    props: { color: "light" },
+                    style: {
+                        border: `1px solid ${colorOptions.palette.light.contrastText}`,
+                        color: colorOptions.palette.light.contrastText,
+                    },
+                },
+                {
+                    props: { color: "legendaryGreen" },
+                    style: {
+                        backgroundColor:
+                            colorOptions.palette.legendaryGreen.main,
+                        color: colorOptions.palette.legendaryGreen.contrastText,
+                    },
+                },
+                {
+                    props: { variant: "primary" },
+                    style: {
+                        fontSize: "22px",
+                        fontFamily: "Be Vietnam Pro",
+                    },
+                },
+            ],
             styleOverrides: {
                 root: {
                     fontFamily: "Azeret Mono",
                     fontWeight: 600,
                     fontSize: "12px",
+                    margin: "10px",
                 },
             },
         },
@@ -137,5 +184,7 @@ const componentOptions = {
 const appTheme = createTheme(
     deepmerge(colorOptions, componentOptions, typographyOptions)
 );
+
+console.log(appTheme);
 
 export { appTheme };

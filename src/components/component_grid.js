@@ -1,6 +1,5 @@
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Container from "@mui/material/Container";
+import { Grid, Paper, Button } from "@mui/material";
+
 import UserDebugPaper from "./user_debug_paper";
 import AssetLiveViewDebug from "./asset_live_view_debug";
 import MetricSummary from "./summary/metric_summary";
@@ -60,6 +59,21 @@ function ComponentGrid(props) {
             </Grid>
             <Grid item xs={12}>
                 <UserDebugPaper></UserDebugPaper>
+            </Grid>
+            <Grid item xs={12}>
+                <Paper sx={{ p: 2 }}>
+                    <Button variant="text">Default</Button>
+                    <Button variant="contained" color="secondary">
+                        Default
+                    </Button>
+                    <Button variant="contained" color="dark">
+                        Default
+                    </Button>
+                    <Button variant="contained" color="green">
+                        Default
+                    </Button>
+                    <Button variant="outlined">Default</Button>
+                </Paper>
             </Grid>
         </Grid>
     );
