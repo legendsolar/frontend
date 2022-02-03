@@ -1,5 +1,6 @@
 import { Box, Stack, Paper, Grid, Container } from "@mui/material";
 import NavBar from "../components/nav_bar";
+import { ErrorBoundary } from "@sentry/react";
 
 const FullPageComponentView = (props) => {
     return (
@@ -16,7 +17,7 @@ const FullPageComponentView = (props) => {
                     zIndex: 4,
                 }}
             >
-                {props.children}
+                <ErrorBoundary>{props.children}</ErrorBoundary>
             </Stack>
             <Box
                 sx={{
