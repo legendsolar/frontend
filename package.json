@@ -9,6 +9,7 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.8",
     "@mui/styles": "^5.2.3",
+    "@mui/x-data-grid": "^5.4.0",
     "@sentry/react": "^6.17.2",
     "@sentry/tracing": "^6.17.2",
     "@testing-library/jest-dom": "^5.16.1",

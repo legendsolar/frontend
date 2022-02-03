@@ -7,7 +7,6 @@ import MetricSummary from "./summary/metric_summary";
 import useTheme from "@mui/material/styles/useTheme";
 import WormLive from "./worm/worm_live";
 import Weather from "./weather";
-import DividendWidget from "./dividends/dividend_widget";
 import QuickAccountSummary from "./quick_account_summary";
 import {
     CarbonGauge,
@@ -61,9 +60,6 @@ function ComponentGrid(props) {
                     </Grid>
                     <Grid item xs={6}>
                         <Weather></Weather>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <DividendWidget></DividendWidget>
                     </Grid>
                     <Grid item xs={12}>
                         <UserDebugPaper></UserDebugPaper>

@@ -7,6 +7,7 @@ import { Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import useTheme from "@mui/material/styles/useTheme";
 import SideBarNavView from "../views/side_bar_view";
+import TransferComponent from "../components/dividends/transfer_component";
 
 import {
     Box,
@@ -17,6 +18,7 @@ import {
     ListItemText,
     ListItemButton,
 } from "@mui/material";
+import AllTransfersDataGrid from "../components/all_transfers_data_grid";
 
 function TransactionView(props) {
     const theme = useTheme();
@@ -84,31 +86,100 @@ function TransactionView(props) {
             }
             mainContent={
                 <div>
-                    <Paper sx={{ p: 2, m: 2, height: 500 }}>
+                    <Paper sx={{ p: 2, m: 2 }}>
                         <Typography variant="mainDisplay">
                             Dividend Earnings
                         </Typography>
 
-                        <Typography>Testing</Typography>
-                        <Typography>blabladsafsdf</Typography>
+                        <Grid container spacing={1} sx={{ mt: 1 }}>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Dividend Payment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Dividend Payment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Dividend Payment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Dividend Payment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                        </Grid>
                     </Paper>
 
-                    <Paper sx={{ p: 2, m: 2, height: 500 }}>
+                    <Paper sx={{ p: 2, m: 2 }}>
                         <Typography variant="mainDisplay">
                             Panel Purchases
                         </Typography>
 
-                        <Typography>Testing</Typography>
-                        <Typography>blabladsafsdf</Typography>
+                        <Grid container spacing={1} sx={{ mt: 1 }}>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Solar Investment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Solar Investment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Solar Investment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Solar Investment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                        </Grid>
                     </Paper>
 
-                    <Paper sx={{ p: 2, m: 2, height: 500 }}>
-                        <Typography variant="mainDisplay">
+                    <Paper sx={{ p: 2, m: 2 }}>
+                        <Typography variant="mainDisplay" sx={{ mb: 2 }}>
                             Bank Transfers
                         </Typography>
-
-                        <Typography>Testing</Typography>
-                        <Typography>blabladsafsdf</Typography>
                     </Paper>
 
                     <Paper
@@ -119,8 +190,7 @@ function TransactionView(props) {
                             All Transactions
                         </Typography>
 
-                        <Typography>Testing</Typography>
-                        <Typography>blabladsafsdf</Typography>
+                        <AllTransfersDataGrid></AllTransfersDataGrid>
                     </Paper>
                 </div>
             }
