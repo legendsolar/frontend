@@ -1,16 +1,20 @@
-import { Paper, Button, Stack, Typography, Box } from "@mui/material";
+import { Paper, Button, Stack, Typography, Box, Divider } from "@mui/material";
 
 import MetricGauge from "../components/gauges/metric_gauge";
 import CumulativeImpact from "../components/gauges/cumulative_impact";
 import MetricList from "../components/metric_list";
 import MetricSummary from "../components/summary/metric_summary";
 import Worm from "../components/worm/worm";
+import data from "../components/worm/fake_data";
+import TransferComponent from "../components/dividends/transfer_component";
 
 const DesignSysDemo = (props) => {
     return (
         <Stack spacing={2}>
             <Paper sx={{ p: 2 }}>
-                <Typography variant="subtitle1">Typography</Typography>
+                <Typography variant="subtitle1">
+                    {"Typography (broken, WIP)"}
+                </Typography>
                 <Typography variant="headline1">Headline 1</Typography>
                 <Typography variant="headline2">Headline 2</Typography>
                 <Typography variant="subtitle1">Subtitle 1</Typography>
@@ -20,7 +24,9 @@ const DesignSysDemo = (props) => {
             </Paper>
 
             <Paper sx={{ p: 2 }}>
-                <Typography variant="subtitle1">Colors</Typography>
+                <Typography variant="subtitle1">
+                    {"Colors (broken, WIP)"}
+                </Typography>
                 <Box
                     sx={{
                         bgcolor: "primary.main",
@@ -68,6 +74,7 @@ const DesignSysDemo = (props) => {
             <Paper sx={{ p: 2 }}>
                 <Typography variant="subtitle1">Components</Typography>
 
+                <Divider sx={{ m: 2 }} />
                 <Typography variant="subtitle1">MetricGauge</Typography>
 
                 <MetricGauge
@@ -83,6 +90,7 @@ const DesignSysDemo = (props) => {
                     }}
                 ></MetricGauge>
 
+                <Divider sx={{ m: 2 }} />
                 <Typography variant="subtitle1">CumulativeImpact</Typography>
 
                 <CumulativeImpact
@@ -99,6 +107,39 @@ const DesignSysDemo = (props) => {
                         strokeColor: "#0000FF",
                     }}
                 ></CumulativeImpact>
+
+                <Divider sx={{ m: 2 }} />
+                <Typography variant="subtitle1">
+                    {"Worm (default options, fake data)"}
+                </Typography>
+                <Worm data={data}></Worm>
+
+                <Divider sx={{ m: 2 }} />
+                <Typography variant="subtitle1">{"Metric List"}</Typography>
+                <MetricList
+                    valuePairs={[
+                        {
+                            metric: "LIST METRIC 1",
+                            value: "LIST METRIC VALUE 1",
+                        },
+                        { metric: "KWH GENERATED", value: "10,725" },
+                        { metric: "UPTIME", value: "99%" },
+                    ]}
+                ></MetricList>
+
+                <Divider sx={{ m: 2 }} />
+
+                <Typography variant="subtitle1">
+                    {"Transfer Component"}
+                </Typography>
+
+                <TransferComponent
+                    title={"Transfer Name"}
+                    amount={99.99}
+                    source={"Source"}
+                    destination={"Destination"}
+                    date={new Date()}
+                ></TransferComponent>
             </Paper>
         </Stack>
     );
