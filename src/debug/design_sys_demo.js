@@ -10,7 +10,7 @@ import TransferComponent from "../components/dividends/transfer_component";
 
 const DesignSysDemo = (props) => {
     return (
-        <Stack spacing={2}>
+        <Stack spacing={2} sx={{ m: 2 }}>
             <Paper variant="container">
                 <Stack>
                     <Typography variant="subtitle2">{"Typography"}</Typography>
@@ -83,76 +83,72 @@ const DesignSysDemo = (props) => {
                 </Button>
             </Paper>
 
-            <Paper variant="container">
-                <Typography variant="subtitle1">Components</Typography>
+            <Typography variant="subtitle1">Components</Typography>
 
-                <Divider sx={{ m: 2 }} />
-                <Typography variant="subtitle1">MetricGauge</Typography>
+            <Divider sx={{ m: 2 }} />
+            <Typography variant="subtitle1">MetricGauge</Typography>
 
-                <MetricGauge
-                    min={0}
-                    max={100}
-                    currentValue={40}
-                    unitOpts={{
-                        title: "Metric Gauge Live",
-                        liveMessage: "live message",
-                        unit: "unit",
-                        unitDescription: "unit description",
-                        strokeColor: "#00FF00",
-                    }}
-                ></MetricGauge>
+            <MetricGauge
+                min={0}
+                max={100}
+                currentValue={40}
+                unitOpts={{
+                    title: "Metric Gauge Live",
+                    liveMessage: "live message",
+                    unit: "unit",
+                    unitDescription: "unit description",
+                    strokeColor: "#00FF00",
+                }}
+            ></MetricGauge>
 
-                <Divider sx={{ m: 2 }} />
-                <Typography variant="subtitle1">CumulativeImpact</Typography>
+            <Divider sx={{ m: 2 }} />
+            <Typography variant="subtitle1">CumulativeImpact</Typography>
 
-                <CumulativeImpact
-                    cumulativeData={{
-                        day: 1,
-                        week: 10,
-                        month: 1000,
-                        year: 10000,
-                    }}
-                    unitOpts={{
-                        title: "Cumulative Impact",
-                        unit: "unit",
-                        unitDescription: "unit description",
-                        strokeColor: "#0000FF",
-                    }}
-                ></CumulativeImpact>
+            <CumulativeImpact
+                cumulativeData={{
+                    day: 1,
+                    week: 10,
+                    month: 1000,
+                    year: 10000,
+                }}
+                unitOpts={{
+                    title: "Cumulative Impact",
+                    unit: "unit",
+                    unitDescription: "unit description",
+                    strokeColor: "#0000FF",
+                }}
+            ></CumulativeImpact>
 
-                <Divider sx={{ m: 2 }} />
-                <Typography variant="subtitle1">
-                    {"Worm (default options, fake data)"}
-                </Typography>
-                <Worm data={data}></Worm>
+            <Divider sx={{ m: 2 }} />
+            <Typography variant="subtitle1">
+                {"Worm (default options, fake data)"}
+            </Typography>
+            <Worm data={data}></Worm>
 
-                <Divider sx={{ m: 2 }} />
-                <Typography variant="subtitle1">{"Metric List"}</Typography>
-                <MetricList
-                    valuePairs={[
-                        {
-                            metric: "LIST METRIC 1",
-                            value: "LIST METRIC VALUE 1",
-                        },
-                        { metric: "KWH GENERATED", value: "10,725" },
-                        { metric: "UPTIME", value: "99%" },
-                    ]}
-                ></MetricList>
+            <Divider sx={{ m: 2 }} />
+            <Typography variant="subtitle1">{"Metric List"}</Typography>
+            <MetricList
+                valuePairs={[
+                    {
+                        metric: "LIST METRIC 1",
+                        value: "LIST METRIC VALUE 1",
+                    },
+                    { metric: "KWH GENERATED", value: "10,725" },
+                    { metric: "UPTIME", value: "99%" },
+                ]}
+            ></MetricList>
 
-                <Divider sx={{ m: 2 }} />
+            <Divider sx={{ m: 2 }} />
 
-                <Typography variant="subtitle1">
-                    {"Transfer Component"}
-                </Typography>
+            <Typography variant="subtitle1">{"Transfer Component"}</Typography>
 
-                <TransferComponent
-                    title={"Transfer Name"}
-                    amount={99.99}
-                    source={"Source"}
-                    destination={"Destination"}
-                    date={new Date()}
-                ></TransferComponent>
-            </Paper>
+            <TransferComponent
+                title={"Transfer Name"}
+                amount={99.99}
+                source={"Source"}
+                destination={"Destination"}
+                date={new Date()}
+            ></TransferComponent>
         </Stack>
     );
 };

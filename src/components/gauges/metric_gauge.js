@@ -27,7 +27,7 @@ function MetricGauge({
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
 
     return (
-        <Paper variant={"container"} sx={{ display: "inline-block" }}>
+        <Paper variant={"container"} sx={{ width: "390px" }}>
             <Stack>
                 <Stack
                     direction="row"
