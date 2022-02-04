@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "legends-alpha"
-  }
+    "default": "legends-alpha-prod",
+    "prod": "legends-alpha-prod"
+  },
+  "targets": {}
 }
