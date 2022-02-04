@@ -151,7 +151,7 @@ const themeOptions = {
                 {
                     props: { variant: "light" },
                     style: {
-                        backgroundColor: "none",
+                        backgroundColor: "#FFF",
                     },
                 },
             ],
