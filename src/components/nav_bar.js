@@ -12,83 +12,93 @@ function NavBar(props) {
     const location = useLocation();
 
     return (
-        <AppBar
-            position="static"
-            // change to fixed to fix with drawer
-            sx={{ height: "300px", zIndex: 1 }}
-        >
-            <Toolbar>
-                <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    sx={{ mt: "30px", ml: "80px", mr: "80px", width: "100%" }}
-                >
-                    <Box
-                        component="img"
-                        sx={{
-                            maxWidth: "120px",
-                            maxHeight: "45px",
-                        }}
-                        alt="logo"
-                        src={Logo}
-                    ></Box>
+        <Toolbar style={{ padding: 0 }}>
+            <Box
+                position="absolute"
+                sx={{
+                    height: "300px",
+                    width: "100%",
+                    bgcolor: "blackDawn.main",
+                    zIndex: -10,
+                }}
+            ></Box>
+            <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                sx={{
+                    zIndex: 1,
+                    mt: "30px",
+                    ml: "80px",
+                    mr: "80px",
+                    mb: "80px",
+                    width: "100%",
+                }}
+            >
+                <Box
+                    component="img"
+                    sx={{
+                        maxWidth: "120px",
+                        maxHeight: "45px",
+                    }}
+                    alt="logo"
+                    src={Logo}
+                ></Box>
 
-                    {auth.user && (
-                        <Stack direction="row">
-                            <Button
-                                color="inherit"
-                                onClick={() => {
-                                    navigate("/");
-                                }}
-                                sx={{ ml: 2 }}
-                            >
-                                <Typography variant="appBarHeader">
-                                    Portfolio
-                                </Typography>
-                            </Button>
-
-                            <Button
-                                color="inherit"
-                                onClick={() => {
-                                    navigate("/transactions");
-                                }}
-                                sx={{ ml: 2 }}
-                            >
-                                <Typography variant="appBarHeader">
-                                    Transactions
-                                </Typography>
-                            </Button>
-
-                            <Button
-                                color="inherit"
-                                variant="outlined"
-                                onClick={() => {
-                                    navigate("/account");
-                                }}
-                                sx={{ ml: 2 }}
-                            >
-                                <Typography variant="appBarHeader">
-                                    Account
-                                </Typography>
-                            </Button>
-                        </Stack>
-                    )}
-
-                    {!auth.user && (
+                {auth.user && (
+                    <Stack direction="row">
                         <Button
-                            color="inherit"
+                            color="dark"
                             onClick={() => {
-                                redirectToHomePage();
+                                navigate("/");
                             }}
-                            variant="light"
+                            sx={{ ml: 2 }}
                         >
-                            Return Home
+                            <Typography variant="appBarHeader">
+                                Portfolio
+                            </Typography>
                         </Button>
-                    )}
-                </Stack>
-            </Toolbar>
-        </AppBar>
+
+                        <Button
+                            color="dark"
+                            onClick={() => {
+                                navigate("/transactions");
+                            }}
+                            sx={{ ml: 2 }}
+                        >
+                            <Typography variant="appBarHeader">
+                                Transactions
+                            </Typography>
+                        </Button>
+
+                        <Button
+                            color="dark"
+                            variant="outlined"
+                            onClick={() => {
+                                navigate("/account");
+                            }}
+                            sx={{ ml: 2 }}
+                        >
+                            <Typography variant="appBarHeader">
+                                Account
+                            </Typography>
+                        </Button>
+                    </Stack>
+                )}
+
+                {!auth.user && (
+                    <Button
+                        color="inherit"
+                        onClick={() => {
+                            redirectToHomePage();
+                        }}
+                        variant="light"
+                    >
+                        Return Home
+                    </Button>
+                )}
+            </Stack>
+        </Toolbar>
     );
 }
 

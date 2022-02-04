@@ -173,7 +173,6 @@ const themeOptions = {
                 {
                     props: { color: "dark" },
                     style: {
-                        backgroundColor: paletteOptions.palette.dark.main,
                         color: paletteOptions.palette.dark.contrastText,
                     },
                 },
@@ -198,6 +197,20 @@ const themeOptions = {
                     style: {
                         fontSize: "22px",
                         fontFamily: "Be Vietnam Pro",
+                    },
+                },
+                {
+                    props: { color: "dark", variant: "filled" },
+                    style: {
+                        backgroundColor: paletteOptions.palette.dark.main,
+                        color: paletteOptions.palette.dark.contrastText,
+                    },
+                },
+                {
+                    props: { color: "dark", variant: "outlined" },
+                    style: {
+                        color: paletteOptions.palette.dark.contrastText,
+                        border: `1px solid ${paletteOptions.palette.dark.contrastText}`,
                     },
                 },
             ],

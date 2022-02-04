@@ -29,6 +29,7 @@ const SideBarNavView = (props) => {
                 sx={{
                     ml: `${props.drawerWidth + 40}px`,
                     mr: "40px",
+                    zIndex: 3,
                 }}
             >
                 <ErrorBoundary>{props.mainContent}</ErrorBoundary>
