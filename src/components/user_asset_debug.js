@@ -27,7 +27,7 @@ function UserAssetDebugPaper(props) {
     }
 
     return (
-        <Paper sx={{ minWidth: 275 }}>
+        <Paper sx={{ minWidth: 275 }} variant="container">
             <Typography
                 sx={{ fontSize: 14 }}
                 color="text.secondary"

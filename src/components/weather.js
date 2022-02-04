@@ -37,9 +37,9 @@ function Weather(props) {
         <Paper
             sx={{
                 minWidth: 275,
-                p: 2,
                 "& .MuiTextField-root": { m: 1 },
             }}
+            variant="container"
         >
             <Typography variant="dashboardHeader" gutterBottom>
                 New York, NY

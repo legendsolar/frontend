@@ -60,21 +60,6 @@ function ComponentGrid(props) {
             <Grid item xs={12}>
                 <UserDebugPaper></UserDebugPaper>
             </Grid>
-            <Grid item xs={12}>
-                <Paper sx={{ p: 2 }}>
-                    <Button variant="text">Default</Button>
-                    <Button variant="contained" color="secondary">
-                        Default
-                    </Button>
-                    <Button variant="contained" color="dark">
-                        Default
-                    </Button>
-                    <Button variant="contained" color="green">
-                        Default
-                    </Button>
-                    <Button variant="outlined">Default</Button>
-                </Paper>
-            </Grid>
         </Grid>
     );
 }

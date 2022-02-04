@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/use_auth";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-import MetricList from "./metric_list";
+import MetricList from "./summary/metric_list";
 import { Typography, Container } from "@mui/material";
 import { useObject } from "react-firebase-hooks/database";
 

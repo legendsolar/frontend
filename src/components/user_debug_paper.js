@@ -25,7 +25,7 @@ function UserDebugPaper(props) {
     const userMetaData = userDataSnap.metadata;
 
     return (
-        <Paper sx={{ minWidth: 275, p: 2 }}>
+        <Paper sx={{ minWidth: 275 }} variant="container">
             <Typography
                 sx={{ fontSize: 14 }}
                 color="text.secondary"

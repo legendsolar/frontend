@@ -37,7 +37,7 @@ const CumulativeImpact = ({ cumulativeData, unitOpts }) => {
                             }}
                             align="center"
                         >
-                            {`${cumulativeData[historyState]}`}
+                            {`${cumulativeData[historyState].toFixed(0)}`}
                         </Typography>
 
                         <Typography variant="body1" align="center">

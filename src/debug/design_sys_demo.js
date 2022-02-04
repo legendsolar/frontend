@@ -2,7 +2,7 @@ import { Paper, Button, Stack, Typography, Box, Divider } from "@mui/material";
 
 import MetricGauge from "../components/gauges/metric_gauge";
 import CumulativeImpact from "../components/gauges/cumulative_impact";
-import MetricList from "../components/metric_list";
+import MetricList from "../components/summary/metric_list";
 import MetricSummary from "../components/summary/metric_summary";
 import Worm from "../components/worm/worm";
 import data from "../components/worm/fake_data";

@@ -103,7 +103,7 @@ const CarbonCumulativeImpact = ({ assetId }) => {
         strokeColor: "#477FB2",
     };
 
-    const unitConversionFactor_kW = 0.15;
+    const unitConversionFactor_kW = 0.12;
 
     return (
         <LiveCumulativeImpact
@@ -126,7 +126,7 @@ const GenerationCumulativeImpact = ({ assetId }) => {
         strokeColor: "#EAB31E",
     };
 
-    const unitConversionFactor_kW = 0.15;
+    const unitConversionFactor_kW = 1;
 
     return (
         <LiveCumulativeImpact
