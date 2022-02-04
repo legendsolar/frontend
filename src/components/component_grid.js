@@ -34,22 +34,22 @@ function ComponentGrid(props) {
                 <AssetLiveViewDebug assetId="-MtUbBNCnoz0VdTQ_m-O"></AssetLiveViewDebug>
             </Grid>
             <Grid item>
-                <EarningsGauge assetId="-MuCmzKbnofQ9TY_sIp9"></EarningsGauge>
+                <EarningsGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></EarningsGauge>
             </Grid>
             <Grid item>
-                <EarningsCumulativeImpact assetId="-MuCmzKbnofQ9TY_sIp9"></EarningsCumulativeImpact>
+                <EarningsCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></EarningsCumulativeImpact>
             </Grid>
             <Grid item>
-                <CarbonGauge assetId="-MuCq8nkhE8gqGrdG9Ta"></CarbonGauge>
+                <CarbonGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></CarbonGauge>
             </Grid>
             <Grid item>
-                <CarbonCumulativeImpact assetId="-MuCmzKbnofQ9TY_sIp9"></CarbonCumulativeImpact>
+                <CarbonCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></CarbonCumulativeImpact>
             </Grid>
             <Grid item>
-                <GenerationGauge assetId="-MuCqDzSoaF0yXWZbouB"></GenerationGauge>
+                <GenerationGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></GenerationGauge>
             </Grid>
             <Grid item>
-                <GenerationCumulativeImpact assetId="-MuCmzKbnofQ9TY_sIp9"></GenerationCumulativeImpact>
+                <GenerationCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></GenerationCumulativeImpact>
             </Grid>
             <Grid item xs={6}>
                 <MetricSummary></MetricSummary>
