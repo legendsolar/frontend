@@ -1,4 +1,4 @@
-import Box from "@mui/material/Box";
+import { Box, Stack, Paper } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import { get, ref, set } from "firebase/database";
 import { database } from "../Firebase";
@@ -65,75 +65,73 @@ function UserInfo(props) {
     };
 
     return (
-        <div>
-            <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-            >
-                Your Contact Info
-            </Typography>
-            <Typography variant="h6">Email:</Typography>
-            <Typography variant="body2">{user.email}</Typography>
-            <Box
-                sx={{
-                    "& .MuiTextField-root": { m: 1 },
-                }}
-            >
-                <div>
-                    <TextField
-                        name="firstName"
-                        label="First Name"
-                        variant="filled"
-                        value={formValues.firstName}
-                        onChange={handleInputChange}
-                    ></TextField>
+        <Paper variant="container">
+            <Typography variant="smallHeadline">Your Contact Info</Typography>
+            <Stack spacing={2} justifyContent="center" alignItems="center">
+                <Box
+                    sx={{
+                        "& .MuiTextField-root": { m: 1 },
+                    }}
+                >
+                    <div>
+                        <TextField
+                            name="firstName"
+                            label="First Name"
+                            variant="filled"
+                            value={formValues.firstName}
+                            onChange={handleInputChange}
+                        ></TextField>
 
-                    <TextField
-                        name="lastName"
-                        label="Last Name"
-                        variant="filled"
-                        value={formValues.lastName}
-                        onChange={handleInputChange}
-                    ></TextField>
+                        <TextField
+                            name="lastName"
+                            label="Last Name"
+                            variant="filled"
+                            value={formValues.lastName}
+                            onChange={handleInputChange}
+                        ></TextField>
 
-                    <TextField
-                        name="streetAddress"
-                        label="Street Address"
-                        variant="filled"
-                        value={formValues.streetAddress}
-                        onChange={handleInputChange}
-                    ></TextField>
+                        <TextField
+                            name="streetAddress"
+                            label="Street Address"
+                            variant="filled"
+                            value={formValues.streetAddress}
+                            onChange={handleInputChange}
+                        ></TextField>
 
-                    <TextField
-                        name="aptNumber"
-                        label="Apt #"
-                        variant="filled"
-                        value={formValues.aptNumber}
-                        onChange={handleInputChange}
-                    ></TextField>
+                        <TextField
+                            name="aptNumber"
+                            label="Apt #"
+                            variant="filled"
+                            value={formValues.aptNumber}
+                            onChange={handleInputChange}
+                        ></TextField>
 
-                    <TextField
-                        name="city"
-                        label="City"
-                        variant="filled"
-                        value={formValues.city}
-                        onChange={handleInputChange}
-                    ></TextField>
+                        <TextField
+                            name="city"
+                            label="City"
+                            variant="filled"
+                            value={formValues.city}
+                            onChange={handleInputChange}
+                        ></TextField>
 
-                    <TextField
-                        name="state"
-                        label="State"
-                        variant="filled"
-                        value={formValues.state}
-                        onChange={handleInputChange}
-                    ></TextField>
-                </div>
-            </Box>
-            <Button variant="contained" onClick={handleSubmit}>
-                Save
-            </Button>
-        </div>
+                        <TextField
+                            name="state"
+                            label="State"
+                            variant="filled"
+                            value={formValues.state}
+                            onChange={handleInputChange}
+                        ></TextField>
+                    </div>
+                </Box>
+                <Button
+                    variant="contained"
+                    color="legendaryGreen"
+                    onClick={handleSubmit}
+                >
+                    Save
+                </Button>
+            </Stack>
+        </Paper>
     );
 }
 export default UserInfo;

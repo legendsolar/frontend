@@ -24,25 +24,10 @@ function AccountView(props) {
     const auth = useAuth();
     const user = auth.user;
 
-    const [snapshots, loading, error] = useList(ref(database, "users"));
-
     const allTransactionRef = useRef(null);
-    if (!user) {
-        console.log("Error, not signed in, auth state:");
-        console.log(auth);
-        return <div>Error, You're Not Signed In</div>;
-    }
 
     const drawerWidth = 240;
     const drawerHeight = 600;
-
-    // const drawerTitles = [
-    //     "Personal Information",
-    //     "Accreditation",
-    //     "Banking Information",
-    //     "Investment History",
-    //     "Communication Prefernces",
-    // ];
 
     const drawerTitles = ["Contact", "Wallet", "Accounts"];
 
@@ -53,10 +38,8 @@ function AccountView(props) {
             drawer={
                 <div>
                     <Stack sx={{ p: 2 }}>
-                        <Typography variant="mainDisplay">
-                            John Compas
-                        </Typography>
-                        <Typography variant="unitLabel">
+                        <Typography variant="headline2">John Compas</Typography>
+                        <Typography variant="label">
                             Member since 2021
                         </Typography>
                     </Stack>
@@ -86,28 +69,26 @@ function AccountView(props) {
             }
             mainContent={
                 <div>
-                    <Paper variant="container">
-                        <UserInfo></UserInfo>
-                    </Paper>
+                    <UserInfo></UserInfo>
 
                     <Paper variant="container">
-                        <Typography variant="dashboardHeader">
-                            Wallet
-                        </Typography>
+                        <Typography variant="smallHeadline">Wallet</Typography>
                         <Stack
                             spacing={2}
                             justifyContent="center"
                             alignItems="center"
                         >
-                            <Typography variant="unitMainDisplay">
+                            <Typography variant="headline1">
                                 $1,750.00
                             </Typography>
-                            <Button variant="contained">Transfer</Button>
+                            <Button variant="contained" color="legendaryGreen">
+                                Transfer
+                            </Button>
                         </Stack>
                     </Paper>
 
                     <Paper variant="container">
-                        <Typography variant="dashboardHeader">
+                        <Typography variant="smallHeadline">
                             Accounts
                         </Typography>
                         <Stack
@@ -115,9 +96,33 @@ function AccountView(props) {
                             justifyContent="center"
                             alignItems="flex-start"
                         >
-                            <Typography>Bank of America Checking</Typography>
-                            <Typography>Bank of America Savings</Typography>
-                            <Typography>Bank of America Checking</Typography>
+                            {[
+                                "Bank of America Checking",
+                                "Bank of America Savings",
+                            ].map((name) => {
+                                return (
+                                    <Stack
+                                        direction="row"
+                                        alignItems="center"
+                                        justifyContent={"space-between"}
+                                    >
+                                        <Typography variant="body1">
+                                            {name}
+                                        </Typography>
+
+                                        <Button
+                                            variant="contained"
+                                            color="legendaryGreen"
+                                        >
+                                            Manage
+                                        </Button>
+                                    </Stack>
+                                );
+                            })}
+
+                            <Button variant="contained" color="legendaryGreen">
+                                Link New Account
+                            </Button>
                         </Stack>
                     </Paper>
                 </div>
