@@ -10,13 +10,14 @@ import {
 import { useState, useEffect, useContext, createContext } from "react";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyD9tNHU9n8yCQPaydXlu7WQro1SN6qVKfI",
-    authDomain: "legends-alpha.firebaseapp.com",
-    projectId: "legends-alpha",
-    storageBucket: "legends-alpha.appspot.com",
-    messagingSenderId: "187562843550",
-    appId: "1:187562843550:web:fdf935a6ac55836623ca8f",
-    measurementId: "${config.measurementId}",
+    apiKey: "AIzaSyBMNSth898JP2cfGkoh3ZZd91AO-6RWTg4",
+    authDomain: "legends-alpha-prod.firebaseapp.com",
+    databaseURL: "https://legends-alpha-prod-default-rtdb.firebaseio.com",
+    projectId: "legends-alpha-prod",
+    storageBucket: "legends-alpha-prod.appspot.com",
+    messagingSenderId: "627679343299",
+    appId: "1:627679343299:web:2cc7d5603f538476256876",
+    measurementId: "G-8JZL5S5VET",
 };
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
