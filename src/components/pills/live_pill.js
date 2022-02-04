@@ -1,15 +1,8 @@
 import React from "react";
-import { auth, database, firebaseApp } from "../../Firebase";
-import { ref } from "firebase/database";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import { Chip, Container, Typography } from "@mui/material";
-import { styled } from "@mui/material";
-import { useObject } from "react-firebase-hooks/database";
-import { format } from "date-fns";
+import PropTypes from "prop-types";
+import { Chip } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
-import { Box } from "@mui/material";
-function LivePill(props) {
+function LivePill({ error }) {
     return (
         <Chip
             size="small"
@@ -19,13 +12,13 @@ function LivePill(props) {
                     fontSize="small"
                     color="action"
                     style={{
-                        color: "green",
+                        color: error ? "red" : "green",
                         width: "10px",
                         height: "10px",
                     }}
                 />
             }
-            label={"Live"}
+            label={error ? "error" : "live"}
             sx={{
                 textTransform: "uppercase",
                 fontSize: "22px",
@@ -35,5 +28,13 @@ function LivePill(props) {
         ></Chip>
     );
 }
+
+LivePill.propTypes = {
+    error: PropTypes.bool,
+};
+
+LivePill.defaultProps = {
+    error: false,
+};
 
 export default LivePill;

@@ -18,10 +18,14 @@ function MetricGauge({
     arcWidth,
     componentWidth,
     gaugeAngleTravel,
-}) {
-    const normalizedCurrentValue = currentValue / (max - min);
 
-    const currentAngle = 180 + normalizedCurrentValue * gaugeAngleTravel;
+    error,
+}) {
+    const normalizedCurrentValue = error ? 0.5 : currentValue / (max - min);
+
+    const currentAngle = error
+        ? 270
+        : 180 + normalizedCurrentValue * gaugeAngleTravel;
     const strokeTotalLength = circleRadius * Math.PI * 2;
     const strokeCurrentLength =
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
@@ -38,7 +42,7 @@ function MetricGauge({
                     <Typography variant="smallHeadline">
                         {unitOpts.title}
                     </Typography>
-                    <LivePill message={unitOpts.liveMessage}></LivePill>
+                    <LivePill error={error}></LivePill>
                 </Stack>
                 <div
                     className={styles.gauge}
@@ -80,7 +84,7 @@ function MetricGauge({
                     </svg>
                     <div className={styles.center}>
                         <Typography variant="headline1">
-                            {currentValue.toFixed(1)}
+                            {error ? "--" : currentValue.toFixed(1)}
                         </Typography>
                     </div>
                 </div>
@@ -90,7 +94,9 @@ function MetricGauge({
                     sx={{ mt: 1 }}
                 >
                     <Typography variant="label">
-                        {min + " " + unitOpts.unit}
+                        {error
+                            ? unitOpts.unit + "-"
+                            : min + " " + unitOpts.unit}
                     </Typography>
 
                     <Typography variant="body1">
@@ -98,7 +104,9 @@ function MetricGauge({
                     </Typography>
 
                     <Typography variant="label">
-                        {max + " " + unitOpts.unit}
+                        {error
+                            ? unitOpts.unit + "-"
+                            : max + " " + unitOpts.unit}
                     </Typography>
                 </Stack>
             </Stack>
@@ -128,6 +136,8 @@ MetricGauge.propTypes = {
     arcWidth: PropTypes.number,
     gaugeAngleTravel: PropTypes.number,
     componentWidth: PropTypes.number,
+
+    error: PropTypes.bool,
 };
 
 MetricGauge.defaultProps = {
@@ -135,5 +145,6 @@ MetricGauge.defaultProps = {
     arcWidth: 90,
     componentWidth: 360,
     gaugeAngleTravel: 180,
+    error: false,
 };
 export default MetricGauge;

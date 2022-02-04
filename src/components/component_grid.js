@@ -11,6 +11,7 @@ import {
     CarbonGauge,
     EarningsGauge,
     GenerationGauge,
+    ErrorGauge,
 } from "./gauges/live_metric_gauge";
 
 import {
@@ -50,6 +51,9 @@ function ComponentGrid(props) {
             </Grid>
             <Grid item>
                 <GenerationCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></GenerationCumulativeImpact>
+            </Grid>
+            <Grid item>
+                <ErrorGauge></ErrorGauge>
             </Grid>
             <Grid item xs={6}>
                 <MetricSummary></MetricSummary>

@@ -6,8 +6,46 @@ import { useObject } from "react-firebase-hooks/database";
 import { differenceInMinutes } from "date-fns";
 import PropTypes from "prop-types";
 
-const LiveMetricGauge = ({ assetId, unitConversionFactor_kW, unitOpts }) => {
-    var error = false;
+const ErrorGauge = ({ unitOpts }) => {
+    unitOpts.liveMessage = `Could not load data`;
+    unitOpts.strokeColor = "#636E72";
+
+    return (
+        <MetricGauge
+            unitOpts={unitOpts}
+            min={0}
+            max={1}
+            currentValue={0}
+            error={true}
+        ></MetricGauge>
+    );
+};
+
+ErrorGauge.propTypes = {
+    unitOpts: PropTypes.shape({
+        title: PropTypes.string,
+        unit: PropTypes.string,
+        unitDescription: PropTypes.string,
+        strokeColor: PropTypes.string,
+    }),
+};
+
+ErrorGauge.defaultProps = {
+    unitOpts: {
+        title: "Error",
+        unit: "-",
+        unitDescription: "-",
+        strokeColor: "#636E72",
+    },
+};
+
+const LiveMetricGauge = ({
+    assetId,
+    unitConversionFactor_kW,
+    unitOpts,
+    errorExt,
+}) => {
+    var error = errorExt;
     var loading = true;
     var currentValue_kW = 0;
     var currentValue_unit = 0;
@@ -46,7 +84,9 @@ const LiveMetricGauge = ({ assetId, unitConversionFactor_kW, unitOpts }) => {
         error = true;
     }
 
-    unitOpts.liveMessage = `updated ${lastUpdateMinAgo} mins ago`;
+    if (error) {
+        return <ErrorGauge unitOpts={unitOpts}></ErrorGauge>;
+    }
 
     return (
         <MetricGauge
@@ -67,6 +107,11 @@ LiveMetricGauge.propTypes = {
         unitDescription: PropTypes.string.isRequired,
         strokeColor: PropTypes.string.isRequired,
     }).isRequired,
+    errorExt: PropTypes.bool,
+};
+
+LiveMetricGauge.defaultProps = {
+    errorExt: false,
 };
 
 const CarbonGauge = ({ assetId }) => {
@@ -135,4 +180,10 @@ EarningsGauge.propTypes = {
     assetId: PropTypes.string.isRequired,
 };
 
-export { LiveMetricGauge, CarbonGauge, GenerationGauge, EarningsGauge };
+export {
+    LiveMetricGauge,
+    CarbonGauge,
+    GenerationGauge,
+    EarningsGauge,
+    ErrorGauge,
+};
