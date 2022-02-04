@@ -57,6 +57,7 @@ const WormAxis = ({
                         key={tick.value.getTime()}
                         style={{
                             fontSize: "10px",
+                            fontFamily: "Be Vietnam Pro",
                             textAnchor: "middle",
                             transform: "translateY(20px)",
                         }}

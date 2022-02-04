@@ -122,10 +122,16 @@ function Worm(props) {
     const SunXPos = xScale(xAccessor(data[data.length - 1]));
 
     return (
-        <Paper style={{ overflow: "hidden" }}>
+        <Paper
+            variant={"container"}
+            sx={{ p: 0 }}
+            style={{ overflow: "hidden" }}
+        >
             <Stack sx={{ p: 2 }} direction="row" justifyContent="space-between">
-                <Typography variant="dashboardHeader">Productivity</Typography>
-                <Typography>{format(new Date(), "p")}</Typography>
+                <Typography variant={"subtitle1"}>Productivity</Typography>
+                <Typography variant={"subtitle2"}>
+                    {format(new Date(), "p")}
+                </Typography>
             </Stack>
             <div
                 className="Chart__wrapper"
