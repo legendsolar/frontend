@@ -7,11 +7,11 @@ const MetricList = (props) => {
                 props.valuePairs.map(({ metric, value }) => (
                     <Stack direction="row" justifyContent={"space-between"}>
                         <Tooltip title="How is this calculated?">
-                            <Typography variant="unitLabel">
+                            <Typography variant="description">
                                 {metric}
                             </Typography>
                         </Tooltip>
-                        <Typography variant="unitValue">{value}</Typography>
+                        <Typography variant="label">{value}</Typography>
                     </Stack>
                 ))}
         </Stack>

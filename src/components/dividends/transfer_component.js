@@ -46,7 +46,7 @@ TransferComponent.propTypes = {
     amount: PropTypes.number.isRequired,
     source: PropTypes.string.isRequired,
     destination: PropTypes.string.isRequired,
-    date: PropTypes.typeof(Date),
+    date: PropTypes.instanceOf(Date),
 };
 
 export default TransferComponent;
