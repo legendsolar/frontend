@@ -26,7 +26,7 @@ function ComponentGrid(props) {
     console.log(theme);
 
     return (
-        <Grid container spacing={2}>
+        <Grid container>
             <Grid item xs={8} md={8} lg={8}>
                 <WormLive assetId="-MtUbBNCnoz0VdTQ_m-O"></WormLive>
             </Grid>
