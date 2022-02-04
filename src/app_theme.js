@@ -152,6 +152,18 @@ const themeOptions = {
                     props: { variant: "light" },
                     style: {
                         backgroundColor: "#FFF",
+                        color: paletteOptions.palette.blackDawn.main,
+                        textTransform: "uppercase",
+                        fontSize: "10px",
+                    },
+                },
+                {
+                    props: { variant: "selected" },
+                    style: {
+                        backgroundColor: paletteOptions.palette.blackDawn.main,
+                        color: "#FFF",
+                        textTransform: "uppercase",
+                        fontSize: "10px",
                     },
                 },
             ],

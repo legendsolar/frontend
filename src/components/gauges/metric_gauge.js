@@ -84,12 +84,16 @@ function MetricGauge({
                         </Typography>
                     </div>
                 </div>
-                <Stack direction="row" justifyContent="space-between">
+                <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    sx={{ mt: 1 }}
+                >
                     <Typography variant="label">
                         {min + " " + unitOpts.unit}
                     </Typography>
 
-                    <Typography variant="body1" align="center">
+                    <Typography variant="body1">
                         {unitOpts.unitDescription}
                     </Typography>
 

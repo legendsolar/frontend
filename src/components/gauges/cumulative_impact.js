@@ -9,73 +9,47 @@ const CumulativeImpact = ({ cumulativeData, unitOpts }) => {
     const [historyState, setHistoryState] = useState("week");
 
     return (
-        <Paper sx={{ p: 2, width: 400, height: 288 }}>
+        <Paper variant={"container"} sx={{ width: 400, height: 288 }}>
             <Stack
                 justifyContent="space-between"
                 spacing={1}
                 sx={{ height: "100%" }}
             >
-                <Typography variant="dashboardHeader" gutterBottom>
+                <Typography variant="smallHeadline">
                     {unitOpts.title}
                 </Typography>
 
                 <Stack direction="row" justifyContent="space-evenly">
                     <Stack>
-                        <Typography
-                            sx={{ fontSize: 12 }}
-                            color="text.secondary"
-                            align="center"
-                            gutterBottom
-                        >
+                        <Typography variant="label" align="center">
                             AVG
                         </Typography>
 
-                        <Typography
-                            sx={{ fontSize: 18 }}
-                            color="text.primary"
-                            align="center"
-                        >
+                        <Typography variant="subtitle1" align="center">
                             -
                         </Typography>
                     </Stack>
                     <Stack>
                         <Typography
-                            variant="unitMainDisplay"
+                            variant="headline1"
                             sx={{
                                 color: unitOpts.strokeColor,
                             }}
-                            gutterBottom
                             align="center"
                         >
-                            {`${cumulativeData[historyState].toFixed(2)}`}
+                            {`${cumulativeData[historyState]}`}
                         </Typography>
 
-                        <Typography
-                            sx={{
-                                fontSize: 12,
-                                fontFamily: "Azeret Mono",
-                            }}
-                            color="text.primary"
-                            align="center"
-                        >
+                        <Typography variant="body1" align="center">
                             {unitOpts.unit}
                         </Typography>
                     </Stack>
                     <Stack>
-                        <Typography
-                            sx={{ fontSize: 12 }}
-                            color="text.secondary"
-                            gutterBottom
-                            align="center"
-                        >
+                        <Typography align="center" variant="label">
                             BEST
                         </Typography>
 
-                        <Typography
-                            sx={{ fontSize: 18 }}
-                            color="text.primary"
-                            align="center"
-                        >
+                        <Typography variant="subtitle1" align="center">
                             -
                         </Typography>
                     </Stack>
@@ -90,54 +64,28 @@ const CumulativeImpact = ({ cumulativeData, unitOpts }) => {
                         label={"Y2D"}
                         onClick={() => setHistoryState("year")}
                         clickable={true}
-                        variant={historyState == "year" ? "filled" : "outlined"}
-                        sx={{
-                            textTransform: "uppercase",
-                            fontFamily: "Azeret Mono",
-                            fontSize: "9px",
-                            lineHeight: "10.5px",
-                        }}
+                        variant={historyState == "year" ? "selected" : "light"}
                     ></Chip>
 
                     <Chip
                         label={"Month to Date"}
                         onClick={() => setHistoryState("month")}
                         clickable={true}
-                        variant={
-                            historyState == "month" ? "filled" : "outlined"
-                        }
-                        sx={{
-                            textTransform: "uppercase",
-                            fontFamily: "Azeret Mono",
-                            fontSize: "9px",
-                            lineHeight: "10.5px",
-                        }}
+                        variant={historyState == "month" ? "selected" : "light"}
                     ></Chip>
 
                     <Chip
                         label={"W2D"}
                         onClick={() => setHistoryState("week")}
                         clickable={true}
-                        variant={historyState == "week" ? "filled" : "outlined"}
-                        sx={{
-                            textTransform: "uppercase",
-                            fontFamily: "Azeret Mono",
-                            fontSize: "9px",
-                            lineHeight: "10.5px",
-                        }}
+                        variant={historyState == "week" ? "selected" : "light"}
                     ></Chip>
 
                     <Chip
                         label={"24H"}
                         onClick={() => setHistoryState("day")}
                         clickable={true}
-                        variant={historyState == "day" ? "filled" : "outlined"}
-                        sx={{
-                            textTransform: "uppercase",
-                            fontFamily: "Azeret Mono",
-                            fontSize: "9px",
-                            lineHeight: "10.5px",
-                        }}
+                        variant={historyState == "day" ? "selected" : "light"}
                     ></Chip>
                 </Stack>
             </Stack>
