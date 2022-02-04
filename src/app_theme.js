@@ -15,7 +15,7 @@ const grassGreen = "#30A462";
 const pencilYellow = "#EAB31E";
 const eraserRed = "#B4615F";
 
-const spacing = (s) => `${s * 4}px`;
+const spacing = (s) => `${s * 8}px`;
 
 const paletteOptions = {
     palette: {
@@ -147,11 +147,14 @@ const themeOptions = {
             },
         },
         MuiChip: {
-            styleOverrides: {
-                root: {
-                    height: "16px",
+            variants: [
+                {
+                    props: { variant: "light" },
+                    style: {
+                        backgroundColor: "none",
+                    },
                 },
-            },
+            ],
         },
         MuiButton: {
             variants: [

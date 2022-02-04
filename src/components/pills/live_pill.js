@@ -11,39 +11,28 @@ import CircleIcon from "@mui/icons-material/Circle";
 import { Box } from "@mui/material";
 function LivePill(props) {
     return (
-        <Grid
-            container
-            direction="column"
-            justifyContent="flex-start"
-            alignItems="flex-end"
-        >
-            <Grid item>
-                <Chip
-                    size="small"
-                    avatar={
-                        <CircleIcon
-                            fontSize="small"
-                            color="action"
-                            style={{
-                                color: "green",
-                                width: "10px",
-                                height: "10px",
-                            }}
-                        />
-                    }
-                    label={"Live"}
-                    sx={{
-                        textTransform: "uppercase",
-                        fontFamily: "Azeret Mono",
-                        fontSize: "9px",
-                        lineHeight: "10.5px",
+        <Chip
+            size="small"
+            variant="light"
+            avatar={
+                <CircleIcon
+                    fontSize="small"
+                    color="action"
+                    style={{
+                        color: "green",
+                        width: "10px",
+                        height: "10px",
                     }}
-                ></Chip>
-            </Grid>
-            <Grid item sx={{ display: "inline-block", lineHeight: "0" }}>
-                <Typography variant="pillLabel">{props.message}</Typography>
-            </Grid>
-        </Grid>
+                />
+            }
+            label={"Live"}
+            sx={{
+                textTransform: "uppercase",
+                fontSize: "22px",
+                fontWeight: 400,
+                color: "blackDawn.main",
+            }}
+        ></Chip>
     );
 }
 

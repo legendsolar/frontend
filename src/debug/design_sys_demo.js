@@ -13,7 +13,7 @@ const DesignSysDemo = (props) => {
         <Stack spacing={2}>
             <Paper variant="container">
                 <Stack>
-                    <Typography variant="subtitle1">{"Typography"}</Typography>
+                    <Typography variant="subtitle2">{"Typography"}</Typography>
                     <Typography variant="headline1">Headline 1</Typography>
                     <Typography variant="subtitle1">Subtitle 1</Typography>
                     <Typography variant="body1">Body 1</Typography>
@@ -30,42 +30,48 @@ const DesignSysDemo = (props) => {
             </Paper>
 
             <Paper variant="container">
-                <Typography variant="subtitle1">
-                    {"Colors (broken, WIP)"}
-                </Typography>
-                <Box
-                    sx={{
-                        bgcolor: "primary.main",
-                        width: "50px",
-                        height: "50px",
-                    }}
-                ></Box>
-
-                <Box
-                    sx={{
-                        bgcolor: "dark.main",
-                        width: "50px",
-                        height: "50px",
-                    }}
-                ></Box>
-
-                <Box
-                    sx={{
-                        bgcolor: "secondary.main",
-                        width: "50px",
-                        height: "50px",
-                    }}
-                ></Box>
+                <Typography variant="subtitle2">{"Colors"}</Typography>
+                {[
+                    "legendaryGreen",
+                    "whiteHaze",
+                    "whiteFog",
+                    "blackDusk",
+                    "blackDawn",
+                    "skyBlue",
+                    "grassGreen",
+                    "pencilYellow",
+                    "eraserRed",
+                ].map((name) => {
+                    return (
+                        <Stack direction="row" alignItems="center">
+                            <Box
+                                sx={{
+                                    bgcolor: `${name}.main`,
+                                    width: "50px",
+                                    height: "50px",
+                                    alignItems: "center",
+                                }}
+                            ></Box>
+                            <Typography
+                                variant="body2"
+                                color="light.contrastText"
+                            >
+                                {name}
+                            </Typography>
+                        </Stack>
+                    );
+                })}
             </Paper>
 
             <Paper variant="container">
-                <Typography variant="subtitle1">Buttons </Typography>
-                <Typography variant="subtitle2">Secondary </Typography>
+                <Typography variant="subtitle2">Buttons </Typography>
+                <Typography variant="subtitle3">Secondary </Typography>
+
                 <Button color="light">Light Button</Button>
                 <Button color="dark">Dark Button</Button>
                 <Button color="legendaryGreen">Green Button</Button>
 
-                <Typography variant="subtitle2">Primary</Typography>
+                <Typography variant="subtitle3">Primary</Typography>
                 <Button color="light" variant="primary">
                     Light Button
                 </Button>

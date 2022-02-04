@@ -27,88 +27,83 @@ function MetricGauge({
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
 
     return (
-        <Paper sx={{ p: 2, display: "inline-block" }}>
-            <div style={{ width: componentWidth + "px" }}>
-                <Grid container sx={{ width: componentWidth + "px" }}>
-                    <Grid item>
-                        <Grid
-                            sx={{ width: componentWidth + "px" }}
-                            container
-                            justifyContent="space-between"
-                        >
-                            <Grid item>
-                                <Typography variant="dashboardHeader">
-                                    {unitOpts.title}
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <LivePill
-                                    message={unitOpts.liveMessage}
-                                ></LivePill>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item>
-                        <div
-                            className={styles.gauge}
-                            style={{
-                                width: componentWidth,
-                                height: 184,
-                            }}
-                        >
-                            <svg
-                                className={styles.svgElement}
-                                viewBox={`0 0 ${componentWidth} 184`}
+        <Paper variant={"container"} sx={{ display: "inline-block" }}>
+            <Stack>
+                <Stack
+                    direction="row"
+                    justifyContent={"space-between"}
+                    alignItems={"center"}
+                    sx={{ width: "100%", mb: 3 }}
+                >
+                    <Typography variant="smallHeadline">
+                        {unitOpts.title}
+                    </Typography>
+                    <LivePill message={unitOpts.liveMessage}></LivePill>
+                </Stack>
+                <div
+                    className={styles.gauge}
+                    style={{
+                        width: componentWidth,
+                        height: 184,
+                    }}
+                >
+                    <svg
+                        className={styles.svgElement}
+                        viewBox={`0 0 ${componentWidth} 184`}
+                    >
+                        <g className={styles.centerTransform}>
+                            <g
+                                className={styles.filledArcs}
+                                style={{
+                                    strokeWidth: arcWidth,
+                                }}
                             >
-                                <g className={styles.centerTransform}>
-                                    <g
-                                        className={styles.filledArcs}
-                                        style={{
-                                            strokeWidth: arcWidth,
-                                        }}
-                                    >
-                                        <circle
-                                            className={styles.background}
-                                            r={circleRadius}
-                                        />
-                                        <circle
-                                            stroke={unitOpts.strokeColor}
-                                            r={circleRadius}
-                                            stroke-dasharray={`${strokeCurrentLength} ${strokeTotalLength}`}
-                                        />
-                                    </g>
-                                    <rect
-                                        x={circleRadius - arcWidth / 2}
-                                        y="-2"
-                                        width={arcWidth}
-                                        height="4"
-                                        fill="black"
-                                        transform={`rotate(${currentAngle})`}
-                                    ></rect>
-                                </g>
-                            </svg>
-                            <div className={styles.center}>
-                                <Typography variant="unitMainDisplay">
-                                    {currentValue.toFixed(1)}
-                                </Typography>
-                            </div>
-                        </div>
-                        <Stack direction="row" justifyContent="space-between">
-                            <Typography variant="unitLabel">
-                                {min + " " + unitOpts.unit}
-                            </Typography>
+                                <circle
+                                    className={styles.background}
+                                    r={circleRadius}
+                                />
+                                <circle
+                                    stroke={unitOpts.strokeColor}
+                                    r={circleRadius}
+                                    stroke-dasharray={`${strokeCurrentLength} ${strokeTotalLength}`}
+                                />
+                            </g>
+                            <rect
+                                x={circleRadius - arcWidth / 2}
+                                y="-2"
+                                width={arcWidth}
+                                height="4"
+                                fill="black"
+                                transform={`rotate(${currentAngle})`}
+                            ></rect>
+                        </g>
+                    </svg>
+                    <div className={styles.center}>
+                        <Typography variant="headline1">
+                            {currentValue.toFixed(1)}
+                        </Typography>
+                    </div>
+                </div>
+                <Stack direction="row" justifyContent="space-between">
+                    <Typography variant="label">
+                        {min + " " + unitOpts.unit}
+                    </Typography>
 
-                            <Typography variant="unitLabel" align="center">
-                                {unitOpts.unitDescription}
-                            </Typography>
+                    <Typography variant="body1" align="center">
+                        {unitOpts.unitDescription}
+                    </Typography>
 
-                            <Typography variant="unitLabel">
-                                {max + " " + unitOpts.unit}
-                            </Typography>
-                        </Stack>
-                    </Grid>
-                </Grid>
-            </div>
+                    <Typography variant="label">
+                        {max + " " + unitOpts.unit}
+                    </Typography>
+                </Stack>
+            </Stack>
+
+            <Stack direction="row" justifyContent="end" sx={{ mt: 3 }}>
+                <Typography variant="label" sx={{ ml: "auto" }}>
+                    {unitOpts.liveMessage}
+                </Typography>
+            </Stack>
         </Paper>
     );
 }
