@@ -18,11 +18,14 @@ function UserDebugPaper(props) {
         return <> </>;
     }
 
-    const userData = userDataSnap.val().info;
-    const userMetaData = userDataSnap.val().metadata;
+    const userDatabaseObj = userDataSnap.val();
+
+    const userData = userDatabaseObj.info;
+
+    const userMetaData = userDataSnap.metadata;
 
     return (
-        <Paper sx={{ minWidth: 275, p: 2 }}>
+        <Paper sx={{ minWidth: 275 }} variant="container">
             <Typography
                 sx={{ fontSize: 14 }}
                 color="text.secondary"
@@ -52,7 +55,9 @@ function UserDebugPaper(props) {
             </Typography>
 
             <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
-                {`${userData.streetAddress}, ${userData.city}, ${userData.state}`}
+                {userData
+                    ? `${userData.streetAddress}, ${userData.city}, ${userData.state}`
+                    : "error"}
             </Typography>
 
             <Typography
@@ -64,7 +69,7 @@ function UserDebugPaper(props) {
             </Typography>
 
             <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
-                {`${userMetaData.lastSignInTime}`}
+                {userMetaData ? `${userMetaData.lastSignInTime}` : "error"}
             </Typography>
         </Paper>
     );

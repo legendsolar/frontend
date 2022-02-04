@@ -9,6 +9,7 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.8",
     "@mui/styles": "^5.2.3",
+    "@mui/x-data-grid": "^5.4.0",
     "@sentry/react": "^6.17.2",
     "@sentry/tracing": "^6.17.2",
     "@testing-library/jest-dom": "^5.16.1",
@@ -39,7 +40,8 @@
     "start": "react-scripts start",
     "build": "CI=false && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "parseWebflowFooter": "node webflow_html_parser.js"
   },
   "eslintConfig": {
     "extends": [
@@ -58,5 +60,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.10"
   }
 }

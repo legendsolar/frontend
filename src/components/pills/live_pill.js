@@ -1,50 +1,40 @@
 import React from "react";
-import { auth, database, firebaseApp } from "../../Firebase";
-import { ref } from "firebase/database";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import { Chip, Container, Typography } from "@mui/material";
-import { styled } from "@mui/material";
-import { useObject } from "react-firebase-hooks/database";
-import { format } from "date-fns";
+import PropTypes from "prop-types";
+import { Chip } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
-import { Box } from "@mui/material";
-function LivePill(props) {
+function LivePill({ error }) {
     return (
-        <Grid
-            container
-            direction="column"
-            justifyContent="flex-start"
-            alignItems="flex-end"
-        >
-            <Grid item>
-                <Chip
-                    size="small"
-                    avatar={
-                        <CircleIcon
-                            fontSize="small"
-                            color="action"
-                            style={{
-                                color: "green",
-                                width: "10px",
-                                height: "10px",
-                            }}
-                        />
-                    }
-                    label={"Live"}
-                    sx={{
-                        textTransform: "uppercase",
-                        fontFamily: "Azeret Mono",
-                        fontSize: "9px",
-                        lineHeight: "10.5px",
+        <Chip
+            size="small"
+            variant="light"
+            avatar={
+                <CircleIcon
+                    fontSize="small"
+                    color="action"
+                    style={{
+                        color: error ? "red" : "green",
+                        width: "10px",
+                        height: "10px",
                     }}
-                ></Chip>
-            </Grid>
-            <Grid item sx={{ display: "inline-block", lineHeight: "0" }}>
-                <Typography variant="pillLabel">{props.message}</Typography>
-            </Grid>
-        </Grid>
+                />
+            }
+            label={error ? "error" : "live"}
+            sx={{
+                textTransform: "uppercase",
+                fontSize: "22px",
+                fontWeight: 400,
+                color: "blackDawn.main",
+            }}
+        ></Chip>
     );
 }
+
+LivePill.propTypes = {
+    error: PropTypes.bool,
+};
+
+LivePill.defaultProps = {
+    error: false,
+};
 
 export default LivePill;

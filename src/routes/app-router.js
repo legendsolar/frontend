@@ -1,13 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useAuth } from "../hooks/use_auth";
-import PortfolioView from "../views/portfolio_view";
-import SignInView from "../views/sign_in_view";
-import SignUpView from "../views/sign_up_view";
+import PortfolioPage from "../pages/portfolio_page";
+import SignInView from "../pages/sign_in_page";
+import SignUpView from "../pages/sign_up_page";
 import { Link, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./protected-route";
 import UnprotectedRoute from "./unprotected-route";
-import AccountView from "../views/account_view";
-import TransactionView from "../views/transactions_view";
+import AccountView from "../pages/account_page";
+import TransactionView from "../pages/transactions_page";
+
+import LoadingView from "../views/loading_view";
+
+import DesignSysDemo from "../debug/design_sys_demo";
 
 function AppRouter() {
     const auth = useAuth();
@@ -18,7 +22,7 @@ function AppRouter() {
     const unprotectedRoutes = ["/signIn", "/signUp", "/forgotPassword"];
 
     if (isAuthenticating) {
-        return <div>Loading...</div>;
+        return <LoadingView></LoadingView>;
     } else {
         return (
             <div>
@@ -27,7 +31,7 @@ function AppRouter() {
                         path="/"
                         element={
                             <ProtectedRoute>
-                                <PortfolioView />
+                                <PortfolioPage />
                             </ProtectedRoute>
                         }
                     />
@@ -48,7 +52,7 @@ function AppRouter() {
                         }
                     />
                     <Route
-                        path="/user"
+                        path="/account"
                         element={
                             <ProtectedRoute>
                                 <AccountView />
@@ -64,6 +68,9 @@ function AppRouter() {
                             </ProtectedRoute>
                         }
                     />
+
+                    {/* Debug */}
+                    <Route path="/designSysDemo" element={<DesignSysDemo />} />
                 </Routes>
             </div>
         );

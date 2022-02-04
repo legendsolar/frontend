@@ -20,8 +20,6 @@ function UserAssetDebugPaper(props) {
     const [userAssetSnapshots, userAssetSnapshotsLoading, userAssetError] =
         useList(ref(database, "users/" + user.uid + "/assets"));
 
-    console.log("assets");
-
     if (!userAssetSnapshotsLoading && !userAssetError) {
         userAssetSnapshots.map((v) => {
             console.log(v.val());
@@ -29,7 +27,7 @@ function UserAssetDebugPaper(props) {
     }
 
     return (
-        <Paper sx={{ minWidth: 275 }}>
+        <Paper sx={{ minWidth: 275 }} variant="container">
             <Typography
                 sx={{ fontSize: 14 }}
                 color="text.secondary"

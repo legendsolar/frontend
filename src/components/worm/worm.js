@@ -1,18 +1,12 @@
-import { timeInterpolatedValues, simSolarOutput, useInterval } from "./Utility";
-import { easeInOutQuad } from "js-easing-functions";
-import { addHours } from "date-fns";
 import Paper from "@mui/material/Paper";
-import { useObject } from "react-firebase-hooks/database";
-import { ref } from "firebase/database";
-import { database } from "../../Firebase";
-import ProductionWorm from "./ProductionWorm";
 import * as d3 from "d3";
 import { useChartDimensions } from "../../hooks/use_chart_dimensions";
 import { useMemo, useRef, useState } from "react";
-import Axis from "./Axis";
-import { useTheme } from "@mui/material/styles";
-import { style } from "@mui/system";
-import styles from "./worm.module.css";
+import WormAxis from "./worm_axis";
+import fakeData from "./fake_data";
+import { format } from "date-fns";
+import { Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 
 var tinycolor = require("tinycolor2");
 
@@ -58,8 +52,8 @@ function Worm(props) {
 
     const chartSettings = {
         marginLeft: 0,
-        marginRight: 50,
-        marginTop: 20,
+        marginRight: 60,
+        marginTop: 10,
         marginBottom: 30,
     };
 
@@ -94,7 +88,6 @@ function Worm(props) {
     const lineGen = d3
         .line()
         .curve(d3.curveBasis)
-        // .curve(d3.curveCardinal.tension(0.5))
         .x((d) => xScale(xAccessor(d)))
         .y((d) => yScale(yAccessor(d)));
 
@@ -129,7 +122,17 @@ function Worm(props) {
     const SunXPos = xScale(xAccessor(data[data.length - 1]));
 
     return (
-        <Paper style={{ overflow: "hidden" }}>
+        <Paper
+            variant={"container"}
+            sx={{ p: 0 }}
+            style={{ overflow: "hidden" }}
+        >
+            <Stack sx={{ p: 2 }} direction="row" justifyContent="space-between">
+                <Typography variant={"subtitle1"}>Productivity</Typography>
+                <Typography variant={"subtitle2"}>
+                    {format(new Date(), "p")}
+                </Typography>
+            </Stack>
             <div
                 className="Chart__wrapper"
                 ref={ref}
@@ -207,9 +210,12 @@ function Worm(props) {
                                 ","
                             )})`}
                         >
-                            <Axis
+                            <WormAxis
                                 domain={xScale.domain()}
                                 range={xScale.range()}
+                                data={data}
+                                xAccessor={xAccessor}
+                                yAccessor={yAccessor}
                             />
                         </g>
                     </g>

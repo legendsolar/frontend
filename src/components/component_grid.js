@@ -1,17 +1,24 @@
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
-import Container from "@mui/material/Container";
+import { Grid, Paper, Button } from "@mui/material";
+
 import UserDebugPaper from "./user_debug_paper";
-import UserAssetDebugPaper from "./user_asset_debug";
 import AssetLiveViewDebug from "./asset_live_view_debug";
 import MetricSummary from "./summary/metric_summary";
 import useTheme from "@mui/material/styles/useTheme";
-import BasicProdWorm from "./worm/BasicProdWorm";
 import WormLive from "./worm/worm_live";
-import EarningsGauge from "./gauges/earning_gauge";
-import CarbonGauge from "./gauges/carbon_gauge";
-import GenerationGauge from "./gauges/generation_gauge";
+import Weather from "./weather";
+import QuickAccountSummary from "./quick_account_summary";
+import {
+    CarbonGauge,
+    EarningsGauge,
+    GenerationGauge,
+    ErrorGauge,
+} from "./gauges/live_metric_gauge";
+
+import {
+    EarningsCumulativeImpact,
+    GenerationCumulativeImpact,
+    CarbonCumulativeImpact,
+} from "./gauges/live_cumulative_impact";
 
 function ComponentGrid(props) {
     const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
@@ -19,33 +26,45 @@ function ComponentGrid(props) {
     console.log(theme);
 
     return (
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-                {/* Chart */}
-                <Grid item xs={8} md={8} lg={8}>
-                    <WormLive assetId="-MtUbBNCnoz0VdTQ_m-O"></WormLive>
-                </Grid>
-
-                <Grid item xs={4}>
-                    <AssetLiveViewDebug assetId="-MtUbBNCnoz0VdTQ_m-O"></AssetLiveViewDebug>
-                </Grid>
-                <Grid item>
-                    <EarningsGauge assetId="-MuCmzKbnofQ9TY_sIp9"></EarningsGauge>
-                </Grid>
-                <Grid item>
-                    <CarbonGauge assetId="-MuCq8nkhE8gqGrdG9Ta"></CarbonGauge>
-                </Grid>
-                <Grid item>
-                    <GenerationGauge assetId="-MuCqDzSoaF0yXWZbouB"></GenerationGauge>
-                </Grid>
-                <Grid item xs={6}>
-                    <MetricSummary></MetricSummary>
-                </Grid>
-                <Grid item xs={12}>
-                    <UserDebugPaper></UserDebugPaper>
-                </Grid>
+        <Grid container>
+            <Grid item xs={8} md={8} lg={8}>
+                <WormLive assetId="-MtUbBNCnoz0VdTQ_m-O"></WormLive>
             </Grid>
-        </Container>
+
+            <Grid item xs={4}>
+                <AssetLiveViewDebug assetId="-MtUbBNCnoz0VdTQ_m-O"></AssetLiveViewDebug>
+            </Grid>
+            <Grid item>
+                <EarningsGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></EarningsGauge>
+            </Grid>
+            <Grid item>
+                <EarningsCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></EarningsCumulativeImpact>
+            </Grid>
+            <Grid item>
+                <CarbonGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></CarbonGauge>
+            </Grid>
+            <Grid item>
+                <CarbonCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></CarbonCumulativeImpact>
+            </Grid>
+            <Grid item>
+                <GenerationGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></GenerationGauge>
+            </Grid>
+            <Grid item>
+                <GenerationCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></GenerationCumulativeImpact>
+            </Grid>
+            <Grid item>
+                <ErrorGauge></ErrorGauge>
+            </Grid>
+            <Grid item xs={6}>
+                <MetricSummary></MetricSummary>
+            </Grid>
+            <Grid item xs={6}>
+                <Weather></Weather>
+            </Grid>
+            <Grid item xs={12}>
+                <UserDebugPaper></UserDebugPaper>
+            </Grid>
+        </Grid>
     );
 }
 

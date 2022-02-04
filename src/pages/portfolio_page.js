@@ -1,18 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getAuth } from "firebase/auth";
 import { auth, database, firebaseApp } from "../Firebase";
-import NavBar from "../components/nav_bar";
 import { useList } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
-import Container from "@mui/material/Container";
 import ComponentGrid from "../components/component_grid";
+import SideBarNavView from "../views/side_bar_view";
+import QuickAccountSummary from "../components/quick_account_summary";
 
-function PortfolioView(props) {
+function PortfolioPage(props) {
     const auth = useAuth();
     const user = auth.user;
 
@@ -24,14 +20,17 @@ function PortfolioView(props) {
         return <div>Error, You're Not Signed In</div>;
     }
 
+    const drawerWidth = 300;
+
     return (
-        <div>
-            <NavBar></NavBar>
-            <ComponentGrid></ComponentGrid>
-        </div>
+        <SideBarNavView
+            drawerWidth={drawerWidth}
+            drawer={<QuickAccountSummary></QuickAccountSummary>}
+            mainContent={<ComponentGrid></ComponentGrid>}
+        ></SideBarNavView>
     );
 }
 
-PortfolioView.propTypes = {};
+PortfolioPage.propTypes = {};
 
-export default PortfolioView;
+export default PortfolioPage;

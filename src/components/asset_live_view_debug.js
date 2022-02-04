@@ -48,7 +48,7 @@ function AssetLiveViewDebug(props) {
     }
 
     return (
-        <Paper sx={{ minWidth: 275, p: 2 }}>
+        <Paper sx={{ minWidth: 275 }} variant="container">
             <Typography
                 sx={{ fontSize: 18 }}
                 color="text.secondary"
