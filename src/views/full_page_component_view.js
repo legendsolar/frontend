@@ -10,21 +10,14 @@ const FullPageComponentView = (props) => {
                 direction={"row"}
                 justifyContent={"center"}
                 alignItems={"flex-start"}
-                position={"absolute"}
                 sx={{
-                    top: "240px",
                     width: "100%",
+                    height: "70vh",
                     zIndex: 4,
                 }}
             >
                 <ErrorBoundary>{props.children}</ErrorBoundary>
             </Stack>
-            <Box
-                sx={{
-                    width: "100%",
-                    height: "60vh",
-                }}
-            ></Box>
         </Box>
     );
 };

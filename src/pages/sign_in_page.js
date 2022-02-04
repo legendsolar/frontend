@@ -42,61 +42,59 @@ function SignInView() {
     };
 
     return (
-        <div>
-            <FullPageComponentView>
-                <Paper sx={{ p: 2, width: "500px" }}>
-                    <Box
-                        component="form"
-                        onSubmit={handleSubmit}
-                        noValidate
-                        sx={{ mt: 1 }}
-                    >
-                        <Stack>
-                            <Typography variant="subtitle1">Log In</Typography>
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                autoFocus
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                            />
-                            <Button
-                                type="submit"
-                                color="legendaryGreen"
-                                sx={{ width: "100%" }}
-                            >
-                                Log In
-                            </Button>
-                            <Stack
-                                direction={"row"}
-                                justifyContent={"space-between"}
-                            >
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
+        <FullPageComponentView>
+            <Paper sx={{ width: "500px" }} variant="container">
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    noValidate
+                    sx={{ mt: 1 }}
+                >
+                    <Stack>
+                        <Typography variant="subtitle1">Log In</Typography>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                        />
+                        <Button
+                            type="submit"
+                            color="legendaryGreen"
+                            sx={{ width: "100%" }}
+                        >
+                            Log In
+                        </Button>
+                        <Stack
+                            direction={"row"}
+                            justifyContent={"space-between"}
+                        >
+                            <Link href="#" variant="body2">
+                                Forgot password?
+                            </Link>
 
-                                <Link href="/signup" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Stack>
+                            <Link href="/signup" variant="body2">
+                                {"Don't have an account? Sign Up"}
+                            </Link>
                         </Stack>
-                    </Box>
-                </Paper>
-            </FullPageComponentView>
-        </div>
+                    </Stack>
+                </Box>
+            </Paper>
+        </FullPageComponentView>
     );
 }
 

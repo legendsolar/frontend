@@ -43,7 +43,7 @@ export default function SignUpView() {
 
     return (
         <FullPageComponentView>
-            <Paper sx={{ p: 2, width: "500px" }}>
+            <Paper sx={{ width: "500px" }} variant="container">
                 <CssBaseline />
 
                 <Box

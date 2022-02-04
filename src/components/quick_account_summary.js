@@ -2,9 +2,7 @@ import React from "react";
 import { auth, database, firebaseApp } from "../Firebase";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import Divider from "@mui/material/Divider";
+import { Paper, Stack, Divider, Box } from "@mui/material";
 import MetricList from "./summary/metric_list";
 import { Typography, Container } from "@mui/material";
 import { useObject } from "react-firebase-hooks/database";
@@ -31,20 +29,30 @@ const QuickAccountSummary = (props) => {
         <Paper>
             <Stack sx={{ p: 2 }}>
                 <Stack direction="row" justifyContent="space-between">
-                    <Typography>15 Panels</Typography>
+                    <Typography variant="subtitle1">15 Panels</Typography>
 
-                    <Typography>6 Kw</Typography>
+                    <Typography variant="body1">6 Kw</Typography>
                 </Stack>
 
-                <Stack direction="row" justifyContent="space-between">
-                    <Typography>$750 per panel</Typography>
+                <Box sx={{ height: "100px" }}></Box>
 
-                    <Typography>$11,250 total investment</Typography>
+                <Stack direction="row" justifyContent="space-between">
+                    <Stack>
+                        <Typography variant="body1">$750</Typography>
+                        <Typography variant="label">per panel</Typography>
+                    </Stack>
+
+                    <Stack>
+                        <Typography variant="body1">$11,250</Typography>
+                        <Typography variant="label">
+                            total investment
+                        </Typography>
+                    </Stack>
                 </Stack>
             </Stack>
             <Divider />
             <Stack sx={{ p: 2 }}>
-                <Typography sx={{ fontSize: 14 }} variant="unitMainDisplay">
+                <Typography sx={{ fontSize: 14 }} variant="subtitle1">
                     All time impact
                 </Typography>
                 <MetricList
@@ -57,7 +65,7 @@ const QuickAccountSummary = (props) => {
             </Stack>
             <Divider />
             <Stack sx={{ p: 2 }}>
-                <Typography sx={{ fontSize: 14 }} variant="unitMainDisplay">
+                <Typography sx={{ fontSize: 14 }} variant="subtitle1">
                     Financial Return
                 </Typography>
                 <MetricList

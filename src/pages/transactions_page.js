@@ -86,13 +86,13 @@ function TransactionView(props) {
             }
             mainContent={
                 <div>
-                    <Paper variant="container">
+                    <Paper variant="container" sx={{ minWidth: 450 }}>
                         <Typography variant="smallHeading">
                             Dividend Earnings
                         </Typography>
 
-                        <Grid container spacing={1} sx={{ mt: 1 }}>
-                            <Grid item xs={6}>
+                        <Grid container sx={{ mt: 1 }}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Dividend Payment"}
                                     amount={55}
@@ -101,7 +101,7 @@ function TransactionView(props) {
                                     date={new Date()}
                                 ></TransferComponent>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Dividend Payment"}
                                     amount={55}
@@ -110,7 +110,7 @@ function TransactionView(props) {
                                     date={new Date()}
                                 ></TransferComponent>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Dividend Payment"}
                                     amount={55}
@@ -119,7 +119,7 @@ function TransactionView(props) {
                                     date={new Date()}
                                 ></TransferComponent>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Dividend Payment"}
                                     amount={55}
@@ -137,7 +137,7 @@ function TransactionView(props) {
                         </Typography>
 
                         <Grid container spacing={1} sx={{ mt: 1 }}>
-                            <Grid item xs={6}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Solar Investment"}
                                     amount={55}
@@ -146,7 +146,7 @@ function TransactionView(props) {
                                     date={new Date()}
                                 ></TransferComponent>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Solar Investment"}
                                     amount={55}
@@ -155,7 +155,7 @@ function TransactionView(props) {
                                     date={new Date()}
                                 ></TransferComponent>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Solar Investment"}
                                     amount={55}
@@ -164,7 +164,7 @@ function TransactionView(props) {
                                     date={new Date()}
                                 ></TransferComponent>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Solar Investment"}
                                     amount={55}
@@ -181,7 +181,7 @@ function TransactionView(props) {
                             Bank Transfers
                         </Typography>
                         <Grid container spacing={1} sx={{ mt: 1 }}>
-                            <Grid item xs={6}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Solar Investment"}
                                     amount={55}
@@ -190,7 +190,7 @@ function TransactionView(props) {
                                     date={new Date()}
                                 ></TransferComponent>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Solar Investment"}
                                     amount={55}
@@ -199,7 +199,7 @@ function TransactionView(props) {
                                     date={new Date()}
                                 ></TransferComponent>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Solar Investment"}
                                     amount={55}
@@ -208,7 +208,7 @@ function TransactionView(props) {
                                     date={new Date()}
                                 ></TransferComponent>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item s={6}>
                                 <TransferComponent
                                     title={"Solar Investment"}
                                     amount={55}

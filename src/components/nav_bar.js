@@ -88,7 +88,7 @@ function NavBar(props) {
 
                 {!auth.user && (
                     <Button
-                        color="inherit"
+                        color="dark"
                         onClick={() => {
                             redirectToHomePage();
                         }}

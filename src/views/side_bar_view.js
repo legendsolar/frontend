@@ -14,7 +14,7 @@ const SideBarNavView = (props) => {
                         width: props.drawerWidth,
                         height: "auto",
                         boxSizing: "border-box",
-                        mt: "165px",
+                        mt: "180px",
                         ml: "20px",
                         borderRadius: "15px",
                         boxShadow: "0px 0px 15px rgba(99, 110, 114, 0.5)",
