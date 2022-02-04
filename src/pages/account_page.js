@@ -86,11 +86,11 @@ function AccountView(props) {
             }
             mainContent={
                 <div>
-                    <Paper sx={{ p: 2, m: 2 }}>
+                    <Paper variant="container">
                         <UserInfo></UserInfo>
                     </Paper>
 
-                    <Paper sx={{ p: 2, m: 2 }}>
+                    <Paper variant="container">
                         <Typography variant="dashboardHeader">
                             Wallet
                         </Typography>
@@ -106,7 +106,7 @@ function AccountView(props) {
                         </Stack>
                     </Paper>
 
-                    <Paper sx={{ p: 2, m: 2 }}>
+                    <Paper variant="container">
                         <Typography variant="dashboardHeader">
                             Accounts
                         </Typography>

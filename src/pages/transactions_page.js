@@ -86,8 +86,8 @@ function TransactionView(props) {
             }
             mainContent={
                 <div>
-                    <Paper sx={{ p: 2, m: 2 }}>
-                        <Typography variant="mainDisplay">
+                    <Paper variant="container">
+                        <Typography variant="smallHeading">
                             Dividend Earnings
                         </Typography>
 
@@ -131,8 +131,8 @@ function TransactionView(props) {
                         </Grid>
                     </Paper>
 
-                    <Paper sx={{ p: 2, m: 2 }}>
-                        <Typography variant="mainDisplay">
+                    <Paper variant="container">
+                        <Typography variant="smallHeading">
                             Panel Purchases
                         </Typography>
 
@@ -176,17 +176,52 @@ function TransactionView(props) {
                         </Grid>
                     </Paper>
 
-                    <Paper sx={{ p: 2, m: 2 }}>
-                        <Typography variant="mainDisplay" sx={{ mb: 2 }}>
+                    <Paper variant="container">
+                        <Typography variant="smallHeading" sx={{ mb: 2 }}>
                             Bank Transfers
                         </Typography>
+                        <Grid container spacing={1} sx={{ mt: 1 }}>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Solar Investment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Solar Investment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Solar Investment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TransferComponent
+                                    title={"Solar Investment"}
+                                    amount={55}
+                                    source={"Barnyard Solar"}
+                                    destination={"Bank of America"}
+                                    date={new Date()}
+                                ></TransferComponent>
+                            </Grid>
+                        </Grid>
                     </Paper>
 
-                    <Paper
-                        sx={{ p: 2, m: 2, height: 500 }}
-                        ref={allTransactionRef}
-                    >
-                        <Typography variant="mainDisplay">
+                    <Paper variant="container" ref={allTransactionRef}>
+                        <Typography variant="smallHeading">
                             All Transactions
                         </Typography>
 
