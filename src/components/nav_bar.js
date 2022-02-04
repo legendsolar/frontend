@@ -35,7 +35,7 @@ function NavBar(props) {
                     ></Box>
 
                     {auth.user && (
-                        <>
+                        <Stack direction="row">
                             <Button
                                 color="inherit"
                                 onClick={() => {
@@ -72,7 +72,7 @@ function NavBar(props) {
                                     Account
                                 </Typography>
                             </Button>
-                        </>
+                        </Stack>
                     )}
 
                     {!auth.user && (
