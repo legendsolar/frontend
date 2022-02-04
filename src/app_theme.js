@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { deepmerge } from "@mui/utils";
 
 /**
@@ -15,7 +15,9 @@ const grassGreen = "#30A462";
 const pencilYellow = "#EAB31E";
 const eraserRed = "#B4615F";
 
-const colorOptions = {
+const spacing = (s) => `${s * 4}px`;
+
+const paletteOptions = {
     palette: {
         primary: {
             main: blackDawn,
@@ -65,13 +67,13 @@ const colorOptions = {
     },
 };
 
-const typographyOptions = {
+const themeOptions = {
+    spacing: spacing,
     typography: {
         fontFamily: "Be Vietnam Pro",
         fontSize: "12px",
         lineHeight: "12px",
         headline1: {
-            fontFamily: "Be Vietnam Pro",
             fontWeight: 600,
             fontSize: "60px",
             lineHeight: "76px",
@@ -79,49 +81,63 @@ const typographyOptions = {
         subtitle1: {
             fontWeight: 600,
             fontSize: "20px",
+            lineHeight: "25.3px",
         },
         body1: {
             fontSize: "20px",
+            lineHeight: "20px",
         },
         headline2: {
             fontWeight: "bold",
             fontSize: "36px",
+            lineHeight: "45.54px",
         },
         subtitle2: {
             fontWeight: 600,
             fontSize: "18px",
+            lineHeight: "22.77px",
         },
         body2: {
+            fontWeight: 400,
             fontSize: "18px",
+            lineHeight: "22.77px",
         },
         description: {
-            fontSize: "18px",
+            fontSize: "14px",
+            lineHeight: "17.71px",
             color: blackDawn,
         },
         smallHeadline: {
             fontSize: "24px",
             fontWeight: "bold",
+            fontWeight: 700,
+            lineHeight: "30.36px",
         },
         subtitle3: {
             fontSize: "14px",
             fontWeight: 600,
+            lineHeight: "17.71px",
         },
         label: {
             fontSize: "12px",
+            lineHeight: "15.18px",
+            fontWeight: 400,
         },
     },
-};
-
-const componentOptions = {
     components: {
         // Careful, MuiPaper is consistently used for AppBar ect
         MuiPaper: {
-            styleOverrides: {
-                root: {
-                    borderRadius: "15px",
-                    boxShadow: "0px 0px 15px rgba(99, 110, 114, 0.5)",
+            variants: [
+                {
+                    props: { variant: "container" },
+                    style: {
+                        margin: spacing(2),
+                        padding: spacing(2),
+                        borderRadius: "15px",
+                        boxShadow: "0px 0px 15px rgba(99, 110, 114, 0.5)",
+                    },
                 },
-            },
+            ],
         },
         MuiAppBar: {
             styleOverrides: {
@@ -142,23 +158,24 @@ const componentOptions = {
                 {
                     props: { color: "dark" },
                     style: {
-                        backgroundColor: colorOptions.palette.dark.main,
-                        color: colorOptions.palette.dark.contrastText,
+                        backgroundColor: paletteOptions.palette.dark.main,
+                        color: paletteOptions.palette.dark.contrastText,
                     },
                 },
                 {
                     props: { color: "light" },
                     style: {
-                        border: `1px solid ${colorOptions.palette.light.contrastText}`,
-                        color: colorOptions.palette.light.contrastText,
+                        border: `1px solid ${paletteOptions.palette.light.contrastText}`,
+                        color: paletteOptions.palette.light.contrastText,
                     },
                 },
                 {
                     props: { color: "legendaryGreen" },
                     style: {
                         backgroundColor:
-                            colorOptions.palette.legendaryGreen.main,
-                        color: colorOptions.palette.legendaryGreen.contrastText,
+                            paletteOptions.palette.legendaryGreen.main,
+                        color: paletteOptions.palette.legendaryGreen
+                            .contrastText,
                     },
                 },
                 {
@@ -181,10 +198,6 @@ const componentOptions = {
     },
 };
 
-const appTheme = createTheme(
-    deepmerge(colorOptions, componentOptions, typographyOptions)
-);
-
-console.log(appTheme);
+const appTheme = createTheme(deepmerge(themeOptions, paletteOptions));
 
 export { appTheme };

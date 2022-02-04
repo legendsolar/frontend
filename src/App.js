@@ -1,13 +1,13 @@
-import { ProvideAuth, useAuth } from "./hooks/use_auth";
+import { ProvideAuth } from "./hooks/use_auth";
 import AppRouter from "./routes/app-router";
-import { ThemeProvider } from "@emotion/react";
+import { ThemeProvider } from "@mui/material/styles";
 import { appTheme } from "./app_theme";
 
 function App() {
     return (
         <ThemeProvider theme={appTheme}>
             <ProvideAuth>
-                <AppRouter></AppRouter>;
+                <AppRouter></AppRouter>
             </ProvideAuth>
         </ThemeProvider>
     );

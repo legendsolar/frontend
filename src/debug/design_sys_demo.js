@@ -11,19 +11,25 @@ import TransferComponent from "../components/dividends/transfer_component";
 const DesignSysDemo = (props) => {
     return (
         <Stack spacing={2}>
-            <Paper sx={{ p: 2 }}>
-                <Typography variant="subtitle1">
-                    {"Typography (broken, WIP)"}
-                </Typography>
-                <Typography variant="headline1">Headline 1</Typography>
-                <Typography variant="headline2">Headline 2</Typography>
-                <Typography variant="subtitle1">Subtitle 1</Typography>
-                <Typography variant="body1">Headline 1</Typography>
-                <Typography variant="label">Label</Typography>
-                <Typography variant="description">Description</Typography>
+            <Paper variant="container">
+                <Stack>
+                    <Typography variant="subtitle1">{"Typography"}</Typography>
+                    <Typography variant="headline1">Headline 1</Typography>
+                    <Typography variant="subtitle1">Subtitle 1</Typography>
+                    <Typography variant="body1">Body 1</Typography>
+                    <Typography variant="headline2">Headline 2</Typography>
+                    <Typography variant="subtitle2">Subtitle 2</Typography>
+                    <Typography variant="body2">Body 2</Typography>
+                    <Typography variant="description">Description</Typography>
+                    <Typography variant="smallHeadline">
+                        Small Headline
+                    </Typography>
+                    <Typography variant="subtitle3">Subtitle 3</Typography>
+                    <Typography variant="label">Label</Typography>
+                </Stack>
             </Paper>
 
-            <Paper sx={{ p: 2 }}>
+            <Paper variant="container">
                 <Typography variant="subtitle1">
                     {"Colors (broken, WIP)"}
                 </Typography>
@@ -52,7 +58,7 @@ const DesignSysDemo = (props) => {
                 ></Box>
             </Paper>
 
-            <Paper sx={{ p: 2 }}>
+            <Paper variant="container">
                 <Typography variant="subtitle1">Buttons </Typography>
                 <Typography variant="subtitle2">Secondary </Typography>
                 <Button color="light">Light Button</Button>
@@ -71,7 +77,7 @@ const DesignSysDemo = (props) => {
                 </Button>
             </Paper>
 
-            <Paper sx={{ p: 2 }}>
+            <Paper variant="container">
                 <Typography variant="subtitle1">Components</Typography>
 
                 <Divider sx={{ m: 2 }} />
