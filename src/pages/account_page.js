@@ -36,7 +36,7 @@ function AccountView(props) {
             drawerWidth={drawerWidth}
             drawerHeight={drawerHeight}
             drawer={
-                <div>
+                <Paper variant="container" sx={{ m: 0 }}>
                     <Stack sx={{ p: 2 }}>
                         <Typography variant="headline2">John Compas</Typography>
                         <Typography variant="label">
@@ -65,7 +65,7 @@ function AccountView(props) {
                             <ListItemText primary={"Sign Out"} />
                         </ListItemButton>
                     </List>
-                </div>
+                </Paper>
             }
             mainContent={
                 <div>

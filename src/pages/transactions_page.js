@@ -1,10 +1,12 @@
 import { useRef } from "react";
-
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
-import { Typography } from "@mui/material";
-import Container from "@mui/material/Container";
+import {
+    Divider,
+    Grid,
+    Paper,
+    Link,
+    Typography,
+    Container,
+} from "@mui/material/";
 import useTheme from "@mui/material/styles/useTheme";
 import SideBarNavView from "../views/side_bar_view";
 import TransferComponent from "../components/dividends/transfer_component";
@@ -57,7 +59,7 @@ function TransactionView(props) {
             drawerWidth={drawerWidth}
             drawerHeight={drawerHeight}
             drawer={
-                <div>
+                <Paper variant="container" sx={{ m: 0 }}>
                     <Stack sx={{ p: 2 }}>
                         <Typography variant="mainDisplay">
                             John Compas
@@ -66,6 +68,8 @@ function TransactionView(props) {
                             Member since 2021
                         </Typography>
                     </Stack>
+
+                    <Divider />
                     <List>
                         {drawerTitles.map((text, index) => (
                             <ListItemButton
@@ -82,7 +86,7 @@ function TransactionView(props) {
                             </ListItemButton>
                         ))}
                     </List>
-                </div>
+                </Paper>
             }
             mainContent={
                 <div>

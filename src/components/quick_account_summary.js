@@ -26,7 +26,7 @@ const QuickAccountSummary = (props) => {
     const userMetaData = userDataSnap.metadata;
 
     return (
-        <Paper>
+        <Paper sx={{ width: "400px", m: 0, p: 0 }} variant="container">
             <Stack sx={{ p: 2 }}>
                 <Stack direction="row" justifyContent="space-between">
                     <Typography variant="subtitle1">15 Panels</Typography>
