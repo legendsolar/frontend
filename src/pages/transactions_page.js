@@ -1,42 +1,19 @@
 import { useRef } from "react";
-import {
-    Divider,
-    Grid,
-    Paper,
-    Link,
-    Typography,
-    Container,
-} from "@mui/material/";
+import { Divider, Paper, Typography, Container } from "@mui/material/";
 import useTheme from "@mui/material/styles/useTheme";
 import SideBarNavView from "../views/side_bar_view";
-import TransferComponent from "../components/transactions/transfer_component";
-
-import {
-    Box,
-    Stack,
-    Button,
-    Drawer,
-    List,
-    ListItemText,
-    ListItemButton,
-} from "@mui/material";
+import { Stack, List, ListItemText, ListItemButton } from "@mui/material";
 import AllTransfersDataGrid from "../components/all_transfers_data_grid";
 import TransactionGrid from "../components/transactions/transaction_grid";
+import ScrollToSidebar from "../components/scroll_to_sidebar";
+import { useObject } from "react-firebase-hooks/database";
+import { ref } from "firebase/database";
+import { auth, database, firebaseApp } from "../Firebase";
+import { useAuth } from "../hooks/use_auth";
 
-function TransactionView(props) {
-    const theme = useTheme();
-    console.log(theme);
-
-    const drawerWidth = 240;
-    const drawerHeight = 600;
-
-    // const drawerTitles = [
-    //     "Personal Information",
-    //     "Accreditation",
-    //     "Banking Information",
-    //     "Investment History",
-    //     "Communication Prefernces",
-    // ];
+const TransactionPage = (props) => {
+    const auth = useAuth();
+    const user = auth.user;
 
     const drawerTitles = [
         "Earnings",
@@ -47,43 +24,35 @@ function TransactionView(props) {
 
     const contentRefs = useRef([]);
 
-    const dividends = [
-        {
-            asset: "Barnyard Solar",
-            amount: 25.31,
-            destination: "Legends Wallet",
-        },
-    ];
+    const [userInfoSnap, userInfoSnapLoading, userInfoSnapError] = useObject(
+        ref(database, "users/" + user.uid)
+    );
+
+    var name = "";
+    var memberInfo = "Member since 2022";
+
+    if (!!userInfoSnap && !userInfoSnapLoading && !userInfoSnapError) {
+        const userInfoObj = userInfoSnap.val();
+
+        console.log(userInfoObj);
+        name = userInfoObj.info.firstName + " " + userInfoObj.info.lastName;
+    }
 
     return (
         <SideBarNavView
             drawer={
-                <Paper variant="container" sx={{ width: "300px", m: 0 }}>
-                    <Stack sx={{ p: 2 }}>
-                        <Typography variant="headline2">John Compas</Typography>
-                        <Typography variant="label">
-                            Member since 2021
-                        </Typography>
-                    </Stack>
-
-                    <Divider />
-                    <List>
-                        {drawerTitles.map((text, index) => (
-                            <ListItemButton
-                                key={text}
-                                onClick={() =>
-                                    window.scrollTo(
-                                        0,
-                                        contentRefs.current[index].offsetTop -
-                                            180
-                                    )
-                                }
-                            >
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        ))}
-                    </List>
-                </Paper>
+                <ScrollToSidebar
+                    header={
+                        <Stack sx={{ p: 2 }}>
+                            <Typography variant="headline2">{name}</Typography>
+                            <Typography variant="label">
+                                {memberInfo}
+                            </Typography>
+                        </Stack>
+                    }
+                    contentTitles={drawerTitles}
+                    refs={contentRefs}
+                ></ScrollToSidebar>
             }
             mainContent={
                 <Container sx={{ ml: "auto" }}>
@@ -151,6 +120,6 @@ function TransactionView(props) {
             }
         ></SideBarNavView>
     );
-}
+};
 
-export default TransactionView;
+export default TransactionPage;

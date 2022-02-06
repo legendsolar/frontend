@@ -4,74 +4,62 @@ import { auth, database, firebaseApp } from "../Firebase";
 import { useList } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
+import { useObject } from "react-firebase-hooks/database";
 
-import {
-    Typography,
-    Paper,
-    Stack,
-    Button,
-    Drawer,
-    List,
-    ListItemText,
-    ListItemButton,
-    Divider,
-} from "@mui/material";
+import { Typography, Paper, Stack, Button } from "@mui/material";
 
 import UserInfo from "../components/user_info";
 import SideBarNavView from "../views/side_bar_view";
+import ScrollToSidebar from "../components/scroll_to_sidebar";
 
 function AccountView(props) {
     const auth = useAuth();
     const user = auth.user;
 
-    const allTransactionRef = useRef(null);
+    const contentRefs = useRef([]);
 
-    const drawerWidth = 240;
-    const drawerHeight = 600;
+    const [userInfoSnap, userInfoSnapLoading, userInfoSnapError] = useObject(
+        ref(database, "users/" + user.uid)
+    );
+
+    var name = "";
+    var memberInfo = "Member since 2022";
+
+    if (!!userInfoSnap && !userInfoSnapLoading && !userInfoSnapError) {
+        const userInfoObj = userInfoSnap.val();
+
+        console.log(userInfoObj);
+        name = userInfoObj.info.firstName + " " + userInfoObj.info.lastName;
+    }
 
     const drawerTitles = ["Contact", "Wallet", "Accounts"];
 
     return (
         <SideBarNavView
-            drawerWidth={drawerWidth}
-            drawerHeight={drawerHeight}
             drawer={
-                <Paper variant="container" sx={{ m: 0 }}>
-                    <Stack sx={{ p: 2 }}>
-                        <Typography variant="headline2">John Compas</Typography>
-                        <Typography variant="label">
-                            Member since 2021
-                        </Typography>
-                    </Stack>
-                    <List>
-                        {drawerTitles.map((text, index) => (
-                            <ListItemButton
-                                key={text}
-                                onClick={() =>
-                                    window.scrollTo(
-                                        0,
-                                        allTransactionRef.current.offsetTop -
-                                            165
-                                    )
-                                }
-                            >
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        ))}
-
-                        <Divider />
-
-                        <ListItemButton onClick={() => auth.signout()}>
-                            <ListItemText primary={"Sign Out"} />
-                        </ListItemButton>
-                    </List>
-                </Paper>
+                <ScrollToSidebar
+                    header={
+                        <Stack sx={{ p: 2 }}>
+                            <Typography variant="headline2">{name}</Typography>
+                            <Typography variant="label">
+                                {memberInfo}
+                            </Typography>
+                        </Stack>
+                    }
+                    contentTitles={drawerTitles}
+                    refs={contentRefs}
+                ></ScrollToSidebar>
             }
             mainContent={
                 <div>
-                    <UserInfo></UserInfo>
+                    <div ref={(el) => (contentRefs.current[0] = el)}>
+                        <UserInfo></UserInfo>
+                    </div>
 
-                    <Paper variant="container">
+                    <Paper
+                        variant="container"
+                        ref={(el) => (contentRefs.current[1] = el)}
+                    >
                         <Typography variant="smallHeadline">Wallet</Typography>
                         <Stack
                             spacing={2}
@@ -82,12 +70,15 @@ function AccountView(props) {
                                 $1,750.00
                             </Typography>
                             <Button variant="contained" color="legendaryGreen">
-                                Transfer
+                                Transfer To Account
                             </Button>
                         </Stack>
                     </Paper>
 
-                    <Paper variant="container">
+                    <Paper
+                        variant="container"
+                        ref={(el) => (contentRefs.current[2] = el)}
+                    >
                         <Typography variant="smallHeadline">
                             Accounts
                         </Typography>
