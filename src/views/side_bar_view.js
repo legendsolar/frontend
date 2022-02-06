@@ -13,6 +13,8 @@ const SideBarNavView = (props) => {
                         width: "auto",
                         top: "180px",
                         position: "sticky",
+                        // Remove sidebar on mobile
+                        display: { xs: "none", sm: "block" },
                     }}
                 >
                     <ErrorBoundary>{props.drawer}</ErrorBoundary>
