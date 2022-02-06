@@ -4,7 +4,7 @@ import { useChartDimensions } from "../../hooks/use_chart_dimensions";
 import { useMemo, useRef, useState } from "react";
 import WormAxis from "./worm_axis";
 import fakeData from "./fake_data";
-import { format } from "date-fns";
+import { format, subDays } from "date-fns";
 import { Typography } from "@mui/material";
 import { Stack } from "@mui/material";
 
@@ -13,6 +13,9 @@ var tinycolor = require("tinycolor2");
 const defaultChartDisplayParams = {
     timeAxisLabels: true,
     currentTimeDisplay: false,
+    minPixelsPerDay: 50,
+    minDaysDisplayed: 2,
+    maxDaysDisplayed: 7,
 
     background: {
         dayRegionColor: tinycolor("rgb(255,255,255)"),
@@ -57,13 +60,40 @@ function Worm(props) {
         marginBottom: 30,
     };
 
-    const data = props.data;
-
     const parseDate = (date) => new Date(date);
     const yAccessor = (d) => d["wattage"];
     const xAccessor = (d) => parseDate(d["time"]);
 
     const [ref, dms] = useChartDimensions(chartSettings);
+
+    const data = useMemo(() => {
+        const daysAllowed = Math.min(
+            Math.max(
+                Math.floor(
+                    (dms.boundedWidth -
+                        chartSettings.marginLeft -
+                        chartSettings.marginRight) /
+                        styleOptions.minPixelsPerDay
+                ),
+                styleOptions.minDaysDisplayed
+            ),
+            styleOptions.maxDaysDisplayed
+        );
+
+        const minDate = subDays(
+            xAccessor(props.data[props.data.length - 1]),
+            daysAllowed
+        );
+
+        const filteredData = props.data.filter((d) => {
+            if (!d) return false;
+
+            console.log(xAccessor(d));
+            return xAccessor(d).getTime() >= minDate.getTime();
+        });
+
+        return filteredData;
+    }, [props.data, dms.boundedWidth]);
 
     const yScale = useMemo(
         () =>
