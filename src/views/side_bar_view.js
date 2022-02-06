@@ -10,6 +10,7 @@ const SideBarNavView = (props) => {
                 <Container
                     sx={{
                         height: "max-content",
+                        width: "auto",
                         top: "180px",
                         position: "sticky",
                     }}

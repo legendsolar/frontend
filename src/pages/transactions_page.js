@@ -9,7 +9,7 @@ import {
 } from "@mui/material/";
 import useTheme from "@mui/material/styles/useTheme";
 import SideBarNavView from "../views/side_bar_view";
-import TransferComponent from "../components/dividends/transfer_component";
+import TransferComponent from "../components/transactions/transfer_component";
 
 import {
     Box,
@@ -21,6 +21,7 @@ import {
     ListItemButton,
 } from "@mui/material";
 import AllTransfersDataGrid from "../components/all_transfers_data_grid";
+import TransactionGrid from "../components/transactions/transaction_grid";
 
 function TransactionView(props) {
     const theme = useTheme();
@@ -44,7 +45,7 @@ function TransactionView(props) {
         "All Transactions",
     ];
 
-    const allTransactionRef = useRef(null);
+    const contentRefs = useRef([]);
 
     const dividends = [
         {
@@ -56,15 +57,11 @@ function TransactionView(props) {
 
     return (
         <SideBarNavView
-            drawerWidth={drawerWidth}
-            drawerHeight={drawerHeight}
             drawer={
-                <Paper variant="container" sx={{ m: 0 }}>
+                <Paper variant="container" sx={{ width: "300px", m: 0 }}>
                     <Stack sx={{ p: 2 }}>
-                        <Typography variant="mainDisplay">
-                            John Compas
-                        </Typography>
-                        <Typography variant="unitLabel">
+                        <Typography variant="headline2">John Compas</Typography>
+                        <Typography variant="label">
                             Member since 2021
                         </Typography>
                     </Stack>
@@ -77,8 +74,8 @@ function TransactionView(props) {
                                 onClick={() =>
                                     window.scrollTo(
                                         0,
-                                        allTransactionRef.current.offsetTop -
-                                            165
+                                        contentRefs.current[index].offsetTop -
+                                            180
                                     )
                                 }
                             >
@@ -89,149 +86,68 @@ function TransactionView(props) {
                 </Paper>
             }
             mainContent={
-                <div>
-                    <Paper variant="container" sx={{ minWidth: 450 }}>
-                        <Typography variant="smallHeading">
-                            Dividend Earnings
-                        </Typography>
+                <Container sx={{ ml: "auto" }}>
+                    <div ref={(el) => (contentRefs.current[0] = el)}>
+                        <TransactionGrid
+                            ref={(el) => (contentRefs.current[0] = el)}
+                            title="Dividend Payments"
+                            transactions={Array.from({ length: 4 }, (x, i) => {
+                                return {
+                                    title: "Dividend Payment",
+                                    amount: Math.random() * 50 + 50,
+                                    source: "Barnyard Solar",
+                                    destination: "Legends Wallet",
+                                    date: new Date(),
+                                };
+                            })}
+                        ></TransactionGrid>
+                    </div>
 
-                        <Grid container sx={{ mt: 1 }}>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Dividend Payment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Dividend Payment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Dividend Payment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Dividend Payment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                        </Grid>
-                    </Paper>
+                    <div ref={(el) => (contentRefs.current[1] = el)}>
+                        <TransactionGrid
+                            ref={(el) => (contentRefs.current[1] = el)}
+                            title="Investments"
+                            transactions={Array.from({ length: 4 }, (x, i) => {
+                                return {
+                                    title: "Panel Investment",
+                                    amount:
+                                        Math.floor(Math.random() * 50) * 100,
+                                    source: "Bank of America",
+                                    destination: `Legends SPV ${(
+                                        Math.random() * 50
+                                    ).toFixed(0)}`,
+                                    date: new Date(),
+                                };
+                            })}
+                        ></TransactionGrid>
+                    </div>
 
-                    <Paper variant="container">
-                        <Typography variant="smallHeading">
-                            Panel Purchases
-                        </Typography>
+                    <div ref={(el) => (contentRefs.current[2] = el)}>
+                        <TransactionGrid
+                            title="Bank Transfers"
+                            transactions={Array.from({ length: 4 }, (x, i) => {
+                                return {
+                                    title: "Transfer",
+                                    amount: Math.random() * 50 + 50,
+                                    source: "Legends Wallet",
+                                    destination: "Bank of America",
+                                    date: new Date(),
+                                };
+                            })}
+                        ></TransactionGrid>
+                    </div>
 
-                        <Grid container spacing={1} sx={{ mt: 1 }}>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Solar Investment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Solar Investment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Solar Investment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Solar Investment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                        </Grid>
-                    </Paper>
-
-                    <Paper variant="container">
-                        <Typography variant="smallHeading" sx={{ mb: 2 }}>
-                            Bank Transfers
-                        </Typography>
-                        <Grid container spacing={1} sx={{ mt: 1 }}>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Solar Investment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Solar Investment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Solar Investment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                            <Grid item s={6}>
-                                <TransferComponent
-                                    title={"Solar Investment"}
-                                    amount={55}
-                                    source={"Barnyard Solar"}
-                                    destination={"Bank of America"}
-                                    date={new Date()}
-                                ></TransferComponent>
-                            </Grid>
-                        </Grid>
-                    </Paper>
-
-                    <Paper variant="container" ref={allTransactionRef}>
+                    <Paper
+                        variant="container"
+                        ref={(el) => (contentRefs.current[3] = el)}
+                    >
                         <Typography variant="smallHeading">
                             All Transactions
                         </Typography>
 
                         <AllTransfersDataGrid></AllTransfersDataGrid>
                     </Paper>
-                </div>
+                </Container>
             }
         ></SideBarNavView>
     );
