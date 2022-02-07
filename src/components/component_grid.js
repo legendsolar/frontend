@@ -52,17 +52,17 @@ function ComponentGrid(props) {
             <Grid item>
                 <ErrorGauge></ErrorGauge>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item>
                 <MetricSummary></MetricSummary>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item>
                 <Weather></Weather>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item>
                 <UserDebugPaper></UserDebugPaper>
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item>
                 <AssetLiveViewDebug assetId="-MtUbBNCnoz0VdTQ_m-O"></AssetLiveViewDebug>
             </Grid>
         </Grid>
