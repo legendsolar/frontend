@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 import {
     Link,
@@ -9,7 +9,12 @@ import {
     TextField,
     Typography,
     Stack,
+    Collapse,
+    Alert,
+    AlertTitle,
+    IconButton,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate, useLocation } from "react-router-dom";
 import NavBar from "../components/nav_bar";
@@ -19,12 +24,12 @@ function SignInView() {
     const auth = useAuth();
     const navigate = useNavigate();
     const { state } = useLocation();
+    const [errorOpen, setErrorOpen] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log("email: " + data.get("email"));
-        console.log("password: " + data.get("password"));
         const email = data.get("email");
         const password = data.get("password");
 
@@ -35,9 +40,12 @@ function SignInView() {
                 })
                 .catch((error) => {
                     console.log(error);
+                    setErrorMessage(error.message);
+                    setErrorOpen(true);
                 });
         } else {
-            // TODO log failure
+            setErrorMessage("Email and password need to be filled");
+            setErrorOpen(true);
         }
     };
 
@@ -72,11 +80,26 @@ function SignInView() {
                             id="password"
                             autoComplete="current-password"
                         />
-                        <Button
-                            type="submit"
-                            color="legendaryGreen"
-                            sx={{ width: "100%" }}
-                        >
+                        <Collapse in={errorOpen}>
+                            <Alert
+                                severity="error"
+                                action={
+                                    <IconButton
+                                        aria-label="close"
+                                        color="inherit"
+                                        size="small"
+                                        onClick={() => {
+                                            setErrorOpen(false);
+                                        }}
+                                    >
+                                        <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                }
+                            >
+                                {errorMessage}
+                            </Alert>
+                        </Collapse>
+                        <Button type="submit" color="legendaryGreen">
                             Log In
                         </Button>
                         <Stack
