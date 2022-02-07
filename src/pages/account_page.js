@@ -28,8 +28,13 @@ function AccountView(props) {
     if (!!userInfoSnap && !userInfoSnapLoading && !userInfoSnapError) {
         const userInfoObj = userInfoSnap.val();
 
-        console.log(userInfoObj);
-        name = userInfoObj.info.firstName + " " + userInfoObj.info.lastName;
+        if (
+            userInfoObj.info &&
+            userInfoObj.info.firstName &&
+            userInfoObj.info.lastName
+        ) {
+            name = userInfoObj.info.firstName + " " + userInfoObj.info.lastName;
+        }
     }
 
     const drawerTitles = ["Contact", "Wallet", "Accounts"];
@@ -44,6 +49,13 @@ function AccountView(props) {
                             <Typography variant="label">
                                 {memberInfo}
                             </Typography>
+                            <Button
+                                variant="contained"
+                                color="legendaryGreen"
+                                onClick={() => auth.signout()}
+                            >
+                                Sign Out
+                            </Button>
                         </Stack>
                     }
                     contentTitles={drawerTitles}

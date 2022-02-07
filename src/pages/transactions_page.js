@@ -34,8 +34,13 @@ const TransactionPage = (props) => {
     if (!!userInfoSnap && !userInfoSnapLoading && !userInfoSnapError) {
         const userInfoObj = userInfoSnap.val();
 
-        console.log(userInfoObj);
-        name = userInfoObj.info.firstName + " " + userInfoObj.info.lastName;
+        if (
+            userInfoObj.info &&
+            userInfoObj.info.firstName &&
+            userInfoObj.info.lastName
+        ) {
+            name = userInfoObj.info.firstName + " " + userInfoObj.info.lastName;
+        }
     }
 
     return (
