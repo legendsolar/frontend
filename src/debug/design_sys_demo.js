@@ -6,7 +6,7 @@ import MetricList from "../components/summary/metric_list";
 import MetricSummary from "../components/summary/metric_summary";
 import Worm from "../components/worm/worm";
 import data from "../components/worm/fake_data";
-import TransferComponent from "../components/dividends/transfer_component";
+import TransactionComponent from "../components/transactions/transfer_component";
 
 const DesignSysDemo = (props) => {
     return (
@@ -142,13 +142,13 @@ const DesignSysDemo = (props) => {
 
             <Typography variant="subtitle1">{"Transfer Component"}</Typography>
 
-            <TransferComponent
+            <TransactionComponent
                 title={"Transfer Name"}
                 amount={99.99}
                 source={"Source"}
                 destination={"Destination"}
                 date={new Date()}
-            ></TransferComponent>
+            ></TransactionComponent>
         </Stack>
     );
 };

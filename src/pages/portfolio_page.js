@@ -20,7 +20,7 @@ function PortfolioPage(props) {
         return <div>Error, You're Not Signed In</div>;
     }
 
-    const drawerWidth = 300;
+    const drawerWidth = 400;
 
     return (
         <SideBarNavView

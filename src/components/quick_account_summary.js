@@ -25,13 +25,18 @@ const QuickAccountSummary = (props) => {
 
     const userMetaData = userDataSnap.metadata;
 
+    const panels = Math.floor(Math.random() * 10 + 10);
+    const kw_panel = 0.5;
+
     return (
-        <Paper>
+        <Paper sx={{ width: "400px", m: 0, p: 0 }} variant="container">
             <Stack sx={{ p: 2 }}>
                 <Stack direction="row" justifyContent="space-between">
-                    <Typography variant="subtitle1">15 Panels</Typography>
+                    <Typography variant="subtitle1">{panels} Panels</Typography>
 
-                    <Typography variant="body1">6 Kw</Typography>
+                    <Typography variant="body1">
+                        {panels * kw_panel} Kw
+                    </Typography>
                 </Stack>
 
                 <Box sx={{ height: "100px" }}></Box>
@@ -43,7 +48,7 @@ const QuickAccountSummary = (props) => {
                     </Stack>
 
                     <Stack>
-                        <Typography variant="body1">$11,250</Typography>
+                        <Typography variant="body1">${panels * 750}</Typography>
                         <Typography variant="label">
                             total investment
                         </Typography>

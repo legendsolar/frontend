@@ -128,7 +128,7 @@ function UserInfo(props) {
                     color="legendaryGreen"
                     onClick={handleSubmit}
                 >
-                    Save
+                    Update
                 </Button>
             </Stack>
         </Paper>

@@ -3,7 +3,7 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import PropTypes from "prop-types";
 
-const TransferComponent = ({ title, amount, source, destination, date }) => {
+const TransactionComponent = ({ title, amount, source, destination, date }) => {
     return (
         <Container sx={{ width: "340px" }}>
             <Stack direction="row" justifyContent="space-between" sx={{ m: 1 }}>
@@ -41,7 +41,7 @@ const TransferComponent = ({ title, amount, source, destination, date }) => {
     );
 };
 
-TransferComponent.propTypes = {
+TransactionComponent.propTypes = {
     title: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,
     source: PropTypes.string.isRequired,
@@ -49,4 +49,4 @@ TransferComponent.propTypes = {
     date: PropTypes.instanceOf(Date),
 };
 
-export default TransferComponent;
+export default TransactionComponent;
