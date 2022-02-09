@@ -27,13 +27,10 @@ function ComponentGrid(props) {
 
     return (
         <Grid container>
-            <Grid item xs={8} md={8} lg={8}>
+            <Grid item xs={12}>
                 <WormLive assetId="-MtUbBNCnoz0VdTQ_m-O"></WormLive>
             </Grid>
 
-            <Grid item xs={4}>
-                <AssetLiveViewDebug assetId="-MtUbBNCnoz0VdTQ_m-O"></AssetLiveViewDebug>
-            </Grid>
             <Grid item>
                 <EarningsGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></EarningsGauge>
             </Grid>
@@ -55,14 +52,18 @@ function ComponentGrid(props) {
             <Grid item>
                 <ErrorGauge></ErrorGauge>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item>
                 <MetricSummary></MetricSummary>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item>
                 <Weather></Weather>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item>
                 <UserDebugPaper></UserDebugPaper>
+            </Grid>
+
+            <Grid item>
+                <AssetLiveViewDebug assetId="-MtUbBNCnoz0VdTQ_m-O"></AssetLiveViewDebug>
             </Grid>
         </Grid>
     );

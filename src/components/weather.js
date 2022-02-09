@@ -1,6 +1,9 @@
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
+import { Paper, Typography, Stack } from "@mui/material";
 import { useState, useEffect } from "react";
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
+
+import CloudyLottieJson from "../assets/weather_icons/cloudy/data.json";
+
 const openWeatherApiKey = "8891a27f5e9762cd6d64fd19264db5d6";
 
 function loadWeatherPromise(apiKey, lat, long) {
@@ -41,32 +44,20 @@ function Weather(props) {
             }}
             variant="container"
         >
-            <Typography variant="dashboardHeader" gutterBottom>
-                New York, NY
-            </Typography>
+            <Stack direction="row" justifyContent="space-between">
+                <Typography variant="smallHeadline">Weather</Typography>
+                <Typography variant="headline1">{"32"}&deg;</Typography>
+            </Stack>
 
-            <Typography
-                sx={{ fontSize: 12 }}
-                color="text.secondary"
-                gutterBottom
-            >
-                Weather
-            </Typography>
+            <Player
+                autoplay
+                loop
+                src={CloudyLottieJson}
+                style={{ height: "200px", width: "200px" }}
+            ></Player>
 
-            <Typography sx={{ fontSize: 18 }} color="text.primary" gutterBottom>
-                {description}
-            </Typography>
-
-            <Typography
-                sx={{ fontSize: 12 }}
-                color="text.secondary"
-                gutterBottom
-            >
-                Temperature
-            </Typography>
-
-            <Typography sx={{ fontSize: 18 }} color="text.primary" gutterBottom>
-                {temp} F
+            <Typography variant="body1" align="right">
+                Cloudy
             </Typography>
         </Paper>
     );

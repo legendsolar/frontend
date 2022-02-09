@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 
 import {
     Typography,
@@ -10,8 +10,13 @@ import {
     CssBaseline,
     Button,
     Paper,
+    Collapse,
+    Alert,
+    AlertTitle,
+    IconButton,
 } from "@mui/material";
 
+import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
 import FullPageComponentView from "../views/full_page_component_view";
@@ -19,26 +24,30 @@ import FullPageComponentView from "../views/full_page_component_view";
 export default function SignUpView() {
     const auth = useAuth();
     const navigate = useNavigate();
+    const [errorOpen, setErrorOpen] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get("email"),
-            password: data.get("password"),
-        });
 
-        auth.signup(data.get("email"), data.get("password"))
-            .then(() => {
-                navigate("/");
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                if (errorCode == "auth/weak-password") {
-                    console.log("Error: password too weak");
-                }
-                console.log("sign up error");
-            });
+        const email = data.get("email");
+        const password = data.get("password");
+
+        if (email && password) {
+            auth.signup(data.get("email"), data.get("password"))
+                .then(() => {
+                    navigate("/");
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setErrorMessage(error.message);
+                    setErrorOpen(true);
+                });
+        } else {
+            setErrorMessage("Email and password need to be filled");
+            setErrorOpen(true);
+        }
     };
 
     return (
@@ -74,6 +83,25 @@ export default function SignUpView() {
                             id="password"
                             autoComplete="current-password"
                         />
+                        <Collapse in={errorOpen}>
+                            <Alert
+                                severity="error"
+                                action={
+                                    <IconButton
+                                        aria-label="close"
+                                        color="inherit"
+                                        size="small"
+                                        onClick={() => {
+                                            setErrorOpen(false);
+                                        }}
+                                    >
+                                        <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                }
+                            >
+                                {errorMessage}
+                            </Alert>
+                        </Collapse>
                         <Button
                             type="submit"
                             color="legendaryGreen"
