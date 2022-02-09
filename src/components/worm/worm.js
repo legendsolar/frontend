@@ -87,8 +87,6 @@ function Worm(props) {
 
         const filteredData = props.data.filter((d) => {
             if (!d) return false;
-
-            console.log(xAccessor(d));
             return xAccessor(d).getTime() >= minDate.getTime();
         });
 
