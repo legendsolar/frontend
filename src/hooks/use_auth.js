@@ -74,11 +74,11 @@ function useProvideAuth() {
     // ... latest auth object.
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            console.log("user auth state changed");
+            console.log("use auth: user auth state changed");
             console.log(user);
 
-            setIsAuthenticating(false);
             setUser(user);
+            setIsAuthenticating(false);
         });
 
         // Cleanup subscription on unmount
