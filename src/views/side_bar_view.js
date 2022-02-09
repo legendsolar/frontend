@@ -1,16 +1,15 @@
 import { Container, Stack, Box } from "@mui/material";
-import NavBar from "../components/nav_bar";
+import DefaultView from "./default_view";
 import { ErrorBoundary } from "@sentry/react";
 
 const SideBarNavView = (props) => {
     return (
-        <Box>
-            <NavBar></NavBar>
+        <DefaultView>
             <Stack direction="row" spacing={2}>
                 <Container
                     sx={{
                         height: "max-content",
-                        width: "auto",
+                        width: "400px",
                         top: "180px",
                         position: "sticky",
                         // Remove sidebar on mobile
@@ -27,10 +26,18 @@ const SideBarNavView = (props) => {
                         zIndex: 3,
                     }}
                 >
+                    <Container
+                        sx={{
+                            display: { xs: "block", sm: "none" },
+                        }}
+                    >
+                        <ErrorBoundary>{props.drawer}</ErrorBoundary>
+                    </Container>
+
                     <ErrorBoundary>{props.mainContent}</ErrorBoundary>
                 </Box>
             </Stack>
-        </Box>
+        </DefaultView>
     );
 };
 

@@ -1,11 +1,10 @@
 import { Box, Stack, Paper, Grid, Container } from "@mui/material";
-import NavBar from "../components/nav_bar";
 import { ErrorBoundary } from "@sentry/react";
+import DefaultView from "./default_view";
 
 const FullPageComponentView = (props) => {
     return (
-        <Box position="relative">
-            <NavBar></NavBar>
+        <DefaultView>
             <Stack
                 direction={"row"}
                 justifyContent={"center"}
@@ -18,7 +17,7 @@ const FullPageComponentView = (props) => {
             >
                 <ErrorBoundary>{props.children}</ErrorBoundary>
             </Stack>
-        </Box>
+        </DefaultView>
     );
 };
 

@@ -3,15 +3,13 @@ import NavBar from "../components/nav_bar";
 
 const DefaultView = (props) => {
     return (
-        <Box position="relative">
+        <Box justifyContent="center" alignItems="center">
             <NavBar></NavBar>
             <Box
-                component="main"
                 sx={{
-                    ml: `${40}px`,
-                    mr: "40px",
-                    width: "100%",
-                    zIndex: 4,
+                    maxWidth: "1200px",
+                    mr: "auto",
+                    ml: "auto",
                 }}
             >
                 {props.children}
