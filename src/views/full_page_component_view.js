@@ -12,7 +12,7 @@ const FullPageComponentView = (props) => {
                 alignItems={"flex-start"}
                 sx={{
                     width: "100%",
-                    height: "70vh",
+                    minHeight: "70vh",
                     zIndex: 4,
                 }}
             >

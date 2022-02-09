@@ -13,6 +13,7 @@ import LoadingView from "../views/loading_view";
 
 import DesignSysDemo from "../debug/design_sys_demo";
 import VerificationPage from "../pages/sign_up_process_page";
+import SignUpProcessPage from "../pages/sign_up_process_page";
 
 function AppRouter() {
     const auth = useAuth();
@@ -61,7 +62,7 @@ function AppRouter() {
                         path="/verify"
                         element={
                             <ProtectedRoute>
-                                <VerificationPage />
+                                <SignUpProcessPage />
                             </ProtectedRoute>
                         }
                     />

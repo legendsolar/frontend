@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { getFunctions, httpsCallable } from "firebase/functions";
+
+import { functions } from "../Firebase";
 
 import {
     Typography,
@@ -14,6 +17,9 @@ import {
     Alert,
     AlertTitle,
     IconButton,
+    Stepper,
+    Step,
+    StepLabel,
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -31,58 +37,124 @@ export default function VerificationPage() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        const email = data.get("email");
-        const password = data.get("password");
+        const createDwollaAccount = httpsCallable(
+            functions,
+            "createNewVerifiedDwollaUser_ext"
+        );
 
-        if (email && password) {
-            auth.signup(data.get("email"), data.get("password"))
-                .then(() => {
-                    navigate("/");
-                })
-                .catch((error) => {
-                    console.log(error);
-                    setErrorMessage(error.message);
-                    setErrorOpen(true);
-                });
-        } else {
-            setErrorMessage("Email and password need to be filled");
-            setErrorOpen(true);
-        }
+        createDwollaAccount({
+            user: {
+                firstName: data.get("firstName"),
+                lastName: data.get("lastName"),
+                email: auth.user.email,
+                address1: data.get("address1"),
+                city: data.get("city"),
+                stateAbbr: data.get("state"),
+                postalCode: data.get("postalCode"),
+                dateOfBirth: data.get("dateOfBirth"),
+                lastFourSSN: data.get("lastFourSSN"),
+            },
+        })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
+
+    const steps = [
+        "Personal Information",
+        "Connect Institution",
+        "Confirmation",
+    ];
 
     return (
         <FullPageComponentView>
-            <Paper sx={{ width: "800px" }} variant="container">
+            <Paper sx={{ width: "600px" }} variant="container">
                 <CssBaseline />
 
                 <Box
                     component="form"
-                    onSubmit={handleSubmit}
                     noValidate
+                    onSubmit={handleSubmit}
                     sx={{ mt: 1 }}
                 >
-                    <Typography variant="subtitle1">Sign up</Typography>
+                    <Typography variant="subtitle1">
+                        Verify Your Account
+                    </Typography>
                     <Stack>
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            id="firstName"
+                            label="First Name"
+                            name="firstName"
+                            autoComplete="firstName"
                             autoFocus
                         />
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
+                            name="lastName"
+                            label="Last Name"
+                            id="lastName"
                         />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="address1"
+                            label="Address"
+                            id="address1"
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="city"
+                            label="City"
+                            id="city"
+                        />
+
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="state"
+                            label="State"
+                            id="state"
+                        />
+
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="postalCode"
+                            label="Zip Code"
+                            id="postalCode"
+                        />
+
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="dateOfBirth"
+                            label="Date of Birth"
+                            id="dateOfBirth"
+                        />
+
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="lastFourSSN"
+                            label="Last Four Digits of SSN"
+                            id="lastFourSSN"
+                        />
+
                         <Collapse in={errorOpen}>
                             <Alert
                                 severity="error"
@@ -102,17 +174,17 @@ export default function VerificationPage() {
                                 {errorMessage}
                             </Alert>
                         </Collapse>
-                        <Button
-                            type="submit"
-                            color="legendaryGreen"
-                            sx={{ width: "100%" }}
-                        >
-                            Sign Up
+                        <Button type="submit" color="legendaryGreen">
+                            [Debug Only] Create Dwolla Account
                         </Button>
 
-                        <Link href="/signin" variant="body2">
-                            Already have an account? Sign in
-                        </Link>
+                        <Stepper activeStep={0} alternativeLabel>
+                            {steps.map((label) => (
+                                <Step key={label}>
+                                    <StepLabel>{label}</StepLabel>
+                                </Step>
+                            ))}
+                        </Stepper>
                     </Stack>
                 </Box>
             </Paper>
