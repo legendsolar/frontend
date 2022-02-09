@@ -12,3 +12,9 @@ The `main` branch is linked to the production firebase project, [legends alpha](
 
 ## Emulation 
 Emulation is controlled by the `emulator` flag in `Firebase.js`
+
+## Deployment
+
+The actions defined in `.github/workflows` should automatically update their respective firebase projects. However, hosting can manually be updated with 
+
+    firebase deploy --only hosting
