@@ -25,9 +25,9 @@ const SideBarNavView = (props) => {
                 </Container>
 
                 <Box
-                    component="main"
                     sx={{
                         zIndex: 3,
+                        width: "100%",
                     }}
                 >
                     <Container

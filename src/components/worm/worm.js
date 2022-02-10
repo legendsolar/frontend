@@ -152,7 +152,7 @@ function Worm(props) {
     return (
         <Paper
             variant={"container"}
-            sx={{ p: 0 }}
+            sx={{ p: 0, width: "100%" }}
             style={{ overflow: "hidden" }}
         >
             <Stack sx={{ p: 2 }} direction="row" justifyContent="space-between">
