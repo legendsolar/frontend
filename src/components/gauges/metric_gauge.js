@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { Typography } from "@mui/material";
 import styles from "./metric_gauge.module.css";
 import LivePill from "../pills/live_pill";
+import { useChartDimensions } from "../../hooks/use_chart_dimensions";
+
 const tinycolor = require("tinycolor2");
 
 function MetricGauge({
@@ -30,9 +33,15 @@ function MetricGauge({
     const strokeCurrentLength =
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
 
+    const [ref, dms] = useChartDimensions({
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 0,
+        marginBottom: 0,
+    });
     return (
         <Paper variant={"container"} sx={{ minWidth: "300px" }}>
-            <Stack>
+            <Stack alignItems={"center"}>
                 <Stack
                     direction="row"
                     justifyContent={"space-between"}
@@ -47,14 +56,13 @@ function MetricGauge({
                 <div
                     className={styles.gauge}
                     style={{
-                        width: componentWidth,
+                        maxWidth: "400px",
+                        width: "100%",
                         height: 184,
                     }}
+                    ref={ref}
                 >
-                    <svg
-                        className={styles.svgElement}
-                        viewBox={`0 0 ${componentWidth} 184`}
-                    >
+                    <svg className={styles.svgElement} width={dms.width}>
                         <g className={styles.centerTransform}>
                             <g
                                 className={styles.filledArcs}
@@ -91,7 +99,11 @@ function MetricGauge({
                 <Stack
                     direction="row"
                     justifyContent="space-between"
-                    sx={{ mt: 1 }}
+                    sx={{
+                        mt: 1,
+                        width: "100%",
+                        maxWidth: "400px",
+                    }}
                 >
                     <Typography variant="label">
                         {error
@@ -109,12 +121,19 @@ function MetricGauge({
                             : max + " " + unitOpts.unit}
                     </Typography>
                 </Stack>
-            </Stack>
 
-            <Stack direction="row" justifyContent="end" sx={{ mt: 3 }}>
-                <Typography variant="label" sx={{ ml: "auto" }}>
-                    {unitOpts.liveMessage}
-                </Typography>
+                <Stack
+                    direction="row"
+                    justifyContent="end"
+                    sx={{
+                        mt: 3,
+                        width: "100%",
+                    }}
+                >
+                    <Typography variant="label" sx={{ ml: "auto" }}>
+                        {unitOpts.liveMessage}
+                    </Typography>
+                </Stack>
             </Stack>
         </Paper>
     );
