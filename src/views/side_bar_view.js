@@ -32,8 +32,14 @@ const SideBarNavView = (props) => {
                         }}
                     >
                         <Container
+                            style={{
+                                // should not be needed
+                                paddingLeft: 0,
+                                paddingRight: 0,
+                            }}
                             sx={{
                                 width: "100%",
+                                mb: 2,
                                 display: { sm: "block", md: "none" },
                             }}
                         >

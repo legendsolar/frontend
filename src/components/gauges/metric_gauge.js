@@ -24,6 +24,13 @@ function MetricGauge({
 
     error,
 }) {
+    const [ref, dms] = useChartDimensions({
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 0,
+        marginBottom: 0,
+    });
+
     const normalizedCurrentValue = error ? 0.5 : currentValue / (max - min);
 
     const currentAngle = error
@@ -32,13 +39,6 @@ function MetricGauge({
     const strokeTotalLength = circleRadius * Math.PI * 2;
     const strokeCurrentLength =
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
-
-    const [ref, dms] = useChartDimensions({
-        marginLeft: 0,
-        marginRight: 0,
-        marginTop: 0,
-        marginBottom: 0,
-    });
     return (
         <Paper variant={"container"} sx={{ minWidth: "300px" }}>
             <Stack alignItems={"center"}>

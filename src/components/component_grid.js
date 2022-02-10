@@ -28,36 +28,36 @@ function ComponentGrid(props) {
                 <WormLive assetId="-MtUbBNCnoz0VdTQ_m-O"></WormLive>
             </Grid>
 
-            <Grid item>
+            <Grid item xs={12}>
                 <EarningsGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></EarningsGauge>
             </Grid>
 
-            <Grid item>
+            <Grid item md={12} lg={6}>
                 <EarningsCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></EarningsCumulativeImpact>
             </Grid>
-            <Grid item>
-                <CarbonGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></CarbonGauge>
-            </Grid>
-            <Grid item>
+
+            <Grid item md={12} lg={6}>
                 <CarbonCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></CarbonCumulativeImpact>
             </Grid>
-            <Grid item>
+            <Grid item xs={12}>
+                <CarbonGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></CarbonGauge>
+            </Grid>
+            <Grid item xs={12}>
                 <GenerationGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></GenerationGauge>
             </Grid>
-            <Grid item>
+
+            <Grid item md={12} lg={6}>
                 <GenerationCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></GenerationCumulativeImpact>
             </Grid>
-            <Grid item>
-                <MetricSummary></MetricSummary>
-            </Grid>
-            <Grid item>
+
+            <Grid item md={12} lg={6}>
                 <WeatherLive></WeatherLive>
             </Grid>
-            <Grid item>
+            <Grid item xs={12}>
                 <UserDebugPaper></UserDebugPaper>
             </Grid>
 
-            <Grid item>
+            <Grid item xs={12}>
                 <AssetLiveViewDebug assetId="-MtUbBNCnoz0VdTQ_m-O"></AssetLiveViewDebug>
             </Grid>
         </Grid>
