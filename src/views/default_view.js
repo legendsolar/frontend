@@ -3,7 +3,7 @@ import NavBar from "../components/nav_bar";
 
 const DefaultView = (props) => {
     return (
-        <Box justifyContent="center" alignItems="center">
+        <Box justifyContent="center" alignItems="center" width="100%">
             <NavBar></NavBar>
             <Box
                 sx={{

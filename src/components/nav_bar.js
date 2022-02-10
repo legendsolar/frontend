@@ -12,7 +12,7 @@ function NavBar(props) {
     const location = useLocation();
 
     return (
-        <Toolbar style={{ padding: 0 }}>
+        <Toolbar style={{ padding: 0, width: "100%" }}>
             <Box
                 position="absolute"
                 sx={{
@@ -27,12 +27,8 @@ function NavBar(props) {
                 justifyContent="space-between"
                 alignItems="center"
                 sx={{
-                    zIndex: 1,
-                    mt: "30px",
-                    ml: "80px",
-                    mr: "80px",
-                    mb: "80px",
                     width: "100%",
+                    zIndex: 1,
                 }}
             >
                 <Box
@@ -46,13 +42,15 @@ function NavBar(props) {
                 ></Box>
 
                 {auth.user && (
-                    <Stack direction="row">
+                    <Stack
+                        direction="row"
+                        sx={{ display: { xs: "none", sm: "block" } }}
+                    >
                         <Button
                             color="dark"
                             onClick={() => {
                                 navigate("/");
                             }}
-                            sx={{ ml: 2 }}
                         >
                             <Typography variant="appBarHeader">
                                 Portfolio
@@ -64,7 +62,6 @@ function NavBar(props) {
                             onClick={() => {
                                 navigate("/transactions");
                             }}
-                            sx={{ ml: 2 }}
                         >
                             <Typography variant="appBarHeader">
                                 Transactions
@@ -77,7 +74,6 @@ function NavBar(props) {
                             onClick={() => {
                                 navigate("/account");
                             }}
-                            sx={{ ml: 2 }}
                         >
                             <Typography variant="appBarHeader">
                                 Account
