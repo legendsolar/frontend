@@ -15,12 +15,12 @@ const SideBarNavView = (props) => {
                     sx={{
                         height: "max-content",
                         width: "400px",
+                        top: "16px",
                         position: "sticky",
                         // Remove sidebar on mobile
                         display: { xs: "none", sm: "block" },
                     }}
                 >
-                    {/* {props.drawer} */}
                     <ErrorBoundary>{props.drawer}</ErrorBoundary>
                 </Container>
 
