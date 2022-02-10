@@ -5,17 +5,22 @@ import { ErrorBoundary } from "@sentry/react";
 const SideBarNavView = (props) => {
     return (
         <DefaultView>
-            <Stack direction="row" spacing={2}>
+            <Stack direction="row" spacing={2} sx={{ mt: 8 }}>
                 <Container
+                    style={{
+                        // should not be needed
+                        paddingLeft: 0,
+                        paddingRight: 0,
+                    }}
                     sx={{
                         height: "max-content",
                         width: "400px",
-                        top: "180px",
                         position: "sticky",
                         // Remove sidebar on mobile
                         display: { xs: "none", sm: "block" },
                     }}
                 >
+                    {/* {props.drawer} */}
                     <ErrorBoundary>{props.drawer}</ErrorBoundary>
                 </Container>
 

@@ -7,7 +7,7 @@ const DefaultView = (props) => {
             <NavBar></NavBar>
             <Box
                 sx={{
-                    maxWidth: "1200px",
+                    maxWidth: "1100px",
                     mr: "auto",
                     ml: "auto",
                 }}

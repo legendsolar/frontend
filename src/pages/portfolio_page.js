@@ -9,22 +9,8 @@ import SideBarNavView from "../views/side_bar_view";
 import QuickAccountSummary from "../components/quick_account_summary";
 
 function PortfolioPage(props) {
-    const auth = useAuth();
-    const user = auth.user;
-
-    const [snapshots, loading, error] = useList(ref(database, "users"));
-
-    if (!user) {
-        console.log("Error, not signed in, auth state:");
-        console.log(auth);
-        return <div>Error, You're Not Signed In</div>;
-    }
-
-    const drawerWidth = 400;
-
     return (
         <SideBarNavView
-            drawerWidth={drawerWidth}
             drawer={<QuickAccountSummary></QuickAccountSummary>}
             mainContent={<ComponentGrid></ComponentGrid>}
         ></SideBarNavView>

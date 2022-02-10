@@ -21,12 +21,8 @@ import {
 } from "./gauges/live_cumulative_impact";
 
 function ComponentGrid(props) {
-    const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
-    const theme = useTheme();
-    console.log(theme);
-
     return (
-        <Grid container>
+        <Grid container spacing={2}>
             <Grid item xs={12}>
                 <WormLive assetId="-MtUbBNCnoz0VdTQ_m-O"></WormLive>
             </Grid>
