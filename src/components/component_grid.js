@@ -47,9 +47,6 @@ function ComponentGrid(props) {
                 <GenerationCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></GenerationCumulativeImpact>
             </Grid>
             <Grid item>
-                <ErrorGauge></ErrorGauge>
-            </Grid>
-            <Grid item>
                 <MetricSummary></MetricSummary>
             </Grid>
             <Grid item>
