@@ -23,7 +23,7 @@ const codeConverter = (code) => {
         },
         fog: {
             test: code < 800,
-            data: SnowLottieJson,
+            data: FogJson,
         },
         clear: {
             test: code == 800,
