@@ -19,6 +19,7 @@ import {
     GenerationCumulativeImpact,
     CarbonCumulativeImpact,
 } from "./gauges/live_cumulative_impact";
+import WeatherLive from "./weather_live";
 
 function ComponentGrid(props) {
     return (
@@ -50,7 +51,7 @@ function ComponentGrid(props) {
                 <MetricSummary></MetricSummary>
             </Grid>
             <Grid item>
-                <Weather></Weather>
+                <WeatherLive></WeatherLive>
             </Grid>
             <Grid item>
                 <UserDebugPaper></UserDebugPaper>
