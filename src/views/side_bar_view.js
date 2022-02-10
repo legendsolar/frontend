@@ -18,7 +18,7 @@ const SideBarNavView = (props) => {
                         top: "16px",
                         position: "sticky",
                         // Remove sidebar on mobile
-                        display: { xs: "none", sm: "block" },
+                        display: { sm: "none", md: "block" },
                     }}
                 >
                     <ErrorBoundary>{props.drawer}</ErrorBoundary>
@@ -32,7 +32,8 @@ const SideBarNavView = (props) => {
                 >
                     <Container
                         sx={{
-                            display: { xs: "block", sm: "none" },
+                            width: "100%",
+                            display: { sm: "block", md: "none" },
                         }}
                     >
                         <ErrorBoundary>{props.drawer}</ErrorBoundary>

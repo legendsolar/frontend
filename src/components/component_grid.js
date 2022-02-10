@@ -24,16 +24,13 @@ function ComponentGrid(props) {
     return (
         <Grid container spacing={2} sx={{ width: "100%" }}>
             <Grid item xs={12}>
-                <Paper variant="container" sx={{ width: "100%" }}></Paper>
-            </Grid>
-            <Grid item xs={12}>
                 <WormLive assetId="-MtUbBNCnoz0VdTQ_m-O"></WormLive>
             </Grid>
 
-            {/* <Grid item>
+            <Grid item>
                 <EarningsGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></EarningsGauge>
-            </Grid> */}
-            {/* 
+            </Grid>
+
             <Grid item>
                 <EarningsCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></EarningsCumulativeImpact>
             </Grid>
@@ -64,7 +61,7 @@ function ComponentGrid(props) {
 
             <Grid item>
                 <AssetLiveViewDebug assetId="-MtUbBNCnoz0VdTQ_m-O"></AssetLiveViewDebug>
-            </Grid> */}
+            </Grid>
         </Grid>
     );
 }
