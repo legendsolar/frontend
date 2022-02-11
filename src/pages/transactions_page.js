@@ -60,7 +60,7 @@ const TransactionPage = (props) => {
                 ></ScrollToSidebar>
             }
             mainContent={
-                <Container sx={{ ml: "auto" }}>
+                <Stack spacing={2}>
                     <div ref={(el) => (contentRefs.current[0] = el)}>
                         <TransactionGrid
                             ref={(el) => (contentRefs.current[0] = el)}
@@ -121,7 +121,7 @@ const TransactionPage = (props) => {
 
                         <AllTransfersDataGrid></AllTransfersDataGrid>
                     </Paper>
-                </Container>
+                </Stack>
             }
         ></SideBarNavView>
     );

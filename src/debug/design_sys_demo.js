@@ -7,6 +7,7 @@ import MetricSummary from "../components/summary/metric_summary";
 import Worm from "../components/worm/worm";
 import data from "../components/worm/fake_data";
 import TransactionComponent from "../components/transactions/transfer_component";
+import Weather from "../components/weather";
 
 const DesignSysDemo = (props) => {
     return (
@@ -149,6 +150,16 @@ const DesignSysDemo = (props) => {
                 destination={"Destination"}
                 date={new Date()}
             ></TransactionComponent>
+
+            <Divider sx={{ m: 2 }} />
+
+            <Typography variant="subtitle1">{"Weather Component"}</Typography>
+            <Weather temp={"0"} state={"clear"} code={800}></Weather>
+            <Weather temp={"10"} state={"cloudy"} code={801}></Weather>
+            <Weather temp={"50"} state={"Fog"} code={701}></Weather>
+            <Weather temp={"32"} state={"Snow"} code={600}></Weather>
+            <Weather temp={"80"} state={"Rain"} code={400}></Weather>
+            <Weather temp={"100"} state={"Thunderstorm"} code={201}></Weather>
         </Stack>
     );
 };
