@@ -1,7 +1,8 @@
 {
   "projects": {
     "dev": "legends-alpha",
-    "prod": "legends-alpha-prod"
+    "prod": "legends-alpha-prod",
+    "default": "legends-alpha"
   },
   "targets": {}
 }

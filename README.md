@@ -20,4 +20,4 @@ Builds app to `./build` using the [legends alpha dev](https://console.firebase.g
 Builds app to `./build` using the [legends alpha prod](https://console.firebase.google.com/u/1/project/legends-alpha-prod/overview) backend.
 
 ### `preview`
-Deploys site to a preview url based on current branch and commit. Url will be of form: `https://legends-alpha--<branch name>-<commit hash>-<random string>.web.app`.
+Deploys site to a public preview url based on current branch and commit. The `legends alpha dev` project will be used. Url will be of form: `https://legends-alpha--<branch name>-<hash>-<random string>.web.app`.
