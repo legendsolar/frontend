@@ -1,21 +1,18 @@
-import { useState } from "react";
-import { getFunctions, httpsCallable } from "firebase/functions";
-
-import { functions } from "../Firebase";
-
+import { useEffect, useState } from "react";
+import {
+    createDwollaAccount,
+    getWalletBalance,
+} from "../firebase/cloud_functions";
 import {
     Typography,
     Box,
-    Grid,
     Stack,
-    Link,
     TextField,
     CssBaseline,
     Button,
     Paper,
     Collapse,
     Alert,
-    AlertTitle,
     IconButton,
     Stepper,
     Step,
@@ -37,11 +34,6 @@ export default function VerificationPage() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        const createDwollaAccount = httpsCallable(
-            functions,
-            "createNewVerifiedDwollaUser_ext"
-        );
-
         createDwollaAccount({
             user: {
                 firstName: data.get("firstName"),
@@ -59,9 +51,21 @@ export default function VerificationPage() {
                 console.log(response);
             })
             .catch((error) => {
-                console.log(error);
+                console.error(error);
             });
     };
+
+    const [walletBalance, setWalletBalance] = useState(0);
+
+    useEffect(() => {
+        getWalletBalance({
+            walletId: "4fa96f97-f95d-4181-9b9d-17a7ebdd585c",
+        }).then((resp) => {
+            console.log("wallet resp");
+            console.log(resp);
+            setWalletBalance(resp.data.balance);
+        });
+    }, []);
 
     const steps = [
         "Personal Information",
@@ -71,123 +75,130 @@ export default function VerificationPage() {
 
     return (
         <FullPageComponentView>
-            <Paper sx={{ width: "600px" }} variant="container">
-                <CssBaseline />
+            <Stack spacing={2}>
+                <Paper sx={{ width: "600px" }} variant="container">
+                    <CssBaseline />
 
-                <Box
-                    component="form"
-                    noValidate
-                    onSubmit={handleSubmit}
-                    sx={{ mt: 1 }}
-                >
-                    <Typography variant="subtitle1">
-                        Verify Your Account
-                    </Typography>
-                    <Stack>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="firstName"
-                            label="First Name"
-                            name="firstName"
-                            autoComplete="firstName"
-                            autoFocus
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="lastName"
-                            label="Last Name"
-                            id="lastName"
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="address1"
-                            label="Address"
-                            id="address1"
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="city"
-                            label="City"
-                            id="city"
-                        />
+                    <Box
+                        component="form"
+                        noValidate
+                        onSubmit={handleSubmit}
+                        sx={{ mt: 1 }}
+                    >
+                        <Typography variant="subtitle1">
+                            Verify Your Account
+                        </Typography>
+                        <Stack>
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="firstName"
+                                label="First Name"
+                                name="firstName"
+                                autoComplete="firstName"
+                                autoFocus
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="lastName"
+                                label="Last Name"
+                                id="lastName"
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="address1"
+                                label="Address"
+                                id="address1"
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="city"
+                                label="City"
+                                id="city"
+                            />
 
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="state"
-                            label="State"
-                            id="state"
-                        />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="state"
+                                label="State"
+                                id="state"
+                            />
 
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="postalCode"
-                            label="Zip Code"
-                            id="postalCode"
-                        />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="postalCode"
+                                label="Zip Code"
+                                id="postalCode"
+                            />
 
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="dateOfBirth"
-                            label="Date of Birth"
-                            id="dateOfBirth"
-                        />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="dateOfBirth"
+                                label="Date of Birth"
+                                id="dateOfBirth"
+                            />
 
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="lastFourSSN"
-                            label="Last Four Digits of SSN"
-                            id="lastFourSSN"
-                        />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="lastFourSSN"
+                                label="Last Four Digits of SSN"
+                                id="lastFourSSN"
+                            />
 
-                        <Collapse in={errorOpen}>
-                            <Alert
-                                severity="error"
-                                action={
-                                    <IconButton
-                                        aria-label="close"
-                                        color="inherit"
-                                        size="small"
-                                        onClick={() => {
-                                            setErrorOpen(false);
-                                        }}
-                                    >
-                                        <CloseIcon fontSize="inherit" />
-                                    </IconButton>
-                                }
-                            >
-                                {errorMessage}
-                            </Alert>
-                        </Collapse>
-                        <Button type="submit" color="legendaryGreen">
-                            [Debug Only] Create Dwolla Account
-                        </Button>
+                            <Collapse in={errorOpen}>
+                                <Alert
+                                    severity="error"
+                                    action={
+                                        <IconButton
+                                            aria-label="close"
+                                            color="inherit"
+                                            size="small"
+                                            onClick={() => {
+                                                setErrorOpen(false);
+                                            }}
+                                        >
+                                            <CloseIcon fontSize="inherit" />
+                                        </IconButton>
+                                    }
+                                >
+                                    {errorMessage}
+                                </Alert>
+                            </Collapse>
+                            <Button type="submit" color="legendaryGreen">
+                                [Debug Only] Create Dwolla Account
+                            </Button>
 
-                        <Stepper activeStep={0} alternativeLabel>
-                            {steps.map((label) => (
-                                <Step key={label}>
-                                    <StepLabel>{label}</StepLabel>
-                                </Step>
-                            ))}
-                        </Stepper>
-                    </Stack>
-                </Box>
-            </Paper>
+                            <Stepper activeStep={0} alternativeLabel>
+                                {steps.map((label) => (
+                                    <Step key={label}>
+                                        <StepLabel>{label}</StepLabel>
+                                    </Step>
+                                ))}
+                            </Stepper>
+                        </Stack>
+                    </Box>
+                </Paper>
+
+                <Paper sx={{ width: "600px" }} variant="container">
+                    <Typography>Live Wallet Amount:</Typography>
+                    {walletBalance}
+                </Paper>
+            </Stack>
         </FullPageComponentView>
     );
 }
