@@ -131,7 +131,6 @@ const themeOptions = {
                 {
                     props: { variant: "container" },
                     style: {
-                        margin: spacing(2),
                         padding: spacing(2),
                         borderRadius: "15px",
                         boxShadow: "0px 0px 15px rgba(99, 110, 114, 0.5)",

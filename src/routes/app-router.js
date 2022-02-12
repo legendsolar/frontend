@@ -12,14 +12,13 @@ import TransactionView from "../pages/transactions_page";
 import LoadingView from "../views/loading_view";
 
 import DesignSysDemo from "../debug/design_sys_demo";
+import VerificationPage from "../pages/sign_up_process_page";
+import SignUpProcessPage from "../pages/sign_up_process_page";
+import { GridPage } from "../pages/grid_page";
 
 function AppRouter() {
     const auth = useAuth();
-    const user = auth.user;
     const isAuthenticating = auth.isAuthenticating;
-
-    // all other routes are assumed protected
-    const unprotectedRoutes = ["/signIn", "/signUp", "/forgotPassword"];
 
     if (isAuthenticating) {
         return <LoadingView></LoadingView>;
@@ -61,6 +60,14 @@ function AppRouter() {
                     />
 
                     <Route
+                        path="/verify"
+                        element={
+                            <ProtectedRoute>
+                                <SignUpProcessPage />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
                         path="/transactions"
                         element={
                             <ProtectedRoute>
@@ -71,6 +78,7 @@ function AppRouter() {
 
                     {/* Debug */}
                     <Route path="/designSysDemo" element={<DesignSysDemo />} />
+                    <Route path="/gridView" element={<GridPage />} />
                 </Routes>
             </div>
         );

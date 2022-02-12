@@ -7,7 +7,12 @@ const TransactionGrid = ({ title, transactions }) => {
         <Paper variant="container" sx={{ minWidth: 450 }}>
             <Typography variant="smallHeading">{title}</Typography>
 
-            <Grid container sx={{ mt: 1 }}>
+            <Grid
+                container
+                sx={{ mt: 1 }}
+                justifyContent="center"
+                alignItems="center"
+            >
                 {transactions.map((transaction) => {
                     return (
                         <Grid item s={6}>

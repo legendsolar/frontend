@@ -63,7 +63,7 @@ function AccountView(props) {
                 ></ScrollToSidebar>
             }
             mainContent={
-                <div>
+                <Stack spacing={2}>
                     <div ref={(el) => (contentRefs.current[0] = el)}>
                         <UserInfo></UserInfo>
                     </div>
@@ -128,7 +128,7 @@ function AccountView(props) {
                             </Button>
                         </Stack>
                     </Paper>
-                </div>
+                </Stack>
             }
         ></SideBarNavView>
     );

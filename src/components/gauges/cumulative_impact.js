@@ -9,7 +9,10 @@ const CumulativeImpact = ({ cumulativeData, unitOpts }) => {
     const [historyState, setHistoryState] = useState("week");
 
     return (
-        <Paper variant={"container"} sx={{ width: 400, height: 288 }}>
+        <Paper
+            variant={"container"}
+            sx={{ minWidth: 300, minHeight: 288, height: "100%" }}
+        >
             <Stack
                 justifyContent="space-between"
                 spacing={1}

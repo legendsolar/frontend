@@ -8,7 +8,7 @@ import {
 
 const ScrollToSidebar = ({ header, contentTitles, refs }) => {
     return (
-        <Paper variant="container" sx={{ width: "300px", m: 0 }}>
+        <Paper variant="container" sx={{ width: "100%", m: 0 }}>
             {header}
 
             <Divider />
@@ -19,7 +19,7 @@ const ScrollToSidebar = ({ header, contentTitles, refs }) => {
                         onClick={() =>
                             window.scrollTo(
                                 0,
-                                refs.current[index].offsetTop - 180
+                                refs.current[index].offsetTop - 20
                             )
                         }
                     >

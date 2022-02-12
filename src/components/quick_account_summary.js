@@ -29,7 +29,7 @@ const QuickAccountSummary = (props) => {
     const kw_panel = 0.5;
 
     return (
-        <Paper sx={{ width: "400px", m: 0, p: 0 }} variant="container">
+        <Paper sx={{ width: "100%", m: 0, p: 0 }} variant="container">
             <Stack sx={{ p: 2 }}>
                 <Stack direction="row" justifyContent="space-between">
                     <Typography variant="subtitle1">{panels} Panels</Typography>
