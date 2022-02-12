@@ -2,21 +2,22 @@
 
 This is the central repository for the Legends App. It primarily leverages [React](https://reactjs.org/) and [MUI](https://mui.com/).
 
-The two main branches, `main` and `dev` are each connected to separate firebase projects.
+## Commands
 
-The `main` branch is linked to the production firebase project, [legends alpha](https://console.firebase.google.com/u/1/project/legends-alpha-prod/overview) while the `dev` branch is linked to [legends alpha dev](https://console.firebase.google.com/u/1/project/legends-alpha/overview).
+### `start`
+Starts a locally hosted version of the site running on the [legends alpha dev](https://console.firebase.google.com/u/1/project/legends-alpha/overview) backend.
 
+### `start:prod`
+Starts a locally hosted version of the site running on the [legends alpha prod](https://console.firebase.google.com/u/1/project/legends-alpha-prod/overview) backend.
 
-## Running
+### `start:emulator`
+Starts a locally hosted version of the site running on the emulator backend. Emulators must be started in the `backend` project for this to work properly.
 
-1. If using the emulator, start backend by starting Firebase emulator in `backend`. Generally not required.
-2. Start react app with `npm start`
+### `build`
+Builds app to `./build` using the [legends alpha dev](https://console.firebase.google.com/u/1/project/legends-alpha/overview) backend.
 
-## Emulation 
-Emulation is controlled by the `emulator` flag in `Firebase.js`
+### `build:prod`
+Builds app to `./build` using the [legends alpha prod](https://console.firebase.google.com/u/1/project/legends-alpha-prod/overview) backend.
 
-## Deployment
-
-The actions defined in `.github/workflows` should automatically update their respective firebase projects. However, hosting can manually be updated with 
-
-    firebase deploy --only hosting
+### `preview`
+Deploys site to a preview url based on current branch and commit. Url will be of form: `https://legends-alpha--<branch name>-<commit hash>-<random string>.web.app`.

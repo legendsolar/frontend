@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "legends-alpha-prod",
+    "dev": "legends-alpha",
     "prod": "legends-alpha-prod"
   },
   "targets": {}
