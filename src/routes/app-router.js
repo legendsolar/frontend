@@ -14,6 +14,7 @@ import LoadingView from "../views/loading_view";
 import DesignSysDemo from "../debug/design_sys_demo";
 import VerificationPage from "../pages/sign_up_process_page";
 import SignUpProcessPage from "../pages/sign_up_process_page";
+import { GridPage } from "../pages/grid_page";
 
 function AppRouter() {
     const auth = useAuth();
@@ -77,6 +78,7 @@ function AppRouter() {
 
                     {/* Debug */}
                     <Route path="/designSysDemo" element={<DesignSysDemo />} />
+                    <Route path="/gridView" element={<GridPage />} />
                 </Routes>
             </div>
         );

@@ -91,7 +91,7 @@ function MetricGauge({
                         </g>
                     </svg>
                     <div className={styles.center}>
-                        <Typography variant="headline1">
+                        <Typography variant="headline1" sx={{ mt: "auto" }}>
                             {error ? "--" : currentValue.toFixed(1)}
                         </Typography>
                     </div>
