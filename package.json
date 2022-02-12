@@ -21,6 +21,7 @@
     "chartjs-adapter-date-fns": "^2.0.0",
     "d3": "^7.3.0",
     "date-fns": "^2.28.0",
+    "env-cmd": "^10.1.0",
     "firebase": "^9.6.1",
     "firebaseui": "^0.600.0",
     "hookrouter": "^1.2.5",
@@ -39,10 +40,12 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "CI=false && react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "env-cmd -f ./.env.dev react-scripts start",
+    "start:prod": "env-cmd -f ./.env.prod react-scripts start",
+    "start:emulator": "env-cmd -f ./.env.emulator react-scripts start",
+    "build": "env-cmd -f ./.env.dev react-scripts build",
+    "build:emulator": "env-cmd -f ./.env.emulator react-scripts build",
+    "build:prod": "env-cmd -f ./.env.prod react-scripts build",
     "parseWebflowFooter": "node webflow_html_parser.js"
   },
   "eslintConfig": {
