@@ -1,6 +1,7 @@
 import { getApp, initializeApp } from "firebase/app";
 import { getDatabase, connectDatabaseEmulator } from "firebase/database";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
+import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
 const emulator =
     !!process.env.REACT_APP_FIREBASE_EMULATOR &&
@@ -33,6 +34,7 @@ const firebaseApp = initializeApp({
 
 const auth = getAuth(firebaseApp);
 const database = getDatabase(firebaseApp);
+const functions = getFunctions(firebaseApp);
 
 if (emulator) {
     connectAuthEmulator(auth, "localhost", 9099);
@@ -40,4 +42,4 @@ if (emulator) {
     connectFunctionsEmulator(functions, "localhost", 5004);
 }
 
-export { firebaseApp, database, auth };
+export { firebaseApp, database, auth, functions };
