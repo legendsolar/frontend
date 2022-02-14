@@ -99,7 +99,7 @@ function Worm(props) {
                 .scaleLinear()
                 .domain(d3.extent(data, yAccessor))
                 .range([dms.boundedHeight, 0]),
-        [dms.boundedHeight]
+        [dms.boundedHeight, data]
     );
 
     const xScale = useMemo(
@@ -108,7 +108,7 @@ function Worm(props) {
                 .scaleTime()
                 .domain(d3.extent(data, xAccessor))
                 .range([0, dms.boundedWidth]),
-        [dms.boundedWidth]
+        [dms.boundedWidth, data]
     );
 
     const dayNightThreshold = styleOptions.worm.nightThreshold_W;
