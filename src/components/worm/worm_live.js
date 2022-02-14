@@ -47,7 +47,7 @@ export default function WormLive(props) {
                 setError(true);
                 console.log(error);
             });
-    }, []);
+    }, [assetId]);
 
     if (loading || error) {
         return <></>;

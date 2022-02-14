@@ -1,5 +1,12 @@
-import { Grid, Paper, Button } from "@mui/material";
-
+import { useState } from "react";
+import {
+    Grid,
+    Paper,
+    Button,
+    Select,
+    MenuItem,
+    Typography,
+} from "@mui/material";
 import UserDebugPaper from "./user_debug_paper";
 import AssetLiveViewDebug from "./asset_live_view_debug";
 import MetricSummary from "./summary/metric_summary";
@@ -22,32 +29,80 @@ import {
 import WeatherLive from "./weather_live";
 
 function ComponentGrid(props) {
+    const [assetDisplayId, setAssetDisplayId] = useState({
+        id: "-MtUbBNCnoz0VdTQ_m-O",
+        name: "Barnyard Solar",
+    });
+
+    const assetList = [
+        {
+            id: "-MtUbBNCnoz0VdTQ_m-O",
+            name: "Barnyard Solar",
+        },
+
+        {
+            id: "-MuCmzKbnofQ9TY_sIp9",
+            name: "Hawaii Solar",
+        },
+
+        {
+            id: "-MuCq8nkhE8gqGrdG9Ta",
+            name: "Big Sur Solar",
+        },
+
+        {
+            id: "-MuCqDzSoaF0yXWZbouB",
+            name: "Sinusoidal Test",
+        },
+
+        {
+            id: "-MuDYXAdGcdAzeGJmzj3",
+            name: "Constant Output Test",
+        },
+    ];
+
+    const onSelectChange = (event) => {
+        console.log(event);
+
+        assetList.map((asset) => {
+            if (asset.name === event.target.value) {
+                setAssetDisplayId(asset);
+            }
+        });
+    };
+
     return (
         <Grid container spacing={2} sx={{ width: "100%" }}>
             <Grid item xs={12}>
-                <WormLive assetId="-MtUbBNCnoz0VdTQ_m-O"></WormLive>
+                <WormLive assetId={assetDisplayId.id}></WormLive>
             </Grid>
 
             <Grid item xs={12}>
-                <EarningsGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></EarningsGauge>
+                <EarningsGauge assetId={assetDisplayId.id}></EarningsGauge>
             </Grid>
 
             <Grid item md={12} lg={6}>
-                <EarningsCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></EarningsCumulativeImpact>
+                <EarningsCumulativeImpact
+                    assetId={assetDisplayId.id}
+                ></EarningsCumulativeImpact>
             </Grid>
 
             <Grid item md={12} lg={6}>
-                <CarbonCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></CarbonCumulativeImpact>
+                <CarbonCumulativeImpact
+                    assetId={assetDisplayId.id}
+                ></CarbonCumulativeImpact>
             </Grid>
             <Grid item xs={12}>
-                <CarbonGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></CarbonGauge>
+                <CarbonGauge assetId={assetDisplayId.id}></CarbonGauge>
             </Grid>
             <Grid item xs={12}>
-                <GenerationGauge assetId="-MtUbBNCnoz0VdTQ_m-O"></GenerationGauge>
+                <GenerationGauge assetId={assetDisplayId.id}></GenerationGauge>
             </Grid>
 
             <Grid item md={12} lg={6}>
-                <GenerationCumulativeImpact assetId="-MtUbBNCnoz0VdTQ_m-O"></GenerationCumulativeImpact>
+                <GenerationCumulativeImpact
+                    assetId={assetDisplayId.id}
+                ></GenerationCumulativeImpact>
             </Grid>
 
             <Grid item md={12} lg={6}>
@@ -58,7 +113,31 @@ function ComponentGrid(props) {
             </Grid>
 
             <Grid item xs={12}>
-                <AssetLiveViewDebug assetId="-MtUbBNCnoz0VdTQ_m-O"></AssetLiveViewDebug>
+                <AssetLiveViewDebug
+                    assetId={assetDisplayId.id}
+                ></AssetLiveViewDebug>
+            </Grid>
+
+            <Grid item xs={12}>
+                <Paper variant="container">
+                    <Typography variant="label">[DEBUG ONLY]</Typography>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={assetDisplayId.name}
+                        label="Test Facility"
+                        onChange={onSelectChange}
+                        sx={{ width: "200px" }}
+                    >
+                        {assetList.map((asset) => {
+                            return (
+                                <MenuItem value={asset.name} name={asset.id}>
+                                    {asset.name}
+                                </MenuItem>
+                            );
+                        })}
+                    </Select>
+                </Paper>
             </Grid>
         </Grid>
     );
