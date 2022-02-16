@@ -23,6 +23,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
 import FullPageComponentView from "../views/full_page_component_view";
+import PlaidLink from "../components/plaid_link";
 
 export default function VerificationPage() {
     const auth = useAuth();
@@ -198,6 +199,8 @@ export default function VerificationPage() {
                     <Typography>Live Wallet Amount:</Typography>
                     {walletBalance}
                 </Paper>
+
+                <PlaidLink></PlaidLink>
             </Stack>
         </FullPageComponentView>
     );
