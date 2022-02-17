@@ -20,7 +20,7 @@ jobs:
           $BRANCH_NAME
           git branch $BRANCH_NAME
           git checkout $BRANCH_NAME
-          git commit -am "[BOT] Automated branch creation before deploy" --allow-empty
+          git commit -m "[BOT] Automated branch creation before deploy" --allow-empty
           git push
       # - run: npm ci && npm run build
       # - uses: FirebaseExtended/action-hosting-deploy@v0
