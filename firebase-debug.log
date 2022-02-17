@@ -1,0 +1,8 @@
+[debug] [2022-02-16T03:35:54.502Z] ----------------------------------------------------------------------
+[debug] [2022-02-16T03:35:54.503Z] Command:       /Users/johncompas/.nvm/versions/node/v16.13.0/bin/node /Users/johncompas/.nvm/versions/node/v16.13.0/bin/firebase deploy --only functions
+[debug] [2022-02-16T03:35:54.503Z] CLI Version:   10.2.0
+[debug] [2022-02-16T03:35:54.503Z] Platform:      darwin
+[debug] [2022-02-16T03:35:54.503Z] Node Version:  v16.13.0
+[debug] [2022-02-16T03:35:54.506Z] Time:          Tue Feb 15 2022 21:35:54 GMT-0600 (Central Standard Time)
+[debug] [2022-02-16T03:35:54.506Z] ----------------------------------------------------------------------
+[debug] 
