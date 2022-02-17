@@ -11,7 +11,9 @@ import {
 
 const PlaidLink = (props) => {
     const auth = useAuth();
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState("");
+    const [publicToken, setPublicToken] = useState("");
+    const [accessToken, setAccessToken] = useState("");
     const redirectUri = "https://legends.solar";
 
     useEffect(() => {
@@ -19,9 +21,7 @@ const PlaidLink = (props) => {
             userId: auth.user.uid,
             redirectUri: redirectUri,
         }).then((data) => {
-            console.log("public token obtained");
-            console.log(data);
-            console.log(data.data.tokenData.link_token);
+            console.log("link token obtained");
             setToken(data.data.tokenData.link_token);
         });
     }, []);
@@ -33,9 +33,13 @@ const PlaidLink = (props) => {
 
             console.log("public token obtained");
             console.log(public_token);
+            setPublicToken(public_token);
 
-            const accessToken = exchangePublicTokenForAccessToken({
+            exchangePublicTokenForAccessToken({
                 publicToken: public_token,
+            }).then((data) => {
+                console.log("access token obtained");
+                console.log(data.accessToken);
             });
         },
     });
@@ -50,6 +54,9 @@ const PlaidLink = (props) => {
             >
                 Test Plaid Link
             </Button>
+            <Typography>{"link token: " + token}</Typography>
+            <Typography>{"public token: " + publicToken}</Typography>
+            <Typography>{"access token: " + accessToken}</Typography>
         </Paper>
     );
 };
