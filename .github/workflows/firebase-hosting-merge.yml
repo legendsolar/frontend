@@ -19,7 +19,7 @@ jobs:
           BRANCH_NAME=`date -u '+%d-%m-%Y_%H.%M.%S'` 
           git branch $BRANCH_NAME
           git checkout $BRANCH_NAME
-          git commit -m "[BOT] Automated branch creation before deploy"
+          git commit -m "[BOT] Automated branch creation before deploy" --allow-empty
           git push --set-upstream origin $BRANCH_NAME
       # - run: npm ci && npm run build
       # - uses: FirebaseExtended/action-hosting-deploy@v0
