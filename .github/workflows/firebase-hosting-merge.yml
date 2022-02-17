@@ -6,6 +6,10 @@ name: Deploy to Dev Firebase Hosting on merge
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -19,7 +23,7 @@ jobs:
           BRANCH_NAME=DEV-DEPLOY-`date -u '+%d-%m-%Y_%H.%M.%S'` 
           git branch $BRANCH_NAME
           git checkout $BRANCH_NAME
-          git commit -m "[BOT] Automated branch creation before deploy" --allow-empty
+          git commit -m "[BOT] Automated branch creation before dev deploy" --allow-empty
           git push --set-upstream origin $BRANCH_NAME
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
