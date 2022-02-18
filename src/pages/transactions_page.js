@@ -72,40 +72,7 @@ const TransactionPage = (props) => {
                                     source: "Barnyard Solar",
                                     destination: "Legends Wallet",
                                     date: new Date(),
-                                };
-                            })}
-                        ></TransactionGrid>
-                    </div>
-
-                    <div ref={(el) => (contentRefs.current[1] = el)}>
-                        <TransactionGrid
-                            ref={(el) => (contentRefs.current[1] = el)}
-                            title="Investments"
-                            transactions={Array.from({ length: 4 }, (x, i) => {
-                                return {
-                                    title: "Panel Investment",
-                                    amount:
-                                        Math.floor(Math.random() * 50) * 100,
-                                    source: "Bank of America",
-                                    destination: `Legends SPV ${(
-                                        Math.random() * 50
-                                    ).toFixed(0)}`,
-                                    date: new Date(),
-                                };
-                            })}
-                        ></TransactionGrid>
-                    </div>
-
-                    <div ref={(el) => (contentRefs.current[2] = el)}>
-                        <TransactionGrid
-                            title="Bank Transfers"
-                            transactions={Array.from({ length: 4 }, (x, i) => {
-                                return {
-                                    title: "Transfer",
-                                    amount: Math.random() * 50 + 50,
-                                    source: "Legends Wallet",
-                                    destination: "Bank of America",
-                                    date: new Date(),
+                                    uid: i,
                                 };
                             })}
                         ></TransactionGrid>

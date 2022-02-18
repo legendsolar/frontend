@@ -15,7 +15,7 @@ const TransactionGrid = ({ title, transactions }) => {
             >
                 {transactions.map((transaction) => {
                     return (
-                        <Grid item s={6}>
+                        <Grid item s={6} key={transaction.uid}>
                             <TransactionComponent
                                 title={transaction.title}
                                 amount={transaction.amount}

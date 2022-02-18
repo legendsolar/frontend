@@ -37,7 +37,7 @@ const database = getDatabase(firebaseApp);
 const functions = getFunctions(firebaseApp);
 
 if (emulator) {
-    connectAuthEmulator(auth, "localhost", 9099);
+    connectAuthEmulator(auth, "http://localhost:9099");
     connectDatabaseEmulator(database, "localhost", 9000);
     connectFunctionsEmulator(functions, "localhost", 5004);
 }
