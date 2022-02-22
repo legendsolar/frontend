@@ -145,6 +145,11 @@ const themeOptions = {
             lineHeight: "15.18px",
             fontWeight: 400,
         },
+        smallLabel: {
+            fontFamily: "Azeret Mono",
+            fontSize: "10px",
+            fontWeight: 800,
+        },
     },
     components: {
         // Careful, MuiPaper is consistently used for AppBar ect
@@ -260,6 +265,43 @@ const themeOptions = {
                     fontSize: "12px",
                     margin: "10px",
                     height: "50px",
+                },
+            },
+        },
+
+        // MuiTextBoxes
+        MuiFilledInput: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "10px",
+                    backgroundColor: paletteOptions.palette.whiteFog.main,
+                    color: paletteOptions.palette.whiteFog.contrastText,
+
+                    borderBottom: "none",
+                    "&&&:before": {
+                        borderBottom: "none",
+                    },
+                    "&&:after": {
+                        borderBottom: "none",
+                    },
+                },
+            },
+        },
+
+        // "Hint text"
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    // color: paletteOptions.palette.whiteFog.contrastText,
+                },
+            },
+        },
+
+        MuiCheckbox: {
+            styleOverrides: {
+                root: {
+                    width: "40px",
+                    height: "40px",
                 },
             },
         },

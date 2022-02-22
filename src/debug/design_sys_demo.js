@@ -1,6 +1,14 @@
 import { useState } from "react";
-import { useTheme } from "@mui/material";
-import { Paper, Button, Stack, Typography, Box, Divider } from "@mui/material";
+import { TextField, useTheme } from "@mui/material";
+import {
+    Paper,
+    Button,
+    Stack,
+    Typography,
+    Box,
+    Divider,
+    Checkbox,
+} from "@mui/material";
 
 import MetricGauge from "../components/gauges/metric_gauge";
 import CumulativeImpact from "../components/gauges/cumulative_impact";
@@ -10,6 +18,7 @@ import Worm from "../components/worm/worm";
 import data from "../components/worm/fake_data";
 import TransactionComponent from "../components/transactions/transfer_component";
 import Weather from "../components/weather";
+import CheckboxList from "../components/inputs/checkbox_list";
 
 const DesignSysDemo = (props) => {
     const theme = useTheme();
@@ -130,6 +139,8 @@ const DesignSysDemo = (props) => {
                 <Box sx={{ height: "50px", bgcolor: color }}></Box>
             </Paper>
 
+            <Typography variant="headline1">Inputs</Typography>
+
             <Paper variant="container">
                 <Stack>
                     <Typography variant="subtitle2">Buttons </Typography>
@@ -143,10 +154,39 @@ const DesignSysDemo = (props) => {
 
                     <Button color="light">Light Button</Button>
                     <Button color="legendaryGreen">Green Button</Button>
+
+                    <Typography variant="subtitle2">Check Box Lists</Typography>
+                    <CheckboxList
+                        options={[
+                            {
+                                description: "First Checkbox Item",
+                                title: "Title",
+                            },
+                            {
+                                description: "Second Checkbox Item",
+                                title: "Title",
+                            },
+                        ]}
+                    ></CheckboxList>
                 </Stack>
             </Paper>
 
-            <Typography variant="subtitle1">Components</Typography>
+            <Paper variant="container">
+                <Stack>
+                    <Typography variant="subtitle2">Text</Typography>
+                    <Typography variant="subtitle3">Filled Text Box</Typography>
+
+                    <TextField
+                        name="firstName"
+                        label="Hint Text"
+                        variant="filled"
+                        value={""}
+                        // InputProps={{ disableUnderline: true }}
+                    ></TextField>
+                </Stack>
+            </Paper>
+
+            <Typography variant="headline1">Components</Typography>
             <Typography variant="body1">
                 Select Color Matrix to change default color
             </Typography>
