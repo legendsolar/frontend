@@ -31,7 +31,9 @@ const DesignSysDemo = (props) => {
             </Paper>
 
             <Paper variant="container">
-                <Typography variant="subtitle2">{"Colors"}</Typography>
+                <Typography variant="subtitle2">
+                    {"Color Matrix (main, light, dark, contrast text color)"}
+                </Typography>
                 {[
                     "legendaryGreen",
                     "whiteHaze",
@@ -53,9 +55,47 @@ const DesignSysDemo = (props) => {
                                     alignItems: "center",
                                 }}
                             ></Box>
+                            <Box
+                                sx={{
+                                    bgcolor: `${name}.light`,
+                                    width: "50px",
+                                    height: "50px",
+                                    alignItems: "center",
+                                }}
+                            ></Box>
+                            <Box
+                                sx={{
+                                    bgcolor: `${name}.dark`,
+                                    width: "50px",
+                                    height: "50px",
+                                    alignItems: "center",
+                                }}
+                            ></Box>
+                            <Box
+                                sx={{
+                                    bgcolor: `${name}.main`,
+                                    width: "50px",
+                                    height: "50px",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    display: "flex",
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        fontSize: "24px",
+                                        color: `${name}.contrastText`,
+                                    }}
+                                >
+                                    F
+                                </Typography>
+                            </Box>
                             <Typography
                                 variant="body2"
                                 color="light.contrastText"
+                                sx={{
+                                    ml: 2,
+                                }}
                             >
                                 {name}
                             </Typography>
@@ -65,23 +105,19 @@ const DesignSysDemo = (props) => {
             </Paper>
 
             <Paper variant="container">
-                <Typography variant="subtitle2">Buttons </Typography>
-                <Typography variant="subtitle3">Secondary </Typography>
+                <Stack>
+                    <Typography variant="subtitle2">Buttons </Typography>
+                    <Typography variant="subtitle3">Primary</Typography>
 
-                <Button color="light">Light Button</Button>
-                <Button color="dark">Dark Button</Button>
-                <Button color="legendaryGreen">Green Button</Button>
+                    <Button variant="primary">Primary Button</Button>
+                    <Typography variant="subtitle3">Secondary</Typography>
+                    <Button variant="secondary">Secondary Button</Button>
 
-                <Typography variant="subtitle3">Primary</Typography>
-                <Button color="light" variant="primary">
-                    Light Button
-                </Button>
-                <Button color="dark" variant="primary">
-                    Dark Button
-                </Button>
-                <Button color="legendaryGreen" variant="primary">
-                    Green Button
-                </Button>
+                    <Typography variant="subtitle3">Others</Typography>
+
+                    <Button color="light">Light Button</Button>
+                    <Button color="legendaryGreen">Green Button</Button>
+                </Stack>
             </Paper>
 
             <Typography variant="subtitle1">Components</Typography>

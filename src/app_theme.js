@@ -35,31 +35,53 @@ const paletteOptions = {
         },
         legendaryGreen: {
             main: legendaryGreen,
+            light: "#708d70",
+            dark: "#244124",
             contrastText: "#fff",
         },
         whiteHaze: {
             main: whiteHaze,
+            contrastText: "#000",
+            dark: "#d3d3d3",
+            light: "#ededed",
         },
         whiteFog: {
             main: whiteFog,
+            contrastText: "#000",
+            dark: "#bcbcbc",
+            light: "#efefef",
         },
         blackDusk: {
             main: blackDusk,
+            contrastText: "#FFF",
         },
         blackDawn: {
             main: blackDawn,
+            contrastText: "#FFF",
         },
         skyBlue: {
             main: skyBlue,
+            contrastText: "#FFF",
+            dark: "#38658e",
+            light: "#6b98c1",
         },
         grassGreen: {
             main: grassGreen,
+            contrastText: "#FFF",
+            dark: "#26834e",
+            light: "#59b681",
         },
         pencilYellow: {
             main: pencilYellow,
+            contrastText: "#FFF",
+            dark: "#bb8f18",
+            light: "#eec24a",
         },
         eraserRed: {
             main: eraserRed,
+            contrastText: "#FFF",
+            dark: "#904d4c",
+            light: "#c3807e",
         },
         inactive: {
             main: "#636E72",
@@ -189,13 +211,31 @@ const themeOptions = {
                             paletteOptions.palette.legendaryGreen.main,
                         color: paletteOptions.palette.legendaryGreen
                             .contrastText,
+                        "&:hover": {
+                            backgroundColor:
+                                paletteOptions.palette.legendaryGreen.light,
+                        },
                     },
                 },
                 {
                     props: { variant: "primary" },
                     style: {
-                        fontSize: "22px",
-                        fontFamily: "Be Vietnam Pro",
+                        backgroundColor:
+                            paletteOptions.palette.legendaryGreen.main,
+                        color: paletteOptions.palette.legendaryGreen
+                            .contrastText,
+                        fontWeight: 600,
+                        "&:hover": {
+                            backgroundColor:
+                                paletteOptions.palette.legendaryGreen.light,
+                        },
+                    },
+                },
+                {
+                    props: { variant: "secondary" },
+                    style: {
+                        backgroundColor: paletteOptions.palette.whiteFog.main,
+                        color: paletteOptions.palette.whiteFog.contrastText,
                     },
                 },
                 {
@@ -216,9 +256,10 @@ const themeOptions = {
             styleOverrides: {
                 root: {
                     fontFamily: "Azeret Mono",
-                    fontWeight: 600,
+                    fontWeight: 500,
                     fontSize: "12px",
                     margin: "10px",
+                    height: "50px",
                 },
             },
         },
