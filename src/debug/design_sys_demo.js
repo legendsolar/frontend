@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useTheme } from "@mui/material";
 import { Paper, Button, Stack, Typography, Box, Divider } from "@mui/material";
 
 import MetricGauge from "../components/gauges/metric_gauge";
@@ -10,6 +12,11 @@ import TransactionComponent from "../components/transactions/transfer_component"
 import Weather from "../components/weather";
 
 const DesignSysDemo = (props) => {
+    const theme = useTheme();
+
+    const [color, setColor] = useState(theme.palette["legendaryGreen"].main);
+    console.log("hex color: " + color);
+
     return (
         <Stack spacing={2} sx={{ m: 2 }}>
             <Paper variant="container">
@@ -48,6 +55,9 @@ const DesignSysDemo = (props) => {
                     return (
                         <Stack direction="row" alignItems="center">
                             <Box
+                                onClick={() =>
+                                    setColor(theme.palette[`${name}`].main)
+                                }
                                 sx={{
                                     bgcolor: `${name}.main`,
                                     width: "50px",
@@ -56,6 +66,9 @@ const DesignSysDemo = (props) => {
                                 }}
                             ></Box>
                             <Box
+                                onClick={() =>
+                                    setColor(theme.palette[`${name}`].light)
+                                }
                                 sx={{
                                     bgcolor: `${name}.light`,
                                     width: "50px",
@@ -64,6 +77,9 @@ const DesignSysDemo = (props) => {
                                 }}
                             ></Box>
                             <Box
+                                onClick={() =>
+                                    setColor(theme.palette[`${name}`].dark)
+                                }
                                 sx={{
                                     bgcolor: `${name}.dark`,
                                     width: "50px",
@@ -72,6 +88,11 @@ const DesignSysDemo = (props) => {
                                 }}
                             ></Box>
                             <Box
+                                onClick={() =>
+                                    setColor(
+                                        theme.palette[`${name}`].contrastText
+                                    )
+                                }
                                 sx={{
                                     bgcolor: `${name}.main`,
                                     width: "50px",
@@ -102,6 +123,11 @@ const DesignSysDemo = (props) => {
                         </Stack>
                     );
                 })}
+
+                <Typography variant="body1" sx={{ mt: 2 }}>
+                    Selected Color:
+                </Typography>
+                <Box sx={{ height: "50px", bgcolor: color }}></Box>
             </Paper>
 
             <Paper variant="container">
@@ -121,6 +147,9 @@ const DesignSysDemo = (props) => {
             </Paper>
 
             <Typography variant="subtitle1">Components</Typography>
+            <Typography variant="body1">
+                Select Color Matrix to change default color
+            </Typography>
 
             <Divider sx={{ m: 2 }} />
             <Typography variant="subtitle1">MetricGauge</Typography>
@@ -134,7 +163,7 @@ const DesignSysDemo = (props) => {
                     liveMessage: "live message",
                     unit: "unit",
                     unitDescription: "unit description",
-                    strokeColor: "#00FF00",
+                    strokeColor: color,
                 }}
             ></MetricGauge>
 
@@ -152,7 +181,7 @@ const DesignSysDemo = (props) => {
                     title: "Cumulative Impact",
                     unit: "unit",
                     unitDescription: "unit description",
-                    strokeColor: "#0000FF",
+                    strokeColor: color,
                 }}
             ></CumulativeImpact>
 
