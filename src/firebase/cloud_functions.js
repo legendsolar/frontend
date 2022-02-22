@@ -21,9 +21,16 @@ const exchangePublicTokenForAccessToken = httpsCallable(
     "exchangePublicTokenForAccessToken_https_ext"
 );
 
+/** Dwolla Pass Through */
+const dwollaCallWrapper = httpsCallable(
+    functions,
+    "dwollaCallWrapper_https_ext"
+);
+
 export {
     createDwollaAccount,
     getWalletBalance,
     createPlaidLinkToken,
     exchangePublicTokenForAccessToken,
+    dwollaCallWrapper,
 };

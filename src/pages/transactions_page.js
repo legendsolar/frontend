@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Divider, Paper, Typography, Container } from "@mui/material/";
 import useTheme from "@mui/material/styles/useTheme";
 import SideBarNavView from "../views/side_bar_view";
@@ -10,38 +10,68 @@ import { useObject } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
 import { auth, database, firebaseApp } from "../Firebase";
 import { useAuth } from "../hooks/use_auth";
+import { openDwollaConnection } from "../dwolla/dwolla_api_interface";
+import { dwollaCallWrapper } from "../firebase/cloud_functions";
+import { dwollaSandboxConfig } from "../dwolla/dwolla_settings";
 
 const TransactionPage = (props) => {
     const auth = useAuth();
     const user = auth.user;
+    const [dwolla, setDwolla] = useState(undefined);
 
-    const drawerTitles = [
-        "Earnings",
-        "Investments",
-        "Bank Transfers",
-        "All Transactions",
-    ];
+    var userDwollaId = "f92da569-41ec-4aa9-ba36-2329b4d26b4b";
+    var transactions = [];
+
+    useEffect(() => {
+        openDwollaConnection(dwollaSandboxConfig.url, dwollaCallWrapper).then(
+            (connection) => {
+                console.log("created dwolla connection");
+                console.log(connection);
+                setDwolla(connection);
+            }
+        );
+    }, []);
+
+    const drawerTitles = ["Earnings", "All Transactions"];
 
     const contentRefs = useRef([]);
 
-    const [userInfoSnap, userInfoSnapLoading, userInfoSnapError] = useObject(
-        ref(database, "users/" + user.uid)
-    );
+    // const [userInfoSnap, userInfoSnapLoading, userInfoSnapError] = useObject(
+    //     ref(database, "users/" + user.uid)
+    // );
 
     var name = "";
     var memberInfo = "Member since 2022";
 
-    if (!!userInfoSnap && !userInfoSnapLoading && !userInfoSnapError) {
-        const userInfoObj = userInfoSnap.val();
+    // if (!!userInfoSnap && !userInfoSnapLoading && !userInfoSnapError) {
+    // const userInfoObj = userInfoSnap.val();
 
-        if (
-            userInfoObj.info &&
-            userInfoObj.info.firstName &&
-            userInfoObj.info.lastName
-        ) {
-            name = userInfoObj.info.firstName + " " + userInfoObj.info.lastName;
-        }
+    // userDwollaId = userInfoObj.dwolla.userId;
+
+    if (dwolla) {
+        console.log(userDwollaId);
+        console.log(dwolla);
+        dwolla.searchTransfers(userDwollaId).then((transferObjects) => {
+            console.log("dwolla transfer objects");
+            console.log(transferObjects);
+        });
+
+        // dwolla
+        //     .getTransferById("aaa90a90-fc90-ec11-813d-ca84ae5ee1fb")
+        //     .then((transferObjects) => {
+        //         console.log("dwolla transfer objects");
+        //         console.log(transferObjects);
+        //     });
     }
+
+    //     if (
+    //         userInfoObj.name &&
+    //         userInfoObj.name.first &&
+    //         userInfoObj.name.name
+    //     ) {
+    //         name = userInfoObj.name.first + " " + userInfoObj.name.last;
+    //     }
+    // }
 
     return (
         <SideBarNavView
@@ -80,7 +110,7 @@ const TransactionPage = (props) => {
 
                     <Paper
                         variant="container"
-                        ref={(el) => (contentRefs.current[3] = el)}
+                        ref={(el) => (contentRefs.current[1] = el)}
                     >
                         <Typography variant="smallHeading">
                             All Transactions
