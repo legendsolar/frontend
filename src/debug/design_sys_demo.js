@@ -166,6 +166,10 @@ const DesignSysDemo = (props) => {
                                 description: "Second Checkbox Item",
                                 title: "Title",
                             },
+                            {
+                                description: "Third Checkbox Item",
+                                title: "Other Title",
+                            },
                         ]}
                     ></CheckboxList>
                 </Stack>

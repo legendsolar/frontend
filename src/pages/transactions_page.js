@@ -10,7 +10,15 @@ import { useObject } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
 import { auth, database, firebaseApp } from "../Firebase";
 import { useAuth } from "../hooks/use_auth";
-import { openDwollaConnection } from "../dwolla/dwolla_api_interface";
+import {
+    getFundingSourceName,
+    getTransferAmount,
+    getTransferArrayFromQuery,
+    getTransferDestinationFundingId,
+    getTransferId,
+    getTransferSourceFundingId,
+    openDwollaConnection,
+} from "../dwolla/dwolla_api_interface";
 import { dwollaCallWrapper } from "../firebase/cloud_functions";
 import { dwollaSandboxConfig } from "../dwolla/dwolla_settings";
 
@@ -18,9 +26,9 @@ const TransactionPage = (props) => {
     const auth = useAuth();
     const user = auth.user;
     const [dwolla, setDwolla] = useState(undefined);
+    const [transactions, setTransactions] = useState([]);
 
     var userDwollaId = "f92da569-41ec-4aa9-ba36-2329b4d26b4b";
-    var transactions = [];
 
     useEffect(() => {
         openDwollaConnection(dwollaSandboxConfig.url, dwollaCallWrapper).then(
@@ -48,21 +56,58 @@ const TransactionPage = (props) => {
 
     // userDwollaId = userInfoObj.dwolla.userId;
 
-    if (dwolla) {
-        console.log(userDwollaId);
-        console.log(dwolla);
-        dwolla.searchTransfers(userDwollaId).then((transferObjects) => {
-            console.log("dwolla transfer objects");
-            console.log(transferObjects);
-        });
+    useEffect(() => {
+        if (dwolla) {
+            dwolla.searchTransfers(userDwollaId).then((transferObjects) => {
+                console.log("dwolla transfer objects");
+                console.log(transferObjects);
+                const transferArray =
+                    getTransferArrayFromQuery(transferObjects);
 
-        // dwolla
-        //     .getTransferById("aaa90a90-fc90-ec11-813d-ca84ae5ee1fb")
-        //     .then((transferObjects) => {
-        //         console.log("dwolla transfer objects");
-        //         console.log(transferObjects);
-        //     });
-    }
+                const newTransferArray = [];
+
+                console.log(transferArray);
+                transferArray.forEach((transfer) => {
+                    const sourceId = getTransferSourceFundingId(transfer);
+                    const destId = getTransferDestinationFundingId(transfer);
+                    console.log("dwolla");
+                    console.log(sourceId);
+                    console.log(destId);
+
+                    Promise.all([
+                        dwolla.getFundingSource(sourceId),
+                        dwolla.getFundingSource(destId),
+                    ]).then(([sourceFundingSource, destFundingSource]) => {
+                        console.log("returned");
+                        console.log(sourceFundingSource);
+                        console.log(destFundingSource);
+
+                        newTransferArray.push({
+                            title: "Dividend Payment",
+                            amount: getTransferAmount(transfer),
+                            source:
+                                "Source: " +
+                                getFundingSourceName(sourceFundingSource),
+                            destination:
+                                "Destination: " +
+                                getFundingSourceName(destFundingSource),
+                            date: new Date(),
+                            uid: getTransferId(transfer),
+                        });
+
+                        console.log("updated");
+                        console.log(newTransferArray);
+
+                        // hmmm
+
+                        if (newTransferArray.length == 6) {
+                            setTransactions(newTransferArray);
+                        }
+                    });
+                });
+            });
+        }
+    }, [dwolla]);
 
     //     if (
     //         userInfoObj.name &&
@@ -95,16 +140,7 @@ const TransactionPage = (props) => {
                         <TransactionGrid
                             ref={(el) => (contentRefs.current[0] = el)}
                             title="Dividend Payments"
-                            transactions={Array.from({ length: 4 }, (x, i) => {
-                                return {
-                                    title: "Dividend Payment",
-                                    amount: Math.random() * 50 + 50,
-                                    source: "Barnyard Solar",
-                                    destination: "Legends Wallet",
-                                    date: new Date(),
-                                    uid: i,
-                                };
-                            })}
+                            transactions={transactions}
                         ></TransactionGrid>
                     </div>
 
