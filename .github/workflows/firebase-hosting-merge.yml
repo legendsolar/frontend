@@ -16,11 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          # git config --global user.name 'legendsolarbot'
-          # git config --global user.email 'githubbotlegendssolar@gmail.com'
           git submodule update --init --recursive
-          # git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-          # git checkout "${GITHUB_REF:11}"
           BRANCH_NAME=DEV-DEPLOY-`date -u '+%d-%m-%Y_%H.%M.%S'` 
           git branch $BRANCH_NAME
           git checkout $BRANCH_NAME
