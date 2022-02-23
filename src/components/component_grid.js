@@ -27,6 +27,7 @@ import {
     CarbonCumulativeImpact,
 } from "./gauges/live_cumulative_impact";
 import WeatherLive from "./weather_live";
+import DefaultErrorBoundary from "./errors/default_error_boundary";
 
 function ComponentGrid(props) {
     const [assetDisplayId, setAssetDisplayId] = useState({
@@ -74,48 +75,70 @@ function ComponentGrid(props) {
     return (
         <Grid container spacing={2} sx={{ width: "100%" }}>
             <Grid item xs={12}>
-                <WormLive assetId={assetDisplayId.id}></WormLive>
+                <DefaultErrorBoundary>
+                    <WormLive assetId={assetDisplayId.id}></WormLive>
+                </DefaultErrorBoundary>
             </Grid>
 
             <Grid item xs={12}>
-                <EarningsGauge assetId={assetDisplayId.id}></EarningsGauge>
+                <DefaultErrorBoundary>
+                    <EarningsGauge assetId={assetDisplayId.id}></EarningsGauge>
+                </DefaultErrorBoundary>
             </Grid>
 
             <Grid item md={12} lg={6}>
-                <EarningsCumulativeImpact
-                    assetId={assetDisplayId.id}
-                ></EarningsCumulativeImpact>
+                <DefaultErrorBoundary>
+                    <EarningsCumulativeImpact
+                        assetId={assetDisplayId.id}
+                    ></EarningsCumulativeImpact>
+                </DefaultErrorBoundary>
             </Grid>
 
             <Grid item md={12} lg={6}>
-                <CarbonCumulativeImpact
-                    assetId={assetDisplayId.id}
-                ></CarbonCumulativeImpact>
+                <DefaultErrorBoundary>
+                    <CarbonCumulativeImpact
+                        assetId={assetDisplayId.id}
+                    ></CarbonCumulativeImpact>
+                </DefaultErrorBoundary>
             </Grid>
             <Grid item xs={12}>
-                <CarbonGauge assetId={assetDisplayId.id}></CarbonGauge>
+                <DefaultErrorBoundary>
+                    <CarbonGauge assetId={assetDisplayId.id}></CarbonGauge>
+                </DefaultErrorBoundary>
             </Grid>
             <Grid item xs={12}>
-                <GenerationGauge assetId={assetDisplayId.id}></GenerationGauge>
+                <DefaultErrorBoundary>
+                    <GenerationGauge
+                        assetId={assetDisplayId.id}
+                    ></GenerationGauge>
+                </DefaultErrorBoundary>
             </Grid>
 
             <Grid item md={12} lg={6}>
-                <GenerationCumulativeImpact
-                    assetId={assetDisplayId.id}
-                ></GenerationCumulativeImpact>
+                <DefaultErrorBoundary>
+                    <GenerationCumulativeImpact
+                        assetId={assetDisplayId.id}
+                    ></GenerationCumulativeImpact>
+                </DefaultErrorBoundary>
             </Grid>
 
             <Grid item md={12} lg={6}>
-                <WeatherLive></WeatherLive>
+                <DefaultErrorBoundary>
+                    <WeatherLive></WeatherLive>
+                </DefaultErrorBoundary>
             </Grid>
             <Grid item xs={12}>
-                <UserDebugPaper></UserDebugPaper>
+                <DefaultErrorBoundary>
+                    <UserDebugPaper></UserDebugPaper>
+                </DefaultErrorBoundary>
             </Grid>
 
             <Grid item xs={12}>
-                <AssetLiveViewDebug
-                    assetId={assetDisplayId.id}
-                ></AssetLiveViewDebug>
+                <DefaultErrorBoundary>
+                    <AssetLiveViewDebug
+                        assetId={assetDisplayId.id}
+                    ></AssetLiveViewDebug>
+                </DefaultErrorBoundary>
             </Grid>
 
             <Grid item xs={12}>

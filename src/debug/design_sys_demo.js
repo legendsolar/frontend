@@ -117,7 +117,7 @@ const DesignSysDemo = (props) => {
                                         color: `${name}.contrastText`,
                                     }}
                                 >
-                                    F
+                                    Eg
                                 </Typography>
                             </Box>
                             <Typography

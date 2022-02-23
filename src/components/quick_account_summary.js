@@ -19,12 +19,6 @@ const QuickAccountSummary = (props) => {
         return <> </>;
     }
 
-    const userDatabaseObj = userDataSnap.val();
-
-    const userData = userDatabaseObj.info;
-
-    const userMetaData = userDataSnap.metadata;
-
     const panels = Math.floor(Math.random() * 10 + 10);
     const kw_panel = 0.5;
 
