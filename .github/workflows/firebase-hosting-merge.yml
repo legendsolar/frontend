@@ -33,3 +33,4 @@ jobs:
           channelId: live
           projectId: legends-alpha
           submodules: 'true'
+          token: ${{ secrets.BOT_PAT_TOKEN}}
