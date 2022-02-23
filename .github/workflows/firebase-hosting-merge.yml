@@ -16,10 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          git config --global user.name 'legendsolarbot'
-          git config --global user.email 'githubbotlegendssolar@gmail.com'
-
-          git submodule update --init --recursive
           BRANCH_NAME=DEV-DEPLOY-`date -u '+%d-%m-%Y_%H.%M.%S'` 
           git branch $BRANCH_NAME
           git checkout $BRANCH_NAME
@@ -32,5 +28,5 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_LEGENDS_ALPHA }}'
           channelId: live
           projectId: legends-alpha
-          # submodules: 'true'
-          # token: ${{ secrets.BOT_PAT_TOKEN}}
+          token: ${{ secrets.BOT_PAT_TOKEN}}
+          submodules: recursive
