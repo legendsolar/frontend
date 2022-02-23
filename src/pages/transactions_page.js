@@ -21,6 +21,7 @@ import {
 } from "../dwolla/dwolla_api_interface";
 import { dwollaCallWrapper } from "../firebase/cloud_functions";
 import { dwollaSandboxConfig } from "../dwolla/dwolla_settings";
+import MemberHeader from "../components/member_header";
 
 const TransactionPage = (props) => {
     const auth = useAuth();
@@ -44,15 +45,17 @@ const TransactionPage = (props) => {
 
     const contentRefs = useRef([]);
 
-    // const [userInfoSnap, userInfoSnapLoading, userInfoSnapError] = useObject(
-    //     ref(database, "users/" + user.uid)
-    // );
+    const [userInfoSnap, userInfoSnapLoading, userInfoSnapError] = useObject(
+        ref(database, "users/" + user.uid)
+    );
+
+    if (!!userInfoSnap && !userInfoSnapLoading && !userInfoSnapError) {
+        const userInfoObj = userInfoSnap.val();
+        name = userInfoObj.name.first + " " + userInfoObj.name.last;
+    }
 
     var name = "";
     var memberInfo = "Member since 2022";
-
-    // if (!!userInfoSnap && !userInfoSnapLoading && !userInfoSnapError) {
-    // const userInfoObj = userInfoSnap.val();
 
     // userDwollaId = userInfoObj.dwolla.userId;
 
@@ -109,27 +112,11 @@ const TransactionPage = (props) => {
         }
     }, [dwolla]);
 
-    //     if (
-    //         userInfoObj.name &&
-    //         userInfoObj.name.first &&
-    //         userInfoObj.name.name
-    //     ) {
-    //         name = userInfoObj.name.first + " " + userInfoObj.name.last;
-    //     }
-    // }
-
     return (
         <SideBarNavView
             drawer={
                 <ScrollToSidebar
-                    header={
-                        <Stack sx={{ p: 2 }}>
-                            <Typography variant="headline2">{name}</Typography>
-                            <Typography variant="label">
-                                {memberInfo}
-                            </Typography>
-                        </Stack>
-                    }
+                    header={<MemberHeader sx={{ p: 2 }}></MemberHeader>}
                     contentTitles={drawerTitles}
                     refs={contentRefs}
                 ></ScrollToSidebar>

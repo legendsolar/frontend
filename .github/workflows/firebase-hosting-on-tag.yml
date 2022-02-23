@@ -26,3 +26,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_LEGENDS_ALPHA_PROD }}'
           channelId: live
           projectId: legends-alpha-prod
+          submodules: 'true'

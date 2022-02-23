@@ -11,6 +11,7 @@ import { Typography, Paper, Stack, Button } from "@mui/material";
 import UserInfo from "../components/user_info";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
+import MemberHeader from "../components/member_header";
 
 function AccountView(props) {
     const auth = useAuth();
@@ -45,10 +46,7 @@ function AccountView(props) {
                 <ScrollToSidebar
                     header={
                         <Stack sx={{ p: 2 }}>
-                            <Typography variant="headline2">{name}</Typography>
-                            <Typography variant="label">
-                                {memberInfo}
-                            </Typography>
+                            <MemberHeader></MemberHeader>
                             <Button
                                 variant="contained"
                                 color="legendaryGreen"
