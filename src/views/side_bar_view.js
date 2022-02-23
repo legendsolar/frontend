@@ -19,10 +19,12 @@ const SideBarNavView = (props) => {
                             top: "16px",
                             position: "sticky",
                             // Remove sidebar on mobile
-                            display: { sm: "none", md: "block" },
+                            display: { xs: "none", sm: "none", md: "block" },
                         }}
                     >
-                        <ErrorBoundary>{props.drawer}</ErrorBoundary>
+                        <DefaultErrorBoundary>
+                            {props.drawer}
+                        </DefaultErrorBoundary>
                     </Container>
                 </Grid>
                 <Grid item xs={8}>
@@ -42,10 +44,16 @@ const SideBarNavView = (props) => {
                             sx={{
                                 width: "100%",
                                 mb: 2,
-                                display: { sm: "block", md: "none" },
+                                display: {
+                                    sm: "block",
+                                    sm: "block",
+                                    md: "none",
+                                },
                             }}
                         >
-                            <ErrorBoundary>{props.drawer}</ErrorBoundary>
+                            <DefaultErrorBoundary>
+                                {props.drawer}
+                            </DefaultErrorBoundary>
                         </Container>
 
                         <DefaultErrorBoundary>

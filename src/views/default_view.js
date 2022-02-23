@@ -1,4 +1,5 @@
 import { Box, Stack, Paper, Grid, Container } from "@mui/material";
+import DefaultErrorBoundary from "../components/errors/default_error_boundary";
 import NavBar from "../components/nav_bar";
 
 const DefaultView = (props) => {
@@ -17,7 +18,7 @@ const DefaultView = (props) => {
                     ml: "auto",
                 }}
             >
-                {props.children}
+                <DefaultErrorBoundary>{props.children}</DefaultErrorBoundary>
             </Box>
         </Box>
     );

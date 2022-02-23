@@ -9,7 +9,7 @@ const ErrorComponent = ({}) => {
                 alignItems="center"
                 sx={{ height: "100%" }}
             >
-                <Typography>Oops... An error occured while loading</Typography>
+                <Typography>Oops... an error occured while loading</Typography>
             </Stack>
         </Paper>
     );
