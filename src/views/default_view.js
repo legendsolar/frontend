@@ -18,7 +18,7 @@ const DefaultView = (props) => {
                     ml: "auto",
                 }}
             >
-                <DefaultErrorBoundary>{props.children}</DefaultErrorBoundary>
+                {props.children}
             </Box>
         </Box>
     );

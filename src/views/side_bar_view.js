@@ -7,7 +7,14 @@ const SideBarNavView = (props) => {
     return (
         <DefaultView>
             <Grid container spacing={2} sx={{ mt: 6 }}>
-                <Grid item xs={4}>
+                <Grid
+                    item
+                    md={4}
+                    sx={{
+                        // Remove sidebar on mobile
+                        display: { xs: "none", sm: "none", md: "block" },
+                    }}
+                >
                     <Container
                         style={{
                             // should not be needed
@@ -18,8 +25,6 @@ const SideBarNavView = (props) => {
                             height: "max-content",
                             top: "16px",
                             position: "sticky",
-                            // Remove sidebar on mobile
-                            display: { xs: "none", sm: "none", md: "block" },
                         }}
                     >
                         <DefaultErrorBoundary>
@@ -27,12 +32,11 @@ const SideBarNavView = (props) => {
                         </DefaultErrorBoundary>
                     </Container>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={12} md={8}>
                     <Box
                         sx={{
                             zIndex: 3,
                             width: "100%",
-                            height: "100%",
                         }}
                     >
                         <Container
