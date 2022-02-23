@@ -33,15 +33,16 @@ export default function WormLive(props) {
             .then((snapshot) => {
                 console.log("data object returned");
                 // clean, reformat data
-                setLoading(false);
                 let newData = [];
+
                 for (let i in snapshot.val()) {
                     const obj = snapshot.val()[i];
-                    if (obj.time && obj.wattage) {
+                    if ("time" in obj && "wattage" in obj) {
                         newData.push(obj);
                     }
                 }
                 setData(newData);
+                setLoading(false);
             })
             .catch((error) => {
                 setError(true);
@@ -53,5 +54,5 @@ export default function WormLive(props) {
         return <></>;
     }
 
-    return <Worm data={data} loading={loading} error={error}></Worm>;
+    return <Worm rawData={data} loading={loading} error={error}></Worm>;
 }

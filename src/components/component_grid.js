@@ -61,87 +61,10 @@ function ComponentGrid(props) {
         },
     ];
 
-    const onSelectChange = (event) => {
-        console.log(event);
-
-        assetList.map((asset) => {
-            if (asset.name === event.target.value) {
-                setAssetDisplayId(asset);
-            }
-        });
-    };
-
     return (
         <Grid container spacing={2} sx={{ width: "100%" }}>
             <Grid item xs={12}>
                 <WormLive assetId={assetDisplayId.id}></WormLive>
-            </Grid>
-
-            <Grid item xs={12}>
-                <EarningsGauge assetId={assetDisplayId.id}></EarningsGauge>
-            </Grid>
-
-            <Grid item md={12} lg={6}>
-                <EarningsCumulativeImpact
-                    assetId={assetDisplayId.id}
-                ></EarningsCumulativeImpact>
-            </Grid>
-
-            <Grid item md={12} lg={6}>
-                <CarbonCumulativeImpact
-                    assetId={assetDisplayId.id}
-                ></CarbonCumulativeImpact>
-            </Grid>
-            <Grid item xs={12}>
-                <CarbonGauge assetId={assetDisplayId.id}></CarbonGauge>
-            </Grid>
-            <Grid item xs={12}>
-                <GenerationGauge assetId={assetDisplayId.id}></GenerationGauge>
-            </Grid>
-
-            <Grid item md={12} lg={6}>
-                <GenerationCumulativeImpact
-                    assetId={assetDisplayId.id}
-                ></GenerationCumulativeImpact>
-            </Grid>
-
-            <Grid item md={12} lg={6}>
-                <WeatherLive></WeatherLive>
-            </Grid>
-            <Grid item xs={12}>
-                <UserDebugPaper></UserDebugPaper>
-            </Grid>
-
-            <Grid item xs={12}>
-                <AssetLiveViewDebug
-                    assetId={assetDisplayId.id}
-                ></AssetLiveViewDebug>
-            </Grid>
-
-            <Grid item xs={12}>
-                <Paper variant="container">
-                    <Typography variant="label">[DEBUG ONLY]</Typography>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={assetDisplayId.name}
-                        label="Test Facility"
-                        onChange={onSelectChange}
-                        sx={{ width: "200px" }}
-                    >
-                        {assetList.map((asset) => {
-                            return (
-                                <MenuItem
-                                    value={asset.name}
-                                    name={asset.id}
-                                    key={asset.id}
-                                >
-                                    {asset.name}
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
-                </Paper>
             </Grid>
         </Grid>
     );

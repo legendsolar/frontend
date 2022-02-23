@@ -50,7 +50,7 @@ const defaultChartDisplayParams = {
     },
 };
 
-function Worm(props) {
+function Worm({ rawData, loading, error }) {
     const styleOptions = defaultChartDisplayParams;
 
     const chartSettings = {
@@ -67,6 +67,13 @@ function Worm(props) {
     const [ref, dms] = useChartDimensions(chartSettings);
 
     const data = useMemo(() => {
+        if (loading || error) {
+            return {
+                time: 0,
+                wattage: 0,
+            };
+        }
+
         const daysAllowed = Math.min(
             Math.max(
                 Math.floor(
@@ -81,17 +88,17 @@ function Worm(props) {
         );
 
         const minDate = subDays(
-            xAccessor(props.data[props.data.length - 1]),
+            xAccessor(rawData[rawData.length - 1]),
             daysAllowed
         );
 
-        const filteredData = props.data.filter((d) => {
+        const filteredData = rawData.filter((d) => {
             if (!d) return false;
             return xAccessor(d).getTime() >= minDate.getTime();
         });
 
         return filteredData;
-    }, [props.data, dms.boundedWidth]);
+    }, [rawData, loading, error, dms.boundedWidth]);
 
     const yScale = useMemo(
         () =>
