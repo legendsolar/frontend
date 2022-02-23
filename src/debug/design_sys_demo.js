@@ -233,7 +233,7 @@ const DesignSysDemo = (props) => {
             <Typography variant="subtitle1">
                 {"Worm (default options, fake data)"}
             </Typography>
-            <Worm data={data}></Worm>
+            <Worm rawData={data} loading={false} error={false}></Worm>
 
             <Divider sx={{ m: 2 }} />
             <Typography variant="subtitle1">{"Metric List"}</Typography>
