@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
+          git config --global user.name 'legendsolarbot'
+          git config --global user.email 'githubbotlegendssolar@gmail.com'
+
           git submodule update --init --recursive
           BRANCH_NAME=DEV-DEPLOY-`date -u '+%d-%m-%Y_%H.%M.%S'` 
           git branch $BRANCH_NAME
