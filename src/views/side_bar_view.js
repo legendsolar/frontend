@@ -1,6 +1,7 @@
 import { Container, Grid, Box } from "@mui/material";
 import DefaultView from "./default_view";
 import { ErrorBoundary } from "@sentry/react";
+import DefaultErrorBoundary from "../components/errors/default_error_boundary";
 
 const SideBarNavView = (props) => {
     return (
@@ -29,6 +30,7 @@ const SideBarNavView = (props) => {
                         sx={{
                             zIndex: 3,
                             width: "100%",
+                            height: "100%",
                         }}
                     >
                         <Container
@@ -46,7 +48,9 @@ const SideBarNavView = (props) => {
                             <ErrorBoundary>{props.drawer}</ErrorBoundary>
                         </Container>
 
-                        <ErrorBoundary>{props.mainContent}</ErrorBoundary>
+                        <DefaultErrorBoundary>
+                            {props.mainContent}
+                        </DefaultErrorBoundary>
                     </Box>
                 </Grid>
             </Grid>

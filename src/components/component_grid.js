@@ -131,7 +131,11 @@ function ComponentGrid(props) {
                     >
                         {assetList.map((asset) => {
                             return (
-                                <MenuItem value={asset.name} name={asset.id}>
+                                <MenuItem
+                                    value={asset.name}
+                                    name={asset.id}
+                                    key={asset.id}
+                                >
                                     {asset.name}
                                 </MenuItem>
                             );
