@@ -60,7 +60,7 @@ function AppRouter() {
                     />
 
                     <Route
-                        path="/verify"
+                        path="/complete-account"
                         element={
                             <ProtectedRoute>
                                 <SignUpProcessPage />

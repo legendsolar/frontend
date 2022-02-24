@@ -7,27 +7,26 @@ import {
     MenuItem,
     Typography,
 } from "@mui/material";
-import UserDebugPaper from "./user_debug_paper";
-import AssetLiveViewDebug from "./asset_live_view_debug";
-import MetricSummary from "./summary/metric_summary";
+import UserDebugPaper from "../components/user_debug_paper";
+import AssetLiveViewDebug from "../components/asset_live_view_debug";
+import MetricSummary from "../components/summary/metric_summary";
 import useTheme from "@mui/material/styles/useTheme";
-import WormLive from "./worm/worm_live";
-import Weather from "./weather";
-import QuickAccountSummary from "./quick_account_summary";
+import WormLive from "../components/worm/worm_live";
+import QuickAccountSummary from "../components/quick_account_summary";
 import {
     CarbonGauge,
     EarningsGauge,
     GenerationGauge,
     ErrorGauge,
-} from "./gauges/live_metric_gauge";
+} from "../components/gauges/live_metric_gauge";
 
 import {
     EarningsCumulativeImpact,
     GenerationCumulativeImpact,
     CarbonCumulativeImpact,
-} from "./gauges/live_cumulative_impact";
-import WeatherLive from "./weather_live";
-import DefaultErrorBoundary from "./errors/default_error_boundary";
+} from "../components/gauges/live_cumulative_impact";
+import WeatherLive from "../components/weather/weather_live";
+import DefaultErrorBoundary from "../components/errors/default_error_boundary";
 
 function ComponentGrid(props) {
     const [assetDisplayId, setAssetDisplayId] = useState({

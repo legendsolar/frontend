@@ -29,6 +29,8 @@ function NavBar(props) {
                 sx={{
                     width: "100%",
                     zIndex: 1,
+                    ml: 2,
+                    mr: 2,
                 }}
             >
                 <Box

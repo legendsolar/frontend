@@ -4,7 +4,7 @@ import { auth, database, firebaseApp } from "../Firebase";
 import { useList } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
-import ComponentGrid from "../components/component_grid";
+import ComponentGrid from "../layouts/component_grid";
 import SideBarNavView from "../views/side_bar_view";
 import QuickAccountSummary from "../components/quick_account_summary";
 

@@ -1,4 +1,4 @@
-import { Box, Stack, Paper } from "@mui/material";
+import { Box, Stack, Paper, Grid } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import { get, ref, set } from "firebase/database";
 import { database } from "../Firebase";
@@ -23,6 +23,7 @@ function UserInfo(props) {
         streetAddress: "",
         city: "",
         state: "",
+        phoneNumber: "",
     };
 
     const [formValues, setFormValues] = useState(startingValues);
@@ -65,73 +66,79 @@ function UserInfo(props) {
     };
 
     return (
-        <Paper variant="container">
-            <Typography variant="smallHeadline">Your Contact Info</Typography>
-            <Stack spacing={2} justifyContent="center" alignItems="center">
-                <Box
-                    sx={{
-                        "& .MuiTextField-root": { m: 1 },
-                    }}
-                >
-                    <div>
-                        <TextField
-                            name="firstName"
-                            label="First Name"
-                            variant="filled"
-                            value={formValues.firstName}
-                            onChange={handleInputChange}
-                        ></TextField>
+        <div>
+            <Typography variant="smallHeadline">Contact</Typography>
 
-                        <TextField
-                            name="lastName"
-                            label="Last Name"
-                            variant="filled"
-                            value={formValues.lastName}
-                            onChange={handleInputChange}
-                        ></TextField>
+            <Grid container spacing={2} sx={{ width: "100%", mt: 1 }}>
+                <Grid item xs={12} md={6}>
+                    <TextField
+                        name="firstName"
+                        label="First Name"
+                        variant="filled"
+                        value={formValues.firstName}
+                        onChange={handleInputChange}
+                    ></TextField>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField
+                        name="lastName"
+                        label="Last Name"
+                        variant="filled"
+                        value={formValues.lastName}
+                        onChange={handleInputChange}
+                    ></TextField>
+                </Grid>
 
-                        <TextField
-                            name="streetAddress"
-                            label="Street Address"
-                            variant="filled"
-                            value={formValues.streetAddress}
-                            onChange={handleInputChange}
-                        ></TextField>
+                <Grid item xs={12} md={6}>
+                    <TextField
+                        name="phoneNumber"
+                        label="Phone Number"
+                        variant="filled"
+                        value={formValues.lastName}
+                        onChange={handleInputChange}
+                    ></TextField>
+                </Grid>
 
-                        <TextField
-                            name="aptNumber"
-                            label="Apt #"
-                            variant="filled"
-                            value={formValues.aptNumber}
-                            onChange={handleInputChange}
-                        ></TextField>
+                <Grid item xs={12} md={6}>
+                    <TextField
+                        name="streetAddress"
+                        label="Street Address"
+                        variant="filled"
+                        value={formValues.streetAddress}
+                        onChange={handleInputChange}
+                    ></TextField>
+                </Grid>
 
-                        <TextField
-                            name="city"
-                            label="City"
-                            variant="filled"
-                            value={formValues.city}
-                            onChange={handleInputChange}
-                        ></TextField>
+                <Grid item xs={12} md={6}>
+                    <TextField
+                        name="city"
+                        label="City"
+                        variant="filled"
+                        value={formValues.city}
+                        onChange={handleInputChange}
+                    ></TextField>
+                </Grid>
 
-                        <TextField
-                            name="state"
-                            label="State"
-                            variant="filled"
-                            value={formValues.state}
-                            onChange={handleInputChange}
-                        ></TextField>
-                    </div>
-                </Box>
-                <Button
-                    variant="contained"
-                    color="legendaryGreen"
-                    onClick={handleSubmit}
-                >
-                    Update
-                </Button>
-            </Stack>
-        </Paper>
+                <Grid item xs={12} md={6}>
+                    <TextField
+                        name="state"
+                        label="State"
+                        variant="filled"
+                        value={formValues.state}
+                        onChange={handleInputChange}
+                    ></TextField>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Button
+                        variant="contained"
+                        color="legendaryGreen"
+                        onClick={handleSubmit}
+                    >
+                        Continue
+                    </Button>
+                </Grid>
+            </Grid>
+        </div>
     );
 }
 export default UserInfo;

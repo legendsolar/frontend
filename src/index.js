@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import * as FullStory from "@fullstory/browser";
+import LogRocket from "logrocket";
 
 import appSettings from "./app_settings";
 
@@ -28,6 +29,11 @@ if (appSettings.fullStoryEnabled) {
         orgId: "18J59K",
     });
 }
+
+// if (appSettings.logRocketEnabled) {
+//     console.log("log rocket enabled");
+LogRocket.init("d6ndfk/legends-alpha");
+// }
 
 ReactDOM.render(
     <React.StrictMode>

@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import { Typography } from "@mui/material";
 import Container from "@mui/material/Container";
-import ComponentGrid from "./component_grid";
+import ComponentGrid from "../layouts/component_grid";
 import { useObject } from "react-firebase-hooks/database";
 import { format } from "date-fns";
 

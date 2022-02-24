@@ -11,14 +11,18 @@ function CheckboxList({ options, singleOption }) {
                         sx={{ borderRadius: "10px", backgroundColor: "#eee" }}
                     >
                         <Typography
-                            sx={{ ml: "50px", mt: 1, mb: 0 }}
+                            sx={{ ml: "40px", mt: 1, mb: 1 }}
                             variant="smallLabel"
                         >
                             {option.title.toUpperCase()}
                         </Typography>
-                        <Stack direction="row" alignItems="center">
+                        <Stack
+                            direction="row"
+                            alignItems="center"
+                            sx={{ mb: 1 }}
+                        >
                             <Checkbox></Checkbox>
-                            <Typography variant="subtitle3">
+                            <Typography variant="subtitle2">
                                 {option.description}
                             </Typography>
                         </Stack>

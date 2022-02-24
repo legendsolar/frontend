@@ -1,14 +1,13 @@
 import { Paper, Typography, Stack } from "@mui/material";
 import { Player } from "@lottiefiles/react-lottie-player";
 import PropTypes from "prop-types";
-import CloudyLottieJson from "../assets/weather_icons/cloudy/data.json";
-import SunnyLottieJson from "../assets/weather_icons/sunny/data.json";
-import RainLottieJson from "../assets/weather_icons/rain/data.json";
-import RainShowerLottieJson from "../assets/weather_icons/rain_shower/data.json";
-import HalfMoonLottieJson from "../assets/weather_icons/half_moon/data.json";
-import SnowLottieJson from "../assets/weather_icons/snowfall/data.json";
-import StarryNightJson from "../assets/weather_icons/starry_night/data.json";
-import FogJson from "../assets/weather_icons/foggy/data.json";
+import CloudyLottieJson from "../../assets/weather_icons/cloudy/data.json";
+import SunnyLottieJson from "../../assets/weather_icons/sunny/data.json";
+import RainLottieJson from "../../assets/weather_icons/rain/data.json";
+import RainShowerLottieJson from "../../assets/weather_icons/rain_shower/data.json";
+import SnowLottieJson from "../../assets/weather_icons/snowfall/data.json";
+import StarryNightJson from "../../assets/weather_icons/starry_night/data.json";
+import FogJson from "../../assets/weather_icons/foggy/data.json";
 
 const codeConverter = (code) => {
     const regex = {

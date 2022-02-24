@@ -17,7 +17,7 @@ import MetricSummary from "../components/summary/metric_summary";
 import Worm from "../components/worm/worm";
 import data from "../components/worm/fake_data";
 import TransactionComponent from "../components/transactions/transfer_component";
-import Weather from "../components/weather";
+import Weather from "../components/weather/weather";
 import CheckboxList from "../components/inputs/checkbox_list";
 
 const DesignSysDemo = (props) => {
