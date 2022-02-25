@@ -1,5 +1,5 @@
 import React from "react";
-import { auth, database, firebaseApp } from "../Firebase";
+import { auth, database, firebaseApp } from "../firebase";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
 import { Paper, Stack, Divider, Box } from "@mui/material";

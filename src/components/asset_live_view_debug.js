@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { getAuth } from "firebase/auth";
-import { auth, database, firebaseApp } from "../Firebase";
+import { auth, database, firebaseApp } from "../firebase";
 import NavBar from "./nav_bar";
 import { ref } from "firebase/database";
 import { useState } from "react";

@@ -1,6 +1,6 @@
 import MetricGauge from "./metric_gauge";
 import { useState } from "react";
-import { database } from "../../Firebase";
+import { database } from "../../firebase";
 import { ref } from "firebase/database";
 import { useObject } from "react-firebase-hooks/database";
 import { differenceInMinutes } from "date-fns";

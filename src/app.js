@@ -1,5 +1,5 @@
 import { ProvideAuth } from "./hooks/use_auth";
-import AppRouter from "./routes/app-router";
+import AppRouter from "./routes/app_router";
 import { ThemeProvider } from "@mui/material/styles";
 import { appTheme } from "./app_theme";
 import { ErrorBoundary } from "@sentry/react";

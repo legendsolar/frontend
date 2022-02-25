@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { useObject } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
-import { auth, database, firebaseApp } from "../Firebase";
+import { auth, database, firebaseApp } from "../firebase";
 import { useAuth } from "../hooks/use_auth";
 
 const MemberHeader = ({ sx }) => {

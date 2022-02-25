@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import PropTypes from "prop-types";
-import { auth, database, firebaseApp } from "../Firebase";
+import { auth, database, firebaseApp } from "../firebase";
 import { useList } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";

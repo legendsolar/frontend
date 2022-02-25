@@ -4,8 +4,8 @@ import PortfolioPage from "../pages/portfolio_page";
 import SignInView from "../pages/sign_in_page";
 import SignUpView from "../pages/sign_up_page";
 import { Link, Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./protected-route";
-import UnprotectedRoute from "./unprotected-route";
+import ProtectedRoute from "./protected_route";
+import UnprotectedRoute from "./unprotected_route";
 import AccountView from "../pages/account_page";
 import TransactionView from "../pages/transactions_page";
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { database } from "../../Firebase";
+import { database } from "../../firebase";
 import { get, query, orderByKey, ref, startAt, endAt } from "firebase/database";
 import { useObject } from "react-firebase-hooks/database";
 import Worm from "./worm";

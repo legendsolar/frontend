@@ -1,5 +1,5 @@
 import { httpsCallable } from "firebase/functions";
-import { functions } from "../Firebase";
+import { functions } from "../firebase";
 
 /** Dwolla Pass Through Functions */
 

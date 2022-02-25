@@ -1,7 +1,7 @@
 import { Box, Stack, Paper, Grid } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import { get, ref, set } from "firebase/database";
-import { database } from "../Firebase";
+import { database } from "../firebase";
 import { useAuth } from "../hooks/use_auth";
 import { Button, Typography } from "@mui/material";
 import { TextField } from "@mui/material";

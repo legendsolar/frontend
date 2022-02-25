@@ -8,7 +8,7 @@ import TransactionGrid from "../components/transactions/transaction_grid";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
 import { useObject } from "react-firebase-hooks/database";
 import { ref } from "firebase/database";
-import { auth, database, firebaseApp } from "../Firebase";
+import { auth, database, firebaseApp } from "../firebase";
 import { useAuth } from "../hooks/use_auth";
 import {
     getFundingSourceName,
