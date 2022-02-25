@@ -19,6 +19,7 @@ import data from "../components/worm/fake_data";
 import TransactionComponent from "../components/transactions/transfer_component";
 import Weather from "../components/weather/weather";
 import CheckboxList from "../components/inputs/checkbox_list";
+import Wallet from "../components/wallet_component";
 
 const DesignSysDemo = (props) => {
     const theme = useTheme();
@@ -196,6 +197,13 @@ const DesignSysDemo = (props) => {
             </Typography>
 
             <Divider sx={{ m: 2 }} />
+
+            <Typography variant="subtitle1">Wallet</Typography>
+
+            <Paper variant="container">
+                <Wallet></Wallet>
+            </Paper>
+
             <Typography variant="subtitle1">MetricGauge</Typography>
 
             <MetricGauge

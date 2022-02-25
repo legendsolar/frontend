@@ -1,5 +1,4 @@
 import { Stack, Button, Grid, Box, Typography } from "@mui/material";
-import CheckboxList from "./inputs/checkbox_list";
 import MetricList from "./summary/metric_list";
 import { DocumentIcon } from "./icons/document_icon";
 

@@ -2,8 +2,6 @@ import React from "react";
 import { useAuth } from "../hooks/use_auth";
 import { Button, Stack, Typography, Toolbar, Box, AppBar } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
-
-import Logo from "../assets/Logo.png";
 import { redirectToHomePage } from "../webflow/webflowLinking";
 import { LegendsSolarLogo } from "./icons/legends_solar_logo";
 
