@@ -20,6 +20,8 @@ import {
     ErrorGauge,
 } from "../components/gauges/live_metric_gauge";
 
+import Wallet from "../components/wallet_component";
+
 import {
     EarningsCumulativeImpact,
     GenerationCumulativeImpact,
@@ -140,6 +142,13 @@ function ComponentGrid(props) {
                 </DefaultErrorBoundary>
             </Grid>
 
+            <Grid item xs={12}>
+                <DefaultErrorBoundary>
+                    <Paper variant="container">
+                        <Wallet></Wallet>
+                    </Paper>
+                </DefaultErrorBoundary>
+            </Grid>
             <Grid item xs={12}>
                 <Paper variant="container">
                     <Typography variant="label">[DEBUG ONLY]</Typography>
