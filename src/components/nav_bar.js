@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import Logo from "../assets/Logo.png";
 import { redirectToHomePage } from "../webflow/webflowLinking";
+import { LegendsSolarLogo } from "./icons/legends_solar_logo";
 
 function NavBar(props) {
     const auth = useAuth();
@@ -34,14 +35,14 @@ function NavBar(props) {
                 }}
             >
                 <Box
-                    component="img"
                     sx={{
-                        maxWidth: "120px",
-                        maxHeight: "45px",
+                        width: "120px",
+                        height: "45px",
                     }}
                     alt="logo"
-                    src={Logo}
-                ></Box>
+                >
+                    <LegendsSolarLogo></LegendsSolarLogo>
+                </Box>
 
                 {auth.user && (
                     <Stack

@@ -1,7 +1,7 @@
 import { Stack, Button, Box, Typography } from "@mui/material";
 import CheckboxList from "./inputs/checkbox_list";
 
-const AccreditationStatus = () => {
+const AccreditationStatus = ({ onContinue }) => {
     return (
         <Stack spacing={2}>
             <Typography variant="smallHeadline">
@@ -31,11 +31,15 @@ const AccreditationStatus = () => {
                 ]}
             ></CheckboxList>
             <Box sx={{ height: "500px" }}> Verify Investor Embed</Box>
-            <Button variant="primary">Continue</Button>
+            <Button variant="primary" onClick={() => onContinue()}>
+                Continue
+            </Button>
             <Typography align={"center"} variant="smallLabel">
                 OR
             </Typography>
-            <Button variant="secondary">Skip for now</Button>
+            <Button variant="secondary" onClick={() => onContinue()}>
+                Skip for now
+            </Button>
         </Stack>
     );
 };

@@ -35,11 +35,7 @@ export default function VerificationPage() {
     const auth = useAuth();
     const navigate = useNavigate();
     const contentRefs = useRef([]);
-    const drawerTitles = [
-        "Username & Password",
-        "Accreditation",
-        "Banking Information",
-    ];
+    const drawerTitles = ["Contact", "Accreditation", "Banking Information"];
     return (
         <SideBarNavView
             drawer={
@@ -61,7 +57,11 @@ export default function VerificationPage() {
                         <UserInfo></UserInfo>
                     </Paper>
                     <Paper sx={{}} variant="container">
-                        <AccreditationStatus></AccreditationStatus>
+                        <AccreditationStatus
+                            onContinue={() => {
+                                navigate("/explore");
+                            }}
+                        ></AccreditationStatus>
                     </Paper>
                 </Stack>
             }
