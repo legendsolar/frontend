@@ -216,9 +216,13 @@ const themeOptions = {
                             paletteOptions.palette.legendaryGreen.main,
                         color: paletteOptions.palette.legendaryGreen
                             .contrastText,
+                        boxShadow:
+                            "rgba(99, 110, 114, 0.2) 0px 0px 13.0207px 0px",
+                        boxSizing: "border-box",
                         "&:hover": {
+                            boxShadow: "0 0 30px 0 rgb(99 110 114 / 45%)",
                             backgroundColor:
-                                paletteOptions.palette.legendaryGreen.light,
+                                paletteOptions.palette.legendaryGreen.main,
                         },
                     },
                 },
@@ -230,9 +234,13 @@ const themeOptions = {
                         color: paletteOptions.palette.legendaryGreen
                             .contrastText,
                         fontWeight: 600,
+                        boxShadow:
+                            "rgba(99, 110, 114, 0.2) 0px 0px 13.0207px 0px",
+                        boxSizing: "border-box",
                         "&:hover": {
+                            boxShadow: "0 0 30px 0 rgb(99 110 114 / 45%)",
                             backgroundColor:
-                                paletteOptions.palette.legendaryGreen.light,
+                                paletteOptions.palette.legendaryGreen.main,
                         },
                     },
                 },
