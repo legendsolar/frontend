@@ -33,7 +33,7 @@ const Wallet = () => {
         }
     }, [walletStatus, dispatch]);
 
-    const amount = walletStatus === "succeeded" ? walletAmount : "0.00";
+    const amount = walletStatus === "succeeded" ? walletAmount : "-";
 
     const accounts = [
         {

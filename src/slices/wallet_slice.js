@@ -53,7 +53,13 @@ const walletSlice = createSlice({
 });
 
 export const selectWallet = (state) => state.wallet.loadedWallet;
-export const selectWalletTotal = (state) =>
-    state.wallet.loadedWallet.total.value;
+
+export const selectWalletTotal = (state) => {
+    try {
+        return state.wallet.loadedWallet.total.value;
+    } catch (error) {
+        return "-";
+    }
+};
 
 export default walletSlice.reducer;
