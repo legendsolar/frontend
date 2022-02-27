@@ -23,7 +23,7 @@ const exchangePublicTokenForAccessToken = httpsCallable(
 
 const firebaseDwollaCallWrapper = httpsCallable(
     functions,
-    "dwollaCallWrapper_https_ext"
+    "dwollaNewCallWrapper_https_ext"
 );
 
 /** Dwolla Pass Through */
@@ -32,10 +32,16 @@ const dwollaCallWrapper = async (params) => {
     return returned.data;
 };
 
+const onCallTest = httpsCallable(functions, "onCallTest");
+const hatemylife = httpsCallable(functions, "ihatemylife_ext");
+
 export {
     createDwollaAccount,
     getWalletBalance,
     createPlaidLinkToken,
     exchangePublicTokenForAccessToken,
     dwollaCallWrapper,
+    onCallTest,
+    hatemylife,
+    firebaseDwollaCallWrapper,
 };

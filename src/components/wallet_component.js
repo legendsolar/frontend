@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     Stack,
     Button,
@@ -12,8 +12,28 @@ import {
 import MetricList from "./summary/metric_list";
 import TransactionComponent from "./transactions/transfer_component";
 
+import { useSelector, useDispatch } from "react-redux";
+import {
+    fetchWallet,
+    selectWallet,
+    selectWalletTotal,
+} from "../slices/wallet_slice";
+
 const Wallet = () => {
-    const amount = Math.random() * 1000;
+    const dispatch = useDispatch();
+
+    const walletStatus = useSelector((state) => state.wallet.status);
+    const wallet = useSelector(selectWallet);
+    const walletAmount = useSelector(selectWalletTotal);
+
+    useEffect(() => {
+        if (walletStatus === "idle") {
+            console.log("dispatch");
+            dispatch(fetchWallet());
+        }
+    }, [walletStatus, dispatch]);
+
+    const amount = walletStatus === "succeeded" ? walletAmount : "0.00";
 
     const accounts = [
         {
@@ -59,7 +79,7 @@ const Wallet = () => {
                                 {"Legends Wallet".toUpperCase()}
                             </Typography>
                             <Typography variant="headline2">
-                                {"$" + amount.toFixed(2)}
+                                {"$" + amount}
                             </Typography>
                         </Stack>
                         <Box
@@ -119,6 +139,7 @@ const Wallet = () => {
                     amount={parseFloat(transferAmount)}
                     source="Wallet"
                     destination={bankAccount}
+                    date={new Date()}
                 ></TransactionComponent>
 
                 <Button variant="primary">Submit Withdraw</Button>

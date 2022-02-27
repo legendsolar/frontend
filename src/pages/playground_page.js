@@ -18,12 +18,15 @@ import {
     selectTransactions,
     fetchTransactions,
     createTransaction,
-    totalTransactions,
-} from "../slices/dwolla_slice";
+} from "../slices/transaction_slice";
 import { useEffect } from "react";
+import {
+    onCallTest,
+    hatemylife,
+    firebaseDwollaCallWrapper,
+} from "../firebase/cloud_functions";
 
 const PlaygroundPage = () => {
-    const count = useSelector(totalTransactions);
     const transactions = useSelector(selectTransactions);
     const dispatch = useDispatch();
 
@@ -56,6 +59,11 @@ const PlaygroundPage = () => {
         if (transactionStatus === "idle") {
             dispatch(fetchTransactions());
         }
+
+        const testing = hatemylife().then((resp) => console.log(resp));
+        const firebase = firebaseDwollaCallWrapper().then((resp) =>
+            console.log(resp)
+        );
     }, [transactionStatus, dispatch]);
 
     return (
@@ -84,10 +92,22 @@ const PlaygroundPage = () => {
                     >
                         add transaction
                     </Button>
+
+                    <Button
+                        onClick={() =>
+                            firebaseDwollaCallWrapper({
+                                data: "what",
+                            })
+                        }
+                        disabled={!canCreateTransaction}
+                    >
+                        dwolla
+                    </Button>
+
+                    <Button onClick={() => onCallTest()}>on call test</Button>
                 </Stack>
 
                 <Typography>total transactions</Typography>
-                <Typography>{count}</Typography>
             </Paper>
         </DefaultView>
     );

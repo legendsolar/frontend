@@ -3,6 +3,8 @@ import {
     dwollaInterface,
     getIdFromHeader,
     getTransferArrayFromQuery,
+    getTransferDestinationFundingId,
+    getTransferSourceFundingId,
 } from "../dwolla/dwolla_api_interface";
 import { dwollaSandboxConfig } from "../dwolla/dwolla_settings";
 import { dwollaCallWrapper } from "../firebase/cloud_functions";
@@ -14,7 +16,7 @@ import { dwollaCallWrapper } from "../firebase/cloud_functions";
 // ];
 
 const initialState = {
-    transactions: [],
+    loadedTransactions: [],
     status: "idle",
     error: null,
 };
@@ -37,7 +39,25 @@ export const fetchTransactions = createAsyncThunk(
 
         const transferArray = getTransferArrayFromQuery(rawTransferObject);
 
+        // const namedTransferArray = await Promise.all(
+        //     transferArray.map(async (transfer) => {
+        //         const sourceInfo = await dwolla.getFundingSource(
+        //             getTransferSourceFundingId(transfer)
+        //         );
+
+        //         const destInfo = await dwolla.getFundingSource(
+        //             getTransferDestinationFundingId(transfer)
+        //         );
+
+        //         console.log(sourceInfo);
+        //         console.log(destInfo);
+
+        //         return { ...transfer };
+        //     })
+        // );
+
         console.log(transferArray);
+        // console.log(namedTransferArray);
 
         return transferArray;
     }
@@ -70,14 +90,10 @@ export const createTransaction = createAsyncThunk(
     }
 );
 
-const dwollaSlice = createSlice({
-    name: "dwolla",
+const transactionSlice = createSlice({
+    name: "transactions",
     initialState,
-    reducers: {
-        addTransaction(state, action) {
-            state.push(action.payload);
-        },
-    },
+    reducers: {},
     extraReducers(builder) {
         builder
             .addCase(fetchTransactions.pending, (state, action) => {
@@ -86,21 +102,20 @@ const dwollaSlice = createSlice({
             .addCase(fetchTransactions.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 // actually add the retrieved transactions
-                state.transactions.push(...action.payload);
+                state.loadedTransactions.push(...action.payload);
             })
             .addCase(fetchTransactions.rejected, (state, action) => {
                 state.status = "failed";
+                console.log(action.error);
                 state.error = action.error.message;
             })
             .addCase(createTransaction.fulfilled, (state, action) => {
-                state.transactions.push(action.payload);
+                state.loadedTransactions.push(action.payload);
             });
     },
 });
 
-export const { addTransaction } = dwollaSlice.actions;
+export const selectTransactions = (state) =>
+    state.transactions.loadedTransactions;
 
-export const selectTransactions = (state) => state.dwolla.transactions;
-export const totalTransactions = (state) => state.dwolla.transactions.length;
-
-export default dwollaSlice.reducer;
+export default transactionSlice.reducer;
