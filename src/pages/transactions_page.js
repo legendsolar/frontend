@@ -17,7 +17,7 @@ import {
     getTransferDestinationFundingId,
     getTransferId,
     getTransferSourceFundingId,
-    openDwollaConnection,
+    dwollaInterface,
 } from "../dwolla/dwolla_api_interface";
 import { dwollaCallWrapper } from "../firebase/cloud_functions";
 import { dwollaSandboxConfig } from "../dwolla/dwolla_settings";
@@ -32,7 +32,7 @@ const TransactionPage = (props) => {
     var userDwollaId = "f92da569-41ec-4aa9-ba36-2329b4d26b4b";
 
     useEffect(() => {
-        openDwollaConnection(dwollaSandboxConfig.url, dwollaCallWrapper).then(
+        dwollaInterface(dwollaSandboxConfig.url, dwollaCallWrapper).then(
             (connection) => {
                 console.log("created dwolla connection");
                 console.log(connection);

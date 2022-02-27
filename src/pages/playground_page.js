@@ -69,7 +69,8 @@ const PlaygroundPage = () => {
                 >
                     {transactions.map((transaction) => (
                         <Typography key={transaction.id}>
-                            {transaction.title}
+                            {transaction.status + ":"}
+                            {"amount: " + transaction.amount.value}
                         </Typography>
                     ))}
 

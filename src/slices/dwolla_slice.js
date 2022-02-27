@@ -1,4 +1,10 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
+import {
+    dwollaInterface,
+    getTransferArrayFromQuery,
+} from "../dwolla/dwolla_api_interface";
+import { dwollaSandboxConfig } from "../dwolla/dwolla_settings";
+import { dwollaCallWrapper } from "../firebase/cloud_functions";
 
 // const initialState = [
 //     { id: "1", title: "First Post!", content: "Hello!" },
@@ -12,16 +18,23 @@ const initialState = {
     error: null,
 };
 
+const userDwollaId = "f92da569-41ec-4aa9-ba36-2329b4d26b4b";
+
 export const fetchTransactions = createAsyncThunk(
     "dwolla/fetchTransactions",
     async () => {
-        const resp = await new Promise((res) => setTimeout(res, 2500));
+        const dwolla = dwollaInterface(
+            dwollaSandboxConfig.url,
+            dwollaCallWrapper
+        );
 
-        console.log("mock api return");
-        return {
-            id: nanoid(),
-            title: "api loaded transaction",
-        };
+        const rawTransferObject = await dwolla.searchTransfers(userDwollaId);
+
+        const transferArray = getTransferArrayFromQuery(rawTransferObject);
+
+        console.log(transferArray);
+
+        return transferArray;
     }
 );
 
@@ -50,7 +63,7 @@ const dwollaSlice = createSlice({
             .addCase(fetchTransactions.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 // actually add the retrieved transactions
-                state.transactions.push(action.payload);
+                state.transactions.push(...action.payload);
             })
             .addCase(fetchTransactions.rejected, (state, action) => {
                 state.status = "failed";

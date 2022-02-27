@@ -25,7 +25,7 @@ const UserStatus = () => {
     ];
 
     return (
-        <Stack spacing={2} sx={{ p: 2 }}>
+        <Stack spacing={2}>
             <Stack direction={"row"} justifyContent="space-between">
                 <Typography variant="smallHeadline">Steps to Invest</Typography>
                 <Typography variant="subtitle1">1/3 Steps Complete</Typography>
