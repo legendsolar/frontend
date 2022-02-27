@@ -21,11 +21,16 @@ const exchangePublicTokenForAccessToken = httpsCallable(
     "exchangePublicTokenForAccessToken_https_ext"
 );
 
-/** Dwolla Pass Through */
-const dwollaCallWrapper = httpsCallable(
+const firebaseDwollaCallWrapper = httpsCallable(
     functions,
     "dwollaCallWrapper_https_ext"
 );
+
+/** Dwolla Pass Through */
+const dwollaCallWrapper = async (params) => {
+    const returned = await firebaseDwollaCallWrapper(params);
+    return returned.data;
+};
 
 export {
     createDwollaAccount,

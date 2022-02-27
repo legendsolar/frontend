@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import {
     dwollaInterface,
+    getIdFromHeader,
     getTransferArrayFromQuery,
 } from "../dwolla/dwolla_api_interface";
 import { dwollaSandboxConfig } from "../dwolla/dwolla_settings";
@@ -19,6 +20,8 @@ const initialState = {
 };
 
 const userDwollaId = "f92da569-41ec-4aa9-ba36-2329b4d26b4b";
+const userWalletId = "da85e28e-2dfb-4690-bfe7-b53818214da3";
+const userCheckingId = "8aa7d0a0-d563-45a1-9c8d-7fb441230636";
 
 export const fetchTransactions = createAsyncThunk(
     "dwolla/fetchTransactions",
@@ -29,6 +32,8 @@ export const fetchTransactions = createAsyncThunk(
         );
 
         const rawTransferObject = await dwolla.searchTransfers(userDwollaId);
+
+        console.log(rawTransferObject);
 
         const transferArray = getTransferArrayFromQuery(rawTransferObject);
 
@@ -41,9 +46,27 @@ export const fetchTransactions = createAsyncThunk(
 export const createTransaction = createAsyncThunk(
     "dwolla/createTransaction",
     async (initialTransaction) => {
-        const resp = await new Promise((res) => setTimeout(res, 2500));
+        const dwolla = dwollaInterface(
+            dwollaSandboxConfig.url,
+            dwollaCallWrapper
+        );
 
-        return initialTransaction;
+        console.log("sent");
+
+        const resp = await dwolla.createTransfer(
+            userWalletId,
+            userCheckingId,
+            0.99
+        );
+
+        console.log("returned");
+        console.log(resp);
+
+        const transactionId = getIdFromHeader(resp);
+
+        const verificationResp = await dwolla.getTransferById(transactionId);
+
+        return verificationResp;
     }
 );
 
