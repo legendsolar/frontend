@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "../hooks/use_auth";
 import { Button, Stack, Typography, Toolbar, Box, AppBar } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -9,6 +10,8 @@ function NavBar(props) {
     const auth = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+
+    const count = useSelector((state) => state.counter.value);
 
     return (
         <Toolbar style={{ padding: 0, width: "100%" }}>
@@ -65,7 +68,7 @@ function NavBar(props) {
                             }}
                         >
                             <Typography variant="appBarHeader">
-                                Transactions
+                                Transactions {count}
                             </Typography>
                         </Button>
 

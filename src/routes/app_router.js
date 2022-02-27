@@ -17,6 +17,7 @@ import SignUpProcessPage from "../pages/sign_up_process_page";
 import { GridPage } from "../pages/grid_page";
 import ExplorePage from "../pages/explore_page";
 import DocumentPage from "../pages/documents_page";
+import PlaygroundPage from "../pages/playground_page";
 
 function AppRouter() {
     const auth = useAuth();
@@ -99,6 +100,7 @@ function AppRouter() {
                     {/* Debug */}
                     <Route path="/designSysDemo" element={<DesignSysDemo />} />
                     <Route path="/gridView" element={<GridPage />} />
+                    <Route path="/playground" element={<PlaygroundPage />} />
                 </Routes>
             </div>
         );
