@@ -1,5 +1,5 @@
 import React from "react";
-import { database } from "../../Firebase";
+import { database } from "../../firebase";
 import { ref } from "firebase/database";
 import { useList } from "react-firebase-hooks/database";
 import { Typography } from "@mui/material";

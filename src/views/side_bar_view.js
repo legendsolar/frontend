@@ -63,6 +63,11 @@ const SideBarNavView = (props) => {
                         <DefaultErrorBoundary>
                             {props.mainContent}
                         </DefaultErrorBoundary>
+
+                        {/** 
+                        Bit of padding below the content to ensure the sidebar can scroll all the way down
+                        */}
+                        <Box sx={{ height: "200px" }}></Box>
                     </Box>
                 </Grid>
             </Grid>

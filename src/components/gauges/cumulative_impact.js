@@ -18,9 +18,11 @@ const CumulativeImpact = ({ cumulativeData, unitOpts }) => {
                 spacing={1}
                 sx={{ height: "100%" }}
             >
-                <Typography variant="smallHeadline">
-                    {unitOpts.title}
-                </Typography>
+                <Stack direction="row" justifyContent={"space-between"}>
+                    <Typography variant="smallHeadline">
+                        {unitOpts.title}
+                    </Typography>
+                </Stack>
 
                 <Stack direction="row" justifyContent="space-evenly">
                     <Stack>

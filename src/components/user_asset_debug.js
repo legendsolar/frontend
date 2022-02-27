@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { getAuth } from "firebase/auth";
-import { auth, database, firebaseApp } from "../Firebase";
+import { auth, database, firebaseApp } from "../firebase";
 import NavBar from "./nav_bar";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
@@ -10,7 +10,6 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import { Typography } from "@mui/material";
 import Container from "@mui/material/Container";
-import ComponentGrid from "./component_grid";
 import { useList } from "react-firebase-hooks/database";
 
 function UserAssetDebugPaper(props) {

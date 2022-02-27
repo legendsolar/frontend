@@ -16,6 +16,7 @@ import VerificationPage from "../pages/sign_up_process_page";
 import SignUpProcessPage from "../pages/sign_up_process_page";
 import { GridPage } from "../pages/grid_page";
 import ExplorePage from "../pages/explore_page";
+import DocumentPage from "../pages/documents_page";
 
 function AppRouter() {
     const auth = useAuth();
@@ -56,6 +57,15 @@ function AppRouter() {
                         element={
                             <ProtectedRoute>
                                 <AccountView />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/documents"
+                        element={
+                            <ProtectedRoute>
+                                <DocumentPage />
                             </ProtectedRoute>
                         }
                     />

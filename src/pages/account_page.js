@@ -62,9 +62,12 @@ function AccountView(props) {
             }
             mainContent={
                 <Stack spacing={2}>
-                    <div ref={(el) => (contentRefs.current[0] = el)}>
+                    <Paper
+                        variant="container"
+                        ref={(el) => (contentRefs.current[0] = el)}
+                    >
                         <UserInfo></UserInfo>
-                    </div>
+                    </Paper>
 
                     <Paper
                         variant="container"

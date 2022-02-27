@@ -54,7 +54,7 @@ function NavBar(props) {
                             }}
                         >
                             <Typography variant="appBarHeader">
-                                Portfolio
+                                Your Rooftop
                             </Typography>
                         </Button>
 
@@ -71,13 +71,35 @@ function NavBar(props) {
 
                         <Button
                             color="dark"
-                            variant="outlined"
+                            onClick={() => {
+                                navigate("/documents");
+                            }}
+                        >
+                            <Typography variant="appBarHeader">
+                                Documents
+                            </Typography>
+                        </Button>
+
+                        <Button
+                            color="dark"
                             onClick={() => {
                                 navigate("/account");
                             }}
                         >
                             <Typography variant="appBarHeader">
                                 Account
+                            </Typography>
+                        </Button>
+
+                        <Button
+                            color="dark"
+                            variant="outlined"
+                            onClick={() => {
+                                navigate("/explore");
+                            }}
+                        >
+                            <Typography variant="appBarHeader">
+                                Available Offerings
                             </Typography>
                         </Button>
                     </Stack>

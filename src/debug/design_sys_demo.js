@@ -20,6 +20,7 @@ import TransactionComponent from "../components/transactions/transfer_component"
 import Weather from "../components/weather/weather";
 import CheckboxList from "../components/inputs/checkbox_list";
 import Wallet from "../components/wallet_component";
+import UserStatus from "../components/user_status";
 
 const DesignSysDemo = (props) => {
     const theme = useTheme();
@@ -202,6 +203,10 @@ const DesignSysDemo = (props) => {
 
             <Paper variant="container">
                 <Wallet></Wallet>
+            </Paper>
+
+            <Paper variant="container">
+                <UserStatus></UserStatus>
             </Paper>
 
             <Typography variant="subtitle1">MetricGauge</Typography>
