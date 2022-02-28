@@ -301,6 +301,7 @@ const themeOptions = {
         MuiInputLabel: {
             styleOverrides: {
                 root: {
+                    zIndex: 1,
                     // color: paletteOptions.palette.whiteFog.contrastText,
                 },
             },

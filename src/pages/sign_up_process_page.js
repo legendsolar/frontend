@@ -30,6 +30,7 @@ import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
 import AccreditationStatus from "../components/accreditation_status";
 import UserInfo from "../components/user_info";
+import AccountLinkComponent from "../components/account_link_component";
 
 export default function VerificationPage() {
     const auth = useAuth();
@@ -62,6 +63,14 @@ export default function VerificationPage() {
                                 navigate("/explore");
                             }}
                         ></AccreditationStatus>
+                    </Paper>
+
+                    <Paper sx={{}} variant="container">
+                        <AccountLinkComponent
+                            onContinue={() => {
+                                navigate("/explore");
+                            }}
+                        ></AccountLinkComponent>
                     </Paper>
                 </Stack>
             }
