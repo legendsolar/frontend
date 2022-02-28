@@ -1,4 +1,4 @@
-import { Stack, Typography, Box } from "@mui/material";
+import { Stack, Grid, Typography, Box } from "@mui/material";
 
 const UserStatus = () => {
     const statusItems = [
@@ -31,54 +31,61 @@ const UserStatus = () => {
                 <Typography variant="subtitle1">1/3 Steps Complete</Typography>
             </Stack>
 
-            <Stack direction={"row"} spacing={4} justifyContent="center">
+            <Grid container spacing={4}>
                 {statusItems.map((item) => {
                     return (
-                        <Stack direction={"row"}>
+                        <Grid item xs={12} lg={4}>
                             <Stack
+                                direction={"row"}
                                 sx={{
-                                    bgcolor: "whiteFog.main",
                                     height: "120px",
-                                    borderRadius: "5px 0px 0px 5px",
-                                    p: 2,
-                                }}
-                                justifyContent={"center"}
-                            >
-                                <Typography variant="smallHeadline">
-                                    {item.title}
-                                </Typography>
-                                <Typography variant="subtitle3">
-                                    {item.subtitle}
-                                </Typography>
-                            </Stack>
-
-                            <Stack
-                                sx={{
-                                    bgcolor: item.statusColor + ".main",
-                                    minWidth: "30px",
-                                    height: "100%",
-                                    borderRadius: "0px 5px 5px 0px",
                                 }}
                             >
-                                <Typography
+                                <Stack
                                     sx={{
-                                        mt: 2,
-                                        color:
-                                            item.statusColor + ".contrastText",
-                                        transform: "rotate(90deg)",
+                                        bgcolor: "whiteFog.main",
+                                        borderRadius: "5px 0px 0px 5px",
+                                        p: 2,
+                                    }}
+                                    justifyContent={"center"}
+                                >
+                                    <Typography variant="smallHeadline">
+                                        {item.title}
+                                    </Typography>
+                                    <Typography variant="subtitle3">
+                                        {item.subtitle}
+                                    </Typography>
+                                </Stack>
 
-                                        fontFamily: "Azeret Mono",
-                                        fontSize: "10px",
-                                        fontWeight: 800,
+                                <Stack
+                                    sx={{
+                                        bgcolor: item.statusColor + ".main",
+                                        width: "30px",
+                                        height: "100%",
+                                        borderRadius: "0px 5px 5px 0px",
                                     }}
                                 >
-                                    {item.sidebarMessage}
-                                </Typography>
+                                    <Typography
+                                        sx={{
+                                            mt: 2,
+                                            color:
+                                                item.statusColor +
+                                                ".contrastText",
+                                            transform: "rotate(90deg)",
+
+                                            fontFamily: "Azeret Mono",
+                                            fontSize: "10px",
+                                            fontWeight: 800,
+                                        }}
+                                    >
+                                        {item.sidebarMessage}
+                                    </Typography>
+                                </Stack>
                             </Stack>
-                        </Stack>
+                        </Grid>
                     );
                 })}
-            </Stack>
+            </Grid>
         </Stack>
     );
 };

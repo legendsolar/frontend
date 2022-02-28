@@ -21,7 +21,7 @@ const TransactionGrid = ({ title, transactions }) => {
                                 title={
                                     "title" in transaction
                                         ? transactions.title
-                                        : "unknown"
+                                        : transaction.status
                                 }
                                 amount={parseFloat(transaction.amount.value)}
                                 source={
@@ -32,7 +32,7 @@ const TransactionGrid = ({ title, transactions }) => {
                                 destination={
                                     "destination" in transaction
                                         ? transactions.destination
-                                        : "unknown"
+                                        : "wallet"
                                 }
                                 date={transaction.created}
                             ></TransactionComponent>
