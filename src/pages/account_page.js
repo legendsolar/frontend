@@ -7,7 +7,7 @@ import { useAuth } from "../hooks/use_auth";
 import { useObject } from "react-firebase-hooks/database";
 
 import { Typography, Paper, Stack, Button } from "@mui/material";
-
+import Wallet from "../components/wallet_component";
 import UserInfo from "../components/user_info";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
@@ -73,19 +73,7 @@ function AccountView(props) {
                         variant="container"
                         ref={(el) => (contentRefs.current[1] = el)}
                     >
-                        <Typography variant="smallHeadline">Wallet</Typography>
-                        <Stack
-                            spacing={2}
-                            justifyContent="center"
-                            alignItems="center"
-                        >
-                            <Typography variant="headline1">
-                                $1,750.00
-                            </Typography>
-                            <Button variant="contained" color="legendaryGreen">
-                                Transfer To Account
-                            </Button>
-                        </Stack>
+                        <Wallet></Wallet>
                     </Paper>
 
                     <Paper

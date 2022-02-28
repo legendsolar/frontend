@@ -30,11 +30,20 @@ function UserInfo(props) {
 
     useEffect(() => {
         // set initial to saved values
-        get(ref(database, "users/" + user.uid + "/info"))
+        get(ref(database, "users/" + user.uid))
             .then((userInfoSnapshot) => {
                 if (userInfoSnapshot && userInfoSnapshot.exists()) {
+                    const userObject = userInfoSnapshot.val();
                     console.log(userInfoSnapshot.val());
-                    setFormValues(userInfoSnapshot.val());
+
+                    setFormValues({
+                        firstName: userObject.name.first,
+                        lastName: userObject.name.last,
+                        streetAddress: userObject.address.streetNumber,
+                        city: userObject.address.city,
+                        state: userObject.address.state,
+                        phoneNumber: userObject.phone.mobile,
+                    });
                 }
             })
             .catch((error) => {
