@@ -3,21 +3,7 @@ import {
     createDwollaAccount,
     getWalletBalance,
 } from "../firebase/cloud_functions";
-import {
-    Typography,
-    Box,
-    Stack,
-    TextField,
-    CssBaseline,
-    Button,
-    Paper,
-    Collapse,
-    Alert,
-    IconButton,
-    Stepper,
-    Step,
-    StepLabel,
-} from "@mui/material";
+import { Typography, Stack, Paper } from "@mui/material";
 
 import { useRef } from "react";
 import PropTypes from "prop-types";
@@ -44,7 +30,9 @@ export default function VerificationPage() {
                     <ScrollToSidebar
                         header={
                             <Stack sx={{ p: 2 }}>
-                                <Typography>Create Account</Typography>
+                                <Typography variant="smallHeadline">
+                                    Complete Your Account
+                                </Typography>
                             </Stack>
                         }
                         contentTitles={drawerTitles}
@@ -54,10 +42,18 @@ export default function VerificationPage() {
             }
             mainContent={
                 <Stack spacing={2}>
-                    <Paper sx={{}} variant="container">
+                    <Paper
+                        sx={{}}
+                        variant="container"
+                        ref={(el) => (contentRefs.current[0] = el)}
+                    >
                         <UserInfo></UserInfo>
                     </Paper>
-                    <Paper sx={{}} variant="container">
+                    <Paper
+                        sx={{}}
+                        variant="container"
+                        ref={(el) => (contentRefs.current[1] = el)}
+                    >
                         <AccreditationStatus
                             onContinue={() => {
                                 navigate("/explore");
@@ -65,7 +61,11 @@ export default function VerificationPage() {
                         ></AccreditationStatus>
                     </Paper>
 
-                    <Paper sx={{}} variant="container">
+                    <Paper
+                        sx={{}}
+                        variant="container"
+                        ref={(el) => (contentRefs.current[2] = el)}
+                    >
                         <AccountLinkComponent
                             onContinue={() => {
                                 navigate("/explore");

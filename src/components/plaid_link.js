@@ -9,7 +9,7 @@ import {
     exchangePublicTokenForAccessToken,
 } from "../firebase/cloud_functions";
 
-const PlaidLink = (props) => {
+const PlaidLink = ({ onSuccess }) => {
     const auth = useAuth();
     const [token, setToken] = useState("");
     const [publicToken, setPublicToken] = useState("");
@@ -40,24 +40,32 @@ const PlaidLink = (props) => {
             }).then((data) => {
                 console.log("access token obtained");
                 console.log(data.accessToken);
+
+                onSuccess();
             });
         },
     });
     return (
-        <Paper variant="container">
-            <Typography>plaid credentials: user_good, pass_good</Typography>
+        <Stack>
+            <Typography variant="description">
+                [Debug] Bank Credentials are: user_good, pass_good for any bank
+            </Typography>
             <Button
                 onClick={() => {
                     open();
                 }}
                 disabled={!ready}
+                variant="primary"
             >
-                Test Plaid Link
+                Link with Plaid
             </Button>
-            <Typography>{"link token: " + token}</Typography>
-            <Typography>{"public token: " + publicToken}</Typography>
-            <Typography>{"access token: " + accessToken}</Typography>
-        </Paper>
+            <Typography variant="description">
+                {"[DEBUG]\n"}
+                {"link token: " + token}
+                {"public token: " + publicToken}
+                {"access token: " + accessToken}
+            </Typography>
+        </Stack>
     );
 };
 

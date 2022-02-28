@@ -8,13 +8,22 @@ import { useAuth } from "../hooks/use_auth";
 import SideBarNavView from "../views/side_bar_view";
 import QuickAccountSummary from "../components/quick_account_summary";
 import ComponentGrid from "../layouts/component_grid";
+import UserStatus from "../components/user_status";
 // import ComponentView from "../views/component_view";
 
+import { Paper } from "@mui/material";
 function PortfolioPage(props) {
     return (
         <SideBarNavView
             drawer={<QuickAccountSummary></QuickAccountSummary>}
-            mainContent={<ComponentGrid></ComponentGrid>}
+            mainContent={
+                <div>
+                    <Paper variant="container" sx={{ mb: 2 }}>
+                        <UserStatus></UserStatus>
+                    </Paper>
+                    <ComponentGrid></ComponentGrid>
+                </div>
+            }
         ></SideBarNavView>
     );
 }

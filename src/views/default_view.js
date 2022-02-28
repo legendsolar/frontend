@@ -23,11 +23,11 @@ const DefaultView = (props) => {
                     ml: "auto",
                 }}
             >
-                {auth.user && (
+                {/* {auth.user && (
                     <Paper variant="container" sx={{ mt: 4 }}>
                         <UserStatus></UserStatus>
                     </Paper>
-                )}
+                )} */}
                 {props.children}
             </Box>
         </Box>

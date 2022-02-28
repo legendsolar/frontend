@@ -1,6 +1,8 @@
-import { Stack, Grid, Typography, Box } from "@mui/material";
+import { Stack, Button, Grid, Typography, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const UserStatus = () => {
+    const navigate = useNavigate();
     const statusItems = [
         {
             title: "Your Information",
@@ -23,6 +25,10 @@ const UserStatus = () => {
             sidebarMessage: "Attention Needed",
         },
     ];
+
+    const onClickAction = () => {
+        navigate("/complete-account");
+    };
 
     return (
         <Stack spacing={2}>
@@ -56,6 +62,7 @@ const UserStatus = () => {
                                         p: 2,
                                         width: "100%",
                                     }}
+                                    onClick
                                     justifyContent={"center"}
                                 >
                                     <Typography variant="smallHeadline">
@@ -94,6 +101,24 @@ const UserStatus = () => {
                         </Grid>
                     );
                 })}
+                <Grid
+                    item
+                    xs={12}
+                    sx={{
+                        width: "100%",
+                        mr: 6,
+                    }}
+                >
+                    <Button
+                        sx={{
+                            width: "100%",
+                        }}
+                        variant="primary"
+                        onClick={onClickAction}
+                    >
+                        Complete
+                    </Button>
+                </Grid>
             </Grid>
         </Stack>
     );
