@@ -11,17 +11,39 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import TransactionGrid from "./transaction_grid";
 
+import { useAuth } from "../../hooks/use_auth";
+import { useObject } from "react-firebase-hooks/database";
+
+import { database } from "../../firebase";
+import { ref } from "firebase/database";
+
 const RecentTransfers = () => {
     const dispatch = useDispatch();
+    const auth = useAuth();
+    const [userDataSnap, userDataLoading, userDataError] = useObject(
+        ref(database, "users/" + auth.user.uid)
+    );
 
     const transactionStatus = useSelector((state) => state.transactions.status);
     const transactions = useSelector(selectTransactions);
 
     useEffect(() => {
-        if (transactionStatus === "idle") {
-            dispatch(fetchTransactions());
+        if (
+            transactionStatus === "idle" &&
+            !userDataLoading &&
+            !userDataError
+        ) {
+            const userData = userDataSnap.val();
+            console.log("dispatch");
+            dispatch(fetchTransactions(userData.dwolla.userId));
         }
-    }, [transactionStatus, dispatch]);
+    }, [
+        transactionStatus,
+        userDataLoading,
+        userDataError,
+        userDataSnap,
+        dispatch,
+    ]);
 
     if (transactionStatus === "loading") {
         return <Typography>loading</Typography>;

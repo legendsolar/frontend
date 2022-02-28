@@ -27,13 +27,13 @@ const userCheckingId = "8aa7d0a0-d563-45a1-9c8d-7fb441230636";
 
 export const fetchTransactions = createAsyncThunk(
     "dwolla/fetchTransactions",
-    async () => {
+    async (userId) => {
         const dwolla = dwollaInterface(
             dwollaSandboxConfig.url,
             dwollaCallWrapper
         );
 
-        const rawTransferObject = await dwolla.searchTransfers(userDwollaId);
+        const rawTransferObject = await dwolla.searchTransfers(userId);
 
         console.log(rawTransferObject);
 
