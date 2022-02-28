@@ -1,4 +1,4 @@
-import { Stack, Button, Box, Typography } from "@mui/material";
+import { Stack, Button, Box, Typography, Link } from "@mui/material";
 import { useEffect, useState } from "react";
 import CheckboxList from "./inputs/checkbox_list";
 
@@ -41,8 +41,11 @@ const AccreditationStatus = ({ onContinue }) => {
 
             <Typography variant="description">
                 We're required to verify your accreditation status. We've
-                partnered with VerifyInvestor to ensure this process is as
-                seemless as possible.
+                partnered with
+                <Link href="https://www.verifyinvestor.com/" target="_blank">
+                    {" VerifyInvestor "}
+                </Link>
+                to ensure this process is as seemless as possible.
             </Typography>
 
             <Button

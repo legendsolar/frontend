@@ -67,7 +67,14 @@ function UserInfo(props) {
 
     return (
         <div>
-            <Typography variant="smallHeadline">Contact</Typography>
+            <Stack spacing={2}>
+                <Typography variant="smallHeadline">Your Info</Typography>
+                <Typography variant="description">
+                    This information will be used to verify your ownership of
+                    accounts provided. All information provided to Legends Solar
+                    will never been shared.{" "}
+                </Typography>
+            </Stack>
 
             <Grid container spacing={2} sx={{ width: "100%", mt: 1 }}>
                 <Grid item xs={12} md={6}>
@@ -77,6 +84,7 @@ function UserInfo(props) {
                         variant="filled"
                         value={formValues.firstName}
                         onChange={handleInputChange}
+                        fullWidth
                     ></TextField>
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -86,6 +94,7 @@ function UserInfo(props) {
                         variant="filled"
                         value={formValues.lastName}
                         onChange={handleInputChange}
+                        fullWidth
                     ></TextField>
                 </Grid>
 
@@ -96,6 +105,7 @@ function UserInfo(props) {
                         variant="filled"
                         value={formValues.lastName}
                         onChange={handleInputChange}
+                        fullWidth
                     ></TextField>
                 </Grid>
 
@@ -106,6 +116,7 @@ function UserInfo(props) {
                         variant="filled"
                         value={formValues.streetAddress}
                         onChange={handleInputChange}
+                        fullWidth
                     ></TextField>
                 </Grid>
 
@@ -116,6 +127,7 @@ function UserInfo(props) {
                         variant="filled"
                         value={formValues.city}
                         onChange={handleInputChange}
+                        fullWidth
                     ></TextField>
                 </Grid>
 
@@ -126,13 +138,15 @@ function UserInfo(props) {
                         variant="filled"
                         value={formValues.state}
                         onChange={handleInputChange}
+                        fullWidth
                     ></TextField>
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12}>
                     <Button
                         variant="contained"
                         color="legendaryGreen"
                         onClick={handleSubmit}
+                        fullWidth
                     >
                         Continue
                     </Button>
