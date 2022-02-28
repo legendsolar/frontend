@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { auth } from "../firebase";
+import { auth, database } from "../firebase";
 import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signOut,
 } from "firebase/auth";
+import { useObject } from "react-firebase-hooks/database";
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...
@@ -22,7 +23,9 @@ export const useAuth = () => {
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
     const [user, setUser] = useState(null);
+    // const [userData, setUserData] = useState(null);
     const [isAuthenticating, setIsAuthenticating] = useState(true);
+
     // Wrap any Firebase methods we want to use making sure ...
     // ... to save the user to state.
     const signin = (email, password) => {
@@ -51,6 +54,13 @@ function useProvideAuth() {
             setUser(null);
         });
     };
+
+    // const userDataSnap = () => {
+    //     if (user.uid) {
+    //         return useObject(ref(database, "users/" + user.uid));
+    //     }
+    //     return null;
+    // };
 
     // const sendPasswordResetEmail = (email) => {
     //     return firebase
@@ -91,5 +101,6 @@ function useProvideAuth() {
         signin,
         signup,
         signout,
+        // userDataSnap,
     };
 }

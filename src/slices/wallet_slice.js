@@ -1,13 +1,11 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { dwollaInterface } from "../dwolla/dwolla_api_interface";
+import {
+    dwollaInterface,
+    getWalletIdFromFundingSources,
+} from "../dwolla/dwolla_api_interface";
 import { dwollaSandboxConfig } from "../dwolla/dwolla_settings";
 import { dwollaCallWrapper } from "../firebase/cloud_functions";
-
-// const initialState = [
-//     { id: "1", title: "First Post!", content: "Hello!" },
-//     { id: "2", title: "Second Post...", content: "More text" },
-//     { id: "3", title: "Third Post...", content: "More text" },
-// ];
+import { useAuth } from "../hooks/use_auth";
 
 const initialState = {
     loadedWallet: {},
@@ -19,16 +17,28 @@ const userDwollaId = "f92da569-41ec-4aa9-ba36-2329b4d26b4b";
 const userWalletId = "da85e28e-2dfb-4690-bfe7-b53818214da3";
 const userCheckingId = "8aa7d0a0-d563-45a1-9c8d-7fb441230636";
 
-export const fetchWallet = createAsyncThunk("dwolla/fetchWallet", async () => {
-    console.log("wallet");
-    const dwolla = dwollaInterface(dwollaSandboxConfig.url, dwollaCallWrapper);
+export const fetchWallet = createAsyncThunk(
+    "dwolla/fetchWallet",
+    async (userId) => {
+        console.log("wallet");
+        console.log(userId);
 
-    const walletObject = await dwolla.getWalletInfo(userWalletId);
+        const dwolla = dwollaInterface(
+            dwollaSandboxConfig.url,
+            dwollaCallWrapper
+        );
 
-    console.log(walletObject);
+        const userFundingSources = await dwolla.getCustomerFundingSources(
+            userId
+        );
 
-    return walletObject;
-});
+        const walletId = getWalletIdFromFundingSources(userFundingSources);
+
+        const walletObject = await dwolla.getWalletInfo(walletId);
+
+        return walletObject;
+    }
+);
 
 const walletSlice = createSlice({
     name: "wallet",
