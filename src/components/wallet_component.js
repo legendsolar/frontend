@@ -153,7 +153,9 @@ const Wallet = () => {
                     date={new Date()}
                 ></TransactionComponent>
 
-                <Button variant="primary">Submit Withdraw</Button>
+                <Button variant="primary" disabled={true}>
+                    Submit Withdraw
+                </Button>
 
                 <Button>View All Transactions</Button>
             </Stack>

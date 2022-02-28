@@ -246,6 +246,14 @@ const themeOptions = {
                     },
                 },
                 {
+                    props: { variant: "primary", disabled: true },
+                    style: {
+                        backgroundColor: paletteOptions.palette.whiteFog.main,
+                        color: paletteOptions.palette.whiteFog.contrastText,
+                        opacity: 1,
+                    },
+                },
+                {
                     props: { variant: "secondary" },
                     style: {
                         backgroundColor: paletteOptions.palette.whiteFog.main,

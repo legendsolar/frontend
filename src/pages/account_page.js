@@ -12,6 +12,7 @@ import UserInfo from "../components/user_info";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
 import MemberHeader from "../components/member_header";
+import AccountsComponent from "../components/accounts_component";
 
 function AccountView(props) {
     const auth = useAuth();
@@ -80,42 +81,7 @@ function AccountView(props) {
                         variant="container"
                         ref={(el) => (contentRefs.current[2] = el)}
                     >
-                        <Typography variant="smallHeadline">
-                            Accounts
-                        </Typography>
-                        <Stack
-                            spacing={2}
-                            justifyContent="center"
-                            alignItems="flex-start"
-                        >
-                            {[
-                                "Bank of America Checking",
-                                "Bank of America Savings",
-                            ].map((name) => {
-                                return (
-                                    <Stack
-                                        direction="row"
-                                        alignItems="center"
-                                        justifyContent={"space-between"}
-                                    >
-                                        <Typography variant="body1">
-                                            {name}
-                                        </Typography>
-
-                                        <Button
-                                            variant="contained"
-                                            color="legendaryGreen"
-                                        >
-                                            Manage
-                                        </Button>
-                                    </Stack>
-                                );
-                            })}
-
-                            <Button variant="contained" color="legendaryGreen">
-                                Link New Account
-                            </Button>
-                        </Stack>
+                        <AccountsComponent></AccountsComponent>
                     </Paper>
                 </Stack>
             }

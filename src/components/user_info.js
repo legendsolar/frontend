@@ -112,7 +112,7 @@ function UserInfo(props) {
                         name="phoneNumber"
                         label="Phone Number"
                         variant="filled"
-                        value={formValues.lastName}
+                        value={formValues.phoneNumber}
                         onChange={handleInputChange}
                         fullWidth
                     ></TextField>

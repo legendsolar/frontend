@@ -47,9 +47,6 @@ const PlaidLink = ({ onSuccess }) => {
     });
     return (
         <Stack>
-            <Typography variant="description">
-                [Debug] Bank Credentials are: user_good, pass_good for any bank
-            </Typography>
             <Button
                 onClick={() => {
                     open();
@@ -64,6 +61,10 @@ const PlaidLink = ({ onSuccess }) => {
                 {"link token: " + token}
                 {"public token: " + publicToken}
                 {"access token: " + accessToken}
+            </Typography>
+
+            <Typography variant="description">
+                [Debug] Bank Credentials are: user_good, pass_good for any bank
             </Typography>
         </Stack>
     );
