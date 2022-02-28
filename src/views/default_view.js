@@ -2,8 +2,11 @@ import { Box, Stack, Paper, Grid, Container } from "@mui/material";
 import DefaultErrorBoundary from "../components/errors/default_error_boundary";
 import NavBar from "../components/nav_bar";
 import UserStatus from "../components/user_status";
+import { useAuth } from "../hooks/use_auth";
 
 const DefaultView = (props) => {
+    const auth = useAuth();
+
     return (
         <Box justifyContent="center" alignItems="center" width="100%">
             <NavBar></NavBar>
@@ -20,9 +23,11 @@ const DefaultView = (props) => {
                     ml: "auto",
                 }}
             >
-                <Paper variant="container" sx={{ mt: 4 }}>
-                    <UserStatus></UserStatus>
-                </Paper>
+                {auth.user && (
+                    <Paper variant="container" sx={{ mt: 4 }}>
+                        <UserStatus></UserStatus>
+                    </Paper>
+                )}
                 {props.children}
             </Box>
         </Box>

@@ -31,7 +31,13 @@ const UserStatus = () => {
                 <Typography variant="subtitle1">1/3 Steps Complete</Typography>
             </Stack>
 
-            <Grid container spacing={4}>
+            <Grid
+                container
+                spacing={4}
+                sx={{
+                    width: "100%",
+                }}
+            >
                 {statusItems.map((item) => {
                     return (
                         <Grid item xs={12} lg={4}>
@@ -39,6 +45,8 @@ const UserStatus = () => {
                                 direction={"row"}
                                 sx={{
                                     height: "120px",
+                                    width: "100%",
+                                    pr: 4,
                                 }}
                             >
                                 <Stack
@@ -46,6 +54,7 @@ const UserStatus = () => {
                                         bgcolor: "whiteFog.main",
                                         borderRadius: "5px 0px 0px 5px",
                                         p: 2,
+                                        width: "100%",
                                     }}
                                     justifyContent={"center"}
                                 >
