@@ -120,7 +120,7 @@ const themeOptions = {
             lineHeight: "22.77px",
         },
         body2: {
-            fontWeight: 400,
+            fontWeight: "normal",
             fontSize: "18px",
             lineHeight: "22.77px",
         },
@@ -174,12 +174,21 @@ const themeOptions = {
             },
         },
         MuiChip: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "5px",
+                    textTransform: "uppercase",
+                    fontSize: "10px",
+                    fontFamily: "Azeret Mono",
+                    fontWeight: 600,
+                },
+            },
             variants: [
                 {
                     props: { variant: "light" },
                     style: {
-                        backgroundColor: "#FFF",
-                        color: paletteOptions.palette.blackDawn.main,
+                        backgroundColor: paletteOptions.palette.light.main,
+                        color: paletteOptions.palette.light.contrastText,
                         textTransform: "uppercase",
                         fontSize: "10px",
                     },
