@@ -99,6 +99,7 @@ function AppRouter() {
 
                     {/* Debug */}
                     <Route path="/designSysDemo" element={<DesignSysDemo />} />
+                    <Route path="/loading" element={<LoadingView />} />
                     <Route path="/gridView" element={<GridPage />} />
                     <Route path="/playground" element={<PlaygroundPage />} />
                 </Routes>

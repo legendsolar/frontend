@@ -23,6 +23,7 @@ export default function VerificationPage() {
     const navigate = useNavigate();
     const contentRefs = useRef([]);
     const drawerTitles = ["Contact", "Accreditation", "Banking Information"];
+
     return (
         <SideBarNavView
             drawer={

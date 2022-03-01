@@ -20,9 +20,38 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
 import FullPageComponentView from "../views/full_page_component_view";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default function SignUpView() {
-    const auth = useAuth();
+    const authHook = useAuth();
+    const provider = new GoogleAuthProvider();
+
+    const googleSignIn = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential =
+                    GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                // ...
+            })
+            .catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.email;
+                // The AuthCredential type that was used.
+                const credential =
+                    GoogleAuthProvider.credentialFromError(error);
+                // ...
+                console.error(errorMessage);
+            });
+    };
+
     const navigate = useNavigate();
     const [errorOpen, setErrorOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -35,9 +64,10 @@ export default function SignUpView() {
         const password = data.get("password");
 
         if (email && password) {
-            auth.signup(data.get("email"), data.get("password"))
+            authHook
+                .signup(data.get("email"), data.get("password"))
                 .then(() => {
-                    navigate("/");
+                    navigate("/complete-account");
                 })
                 .catch((error) => {
                     console.log(error);
@@ -63,6 +93,10 @@ export default function SignUpView() {
                 >
                     <Typography variant="subtitle1">Sign up</Typography>
                     <Stack>
+                        <Button onClick={() => googleSignIn()}>
+                            Sign up with Google
+                        </Button>
+                        <Typography align="center">or</Typography>
                         <TextField
                             margin="normal"
                             required

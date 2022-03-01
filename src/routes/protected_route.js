@@ -1,14 +1,14 @@
 import { useAuth } from "../hooks/use_auth";
 import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import LoadingView from "../views/loading_view";
 
 function ProtectedRoute({ children }) {
     const auth = useAuth();
     const location = useLocation();
 
     if (auth.isAuthenticating) {
-        console.log("is authenticating");
-        return <></>;
+        return <LoadingView></LoadingView>;
     }
 
     console.log("auth state");

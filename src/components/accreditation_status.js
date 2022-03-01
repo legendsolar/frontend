@@ -22,15 +22,9 @@ const AccreditationStatus = ({ onContinue }) => {
                 </Typography>
 
                 <Typography variant="description">
-                    We're required to verify your accreditation status. We've
-                    partnered with
-                    <Link
-                        href="https://www.verifyinvestor.com/"
-                        target="_blank"
-                    >
-                        {" VerifyInvestor "}
-                    </Link>
-                    to ensure this process is as seemless as possible.
+                    Legends Solar offers private placements regulated by the SEC
+                    under Regulation D. All investors must be accredited in
+                    order to participate in Legends Solar offerings.
                 </Typography>
 
                 <Stack
