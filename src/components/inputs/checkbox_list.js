@@ -3,21 +3,28 @@ import { Checkbox, Divider, Stack, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 function CheckboxList({ options, onInputChange }) {
     const [checkedList, setCheckedList] = useState(
-        options.map((option) => ("default" in option ? option.default : false))
+        Object.fromEntries(
+            Object.entries(options).map(([key, option]) => [
+                key,
+                option.checked ? option.checked : false,
+            ])
+        )
     );
-    const [exclusive, setExclusive] = useState(-1);
+    const [exclusive, setExclusive] = useState(undefined);
 
-    const setCheckedItem = (i, value) => {
-        if (checkedList[i] != value) {
-            setExclusive(-1);
+    const setCheckedItem = (key, value) => {
+        if (checkedList[key] != value) {
+            setExclusive(undefined);
 
-            const list = checkedList.slice();
-            if (options[i].exclusive && value) {
-                list.fill(false);
-                setExclusive(i);
+            const list = { ...checkedList };
+            if (options[key].exclusive && value) {
+                Object.keys(list).forEach((key) => {
+                    list[key] = false;
+                });
+                setExclusive(key);
             }
 
-            list[i] = value;
+            list[key] = value;
             setCheckedList(list);
 
             onInputChange(list);
@@ -26,19 +33,19 @@ function CheckboxList({ options, onInputChange }) {
 
     return (
         <Stack spacing={2}>
-            {options.map((option, i) => {
+            {Object.entries(options).map(([key, option]) => {
                 return (
-                    <Stack spacing={0} key={i}>
+                    <Stack spacing={0} key={key}>
                         <Stack
                             direction="row"
                             alignItems="center"
                             sx={{ mb: 1 }}
                         >
                             <Checkbox
-                                checked={checkedList[i]}
-                                disabled={exclusive > 0 && exclusive != i}
+                                checked={checkedList[key]}
+                                disabled={exclusive ? exclusive != key : false}
                                 onChange={(event) => {
-                                    setCheckedItem(i, event.target.checked);
+                                    setCheckedItem(key, event.target.checked);
                                 }}
                             ></Checkbox>
                             <Typography
@@ -59,7 +66,7 @@ function CheckboxList({ options, onInputChange }) {
 }
 
 CheckboxList.propTypes = {
-    options: PropTypes.array,
+    options: PropTypes.object,
     singleOption: PropTypes.bool,
 };
 

@@ -17,42 +17,43 @@ const AccreditationStatus = ({ onContinue }) => {
     const auth = useAuth();
     const user = auth.user;
 
-    const accreditationOptionsList = [
-        {
+    const [accreditationOptionsList, setAccreditationOptionsList] = useState({
+        INCOME: {
             title: "Income",
             description:
                 "I earn $200,000 yearly, or $300,000 with my spousal equivalant",
             accredited: true,
             attribute: "INCOME",
         },
-        {
+        PERSONAL_NET_WORTH: {
             title: "Personal Net Worth",
             description:
                 "I have $1,000,000 in assets, excluding my primary residence",
             accredited: true,
             attribute: "PERSONAL_NET_WORTH",
         },
-        {
+        LICENSE_HOLDER: {
             title: "License Holder",
             description:
                 "I hold a Series 7, 65, or 82 license currently in good standing",
             accredited: true,
             attribute: "LICENSE_HOLDER",
         },
-        {
+        ENTITY_OWNER: {
             title: "Entity Owner",
             description:
                 "I own an entity (e.g. family office) with $5,000,000+ in assets",
             accredited: true,
             attribute: "ENTITY_OWNER",
         },
-        {
+        NONE: {
             title: "None of the above",
             description: "I am not an accredited investor",
             exclusive: true,
             accredited: false,
+            attribute: "NONE",
         },
-    ];
+    });
 
     const [checkedList, setCheckedList] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -64,23 +65,39 @@ const AccreditationStatus = ({ onContinue }) => {
 
     if (status == "success") {
         console.log(userInfo);
+        if (
+            userInfo &&
+            userInfo.accreditation &&
+            userInfo.accreditation.attributes
+        ) {
+            const list = { ...accreditationOptionsList };
+            Object.entries(userInfo.accreditation.attributes).map(
+                ([key, val]) => {
+                    if (val.status) {
+                        list[key].checked = val.status;
+                    }
+                }
+            );
+        }
     }
 
     const onContinueClick = () => {
         var accreditationStatus = "NOT_ACCREDITED";
-        const accreditationAttributes = checkedList
-            .map((checked, i) => {
-                if (checked && accreditationOptionsList[i].accredited) {
+        const accreditationAttributes = Object.fromEntries(
+            Object.entries(checkedList).map(([key, checked]) => {
+                if (checked && accreditationOptionsList[key].accredited) {
                     accreditationStatus = "ACCREDITED";
-
-                    return {
-                        title: accreditationOptionsList[i].title,
-                        description: accreditationOptionsList[i].description,
-                        attribute: accreditationOptionsList[i].attribute,
-                    };
                 }
+
+                return [
+                    key,
+                    {
+                        status: checked,
+                        attribute: accreditationOptionsList[key].attribute,
+                    },
+                ];
             })
-            .filter((i) => i);
+        );
 
         const databaseObject = {
             status: accreditationStatus,
@@ -148,7 +165,10 @@ const AccreditationStatus = ({ onContinue }) => {
 
                 <Button
                     variant="primary"
-                    disabled={!checkedList.some((el) => el) || loading}
+                    disabled={
+                        !Object.keys(checkedList).some((k) => checkedList[k]) ||
+                        loading
+                    }
                     onClick={() => onContinueClick()}
                 >
                     {loading ? (

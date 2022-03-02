@@ -191,17 +191,6 @@ function UserInfo(props) {
                     This information will be used to verify your ownership of
                     accounts provided and prevent fraud.{" "}
                 </Typography>
-                <Typography variant="description">{`[DEBUG USER DWOLLA OBJECT]
-                 ${JSON.stringify(userInfo.dwolla, null, 2)}
-                `}</Typography>
-
-                <Typography variant="description">{`[DEBUG USER PLAID OBJECT]
-                 ${JSON.stringify(userInfo.plaid, null, 2)}
-                `}</Typography>
-
-                <Typography variant="description">{`[DEBUG USER ADDRESS OBJECT]
-                 ${JSON.stringify(userInfo.address, null, 2)}
-                `}</Typography>
             </Stack>
 
             <Grid container spacing={2} sx={{ width: "100%", mt: 1 }}>

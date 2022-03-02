@@ -20,6 +20,7 @@ import AccountLinkComponent from "../components/account_link_component";
 
 import { useDatabaseObjectData, useDatabase } from "reactfire";
 import LoadingView from "../views/loading_view";
+import IdentityVerification from "../components/identity_verification";
 
 export default function VerificationPage() {
     const auth = useAuth();
@@ -30,6 +31,7 @@ export default function VerificationPage() {
     const drawerTitles = [
         "Accreditation",
         "Information",
+        "Identity Verification",
         "Link Financial Account",
     ];
 
@@ -71,7 +73,9 @@ export default function VerificationPage() {
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
                         <AccreditationStatus
-                            onContinue={() => {}}
+                            onContinue={() => {
+                                // TODO scroll to next action
+                            }}
                         ></AccreditationStatus>
                     </Paper>
 
@@ -87,6 +91,14 @@ export default function VerificationPage() {
                         sx={{}}
                         variant="container"
                         ref={(el) => (contentRefs.current[2] = el)}
+                    >
+                        <IdentityVerification></IdentityVerification>
+                    </Paper>
+
+                    <Paper
+                        sx={{}}
+                        variant="container"
+                        ref={(el) => (contentRefs.current[3] = el)}
                     >
                         <AccountLinkComponent
                             onContinue={() => {
