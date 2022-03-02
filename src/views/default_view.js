@@ -18,7 +18,7 @@ const DefaultView = (props) => {
                         md: "700px",
                         lg: "1100px",
                     },
-                    mt: 8,
+                    mt: 6,
                     mr: "auto",
                     ml: "auto",
                 }}

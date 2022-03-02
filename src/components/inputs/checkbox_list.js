@@ -1,13 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Checkbox, Divider, Stack, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 function CheckboxList({ options, onInputChange }) {
-    const [checkedList, setCheckedList] = useState([]);
+    const [checkedList, setCheckedList] = useState(
+        options.map((option) => ("default" in option ? option.default : false))
+    );
     const [exclusive, setExclusive] = useState(-1);
-
-    options.map((option) => {
-        checkedList.push("default" in option ? option.default : false);
-    });
 
     const setCheckedItem = (i, value) => {
         if (checkedList[i] != value) {
@@ -30,7 +28,7 @@ function CheckboxList({ options, onInputChange }) {
         <Stack spacing={2}>
             {options.map((option, i) => {
                 return (
-                    <Stack spacing={0}>
+                    <Stack spacing={0} key={i}>
                         <Stack
                             direction="row"
                             alignItems="center"

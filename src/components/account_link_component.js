@@ -11,7 +11,9 @@ const AccountLinkComponent = ({ onContinue }) => {
 
     return (
         <Stack spacing={2}>
-            <Typography variant="smallHeadline">Link Institution</Typography>
+            <Typography variant="smallHeadline">
+                Link Financial Account
+            </Typography>
 
             <Typography variant="description">
                 We need to link an account to transfer money from your Wallet to{" "}

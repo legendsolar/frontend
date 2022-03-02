@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { auth, database } from "../firebase";
+import { auth } from "../firebase";
+import { useDatabase } from "reactfire";
 import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
@@ -7,6 +8,7 @@ import {
     signOut,
 } from "firebase/auth";
 import { useObject } from "react-firebase-hooks/database";
+import { ref } from "firebase/database";
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...
@@ -23,6 +25,7 @@ export const useAuth = () => {
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
     const [user, setUser] = useState(null);
+    const database = useDatabase();
     // const [userData, setUserData] = useState(null);
     const [isAuthenticating, setIsAuthenticating] = useState(true);
 
@@ -53,6 +56,12 @@ function useProvideAuth() {
             setIsAuthenticating(false);
             setUser(null);
         });
+    };
+
+    const getUserDatabaseRef = () => {
+        if (user.uid) {
+            // return ref(database, "users/" + user.uid);
+        }
     };
 
     // const userDataSnap = () => {
@@ -101,6 +110,7 @@ function useProvideAuth() {
         signin,
         signup,
         signout,
+        getUserDatabaseRef,
         // userDataSnap,
     };
 }
