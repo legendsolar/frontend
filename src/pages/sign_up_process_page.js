@@ -22,7 +22,9 @@ export default function VerificationPage() {
     const auth = useAuth();
     const navigate = useNavigate();
     const contentRefs = useRef([]);
-    const drawerTitles = ["Contact", "Accreditation", "Banking Information"];
+    const drawerTitles = ["Accreditation", "Information", "Link Institution"];
+
+    const [signUpState, setSignUpState] = useState("ACCREDITATION");
 
     return (
         <SideBarNavView
@@ -48,18 +50,19 @@ export default function VerificationPage() {
                         variant="container"
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
-                        <UserInfo></UserInfo>
-                    </Paper>
-                    <Paper
-                        sx={{}}
-                        variant="container"
-                        ref={(el) => (contentRefs.current[1] = el)}
-                    >
                         <AccreditationStatus
                             onContinue={() => {
                                 navigate("/explore");
                             }}
                         ></AccreditationStatus>
+                    </Paper>
+
+                    <Paper
+                        sx={{}}
+                        variant="container"
+                        ref={(el) => (contentRefs.current[1] = el)}
+                    >
+                        <UserInfo></UserInfo>
                     </Paper>
 
                     <Paper

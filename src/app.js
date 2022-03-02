@@ -7,16 +7,24 @@ import ErrorPage from "./pages/error_page";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import { DatabaseProvider, FirebaseAppProvider } from "reactfire";
+
+import { database, firebaseApp, firebaseConfig } from "./firebase";
+
 function App() {
     return (
         <ErrorBoundary fallback={<ErrorPage></ErrorPage>}>
-            <Provider store={store}>
-                <ThemeProvider theme={appTheme}>
-                    <ProvideAuth>
-                        <AppRouter></AppRouter>
-                    </ProvideAuth>
-                </ThemeProvider>
-            </Provider>
+            <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+                <DatabaseProvider sdk={database}>
+                    <Provider store={store}>
+                        <ThemeProvider theme={appTheme}>
+                            <ProvideAuth>
+                                <AppRouter></AppRouter>
+                            </ProvideAuth>
+                        </ThemeProvider>
+                    </Provider>
+                </DatabaseProvider>
+            </FirebaseAppProvider>
         </ErrorBoundary>
     );
 }
