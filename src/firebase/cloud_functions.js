@@ -26,22 +26,10 @@ const firebaseDwollaCallWrapper = httpsCallable(
     "dwollaNewCallWrapper_https_ext"
 );
 
-/** Dwolla Pass Through */
-const dwollaCallWrapper = async (params) => {
-    const returned = await firebaseDwollaCallWrapper(params);
-    return returned.data;
-};
-
-const onCallTest = httpsCallable(functions, "onCallTest");
-const hatemylife = httpsCallable(functions, "ihatemylife_ext");
-
 export {
     createDwollaAccount,
     getWalletBalance,
     createPlaidLinkToken,
     exchangePublicTokenForAccessToken,
-    dwollaCallWrapper,
-    onCallTest,
-    hatemylife,
     firebaseDwollaCallWrapper,
 };

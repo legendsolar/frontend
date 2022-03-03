@@ -1,10 +1,4 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import {
-    dwollaInterface,
-    getWalletIdFromFundingSources,
-} from "../dwolla/dwolla_api_interface";
-import { dwollaSandboxConfig } from "../dwolla/dwolla_settings";
-import { dwollaCallWrapper } from "../firebase/cloud_functions";
 import { useAuth } from "../hooks/use_auth";
 
 const initialState = {
@@ -20,23 +14,18 @@ const userCheckingId = "8aa7d0a0-d563-45a1-9c8d-7fb441230636";
 export const fetchWallet = createAsyncThunk(
     "dwolla/fetchWallet",
     async (userId) => {
-        console.log("wallet");
-        console.log(userId);
-
-        const dwolla = dwollaInterface(
-            dwollaSandboxConfig.url,
-            dwollaCallWrapper
-        );
-
-        const userFundingSources = await dwolla.getCustomerFundingSources(
-            userId
-        );
-
-        const walletId = getWalletIdFromFundingSources(userFundingSources);
-
-        const walletObject = await dwolla.getWalletInfo(walletId);
-
-        return walletObject;
+        // console.log("wallet");
+        // console.log(userId);
+        // const dwolla = dwollaInterface(
+        //     dwollaSandboxConfig.url,
+        //     dwollaCallWrapper
+        // );
+        // const userFundingSources = await dwolla.getCustomerFundingSources(
+        //     userId
+        // );
+        // const walletId = getWalletIdFromFundingSources(userFundingSources);
+        // const walletObject = await dwolla.getWalletInfo(walletId);
+        // return walletObject;
     }
 );
 
@@ -45,20 +34,20 @@ const walletSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers(builder) {
-        builder
-            .addCase(fetchWallet.pending, (state, action) => {
-                state.status = "loading";
-            })
-            .addCase(fetchWallet.fulfilled, (state, action) => {
-                state.status = "succeeded";
-                // actually add the retrieved transactions
-                state.loadedWallet = action.payload;
-            })
-            .addCase(fetchWallet.rejected, (state, action) => {
-                state.status = "failed";
-                console.log(action.error);
-                state.error = action.error.message;
-            });
+        // builder
+        //     .addCase(fetchWallet.pending, (state, action) => {
+        //         state.status = "loading";
+        //     })
+        //     .addCase(fetchWallet.fulfilled, (state, action) => {
+        //         state.status = "succeeded";
+        //         // actually add the retrieved transactions
+        //         state.loadedWallet = action.payload;
+        //     })
+        //     .addCase(fetchWallet.rejected, (state, action) => {
+        //         state.status = "failed";
+        //         console.log(action.error);
+        //         state.error = action.error.message;
+        //     });
     },
 });
 

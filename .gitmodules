@@ -1,3 +1,0 @@
-[submodule "src/dwolla"]
-	path = src/dwolla
-	url = https://github.com/legendsolar/dwolla_api

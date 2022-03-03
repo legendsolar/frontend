@@ -1,19 +1,5 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import {
-    dwollaInterface,
-    getIdFromHeader,
-    getTransferArrayFromQuery,
-    getTransferDestinationFundingId,
-    getTransferSourceFundingId,
-} from "../dwolla/dwolla_api_interface";
-import { dwollaSandboxConfig } from "../dwolla/dwolla_settings";
 import { dwollaCallWrapper } from "../firebase/cloud_functions";
-
-// const initialState = [
-//     { id: "1", title: "First Post!", content: "Hello!" },
-//     { id: "2", title: "Second Post...", content: "More text" },
-//     { id: "3", title: "Third Post...", content: "More text" },
-// ];
 
 const initialState = {
     loadedTransactions: [],
@@ -28,65 +14,50 @@ const userCheckingId = "8aa7d0a0-d563-45a1-9c8d-7fb441230636";
 export const fetchTransactions = createAsyncThunk(
     "dwolla/fetchTransactions",
     async (userId) => {
-        const dwolla = dwollaInterface(
-            dwollaSandboxConfig.url,
-            dwollaCallWrapper
-        );
-
-        const rawTransferObject = await dwolla.searchTransfers(userId);
-
-        console.log(rawTransferObject);
-
-        const transferArray = getTransferArrayFromQuery(rawTransferObject);
-
-        // const namedTransferArray = await Promise.all(
-        //     transferArray.map(async (transfer) => {
-        //         const sourceInfo = await dwolla.getFundingSource(
-        //             getTransferSourceFundingId(transfer)
-        //         );
-
-        //         const destInfo = await dwolla.getFundingSource(
-        //             getTransferDestinationFundingId(transfer)
-        //         );
-
-        //         console.log(sourceInfo);
-        //         console.log(destInfo);
-
-        //         return { ...transfer };
-        //     })
+        // const dwolla = dwollaInterface(
+        //     dwollaSandboxConfig.url,
+        //     dwollaCallWrapper
         // );
-
-        console.log(transferArray);
-        // console.log(namedTransferArray);
-
-        return transferArray;
+        // const rawTransferObject = await dwolla.searchTransfers(userId);
+        // console.log(rawTransferObject);
+        // const transferArray = getTransferArrayFromQuery(rawTransferObject);
+        // // const namedTransferArray = await Promise.all(
+        // //     transferArray.map(async (transfer) => {
+        // //         const sourceInfo = await dwolla.getFundingSource(
+        // //             getTransferSourceFundingId(transfer)
+        // //         );
+        // //         const destInfo = await dwolla.getFundingSource(
+        // //             getTransferDestinationFundingId(transfer)
+        // //         );
+        // //         console.log(sourceInfo);
+        // //         console.log(destInfo);
+        // //         return { ...transfer };
+        // //     })
+        // // );
+        // console.log(transferArray);
+        // // console.log(namedTransferArray);
+        // return transferArray;
     }
 );
 
 export const createTransaction = createAsyncThunk(
     "dwolla/createTransaction",
     async (initialTransaction) => {
-        const dwolla = dwollaInterface(
-            dwollaSandboxConfig.url,
-            dwollaCallWrapper
-        );
-
-        console.log("sent");
-
-        const resp = await dwolla.createTransfer(
-            userWalletId,
-            userCheckingId,
-            0.99
-        );
-
-        console.log("returned");
-        console.log(resp);
-
-        const transactionId = getIdFromHeader(resp);
-
-        const verificationResp = await dwolla.getTransferById(transactionId);
-
-        return verificationResp;
+        // const dwolla = dwollaInterface(
+        //     dwollaSandboxConfig.url,
+        //     dwollaCallWrapper
+        // );
+        // console.log("sent");
+        // const resp = await dwolla.createTransfer(
+        //     userWalletId,
+        //     userCheckingId,
+        //     0.99
+        // );
+        // console.log("returned");
+        // console.log(resp);
+        // const transactionId = getIdFromHeader(resp);
+        // const verificationResp = await dwolla.getTransferById(transactionId);
+        // return verificationResp;
     }
 );
 
@@ -95,23 +66,23 @@ const transactionSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers(builder) {
-        builder
-            .addCase(fetchTransactions.pending, (state, action) => {
-                state.status = "loading";
-            })
-            .addCase(fetchTransactions.fulfilled, (state, action) => {
-                state.status = "succeeded";
-                // actually add the retrieved transactions
-                state.loadedTransactions.push(...action.payload);
-            })
-            .addCase(fetchTransactions.rejected, (state, action) => {
-                state.status = "failed";
-                console.log(action.error);
-                state.error = action.error.message;
-            })
-            .addCase(createTransaction.fulfilled, (state, action) => {
-                state.loadedTransactions.push(action.payload);
-            });
+        // builder
+        //     .addCase(fetchTransactions.pending, (state, action) => {
+        //         state.status = "loading";
+        //     })
+        //     .addCase(fetchTransactions.fulfilled, (state, action) => {
+        //         state.status = "succeeded";
+        //         // actually add the retrieved transactions
+        //         state.loadedTransactions.push(...action.payload);
+        //     })
+        //     .addCase(fetchTransactions.rejected, (state, action) => {
+        //         state.status = "failed";
+        //         console.log(action.error);
+        //         state.error = action.error.message;
+        //     })
+        //     .addCase(createTransaction.fulfilled, (state, action) => {
+        //         state.loadedTransactions.push(action.payload);
+        //     });
     },
 });
 
