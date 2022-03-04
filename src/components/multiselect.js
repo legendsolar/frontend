@@ -6,35 +6,42 @@ import {
     Select,
     Typography,
 } from "@mui/material";
-import { useState } from "react";
 
-const MultiSelectQuestion = () => {
-    const [selectedAnswer, setSelectedAnswer] = useState("none");
-
+const MultiSelect = ({ id, text, fields, value, onChangeListener }) => {
     const handleChange = (event) => {
-        setSelectedAnswer(event.target.value);
+        const value = event.target.value;
+
+        onChangeListener({
+            id: id,
+            value: value,
+        });
     };
 
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
                 <Typography variant="body2" sx={{ mb: 2 }}>
-                    Question 1
+                    {text}
                 </Typography>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={selectedAnswer}
+                    value={value ? value : ""}
                     displayEmpty
                     onChange={handleChange}
                 >
-                    <MenuItem value={10}>Answer 1</MenuItem>
-                    <MenuItem value={10}>Answer 2</MenuItem>
-                    <MenuItem value={10}>Answer 3</MenuItem>
+                    {fields.map((field) => {
+                        console.log(field);
+                        return (
+                            <MenuItem value={field.id} key={field.id}>
+                                {field.text}
+                            </MenuItem>
+                        );
+                    })}
                 </Select>
             </FormControl>
         </Box>
     );
 };
 
-export default MultiSelectQuestion;
+export default MultiSelect;

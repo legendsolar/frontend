@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
     createDwollaAccount,
     getWalletBalance,
+    returnKBASessionResponse,
 } from "../firebase/cloud_functions";
 import { Typography, Stack, Paper } from "@mui/material";
 
@@ -21,6 +22,8 @@ import AccountLinkComponent from "../components/account_link_component";
 import { useDatabaseObjectData, useDatabase } from "reactfire";
 import LoadingView from "../views/loading_view";
 import IdentityVerification from "../components/identity_verification";
+
+import { getKBASession } from "../firebase/cloud_functions";
 
 export default function VerificationPage() {
     const auth = useAuth();
@@ -42,6 +45,21 @@ export default function VerificationPage() {
 
     const updateUserState = (newState) => {
         set(ref(database, "users/" + user.uid + "/state/signUp"), newState);
+    };
+
+    const [kbaQuestions, setKBAQuestions] = useState([]);
+
+    useEffect(() => {
+        getKBASession().then(({ data }) => {
+            setKBAQuestions(data.questions);
+        });
+    }, []);
+
+    const onSubmitKBA = (selections) => {
+        console.log("submitted kba");
+        console.log(selections);
+
+        returnKBASessionResponse(selections);
     };
 
     if (status === "loading") {
@@ -92,7 +110,11 @@ export default function VerificationPage() {
                         variant="container"
                         ref={(el) => (contentRefs.current[2] = el)}
                     >
-                        <IdentityVerification></IdentityVerification>
+                        <IdentityVerification
+                            questions={kbaQuestions}
+                            idVerification={false}
+                            onSubmit={onSubmitKBA}
+                        ></IdentityVerification>
                     </Paper>
 
                     <Paper

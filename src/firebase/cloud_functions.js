@@ -8,8 +8,6 @@ const createDwollaAccount = httpsCallable(
     "createNewVerifiedDwollaUser_ext"
 );
 
-const getWalletBalance = httpsCallable(functions, "getWalletBalance_ext");
-
 /** Plaid Pass Through Functions */
 
 const createPlaidLinkToken = httpsCallable(
@@ -26,9 +24,35 @@ const firebaseDwollaCallWrapper = httpsCallable(
     "dwollaNewCallWrapper_https_ext"
 );
 
+/** Dwolla */
+
+// TODO less dumb way to populate this
+
+export const getWalletBalance = httpsCallable(
+    functions,
+    "getWalletBalance_https_ext"
+);
+export const createTransfer = httpsCallable(
+    functions,
+    "createTransfer_https_ext"
+);
+export const getRecentTransfer = httpsCallable(
+    functions,
+    "getRecentTransfer_https_ext"
+);
+
+export const getKBASession = httpsCallable(
+    functions,
+    "getKBASession_https_ext"
+);
+
+export const returnKBASessionResponse = httpsCallable(
+    functions,
+    "returnKBASessionResponse_https_ext"
+);
+
 export {
     createDwollaAccount,
-    getWalletBalance,
     createPlaidLinkToken,
     exchangePublicTokenForAccessToken,
     firebaseDwollaCallWrapper,
