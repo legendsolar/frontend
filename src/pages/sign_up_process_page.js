@@ -112,7 +112,7 @@ export default function VerificationPage() {
                     >
                         <IdentityVerification
                             questions={kbaQuestions}
-                            idVerification={false}
+                            idVerification={true}
                             onSubmit={onSubmitKBA}
                         ></IdentityVerification>
                     </Paper>

@@ -1,5 +1,5 @@
 import { Typography, Stack, Button } from "@mui/material";
-import FileUpload from "./file_upload";
+import ImageUpload from "./image_upload";
 import MultiSelect from "./multiselect";
 import { useEffect, useState } from "react";
 
@@ -45,7 +45,7 @@ const IdentityVerification = ({ questions, idVerification, onSubmit }) => {
                     <Typography variant="description">
                         Document Upload
                     </Typography>
-                    <FileUpload></FileUpload>
+                    <ImageUpload></ImageUpload>
                 </Stack>
             )}
 
