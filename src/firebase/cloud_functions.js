@@ -51,6 +51,11 @@ export const returnKBASessionResponse = httpsCallable(
     "returnKBASessionResponse_https_ext"
 );
 
+export const receiveIdVerificationDocument = httpsCallable(
+    functions,
+    "receiveIdVerificationDocument_https_ext"
+);
+
 export {
     createDwollaAccount,
     createPlaidLinkToken,

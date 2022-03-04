@@ -40,15 +40,6 @@ const IdentityVerification = ({ questions, idVerification, onSubmit }) => {
                 );
             })}
 
-            {idVerification && (
-                <Stack>
-                    <Typography variant="description">
-                        Document Upload
-                    </Typography>
-                    <ImageUpload></ImageUpload>
-                </Stack>
-            )}
-
             <Button
                 variant="primary"
                 onClick={() => onSubmit(selected)}

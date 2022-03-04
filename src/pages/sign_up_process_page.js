@@ -24,6 +24,7 @@ import LoadingView from "../views/loading_view";
 import IdentityVerification from "../components/identity_verification";
 
 import { getKBASession } from "../firebase/cloud_functions";
+import ImageUpload from "../components/image_upload";
 
 export default function VerificationPage() {
     const auth = useAuth();
@@ -110,11 +111,29 @@ export default function VerificationPage() {
                         variant="container"
                         ref={(el) => (contentRefs.current[2] = el)}
                     >
-                        <IdentityVerification
-                            questions={kbaQuestions}
-                            idVerification={true}
-                            onSubmit={onSubmitKBA}
-                        ></IdentityVerification>
+                        <Stack spacing={2}>
+                            <IdentityVerification
+                                questions={kbaQuestions}
+                                idVerification={true}
+                                onSubmit={onSubmitKBA}
+                            ></IdentityVerification>
+
+                            <Typography variant="headline3">
+                                {`Document Verification`}
+                            </Typography>
+
+                            <Typography variant="description">
+                                {`A scan of a passport, driver's license or government 
+                                issued ID is required to verify your identity.`}
+                            </Typography>
+
+                            <Typography variant="description">
+                                {`\nAll four edges of the document should be visible, and the image should be 
+                            directly above the document.`}
+                            </Typography>
+
+                            <ImageUpload></ImageUpload>
+                        </Stack>
                     </Paper>
 
                     <Paper
