@@ -21,6 +21,7 @@ import Weather from "../components/weather/weather";
 import CheckboxList from "../components/inputs/checkbox_list";
 import Wallet from "../components/wallet_component";
 import UserStatus from "../components/user_status";
+import DefaultComponent from "../components/default_component";
 
 const DesignSysDemo = (props) => {
     const theme = useTheme();
@@ -30,6 +31,7 @@ const DesignSysDemo = (props) => {
 
     return (
         <Stack spacing={2} sx={{ m: 2 }}>
+            <Typography variant="headline1">Theme</Typography>
             <Paper variant="container">
                 <Stack>
                     <Typography variant="subtitle2">{"Typography"}</Typography>
@@ -156,7 +158,11 @@ const DesignSysDemo = (props) => {
 
                     <Button color="light">Light Button</Button>
                     <Button color="legendaryGreen">Green Button</Button>
+                </Stack>
+            </Paper>
 
+            <Paper variant="container">
+                <Stack>
                     <Typography variant="subtitle2">Check Box Lists</Typography>
                     <CheckboxList
                         options={[
@@ -179,7 +185,7 @@ const DesignSysDemo = (props) => {
 
             <Paper variant="container">
                 <Stack>
-                    <Typography variant="subtitle2">Text</Typography>
+                    <Typography variant="subtitle2">Text Inputs</Typography>
                     <Typography variant="subtitle3">Filled Text Box</Typography>
 
                     <TextField
@@ -198,6 +204,56 @@ const DesignSysDemo = (props) => {
             </Typography>
 
             <Divider sx={{ m: 2 }} />
+
+            <Typography variant="subtitle1">Default Component</Typography>
+
+            <DefaultComponent>
+                <Stack>
+                    <Typography variant="smallHeadline">
+                        Default Component
+                    </Typography>
+                    <Typography variant="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Nulla facilisi cras fermentum odio eu
+                        feugiat pretium nibh.
+                    </Typography>
+
+                    <Button variant="primary">Button</Button>
+                </Stack>
+            </DefaultComponent>
+
+            <DefaultComponent inactive={true}>
+                <Stack>
+                    <Typography variant="smallHeadline">
+                        Inactive Default Component
+                    </Typography>
+                    <Typography variant="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Nulla facilisi cras fermentum odio eu
+                        feugiat pretium nibh.
+                    </Typography>
+
+                    <Button variant="primary">Button</Button>
+                </Stack>
+            </DefaultComponent>
+
+            <DefaultComponent disabled={true} inactive={true}>
+                <Stack>
+                    <Typography variant="smallHeadline">
+                        Inactive and Disabled Default Component
+                    </Typography>
+                    <Typography variant="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Nulla facilisi cras fermentum odio eu
+                        feugiat pretium nibh.
+                    </Typography>
+
+                    <Button variant="primary">Button</Button>
+                </Stack>
+            </DefaultComponent>
 
             <Typography variant="subtitle1">Wallet</Typography>
 

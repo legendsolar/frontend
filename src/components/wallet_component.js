@@ -26,23 +26,23 @@ import { database } from "../firebase";
 import { ref } from "firebase/database";
 
 const Wallet = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const auth = useAuth();
-    const [userDataSnap, userDataLoading, userDataError] = useObject(
-        ref(database, "users/" + auth.user.uid)
-    );
+    // const [userDataSnap, userDataLoading, userDataError] = useObject(
+    // ref(database, "users/" + auth.user.uid)
+    // );
 
     const walletStatus = useSelector((state) => state.wallet.status);
     const wallet = useSelector(selectWallet);
     const walletAmount = useSelector(selectWalletTotal);
 
-    useEffect(() => {
-        if (walletStatus === "idle" && !userDataLoading && !userDataError) {
-            const userData = userDataSnap.val();
-            console.log("dispatch");
-            dispatch(fetchWallet(userData.dwolla.userId));
-        }
-    }, [walletStatus, userDataLoading, userDataError, userDataSnap, dispatch]);
+    // useEffect(() => {
+    //     if (walletStatus === "idle" && !userDataLoading && !userDataError) {
+    //         const userData = userDataSnap.val();
+    //         console.log("dispatch");
+    //         dispatch(fetchWallet(userData.dwolla.userId));
+    //     }
+    // }, [walletStatus, userDataLoading, userDataError, userDataSnap, dispatch]);
 
     const amount = walletStatus === "succeeded" ? walletAmount : "-";
 

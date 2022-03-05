@@ -25,6 +25,7 @@ import IdentityVerification from "../components/identity_verification";
 
 import { getKBASession } from "../firebase/cloud_functions";
 import ImageUpload from "../components/image_upload";
+import DefaultComponent from "../components/default_component";
 
 export default function VerificationPage() {
     const auth = useAuth();
@@ -86,31 +87,23 @@ export default function VerificationPage() {
             }
             mainContent={
                 <Stack spacing={2}>
-                    <Paper
-                        sx={{}}
-                        variant="container"
-                        ref={(el) => (contentRefs.current[0] = el)}
-                    >
+                    <DefaultComponent>
                         <AccreditationStatus
                             onContinue={() => {
                                 // TODO scroll to next action
                             }}
                         ></AccreditationStatus>
-                    </Paper>
+                    </DefaultComponent>
 
-                    <Paper
-                        sx={{}}
-                        variant="container"
-                        ref={(el) => (contentRefs.current[1] = el)}
-                    >
-                        <UserInfo></UserInfo>
-                    </Paper>
+                    <DefaultComponent disabled={true}>
+                        <UserInfo
+                            onContinue={() => {
+                                // TODO scroll to next action
+                            }}
+                        ></UserInfo>
+                    </DefaultComponent>
 
-                    <Paper
-                        sx={{}}
-                        variant="container"
-                        ref={(el) => (contentRefs.current[2] = el)}
-                    >
+                    <DefaultComponent disabled={true}>
                         <Stack spacing={2}>
                             <IdentityVerification
                                 questions={kbaQuestions}
@@ -134,19 +127,15 @@ export default function VerificationPage() {
 
                             <ImageUpload></ImageUpload>
                         </Stack>
-                    </Paper>
+                    </DefaultComponent>
 
-                    <Paper
-                        sx={{}}
-                        variant="container"
-                        ref={(el) => (contentRefs.current[3] = el)}
-                    >
+                    <DefaultComponent disabled={true}>
                         <AccountLinkComponent
                             onContinue={() => {
                                 navigate("/explore");
                             }}
                         ></AccountLinkComponent>
-                    </Paper>
+                    </DefaultComponent>
                 </Stack>
             }
         ></SideBarNavView>
