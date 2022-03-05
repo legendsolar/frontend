@@ -50,12 +50,12 @@ function CheckboxList({ options, onInputChange }) {
                             ></Checkbox>
                             <Typography
                                 sx={{ mt: 1, mb: 1 }}
-                                variant="smallHeadline"
+                                variant="subtitle1"
                             >
                                 {option.title}
                             </Typography>
                         </Stack>
-                        <Typography variant="body2">
+                        <Typography variant="description">
                             {option.description}
                         </Typography>
                     </Stack>

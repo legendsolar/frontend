@@ -14,8 +14,8 @@ const DefaultView = (props) => {
             <Box
                 sx={{
                     maxWidth: {
-                        sm: "500px",
-                        md: "700px",
+                        sm: "550px",
+                        md: "850px",
                         lg: "1100px",
                     },
                     mt: 6,

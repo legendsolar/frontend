@@ -119,7 +119,6 @@ const AccreditationStatus = ({ onContinue }) => {
         <div>
             <Stack
                 sx={{
-                    backgroundColor: "whiteHaze.main",
                     mt: -2,
                     p: 2,
                     ml: -2,
@@ -128,9 +127,21 @@ const AccreditationStatus = ({ onContinue }) => {
                 spacing={2}
                 justifyContent="space-between"
             >
-                <Typography variant="smallHeadline">
-                    Accreditation Status
-                </Typography>
+                <Stack
+                    direction={"row"}
+                    justifyContent="space-between"
+                    alignItems={"end"}
+                >
+                    <Typography variant="smallHeadline">
+                        Accreditation Status
+                    </Typography>
+
+                    <Chip
+                        label="Learn About Investor Accreditation"
+                        variant="light"
+                        onClick={() => {}}
+                    ></Chip>
+                </Stack>
 
                 <Typography variant="description">
                     Legends Solar offers private placements regulated by the SEC
@@ -138,20 +149,7 @@ const AccreditationStatus = ({ onContinue }) => {
                     order to participate in Legends Solar offerings.
                 </Typography>
 
-                <Stack
-                    direction={"row"}
-                    justifyContent="space-between"
-                    alignItems={"end"}
-                >
-                    <Typography variant="body2">
-                        Check all that apply
-                    </Typography>
-                    <Chip
-                        label="Learn About Investor Accreditation"
-                        variant="light"
-                        onClick={() => {}}
-                    ></Chip>
-                </Stack>
+                <Typography variant="body2">Check all that apply</Typography>
             </Stack>
 
             <Stack>

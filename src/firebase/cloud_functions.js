@@ -56,6 +56,11 @@ export const receiveIdVerificationDocument = httpsCallable(
     "receiveIdVerificationDocument_https_ext"
 );
 
+export const attemptCreateNewDwollaVerifiedUser = httpsCallable(
+    functions,
+    "attemptCreateNewDwollaVerifiedUser_https_ext"
+);
+
 export {
     createDwollaAccount,
     createPlaidLinkToken,

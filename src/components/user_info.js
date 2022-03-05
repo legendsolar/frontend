@@ -1,4 +1,4 @@
-import { Box, Stack, Paper, Grid } from "@mui/material";
+import { Alert, Box, Stack, Paper, Grid } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import { get, ref, set } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
@@ -7,16 +7,16 @@ import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { useDatabaseObjectData, useDatabase } from "reactfire";
+import { attemptCreateNewDwollaVerifiedUser } from "../firebase/cloud_functions";
 
 function UserInfo(props) {
-    const [value, setValue] = useState(0);
-
     const auth = useAuth();
     const user = auth.user;
-    const assetId = "-MtUpMiLZ0cvkQ-Dok2z";
-    const theme = useTheme();
 
-    const saveUserInfo = () => {};
+    const database = useDatabase();
+    const { status, data: userInfo } = useDatabaseObjectData(
+        ref(database, "users/" + user.uid)
+    );
 
     const startingValues = {
         firstName: {
@@ -48,44 +48,28 @@ function UserInfo(props) {
         },
     };
 
-    const database = useDatabase();
-    const { status, data: userInfo } = useDatabaseObjectData(
-        ref(database, "users/" + user.uid)
-    );
-
-    if (status === "success") {
-        console.log({
-            status,
-            userInfo,
-        });
-    }
-
     const [formValues, setFormValues] = useState(startingValues);
+    const [submitErrorMessage, setSubmitErrorMessage] = useState(undefined);
 
-    useEffect(() => {
-        // set initial to saved values
-        get(ref(database, "users/" + user.uid))
-            .then((userInfoSnapshot) => {
-                if (userInfoSnapshot && userInfoSnapshot.exists()) {
-                    const userObject = userInfoSnapshot.val();
-                    console.log(userInfoSnapshot.val());
+    if (status == "success") {
+        if (
+            userInfo &&
+            userInfo.info &&
+            userInfo.info.address &&
+            userInfo.info.name
+        ) {
+            const info = userInfo.info;
+            const loadedUserData = { ...formValues };
 
-                    const updatedObject = { ...formValues };
+            loadedUserData.firstName.value = info.name.first;
+            loadedUserData.lastName.value = info.name.last;
+            loadedUserData.streetAddress.value = info.address.streetNumber;
+            loadedUserData.city.value = info.address.city;
+            loadedUserData.state.value = info.address.state;
 
-                    updatedObject.firstName.value = userObject.name.first;
-                    updatedObject.lastName.value = userObject.name.last;
-                    updatedObject.streetAddress.value =
-                        userObject.address.streetNumber;
-                    updatedObject.city.value = userObject.address.city;
-                    updatedObject.state.value = userObject.address.state;
-
-                    formDataValid(updatedObject);
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }, []);
+            formDataValid(loadedUserData);
+        }
+    }
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -122,13 +106,15 @@ function UserInfo(props) {
 
         if (!formData.streetAddress.value) {
             formData.firstName.error = true;
-            formData.firstName.errMsg = undefined;
+            formData.firstName.errMsg = "Street required";
         } else {
             formData.streetAddress.error = false;
             formData.streetAddress.errMsg = undefined;
         }
 
         if (!formData.city.value) {
+            formData.city.error = true;
+            formData.city.errMsg = "City required";
         } else {
             formData.city.error = false;
             formData.city.errMsg = undefined;
@@ -145,7 +131,7 @@ function UserInfo(props) {
         if (!formData.postalCode.value) {
             formData.postalCode.error = true;
             formData.postalCode.errMsg = "Zip code required";
-        } else if (!formData.postalCode.value.match(/\d{6}/g)) {
+        } else if (!formData.postalCode.value.match(/\d{5}/g)) {
             formData.postalCode.error = true;
             formData.postalCode.errMsg = "Zip code invalid";
         } else {
@@ -166,11 +152,33 @@ function UserInfo(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // set(ref(database, "users/" + user.uid + "/info"), formValues).then(
-        //     () => {
-        //         console.log("complete");
-        //     }
-        // );
+
+        const dwollaObject = {
+            name: {
+                first: formValues.firstName.value,
+                last: formValues.lastName.value,
+            },
+            address: {
+                streetAddress: formValues.streetAddress.value,
+                streetAddress2: formValues.streetAddress2.value,
+                city: formValues.city.value,
+                state: formValues.state.value,
+                postalCode: formValues.postalCode.value,
+            },
+            dateOfBirth: "10/11/1995",
+            ssn: formValues.ssn.value,
+        };
+
+        attemptCreateNewDwollaVerifiedUser(dwollaObject)
+            .then((resp) => {
+                console.log(resp);
+            })
+            .catch((error) => {
+                console.log(error);
+                const errorJson = JSON.parse(JSON.stringify(error));
+                console.log(errorJson);
+                setSubmitErrorMessage(errorJson.details.message);
+            });
     };
 
     const continueAllowed = () => {
@@ -186,7 +194,9 @@ function UserInfo(props) {
     return (
         <div>
             <Stack spacing={2}>
-                <Typography variant="smallHeadline">Your Info</Typography>
+                <Typography variant="smallHeadline">
+                    Personal Information
+                </Typography>
                 <Typography variant="description">
                     This information will be used to verify your ownership of
                     accounts provided and prevent fraud.{" "}
@@ -225,20 +235,7 @@ function UserInfo(props) {
                     ></TextField>
                 </Grid>
 
-                <Grid item xs={12} md={6}>
-                    <TextField
-                        error={!!formValues.phoneNumber.error}
-                        helperText={formValues.phoneNumber.errMsg}
-                        name="phoneNumber"
-                        label="Phone Number"
-                        variant="filled"
-                        value={formValues.phoneNumber.value}
-                        onChange={handleInputChange}
-                        fullWidth
-                    ></TextField>
-                </Grid>
-
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={8}>
                     <TextField
                         error={!!formValues.streetAddress.error}
                         helperText={formValues.streetAddress.errMsg}
@@ -251,12 +248,12 @@ function UserInfo(props) {
                     ></TextField>
                 </Grid>
 
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={4}>
                     <TextField
                         error={!!formValues.streetAddress2.error}
                         helperText={formValues.streetAddress2.errMsg}
                         name="streetAddress2"
-                        label="Apartment # or PO Box"
+                        label="Apartment #"
                         variant="filled"
                         value={formValues.streetAddress2.value}
                         onChange={handleInputChange}
@@ -275,7 +272,7 @@ function UserInfo(props) {
                     ></TextField>
                 </Grid>
 
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={2}>
                     <TextField
                         error={!!formValues.state.error}
                         helperText={formValues.state.errMsg}
@@ -288,7 +285,7 @@ function UserInfo(props) {
                     ></TextField>
                 </Grid>
 
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={4}>
                     <TextField
                         error={!!formValues.postalCode.error}
                         helperText={formValues.postalCode.errMsg}
@@ -296,6 +293,19 @@ function UserInfo(props) {
                         label="Zip Code"
                         variant="filled"
                         value={formValues.postalCode.value}
+                        onChange={handleInputChange}
+                        fullWidth
+                    ></TextField>
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                    <TextField
+                        error={!!formValues.phoneNumber.error}
+                        helperText={formValues.phoneNumber.errMsg}
+                        name="phoneNumber"
+                        label="Phone Number"
+                        variant="filled"
+                        value={formValues.phoneNumber.value}
                         onChange={handleInputChange}
                         fullWidth
                     ></TextField>
@@ -311,8 +321,18 @@ function UserInfo(props) {
                         value={formValues.ssn.value}
                         onChange={handleInputChange}
                         fullWidth
+                        type="password"
                     ></TextField>
                 </Grid>
+
+                {submitErrorMessage && (
+                    <Grid item xs={12}>
+                        <Alert severity="error">
+                            {"Sorry, retry! " + submitErrorMessage}
+                        </Alert>
+                    </Grid>
+                )}
+
                 <Grid item xs={12}>
                     <Button
                         variant="contained"
