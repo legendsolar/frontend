@@ -44,33 +44,26 @@ const PlaidLink = ({ onSuccess }) => {
             console.log(metadata);
             setPublicToken(public_token);
 
-            if (!userDataLoading && !userDataError) {
-                const userObject = userDataSnap.val();
+            const accountName = `${metadata.institution.name}|${metadata.accounts[0].subtype}|${metadata.accounts[0].name}`;
+            // |${metadata.accounts[0].mask}`;
 
-                if (userObject.dwolla.userId) {
-                    const accountName = `${metadata.institution.name}|${metadata.accounts[0].subtype}|${metadata.accounts[0].name}`;
-                    // |${metadata.accounts[0].mask}`;
+            exchangePublicTokenForAccessToken({
+                publicToken: public_token,
+                accountId: metadata.account_id,
+                name: accountName,
+            }).then(({ data }) => {
+                console.log("access token obtained");
+                console.log(data);
+                console.log(data.accessToken);
 
-                    exchangePublicTokenForAccessToken({
-                        publicToken: public_token,
-                        accountId: metadata.account_id,
-                        dwollaCustomerId: userObject.dwolla.userId,
-                        name: accountName,
-                    }).then(({ data }) => {
-                        console.log("access token obtained");
-                        console.log(data);
-                        console.log(data.accessToken);
+                setAccessToken(data.accessToken);
 
-                        setAccessToken(data.accessToken);
+                console.log("processor token obtained");
+                console.log(data.processorToken);
 
-                        console.log("processor token obtained");
-                        console.log(data.processorToken);
-
-                        setProcessorToken(data.processorToken);
-                        onSuccess();
-                    });
-                }
-            }
+                setProcessorToken(data.processorToken);
+                onSuccess();
+            });
         },
     });
     return (

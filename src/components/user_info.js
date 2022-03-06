@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useDatabaseObjectData, useDatabase } from "reactfire";
 import { attemptCreateNewDwollaVerifiedUser } from "../firebase/cloud_functions";
 
-function UserInfo(props) {
+function UserInfo({ onContinue }) {
     const auth = useAuth();
     const user = auth.user;
 
@@ -172,6 +172,7 @@ function UserInfo(props) {
         attemptCreateNewDwollaVerifiedUser(dwollaObject)
             .then((resp) => {
                 console.log(resp);
+                onContinue();
             })
             .catch((error) => {
                 console.log(error);

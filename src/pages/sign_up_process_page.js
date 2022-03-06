@@ -44,10 +44,17 @@ export default function VerificationPage() {
     );
     const userSignUpState = useSelector(selectUserSignUpState);
 
-    useEffect(() => {
-        if (userSignUpStateStatus === "idle") {
+    const requestUpdateState = () => {
+        if (
+            userSignUpStateStatus === "idle" ||
+            userSignUpStateStatus === "succeeded"
+        ) {
             dispatch(fetchUserSignUpState());
         }
+    };
+
+    useEffect(() => {
+        requestUpdateState();
     }, []);
 
     const navigate = useNavigate();
@@ -77,6 +84,7 @@ export default function VerificationPage() {
         console.log(selections);
 
         returnKBASessionResponse(selections);
+        requestUpdateState();
     };
 
     if (status === "loading") {
@@ -102,10 +110,12 @@ export default function VerificationPage() {
             }
             mainContent={
                 <Stack spacing={2}>
-                    <DefaultComponent>
+                    <DefaultComponent
+                        disabled={userSignUpState !== "ACCOUNT_CREATED"}
+                    >
                         <AccreditationStatus
                             onContinue={() => {
-                                // TODO scroll to next action
+                                requestUpdateState();
                             }}
                         ></AccreditationStatus>
                     </DefaultComponent>
@@ -117,7 +127,7 @@ export default function VerificationPage() {
                     >
                         <UserInfo
                             onContinue={() => {
-                                // TODO scroll to next action
+                                requestUpdateState();
                             }}
                         ></UserInfo>
                     </DefaultComponent>
@@ -152,6 +162,9 @@ export default function VerificationPage() {
                         disabled={userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED"}
                     >
                         <AccountLinkComponent
+                            onLinkComplete={() => {
+                                requestUpdateState();
+                            }}
                             onContinue={() => {
                                 navigate("/explore");
                             }}
