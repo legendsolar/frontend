@@ -28,19 +28,27 @@ import { getKBASession } from "../firebase/cloud_functions";
 import ImageUpload from "../components/image_upload";
 import DefaultComponent from "../components/default_component";
 
+import { useSelector, useDispatch } from "react-redux";
+import {
+    fetchUserSignUpState,
+    selectUserSignUpState,
+} from "../slices/user_slice";
+
 export default function VerificationPage() {
+    const dispatch = useDispatch();
     const auth = useAuth();
     const user = auth.user;
 
-    const [userSignUpState, setUserSignUpState] = useState("UNKNOWN");
+    const userSignUpStateStatus = useSelector(
+        (state) => state.user.signUpState.status
+    );
+    const userSignUpState = useSelector(selectUserSignUpState);
 
     useEffect(() => {
-        getUserSignUpState().then(({ data }) => {
-            setUserSignUpState(data);
-        });
+        if (userSignUpStateStatus === "idle") {
+            dispatch(fetchUserSignUpState());
+        }
     }, []);
-
-    console.log(userSignUpState);
 
     const navigate = useNavigate();
     const contentRefs = useRef([]);
