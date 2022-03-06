@@ -24,6 +24,13 @@ const firebaseDwollaCallWrapper = httpsCallable(
     "dwollaNewCallWrapper_https_ext"
 );
 
+/** User functions */
+
+export const getUserSignUpState = httpsCallable(
+    functions,
+    "getUserSignUpState_https_ext"
+);
+
 /** Dwolla */
 
 // TODO less dumb way to populate this

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
     createDwollaAccount,
+    getUserSignUpState,
     getWalletBalance,
     returnKBASessionResponse,
 } from "../firebase/cloud_functions";
@@ -31,6 +32,16 @@ export default function VerificationPage() {
     const auth = useAuth();
     const user = auth.user;
 
+    const [userSignUpState, setUserSignUpState] = useState("UNKNOWN");
+
+    useEffect(() => {
+        getUserSignUpState().then(({ data }) => {
+            setUserSignUpState(data);
+        });
+    }, []);
+
+    console.log(userSignUpState);
+
     const navigate = useNavigate();
     const contentRefs = useRef([]);
     const drawerTitles = [
@@ -45,17 +56,13 @@ export default function VerificationPage() {
         ref(database, "users/" + user.uid)
     );
 
-    const updateUserState = (newState) => {
-        set(ref(database, "users/" + user.uid + "/state/signUp"), newState);
-    };
-
     const [kbaQuestions, setKBAQuestions] = useState([]);
 
-    useEffect(() => {
-        getKBASession().then(({ data }) => {
-            setKBAQuestions(data.questions);
-        });
-    }, []);
+    // useEffect(() => {
+    //     getKBASession().then(({ data }) => {
+    //         setKBAQuestions(data.questions);
+    //     });
+    // }, []);
 
     const onSubmitKBA = (selections) => {
         console.log("submitted kba");
@@ -95,7 +102,11 @@ export default function VerificationPage() {
                         ></AccreditationStatus>
                     </DefaultComponent>
 
-                    <DefaultComponent disabled={true}>
+                    <DefaultComponent
+                        disabled={
+                            userSignUpState !== "ACCREDATION_VERIF_COMPLETE"
+                        }
+                    >
                         <UserInfo
                             onContinue={() => {
                                 // TODO scroll to next action
@@ -129,7 +140,9 @@ export default function VerificationPage() {
                         </Stack>
                     </DefaultComponent>
 
-                    <DefaultComponent disabled={true}>
+                    <DefaultComponent
+                        disabled={userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED"}
+                    >
                         <AccountLinkComponent
                             onContinue={() => {
                                 navigate("/explore");
