@@ -123,7 +123,11 @@ const CompleteAccountPage = () => {
                     )}
 
                     {userSignUpState === "DWOLLA_ACCOUNT_KBA_REQ" && (
-                        <DefaultComponent disabled={true}>
+                        <DefaultComponent
+                            disabled={
+                                userSignUpState !== "DWOLLA_ACCOUNT_KBA_REQ"
+                            }
+                        >
                             <IdentityVerificationKBA
                                 onComplete={onComplete}
                             ></IdentityVerificationKBA>
@@ -131,13 +135,18 @@ const CompleteAccountPage = () => {
                     )}
 
                     {userSignUpState === "DWOLLA_ACCOUNT_DOCUMENT_REQ" && (
-                        <DefaultComponent disabled={true}>
+                        <DefaultComponent
+                            disabled={
+                                userSignUpState !==
+                                "DWOLLA_ACCOUNT_DOCUMENT_REQ"
+                            }
+                        >
                             <IdentityVerificationDocument
                                 onComplete={onComplete}
                             ></IdentityVerificationDocument>
                         </DefaultComponent>
                     )}
-
+                    {/* 
                     <DefaultComponent
                         disabled={userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED"}
                     >
@@ -152,7 +161,7 @@ const CompleteAccountPage = () => {
                                 }
                             }}
                         ></AccountLinkComponent>
-                    </DefaultComponent>
+                    </DefaultComponent> */}
                 </Stack>
             }
         ></SideBarNavView>
