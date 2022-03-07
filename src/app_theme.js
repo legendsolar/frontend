@@ -269,6 +269,24 @@ const themeOptions = {
                         color: paletteOptions.palette.whiteFog.contrastText,
                     },
                 },
+
+                {
+                    props: { variant: "header" },
+                    style: {
+                        fontFamily: "Azeret Mono",
+                        fontWeight: 600,
+                        fontSize: "12px",
+                        lineHeight: "14px",
+                        textTransform: "uppercase",
+                        backgroundColor: "none",
+
+                        "&:hover": {
+                            opacity: "0.75",
+                            backgroundColor: "none",
+                        },
+                    },
+                },
+
                 {
                     props: { color: "dark", variant: "filled" },
                     style: {

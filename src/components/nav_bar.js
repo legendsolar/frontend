@@ -27,6 +27,8 @@ const NavBar = ({}) => {
         }
     }, []);
 
+    const backgroundColor = auth.user ? "blackDusk.main" : "blackDawn.main";
+
     return (
         <Toolbar style={{ padding: 0, width: "100%" }}>
             <Box
@@ -34,7 +36,7 @@ const NavBar = ({}) => {
                 sx={{
                     height: "300px",
                     width: "100%",
-                    bgcolor: "blackDawn.main",
+                    backgroundColor: backgroundColor,
                     zIndex: -10,
                 }}
             ></Box>
@@ -68,6 +70,7 @@ const NavBar = ({}) => {
                             <>
                                 <Button
                                     color="dark"
+                                    variant="header"
                                     onClick={() => {
                                         navigate("/");
                                     }}
@@ -79,6 +82,7 @@ const NavBar = ({}) => {
 
                                 <Button
                                     color="dark"
+                                    variant="header"
                                     onClick={() => {
                                         navigate("/transactions");
                                     }}
@@ -90,6 +94,7 @@ const NavBar = ({}) => {
 
                                 <Button
                                     color="dark"
+                                    variant="header"
                                     onClick={() => {
                                         navigate("/documents");
                                     }}
@@ -101,6 +106,7 @@ const NavBar = ({}) => {
 
                                 <Button
                                     color="dark"
+                                    variant="header"
                                     onClick={() => {
                                         navigate("/account");
                                     }}
@@ -112,7 +118,7 @@ const NavBar = ({}) => {
 
                                 <Button
                                     color="dark"
-                                    variant="outlined"
+                                    variant="header"
                                     onClick={() => {
                                         navigate("/explore");
                                     }}
