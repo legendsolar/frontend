@@ -40,7 +40,7 @@ function CreateDwollaAccount({ onComplete }) {
         state: {
             value: "",
         },
-        phoneNumber: {
+        dateOfBirth: {
             value: "",
         },
         postalCode: {
@@ -68,12 +68,12 @@ function CreateDwollaAccount({ onComplete }) {
             formData.lastName.errMsg = undefined;
         }
 
-        if (!formData.phoneNumber.value) {
-            formData.phoneNumber.error = true;
-            formData.phoneNumber.errMsg = "Phone number required";
+        if (!formData.dateOfBirth.value) {
+            formData.dateOfBirth.error = true;
+            formData.dateOfBirth.errMsg = "Date of birth required";
         } else {
-            formData.phoneNumber.error = false;
-            formData.phoneNumber.errMsg = undefined;
+            formData.dateOfBirth.error = false;
+            formData.dateOfBirth.errMsg = undefined;
         }
 
         if (!formData.streetAddress.value) {
@@ -173,7 +173,7 @@ function CreateDwollaAccount({ onComplete }) {
                 state: formValues.state.value,
                 postalCode: formValues.postalCode.value,
             },
-            dateOfBirth: "10/11/1995",
+            dateOfBirth: formValues.dateOfBirth.value,
             ssn: formValues.ssn.value,
         };
 
@@ -309,12 +309,12 @@ function CreateDwollaAccount({ onComplete }) {
 
                 <Grid item xs={12} md={6}>
                     <TextField
-                        error={!!formValues.phoneNumber.error}
-                        helperText={formValues.phoneNumber.errMsg}
-                        name="phoneNumber"
-                        label="Phone Number"
+                        error={!!formValues.dateOfBirth.error}
+                        helperText={formValues.dateOfBirth.errMsg}
+                        name="dateOfBirth"
+                        label="Date of Birth"
                         variant="filled"
-                        value={formValues.phoneNumber.value}
+                        value={formValues.dateOfBirth.value}
                         onChange={handleInputChange}
                         fullWidth
                     ></TextField>

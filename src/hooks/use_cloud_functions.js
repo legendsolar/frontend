@@ -21,6 +21,11 @@ const useProvideCloudFunctions = (functions) => {
         "createNewVerifiedDwollaUser_ext"
     );
 
+    const updateDwollaUser = httpsCallable(
+        functions,
+        "updateDwollaUser_https_ext"
+    );
+
     /** Plaid Pass Through Functions */
 
     const createPlaidLinkToken = httpsCallable(
@@ -72,6 +77,7 @@ const useProvideCloudFunctions = (functions) => {
     // Return the user object and auth methods
     return {
         createDwollaAccount,
+        updateDwollaUser,
         createPlaidLinkToken,
         exchangePublicTokenForAccessToken,
         getUserSignUpState,
