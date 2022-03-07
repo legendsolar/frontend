@@ -32,12 +32,10 @@ const userSlice = createSlice({
             })
             .addCase(fetchUserSignUpState.fulfilled, (state, action) => {
                 state.signUpState.status = "succeeded";
-                // actually add the retrieved transactions
                 state.signUpState.value = action.payload;
             })
             .addCase(fetchUserSignUpState.rejected, (state, action) => {
                 state.signUpState.status = "failed";
-                console.log(action.error);
                 state.signUpState.error = action.error.message;
             });
     },

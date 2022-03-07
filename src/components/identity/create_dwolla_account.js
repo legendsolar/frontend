@@ -323,7 +323,7 @@ const CreateDwollaAccount = ({ onComplete }) => {
 
             <Box
                 sx={{
-                    mr: -4,
+                    mr: -2,
                     ml: -2,
                     height: "2px",
                     backgroundColor: "whiteFog.main",
@@ -334,7 +334,7 @@ const CreateDwollaAccount = ({ onComplete }) => {
                 direction={"row"}
                 alignItems={"center"}
                 justifyContent={"space-between"}
-                sx={{ pr: 2 }}
+                sx={{ pl: 2 }}
             >
                 <Typography variant="subtitle1">Identification</Typography>
                 <Chip variant="selected" label="Why do we need this?"></Chip>

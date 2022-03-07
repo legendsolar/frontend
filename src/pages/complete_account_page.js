@@ -46,7 +46,7 @@ const CompleteAccountPage = () => {
 
     useEffect(() => {
         requestUpdateState();
-    }, []);
+    }, [dispatch]);
 
     const navigate = useNavigate();
     const contentRefs = useRef([]);

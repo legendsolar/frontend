@@ -14,33 +14,25 @@ import TransactionComponent from "./transactions/transfer_component";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
-    fetchWallet,
-    selectWallet,
-    selectWalletTotal,
+    fetchWalletBalance,
+    selectWalletBalance,
 } from "../slices/wallet_slice";
 
-import { useAuth } from "../hooks/use_auth";
+import { useCloudFunctions } from "../hooks/use_cloud_functions";
 
 const Wallet = () => {
-    // const dispatch = useDispatch();
-    const auth = useAuth();
-    // const [userDataSnap, userDataLoading, userDataError] = useObject(
-    // ref(database, "users/" + auth.user.uid)
-    // );
+    const cloudFunctions = useCloudFunctions();
+    const dispatch = useDispatch();
+    const balanceStatus = useSelector((state) => state.wallet.balance.status);
+    const walletBalance = useSelector(selectWalletBalance);
 
-    const walletStatus = useSelector((state) => state.wallet.status);
-    const wallet = useSelector(selectWallet);
-    const walletAmount = useSelector(selectWalletTotal);
+    const balance = walletBalance ? walletBalance : "-";
 
-    // useEffect(() => {
-    //     if (walletStatus === "idle" && !userDataLoading && !userDataError) {
-    //         const userData = userDataSnap.val();
-    //         console.log("dispatch");
-    //         dispatch(fetchWallet(userData.dwolla.userId));
-    //     }
-    // }, [walletStatus, userDataLoading, userDataError, userDataSnap, dispatch]);
-
-    const amount = walletStatus === "succeeded" ? walletAmount : "-";
+    useEffect(() => {
+        if (balanceStatus === "idle") {
+            dispatch(fetchWalletBalance(cloudFunctions));
+        }
+    }, [balanceStatus, dispatch]);
 
     const accounts = [
         {
@@ -86,7 +78,7 @@ const Wallet = () => {
                                 {"Legends Wallet".toUpperCase()}
                             </Typography>
                             <Typography variant="headline2">
-                                {"$" + amount}
+                                {"$" + balance}
                             </Typography>
                         </Stack>
                         <Box

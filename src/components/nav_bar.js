@@ -25,7 +25,7 @@ const NavBar = ({}) => {
         if (userSignUpStateStatus === "idle") {
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
-    }, []);
+    }, [dispatch, userSignUpStateStatus]);
 
     const backgroundColor = auth.user ? "blackDusk.main" : "blackDawn.main";
 
@@ -136,10 +136,10 @@ const NavBar = ({}) => {
                     userSignUpState !== "INSTITUTION_LINK_COMPLETE") && (
                     <Button
                         color="dark"
+                        variant="header"
                         onClick={() => {
                             redirectToHomePage();
                         }}
-                        variant="light"
                     >
                         Return Home
                     </Button>
