@@ -43,6 +43,7 @@ const AccountLinkComponent = ({ onContinue, onComplete, onLinkComplete }) => {
             {userInfo?.plaid?.accounts && (
                 <>
                     <Typography variant="body2">Accounts</Typography>
+                    <Typography variant="description">[DEBUG]</Typography>
                     {Object.entries(userInfo?.plaid?.accounts).map(
                         ([key, account]) => {
                             return (

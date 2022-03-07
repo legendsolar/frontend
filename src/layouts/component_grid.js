@@ -141,14 +141,6 @@ function ComponentGrid(props) {
                     ></AssetLiveViewDebug>
                 </DefaultErrorBoundary>
             </Grid>
-
-            <Grid item xs={12}>
-                <DefaultErrorBoundary>
-                    <Paper variant="container">
-                        <Wallet></Wallet>
-                    </Paper>
-                </DefaultErrorBoundary>
-            </Grid>
             <Grid item xs={12}>
                 <Paper variant="container">
                     <Typography variant="label">[DEBUG ONLY]</Typography>
