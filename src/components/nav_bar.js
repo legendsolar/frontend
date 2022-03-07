@@ -47,8 +47,9 @@ const NavBar = ({}) => {
                 sx={{
                     width: "100%",
                     zIndex: 1,
-                    ml: 2,
-                    mr: 2,
+                    ml: 10,
+                    mr: 6,
+                    mt: 5,
                 }}
             >
                 <Box

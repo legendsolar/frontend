@@ -18,9 +18,9 @@ const DefaultView = (props) => {
                         md: "850px",
                         lg: "1100px",
                     },
-                    mt: 6,
                     mr: "auto",
                     ml: "auto",
+                    mt: 6,
                 }}
             >
                 {/* {auth.user && (
