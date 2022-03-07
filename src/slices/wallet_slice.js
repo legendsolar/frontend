@@ -7,6 +7,11 @@ const initialState = {
         status: "idle",
         error: null,
     },
+    accounts: {
+        value: null,
+        status: "idle",
+        error: null,
+    },
 };
 
 const userDwollaId = "f92da569-41ec-4aa9-ba36-2329b4d26b4b";
@@ -20,6 +25,16 @@ export const fetchWalletBalance = createAsyncThunk(
         console.log(returned);
         const balance = returned.data.balance;
         return balance;
+    }
+);
+
+export const fetchAccounts = createAsyncThunk(
+    "dwolla/fetchAccounts",
+    async (cloudFunctions) => {
+        const returned = await cloudFunctions.getLinkedAccounts();
+        console.log(returned);
+        const accounts = returned.data;
+        return accounts;
     }
 );
 
@@ -40,8 +55,29 @@ const walletSlice = createSlice({
                 state.balance.status = "failed";
                 state.balance.error = action.error.message;
             });
+
+        builder
+            .addCase(fetchAccounts.pending, (state, action) => {
+                state.accounts.status = "loading";
+            })
+            .addCase(fetchAccounts.fulfilled, (state, action) => {
+                state.accounts.status = "succeeded";
+                state.accounts.value = action.payload;
+            })
+            .addCase(fetchAccounts.rejected, (state, action) => {
+                state.accounts.status = "failed";
+                state.accounts.error = action.error.message;
+            });
     },
 });
+
+export const selectAllAccounts = (state) => {
+    if (state.wallet.accounts.value) {
+        return state.wallet.accounts.value;
+    }
+
+    return null;
+};
 
 export const selectWalletBalance = (state) => {
     if (state.wallet.balance.value) {

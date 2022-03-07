@@ -14,8 +14,10 @@ import TransactionComponent from "./transactions/transfer_component";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
+    fetchAccounts,
     fetchWalletBalance,
     selectWalletBalance,
+    selectAllAccounts,
 } from "../slices/wallet_slice";
 
 import { useCloudFunctions } from "../hooks/use_cloud_functions";
@@ -24,6 +26,7 @@ const Wallet = () => {
     const cloudFunctions = useCloudFunctions();
     const dispatch = useDispatch();
     const balanceStatus = useSelector((state) => state.wallet.balance.status);
+    const accountStatus = useSelector((state) => state.wallet.accounts.status);
     const walletBalance = useSelector(selectWalletBalance);
 
     const balance = walletBalance ? walletBalance : "-";
@@ -32,25 +35,15 @@ const Wallet = () => {
         if (balanceStatus === "idle") {
             dispatch(fetchWalletBalance(cloudFunctions));
         }
-    }, [balanceStatus, dispatch]);
 
-    const accounts = [
-        {
-            value: "Bank of America ****156",
-            label: "Bank of America",
-        },
-        {
-            value: "Chase ****451",
-            label: "Chase",
-        },
-        {
-            value: "RCU ****468",
-            label: "Rural Credit Union",
-        },
-    ];
+        if (accountStatus === "idle") {
+            dispatch(fetchAccounts(cloudFunctions));
+        }
+    }, [balanceStatus, accountStatus, dispatch]);
 
+    const accounts = useSelector(selectAllAccounts);
     const [transferAmount, setTransferAmount] = useState(0.0);
-    const [bankAccount, setBankAccount] = useState(accounts[0].value);
+    const [bankAccount, setBankAccount] = useState(null);
 
     return (
         <div>
@@ -126,11 +119,12 @@ const Wallet = () => {
                         setBankAccount(value);
                     }}
                 >
-                    {accounts.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
+                    {accounts &&
+                        accounts.map((account) => (
+                            <MenuItem key={account.id} value={account.id}>
+                                {account.name}
+                            </MenuItem>
+                        ))}
                 </TextField>
 
                 <TransactionComponent

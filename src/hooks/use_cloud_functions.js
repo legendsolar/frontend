@@ -74,6 +74,11 @@ const useProvideCloudFunctions = (functions) => {
         functions,
         "attemptCreateNewDwollaVerifiedUser_https_ext"
     );
+
+    const getLinkedAccounts = httpsCallable(
+        functions,
+        "getLinkedAccounts_https_ext"
+    );
     // Return the user object and auth methods
     return {
         createDwollaAccount,
@@ -88,5 +93,6 @@ const useProvideCloudFunctions = (functions) => {
         returnKBASessionResponse,
         receiveIdVerificationDocument,
         attemptCreateNewDwollaVerifiedUser,
+        getLinkedAccounts,
     };
 };
