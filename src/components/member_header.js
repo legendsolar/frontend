@@ -1,25 +1,11 @@
 import { Stack, Typography } from "@mui/material";
-import { useObject } from "react-firebase-hooks/database";
-import { ref } from "firebase/database";
-import { auth, database, firebaseApp } from "../firebase";
-import { useAuth } from "../hooks/use_auth";
+import { useUser } from "reactfire";
 
 const MemberHeader = ({ sx }) => {
-    const auth = useAuth();
-    const user = auth.user;
+    const { status, data: user } = useUser();
 
-    const [userInfoSnap, userInfoSnapLoading, userInfoSnapError] = useObject(
-        ref(database, "users/" + user.uid)
-    );
-
-    var name = "";
-
-    if (!!userInfoSnap && !userInfoSnapLoading && !userInfoSnapError) {
-        const userInfoObj = userInfoSnap.val();
-        name = userInfoObj.name.first + " " + userInfoObj.name.last;
-    }
-
-    var memberInfo = "Member since 2022";
+    const name = "TEST NAME";
+    const memberInfo = "Member since 2022";
 
     return (
         <Stack sx={sx ? sx : {}}>

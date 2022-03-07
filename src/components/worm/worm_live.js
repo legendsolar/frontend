@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import { database } from "../../firebase";
 import { get, query, orderByKey, ref, startAt, endAt } from "firebase/database";
-import { useObject } from "react-firebase-hooks/database";
 import Worm from "./worm";
 import { subWeeks, setDate } from "date-fns";
+import { useDatabase } from "reactfire";
 
 export default function WormLive(props) {
+    const database = useDatabase();
     const assetId = props.assetId;
-    const unitConversionFactor_kW = props.unitConversionFactor_kW;
-    const displayOptions = props.displayOptions;
 
     const [data, setData] = useState([
         {

@@ -20,10 +20,6 @@ import {
 } from "../slices/wallet_slice";
 
 import { useAuth } from "../hooks/use_auth";
-import { useObject } from "react-firebase-hooks/database";
-
-import { database } from "../firebase";
-import { ref } from "firebase/database";
 
 const Wallet = () => {
     // const dispatch = useDispatch();

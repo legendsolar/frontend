@@ -6,27 +6,22 @@ import { ErrorBoundary } from "@sentry/react";
 import ErrorPage from "./pages/error_page";
 import { Provider } from "react-redux";
 import store from "./store";
+import FirebaseInit from "./firebase_init";
 
-import { DatabaseProvider, FirebaseAppProvider } from "reactfire";
-
-import { database, firebaseApp, firebaseConfig } from "./firebase";
-
-function App() {
+const App = () => {
     return (
         <ErrorBoundary fallback={<ErrorPage></ErrorPage>}>
-            <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-                <DatabaseProvider sdk={database}>
-                    <Provider store={store}>
-                        <ThemeProvider theme={appTheme}>
-                            <ProvideAuth>
-                                <AppRouter></AppRouter>
-                            </ProvideAuth>
-                        </ThemeProvider>
-                    </Provider>
-                </DatabaseProvider>
-            </FirebaseAppProvider>
+            <FirebaseInit>
+                <Provider store={store}>
+                    <ThemeProvider theme={appTheme}>
+                        <ProvideAuth>
+                            <AppRouter></AppRouter>
+                        </ProvideAuth>
+                    </ThemeProvider>
+                </Provider>
+            </FirebaseInit>
         </ErrorBoundary>
     );
-}
+};
 
 export default App;

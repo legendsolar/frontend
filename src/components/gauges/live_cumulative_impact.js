@@ -1,20 +1,15 @@
-import MetricGauge from "./metric_gauge";
-import { useState } from "react";
-import { database } from "../../firebase";
 import { ref } from "firebase/database";
-import { useObject } from "react-firebase-hooks/database";
-import { differenceInMinutes } from "date-fns";
 import PropTypes from "prop-types";
 import CumulativeImpact from "./cumulative_impact";
+import LoadingComponent from "../loading_component";
+import { useDatabase, useDatabaseObjectData } from "reactfire";
 
 const LiveCumulativeImpact = ({
     assetId,
     unitConversionFactor_kW,
     unitOpts,
 }) => {
-    var error = true;
-    var loading = true;
-    var lastUpdateMinAgo = 0;
+    const database = useDatabase();
 
     var convertedCumulativeData = {
         day: 0,
@@ -23,35 +18,22 @@ const LiveCumulativeImpact = ({
         year: 0,
     };
 
-    const [assetProdSummarySnap, assetProdSummaryLoading, assetProdError] =
-        useObject(ref(database, "production/" + assetId + "/summary"));
+    const { metaDataStatus, data: metaData } = useDatabaseObjectData(
+        ref(database, "assets/" + assetId)
+    );
 
-    const [assetMetadataSnap, assetMetadataLoading, assetMetadataError] =
-        useObject(ref(database, "assets/" + assetId));
-
-    if (assetProdSummaryLoading || assetMetadataLoading) {
-        loading = true;
-    } else if (
-        assetProdSummarySnap &&
-        assetMetadataSnap &&
-        !assetProdSummaryLoading &&
-        !assetMetadataLoading &&
-        !assetProdError &&
-        !assetMetadataError
-    ) {
-        lastUpdateMinAgo = differenceInMinutes(
-            new Date(),
-            new Date(assetProdSummarySnap.val().recent.time)
+    const { productionSummaryState, data: productionSummary } =
+        useDatabaseObjectData(
+            ref(database, "production/" + assetId + "/summary")
         );
 
-        Object.entries(assetProdSummarySnap.val().last).forEach(
-            ([key, value]) => {
-                convertedCumulativeData[key] = value * unitConversionFactor_kW;
-            }
-        );
-    } else {
-        error = true;
+    if (metaDataStatus === "loading" || productionSummaryState === "loading") {
+        return <LoadingComponent></LoadingComponent>;
     }
+
+    Object.entries(productionSummary.last).forEach(([key, value]) => {
+        convertedCumulativeData[key] = value * unitConversionFactor_kW;
+    });
 
     return (
         <CumulativeImpact

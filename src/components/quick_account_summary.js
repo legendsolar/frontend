@@ -1,23 +1,11 @@
 import React from "react";
-import { auth, database, firebaseApp } from "../firebase";
-import { ref } from "firebase/database";
-import { useAuth } from "../hooks/use_auth";
 import { Paper, Stack, Divider, Box } from "@mui/material";
 import MetricList from "./summary/metric_list";
-import { Typography, Container } from "@mui/material";
-import { useObject } from "react-firebase-hooks/database";
+import { Typography } from "@mui/material";
+import { useUser } from "reactfire";
 
 const QuickAccountSummary = (props) => {
-    const auth = useAuth();
-    const user = auth.user;
-
-    const [userDataSnap, userDataLoading, userDataError] = useObject(
-        ref(database, "users/" + user.uid)
-    );
-
-    if (!userDataSnap || userDataLoading) {
-        return <> </>;
-    }
+    const user = useUser();
 
     const panels = Math.floor(Math.random() * 10 + 10);
     const kw_panel = 0.5;

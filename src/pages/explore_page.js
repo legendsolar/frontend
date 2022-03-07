@@ -1,45 +1,11 @@
 import { useRef } from "react";
-import PropTypes from "prop-types";
-import { auth, database, firebaseApp } from "../firebase";
-import { useList } from "react-firebase-hooks/database";
-import { ref } from "firebase/database";
-import { useAuth } from "../hooks/use_auth";
-import { useObject } from "react-firebase-hooks/database";
-
 import { Typography, Paper, Stack, Button } from "@mui/material";
-
-import CreateDwollaAccount from "../components/identity/create_dwolla_account";
 import SideBarNavView from "../views/side_bar_view";
-import ScrollToSidebar from "../components/scroll_to_sidebar";
-import MemberHeader from "../components/member_header";
 import OfferingComponent from "../components/offering";
 import MetricList from "../components/summary/metric_list";
 
-function ExplorePage(props) {
-    const auth = useAuth();
-    const user = auth.user;
-
+const ExplorePage = () => {
     const contentRefs = useRef([]);
-
-    const [userInfoSnap, userInfoSnapLoading, userInfoSnapError] = useObject(
-        ref(database, "users/" + user.uid)
-    );
-
-    var name = "";
-    var memberInfo = "Member since 2022";
-
-    if (!!userInfoSnap && !userInfoSnapLoading && !userInfoSnapError) {
-        const userInfoObj = userInfoSnap.val();
-
-        if (
-            userInfoObj.info &&
-            userInfoObj.info.firstName &&
-            userInfoObj.info.lastName
-        ) {
-            name = userInfoObj.info.firstName + " " + userInfoObj.info.lastName;
-        }
-    }
-
     const drawerTitles = ["Contact", "Wallet", "Accounts"];
 
     return (
@@ -74,7 +40,7 @@ function ExplorePage(props) {
             }
         ></SideBarNavView>
     );
-}
+};
 
 ExplorePage.propTypes = {};
 

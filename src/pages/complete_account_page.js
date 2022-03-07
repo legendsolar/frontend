@@ -1,33 +1,18 @@
-import { useEffect, useState } from "react";
-import {
-    createDwollaAccount,
-    getUserSignUpState,
-    getWalletBalance,
-    returnKBASessionResponse,
-} from "../firebase/cloud_functions";
-import { Typography, Stack, Paper } from "@mui/material";
-
+import { useEffect } from "react";
+import { Typography, Stack } from "@mui/material";
 import { useRef } from "react";
-import PropTypes from "prop-types";
-import { useList } from "react-firebase-hooks/database";
-import { set, ref } from "firebase/database";
+import { ref } from "firebase/database";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
-import MemberHeader from "../components/member_header";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
 import AccreditationStatus from "../components/accreditation_status";
 import CreateDwollaAccount from "../components/identity/create_dwolla_account";
 import AccountLinkComponent from "../components/account_link_component";
-
 import { useDatabaseObjectData, useDatabase } from "reactfire";
 import LoadingView from "../views/loading_view";
 import IdentityVerificationKBA from "../components/identity/identity_verification_kba";
-
-import { getKBASession } from "../firebase/cloud_functions";
-import ImageUpload from "../components/image_upload";
 import DefaultComponent from "../components/default_component";
-
 import { useSelector, useDispatch } from "react-redux";
 import {
     fetchUserSignUpState,
@@ -37,7 +22,7 @@ import IdentityVerificationFullSSN from "../components/identity/identity_verific
 import IdentityVerificationDocument from "../components/identity/identity_verification_document";
 import DefaultView from "../views/default_view";
 
-export default function VerificationPage() {
+const CompleteAccountPage = () => {
     const dispatch = useDispatch();
     const auth = useAuth();
     const user = auth.user;
@@ -166,4 +151,6 @@ export default function VerificationPage() {
             }
         ></SideBarNavView>
     );
-}
+};
+
+export default CompleteAccountPage;

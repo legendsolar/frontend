@@ -1,11 +1,7 @@
 import { Paper, Stack, Button, Typography } from "@mui/material";
-import { Configuration, PlaidApi, PlaidEnvironments } from "plaid";
 import { usePlaidLink } from "react-plaid-link";
 import { useAuth } from "./../hooks/use_auth";
 
-import { ref } from "firebase/database";
-import { useObject } from "react-firebase-hooks/database";
-import { database } from "../firebase";
 import { useEffect, useState } from "react";
 import {
     createPlaidLinkToken,
@@ -19,10 +15,6 @@ const PlaidLink = ({ onSuccess }) => {
     const [accessToken, setAccessToken] = useState("-");
     const [processorToken, setProcessorToken] = useState("-");
     const redirectUri = "https://legends.solar";
-
-    const [userDataSnap, userDataLoading, userDataError] = useObject(
-        ref(database, "users/" + auth.user.uid)
-    );
 
     useEffect(() => {
         createPlaidLinkToken({

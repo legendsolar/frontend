@@ -1,10 +1,11 @@
 import MetricGauge from "./metric_gauge";
 import React from "react";
-import { database } from "../../firebase";
 import { ref } from "firebase/database";
-import { useObject } from "react-firebase-hooks/database";
 import { differenceInMinutes } from "date-fns";
+import { useDatabase } from "reactfire";
+import { useDatabaseObjectData } from "reactfire";
 import PropTypes from "prop-types";
+import LoadingComponent from "../loading_component";
 
 const ErrorGauge = ({ unitOpts }) => {
     unitOpts.liveMessage = `Could not load data`;
@@ -39,54 +40,38 @@ ErrorGauge.defaultProps = {
     },
 };
 
-const LiveMetricGauge = ({
-    assetId,
-    unitConversionFactor_kW,
-    unitOpts,
-    errorExt,
-}) => {
-    var error = errorExt;
-    var loading = true;
-    var currentValue_kW = 0;
-    var currentValue_unit = 0;
-    var lastUpdateMinAgo = 0;
+const LiveMetricGauge = ({ assetId, unitConversionFactor_kW, unitOpts }) => {
+    const database = useDatabase();
 
-    var max = 0;
+    const { metaDataStatus, data: metaData } = useDatabaseObjectData(
+        ref(database, "assets/" + assetId)
+    );
 
-    const [assetProdSummarySnap, assetProdSummaryLoading, assetProdError] =
-        useObject(ref(database, "production/" + assetId + "/summary"));
-
-    const [assetMetadataSnap, assetMetadataLoading, assetMetadataError] =
-        useObject(ref(database, "assets/" + assetId));
-
-    if (assetProdSummaryLoading || assetMetadataLoading) {
-        loading = true;
-    } else if (
-        assetProdSummarySnap &&
-        assetMetadataSnap &&
-        !assetProdSummaryLoading &&
-        !assetMetadataLoading &&
-        !assetProdError &&
-        !assetMetadataError
-    ) {
-        currentValue_kW = assetProdSummarySnap.val().recent.wattage;
-        currentValue_unit = (currentValue_kW / 1000) * unitConversionFactor_kW;
-
-        lastUpdateMinAgo = differenceInMinutes(
-            new Date(),
-            new Date(assetProdSummarySnap.val().recent.time)
+    const { productionSummaryState, data: productionSummary } =
+        useDatabaseObjectData(
+            ref(database, "production/" + assetId + "/summary")
         );
 
-        max =
-            (assetMetadataSnap.val().productionData.maxRating_W / 1000) *
-            unitConversionFactor_kW;
-    } else {
-        error = true;
-    }
-
-    if (error) {
+    if (metaDataStatus === "loading" || productionSummaryState === "loading") {
+        return <LoadingComponent></LoadingComponent>;
+    } else if (
+        metaDataStatus === "error" ||
+        productionSummaryState === "error"
+    ) {
         return <ErrorGauge unitOpts={unitOpts}></ErrorGauge>;
     }
+
+    const currentValue_kW = productionSummary.recent.wattage;
+    const currentValue_unit =
+        (currentValue_kW / 1000) * unitConversionFactor_kW;
+
+    const lastUpdateMinAgo = differenceInMinutes(
+        new Date(),
+        new Date(productionSummary.recent.time)
+    );
+
+    const max =
+        (metaData.productionData.maxRating_W / 1000) * unitConversionFactor_kW;
 
     return (
         <MetricGauge

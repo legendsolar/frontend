@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { auth } from "../firebase";
-import { useDatabase } from "reactfire";
+import { useDatabase, useFirebaseApp } from "reactfire";
 import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signOut,
+    getAuth,
 } from "firebase/auth";
-import { useObject } from "react-firebase-hooks/database";
-import { ref } from "firebase/database";
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...
@@ -24,6 +22,9 @@ export const useAuth = () => {
 };
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
+    const app = useFirebaseApp();
+    const auth = getAuth(app);
+
     const [user, setUser] = useState(null);
     const database = useDatabase();
     // const [userData, setUserData] = useState(null);

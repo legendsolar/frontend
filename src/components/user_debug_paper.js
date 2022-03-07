@@ -1,29 +1,20 @@
 import React from "react";
-import { auth, database, firebaseApp } from "../firebase";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
-import { useObject } from "react-firebase-hooks/database";
-import { useSearchParams } from "react-router-dom";
-
+import LoadingComponent from "./loading_component";
+import { useUser, useDatabase, useDatabaseObjectData } from "reactfire";
 function UserDebugPaper(props) {
-    const auth = useAuth();
-    const user = auth.user;
-
-    const [userDataSnap, userDataLoading, userDataError] = useObject(
-        ref(database, "users/" + user.uid)
+    const database = useDatabase();
+    const { userStatus, data: user } = useUser();
+    const { status, data: userData } = useDatabaseObjectData(
+        ref(database, "user/" + user.uid)
     );
 
-    if (!userDataSnap || userDataLoading) {
-        return <> </>;
+    if (status === "loading") {
+        return <LoadingComponent></LoadingComponent>;
     }
-
-    const userDatabaseObj = userDataSnap.val();
-
-    const userData = userDatabaseObj;
-
-    const userMetaData = userDataSnap.meta;
 
     return (
         <Paper sx={{ minWidth: 275 }} variant="container">
