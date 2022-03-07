@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Fragment } from "react";
 import { useCloudFunctions } from "../hooks/use_cloud_functions";
 
-const ImageUpload = () => {
+const ImageUpload = ({ onComplete }) => {
     const uploadInputRef = useRef(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [alertMessage, setAlertMessage] = useState(null);
@@ -35,6 +35,8 @@ const ImageUpload = () => {
                 .then((resp) => {
                     console.log("dwolla resp:");
                     console.log(resp);
+
+                    onComplete();
                 })
                 .catch((error) => {
                     console.log("dwolla error resp:");

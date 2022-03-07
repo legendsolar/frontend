@@ -1,10 +1,10 @@
 import { Stack } from "@mui/material";
 import ImageUpload from "../image_upload";
 
-const IdentityVerificationDocument = () => {
+const IdentityVerificationDocument = ({ onComplete }) => {
     return (
         <Stack spacing={2}>
-            <ImageUpload></ImageUpload>
+            <ImageUpload onComplete={onComplete}></ImageUpload>
         </Stack>
     );
 };
