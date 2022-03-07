@@ -1,4 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import { useEffect } from "react";
 import { useAuth } from "../hooks/use_auth";
 import PortfolioPage from "../pages/portfolio_page";
 import SignInView from "../pages/sign_in_page";
@@ -12,8 +14,8 @@ import TransactionView from "../pages/transactions_page";
 import LoadingView from "../views/loading_view";
 
 import DesignSysDemo from "../debug/design_sys_demo";
-import VerificationPage from "../pages/sign_up_process_page";
-import SignUpProcessPage from "../pages/sign_up_process_page";
+import VerificationPage from "../pages/complete_account_page";
+import SignUpProcessPage from "../pages/complete_account_page";
 import { GridPage } from "../pages/grid_page";
 import ExplorePage from "../pages/explore_page";
 import DocumentPage from "../pages/documents_page";
@@ -24,11 +26,18 @@ import { getDatabase, connectDatabaseEmulator } from "firebase/database";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
+import { useSelector, useDispatch } from "react-redux";
+import {
+    fetchUserSignUpState,
+    selectUserSignUpState,
+} from "../slices/user_slice";
+
 function AppRouter() {
     const app = useFirebaseApp();
     const database = getDatabase(app);
     const auth = getAuth(app);
     const functions = getFunctions(app);
+    const dispatch = useDispatch();
 
     const emulator =
         !!process.env.REACT_APP_FIREBASE_EMULATOR &&

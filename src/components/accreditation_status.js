@@ -13,7 +13,7 @@ import { useDatabaseObjectData, useDatabase } from "reactfire";
 import { set, ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
 
-const AccreditationStatus = ({ onContinue }) => {
+const AccreditationStatus = ({ onComplete }) => {
     const auth = useAuth();
     const user = auth.user;
 
@@ -111,7 +111,7 @@ const AccreditationStatus = ({ onContinue }) => {
             databaseObject
         ).then(() => {
             setLoading(false);
-            onContinue();
+            onComplete();
         });
     };
 

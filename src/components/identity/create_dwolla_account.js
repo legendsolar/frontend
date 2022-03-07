@@ -1,15 +1,15 @@
 import { Alert, Box, Stack, Paper, Grid } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import { get, ref, set } from "firebase/database";
-import { useAuth } from "../hooks/use_auth";
+import { useAuth } from "../../hooks/use_auth";
 import { Button, Typography } from "@mui/material";
 import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { useDatabaseObjectData, useDatabase } from "reactfire";
-import { attemptCreateNewDwollaVerifiedUser } from "../firebase/cloud_functions";
+import { attemptCreateNewDwollaVerifiedUser } from "../../firebase/cloud_functions";
 
-function UserInfo({ onContinue }) {
+function CreateDwollaAccount({ onComplete }) {
     const auth = useAuth();
     const user = auth.user;
 
@@ -172,7 +172,7 @@ function UserInfo({ onContinue }) {
         attemptCreateNewDwollaVerifiedUser(dwollaObject)
             .then((resp) => {
                 console.log(resp);
-                onContinue();
+                onComplete();
             })
             .catch((error) => {
                 console.log(error);
@@ -349,4 +349,4 @@ function UserInfo({ onContinue }) {
         </div>
     );
 }
-export default UserInfo;
+export default CreateDwollaAccount;

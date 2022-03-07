@@ -17,12 +17,12 @@ import MemberHeader from "../components/member_header";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
 import AccreditationStatus from "../components/accreditation_status";
-import UserInfo from "../components/user_info";
+import CreateDwollaAccount from "../components/identity/create_dwolla_account";
 import AccountLinkComponent from "../components/account_link_component";
 
 import { useDatabaseObjectData, useDatabase } from "reactfire";
 import LoadingView from "../views/loading_view";
-import IdentityVerification from "../components/identity_verification";
+import IdentityVerificationKBA from "../components/identity/identity_verification_kba";
 
 import { getKBASession } from "../firebase/cloud_functions";
 import ImageUpload from "../components/image_upload";
@@ -33,6 +33,9 @@ import {
     fetchUserSignUpState,
     selectUserSignUpState,
 } from "../slices/user_slice";
+import IdentityVerificationFullSSN from "../components/identity/identity_verification_full_ssn";
+import IdentityVerificationDocument from "../components/identity/identity_verification_document";
+import DefaultView from "../views/default_view";
 
 export default function VerificationPage() {
     const dispatch = useDispatch();
@@ -71,24 +74,16 @@ export default function VerificationPage() {
         ref(database, "users/" + user.uid)
     );
 
-    const [kbaQuestions, setKBAQuestions] = useState([]);
-
-    // useEffect(() => {
-    //     getKBASession().then(({ data }) => {
-    //         setKBAQuestions(data.questions);
-    //     });
-    // }, []);
-
-    const onSubmitKBA = (selections) => {
-        console.log("submitted kba");
-        console.log(selections);
-
-        returnKBASessionResponse(selections);
+    const onComplete = () => {
         requestUpdateState();
     };
 
-    if (status === "loading") {
+    if (status === "loading" || userSignUpStateStatus === "loading") {
         return <LoadingView></LoadingView>;
+    }
+
+    if (userSignUpState === "INSTITUTION_LINK_COMPLETE") {
+        navigate("/explore");
     }
 
     return (
@@ -114,9 +109,7 @@ export default function VerificationPage() {
                         disabled={userSignUpState !== "ACCOUNT_CREATED"}
                     >
                         <AccreditationStatus
-                            onContinue={() => {
-                                requestUpdateState();
-                            }}
+                            onComplete={onComplete}
                         ></AccreditationStatus>
                     </DefaultComponent>
 
@@ -125,48 +118,47 @@ export default function VerificationPage() {
                             userSignUpState !== "ACCREDATION_VERIF_COMPLETE"
                         }
                     >
-                        <UserInfo
-                            onContinue={() => {
-                                requestUpdateState();
-                            }}
-                        ></UserInfo>
+                        <CreateDwollaAccount
+                            onComplete={onComplete}
+                        ></CreateDwollaAccount>
                     </DefaultComponent>
 
-                    <DefaultComponent disabled={true}>
-                        <Stack spacing={2}>
-                            <IdentityVerification
-                                questions={kbaQuestions}
-                                idVerification={true}
-                                onSubmit={onSubmitKBA}
-                            ></IdentityVerification>
+                    {userSignUpState === "DWOLLA_ACCOUNT_RETRY_REQ" && (
+                        <DefaultComponent disabled={true}>
+                            <IdentityVerificationFullSSN
+                                onComplete={onComplete}
+                            ></IdentityVerificationFullSSN>
+                        </DefaultComponent>
+                    )}
 
-                            <Typography variant="headline3">
-                                {`Document Verification`}
-                            </Typography>
+                    {userSignUpState === "DWOLLA_ACCOUNT_KBA_REQ" && (
+                        <DefaultComponent disabled={true}>
+                            <IdentityVerificationKBA
+                                onComplete={onComplete}
+                            ></IdentityVerificationKBA>
+                        </DefaultComponent>
+                    )}
 
-                            <Typography variant="description">
-                                {`A scan of a passport, driver's license or government 
-                                issued ID is required to verify your identity.`}
-                            </Typography>
-
-                            <Typography variant="description">
-                                {`\nAll four edges of the document should be visible, and the image should be 
-                            directly above the document.`}
-                            </Typography>
-
-                            <ImageUpload></ImageUpload>
-                        </Stack>
-                    </DefaultComponent>
+                    {userSignUpState === "DWOLLA_ACCOUNT_DOCUMENT_REQ" && (
+                        <DefaultComponent disabled={true}>
+                            <IdentityVerificationDocument
+                                onComplete={onComplete}
+                            ></IdentityVerificationDocument>
+                        </DefaultComponent>
+                    )}
 
                     <DefaultComponent
                         disabled={userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED"}
                     >
                         <AccountLinkComponent
-                            onLinkComplete={() => {
-                                requestUpdateState();
-                            }}
+                            onLinkComplete={onComplete}
                             onContinue={() => {
-                                navigate("/explore");
+                                if (
+                                    userSignUpState ===
+                                    "INSTITUTION_LINK_COMPLETE"
+                                ) {
+                                    navigate("/explore");
+                                }
                             }}
                         ></AccountLinkComponent>
                     </DefaultComponent>

@@ -8,7 +8,7 @@ import { useObject } from "react-firebase-hooks/database";
 
 import { Typography, Paper, Stack, Button } from "@mui/material";
 import Wallet from "../components/wallet_component";
-import UserInfo from "../components/user_info";
+import CreateDwollaAccount from "../components/identity/create_dwolla_account";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
 import MemberHeader from "../components/member_header";
@@ -67,7 +67,7 @@ function AccountView(props) {
                         variant="container"
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
-                        <UserInfo></UserInfo>
+                        <CreateDwollaAccount></CreateDwollaAccount>
                     </Paper>
 
                     <Paper

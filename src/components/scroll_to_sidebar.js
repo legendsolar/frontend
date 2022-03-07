@@ -11,7 +11,6 @@ const ScrollToSidebar = ({ header, contentTitles, refs }) => {
         <Paper variant="container" sx={{ width: "100%", m: 0 }}>
             {header}
 
-            <Divider />
             <List>
                 {contentTitles.map((text, index) => (
                     <ListItemButton

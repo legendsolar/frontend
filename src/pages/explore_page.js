@@ -8,7 +8,7 @@ import { useObject } from "react-firebase-hooks/database";
 
 import { Typography, Paper, Stack, Button } from "@mui/material";
 
-import UserInfo from "../components/user_info";
+import CreateDwollaAccount from "../components/identity/create_dwolla_account";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
 import MemberHeader from "../components/member_header";

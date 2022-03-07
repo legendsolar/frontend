@@ -2,12 +2,12 @@ import { Stack, Button, Box, Typography } from "@mui/material";
 import CheckboxList from "./inputs/checkbox_list";
 import { useState } from "react";
 import PlaidLink from "./plaid_link";
-const AccountLinkComponent = ({ onContinue, onLinkComplete }) => {
+const AccountLinkComponent = ({ onContinue, onComplete }) => {
     const [continueAllowed, setContinueAllowed] = useState(false);
 
     const onPlaidSuccess = () => {
-        onLinkComplete();
         setContinueAllowed(true);
+        onComplete();
     };
 
     return (
@@ -28,12 +28,6 @@ const AccountLinkComponent = ({ onContinue, onLinkComplete }) => {
                 onClick={() => onContinue()}
             >
                 Continue
-            </Button>
-            <Typography align={"center"} variant="smallLabel">
-                OR
-            </Typography>
-            <Button variant="secondary" onClick={() => onContinue()}>
-                Skip for now
             </Button>
         </Stack>
     );
