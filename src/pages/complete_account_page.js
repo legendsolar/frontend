@@ -21,9 +21,11 @@ import {
 import IdentityVerificationFullSSN from "../components/identity/identity_verification_full_ssn";
 import IdentityVerificationDocument from "../components/identity/identity_verification_document";
 import DefaultView from "../views/default_view";
+import { useCloudFunctions } from "../hooks/use_cloud_functions";
 
 const CompleteAccountPage = () => {
     const dispatch = useDispatch();
+    const cloudFunctions = useCloudFunctions();
     const auth = useAuth();
     const user = auth.user;
 
@@ -37,7 +39,7 @@ const CompleteAccountPage = () => {
             userSignUpStateStatus === "idle" ||
             userSignUpStateStatus === "succeeded"
         ) {
-            dispatch(fetchUserSignUpState());
+            dispatch(fetchUserSignUpState(cloudFunctions));
         }
     };
 
@@ -109,7 +111,11 @@ const CompleteAccountPage = () => {
                     </DefaultComponent>
 
                     {userSignUpState === "DWOLLA_ACCOUNT_RETRY_REQ" && (
-                        <DefaultComponent disabled={true}>
+                        <DefaultComponent
+                            disabled={
+                                userSignUpState !== "DWOLLA_ACCOUNT_RETRY_REQ"
+                            }
+                        >
                             <IdentityVerificationFullSSN
                                 onComplete={onComplete}
                             ></IdentityVerificationFullSSN>

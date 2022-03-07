@@ -51,37 +51,6 @@ function CreateDwollaAccount({ onComplete }) {
         },
     };
 
-    const [formValues, setFormValues] = useState(startingValues);
-    const [submitErrorMessage, setSubmitErrorMessage] = useState(undefined);
-
-    if (status == "success") {
-        if (
-            userInfo &&
-            userInfo.info &&
-            userInfo.info.address &&
-            userInfo.info.name
-        ) {
-            const info = userInfo.info;
-            const loadedUserData = { ...formValues };
-
-            loadedUserData.firstName.value = info.name.first;
-            loadedUserData.lastName.value = info.name.last;
-            loadedUserData.streetAddress.value = info.address.streetNumber;
-            loadedUserData.city.value = info.address.city;
-            loadedUserData.state.value = info.address.state;
-
-            formDataValid(loadedUserData);
-        }
-    }
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-
-        const updatedObject = { ...formValues };
-        updatedObject[name].value = value;
-        formDataValid(updatedObject);
-    };
-
     const formDataValid = (formData) => {
         if (!formData.firstName.value) {
             formData.firstName.error = true;
@@ -151,6 +120,42 @@ function CreateDwollaAccount({ onComplete }) {
         }
 
         setFormValues(formData);
+    };
+
+    const [formValues, setFormValues] = useState(startingValues);
+    const [submitErrorMessage, setSubmitErrorMessage] = useState(undefined);
+
+    useEffect(() => {
+        if (status == "success") {
+            if (
+                userInfo &&
+                userInfo.info &&
+                userInfo.info.address &&
+                userInfo.info.name
+            ) {
+                const info = userInfo.info;
+                const loadedUserData = { ...formValues };
+
+                loadedUserData.firstName.value = info.name.first;
+                loadedUserData.lastName.value = info.name.last;
+                loadedUserData.streetAddress.value = info.address.streetAddress;
+                loadedUserData.streetAddress2.value =
+                    info.address.streetAddress2;
+                loadedUserData.city.value = info.address.city;
+                loadedUserData.state.value = info.address.state;
+                loadedUserData.postalCode.value = info.address.postalCode;
+
+                formDataValid(loadedUserData);
+            }
+        }
+    }, [status]);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+
+        const updatedObject = { ...formValues };
+        updatedObject[name].value = value;
+        formDataValid(updatedObject);
     };
 
     const handleSubmit = (event) => {
