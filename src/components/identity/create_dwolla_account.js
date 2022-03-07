@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 import { useDatabaseObjectData, useDatabase } from "reactfire";
 import { useCloudFunctions } from "../../hooks/use_cloud_functions";
+import LoadingComponent from "../loading_component";
 
 function CreateDwollaAccount({ onComplete }) {
     const auth = useAuth();
@@ -20,6 +21,8 @@ function CreateDwollaAccount({ onComplete }) {
     const { status, data: userInfo } = useDatabaseObjectData(
         ref(database, "users/" + user.uid)
     );
+
+    const [loading, setLoading] = useState(false);
 
     const startingValues = {
         firstName: {
@@ -175,7 +178,10 @@ function CreateDwollaAccount({ onComplete }) {
             },
             dateOfBirth: formValues.dateOfBirth.value,
             ssn: formValues.ssn.value,
+            email: null,
         };
+
+        setLoading(true);
 
         attemptCreateNewDwollaVerifiedUser(dwollaObject)
             .then((resp) => {
@@ -187,6 +193,9 @@ function CreateDwollaAccount({ onComplete }) {
                 const errorJson = JSON.parse(JSON.stringify(error));
                 console.log(errorJson);
                 setSubmitErrorMessage(errorJson.details.message);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     };
 
@@ -199,6 +208,10 @@ function CreateDwollaAccount({ onComplete }) {
 
         return error;
     };
+
+    if (loading) {
+        return <LoadingComponent></LoadingComponent>;
+    }
 
     return (
         <div>

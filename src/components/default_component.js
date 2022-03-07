@@ -1,4 +1,4 @@
-import { Paper } from "@mui/material";
+import { Paper, Box } from "@mui/material";
 
 const DefaultComponent = ({ inactive, disabled, children, sx }) => {
     const opacity = inactive || disabled ? 0.5 : 1;
@@ -6,14 +6,19 @@ const DefaultComponent = ({ inactive, disabled, children, sx }) => {
 
     return (
         <Paper
+            variant="container"
             sx={{
                 ...sx,
-                opacity: opacity,
                 pointerEvents: pointerEvents,
             }}
-            variant="container"
         >
-            {children}
+            <Box
+                sx={{
+                    opacity: opacity,
+                }}
+            >
+                {children}
+            </Box>
         </Paper>
     );
 };

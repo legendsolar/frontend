@@ -32,6 +32,7 @@ const CompleteAccountPage = () => {
     const userSignUpStateStatus = useSelector(
         (state) => state.user.signUpState.status
     );
+
     const userSignUpState = useSelector(selectUserSignUpState);
 
     const requestUpdateState = () => {

@@ -17,7 +17,7 @@ const IdentityVerificationKBA = ({ onComplete }) => {
 
     useEffect(() => {
         getKBASession().then(({ data }) => {
-            setKBAQuestions(data.questions);
+            setKBAQuestions(data);
         });
     }, []);
 
@@ -50,22 +50,25 @@ const IdentityVerificationKBA = ({ onComplete }) => {
                 We need to ask a few questions to verify your identity
             </Typography>
 
-            {kbaQuestions.map((question) => {
-                return (
-                    <MultiSelect
-                        key={question.id}
-                        id={question.id}
-                        text={question.text}
-                        fields={question.answers}
-                        value={selected[question.id]}
-                        onChangeListener={onQuestionUpdate}
-                    ></MultiSelect>
-                );
-            })}
+            {kbaQuestions &&
+                kbaQuestions.map((question) => {
+                    return (
+                        <MultiSelect
+                            key={question.id}
+                            id={question.id}
+                            text={question.text}
+                            fields={question.answers}
+                            value={selected[question.id]}
+                            onChangeListener={onQuestionUpdate}
+                        ></MultiSelect>
+                    );
+                })}
 
             <Button
                 variant="primary"
-                onClick={onSubmit}
+                onClick={() => {
+                    onSubmit();
+                }}
                 disabled={submitDisabled()}
             >
                 Submit

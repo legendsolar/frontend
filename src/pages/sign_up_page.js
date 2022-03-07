@@ -21,6 +21,7 @@ import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
 import FullPageComponentView from "../views/full_page_component_view";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import LoadingView from "../views/loading_view";
 
 export default function SignUpView() {
     const authHook = useAuth();

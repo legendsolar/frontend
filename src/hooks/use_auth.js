@@ -64,7 +64,6 @@ function useProvideAuth() {
             // return ref(database, "users/" + user.uid);
         }
     };
-
     // const userDataSnap = () => {
     //     if (user.uid) {
     //         return useObject(ref(database, "users/" + user.uid));
