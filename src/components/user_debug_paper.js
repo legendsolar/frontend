@@ -9,7 +9,7 @@ function UserDebugPaper(props) {
     const database = useDatabase();
     const { userStatus, data: user } = useUser();
     const { status, data: userData } = useDatabaseObjectData(
-        ref(database, "user/" + user.uid)
+        ref(database, "users/" + user.uid)
     );
 
     if (status === "loading") {
@@ -43,12 +43,12 @@ function UserDebugPaper(props) {
                 color="text.secondary"
                 gutterBottom
             >
-                Address
+                Name
             </Typography>
 
             <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
-                {userData
-                    ? `${userData.address.streetNumber}, ${userData.address.city}, ${userData.address.state} ${userData.address.postalCode}`
+                {userData.info
+                    ? userData.info.name?.first + " " + userData.info.name.last
                     : "error"}
             </Typography>
 
@@ -57,11 +57,14 @@ function UserDebugPaper(props) {
                 color="text.secondary"
                 gutterBottom
             >
-                DOB
+                Address
             </Typography>
 
             <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
-                {userData ? `${userData.dateOfBirth}` : "error"}
+                {userData
+                    ? `${userData.info.address.steetAddress}, ${userData.info.address.city}, 
+                    ${userData.info.address.postalCode} ${userData.info.address.state}`
+                    : "error"}
             </Typography>
 
             <Typography
@@ -74,7 +77,7 @@ function UserDebugPaper(props) {
 
             <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
                 {userData
-                    ? `${new Date(userData.state.signIn.lastSignInTime)}`
+                    ? `${new Date(userData?.state?.signIn?.lastSignInTime)}`
                     : "error"}
             </Typography>
 
@@ -87,7 +90,7 @@ function UserDebugPaper(props) {
             </Typography>
 
             <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
-                {userData ? `${userData.state.signUp}` : "error"}
+                {userData ? `${userData?.state?.signUp}` : "error"}
             </Typography>
 
             <Typography
@@ -99,7 +102,21 @@ function UserDebugPaper(props) {
             </Typography>
 
             <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
-                {userData ? `${userData.dwolla.userId}` : "error"}
+                {userData ? `${userData?.dwolla?.id}` : "error"}
+            </Typography>
+
+            <Typography
+                sx={{ fontSize: 12 }}
+                color="text.secondary"
+                gutterBottom
+            >
+                Linked Accounts
+            </Typography>
+
+            <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
+                {userData
+                    ? `${JSON.stringify(userData?.plaid?.accounts, null, 2)}`
+                    : "error"}
             </Typography>
 
             <Typography
@@ -108,13 +125,13 @@ function UserDebugPaper(props) {
                 gutterBottom
             >
                 Phone {"("}
-                {userData && userData.phone.verified
+                {userData && userData?.phone?.verified
                     ? "verified"
                     : "unverified" + ")"}
             </Typography>
 
             <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
-                {userData ? `${userData.phone.mobile}` : "error"}
+                {userData ? `${userData?.phone?.mobile}` : "error"}
             </Typography>
         </Paper>
     );

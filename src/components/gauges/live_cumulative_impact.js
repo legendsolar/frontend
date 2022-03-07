@@ -18,17 +18,17 @@ const LiveCumulativeImpact = ({
         year: 0,
     };
 
-    const { metaDataStatus, data: metaData } = useDatabaseObjectData(
-        ref(database, "assets/" + assetId)
-    );
-
     const { productionSummaryState, data: productionSummary } =
         useDatabaseObjectData(
             ref(database, "production/" + assetId + "/summary")
         );
 
-    if (metaDataStatus === "loading" || productionSummaryState === "loading") {
+    if (productionSummaryState === "loading") {
         return <LoadingComponent></LoadingComponent>;
+    }
+
+    if (!productionSummary?.last) {
+        return <></>;
     }
 
     Object.entries(productionSummary.last).forEach(([key, value]) => {

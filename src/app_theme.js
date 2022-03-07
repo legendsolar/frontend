@@ -243,7 +243,7 @@ const themeOptions = {
                             paletteOptions.palette.legendaryGreen.main,
                         color: paletteOptions.palette.legendaryGreen
                             .contrastText,
-                        fontWeight: 600,
+                        fontWeight: 400,
                         boxShadow:
                             "rgba(99, 110, 114, 0.2) 0px 0px 13.0207px 0px",
                         boxSizing: "border-box",
@@ -286,11 +286,12 @@ const themeOptions = {
             ],
             styleOverrides: {
                 root: {
-                    fontFamily: "Azeret Mono",
-                    fontWeight: 500,
-                    fontSize: "12px",
-                    margin: "10px",
-                    height: "50px",
+                    fontWeight: 400,
+                    fontSize: "22px",
+                    lineHeight: "20px",
+                    height: "65px",
+                    textTransform: "none",
+                    borderRadius: "5px",
                 },
             },
         },

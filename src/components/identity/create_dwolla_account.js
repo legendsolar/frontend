@@ -1,4 +1,4 @@
-import { Alert, Box, Stack, Paper, Grid } from "@mui/material";
+import { Alert, Box, Stack, Paper, Grid, Chip, Divider } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import { get, ref, set } from "firebase/database";
 import { useAuth } from "../../hooks/use_auth";
@@ -10,7 +10,7 @@ import { useDatabaseObjectData, useDatabase } from "reactfire";
 import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 import LoadingComponent from "../loading_component";
 
-function CreateDwollaAccount({ onComplete }) {
+const CreateDwollaAccount = ({ onComplete }) => {
     const auth = useAuth();
     const user = auth.user;
 
@@ -214,7 +214,7 @@ function CreateDwollaAccount({ onComplete }) {
     }
 
     return (
-        <div>
+        <Stack spacing={2}>
             <Stack spacing={2}>
                 <Typography variant="smallHeadline">
                     Personal Information
@@ -231,7 +231,7 @@ function CreateDwollaAccount({ onComplete }) {
                 </Typography>
             </Stack>
 
-            <Grid container spacing={2} sx={{ width: "100%", mt: 1 }}>
+            <Grid container spacing={2} sx={{ width: "100%" }}>
                 <Grid item xs={12} md={6}>
                     <TextField
                         error={!!formValues.firstName.error}
@@ -319,20 +319,28 @@ function CreateDwollaAccount({ onComplete }) {
                         fullWidth
                     ></TextField>
                 </Grid>
+            </Grid>
 
-                <Grid item xs={12} md={6}>
-                    <TextField
-                        error={!!formValues.dateOfBirth.error}
-                        helperText={formValues.dateOfBirth.errMsg}
-                        name="dateOfBirth"
-                        label="Date of Birth"
-                        variant="filled"
-                        value={formValues.dateOfBirth.value}
-                        onChange={handleInputChange}
-                        fullWidth
-                    ></TextField>
-                </Grid>
+            <Box
+                sx={{
+                    mr: -4,
+                    ml: -2,
+                    height: "2px",
+                    backgroundColor: "whiteFog.main",
+                }}
+            ></Box>
 
+            <Stack
+                direction={"row"}
+                alignItems={"center"}
+                justifyContent={"space-between"}
+                sx={{ pr: 2 }}
+            >
+                <Typography variant="subtitle1">Identification</Typography>
+                <Chip variant="selected" label="Why do we need this?"></Chip>
+            </Stack>
+
+            <Grid container spacing={2} sx={{ width: "100%", mt: 1 }}>
                 <Grid item xs={12} md={6}>
                     <TextField
                         error={!!formValues.ssn.error}
@@ -344,6 +352,18 @@ function CreateDwollaAccount({ onComplete }) {
                         onChange={handleInputChange}
                         fullWidth
                         type="password"
+                    ></TextField>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField
+                        error={!!formValues.dateOfBirth.error}
+                        helperText={formValues.dateOfBirth.errMsg}
+                        name="dateOfBirth"
+                        label="Date of Birth"
+                        variant="filled"
+                        value={formValues.dateOfBirth.value}
+                        onChange={handleInputChange}
+                        fullWidth
                     ></TextField>
                 </Grid>
 
@@ -367,7 +387,7 @@ function CreateDwollaAccount({ onComplete }) {
                     </Button>
                 </Grid>
             </Grid>
-        </div>
+        </Stack>
     );
-}
+};
 export default CreateDwollaAccount;

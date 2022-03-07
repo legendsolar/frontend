@@ -17,6 +17,10 @@ const AssetLiveViewDebug = ({ assetId }) => {
         return <LoadingComponent></LoadingComponent>;
     }
 
+    if (!metaData?.description || metaData?.address) {
+        return <></>;
+    }
+
     return (
         <Paper sx={{ minWidth: 275 }} variant="container">
             <Typography variant="smallHeadline">{metaData.name}</Typography>

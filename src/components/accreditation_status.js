@@ -133,26 +133,20 @@ const AccreditationStatus = ({ onComplete }) => {
                     alignItems={"end"}
                 >
                     <Typography variant="smallHeadline">
-                        Accreditation Status
+                        Accreditation
                     </Typography>
-
-                    <Chip
-                        label="Learn About Investor Accreditation"
-                        variant="light"
-                        onClick={() => {}}
-                    ></Chip>
                 </Stack>
 
-                <Typography variant="description">
+                <Typography variant="body2">
                     Legends Solar offers private placements regulated by the SEC
                     under Regulation D. All investors must be accredited in
                     order to participate in Legends Solar offerings.
                 </Typography>
 
-                <Typography variant="body2">Check all that apply</Typography>
+                <Typography variant="label">Check all that apply</Typography>
             </Stack>
 
-            <Stack>
+            <Stack spacing={2}>
                 <CheckboxList
                     options={accreditationOptionsList}
                     onInputChange={(checkboxListChecked) => {
@@ -172,7 +166,7 @@ const AccreditationStatus = ({ onComplete }) => {
                     {loading ? (
                         <CircularProgress color="dark" size={30} />
                     ) : (
-                        "Continue"
+                        "Continue to personal information"
                     )}
                 </Button>
             </Stack>

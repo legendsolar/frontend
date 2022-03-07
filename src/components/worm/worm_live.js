@@ -39,8 +39,13 @@ export default function WormLive(props) {
                         newData.push(obj);
                     }
                 }
-                setData(newData);
-                setLoading(false);
+
+                if (newData.length !== 0) {
+                    setData(newData);
+                    setLoading(false);
+                } else {
+                    setError(true);
+                }
             })
             .catch((error) => {
                 setError(true);

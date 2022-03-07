@@ -61,6 +61,10 @@ const LiveMetricGauge = ({ assetId, unitConversionFactor_kW, unitOpts }) => {
         return <ErrorGauge unitOpts={unitOpts}></ErrorGauge>;
     }
 
+    if (!productionSummary?.recent) {
+        return <ErrorGauge unitOpts={unitOpts}></ErrorGauge>;
+    }
+
     const currentValue_kW = productionSummary.recent.wattage;
     const currentValue_unit =
         (currentValue_kW / 1000) * unitConversionFactor_kW;

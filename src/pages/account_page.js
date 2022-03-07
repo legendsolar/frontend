@@ -7,7 +7,7 @@ import UserInfo from "../components/user/modify_user_info";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
 import MemberHeader from "../components/member_header";
-import AccountsComponent from "../components/accounts_component";
+import AccountLinkComponent from "../components/account_link_component";
 
 const AccountView = () => {
     const auth = useAuth();
@@ -57,7 +57,7 @@ const AccountView = () => {
                         variant="container"
                         ref={(el) => (contentRefs.current[2] = el)}
                     >
-                        <AccountsComponent></AccountsComponent>
+                        <AccountLinkComponent></AccountLinkComponent>
                     </Paper>
                 </Stack>
             }

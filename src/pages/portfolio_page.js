@@ -11,10 +11,7 @@ const PortfolioPage = () => {
             drawer={<QuickAccountSummary></QuickAccountSummary>}
             mainContent={
                 <div>
-                    <Paper variant="container" sx={{ mb: 2 }}>
-                        <UserStatus></UserStatus>
-                    </Paper>
-                    {/* <ComponentGrid></ComponentGrid> */}
+                    <ComponentGrid></ComponentGrid>
                 </div>
             }
         ></SideBarNavView>
