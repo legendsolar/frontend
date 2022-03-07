@@ -6,10 +6,16 @@ import { useEffect, useState } from "react";
 import {
     createPlaidLinkToken,
     exchangePublicTokenForAccessToken,
-} from "../firebase/cloud_functions";
+    useCloudFunctions,
+} from "../hooks/use_cloud_functions";
 
 const PlaidLink = ({ onSuccess }) => {
     const auth = useAuth();
+    const cloudFunctions = useCloudFunctions();
+    const createPlaidLinkToken = cloudFunctions.createPlaidLinkToken;
+    const exchangePublicTokenForAccessToken =
+        cloudFunctions.exchangePublicTokenForAccessToken;
+
     const [token, setToken] = useState("");
     const [publicToken, setPublicToken] = useState("-");
     const [accessToken, setAccessToken] = useState("-");

@@ -2,12 +2,18 @@ import { Typography, Stack, Button } from "@mui/material";
 import ImageUpload from "../image_upload";
 import MultiSelect from "../multiselect";
 import { useEffect, useState } from "react";
-import { getKBASession } from "../../firebase/cloud_functions";
-import { returnKBASessionResponse } from "../../firebase/cloud_functions";
+import {
+    getKBASession,
+    useCloudFunctions,
+} from "../../hooks/use_cloud_functions";
+import { returnKBASessionResponse } from "../../hooks/use_cloud_functions";
 
 const IdentityVerificationKBA = ({ onComplete }) => {
     const [selected, setSelected] = useState([]);
     const [kbaQuestions, setKBAQuestions] = useState([]);
+    const cloudFunctions = useCloudFunctions();
+    const getKBASession = cloudFunctions.getKBASession;
+    const returnKBASessionResponse = cloudFunctions.returnKBASessionResponse;
 
     useEffect(() => {
         getKBASession().then(({ data }) => {

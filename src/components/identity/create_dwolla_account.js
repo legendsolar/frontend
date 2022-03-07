@@ -7,11 +7,14 @@ import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { useDatabaseObjectData, useDatabase } from "reactfire";
-import { attemptCreateNewDwollaVerifiedUser } from "../../firebase/cloud_functions";
+import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 
 function CreateDwollaAccount({ onComplete }) {
     const auth = useAuth();
     const user = auth.user;
+
+    const attemptCreateNewDwollaVerifiedUser =
+        useCloudFunctions().attemptCreateNewDwollaVerifiedUser;
 
     const database = useDatabase();
     const { status, data: userInfo } = useDatabaseObjectData(

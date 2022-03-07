@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { dwollaCallWrapper } from "../firebase/cloud_functions";
+import { dwollaCallWrapper } from "../hooks/use_cloud_functions";
 
 const initialState = {
     loadedTransactions: [],

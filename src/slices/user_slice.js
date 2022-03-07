@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { getUserSignUpState } from "../firebase/cloud_functions";
+import { getUserSignUpState } from "../hooks/use_cloud_functions";
 
 const initialState = {
     signUpState: {
@@ -16,8 +16,9 @@ const userCheckingId = "8aa7d0a0-d563-45a1-9c8d-7fb441230636";
 export const fetchUserSignUpState = createAsyncThunk(
     "user/fetchUserState",
     async () => {
-        const resp = await getUserSignUpState();
-        return resp.data;
+        // const resp = await getUserSignUpState();
+        // return resp.data;
+        return "ACCOUNT_CREATED";
     }
 );
 

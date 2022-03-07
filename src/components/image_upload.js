@@ -1,12 +1,15 @@
 import { Button, Typography, Alert } from "@mui/material";
 import { useRef, useState } from "react";
 import { Fragment } from "react";
-import { receiveIdVerificationDocument } from "../firebase/cloud_functions";
+import { useCloudFunctions } from "../hooks/use_cloud_functions";
 
 const ImageUpload = () => {
     const uploadInputRef = useRef(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [alertMessage, setAlertMessage] = useState(null);
+
+    const receiveIdVerificationDocument =
+        useCloudFunctions().receiveIdVerificationDocument;
 
     const onChange = (event) => {
         console.log("uploaded?");

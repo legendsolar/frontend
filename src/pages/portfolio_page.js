@@ -14,7 +14,7 @@ const PortfolioPage = () => {
                     <Paper variant="container" sx={{ mb: 2 }}>
                         <UserStatus></UserStatus>
                     </Paper>
-                    <ComponentGrid></ComponentGrid>
+                    {/* <ComponentGrid></ComponentGrid> */}
                 </div>
             }
         ></SideBarNavView>
