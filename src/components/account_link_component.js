@@ -2,10 +2,11 @@ import { Stack, Button, Box, Typography } from "@mui/material";
 import CheckboxList from "./inputs/checkbox_list";
 import { useState } from "react";
 import PlaidLink from "./plaid_link";
-const AccountLinkComponent = ({ onContinue, onComplete }) => {
+const AccountLinkComponent = ({ onContinue, onComplete, onLinkComplete }) => {
     const [continueAllowed, setContinueAllowed] = useState(false);
 
     const onPlaidSuccess = () => {
+        onLinkComplete();
         setContinueAllowed(true);
         onComplete();
     };

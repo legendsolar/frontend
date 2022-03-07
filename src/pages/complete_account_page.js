@@ -147,7 +147,7 @@ const CompleteAccountPage = () => {
                             ></IdentityVerificationDocument>
                         </DefaultComponent>
                     )}
-                    {/* 
+
                     <DefaultComponent
                         disabled={userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED"}
                     >
@@ -162,7 +162,7 @@ const CompleteAccountPage = () => {
                                 }
                             }}
                         ></AccountLinkComponent>
-                    </DefaultComponent> */}
+                    </DefaultComponent>
                 </Stack>
             }
         ></SideBarNavView>

@@ -46,7 +46,10 @@ function useProvideAuth() {
             (response) => {
                 if (response) {
                     setUser(response.user);
-                    setIsAuthenticating(false);
+
+                    setTimeout(() => {
+                        setIsAuthenticating(false);
+                    }, 1000);
                 }
             }
         );

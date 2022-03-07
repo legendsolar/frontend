@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { useAuth } from "../hooks/use_auth";
 
-import { Typography, Paper, Stack, Button } from "@mui/material";
+import { Paper, Stack, Button } from "@mui/material";
 import Wallet from "../components/wallet_component";
-import CreateDwollaAccount from "../components/identity/create_dwolla_account";
+import UserInfo from "../components/user/modify_user_info";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
 import MemberHeader from "../components/member_header";
@@ -43,7 +43,7 @@ const AccountView = () => {
                         variant="container"
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
-                        <CreateDwollaAccount></CreateDwollaAccount>
+                        <UserInfo></UserInfo>
                     </Paper>
 
                     <Paper
