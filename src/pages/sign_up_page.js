@@ -94,7 +94,7 @@ export default function SignUpView() {
 
                 <Box component="form" onSubmit={handleSubmit} noValidate>
                     <Stack spacing={4}>
-                        <Typography variant="subtitle1">Sign up</Typography>
+                        <Typography variant="subtitle1">Sign Up</Typography>
                         <GoogleSignUp></GoogleSignUp>
                         <Typography align="center" variant="description">
                             or
@@ -146,7 +146,7 @@ export default function SignUpView() {
                         <Stack direction="row" justifyContent={"flex-end"}>
                             <Stack spacing={2} alignItems={"flex-end"}>
                                 <Typography variant="smallLabel">
-                                    Already have an account?
+                                    Don't have an account
                                 </Typography>
                                 <Button
                                     variant="medium"

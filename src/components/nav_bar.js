@@ -136,7 +136,7 @@ const NavBar = ({}) => {
                     userSignUpState !== "INSTITUTION_LINK_COMPLETE") && (
                     <Button
                         color="dark"
-                        variant="header"
+                        variant="medium"
                         onClick={() => {
                             redirectToHomePage();
                         }}
