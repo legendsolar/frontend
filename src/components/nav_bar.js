@@ -22,10 +22,10 @@ const NavBar = ({}) => {
     const userSignUpState = useSelector(selectUserSignUpState);
 
     useEffect(() => {
-        if (userSignUpStateStatus === "idle") {
+        if (userSignUpStateStatus === "idle" && auth.user) {
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
-    }, [dispatch, userSignUpStateStatus]);
+    }, [dispatch, userSignUpStateStatus, auth.user]);
 
     const backgroundColor = auth.user ? "blackDusk.main" : "blackDawn.main";
 

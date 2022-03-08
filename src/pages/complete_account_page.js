@@ -38,15 +38,19 @@ const CompleteAccountPage = () => {
     const requestUpdateState = () => {
         if (
             userSignUpStateStatus === "idle" ||
-            userSignUpStateStatus === "succeeded"
+            userSignUpStateStatus === "succeeded" ||
+            userSignUpStateStatus === "rejected"
         ) {
+            console.log("requested state update");
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
     };
 
     useEffect(() => {
-        requestUpdateState();
-    }, [dispatch]);
+        if (auth.user) {
+            requestUpdateState();
+        }
+    }, [dispatch, auth.user, auth.isAuthenticating]);
 
     const navigate = useNavigate();
     const contentRefs = useRef([]);
