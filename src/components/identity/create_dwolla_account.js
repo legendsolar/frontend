@@ -321,15 +321,6 @@ const CreateDwollaAccount = ({ onComplete }) => {
                 </Grid>
             </Grid>
 
-            <Box
-                sx={{
-                    mr: -2,
-                    ml: -2,
-                    height: "2px",
-                    backgroundColor: "whiteFog.main",
-                }}
-            ></Box>
-
             <Stack
                 direction={"row"}
                 alignItems={"center"}

@@ -1,9 +1,9 @@
 import { Stack, Button, Typography } from "@mui/material/";
 import GoogleLogo from "../icons/google_logo";
 
-const GoogleSignUp = () => {
+const GoogleIconButton = ({ label, onClick }) => {
     return (
-        <Button variant="medium">
+        <Button variant="medium" onClick={onClick}>
             <GoogleLogo sx={{ ml: 2 }}></GoogleLogo>
             <Stack
                 direction="row"
@@ -12,11 +12,11 @@ const GoogleSignUp = () => {
                 sx={{ width: "100%", ml: -9 }}
             >
                 <Typography justifyContent="center" variant="smallLabel">
-                    Log In With Google
+                    {label}
                 </Typography>
             </Stack>
         </Button>
     );
 };
 
-export default GoogleSignUp;
+export default GoogleIconButton;

@@ -150,6 +150,7 @@ const themeOptions = {
             fontSize: "12px",
             fontWeight: 800,
             textTransform: "uppercase",
+            color: paletteOptions.palette.blackDawn.main,
         },
     },
     components: {

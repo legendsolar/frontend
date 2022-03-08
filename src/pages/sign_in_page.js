@@ -17,8 +17,10 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate, useLocation } from "react-router-dom";
-import NavBar from "../components/nav_bar";
-import FullPageComponentView from "../views/full_page_component_view";
+import GoogleSignUp from "../components/buttons/google_icon_button";
+import CenteredComponentView from "../views/centered_component_view";
+import GoogleIconButton from "../components/buttons/google_icon_button";
+import ContentDivider from "../components/basics/content_divider";
 
 function SignInView() {
     const auth = useAuth();
@@ -50,74 +52,83 @@ function SignInView() {
     };
 
     return (
-        <FullPageComponentView>
-            <Paper sx={{ width: "500px" }} variant="container">
-                <Box
-                    component="form"
-                    onSubmit={handleSubmit}
-                    noValidate
-                    sx={{ mt: 1 }}
-                >
-                    <Stack>
-                        <Typography variant="subtitle1">Log In</Typography>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <Collapse in={errorOpen}>
-                            <Alert
-                                severity="error"
-                                action={
-                                    <IconButton
-                                        aria-label="close"
-                                        color="inherit"
-                                        size="small"
-                                        onClick={() => {
-                                            setErrorOpen(false);
-                                        }}
-                                    >
-                                        <CloseIcon fontSize="inherit" />
-                                    </IconButton>
-                                }
-                            >
-                                {errorMessage}
-                            </Alert>
-                        </Collapse>
-                        <Button type="submit" color="legendaryGreen">
-                            Log In
-                        </Button>
-                        <Stack
-                            direction={"row"}
-                            justifyContent={"space-between"}
-                        >
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
+        <CenteredComponentView>
+            <Box component="form" onSubmit={handleSubmit} noValidate>
+                <Stack spacing={4}>
+                    <Typography variant="subtitle1">Login</Typography>
+                    <GoogleIconButton
+                        label={"Login with Google"}
+                    ></GoogleIconButton>
 
-                            <Link href="/signup" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
+                    <ContentDivider>
+                        <Typography align="center" variant="smallLabel">
+                            or
+                        </Typography>
+                    </ContentDivider>
+
+                    <TextField
+                        margin="normal"
+                        required
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                    />
+                    <Collapse in={errorOpen}>
+                        <Alert
+                            severity="error"
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setErrorOpen(false);
+                                    }}
+                                >
+                                    <CloseIcon fontSize="inherit" />
+                                </IconButton>
+                            }
+                        >
+                            {errorMessage}
+                        </Alert>
+                    </Collapse>
+                    <Button
+                        type="submit"
+                        color="legendaryGreen"
+                        sx={{ width: "100%" }}
+                    >
+                        Login
+                    </Button>
+
+                    <Stack direction="row" justifyContent={"flex-end"}>
+                        <Stack spacing={2} alignItems={"flex-end"}>
+                            <Typography variant="smallLabel">
+                                Don't have an account
+                            </Typography>
+                            <Button
+                                variant="medium"
+                                onClick={() => {
+                                    navigate("/signUp");
+                                }}
+                                sx={{ width: "120px" }}
+                            >
+                                Sign Up
+                            </Button>
                         </Stack>
                     </Stack>
-                </Box>
-            </Paper>
-        </FullPageComponentView>
+                </Stack>
+            </Box>
+        </CenteredComponentView>
     );
 }
 
