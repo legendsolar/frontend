@@ -15,7 +15,7 @@ const grassGreen = "#30A462";
 const pencilYellow = "#EAB31E";
 const eraserRed = "#B4615F";
 
-const spacing = (s) => `${s * 8}px`;
+const spacing = (s) => `${s * 5}px`;
 
 const paletteOptions = {
     palette: {
@@ -147,8 +147,9 @@ const themeOptions = {
         },
         smallLabel: {
             fontFamily: "Azeret Mono",
-            fontSize: "10px",
+            fontSize: "12px",
             fontWeight: 800,
+            textTransform: "uppercase",
         },
     },
     components: {
@@ -211,7 +212,6 @@ const themeOptions = {
             },
         },
         MuiButton: {
-            disableRipple: true,
             variants: [
                 {
                     props: { color: "dark" },
@@ -335,6 +335,13 @@ const themeOptions = {
                     textTransform: "none",
                     borderRadius: "5px",
                 },
+            },
+        },
+
+        MuiTextField: {
+            defaultProps: {
+                variant: "filled",
+                fullWidth: true,
             },
         },
 

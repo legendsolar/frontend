@@ -63,8 +63,8 @@ const UserInfo = ({ onComplete }) => {
         }
 
         if (!formData.streetAddress.value) {
-            formData.firstName.error = true;
-            formData.firstName.errMsg = "Street required";
+            formData.streetAddress.error = true;
+            formData.streetAddress.errMsg = "Street required";
         } else {
             formData.streetAddress.error = false;
             formData.streetAddress.errMsg = undefined;
@@ -215,10 +215,8 @@ const UserInfo = ({ onComplete }) => {
                         helperText={formValues.lastName.errMsg}
                         name="lastName"
                         label="Last Name"
-                        variant="filled"
                         value={formValues.lastName.value}
                         onChange={handleInputChange}
-                        fullWidth
                     ></TextField>
                 </Grid>
 
@@ -228,7 +226,6 @@ const UserInfo = ({ onComplete }) => {
                         helperText={formValues.streetAddress.errMsg}
                         name="streetAddress"
                         label="Street Address"
-                        variant="filled"
                         value={formValues.streetAddress.value}
                         onChange={handleInputChange}
                         fullWidth

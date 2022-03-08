@@ -83,33 +83,33 @@ export default function SignUpView() {
 
     return (
         <FullPageComponentView>
-            <Paper sx={{ width: "500px" }} variant="container">
+            <Paper
+                variant="container"
+                sx={{
+                    p: 4,
+                    width: "400px",
+                }}
+            >
                 <CssBaseline />
 
-                <Box
-                    component="form"
-                    onSubmit={handleSubmit}
-                    noValidate
-                    sx={{ mt: 1 }}
-                >
-                    <Typography variant="subtitle1">Sign up</Typography>
-                    <Stack>
+                <Box component="form" onSubmit={handleSubmit} noValidate>
+                    <Stack spacing={4}>
+                        <Typography variant="subtitle1">Sign up</Typography>
                         <GoogleSignUp></GoogleSignUp>
-                        <Typography align="center">or</Typography>
+                        <Typography align="center" variant="description">
+                            or
+                        </Typography>
                         <TextField
                             margin="normal"
                             required
-                            fullWidth
                             id="email"
                             label="Email Address"
                             name="email"
                             autoComplete="email"
-                            autoFocus
                         />
                         <TextField
                             margin="normal"
                             required
-                            fullWidth
                             name="password"
                             label="Password"
                             type="password"
@@ -143,9 +143,22 @@ export default function SignUpView() {
                             Sign Up
                         </Button>
 
-                        <Link href="/signin" variant="body2">
-                            Already have an account? Sign in
-                        </Link>
+                        <Stack direction="row" justifyContent={"flex-end"}>
+                            <Stack spacing={2} alignItems={"flex-end"}>
+                                <Typography variant="smallLabel">
+                                    Already have an account?
+                                </Typography>
+                                <Button
+                                    variant="medium"
+                                    onClick={() => {
+                                        navigate("/signIn");
+                                    }}
+                                    sx={{ width: "120px" }}
+                                >
+                                    Sign In
+                                </Button>
+                            </Stack>
+                        </Stack>
                     </Stack>
                 </Box>
             </Paper>
