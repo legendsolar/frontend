@@ -204,7 +204,14 @@ const themeOptions = {
                 },
             ],
         },
+
+        MuiButtonBase: {
+            defaultProps: {
+                disableRipple: true,
+            },
+        },
         MuiButton: {
+            disableRipple: true,
             variants: [
                 {
                     props: { color: "dark" },
@@ -280,6 +287,23 @@ const themeOptions = {
                         textTransform: "uppercase",
                         backgroundColor: "none",
 
+                        "&:hover": {
+                            opacity: "0.75",
+                            backgroundColor: "none",
+                        },
+                    },
+                },
+                {
+                    props: { variant: "medium" },
+                    style: {
+                        fontFamily: "Azeret Mono",
+                        fontWeight: 600,
+                        fontSize: "12px",
+                        lineHeight: "14px",
+                        textTransform: "uppercase",
+                        color: paletteOptions.palette.blackDawn.main,
+                        backgroundColor: paletteOptions.palette.whiteFog.main,
+                        height: "44px",
                         "&:hover": {
                             opacity: "0.75",
                             backgroundColor: "none",

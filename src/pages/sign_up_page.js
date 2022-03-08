@@ -21,6 +21,7 @@ import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
 import FullPageComponentView from "../views/full_page_component_view";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import GoogleSignUp from "../components/buttons/google_sign_up";
 import LoadingView from "../views/loading_view";
 
 export default function SignUpView() {
@@ -93,9 +94,7 @@ export default function SignUpView() {
                 >
                     <Typography variant="subtitle1">Sign up</Typography>
                     <Stack>
-                        <Button onClick={() => googleSignIn()}>
-                            Sign up with Google
-                        </Button>
+                        <GoogleSignUp></GoogleSignUp>
                         <Typography align="center">or</Typography>
                         <TextField
                             margin="normal"
