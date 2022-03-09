@@ -1,6 +1,12 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import { getUserSignUpState } from "../hooks/use_cloud_functions";
 
+const userSignUpStates = {
+    ACCOUNT_CREATED: {},
+    ACCREDATION_VERIF_COMPLETE: {},
+    DWOLLA_ACCOUNT_VERIFIED: {},
+};
+
 const initialState = {
     signUpState: {
         value: null,

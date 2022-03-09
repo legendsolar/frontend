@@ -5,6 +5,7 @@ import {
     ListItemButton,
     Typography,
 } from "@mui/material/";
+import scrollToEl from "../utils/scroll_to_el";
 
 const ScrollToSidebar = ({ header, contentTitles, refs }) => {
     return (
@@ -14,14 +15,11 @@ const ScrollToSidebar = ({ header, contentTitles, refs }) => {
             <List>
                 {contentTitles.map((text, index) => (
                     <ListItemButton
-                        sx={{ ml: -2, mr: -2, height: "88px" }}
+                        sx={{ ml: -4, mr: -4, height: "88px" }}
                         key={text}
-                        onClick={() =>
-                            window.scrollTo(
-                                0,
-                                refs.current[index].offsetTop - 20
-                            )
-                        }
+                        onClick={() => {
+                            scrollToEl(refs.current[index], -20);
+                        }}
                     >
                         <Typography variant="subtitle1">{text}</Typography>
                     </ListItemButton>
