@@ -1,12 +1,16 @@
 import { useRef } from "react";
-import { Typography, Paper, Stack, Button, Grid } from "@mui/material";
+import { DocumentIcon } from "../components/icons/document_icon";
+import { useTheme } from "@mui/material";
+import { Box, Typography, Paper, Stack, Button, Grid } from "@mui/material";
 import SideBarNavView from "../views/side_bar_view";
 import OfferingComponent from "../components/offering";
 import MetricList from "../components/summary/metric_list";
 import DefaultComponent from "../components/default_component";
 import SolarPicture from "../assets/solar_frame.png";
+import PanelsSvg from "../components/icons/panels_svg";
 
 const InvestPage = () => {
+    const theme = useTheme();
     const contentRefs = useRef([]);
     const drawerTitles = ["Contact", "Wallet", "Accounts"];
 
@@ -16,21 +20,26 @@ const InvestPage = () => {
             drawerAppearsOnTop={false}
             drawer={
                 <Paper variant="container">
-                    <Stack>
-                        <Typography variant="smallHeadline">Commit</Typography>
+                    <Stack spacing={4}>
+                        <Typography variant="smallHeadline">
+                            Pre-commit
+                        </Typography>
+                        <PanelsSvg
+                            color={theme.palette.skyBlue.main}
+                        ></PanelsSvg>
                         <MetricList
                             valuePairs={[
                                 {
                                     metric: "Available panels",
-                                    value: "140/300",
+                                    value: "300/300",
                                 },
                                 {
                                     metric: "Total Investment",
-                                    value: "$25,000",
+                                    value: "$74,500",
                                 },
                             ]}
                         ></MetricList>
-                        <Button variant="secondary">Precommit to invest</Button>
+                        <Button variant="primary">Sign pre-commitment</Button>
                     </Stack>
                 </Paper>
             }
@@ -228,10 +237,82 @@ const InvestPage = () => {
                                 <Typography variant="smallHeadline">
                                     Documents
                                 </Typography>
+
+                                <Grid
+                                    container
+                                    spacing={2}
+                                    sx={{ width: "100%" }}
+                                >
+                                    <Grid item xs={12} lg={4}>
+                                        <Stack
+                                            direction="row"
+                                            justifyContent={"flex-start"}
+                                            alignItems="center"
+                                            spacing={2}
+                                        >
+                                            <DocumentIcon
+                                                color={
+                                                    theme.palette.skyBlue.main
+                                                }
+                                                darkColor={
+                                                    theme.palette.skyBlue.dark
+                                                }
+                                            ></DocumentIcon>
+                                            <Typography variant="subtitle1">
+                                                Prospectus
+                                            </Typography>
+                                        </Stack>
+                                    </Grid>
+
+                                    <Grid item xs={12} lg={4}>
+                                        <Stack
+                                            direction="row"
+                                            justifyContent={"flex-start"}
+                                            alignItems="center"
+                                            spacing={2}
+                                        >
+                                            <DocumentIcon
+                                                color={
+                                                    theme.palette.pencilYellow
+                                                        .main
+                                                }
+                                                darkColor={
+                                                    theme.palette.pencilYellow
+                                                        .dark
+                                                }
+                                            ></DocumentIcon>
+                                            <Typography variant="subtitle1">
+                                                {`Subscription \nAgreement`}
+                                            </Typography>
+                                        </Stack>
+                                    </Grid>
+
+                                    <Grid item xs={12} lg={4}>
+                                        <Stack
+                                            direction="row"
+                                            justifyContent={"flex-start"}
+                                            alignItems="center"
+                                            spacing={2}
+                                        >
+                                            <DocumentIcon
+                                                color={
+                                                    theme.palette.grassGreen
+                                                        .main
+                                                }
+                                                darkColor={
+                                                    theme.palette.grassGreen
+                                                        .dark
+                                                }
+                                            ></DocumentIcon>
+                                            <Typography variant="subtitle1">
+                                                {`Wiring \nInstructions`}
+                                            </Typography>
+                                        </Stack>
+                                    </Grid>
+                                </Grid>
                             </Stack>
                         </DefaultComponent>
                     </Stack>
-                    <OfferingComponent></OfferingComponent>
                 </div>
             }
         ></SideBarNavView>

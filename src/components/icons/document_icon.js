@@ -1,4 +1,4 @@
-export const DocumentIcon = () => {
+export const DocumentIcon = ({ color, darkColor }) => {
     return (
         <svg
             width="55"
@@ -9,10 +9,10 @@ export const DocumentIcon = () => {
         >
             <path
                 d="M38.3335 0L54.3335 16V69H0.333496V0H38.3335Z"
-                fill="#30A462"
+                fill={color}
             />
 
-            <path d="M38.3335 0 L 54.3335 16 L 38.3335 16" fill="#185231" />
+            <path d="M38.3335 0 L 54.3335 16 L 38.3335 16" fill={darkColor} />
         </svg>
     );
 };
