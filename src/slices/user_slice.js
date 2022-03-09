@@ -17,7 +17,8 @@ const initialState = {
 
 const userDwollaId = "f92da569-41ec-4aa9-ba36-2329b4d26b4b";
 const userWalletId = "da85e28e-2dfb-4690-bfe7-b53818214da3";
-const userCheckingId = "8aa7d0a0-d563-45a1-9c8d-7fb441230636";
+const userCheckingDWOLLA_ACCOUNT_VERIFIEDId =
+    "8aa7d0a0-d563-45a1-9c8d-7fb441230636";
 
 export const fetchUserSignUpState = createAsyncThunk(
     "user/fetchUserState",

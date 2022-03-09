@@ -1,23 +1,25 @@
 import { Stack, Typography, Tooltip } from "@mui/material";
 
-const MetricList = (props) => {
+const MetricList = ({ valuePairs }) => {
+    if (!valuePairs) {
+        return <></>;
+    }
+
     return (
-        <Stack spacing={2} sx={{ mt: 2, mb: 2 }}>
-            {props.valuePairs &&
-                props.valuePairs.map(({ metric, value }) => (
-                    <Stack
-                        direction="row"
-                        justifyContent={"space-between"}
-                        key={metric + value}
-                    >
-                        <Tooltip title="How is this calculated?">
-                            <Typography variant="description">
-                                {metric}
-                            </Typography>
-                        </Tooltip>
-                        <Typography variant="label">{value}</Typography>
-                    </Stack>
-                ))}
+        <Stack spacing={2} sx={{ width: "100%", height: "100%" }}>
+            {valuePairs.map(({ metric, value }) => (
+                <Stack
+                    direction="row"
+                    justifyContent={"space-between"}
+                    alignItems="center"
+                    key={metric + value}
+                >
+                    <Tooltip title="How is this calculated?">
+                        <Typography variant="subtitle1">{metric}</Typography>
+                    </Tooltip>
+                    <Typography variant="subtitle2">{value}</Typography>
+                </Stack>
+            ))}
         </Stack>
     );
 };

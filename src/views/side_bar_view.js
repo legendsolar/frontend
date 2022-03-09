@@ -6,7 +6,7 @@ import DefaultErrorBoundary from "../components/errors/default_error_boundary";
 const SideBarNavView = (props) => {
     return (
         <DefaultView>
-            <Grid container spacing={2}>
+            <Grid container spacing={6}>
                 <Grid
                     item
                     md={4}
