@@ -1,27 +1,33 @@
 import React from "react";
+import { useTheme } from "@mui/material";
 import { Paper, Stack, Divider, Box } from "@mui/material";
 import MetricList from "./summary/metric_list";
 import { Typography } from "@mui/material";
 import { useUser } from "reactfire";
+import PanelsSvg from "./icons/panels_svg";
+import DefaultComponent from "./default_component";
 
 const QuickAccountSummary = (props) => {
     const user = useUser();
+    const theme = useTheme();
+
+    const panelColor = theme.palette.skyBlue.main;
 
     const panels = Math.floor(Math.random() * 10 + 10);
     const kw_panel = 0.5;
 
     return (
-        <Paper sx={{ width: "100%", m: 0, p: 0 }} variant="container">
+        <DefaultComponent>
             <Stack sx={{ p: 2 }}>
                 <Stack direction="row" justifyContent="space-between">
                     <Typography variant="subtitle1">{panels} Panels</Typography>
 
-                    <Typography variant="body1">
+                    <Typography variant="subtitle1">
                         {panels * kw_panel} Kw
                     </Typography>
                 </Stack>
 
-                <Box sx={{ height: "100px" }}></Box>
+                <PanelsSvg color={panelColor}></PanelsSvg>
 
                 <Stack direction="row" justifyContent="space-between">
                     <Stack>
@@ -37,33 +43,7 @@ const QuickAccountSummary = (props) => {
                     </Stack>
                 </Stack>
             </Stack>
-            <Divider />
-            <Stack sx={{ p: 2 }}>
-                <Typography sx={{ fontSize: 14 }} variant="subtitle1">
-                    All time impact
-                </Typography>
-                <MetricList
-                    valuePairs={[
-                        { metric: "DIVIDENDS EARNED", value: "$625" },
-                        { metric: "KILOWATT HOURS GENERATED", value: "10,725" },
-                        { metric: "CARBON AVERTED", value: "235 LBS" },
-                    ]}
-                ></MetricList>
-            </Stack>
-            <Divider />
-            <Stack sx={{ p: 2 }}>
-                <Typography sx={{ fontSize: 14 }} variant="subtitle1">
-                    Financial Return
-                </Typography>
-                <MetricList
-                    valuePairs={[
-                        { metric: "EST. NET PRESENT VALUE", value: "$625" },
-                        { metric: "COMBINED NPV + DIVIDENDS", value: "10,725" },
-                        { metric: "EST. NET ANNUAL RETURN", value: "235 LBS" },
-                    ]}
-                ></MetricList>
-            </Stack>
-        </Paper>
+        </DefaultComponent>
     );
 };
 export default QuickAccountSummary;

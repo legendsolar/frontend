@@ -10,6 +10,38 @@ const SideBarNavView = ({
     drawerAppearsOnTop = true,
     drawerAppearsOnBotton,
 }) => {
+    const wrappedDrawer = (
+        <Container
+            sx={{
+                width: "100%",
+                pl: 0,
+                pr: 0,
+                mb: {
+                    sm: 2,
+                    md: 0,
+                },
+                display: {
+                    sm: "block",
+                    md: "none",
+                },
+            }}
+        >
+            <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
+        </Container>
+    );
+
+    const getDrawerTop = () => {
+        if (drawerAppearsOnTop) return wrappedDrawer;
+
+        return null;
+    };
+
+    const getDrawerBottom = () => {
+        if (drawerAppearsOnTop) return wrappedDrawer;
+
+        return null;
+    };
+
     return (
         <DefaultView>
             <Grid container spacing={6}>
@@ -49,55 +81,12 @@ const SideBarNavView = ({
                             width: "100%",
                         }}
                     >
-                        {drawerAppearsOnTop && (
-                            <Container
-                                style={{
-                                    // should not be needed
-                                    paddingLeft: 0,
-                                    paddingRight: 0,
-                                }}
-                                sx={{
-                                    width: "100%",
-                                    mb: 2,
-                                    display: {
-                                        sm: "block",
-                                        sm: "block",
-                                        md: "none",
-                                    },
-                                }}
-                            >
-                                <DefaultErrorBoundary>
-                                    {drawer}
-                                </DefaultErrorBoundary>
-                            </Container>
-                        )}
-
+                        {getDrawerTop()}
                         <DefaultErrorBoundary>
                             {mainContent}
                         </DefaultErrorBoundary>
 
-                        {drawerAppearsOnBotton && (
-                            <Container
-                                style={{
-                                    // should not be needed
-                                    paddingLeft: 0,
-                                    paddingRight: 0,
-                                }}
-                                sx={{
-                                    width: "100%",
-                                    mt: 2,
-                                    display: {
-                                        sm: "block",
-                                        sm: "block",
-                                        md: "none",
-                                    },
-                                }}
-                            >
-                                <DefaultErrorBoundary>
-                                    {drawer}
-                                </DefaultErrorBoundary>
-                            </Container>
-                        )}
+                        {getDrawerBottom()}
 
                         {/** 
                         Bit of padding below the content to ensure the sidebar can scroll all the way down

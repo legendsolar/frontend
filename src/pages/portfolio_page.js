@@ -9,11 +9,7 @@ const PortfolioPage = () => {
     return (
         <SideBarNavView
             drawer={<QuickAccountSummary></QuickAccountSummary>}
-            mainContent={
-                <div>
-                    <ComponentGrid></ComponentGrid>
-                </div>
-            }
+            mainContent={<ComponentGrid></ComponentGrid>}
         ></SideBarNavView>
     );
 };

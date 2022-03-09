@@ -40,111 +40,129 @@ const NavBar = ({}) => {
                     zIndex: -10,
                 }}
             ></Box>
-            <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
+
+            <Box
                 sx={{
                     width: "100%",
-                    zIndex: 1,
-                    ml: 10,
-                    mr: 6,
-                    mt: 5,
                 }}
+                display="flex"
+                justifyContent={"center"}
             >
                 <Box
                     sx={{
-                        width: "120px",
-                        height: "45px",
+                        width: {
+                            sm: "550px",
+                            md: "850px",
+                            lg: "1100px",
+                        },
                     }}
-                    alt="logo"
                 >
-                    <LegendsSolarLogo></LegendsSolarLogo>
-                </Box>
-
-                <Stack
-                    direction="row"
-                    sx={{ display: { xs: "none", sm: "block" } }}
-                >
-                    {auth.user &&
-                        userSignUpState === "DWOLLA_ACCOUNT_VERIFIED" && (
-                            <>
-                                <Button
-                                    color="dark"
-                                    variant="header"
-                                    onClick={() => {
-                                        navigate("/");
-                                    }}
-                                >
-                                    <Typography variant="appBarHeader">
-                                        Your Rooftop
-                                    </Typography>
-                                </Button>
-
-                                <Button
-                                    color="dark"
-                                    variant="header"
-                                    onClick={() => {
-                                        navigate("/transactions");
-                                    }}
-                                >
-                                    <Typography variant="appBarHeader">
-                                        Transactions
-                                    </Typography>
-                                </Button>
-
-                                <Button
-                                    color="dark"
-                                    variant="header"
-                                    onClick={() => {
-                                        navigate("/documents");
-                                    }}
-                                >
-                                    <Typography variant="appBarHeader">
-                                        Documents
-                                    </Typography>
-                                </Button>
-
-                                <Button
-                                    color="dark"
-                                    variant="header"
-                                    onClick={() => {
-                                        navigate("/account");
-                                    }}
-                                >
-                                    <Typography variant="appBarHeader">
-                                        Account
-                                    </Typography>
-                                </Button>
-
-                                <Button
-                                    color="dark"
-                                    variant="header"
-                                    onClick={() => {
-                                        navigate("/explore");
-                                    }}
-                                >
-                                    <Typography variant="appBarHeader">
-                                        Available Offerings
-                                    </Typography>
-                                </Button>
-                            </>
-                        )}
-                </Stack>
-
-                {(!auth.user ||
-                    userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED") && (
-                    <Button
-                        color="dark"
-                        variant="medium"
-                        onClick={() => {
-                            redirectToHomePage();
+                    <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        sx={{
+                            width: "100%",
+                            zIndex: 1,
+                            mt: 5,
                         }}
                     >
-                        Return Home
-                    </Button>
-                )}
-            </Stack>
+                        <Box
+                            sx={{
+                                width: "120px",
+                                height: "45px",
+                            }}
+                            alt="logo"
+                        >
+                            <LegendsSolarLogo></LegendsSolarLogo>
+                        </Box>
+
+                        <Stack
+                            direction="row"
+                            sx={{ display: { xs: "none", sm: "block" } }}
+                        >
+                            {auth.user &&
+                                userSignUpState ===
+                                    "DWOLLA_ACCOUNT_VERIFIED" && (
+                                    <>
+                                        <Button
+                                            color="dark"
+                                            variant="header"
+                                            onClick={() => {
+                                                navigate("/");
+                                            }}
+                                        >
+                                            <Typography variant="appBarHeader">
+                                                Your Rooftop
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            color="dark"
+                                            variant="header"
+                                            onClick={() => {
+                                                navigate("/transactions");
+                                            }}
+                                        >
+                                            <Typography variant="appBarHeader">
+                                                Transactions
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            color="dark"
+                                            variant="header"
+                                            onClick={() => {
+                                                navigate("/documents");
+                                            }}
+                                        >
+                                            <Typography variant="appBarHeader">
+                                                Documents
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            color="dark"
+                                            variant="header"
+                                            onClick={() => {
+                                                navigate("/account");
+                                            }}
+                                        >
+                                            <Typography variant="appBarHeader">
+                                                Account
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            color="dark"
+                                            variant="header"
+                                            onClick={() => {
+                                                navigate("/explore");
+                                            }}
+                                        >
+                                            <Typography variant="appBarHeader">
+                                                Available Offerings
+                                            </Typography>
+                                        </Button>
+                                    </>
+                                )}
+                        </Stack>
+
+                        {(!auth.user ||
+                            userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED") && (
+                            <Button
+                                color="dark"
+                                variant="medium"
+                                onClick={() => {
+                                    redirectToHomePage();
+                                }}
+                            >
+                                Return Home
+                            </Button>
+                        )}
+                    </Stack>
+                </Box>
+            </Box>
         </Toolbar>
     );
 };

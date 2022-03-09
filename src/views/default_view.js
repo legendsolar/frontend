@@ -10,10 +10,9 @@ const DefaultView = (props) => {
     return (
         <Box justifyContent="center" alignItems="center" width="100%">
             <NavBar></NavBar>
-
             <Box
                 sx={{
-                    maxWidth: {
+                    width: {
                         sm: "550px",
                         md: "850px",
                         lg: "1100px",
@@ -23,11 +22,6 @@ const DefaultView = (props) => {
                     mt: 6,
                 }}
             >
-                {/* {auth.user && (
-                    <Paper variant="container" sx={{ mt: 4 }}>
-                        <UserStatus></UserStatus>
-                    </Paper>
-                )} */}
                 {props.children}
             </Box>
         </Box>
