@@ -15,7 +15,7 @@ const MetricList = ({ valuePairs }) => {
                     key={metric + value}
                 >
                     <Tooltip title="How is this calculated?">
-                        <Typography variant="subtitle1">{metric}</Typography>
+                        <Typography variant="label">{metric}</Typography>
                     </Tooltip>
                     <Typography variant="subtitle2">{value}</Typography>
                 </Stack>

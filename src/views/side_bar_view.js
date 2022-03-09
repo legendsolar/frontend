@@ -3,7 +3,12 @@ import DefaultView from "./default_view";
 import { ErrorBoundary } from "@sentry/react";
 import DefaultErrorBoundary from "../components/errors/default_error_boundary";
 
-const SideBarNavView = (props) => {
+const SideBarNavView = ({
+    drawer,
+    mainContent,
+    drawerAppearsOnTop = true,
+    drawerAppearsOnBotton,
+}) => {
     return (
         <DefaultView>
             <Grid container spacing={6}>
@@ -27,9 +32,7 @@ const SideBarNavView = (props) => {
                             position: "sticky",
                         }}
                     >
-                        <DefaultErrorBoundary>
-                            {props.drawer}
-                        </DefaultErrorBoundary>
+                        <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
                     </Container>
                 </Grid>
                 <Grid item xs={12} md={8}>
@@ -39,30 +42,55 @@ const SideBarNavView = (props) => {
                             width: "100%",
                         }}
                     >
-                        <Container
-                            style={{
-                                // should not be needed
-                                paddingLeft: 0,
-                                paddingRight: 0,
-                            }}
-                            sx={{
-                                width: "100%",
-                                mb: 2,
-                                display: {
-                                    sm: "block",
-                                    sm: "block",
-                                    md: "none",
-                                },
-                            }}
-                        >
-                            <DefaultErrorBoundary>
-                                {props.drawer}
-                            </DefaultErrorBoundary>
-                        </Container>
+                        {drawerAppearsOnTop && (
+                            <Container
+                                style={{
+                                    // should not be needed
+                                    paddingLeft: 0,
+                                    paddingRight: 0,
+                                }}
+                                sx={{
+                                    width: "100%",
+                                    mb: 2,
+                                    display: {
+                                        sm: "block",
+                                        sm: "block",
+                                        md: "none",
+                                    },
+                                }}
+                            >
+                                <DefaultErrorBoundary>
+                                    {drawer}
+                                </DefaultErrorBoundary>
+                            </Container>
+                        )}
 
                         <DefaultErrorBoundary>
-                            {props.mainContent}
+                            {mainContent}
                         </DefaultErrorBoundary>
+
+                        {drawerAppearsOnBotton && (
+                            <Container
+                                style={{
+                                    // should not be needed
+                                    paddingLeft: 0,
+                                    paddingRight: 0,
+                                }}
+                                sx={{
+                                    width: "100%",
+                                    mt: 2,
+                                    display: {
+                                        sm: "block",
+                                        sm: "block",
+                                        md: "none",
+                                    },
+                                }}
+                            >
+                                <DefaultErrorBoundary>
+                                    {drawer}
+                                </DefaultErrorBoundary>
+                            </Container>
+                        )}
 
                         {/** 
                         Bit of padding below the content to ensure the sidebar can scroll all the way down

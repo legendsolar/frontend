@@ -8,9 +8,11 @@ import DefaultComponent from "../components/default_component";
 import { InvestmentAccountSubtype } from "plaid";
 import { useTheme } from "@mui/material";
 import PanelsSvg from "../components/icons/panels_svg";
+import { useNavigate } from "react-router-dom";
 
 const ExplorePage = () => {
     const theme = useTheme();
+    const navigate = useNavigate();
     const contentRefs = useRef([]);
     const drawerTitles = [
         "Santa Rosa Solar",
@@ -161,7 +163,12 @@ const ExplorePage = () => {
                                                     </Stack>
                                                 )
                                             )}
-                                            <Button variant="primary">
+                                            <Button
+                                                variant="primary"
+                                                onClick={() => {
+                                                    navigate("/invest");
+                                                }}
+                                            >
                                                 View executive summary
                                             </Button>
                                         </Stack>

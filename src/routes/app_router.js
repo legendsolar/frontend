@@ -32,6 +32,7 @@ import {
     fetchUserSignUpState,
     selectUserSignUpState,
 } from "../slices/user_slice";
+import InvestPage from "../pages/invest_page";
 
 function AppRouter() {
     const app = useFirebaseApp();
@@ -132,6 +133,15 @@ function AppRouter() {
                         element={
                             <ProtectedRoute>
                                 <ExplorePage />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/invest"
+                        element={
+                            <ProtectedRoute>
+                                <InvestPage />
                             </ProtectedRoute>
                         }
                     />
