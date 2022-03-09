@@ -6,12 +6,19 @@ import DefaultErrorBoundary from "../components/errors/default_error_boundary";
 const SideBarNavView = ({
     drawer,
     mainContent,
+    header,
     drawerAppearsOnTop = true,
     drawerAppearsOnBotton,
 }) => {
     return (
         <DefaultView>
             <Grid container spacing={6}>
+                {!!header && (
+                    <Grid item xs={12}>
+                        {header}
+                    </Grid>
+                )}
+
                 <Grid
                     item
                     md={4}

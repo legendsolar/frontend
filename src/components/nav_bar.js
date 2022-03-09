@@ -67,7 +67,7 @@ const NavBar = ({}) => {
                     sx={{ display: { xs: "none", sm: "block" } }}
                 >
                     {auth.user &&
-                        userSignUpState === "INSTITUTION_LINK_COMPLETE" && (
+                        userSignUpState === "DWOLLA_ACCOUNT_VERIFIED" && (
                             <>
                                 <Button
                                     color="dark"
@@ -133,7 +133,7 @@ const NavBar = ({}) => {
                 </Stack>
 
                 {(!auth.user ||
-                    userSignUpState !== "INSTITUTION_LINK_COMPLETE") && (
+                    userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED") && (
                     <Button
                         color="dark"
                         variant="medium"
