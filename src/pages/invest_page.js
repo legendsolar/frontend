@@ -96,7 +96,7 @@ const InvestPage = () => {
             )}
 
             {state.userState === "CONFIRMED" && (
-                <Button variant="secondary" onClick={() => {}}>
+                <Button variant="secondary" disabled={true} onClick={() => {}}>
                     {"Complete payment"}
                 </Button>
             )}
