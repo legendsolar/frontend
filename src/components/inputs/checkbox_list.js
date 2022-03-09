@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Checkbox, Divider, Stack, Typography } from "@mui/material";
+import { Box, Checkbox, Stack, Typography } from "@mui/material";
+import Divider from "../basics/divider";
 import PropTypes from "prop-types";
 function CheckboxList({ options, onInputChange }) {
     const [checkedList, setCheckedList] = useState(
@@ -35,32 +36,33 @@ function CheckboxList({ options, onInputChange }) {
         <Stack spacing={2}>
             {Object.entries(options).map(([key, option]) => {
                 return (
-                    <Stack
-                        direction="row"
-                        alignItems="flex-start"
-                        sx={{ mb: 1 }}
-                        spacing={0}
-                    >
-                        <Checkbox
-                            checked={checkedList[key]}
-                            disabled={exclusive ? exclusive != key : false}
-                            onChange={(event) => {
-                                setCheckedItem(key, event.target.checked);
-                            }}
-                        ></Checkbox>
-                        <Stack spacing={0}>
-                            <Typography
-                                sx={{ mt: 1, mb: 1 }}
-                                variant="subtitle1"
-                            >
-                                {option.title}
-                            </Typography>
+                    <Box sx={{ height: "88px" }} key={key}>
+                        <Stack
+                            direction="row"
+                            alignItems="flex-start"
+                            spacing={0}
+                        >
+                            <Checkbox
+                                checked={checkedList[key]}
+                                disabled={exclusive ? exclusive != key : false}
+                                onChange={(event) => {
+                                    setCheckedItem(key, event.target.checked);
+                                }}
+                            ></Checkbox>
+                            <Stack spacing={0}>
+                                <Typography
+                                    sx={{ mt: 1, mb: 1 }}
+                                    variant="subtitle1"
+                                >
+                                    {option.title}
+                                </Typography>
 
-                            <Typography variant="description">
-                                {option.description}
-                            </Typography>
+                                <Typography variant="description">
+                                    {option.description}
+                                </Typography>
+                            </Stack>
                         </Stack>
-                    </Stack>
+                    </Box>
                 );
             })}
         </Stack>

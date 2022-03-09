@@ -9,8 +9,8 @@ import {
     InputAdornment,
     MenuItem,
 } from "@mui/material";
-import MetricList from "./summary/metric_list";
-import TransactionComponent from "./transactions/transfer_component";
+import MetricList from "../summary/metric_list";
+import TransactionComponent from "../transactions/transfer_component";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -18,9 +18,9 @@ import {
     fetchWalletBalance,
     selectWalletBalance,
     selectAllAccounts,
-} from "../slices/wallet_slice";
+} from "../../slices/wallet_slice";
 
-import { useCloudFunctions } from "../hooks/use_cloud_functions";
+import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 
 const Wallet = () => {
     const cloudFunctions = useCloudFunctions();

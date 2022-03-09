@@ -1,15 +1,15 @@
 import { Stack, Button, Box, Typography } from "@mui/material";
-import CheckboxList from "./inputs/checkbox_list";
+import CheckboxList from "../inputs/checkbox_list";
 import { useState } from "react";
-import PlaidLink from "./plaid_link";
+import PlaidLink from "../plaid_link";
 import {
     useDatabase,
     useDatabaseObjectData,
     useFirestoreDocData,
 } from "reactfire";
 import { ref } from "firebase/database";
-import { useAuth } from "../hooks/use_auth";
-import LoadingComponent from "./loading_component";
+import { useAuth } from "../../hooks/use_auth";
+import LoadingComponent from "../loading_component";
 
 const AccountLinkComponent = ({ onContinue, onComplete, onLinkComplete }) => {
     const user = useAuth().user;

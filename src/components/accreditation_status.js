@@ -119,10 +119,7 @@ const AccreditationStatus = ({ onComplete }) => {
         <div>
             <Stack
                 sx={{
-                    mt: -2,
-                    p: 2,
-                    ml: -2,
-                    mr: -2,
+                    m: 4,
                 }}
                 spacing={2}
                 justifyContent="space-between"
@@ -143,10 +140,10 @@ const AccreditationStatus = ({ onComplete }) => {
                     order to participate in Legends Solar offerings.
                 </Typography>
 
-                <Typography variant="label">Check all that apply</Typography>
-            </Stack>
+                <Typography variant="label" sx={{ mt: 5 }}>
+                    Check all that apply
+                </Typography>
 
-            <Stack spacing={2}>
                 <CheckboxList
                     options={accreditationOptionsList}
                     onInputChange={(checkboxListChecked) => {

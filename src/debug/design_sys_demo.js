@@ -19,7 +19,7 @@ import data from "../components/worm/fake_data";
 import TransactionComponent from "../components/transactions/transfer_component";
 import Weather from "../components/weather/weather";
 import CheckboxList from "../components/inputs/checkbox_list";
-import Wallet from "../components/wallet_component";
+import Wallet from "../components/wallet/wallet_component";
 import UserStatus from "../components/user_status";
 import DefaultComponent from "../components/default_component";
 

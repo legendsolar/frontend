@@ -5,7 +5,7 @@ import ScrollToSidebar from "../components/scroll_to_sidebar";
 import { useAuth } from "../hooks/use_auth";
 import MemberHeader from "../components/member_header";
 import RecentTransfers from "../components/transactions/recent_transfers";
-import Wallet from "../components/wallet_component";
+import Wallet from "../components/wallet/wallet_component";
 
 const TransactionPage = (props) => {
     const auth = useAuth();

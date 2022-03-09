@@ -47,9 +47,10 @@ function useProvideAuth() {
                 if (response) {
                     setUser(response.user);
 
+                    // TODO remove this
                     setTimeout(() => {
                         setIsAuthenticating(false);
-                    }, 5000);
+                    }, 2000);
                 }
             }
         );

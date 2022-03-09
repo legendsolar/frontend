@@ -14,6 +14,7 @@ const ScrollToSidebar = ({ header, contentTitles, refs }) => {
             <List>
                 {contentTitles.map((text, index) => (
                     <ListItemButton
+                        sx={{ ml: -2, mr: -2, height: "88px" }}
                         key={text}
                         onClick={() =>
                             window.scrollTo(
@@ -22,7 +23,7 @@ const ScrollToSidebar = ({ header, contentTitles, refs }) => {
                             )
                         }
                     >
-                        <Typography>{text}</Typography>
+                        <Typography variant="subtitle1">{text}</Typography>
                     </ListItemButton>
                 ))}
             </List>

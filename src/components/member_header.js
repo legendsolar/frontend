@@ -11,9 +11,10 @@ const MemberHeader = ({ sx }) => {
         ref(database, "users/" + user.uid)
     );
     const loading = status !== "success";
-    const name = loading
-        ? "-"
-        : `${userInfo.info.name.first} ${userInfo.info.name.last}`;
+    const name =
+        loading || !userInfo?.info?.name
+            ? "-"
+            : `${userInfo.info.name.first} ${userInfo.info.name.last}`;
     const memberInfo = "Member since 2022";
 
     return (

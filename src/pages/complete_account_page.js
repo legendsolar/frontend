@@ -8,7 +8,7 @@ import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
 import AccreditationStatus from "../components/accreditation_status";
 import CreateDwollaAccount from "../components/identity/create_dwolla_account";
-import AccountLinkComponent from "../components/account_link_component";
+import AccountLinkComponent from "../components/transactions/account_link_component";
 import { useDatabaseObjectData, useDatabase } from "reactfire";
 import LoadingView from "../views/loading_view";
 import IdentityVerificationKBA from "../components/identity/identity_verification_kba";
@@ -147,26 +147,17 @@ const CompleteAccountPage = () => {
                             }
                         >
                             <IdentityVerificationDocument
-                                onComplete={onComplete}
+                                onContinue={() => {
+                                    if (
+                                        userSignUpState ===
+                                        "DWOLLA_ACCOUNT_VERIFIED"
+                                    ) {
+                                        navigate("/explore");
+                                    }
+                                }}
                             ></IdentityVerificationDocument>
                         </DefaultComponent>
                     )}
-
-                    <DefaultComponent
-                        disabled={userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED"}
-                    >
-                        <AccountLinkComponent
-                            onLinkComplete={onComplete}
-                            onContinue={() => {
-                                if (
-                                    userSignUpState ===
-                                    "INSTITUTION_LINK_COMPLETE"
-                                ) {
-                                    navigate("/explore");
-                                }
-                            }}
-                        ></AccountLinkComponent>
-                    </DefaultComponent>
                 </Stack>
             }
         ></SideBarNavView>

@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import LoadingView from "../views/loading_view";
 
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ children, disallowedUserStates }) {
     const auth = useAuth();
     const location = useLocation();
 
@@ -11,8 +11,9 @@ function ProtectedRoute({ children }) {
         return <LoadingView></LoadingView>;
     }
 
-    console.log("auth state");
-    console.log(auth);
+    if (disallowedUserStates) {
+    }
+
     return auth.user ? (
         children
     ) : (

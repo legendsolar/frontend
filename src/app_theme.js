@@ -160,7 +160,7 @@ const themeOptions = {
                 {
                     props: { variant: "container" },
                     style: {
-                        padding: spacing(2),
+                        padding: spacing(4),
                         borderRadius: "15px",
                         boxShadow: "0px 0px 15px rgba(99, 110, 114, 0.5)",
                         overflow: "hidden",

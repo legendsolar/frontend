@@ -1,4 +1,14 @@
-import { Alert, Box, Stack, Paper, Grid } from "@mui/material";
+import {
+    Alert,
+    Box,
+    Stack,
+    Paper,
+    Grid,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+} from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import { get, ref, set } from "firebase/database";
 import { useAuth } from "../../hooks/use_auth";
@@ -9,8 +19,9 @@ import { useEffect, useState } from "react";
 import { useDatabaseObjectData, useDatabase } from "reactfire";
 import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 import LoadingComponent from "../loading_component";
+import { states } from "../../utils/static_lists";
 
-const UserInfo = ({ onComplete }) => {
+const ModifyUserInfo = ({ onValid, onChange, onLoadingChange }) => {
     const auth = useAuth();
     const user = auth.user;
 
@@ -89,7 +100,7 @@ const UserInfo = ({ onComplete }) => {
         if (!formData.postalCode.value) {
             formData.postalCode.error = true;
             formData.postalCode.errMsg = "Zip code required";
-        } else if (!formData.postalCode.value.match(/\d{5}/g)) {
+        } else if (formData.postalCode.value.length !== 5) {
             formData.postalCode.error = true;
             formData.postalCode.errMsg = "Zip code invalid";
         } else {
@@ -98,6 +109,16 @@ const UserInfo = ({ onComplete }) => {
         }
 
         setFormValues(formData);
+
+        const error = Object.keys(formData)
+            .map((key) => {
+                return formValues[key].error;
+            })
+            .some((el) => el);
+
+        if (!error) {
+            onValid(formData);
+        }
     };
 
     const [formValues, setFormValues] = useState(startingValues);
@@ -123,7 +144,7 @@ const UserInfo = ({ onComplete }) => {
                 loadedUserData.state.value = info.address.state;
                 loadedUserData.postalCode.value = info.address.postalCode;
 
-                formDataValid(loadedUserData);
+                setFormValues(loadedUserData);
             }
         }
     }, [status]);
@@ -136,66 +157,12 @@ const UserInfo = ({ onComplete }) => {
         formDataValid(updatedObject);
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        const dwollaObject = {
-            name: {
-                first: formValues.firstName.value,
-                last: formValues.lastName.value,
-            },
-            address: {
-                streetAddress: formValues.streetAddress.value,
-                streetAddress2: formValues.streetAddress2.value,
-                city: formValues.city.value,
-                state: formValues.state.value,
-                postalCode: formValues.postalCode.value,
-            },
-            dateOfBirth: formValues.dateOfBirth.value,
-            ssn: formValues.ssn.value,
-            email: null,
-        };
-
-        // setLoading(true);
-
-        // attemptCreateNewDwollaVerifiedUser(dwollaObject)
-        //     .then((resp) => {
-        //         console.log(resp);
-        //         onComplete();
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //         const errorJson = JSON.parse(JSON.stringify(error));
-        //         console.log(errorJson);
-        //         setSubmitErrorMessage(errorJson.details.message);
-        //     })
-        //     .finally(() => {
-        //         setLoading(false);
-        //     });
-    };
-
-    const submitDisabled = () => {
-        const error = Object.keys(formValues)
-            .map((key) => {
-                return formValues[key].error;
-            })
-            .some((el) => el);
-
-        return error || loading;
-    };
-
     if (loading) {
         return <LoadingComponent></LoadingComponent>;
     }
 
     return (
         <div>
-            <Stack spacing={2}>
-                <Typography variant="smallHeadline">
-                    Personal Information
-                </Typography>
-            </Stack>
-
             <Grid container spacing={2} sx={{ width: "100%", mt: 1 }}>
                 <Grid item xs={12} md={6}>
                     <TextField
@@ -257,16 +224,22 @@ const UserInfo = ({ onComplete }) => {
                 </Grid>
 
                 <Grid item xs={12} md={2}>
-                    <TextField
-                        error={!!formValues.state.error}
-                        helperText={formValues.state.errMsg}
-                        name="state"
-                        label="State"
-                        variant="filled"
-                        value={formValues.state.value}
-                        onChange={handleInputChange}
-                        fullWidth
-                    ></TextField>
+                    <FormControl variant="filled" fullWidth>
+                        <InputLabel>State</InputLabel>
+                        <Select
+                            name="state"
+                            value={formValues.state.value}
+                            onChange={handleInputChange}
+                        >
+                            {states.map((state) => {
+                                return (
+                                    <MenuItem key={state} value={state}>
+                                        {state}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
                 </Grid>
 
                 <Grid item xs={12} md={4}>
@@ -281,28 +254,8 @@ const UserInfo = ({ onComplete }) => {
                         fullWidth
                     ></TextField>
                 </Grid>
-
-                {submitErrorMessage && (
-                    <Grid item xs={12}>
-                        <Alert severity="error">
-                            {"Sorry, retry! " + submitErrorMessage}
-                        </Alert>
-                    </Grid>
-                )}
-
-                <Grid item xs={12}>
-                    <Button
-                        variant="contained"
-                        disabled={submitDisabled()}
-                        color="legendaryGreen"
-                        onClick={handleSubmit}
-                        fullWidth
-                    >
-                        Update
-                    </Button>
-                </Grid>
             </Grid>
         </div>
     );
 };
-export default UserInfo;
+export default ModifyUserInfo;

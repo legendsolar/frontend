@@ -1,21 +1,44 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useAuth } from "../hooks/use_auth";
 
-import { Paper, Stack, Button } from "@mui/material";
+import { Paper, Stack, Button, Typography } from "@mui/material";
 import Wallet from "../components/wallet/wallet_component";
 import ModifyUserInfo from "../components/user/modify_user_info";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
 import MemberHeader from "../components/member_header";
 import AccountLinkComponent from "../components/transactions/account_link_component";
+import CreateTransactionComponent from "../components/transactions/create_transaction_component";
+import AccountListComponent from "../components/transactions/account_list_component";
+import { useDispatch, useSelector } from "react-redux";
+import { selectWalletBalance } from "../slices/wallet_slice";
+import { fetchWalletBalance } from "../slices/wallet_slice";
+import { useCloudFunctions } from "../hooks/use_cloud_functions";
 
-const AccountPage = () => {
+const TransferPage = () => {
     const auth = useAuth();
+    const cloudFunctions = useCloudFunctions();
+    const dispatch = useDispatch();
     const user = auth.user;
+
+    const balanceStatus = useSelector((state) => state.wallet.balance.status);
+    const walletBalance = useSelector(selectWalletBalance);
+
+    const balance = walletBalance ? walletBalance : "0.00";
+
+    useEffect(() => {
+        if (balanceStatus === "idle") {
+            dispatch(fetchWalletBalance(cloudFunctions));
+        }
+    }, [balanceStatus, dispatch]);
 
     const contentRefs = useRef([]);
 
-    const drawerTitles = ["Contact", "Wallet", "Accounts"];
+    const drawerTitles = [
+        "Transfer Cash",
+        "Connected Bank Accounts",
+        "Recent Transactions",
+    ];
 
     return (
         <SideBarNavView
@@ -24,13 +47,12 @@ const AccountPage = () => {
                     header={
                         <Stack sx={{ p: 2 }}>
                             <MemberHeader></MemberHeader>
-                            <Button
-                                variant="contained"
-                                color="legendaryGreen"
-                                onClick={() => auth.signout()}
-                            >
-                                Sign Out
-                            </Button>
+                            <Typography variant="smallHeadline">
+                                Balance
+                            </Typography>
+                            <Typography variant="headline1">
+                                {"$" + balance}
+                            </Typography>
                         </Stack>
                     }
                     contentTitles={drawerTitles}
@@ -43,7 +65,7 @@ const AccountPage = () => {
                         variant="container"
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
-                        <ModifyUserInfo></ModifyUserInfo>
+                        <CreateTransactionComponent></CreateTransactionComponent>
                     </Paper>
 
                     <Paper
@@ -57,7 +79,7 @@ const AccountPage = () => {
                         variant="container"
                         ref={(el) => (contentRefs.current[2] = el)}
                     >
-                        <AccountLinkComponent></AccountLinkComponent>
+                        <AccountListComponent></AccountListComponent>
                     </Paper>
                 </Stack>
             }
@@ -65,6 +87,6 @@ const AccountPage = () => {
     );
 };
 
-AccountPage.propTypes = {};
+TransferPage.propTypes = {};
 
-export default AccountPage;
+export default TransferPage;

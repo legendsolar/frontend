@@ -8,18 +8,19 @@ import SignUpView from "../pages/sign_up_page";
 import { Link, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./protected_route";
 import UnprotectedRoute from "./unprotected_route";
-import AccountView from "../pages/account_page";
 import TransactionView from "../pages/transactions_page";
 
 import LoadingView from "../views/loading_view";
 
 import DesignSysDemo from "../debug/design_sys_demo";
-import VerificationPage from "../pages/complete_account_page";
 import SignUpProcessPage from "../pages/complete_account_page";
 import { GridPage } from "../pages/grid_page";
 import ExplorePage from "../pages/explore_page";
 import DocumentPage from "../pages/documents_page";
 import PlaygroundPage from "../pages/playground_page";
+import TransferPage from "../pages/transfer_page";
+import AccountPage from "../pages/account_page";
+
 import { useFirebaseApp, useFunctions } from "reactfire";
 
 import { getDatabase, connectDatabaseEmulator } from "firebase/database";
@@ -86,7 +87,16 @@ function AppRouter() {
                         path="/account"
                         element={
                             <ProtectedRoute>
-                                <AccountView />
+                                <AccountPage />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/transfer"
+                        element={
+                            <ProtectedRoute>
+                                <TransferPage />
                             </ProtectedRoute>
                         }
                     />

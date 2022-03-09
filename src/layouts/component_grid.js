@@ -20,7 +20,7 @@ import {
     ErrorGauge,
 } from "../components/gauges/live_metric_gauge";
 
-import Wallet from "../components/wallet_component";
+import Wallet from "../components/wallet/wallet_component";
 
 import {
     EarningsCumulativeImpact,
