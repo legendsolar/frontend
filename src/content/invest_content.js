@@ -192,6 +192,9 @@ const InvestContent = ({ assetId }) => {
             <DefaultComponent>
                 <Stack spacing={4}>
                     <Typography variant="smallHeadline">Documents</Typography>
+                    <Typography variant="description">
+                        Currently unavailable
+                    </Typography>
 
                     <Grid container spacing={2} sx={{ width: "100%" }}>
                         <Grid item xs={12} lg={4}>
