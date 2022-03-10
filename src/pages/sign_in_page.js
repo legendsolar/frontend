@@ -17,7 +17,6 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate, useLocation } from "react-router-dom";
-import GoogleSignUp from "../components/buttons/google_icon_button";
 import CenteredComponentView from "../views/centered_component_view";
 import GoogleIconButton from "../components/buttons/google_icon_button";
 import ContentDivider from "../components/basics/content_divider";
@@ -29,6 +28,10 @@ function SignInView() {
     const [errorOpen, setErrorOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
+    const onSuccessfulSignIn = () => {
+        navigate(state?.path || "/");
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -38,7 +41,7 @@ function SignInView() {
         if (email && password) {
             auth.signin(email, password)
                 .then(() => {
-                    navigate(state?.path || "/");
+                    onSuccessfulSignIn();
                 })
                 .catch((error) => {
                     console.log(error);
@@ -46,7 +49,7 @@ function SignInView() {
                     setErrorOpen(true);
                 });
         } else {
-            setErrorMessage("Email and password need to be filled");
+            setErrorMessage("Email and/or password invalid");
             setErrorOpen(true);
         }
     };
@@ -57,7 +60,17 @@ function SignInView() {
                 <Stack spacing={4}>
                     <Typography variant="subtitle1">Login</Typography>
                     <GoogleIconButton
-                        label={"Login with Google"}
+                        label="Sign in with Google"
+                        onClick={() => {
+                            auth.signInWithGoogle()
+                                .then(() => {
+                                    onSuccessfulSignIn();
+                                })
+                                .catch((error) => {
+                                    setErrorMessage(error.message);
+                                    setErrorOpen(true);
+                                });
+                        }}
                     ></GoogleIconButton>
 
                     <ContentDivider>

@@ -6,7 +6,10 @@ import {
     signInWithEmailAndPassword,
     signOut,
     getAuth,
+    signInWithPopup,
 } from "firebase/auth";
+
+import { GoogleAuthProvider } from "firebase/auth";
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...
@@ -24,6 +27,7 @@ export const useAuth = () => {
 function useProvideAuth() {
     const app = useFirebaseApp();
     const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
 
     const [user, setUser] = useState(null);
     const database = useDatabase();
@@ -33,41 +37,53 @@ function useProvideAuth() {
     // Wrap any Firebase methods we want to use making sure ...
     // ... to save the user to state.
     const signin = (email, password) => {
-        return signInWithEmailAndPassword(auth, email, password).then(
-            (response) => {
+        setIsAuthenticating(true);
+        return signInWithEmailAndPassword(auth, email, password)
+            .then((response) => {
                 setUser(response.user);
+            })
+            .finally(() => {
                 setIsAuthenticating(false);
-            }
-        );
+            });
     };
 
     const signup = (email, password) => {
-        return createUserWithEmailAndPassword(auth, email, password).then(
-            (response) => {
+        setIsAuthenticating(true);
+        return createUserWithEmailAndPassword(auth, email, password)
+            .then((response) => {
                 if (response) {
                     setUser(response.user);
-
-                    // TODO remove this
-                    setTimeout(() => {
-                        setIsAuthenticating(false);
-                    }, 2000);
                 }
-            }
-        );
+            })
+            .finally(() => {
+                setIsAuthenticating(false);
+            });
     };
 
     const signout = () => {
-        return signOut(auth).then(() => {
-            setIsAuthenticating(false);
-            setUser(null);
-        });
+        setIsAuthenticating(true);
+        return signOut(auth)
+            .then(() => {
+                setUser(null);
+            })
+            .finally(() => {
+                setIsAuthenticating(false);
+            });
     };
 
-    const getUserDatabaseRef = () => {
-        if (user.uid) {
-            // return ref(database, "users/" + user.uid);
-        }
+    const signInWithGoogle = () => {
+        setIsAuthenticating(true);
+        return signInWithPopup(auth, provider)
+            .then((response) => {
+                if (response) {
+                    setUser(response.user);
+                }
+            })
+            .finally(() => {
+                setIsAuthenticating(false);
+            });
     };
+
     // const userDataSnap = () => {
     //     if (user.uid) {
     //         return useObject(ref(database, "users/" + user.uid));
@@ -114,7 +130,7 @@ function useProvideAuth() {
         signin,
         signup,
         signout,
-        getUserDatabaseRef,
+        signInWithGoogle,
         // userDataSnap,
     };
 }

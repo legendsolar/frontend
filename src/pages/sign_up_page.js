@@ -60,6 +60,10 @@ export default function SignUpView() {
     const [errorOpen, setErrorOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
+    const onSuccessfulSignUp = () => {
+        navigate("/complete-account");
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -71,7 +75,7 @@ export default function SignUpView() {
             authHook
                 .signup(data.get("email"), data.get("password"))
                 .then(() => {
-                    navigate("/complete-account");
+                    onSuccessfulSignUp();
                 })
                 .catch((error) => {
                     console.log(error);
@@ -90,7 +94,18 @@ export default function SignUpView() {
                 <Stack spacing={4}>
                     <Typography variant="subtitle1">Create Account</Typography>
                     <GoogleIconButton
-                        label={"Sign up with Google"}
+                        label="Sign up with Google"
+                        onClick={() => {
+                            authHook
+                                .signInWithGoogle()
+                                .then(() => {
+                                    onSuccessfulSignUp();
+                                })
+                                .catch((error) => {
+                                    setErrorMessage(error.message);
+                                    setErrorOpen(true);
+                                });
+                        }}
                     ></GoogleIconButton>
                     <ContentDivider>
                         <Typography align="center" variant="smallLabel">
