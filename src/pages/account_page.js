@@ -1,13 +1,21 @@
 import { useRef } from "react";
 import { useAuth } from "../hooks/use_auth";
 
-import { Paper, Stack, Button } from "@mui/material";
+import {
+    Paper,
+    Stack,
+    Button,
+    Typography,
+    ListItemButton,
+} from "@mui/material";
 import Wallet from "../components/wallet/wallet_component";
 import ModifyUserInfo from "../components/user/modify_user_info";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
 import MemberHeader from "../components/member_header";
 import AccountLinkComponent from "../components/transactions/account_link_component";
+import DefaultComponent from "../components/default_component";
+import AccreditationStatus from "../components/accreditation_status";
 
 const AccountPage = () => {
     const auth = useAuth();
@@ -15,7 +23,13 @@ const AccountPage = () => {
 
     const contentRefs = useRef([]);
 
-    const drawerTitles = ["Contact", "Wallet", "Accounts"];
+    const drawerTitles = [
+        "Personal Information",
+        "Accreditation",
+        "Bank Information",
+        "Investments",
+        "Communication",
+    ];
 
     return (
         <SideBarNavView
@@ -24,41 +38,48 @@ const AccountPage = () => {
                     header={
                         <Stack sx={{ p: 2 }}>
                             <MemberHeader></MemberHeader>
-                            <Button
-                                variant="contained"
-                                color="legendaryGreen"
-                                onClick={() => auth.signout()}
-                            >
-                                Sign Out
-                            </Button>
                         </Stack>
                     }
                     contentTitles={drawerTitles}
                     refs={contentRefs}
+                    additionalButtons={
+                        <ListItemButton
+                            sx={{ ml: -4, mr: -4, height: "88px" }}
+                            key={"logout"}
+                            onClick={() => {
+                                auth.signout();
+                            }}
+                        >
+                            <Typography variant="subtitle1">Log Out</Typography>
+                        </ListItemButton>
+                    }
                 ></ScrollToSidebar>
             }
             mainContent={
-                <Stack spacing={2}>
-                    <Paper
-                        variant="container"
+                <Stack spacing={6}>
+                    <DefaultComponent
+                        disabled={true}
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
+                        <Typography variant="smallHeadline">
+                            Personal Information
+                        </Typography>
                         <ModifyUserInfo></ModifyUserInfo>
-                    </Paper>
+                    </DefaultComponent>
 
-                    <Paper
-                        variant="container"
-                        ref={(el) => (contentRefs.current[1] = el)}
+                    <DefaultComponent
+                        disabled={true}
+                        ref={(el) => (contentRefs.current[0] = el)}
                     >
-                        <Wallet></Wallet>
-                    </Paper>
+                        <AccreditationStatus></AccreditationStatus>
+                    </DefaultComponent>
 
-                    <Paper
-                        variant="container"
-                        ref={(el) => (contentRefs.current[2] = el)}
+                    <DefaultComponent
+                        disabled={true}
+                        ref={(el) => (contentRefs.current[0] = el)}
                     >
                         <AccountLinkComponent></AccountLinkComponent>
-                    </Paper>
+                    </DefaultComponent>
                 </Stack>
             }
         ></SideBarNavView>
