@@ -101,7 +101,7 @@ const CompleteAccountPage = () => {
                 </Stack>
             }
             mainContent={
-                <Stack spacing={2}>
+                <Stack spacing={4}>
                     <DefaultComponent
                         ref={(el) => (contentRefs.current[0] = el)}
                         disabled={userSignUpState !== "ACCOUNT_CREATED"}
