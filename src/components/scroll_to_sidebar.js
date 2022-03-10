@@ -26,7 +26,7 @@ const ScrollToSidebar = ({
                 {contentTitles.map((text, index) => (
                     <ListItemButton
                         sx={{ ml: -4, mr: -4, height: "88px" }}
-                        key={text}
+                        key={index}
                         onClick={() => {
                             scrollToEl(refs.current[index], -20);
                         }}

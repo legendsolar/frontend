@@ -94,12 +94,6 @@ const CreateDwollaAccount = ({ onComplete }) => {
                     This information will be used to verify your ownership of
                     accounts provided and prevent fraud.{" "}
                 </Typography>
-
-                <Typography variant="description">
-                    {`[SANDBOX ONLY] To simulate the various statuses in the Sandbox, 
-                    submit either verified, retry, kba, document, or suspended 
-                    in the firstName parameter `}
-                </Typography>
             </Stack>
 
             <ModifyUserInfo

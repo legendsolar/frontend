@@ -31,9 +31,31 @@ export const fetchWalletBalance = createAsyncThunk(
 export const fetchAccounts = createAsyncThunk(
     "dwolla/fetchAccounts",
     async (cloudFunctions) => {
-        const returned = await cloudFunctions.getLinkedAccounts();
-        console.log(returned);
-        const accounts = returned.data;
+        // const returned = await cloudFunctions.getLinkedAccounts();
+        // console.log(returned);
+        // const accounts = returned.data;
+
+        const accounts = [
+            {
+                name: "Checking Account",
+                institution: "Bank of America",
+                type: "Checking",
+                source: "Linked with Plaid",
+            },
+            {
+                name: "Savings Account",
+                institution: "Citibank",
+                type: "Savings",
+                source: "Linked with Plaid",
+            },
+
+            {
+                name: "Savings Account",
+                institution: "USB",
+                type: "Savings",
+                source: "Linked with Plaid",
+            },
+        ];
         return accounts;
     }
 );

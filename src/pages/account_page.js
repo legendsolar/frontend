@@ -16,6 +16,7 @@ import MemberHeader from "../components/member_header";
 import AccountLinkComponent from "../components/transactions/account_link_component";
 import DefaultComponent from "../components/default_component";
 import AccreditationStatus from "../components/accreditation_status";
+import AccountManagementComponent from "../components/transactions/account_list_component";
 
 const AccountPage = () => {
     const auth = useAuth();
@@ -75,10 +76,10 @@ const AccountPage = () => {
                     </DefaultComponent>
 
                     <DefaultComponent
-                        disabled={true}
+                        disabled={false}
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
-                        <AccountLinkComponent></AccountLinkComponent>
+                        <AccountManagementComponent></AccountManagementComponent>
                     </DefaultComponent>
                 </Stack>
             }
