@@ -10,6 +10,8 @@ import { useTheme } from "@mui/material";
 import PanelsSvg from "../components/icons/panels_svg";
 import { useNavigate } from "react-router-dom";
 
+import investmentOpportunities from "../utils/asset_data";
+
 const ExplorePage = () => {
     const theme = useTheme();
     const navigate = useNavigate();
@@ -19,68 +21,6 @@ const ExplorePage = () => {
         "Glassboro Solar",
         "Lake Elsinore Solar",
         "Lindenwold Solar",
-    ];
-
-    const investmentOpportunities = [
-        {
-            title: "Santa Rosa Solar",
-            metrics: [
-                {
-                    metric: "Available Panels",
-                    value: "300",
-                },
-                {
-                    metric: "Minimum Investment",
-                    value: "$74,500",
-                },
-            ],
-            color: theme.palette.skyBlue.main,
-        },
-
-        {
-            title: "Glassboro Solar",
-            metrics: [
-                {
-                    metric: "Available Panels",
-                    value: "300",
-                },
-                {
-                    metric: "Minimum Investment",
-                    value: "$74,500",
-                },
-            ],
-            color: theme.palette.pencilYellow.main,
-        },
-
-        {
-            title: "Lake Elsinore Solar",
-            metrics: [
-                {
-                    metric: "Available Panels",
-                    value: "300",
-                },
-                {
-                    metric: "Minimum Investment",
-                    value: "$74,500",
-                },
-            ],
-            color: theme.palette.grassGreen.main,
-        },
-
-        {
-            title: "Lindenwold Solar",
-            metrics: [
-                {
-                    metric: "Available Panels",
-                    value: "300",
-                },
-                {
-                    metric: "Minimum Investment",
-                    value: "$74,500",
-                },
-            ],
-            color: theme.palette.eraserRed.main,
-        },
     ];
 
     return (
@@ -98,85 +38,93 @@ const ExplorePage = () => {
             }
             mainContent={
                 <Stack spacing={4}>
-                    {investmentOpportunities.map((investment, i) => (
-                        <DefaultComponent
-                            ref={(el) => (contentRefs.current[i] = el)}
-                        >
-                            <Stack spacing={4}>
-                                <Typography variant="smallHeadline">
-                                    {investment.title}
-                                </Typography>
-                                <Grid container>
-                                    <Grid item xs={12} lg={8}>
-                                        <Box
-                                            sx={{
-                                                height: "240px",
-                                                borderRadius: "15px",
-                                                backgroundColor:
-                                                    "whiteHaze.main",
-                                                mr: {
-                                                    xs: 0,
-                                                    lg: 4,
-                                                },
-                                                mb: {
-                                                    xs: 4,
-                                                    lg: 0,
-                                                },
-                                            }}
-                                            display="flex"
-                                            justifyContent={"center"}
-                                            alignItems="center"
-                                        >
-                                            <PanelsSvg
-                                                color={investment.color}
-                                            ></PanelsSvg>
-                                        </Box>
-                                    </Grid>
-
-                                    <Grid
-                                        item
-                                        xs={12}
-                                        lg={4}
-                                        sx={{ height: "100%" }}
-                                    >
-                                        <Stack
-                                            justifyContent={"space-between"}
-                                            sx={{ height: "100%" }}
-                                            spacing={4}
-                                        >
-                                            {investment.metrics.map(
-                                                ({ metric, value }) => (
-                                                    <Stack
-                                                        direction="row"
-                                                        justifyContent={
-                                                            "space-between"
-                                                        }
-                                                        alignItems="center"
-                                                        key={metric + value}
-                                                    >
-                                                        <Typography variant="subtitle1">
-                                                            {metric}
-                                                        </Typography>
-                                                        <Typography variant="subtitle2">
-                                                            {value}
-                                                        </Typography>
-                                                    </Stack>
-                                                )
-                                            )}
-                                            <Button
-                                                variant="primary"
-                                                onClick={() => {
-                                                    navigate("/invest");
+                    {Object.entries(investmentOpportunities).map(
+                        ([key, investment], i) => (
+                            <DefaultComponent
+                                ref={(el) => (contentRefs.current[i] = el)}
+                            >
+                                <Stack spacing={4}>
+                                    <Typography variant="smallHeadline">
+                                        {investment.title}
+                                    </Typography>
+                                    <Grid container>
+                                        <Grid item xs={12} lg={8}>
+                                            <Box
+                                                sx={{
+                                                    height: "240px",
+                                                    borderRadius: "15px",
+                                                    backgroundColor:
+                                                        "whiteHaze.main",
+                                                    mr: {
+                                                        xs: 0,
+                                                        lg: 4,
+                                                    },
+                                                    mb: {
+                                                        xs: 4,
+                                                        lg: 0,
+                                                    },
                                                 }}
+                                                display="flex"
+                                                justifyContent={"center"}
+                                                alignItems="center"
                                             >
-                                                View executive summary
-                                            </Button>
-                                        </Stack>
+                                                <PanelsSvg
+                                                    color={
+                                                        theme.palette[
+                                                            investment.color
+                                                        ].main
+                                                    }
+                                                ></PanelsSvg>
+                                            </Box>
+                                        </Grid>
+
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            lg={4}
+                                            sx={{ height: "100%" }}
+                                        >
+                                            <Stack
+                                                justifyContent={"space-between"}
+                                                sx={{ height: "100%" }}
+                                                spacing={4}
+                                            >
+                                                {investment.metrics.map(
+                                                    ({ metric, value }) => (
+                                                        <Stack
+                                                            direction="row"
+                                                            justifyContent={
+                                                                "space-between"
+                                                            }
+                                                            alignItems="center"
+                                                            key={metric + value}
+                                                        >
+                                                            <Typography variant="subtitle1">
+                                                                {metric}
+                                                            </Typography>
+                                                            <Typography variant="subtitle2">
+                                                                {value}
+                                                            </Typography>
+                                                        </Stack>
+                                                    )
+                                                )}
+                                                <Button
+                                                    variant="primary"
+                                                    onClick={() => {
+                                                        navigate(
+                                                            "/invest/" + key
+                                                        );
+                                                    }}
+                                                >
+                                                    View executive summary
+                                                </Button>
+                                            </Stack>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </Stack>
-                        </DefaultComponent>
-                    ))}
+                                </Stack>
+                            </DefaultComponent>
+                        )
+                    )}
                 </Stack>
             }
         ></SideBarNavView>

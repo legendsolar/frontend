@@ -138,7 +138,7 @@ function AppRouter() {
                     />
 
                     <Route
-                        path="/invest"
+                        path="/invest/:assetName"
                         element={
                             <ProtectedRoute>
                                 <InvestPage />

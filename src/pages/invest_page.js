@@ -9,9 +9,15 @@ import PanelsSvg from "../components/icons/panels_svg";
 import { useTheme } from "@mui/material";
 import MetricList from "../components/summary/metric_list";
 import PrecommitLetterComponent from "../components/precommit_letter_component";
+import { useParams } from "react-router-dom";
+import investmentOpportunities from "../utils/asset_data";
 
 const InvestPage = () => {
     const theme = useTheme();
+    const { assetName } = useParams();
+    const assetId = assetName;
+    const asset = investmentOpportunities[assetId];
+
     const contentRefs = useRef([]);
     const drawerTitles = ["Contact", "Wallet", "Accounts"];
 
@@ -38,19 +44,8 @@ const InvestPage = () => {
     const sidebarEditState = (
         <Stack spacing={4}>
             <Typography variant="smallHeadline">Pre-commit</Typography>
-            <PanelsSvg color={theme.palette.skyBlue.main}></PanelsSvg>
-            <MetricList
-                valuePairs={[
-                    {
-                        metric: "Available panels",
-                        value: "300/300",
-                    },
-                    {
-                        metric: "Total Investment",
-                        value: "$74,500",
-                    },
-                ]}
-            ></MetricList>
+            <PanelsSvg color={theme.palette[asset.color].main}></PanelsSvg>
+            <MetricList valuePairs={asset.metrics}></MetricList>
             <Button
                 variant="primary"
                 onClick={() =>
@@ -110,7 +105,11 @@ const InvestPage = () => {
                 <Typography variant="headline1">
                     Pre-commitment confirmed
                 </Typography>
-                <Button sx={{ width: "200px" }} variant="medium">
+                <Button
+                    sx={{ width: "200px" }}
+                    variant="medium"
+                    disabled={true}
+                >
                     Review Commitment
                 </Button>
             </Stack>
@@ -132,7 +131,7 @@ const InvestPage = () => {
             mainContent={
                 <div>
                     {state.userState === "EDITING" && (
-                        <InvestContent></InvestContent>
+                        <InvestContent assetId={assetId}></InvestContent>
                     )}
 
                     {state.userState === "REVIEWING" && (
@@ -147,7 +146,7 @@ const InvestPage = () => {
                     )}
 
                     {state.userState === "CONFIRMED" && (
-                        <InvestContent></InvestContent>
+                        <InvestContent assetId={assetId}></InvestContent>
                     )}
                 </div>
             }

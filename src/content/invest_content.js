@@ -5,9 +5,16 @@ import PanelsSvg from "../components/icons/panels_svg";
 import { useTheme } from "@mui/material";
 import MetricList from "../components/summary/metric_list";
 import { DocumentIcon } from "../components/icons/document_icon";
+import investmentOpportunities from "../utils/asset_data";
+import ErrorComponent from "../components/errors/error_component";
 
-const InvestContent = () => {
+const InvestContent = ({ assetId }) => {
     const theme = useTheme();
+    const asset = investmentOpportunities[assetId];
+
+    if (!asset) {
+        return <ErrorComponent></ErrorComponent>;
+    }
 
     return (
         <Stack spacing={4}>
@@ -16,15 +23,13 @@ const InvestContent = () => {
                     <Typography variant="smallHeadline">
                         Execuive Summary
                     </Typography>
-                    <Typography variant="headline2">
-                        Santa Rosa Solar
-                    </Typography>
+                    <Typography variant="headline2">{asset.title}</Typography>
                 </Stack>
             </DefaultComponent>
 
             <DefaultComponent>
-                <Typography>Photography</Typography>
-                <img src={SolarPicture}></img>
+                <Typography variant="smallHeadline">Photography</Typography>
+                <img style={{ width: "100%" }} src={SolarPicture}></img>
             </DefaultComponent>
 
             <DefaultComponent>
@@ -89,21 +94,18 @@ const InvestContent = () => {
                 </Stack>
             </DefaultComponent>
 
-            <Grid container>
+            <Grid
+                container
+                columnSpacing={{ xs: 0, lg: 4 }}
+                rowSpacing={{ xs: 4, lg: 0 }}
+            >
                 <Grid
                     item
                     xs={12}
                     lg={6}
                     sx={{
-                        mr: {
-                            xs: 0,
-                            lg: 4,
-                        },
-
-                        mb: {
-                            xs: 4,
-                            lg: 0,
-                        },
+                        ml: { lg: -4 },
+                        mt: { xs: -4, lg: 0 },
                     }}
                 >
                     <DefaultComponent>
