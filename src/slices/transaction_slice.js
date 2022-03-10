@@ -37,6 +37,41 @@ export const fetchTransactions = createAsyncThunk(
         // console.log(transferArray);
         // // console.log(namedTransferArray);
         // return transferArray;
+
+        return [
+            {
+                title: "Dividend Payment",
+                source: "Solar SPV",
+                destination: "Legends Wallet",
+                amount: {
+                    value: Math.random() * 100,
+                },
+            },
+            {
+                title: "Dividend Payment",
+                source: "Solar SPV",
+                destination: "Legends Wallet",
+                amount: {
+                    value: Math.random() * 100,
+                },
+            },
+            {
+                title: "Dividend Payment",
+                source: "Solar SPV",
+                destination: "Legends Wallet",
+                amount: {
+                    value: Math.random() * 100,
+                },
+            },
+            {
+                title: "Dividend Payment",
+                source: "Solar SPV",
+                destination: "Legends Wallet",
+                amount: {
+                    value: Math.random() * 100,
+                },
+            },
+        ];
     }
 );
 
@@ -66,23 +101,22 @@ const transactionSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers(builder) {
-        // builder
-        //     .addCase(fetchTransactions.pending, (state, action) => {
-        //         state.status = "loading";
-        //     })
-        //     .addCase(fetchTransactions.fulfilled, (state, action) => {
-        //         state.status = "succeeded";
-        //         // actually add the retrieved transactions
-        //         state.loadedTransactions.push(...action.payload);
-        //     })
-        //     .addCase(fetchTransactions.rejected, (state, action) => {
-        //         state.status = "failed";
-        //         console.log(action.error);
-        //         state.error = action.error.message;
-        //     })
-        //     .addCase(createTransaction.fulfilled, (state, action) => {
-        //         state.loadedTransactions.push(action.payload);
-        //     });
+        builder
+            .addCase(fetchTransactions.pending, (state, action) => {
+                state.status = "loading";
+            })
+            .addCase(fetchTransactions.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                // actually add the retrieved transactions
+                state.loadedTransactions.push(...action.payload);
+            })
+            .addCase(fetchTransactions.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message;
+            })
+            .addCase(createTransaction.fulfilled, (state, action) => {
+                state.loadedTransactions.push(action.payload);
+            });
     },
 });
 

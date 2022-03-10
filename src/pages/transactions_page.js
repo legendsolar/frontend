@@ -6,12 +6,18 @@ import { useAuth } from "../hooks/use_auth";
 import MemberHeader from "../components/member_header";
 import RecentTransfers from "../components/transactions/recent_transfers";
 import Wallet from "../components/wallet/wallet_component";
+import DefaultComponent from "../components/default_component";
 
 const TransactionPage = (props) => {
     const auth = useAuth();
     const user = auth.user;
 
-    const drawerTitles = ["Earnings", "All Transactions"];
+    const drawerTitles = [
+        "Earnings",
+        "Investments",
+        "Bank Transfers",
+        "All Transactions",
+    ];
 
     const contentRefs = useRef([]);
 
@@ -28,11 +34,7 @@ const TransactionPage = (props) => {
                 ></ScrollToSidebar>
             }
             mainContent={
-                <Stack spacing={2}>
-                    <Paper variant="container">
-                        <Wallet></Wallet>
-                    </Paper>
-
+                <Stack spacing={4}>
                     <Paper
                         variant="container"
                         ref={(el) => (contentRefs.current[0] = el)}
@@ -40,14 +42,32 @@ const TransactionPage = (props) => {
                         <RecentTransfers></RecentTransfers>
                     </Paper>
 
-                    <Paper
+                    <DefaultComponent
                         variant="container"
                         ref={(el) => (contentRefs.current[1] = el)}
                     >
-                        <Typography variant="smallHeading">
+                        <Typography variant="smallHeadline">
+                            Bank Transfers
+                        </Typography>
+                    </DefaultComponent>
+
+                    <DefaultComponent
+                        variant="container"
+                        ref={(el) => (contentRefs.current[2] = el)}
+                    >
+                        <Typography variant="smallHeadline">
+                            Investments
+                        </Typography>
+                    </DefaultComponent>
+
+                    <DefaultComponent
+                        variant="container"
+                        ref={(el) => (contentRefs.current[3] = el)}
+                    >
+                        <Typography variant="smallHeadline">
                             All Transactions
                         </Typography>
-                    </Paper>
+                    </DefaultComponent>
                 </Stack>
             }
         ></SideBarNavView>

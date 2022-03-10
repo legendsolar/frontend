@@ -6,7 +6,7 @@ const TransactionGrid = ({ title, transactions }) => {
     console.log("loaded: " + transactions);
     return (
         <div>
-            <Typography variant="smallHeading">{title}</Typography>
+            <Typography variant="smallHeadline">{title}</Typography>
 
             <Grid
                 container
@@ -20,18 +20,18 @@ const TransactionGrid = ({ title, transactions }) => {
                             <TransactionComponent
                                 title={
                                     "title" in transaction
-                                        ? transactions.title
+                                        ? transaction.title
                                         : transaction.status
                                 }
                                 amount={parseFloat(transaction.amount.value)}
                                 source={
                                     "source" in transaction
-                                        ? transactions.source
+                                        ? transaction.source
                                         : "unknown"
                                 }
                                 destination={
                                     "destination" in transaction
-                                        ? transactions.destination
+                                        ? transaction.destination
                                         : "wallet"
                                 }
                                 date={transaction.created}

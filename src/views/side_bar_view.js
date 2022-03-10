@@ -8,7 +8,7 @@ const SideBarNavView = ({
     mainContent,
     header,
     drawerAppearsOnTop = true,
-    drawerAppearsOnBotton,
+    drawerAppearsOnBotton = false,
 }) => {
     const wrappedDrawer = (
         <Container
@@ -37,7 +37,7 @@ const SideBarNavView = ({
     };
 
     const getDrawerBottom = () => {
-        if (drawerAppearsOnTop) return wrappedDrawer;
+        if (drawerAppearsOnBotton) return wrappedDrawer;
 
         return null;
     };
@@ -83,7 +83,9 @@ const SideBarNavView = ({
                     >
                         {getDrawerTop()}
                         <DefaultErrorBoundary>
-                            {mainContent}
+                            <Box sx={{ mt: { xs: 4, md: 0 } }}>
+                                {mainContent}
+                            </Box>
                         </DefaultErrorBoundary>
 
                         {getDrawerBottom()}
