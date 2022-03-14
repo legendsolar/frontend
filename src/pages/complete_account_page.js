@@ -74,6 +74,8 @@ const CompleteAccountPage = () => {
 
     const pageIndex = userSignUpOrder(userSignUpState);
 
+    console.log(pageIndex, userSignUpState);
+
     const pageContent = [
         {
             title: "Accreditation",
@@ -94,31 +96,60 @@ const CompleteAccountPage = () => {
             disabled: userSignUpOrder(userSignUpState) < 1,
         },
         {
-            title: "Create Wallet",
-            content: <AccreditationStatus></AccreditationStatus>,
-            disabled: userSignUpOrder(userSignUpState) < 2,
-        },
-        {
             title: "Full SSN Validation",
             content: (
-                <IdentityVerificationFullSSN></IdentityVerificationFullSSN>
+                <IdentityVerificationFullSSN
+                    onComplete={onComplete}
+                ></IdentityVerificationFullSSN>
+            ),
+            disabled: userSignUpOrder(userSignUpState) < 2,
+            sidebar: false,
+        },
+        {
+            title: "KBA Validation",
+            content: (
+                <IdentityVerificationKBA
+                    onComplete={onComplete}
+                ></IdentityVerificationKBA>
             ),
             disabled: userSignUpOrder(userSignUpState) < 3,
             sidebar: false,
         },
         {
-            title: "KBA Validation",
-            content: <IdentityVerificationKBA></IdentityVerificationKBA>,
+            title: "Document Validation",
+            content: (
+                <IdentityVerificationDocument
+                    onComplete={onComplete}
+                ></IdentityVerificationDocument>
+            ),
             disabled: userSignUpOrder(userSignUpState) < 4,
             sidebar: false,
         },
         {
-            title: "Document Validation",
+            title: "Create Wallet",
             content: (
-                <IdentityVerificationDocument></IdentityVerificationDocument>
+                <Stack spacing={6}>
+                    <Typography variant="body2">
+                        On Legends, earnings are deposited into your ‘Legends
+                        Wallet’, where you can save them, reinvest them in
+                        future offerings or deposit them in your checking
+                        account. The Legends Wallet will never withdraw funds
+                        from your checking account.
+                    </Typography>
+
+                    <Button
+                        variant="primary"
+                        disabled={userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED"}
+                        onClick={() => {
+                            navigate("/explore");
+                        }}
+                    >
+                        Continue
+                    </Button>
+                </Stack>
             ),
             disabled: userSignUpOrder(userSignUpState) < 5,
-            sidebar: false,
+            sidebar: true,
         },
     ];
 

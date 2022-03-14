@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import { Box, Checkbox, Stack, Typography } from "@mui/material";
 import Divider from "../basics/divider";
 import PropTypes from "prop-types";
-function CheckboxList({ options, onInputChange }) {
+function CheckboxList({ options, precheckedList, onInputChange }) {
     const [checkedList, setCheckedList] = useState(
         Object.fromEntries(
-            Object.entries(options).map(([key, option]) => [
-                key,
-                option.checked ? option.checked : false,
-            ])
+            Object.entries(options).map(([key, option]) => [key, false])
         )
     );
+
+    useEffect(() => {
+        if (precheckedList) {
+            setCheckedList(precheckedList);
+        }
+    }, [precheckedList]);
+
     const [exclusive, setExclusive] = useState(undefined);
 
     const setCheckedItem = (key, value) => {

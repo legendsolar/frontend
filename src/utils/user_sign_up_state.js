@@ -8,7 +8,7 @@ export const userSignUpOrder = (state) => {
         DWOLLA_ACCOUNT_VERIFIED: 5,
     };
 
-    if (signUpOrder[state]) {
+    if (state in signUpOrder) {
         return signUpOrder[state];
     }
 

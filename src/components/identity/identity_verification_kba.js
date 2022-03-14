@@ -14,11 +14,17 @@ const IdentityVerificationKBA = ({ onComplete }) => {
     const cloudFunctions = useCloudFunctions();
     const getKBASession = cloudFunctions.getKBASession;
     const returnKBASessionResponse = cloudFunctions.returnKBASessionResponse;
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getKBASession().then(({ data }) => {
-            setKBAQuestions(data);
-        });
+        setLoading(true);
+        getKBASession()
+            .then(({ data }) => {
+                setKBAQuestions(data);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, []);
 
     const onQuestionUpdate = ({ id, value }) => {

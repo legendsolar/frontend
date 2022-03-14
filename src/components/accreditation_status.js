@@ -55,7 +55,7 @@ const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
         },
     });
 
-    const [checkedList, setCheckedList] = useState([]);
+    const [checkedList, setCheckedList] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const database = useDatabase();
@@ -63,22 +63,23 @@ const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
         ref(database, "users/" + user.uid)
     );
 
-    if (status == "success") {
-        if (
-            userInfo &&
-            userInfo.accreditation &&
-            userInfo.accreditation.attributes
-        ) {
-            const list = { ...accreditationOptionsList };
-            Object.entries(userInfo.accreditation.attributes).map(
-                ([key, val]) => {
-                    if (val.status) {
-                        list[key].checked = val.status;
+    useEffect(() => {
+        if (status == "success") {
+            if (
+                userInfo &&
+                userInfo.accreditation &&
+                userInfo.accreditation.attributes
+            ) {
+                const list = {};
+                Object.entries(userInfo.accreditation.attributes).map(
+                    ([key, val]) => {
+                        list[key] = val.status;
                     }
-                }
-            );
+                );
+                setCheckedList(list);
+            }
         }
-    }
+    }, [status]);
 
     const onContinueClick = () => {
         var accreditationStatus = "NOT_ACCREDITED";
@@ -135,8 +136,8 @@ const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
 
                 <CheckboxList
                     options={accreditationOptionsList}
+                    precheckedList={checkedList}
                     onInputChange={(checkboxListChecked) => {
-                        console.log(checkboxListChecked);
                         setCheckedList(checkboxListChecked);
                     }}
                 ></CheckboxList>
@@ -144,10 +145,10 @@ const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
                 <Button
                     variant="primary"
                     disabled={
-                        !Object.keys(checkedList).some((k) => checkedList[k]) ||
-                        !Object.keys(accreditationOptionsList).some(
-                            (k) => accreditationOptionsList[k].checked
-                        ) ||
+                        (checkedList &&
+                            !Object.keys(checkedList).some(
+                                (k) => checkedList[k]
+                            )) ||
                         loading
                     }
                     onClick={() => onContinueClick()}
