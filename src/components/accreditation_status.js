@@ -13,7 +13,7 @@ import { useDatabaseObjectData, useDatabase } from "reactfire";
 import { set, ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
 
-const AccreditationStatus = ({ onComplete }) => {
+const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
     const auth = useAuth();
     const user = auth.user;
 
@@ -64,7 +64,6 @@ const AccreditationStatus = ({ onComplete }) => {
     );
 
     if (status == "success") {
-        console.log(userInfo);
         if (
             userInfo &&
             userInfo.accreditation &&
@@ -124,16 +123,6 @@ const AccreditationStatus = ({ onComplete }) => {
                 spacing={2}
                 justifyContent="space-between"
             >
-                <Stack
-                    direction={"row"}
-                    justifyContent="space-between"
-                    alignItems={"end"}
-                >
-                    <Typography variant="smallHeadline">
-                        Accreditation
-                    </Typography>
-                </Stack>
-
                 <Typography variant="body2">
                     Legends Solar offers private placements regulated by the SEC
                     under Regulation D. All investors must be accredited in
@@ -156,6 +145,9 @@ const AccreditationStatus = ({ onComplete }) => {
                     variant="primary"
                     disabled={
                         !Object.keys(checkedList).some((k) => checkedList[k]) ||
+                        !Object.keys(accreditationOptionsList).some(
+                            (k) => accreditationOptionsList[k].checked
+                        ) ||
                         loading
                     }
                     onClick={() => onContinueClick()}
@@ -163,7 +155,7 @@ const AccreditationStatus = ({ onComplete }) => {
                     {loading ? (
                         <CircularProgress color="dark" size={30} />
                     ) : (
-                        "Continue to personal information"
+                        "Continue"
                     )}
                 </Button>
             </Stack>

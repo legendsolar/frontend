@@ -24,7 +24,8 @@ import DefaultView from "../views/default_view";
 import { useCloudFunctions } from "../hooks/use_cloud_functions";
 import scrollToEl from "../utils/scroll_to_el";
 
-import PageinatedView from "../views/paginated_view";
+import LinearPageinatedView from "../views/linear_paginated_view";
+import { userSignUpOrder } from "../utils/user_sign_up_state";
 
 const CompleteAccountPage = () => {
     const dispatch = useDispatch();
@@ -57,11 +58,6 @@ const CompleteAccountPage = () => {
 
     const navigate = useNavigate();
     const contentRefs = useRef([]);
-    const drawerTitles = [
-        "Accreditation",
-        "Personal Information",
-        "Create Wallet",
-    ];
 
     const database = useDatabase();
     const { status, data: userInfo } = useDatabaseObjectData(
@@ -69,15 +65,6 @@ const CompleteAccountPage = () => {
     );
 
     const onComplete = () => {
-        switch (userSignUpState) {
-            case "ACCOUNT_CREATED":
-                scrollToEl(contentRefs.current[1]);
-                break;
-            case "ACCREDATION_VERIF_COMPLETE":
-                scrollToEl(contentRefs.current[2]);
-                break;
-        }
-
         requestUpdateState();
     };
 
@@ -85,8 +72,66 @@ const CompleteAccountPage = () => {
         return <LoadingView></LoadingView>;
     }
 
+    const pageIndex = userSignUpOrder(userSignUpState);
+
+    const pageContent = [
+        {
+            title: "Accreditation",
+            content: (
+                <AccreditationStatus
+                    onComplete={onComplete}
+                ></AccreditationStatus>
+            ),
+            disabled: userSignUpOrder(userSignUpState) < 0,
+        },
+        {
+            title: "Personal Information",
+            content: (
+                <CreateDwollaAccount
+                    onComplete={onComplete}
+                ></CreateDwollaAccount>
+            ),
+            disabled: userSignUpOrder(userSignUpState) < 1,
+        },
+        {
+            title: "Create Wallet",
+            content: <AccreditationStatus></AccreditationStatus>,
+            disabled: userSignUpOrder(userSignUpState) < 2,
+        },
+        {
+            title: "Full SSN Validation",
+            content: (
+                <IdentityVerificationFullSSN></IdentityVerificationFullSSN>
+            ),
+            disabled: userSignUpOrder(userSignUpState) < 3,
+            sidebar: false,
+        },
+        {
+            title: "KBA Validation",
+            content: <IdentityVerificationKBA></IdentityVerificationKBA>,
+            disabled: userSignUpOrder(userSignUpState) < 4,
+            sidebar: false,
+        },
+        {
+            title: "Document Validation",
+            content: (
+                <IdentityVerificationDocument></IdentityVerificationDocument>
+            ),
+            disabled: userSignUpOrder(userSignUpState) < 5,
+            sidebar: false,
+        },
+    ];
+
     return (
-        <PageinatedView></PageinatedView>
+        <LinearPageinatedView
+            header={
+                <Typography variant="smallHeadline">
+                    Profile Information
+                </Typography>
+            }
+            pageContent={pageContent}
+            pageIndex={pageIndex}
+        ></LinearPageinatedView>
 
         // <SideBarNavView
         //     drawer={

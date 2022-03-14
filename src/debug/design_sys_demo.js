@@ -151,13 +151,22 @@ const DesignSysDemo = (props) => {
                     <Typography variant="subtitle3">Primary</Typography>
 
                     <Button variant="primary">Primary Button</Button>
+                    <Button variant="primary" disabled={true}>
+                        Disabled
+                    </Button>
                     <Typography variant="subtitle3">Secondary</Typography>
                     <Button variant="secondary">Secondary Button</Button>
+                    <Button variant="secondary" disabled={true}>
+                        Secondary Button
+                    </Button>
 
+                    <Button variant="mini">Mini Button</Button>
+                    <Button variant="mini" disabled={true}>
+                        Mini Button
+                    </Button>
                     <Typography variant="subtitle3">Others</Typography>
 
-                    <Button color="light">Light Button</Button>
-                    <Button color="legendaryGreen">Green Button</Button>
+                    <Button variant="header">Header Button</Button>
                 </Stack>
             </Paper>
 

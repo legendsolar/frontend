@@ -228,35 +228,13 @@ const themeOptions = {
         MuiButton: {
             variants: [
                 {
-                    props: { color: "dark" },
-                    style: {
-                        color: paletteOptions.palette.dark.contrastText,
-                    },
-                },
-                {
                     props: { color: "light" },
                     style: {
                         border: `1px solid ${paletteOptions.palette.light.contrastText}`,
                         color: paletteOptions.palette.light.contrastText,
                     },
                 },
-                {
-                    props: { color: "legendaryGreen" },
-                    style: {
-                        backgroundColor:
-                            paletteOptions.palette.legendaryGreen.main,
-                        color: paletteOptions.palette.legendaryGreen
-                            .contrastText,
-                        boxShadow:
-                            "rgba(99, 110, 114, 0.2) 0px 0px 13.0207px 0px",
-                        boxSizing: "border-box",
-                        "&:hover": {
-                            boxShadow: "0 0 30px 0 rgb(99 110 114 / 45%)",
-                            backgroundColor:
-                                paletteOptions.palette.legendaryGreen.main,
-                        },
-                    },
-                },
+                // Enabled "Green" button
                 {
                     props: { variant: "primary" },
                     style: {
@@ -265,29 +243,72 @@ const themeOptions = {
                         color: paletteOptions.palette.legendaryGreen
                             .contrastText,
                         fontWeight: 400,
-                        boxShadow:
-                            "rgba(99, 110, 114, 0.2) 0px 0px 13.0207px 0px",
-                        boxSizing: "border-box",
+                        height: "65px",
+                        boxShadow: "0px 0px 25px rgba(99, 110, 114, 0.25)",
+
                         "&:hover": {
-                            boxShadow: "0 0 30px 0 rgb(99 110 114 / 45%)",
                             backgroundColor:
                                 paletteOptions.palette.legendaryGreen.main,
                         },
                     },
                 },
+                // Disabled "Green Button"
                 {
                     props: { variant: "primary", disabled: true },
                     style: {
+                        boxShadow: "none",
                         backgroundColor: paletteOptions.palette.whiteFog.main,
-                        color: paletteOptions.palette.whiteFog.contrastText,
+                        color: paletteOptions.palette.blackDawn.main,
                         opacity: 1,
+
+                        "&:hover": {
+                            backgroundColor:
+                                paletteOptions.palette.whiteFog.main,
+                        },
                     },
                 },
+                // "Medium Button"
                 {
                     props: { variant: "secondary" },
                     style: {
+                        height: "44px",
+                        backgroundColor: paletteOptions.palette.blackDawn.main,
+                        color: paletteOptions.palette.blackDawn.contrastText,
+
+                        "&:hover": {
+                            backgroundColor:
+                                paletteOptions.palette.blackDawn.main,
+                        },
+                    },
+                },
+                {
+                    props: { variant: "secondary", disabled: true },
+                    style: {
                         backgroundColor: paletteOptions.palette.whiteFog.main,
-                        color: paletteOptions.palette.whiteFog.contrastText,
+                        color: paletteOptions.palette.blackDawn.main,
+
+                        "&:hover": {
+                            backgroundColor:
+                                paletteOptions.palette.whiteFog.main,
+                        },
+                    },
+                },
+
+                {
+                    props: { variant: "mini" },
+                    style: {
+                        fontFamily: "Azeret Mono",
+                        fontWeight: 600,
+                        fontSize: "12px",
+                        lineHeight: "14px",
+                        textTransform: "uppercase",
+
+                        backgroundColor: paletteOptions.palette.whiteFog.main,
+
+                        "&:hover": {
+                            backgroundColor:
+                                paletteOptions.palette.whiteFog.main,
+                        },
                     },
                 },
 
@@ -299,7 +320,6 @@ const themeOptions = {
                         fontSize: "12px",
                         lineHeight: "14px",
                         textTransform: "uppercase",
-                        backgroundColor: "none",
 
                         "&:hover": {
                             opacity: "0.75",
@@ -344,6 +364,23 @@ const themeOptions = {
                 },
 
                 {
+                    props: { variant: "mono" },
+                    style: {
+                        fontFamily: "Azeret Mono",
+                        fontWeight: 600,
+                        fontSize: "12px",
+                        lineHeight: "14px",
+                        textTransform: "uppercase",
+                        color: paletteOptions.palette.blackDawn.main,
+                        backgroundColor: "none",
+                        "&:hover": {
+                            opacity: "0.75",
+                            backgroundColor: "none",
+                        },
+                    },
+                },
+
+                {
                     props: { color: "dark", variant: "filled" },
                     style: {
                         backgroundColor: paletteOptions.palette.dark.main,
@@ -363,7 +400,6 @@ const themeOptions = {
                     fontWeight: 400,
                     fontSize: "22px",
                     lineHeight: "20px",
-                    height: "65px",
                     textTransform: "none",
                     borderRadius: "5px",
                 },

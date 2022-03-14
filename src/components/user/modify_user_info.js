@@ -163,7 +163,7 @@ const ModifyUserInfo = ({ onValid, onChange, onLoadingChange }) => {
 
     return (
         <div>
-            <Grid container spacing={2} sx={{ width: "100%", mt: 1 }}>
+            <Grid variant="inputFields" container sx={{ width: "100%", mt: 1 }}>
                 <Grid item xs={12} md={6}>
                     <TextField
                         error={!!formValues.firstName.error}

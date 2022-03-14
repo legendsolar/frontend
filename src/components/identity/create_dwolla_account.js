@@ -1,4 +1,13 @@
-import { Alert, Box, Stack, Paper, Grid, Chip, Divider } from "@mui/material";
+import {
+    Alert,
+    Box,
+    Stack,
+    Paper,
+    Grid,
+    Chip,
+    Divider,
+    CircularProgress,
+} from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import { get, ref, set } from "firebase/database";
 import { useAuth } from "../../hooks/use_auth";
@@ -80,21 +89,12 @@ const CreateDwollaAccount = ({ onComplete }) => {
         setInputValid(newInputValid);
     };
 
-    if (loading) {
-        return <LoadingComponent></LoadingComponent>;
-    }
-
     return (
-        <Stack spacing={2} sx={{ mt: 4, mb: 4, mr: 4 }}>
-            <Stack spacing={2} sx={{ ml: 2 }}>
-                <Typography variant="smallHeadline">
-                    Personal Information
-                </Typography>
-                <Typography variant="description">
-                    This information will be used to verify your ownership of
-                    accounts provided and prevent fraud.{" "}
-                </Typography>
-            </Stack>
+        <Stack>
+            <Typography variant="description">
+                This information will be used to verify your ownership of
+                accounts provided and prevent fraud.{" "}
+            </Typography>
 
             <ModifyUserInfo
                 onValid={(unprotectedUserInfo) => {
@@ -125,13 +125,16 @@ const CreateDwollaAccount = ({ onComplete }) => {
             )}
 
             <Button
-                variant="contained"
+                variant="primary"
                 disabled={!inputValid.every((valid) => valid)}
                 color="legendaryGreen"
                 onClick={handleSubmit}
-                fullWidth
             >
-                Continue
+                {loading ? (
+                    <CircularProgress color="dark" size={30} />
+                ) : (
+                    "Continue"
+                )}
             </Button>
         </Stack>
     );
