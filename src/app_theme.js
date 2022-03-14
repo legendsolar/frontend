@@ -207,6 +207,19 @@ const themeOptions = {
             ],
         },
 
+        MuiGrid: {
+            // Default spacing for all Grid layouts
+            defaultProps: {
+                spacing: 2,
+            },
+        },
+
+        MuiStack: {
+            defaultProps: {
+                spacing: 2,
+            },
+        },
+
         MuiButtonBase: {
             defaultProps: {
                 disableRipple: true,
@@ -399,6 +412,9 @@ const themeOptions = {
                     width: "40px",
                     height: "40px",
                 },
+            },
+            defaultProps: {
+                disableRipple: true,
             },
         },
     },
