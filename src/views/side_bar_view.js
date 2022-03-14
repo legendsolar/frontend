@@ -3,7 +3,7 @@ import DefaultView from "./default_view";
 import { ErrorBoundary } from "@sentry/react";
 import DefaultErrorBoundary from "../components/errors/default_error_boundary";
 
-const SideBarNavView = ({
+const SideBarView = ({
     drawer,
     mainContent,
     header,
@@ -101,4 +101,4 @@ const SideBarNavView = ({
     );
 };
 
-export default SideBarNavView;
+export default SideBarView;

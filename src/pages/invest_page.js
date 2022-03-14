@@ -1,7 +1,7 @@
 import { useReducer, useRef } from "react";
 import InvestContent from "../content/invest_content";
 import { Box, Typography, Paper, Stack, Button, Grid } from "@mui/material";
-import SideBarNavView from "../views/side_bar_view";
+import SideBarView from "../views/side_bar_view";
 import OfferingComponent from "../components/offering";
 import DefaultComponent from "../components/default_component";
 import SolarPicture from "../assets/solar_frame.png";
@@ -117,7 +117,7 @@ const InvestPage = () => {
     );
 
     return (
-        <SideBarNavView
+        <SideBarView
             drawerAppearsOnBotton={true}
             drawerAppearsOnTop={false}
             header={state.userState === "CONFIRMED" && precommitConfirmed}
@@ -150,7 +150,7 @@ const InvestPage = () => {
                     )}
                 </div>
             }
-        ></SideBarNavView>
+        ></SideBarView>
     );
 };
 

@@ -24,6 +24,8 @@ import DefaultView from "../views/default_view";
 import { useCloudFunctions } from "../hooks/use_cloud_functions";
 import scrollToEl from "../utils/scroll_to_el";
 
+import PageinatedView from "../views/paginated_view";
+
 const CompleteAccountPage = () => {
     const dispatch = useDispatch();
     const cloudFunctions = useCloudFunctions();
@@ -84,123 +86,125 @@ const CompleteAccountPage = () => {
     }
 
     return (
-        <SideBarNavView
-            drawer={
-                <Stack spacing={2}>
-                    <ScrollToSidebar
-                        header={
-                            <Stack sx={{ p: 2 }}>
-                                <Typography variant="smallHeadline">
-                                    Complete Your Account
-                                </Typography>
-                            </Stack>
-                        }
-                        contentTitles={drawerTitles}
-                        refs={contentRefs}
-                    ></ScrollToSidebar>
-                </Stack>
-            }
-            mainContent={
-                <Stack spacing={4}>
-                    <DefaultComponent
-                        ref={(el) => (contentRefs.current[0] = el)}
-                        disabled={userSignUpState !== "ACCOUNT_CREATED"}
-                    >
-                        <AccreditationStatus
-                            onComplete={onComplete}
-                        ></AccreditationStatus>
-                    </DefaultComponent>
+        <PageinatedView></PageinatedView>
 
-                    <DefaultComponent
-                        ref={(el) => (contentRefs.current[1] = el)}
-                        disabled={
-                            userSignUpState !== "ACCREDATION_VERIF_COMPLETE"
-                        }
-                    >
-                        <CreateDwollaAccount
-                            onComplete={onComplete}
-                        ></CreateDwollaAccount>
-                    </DefaultComponent>
+        // <SideBarNavView
+        //     drawer={
+        //         <Stack spacing={2}>
+        //             <ScrollToSidebar
+        //                 header={
+        //                     <Stack sx={{ p: 2 }}>
+        //                         <Typography variant="smallHeadline">
+        //                             Complete Your Account
+        //                         </Typography>
+        //                     </Stack>
+        //                 }
+        //                 contentTitles={drawerTitles}
+        //                 refs={contentRefs}
+        //             ></ScrollToSidebar>
+        //         </Stack>
+        //     }
+        //     mainContent={
+        //         <Stack spacing={4}>
+        //             <DefaultComponent
+        //                 ref={(el) => (contentRefs.current[0] = el)}
+        //                 disabled={userSignUpState !== "ACCOUNT_CREATED"}
+        //             >
+        //                 <AccreditationStatus
+        //                     onComplete={onComplete}
+        //                 ></AccreditationStatus>
+        //             </DefaultComponent>
 
-                    <DefaultComponent
-                        ref={(el) => (contentRefs.current[2] = el)}
-                        disabled={userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED"}
-                    >
-                        <Stack spacing={6}>
-                            <Typography variant="smallHeadline">
-                                Create Legends Wallet
-                            </Typography>
+        //             <DefaultComponent
+        //                 ref={(el) => (contentRefs.current[1] = el)}
+        //                 disabled={
+        //                     userSignUpState !== "ACCREDATION_VERIF_COMPLETE"
+        //                 }
+        //             >
+        //                 <CreateDwollaAccount
+        //                     onComplete={onComplete}
+        //                 ></CreateDwollaAccount>
+        //             </DefaultComponent>
 
-                            <Typography variant="body2">
-                                On Legends, earnings are deposited into your
-                                ‘Legends Wallet’, where you can save them,
-                                reinvest them in future offerings or deposit
-                                them in your checking account. The Legends
-                                Wallet will never withdraw funds from your
-                                checking account.
-                            </Typography>
+        //             <DefaultComponent
+        //                 ref={(el) => (contentRefs.current[2] = el)}
+        //                 disabled={userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED"}
+        //             >
+        //                 <Stack spacing={6}>
+        //                     <Typography variant="smallHeadline">
+        //                         Create Legends Wallet
+        //                     </Typography>
 
-                            <Button
-                                variant="primary"
-                                disabled={
-                                    userSignUpState !==
-                                    "DWOLLA_ACCOUNT_VERIFIED"
-                                }
-                                onClick={() => {
-                                    navigate("/explore");
-                                }}
-                            >
-                                Continue
-                            </Button>
-                        </Stack>
-                    </DefaultComponent>
+        //                     <Typography variant="body2">
+        //                         On Legends, earnings are deposited into your
+        //                         ‘Legends Wallet’, where you can save them,
+        //                         reinvest them in future offerings or deposit
+        //                         them in your checking account. The Legends
+        //                         Wallet will never withdraw funds from your
+        //                         checking account.
+        //                     </Typography>
 
-                    {userSignUpState === "DWOLLA_ACCOUNT_RETRY_REQ" && (
-                        <DefaultComponent
-                            disabled={
-                                userSignUpState !== "DWOLLA_ACCOUNT_RETRY_REQ"
-                            }
-                        >
-                            <IdentityVerificationFullSSN
-                                onComplete={onComplete}
-                            ></IdentityVerificationFullSSN>
-                        </DefaultComponent>
-                    )}
+        //                     <Button
+        //                         variant="primary"
+        //                         disabled={
+        //                             userSignUpState !==
+        //                             "DWOLLA_ACCOUNT_VERIFIED"
+        //                         }
+        //                         onClick={() => {
+        //                             navigate("/explore");
+        //                         }}
+        //                     >
+        //                         Continue
+        //                     </Button>
+        //                 </Stack>
+        //             </DefaultComponent>
 
-                    {userSignUpState === "DWOLLA_ACCOUNT_KBA_REQ" && (
-                        <DefaultComponent
-                            disabled={
-                                userSignUpState !== "DWOLLA_ACCOUNT_KBA_REQ"
-                            }
-                        >
-                            <IdentityVerificationKBA
-                                onComplete={onComplete}
-                            ></IdentityVerificationKBA>
-                        </DefaultComponent>
-                    )}
+        //             {userSignUpState === "DWOLLA_ACCOUNT_RETRY_REQ" && (
+        //                 <DefaultComponent
+        //                     disabled={
+        //                         userSignUpState !== "DWOLLA_ACCOUNT_RETRY_REQ"
+        //                     }
+        //                 >
+        //                     <IdentityVerificationFullSSN
+        //                         onComplete={onComplete}
+        //                     ></IdentityVerificationFullSSN>
+        //                 </DefaultComponent>
+        //             )}
 
-                    {userSignUpState === "DWOLLA_ACCOUNT_DOCUMENT_REQ" && (
-                        <DefaultComponent
-                            disabled={
-                                userSignUpState !==
-                                "DWOLLA_ACCOUNT_DOCUMENT_REQ"
-                            }
-                        >
-                            <IdentityVerificationDocument
-                                onContinue={() => {
-                                    if (
-                                        userSignUpState ===
-                                        "DWOLLA_ACCOUNT_VERIFIED"
-                                    ) {
-                                        navigate("/explore");
-                                    }
-                                }}
-                            ></IdentityVerificationDocument>
-                        </DefaultComponent>
-                    )}
-                </Stack>
-            }
-        ></SideBarNavView>
+        //             {userSignUpState === "DWOLLA_ACCOUNT_KBA_REQ" && (
+        //                 <DefaultComponent
+        //                     disabled={
+        //                         userSignUpState !== "DWOLLA_ACCOUNT_KBA_REQ"
+        //                     }
+        //                 >
+        //                     <IdentityVerificationKBA
+        //                         onComplete={onComplete}
+        //                     ></IdentityVerificationKBA>
+        //                 </DefaultComponent>
+        //             )}
+
+        //             {userSignUpState === "DWOLLA_ACCOUNT_DOCUMENT_REQ" && (
+        //                 <DefaultComponent
+        //                     disabled={
+        //                         userSignUpState !==
+        //                         "DWOLLA_ACCOUNT_DOCUMENT_REQ"
+        //                     }
+        //                 >
+        //                     <IdentityVerificationDocument
+        //                         onContinue={() => {
+        //                             if (
+        //                                 userSignUpState ===
+        //                                 "DWOLLA_ACCOUNT_VERIFIED"
+        //                             ) {
+        //                                 navigate("/explore");
+        //                             }
+        //                         }}
+        //                     ></IdentityVerificationDocument>
+        //                 </DefaultComponent>
+        //             )}
+        //         </Stack>
+        //     }
+        // ></SideBarNavView>
     );
 };
 

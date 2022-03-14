@@ -6,6 +6,7 @@ import {
     Typography,
 } from "@mui/material/";
 import scrollToEl from "../utils/scroll_to_el";
+import SideBar from "./sidebar_component";
 
 const ScrollToSidebar = ({
     header,
@@ -19,7 +20,7 @@ const ScrollToSidebar = ({
     };
 
     return (
-        <Paper variant="container" sx={{ width: "100%", m: 0 }}>
+        <SideBar>
             {header}
 
             <List>
@@ -36,7 +37,7 @@ const ScrollToSidebar = ({
                 ))}
                 {getAdditionalButtons()}
             </List>
-        </Paper>
+        </SideBar>
     );
 };
 
