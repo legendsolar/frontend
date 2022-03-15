@@ -14,14 +14,6 @@ jobs:
         with:
           token: ${{ secrets.BOT_PAT_TOKEN}}
           submodules: recursive
-      - run: |
-          git config --global user.name 'legendsolarbot'
-          git config --global user.email 'githubbotlegendssolar@gmail.com'
-          BRANCH_NAME=PROD-DEPLOY-`date -u '+%d-%m-%Y_%H.%M.%S'` 
-          git branch $BRANCH_NAME
-          git checkout $BRANCH_NAME
-          git commit -m "[BOT] Automated branch creation before production deploy" --allow-empty
-          git push --set-upstream origin $BRANCH_NAME
       - run: npm ci && npm run build:prod
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
