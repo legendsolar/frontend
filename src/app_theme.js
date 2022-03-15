@@ -169,6 +169,7 @@ const typographyOptions = {
         smallLabel: {
             fontFamily: "Azeret Mono",
             fontSize: "12px",
+            lineHeight: "14px",
             fontWeight: 800,
             color: paletteOptions.palette.blackDusk.main,
             textTransform: "uppercase",
@@ -356,11 +357,7 @@ const themeOptions = {
                 {
                     props: { variant: "header-outlined" },
                     style: {
-                        fontFamily: "Azeret Mono",
-                        fontWeight: 600,
-                        fontSize: "12px",
-                        lineHeight: "14px",
-                        textTransform: "uppercase",
+                        ...typographyOptions.typography.smallLabel,
                         height: "50px",
                         color: paletteOptions.palette.white.main,
                         border: `1px solid ${paletteOptions.palette.white.main}`,
@@ -374,11 +371,7 @@ const themeOptions = {
                 {
                     props: { variant: "medium" },
                     style: {
-                        fontFamily: "Azeret Mono",
-                        fontWeight: 600,
-                        fontSize: "12px",
-                        lineHeight: "14px",
-                        textTransform: "uppercase",
+                        ...typographyOptions.typography.smallLabel,
                         color: paletteOptions.palette.blackDawn.main,
                         backgroundColor: paletteOptions.palette.whiteFog.main,
                         height: "44px",

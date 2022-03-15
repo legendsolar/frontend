@@ -215,6 +215,8 @@ const ModifyUserInfo = ({ onValid, onChange, onLoadingChange }) => {
 
                 <Grid item xs={12} md={6}>
                     <TextField
+                        error={!!formValues.city.error}
+                        helperText={formValues.city.errMsg}
                         name="city"
                         label="City"
                         variant="filled"
