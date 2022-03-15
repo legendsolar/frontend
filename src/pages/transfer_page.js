@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectWalletBalance } from "../slices/wallet_slice";
 import { fetchWalletBalance } from "../slices/wallet_slice";
 import { useCloudFunctions } from "../hooks/use_cloud_functions";
+import RecentTransfers from "../components/transactions/recent_transfers";
 
 const TransferPage = () => {
     const auth = useAuth();
@@ -73,6 +74,13 @@ const TransferPage = () => {
                         ref={(el) => (contentRefs.current[1] = el)}
                     >
                         <AccountListComponent></AccountListComponent>
+                    </Paper>
+
+                    <Paper
+                        variant="container"
+                        ref={(el) => (contentRefs.current[2] = el)}
+                    >
+                        <RecentTransfers></RecentTransfers>
                     </Paper>
                 </Stack>
             }
