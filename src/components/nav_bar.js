@@ -72,7 +72,6 @@ const NavBar = ({}) => {
                                     "DWOLLA_ACCOUNT_VERIFIED" && (
                                     <>
                                         <Button
-                                            color="dark"
                                             variant="header"
                                             onClick={() => {
                                                 navigate("/");
@@ -84,7 +83,6 @@ const NavBar = ({}) => {
                                         </Button>
 
                                         <Button
-                                            color="dark"
                                             variant="header"
                                             onClick={() => {
                                                 navigate("/transactions");
@@ -96,7 +94,6 @@ const NavBar = ({}) => {
                                         </Button>
 
                                         <Button
-                                            color="dark"
                                             variant="header"
                                             onClick={() => {
                                                 navigate("/documents");
@@ -108,26 +105,24 @@ const NavBar = ({}) => {
                                         </Button>
 
                                         <Button
-                                            color="dark"
-                                            variant="header"
-                                            onClick={() => {
-                                                navigate("/account");
-                                            }}
-                                        >
-                                            <Typography variant="appBarHeader">
-                                                Account
-                                            </Typography>
-                                        </Button>
-
-                                        <Button
-                                            color="dark"
                                             variant="header"
                                             onClick={() => {
                                                 navigate("/explore");
                                             }}
                                         >
                                             <Typography variant="appBarHeader">
-                                                Available Offerings
+                                                Available Panels
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            variant="header-outlined"
+                                            onClick={() => {
+                                                navigate("/account");
+                                            }}
+                                        >
+                                            <Typography variant="appBarHeader">
+                                                Account
                                             </Typography>
                                         </Button>
                                     </>
@@ -137,7 +132,6 @@ const NavBar = ({}) => {
                         {(!auth.user ||
                             userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED") && (
                             <Button
-                                color="dark"
                                 variant="medium"
                                 onClick={() => {
                                     redirectToHomePage();

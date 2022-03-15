@@ -27,6 +27,10 @@ const paletteOptions = {
             main: "#FFF",
             contrastText: "#000",
         },
+        white: {
+            main: "#FFF",
+            contrastText: "#000",
+        },
         legendaryGreen: {
             main: legendaryGreen,
             light: "#708d70",
@@ -341,13 +345,32 @@ const themeOptions = {
                         fontSize: "12px",
                         lineHeight: "14px",
                         textTransform: "uppercase",
-
+                        color: paletteOptions.palette.white.main,
                         "&:hover": {
                             opacity: "0.75",
                             backgroundColor: "none",
                         },
                     },
                 },
+
+                {
+                    props: { variant: "header-outlined" },
+                    style: {
+                        fontFamily: "Azeret Mono",
+                        fontWeight: 600,
+                        fontSize: "12px",
+                        lineHeight: "14px",
+                        textTransform: "uppercase",
+                        height: "50px",
+                        color: paletteOptions.palette.white.main,
+                        border: `1px solid ${paletteOptions.palette.white.main}`,
+                        "&:hover": {
+                            opacity: "0.75",
+                            backgroundColor: "none",
+                        },
+                    },
+                },
+
                 {
                     props: { variant: "medium" },
                     style: {
@@ -361,7 +384,8 @@ const themeOptions = {
                         height: "44px",
                         "&:hover": {
                             opacity: "0.75",
-                            backgroundColor: "none",
+                            backgroundColor:
+                                paletteOptions.palette.whiteFog.main,
                         },
                     },
                 },
