@@ -28,10 +28,6 @@ import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
 import { useSelector, useDispatch } from "react-redux";
-import {
-    fetchUserSignUpState,
-    selectUserSignUpState,
-} from "../slices/user_slice";
 import InvestPage from "../pages/invest_page";
 
 function AppRouter() {
@@ -39,7 +35,6 @@ function AppRouter() {
     const database = getDatabase(app);
     const auth = getAuth(app);
     const functions = getFunctions(app);
-    const dispatch = useDispatch();
 
     const emulator =
         !!process.env.REACT_APP_FIREBASE_EMULATOR &&
@@ -74,7 +69,10 @@ function AppRouter() {
                 <Route
                     path="/"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute
+                            requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
+                            requiredPath="/complete-account"
+                        >
                             <PortfolioPage />
                         </ProtectedRoute>
                     }
@@ -82,7 +80,10 @@ function AppRouter() {
                 <Route
                     path="/account"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute
+                            requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
+                            requiredPath="/complete-account"
+                        >
                             <AccountPage />
                         </ProtectedRoute>
                     }
@@ -91,7 +92,10 @@ function AppRouter() {
                 <Route
                     path="/transfer"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute
+                            requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
+                            requiredPath="/complete-account"
+                        >
                             <TransferPage />
                         </ProtectedRoute>
                     }
@@ -100,7 +104,10 @@ function AppRouter() {
                 <Route
                     path="/documents"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute
+                            requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
+                            requiredPath="/complete-account"
+                        >
                             <DocumentPage />
                         </ProtectedRoute>
                     }
@@ -109,7 +116,10 @@ function AppRouter() {
                 <Route
                     path="/complete-account"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute
+                            disallowedUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
+                            disallowedPath="/explore"
+                        >
                             <SignUpProcessPage />
                         </ProtectedRoute>
                     }
@@ -117,7 +127,10 @@ function AppRouter() {
                 <Route
                     path="/transactions"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute
+                            requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
+                            requiredPath="/complete-account"
+                        >
                             <TransactionView />
                         </ProtectedRoute>
                     }

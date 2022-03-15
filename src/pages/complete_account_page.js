@@ -46,15 +46,20 @@ const CompleteAccountPage = () => {
             userSignUpStateStatus === "rejected"
         ) {
             console.log("requested state update");
+            console.log(userSignUpStateStatus);
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
     };
 
     useEffect(() => {
-        if (auth.user) {
+        if (
+            auth.user &&
+            !auth.isAuthenticating &&
+            userSignUpStateStatus === "idle"
+        ) {
             requestUpdateState();
         }
-    }, [dispatch, auth.user, auth.isAuthenticating]);
+    }, [dispatch, auth.user, auth.isAuthenticating, userSignUpStateStatus]);
 
     const navigate = useNavigate();
     const contentRefs = useRef([]);
@@ -73,8 +78,6 @@ const CompleteAccountPage = () => {
     }
 
     const pageIndex = userSignUpOrder(userSignUpState);
-
-    console.log(pageIndex, userSignUpState);
 
     const pageContent = [
         {
