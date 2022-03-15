@@ -51,110 +51,104 @@ function AppRouter() {
         // connectFunctionsEmulator(functions, "localhost", 5004);
     }
 
-    const authHook = useAuth();
-    const isAuthenticating = authHook.isAuthenticating;
+    return (
+        <div>
+            <Routes>
+                <Route
+                    path="/signin"
+                    element={
+                        <UnprotectedRoute>
+                            <SignInView />
+                        </UnprotectedRoute>
+                    }
+                />
+                <Route
+                    path="/signup"
+                    element={
+                        <UnprotectedRoute>
+                            <SignUpView />
+                        </UnprotectedRoute>
+                    }
+                />
 
-    if (isAuthenticating) {
-        return <LoadingView></LoadingView>;
-    } else {
-        return (
-            <div>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <ProtectedRoute>
-                                <PortfolioPage />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/signin"
-                        element={
-                            <UnprotectedRoute>
-                                <SignInView />
-                            </UnprotectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/signup"
-                        element={
-                            <UnprotectedRoute>
-                                <SignUpView />
-                            </UnprotectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/account"
-                        element={
-                            <ProtectedRoute>
-                                <AccountPage />
-                            </ProtectedRoute>
-                        }
-                    />
+                <Route
+                    path="/"
+                    element={
+                        <ProtectedRoute>
+                            <PortfolioPage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/account"
+                    element={
+                        <ProtectedRoute>
+                            <AccountPage />
+                        </ProtectedRoute>
+                    }
+                />
 
-                    <Route
-                        path="/transfer"
-                        element={
-                            <ProtectedRoute>
-                                <TransferPage />
-                            </ProtectedRoute>
-                        }
-                    />
+                <Route
+                    path="/transfer"
+                    element={
+                        <ProtectedRoute>
+                            <TransferPage />
+                        </ProtectedRoute>
+                    }
+                />
 
-                    <Route
-                        path="/documents"
-                        element={
-                            <ProtectedRoute>
-                                <DocumentPage />
-                            </ProtectedRoute>
-                        }
-                    />
+                <Route
+                    path="/documents"
+                    element={
+                        <ProtectedRoute>
+                            <DocumentPage />
+                        </ProtectedRoute>
+                    }
+                />
 
-                    <Route
-                        path="/complete-account"
-                        element={
-                            <ProtectedRoute>
-                                <SignUpProcessPage />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/transactions"
-                        element={
-                            <ProtectedRoute>
-                                <TransactionView />
-                            </ProtectedRoute>
-                        }
-                    />
+                <Route
+                    path="/complete-account"
+                    element={
+                        <ProtectedRoute>
+                            <SignUpProcessPage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/transactions"
+                    element={
+                        <ProtectedRoute>
+                            <TransactionView />
+                        </ProtectedRoute>
+                    }
+                />
 
-                    <Route
-                        path="/explore"
-                        element={
-                            <ProtectedRoute>
-                                <ExplorePage />
-                            </ProtectedRoute>
-                        }
-                    />
+                <Route
+                    path="/explore"
+                    element={
+                        <ProtectedRoute>
+                            <ExplorePage />
+                        </ProtectedRoute>
+                    }
+                />
 
-                    <Route
-                        path="/invest/:assetName"
-                        element={
-                            <ProtectedRoute>
-                                <InvestPage />
-                            </ProtectedRoute>
-                        }
-                    />
+                <Route
+                    path="/invest/:assetName"
+                    element={
+                        <ProtectedRoute>
+                            <InvestPage />
+                        </ProtectedRoute>
+                    }
+                />
 
-                    {/* Debug */}
-                    <Route path="/designSysDemo" element={<DesignSysDemo />} />
-                    <Route path="/loading" element={<LoadingView />} />
-                    <Route path="/gridView" element={<GridPage />} />
-                    <Route path="/playground" element={<PlaygroundPage />} />
-                </Routes>
-            </div>
-        );
-    }
+                {/* Debug */}
+                <Route path="/designSysDemo" element={<DesignSysDemo />} />
+                <Route path="/loading" element={<LoadingView />} />
+                <Route path="/gridView" element={<GridPage />} />
+                <Route path="/playground" element={<PlaygroundPage />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default AppRouter;

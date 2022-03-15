@@ -20,38 +20,97 @@ import { useNavigate, useLocation } from "react-router-dom";
 import CenteredComponentView from "../views/centered_component_view";
 import GoogleIconButton from "../components/buttons/google_icon_button";
 import ContentDivider from "../components/basics/content_divider";
+import { authErrorTranslator } from "../utils/auth_error_translator";
 
 function SignInView() {
-    const auth = useAuth();
+    const authHook = useAuth();
     const navigate = useNavigate();
     const { state } = useLocation();
-    const [errorOpen, setErrorOpen] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
 
     const onSuccessfulSignIn = () => {
         navigate(state?.path || "/");
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const email = data.get("email");
-        const password = data.get("password");
+    const initValues = {
+        email: {
+            value: "",
+        },
+        password: {
+            value: "",
+        },
+    };
 
-        if (email && password) {
-            auth.signin(email, password)
-                .then(() => {
-                    onSuccessfulSignIn();
-                })
-                .catch((error) => {
-                    console.log(error);
-                    setErrorMessage(error.message);
-                    setErrorOpen(true);
-                });
+    const [formValues, setFormValues] = useState(initValues);
+
+    const formDataValid = (formData) => {
+        if (!formData.password.value) {
+            formData.password.error = true;
+            formData.password.errMsg = "Password required";
         } else {
-            setErrorMessage("Email and/or password invalid");
-            setErrorOpen(true);
+            formData.password.error = false;
+            formData.password.errMsg = undefined;
         }
+
+        if (!formData.email.value) {
+            formData.email.error = true;
+            formData.email.errMsg = "Email required";
+        } else {
+            formData.email.error = false;
+            formData.email.errMsg = undefined;
+        }
+
+        setFormValues(formData);
+    };
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+
+        const updatedObject = { ...formValues };
+        updatedObject[name].value = value;
+        formDataValid(updatedObject);
+    };
+
+    const onSuccessfulSignUp = () => {
+        navigate("/complete-account");
+    };
+
+    const handleFirebaseError = (error) => {
+        const translatedError = authErrorTranslator(error);
+
+        const newFormValues = { ...formValues };
+        newFormValues[translatedError.type].error = true;
+        newFormValues[translatedError.type].errMsg = translatedError.message;
+
+        setFormValues(newFormValues);
+    };
+
+    const handleSubmit = (event) => {
+        console.log("submit");
+        event.preventDefault();
+
+        authHook
+            .signin(formValues.email.value, formValues.password.value)
+            .then(() => {
+                onSuccessfulSignUp();
+            })
+            .catch((error) => {
+                handleFirebaseError(error);
+                console.log("error");
+                console.log(error);
+                console.log(error.message);
+                console.log(error.code);
+            });
+    };
+
+    const isDisabled = () => {
+        const error = Object.keys(formValues)
+            .map((key) => {
+                return formValues[key].error !== false;
+            })
+            .some((el) => el);
+        console.log(error);
+
+        return error;
     };
 
     return (
@@ -62,13 +121,13 @@ function SignInView() {
                     <GoogleIconButton
                         label="Sign in with Google"
                         onClick={() => {
-                            auth.signInWithGoogle()
+                            authHook
+                                .signInWithGoogle()
                                 .then(() => {
                                     onSuccessfulSignIn();
                                 })
                                 .catch((error) => {
-                                    setErrorMessage(error.message);
-                                    setErrorOpen(true);
+                                    handleFirebaseError(error);
                                 });
                         }}
                     ></GoogleIconButton>
@@ -80,44 +139,31 @@ function SignInView() {
                     </ContentDivider>
 
                     <TextField
+                        error={!!formValues.email.error}
+                        helperText={formValues.email.errMsg}
                         margin="normal"
-                        required
                         id="email"
                         label="Email Address"
                         name="email"
                         autoComplete="email"
+                        onChange={handleInputChange}
                     />
                     <TextField
+                        error={!!formValues.password.error}
+                        helperText={formValues.password.errMsg}
                         margin="normal"
-                        required
                         name="password"
                         label="Password"
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={handleInputChange}
                     />
-                    <Collapse in={errorOpen}>
-                        <Alert
-                            severity="error"
-                            action={
-                                <IconButton
-                                    aria-label="close"
-                                    color="inherit"
-                                    size="small"
-                                    onClick={() => {
-                                        setErrorOpen(false);
-                                    }}
-                                >
-                                    <CloseIcon fontSize="inherit" />
-                                </IconButton>
-                            }
-                        >
-                            {errorMessage}
-                        </Alert>
-                    </Collapse>
+
                     <Button
-                        type="submit"
-                        color="legendaryGreen"
+                        variant="primary"
+                        onClick={handleSubmit}
+                        disabled={isDisabled()}
                         sx={{ width: "100%" }}
                     >
                         Login

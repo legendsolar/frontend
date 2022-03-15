@@ -20,77 +20,110 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
 import FullPageComponentView from "../views/full_page_component_view";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import GoogleSignUp from "../components/buttons/google_icon_button";
 import LoadingView from "../views/loading_view";
 import CenteredComponentView from "../views/centered_component_view";
 import GoogleIconButton from "../components/buttons/google_icon_button";
 import ContentDivider from "../components/basics/content_divider";
+import { authErrorTranslator } from "../utils/auth_error_translator";
 
 export default function SignUpView() {
     const authHook = useAuth();
-    const provider = new GoogleAuthProvider();
+    const navigate = useNavigate();
 
-    const googleSignIn = () => {
-        // signInWithPopup(auth, provider)
-        //     .then((result) => {
-        //         // This gives you a Google Access Token. You can use it to access the Google API.
-        //         const credential =
-        //             GoogleAuthProvider.credentialFromResult(result);
-        //         const token = credential.accessToken;
-        //         // The signed-in user info.
-        //         const user = result.user;
-        //         // ...
-        //     })
-        //     .catch((error) => {
-        //         // Handle Errors here.
-        //         const errorCode = error.code;
-        //         const errorMessage = error.message;
-        //         // The email of the user's account used.
-        //         const email = error.email;
-        //         // The AuthCredential type that was used.
-        //         const credential =
-        //             GoogleAuthProvider.credentialFromError(error);
-        //         // ...
-        //         console.error(errorMessage);
-        //     });
+    const initValues = {
+        email: {
+            value: "",
+        },
+        password: {
+            value: "",
+        },
     };
 
-    const navigate = useNavigate();
-    const [errorOpen, setErrorOpen] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
+    const [formValues, setFormValues] = useState(initValues);
+
+    const formDataValid = (formData) => {
+        if (!formData.password.value) {
+            formData.password.error = true;
+            formData.password.errMsg = "Password required";
+        } else {
+            formData.password.error = false;
+            formData.password.errMsg = undefined;
+        }
+
+        if (!formData.email.value) {
+            formData.email.error = true;
+            formData.email.errMsg = "Email required";
+        } else {
+            formData.email.error = false;
+            formData.email.errMsg = undefined;
+        }
+
+        setFormValues(formData);
+    };
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+
+        const updatedObject = { ...formValues };
+        updatedObject[name].value = value;
+        formDataValid(updatedObject);
+    };
 
     const onSuccessfulSignUp = () => {
         navigate("/complete-account");
     };
 
+    const handleFirebaseError = (error) => {
+        const translatedError = authErrorTranslator(error);
+
+        const newFormValues = { ...formValues };
+        newFormValues[translatedError.type].error = true;
+        newFormValues[translatedError.type].errMsg = translatedError.message;
+
+        setFormValues(newFormValues);
+    };
+
     const handleSubmit = (event) => {
+        console.log("submit");
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
 
-        const email = data.get("email");
-        const password = data.get("password");
+        authHook
+            .signup(formValues.email.value, formValues.password.value)
+            .then(() => {
+                onSuccessfulSignUp();
+            })
+            .catch((error) => {
+                const translatedError = authErrorTranslator(error);
 
-        if (email && password) {
-            authHook
-                .signup(data.get("email"), data.get("password"))
-                .then(() => {
-                    onSuccessfulSignUp();
-                })
-                .catch((error) => {
-                    console.log(error);
-                    setErrorMessage(error.message);
-                    setErrorOpen(true);
-                });
-        } else {
-            setErrorMessage("Email and password need to be filled");
-            setErrorOpen(true);
-        }
+                const newFormValues = { ...formValues };
+                newFormValues[translatedError.type].error = true;
+                newFormValues[translatedError.type].errMsg =
+                    translatedError.message;
+
+                setFormValues(newFormValues);
+
+                console.log("error");
+                console.log(error);
+                console.log(error.message);
+                console.log(error.code);
+            });
+    };
+
+    const isDisabled = () => {
+        const error = Object.keys(formValues)
+            .map((key) => {
+                return formValues[key].error !== false;
+            })
+            .some((el) => el);
+        console.log(error);
+
+        return error;
     };
 
     return (
         <CenteredComponentView>
-            <Box component="form" onSubmit={handleSubmit} noValidate>
+            <Box>
                 <Stack spacing={4}>
                     <Typography variant="subtitle1">Create Account</Typography>
                     <GoogleIconButton
@@ -102,8 +135,7 @@ export default function SignUpView() {
                                     onSuccessfulSignUp();
                                 })
                                 .catch((error) => {
-                                    setErrorMessage(error.message);
-                                    setErrorOpen(true);
+                                    handleFirebaseError(error);
                                 });
                         }}
                     ></GoogleIconButton>
@@ -113,43 +145,30 @@ export default function SignUpView() {
                         </Typography>
                     </ContentDivider>
                     <TextField
+                        error={!!formValues.email.error}
+                        helperText={formValues.email.errMsg}
                         margin="normal"
-                        required
                         id="email"
                         label="Email Address"
                         name="email"
                         autoComplete="email"
+                        onChange={handleInputChange}
                     />
                     <TextField
+                        error={!!formValues.password.error}
+                        helperText={formValues.password.errMsg}
                         margin="normal"
-                        required
                         name="password"
                         label="Password"
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={handleInputChange}
                     />
-                    <Collapse in={errorOpen}>
-                        <Alert
-                            severity="error"
-                            action={
-                                <IconButton
-                                    aria-label="close"
-                                    color="inherit"
-                                    size="small"
-                                    onClick={() => {
-                                        setErrorOpen(false);
-                                    }}
-                                >
-                                    <CloseIcon fontSize="inherit" />
-                                </IconButton>
-                            }
-                        >
-                            {errorMessage}
-                        </Alert>
-                    </Collapse>
                     <Button
-                        type="submit"
+                        variant="primary"
+                        onClick={handleSubmit}
+                        disabled={isDisabled()}
                         color="legendaryGreen"
                         sx={{ width: "100%" }}
                     >
