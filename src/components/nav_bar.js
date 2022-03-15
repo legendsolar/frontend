@@ -38,11 +38,10 @@ const NavBar = ({}) => {
             >
                 <Box
                     sx={{
-                        width: {
-                            sm: "550px",
-                            md: "850px",
-                            lg: "1100px",
-                        },
+                        width: "100%",
+                        ml: 10,
+                        mr: 10,
+                        mt: 6,
                     }}
                 >
                     <Stack
@@ -52,7 +51,6 @@ const NavBar = ({}) => {
                         sx={{
                             width: "100%",
                             zIndex: 1,
-                            mt: 5,
                         }}
                     >
                         <Box
