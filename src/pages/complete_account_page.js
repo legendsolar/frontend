@@ -102,7 +102,7 @@ const CompleteAccountPage = () => {
                     onComplete={onComplete}
                 ></IdentityVerificationFullSSN>
             ),
-            disabled: userSignUpOrder(userSignUpState) < 2,
+            disabled: userSignUpState !== "DWOLLA_ACCOUNT_RETRY_REQ",
             sidebar: false,
         },
         {
@@ -112,7 +112,7 @@ const CompleteAccountPage = () => {
                     onComplete={onComplete}
                 ></IdentityVerificationKBA>
             ),
-            disabled: userSignUpOrder(userSignUpState) < 3,
+            disabled: userSignUpState !== "DWOLLA_ACCOUNT_KBA_REQ",
             sidebar: false,
         },
         {
@@ -122,7 +122,7 @@ const CompleteAccountPage = () => {
                     onComplete={onComplete}
                 ></IdentityVerificationDocument>
             ),
-            disabled: userSignUpOrder(userSignUpState) < 4,
+            disabled: userSignUpState !== "DWOLLA_ACCOUNT_DOCUMENT_REQ",
             sidebar: false,
         },
         {

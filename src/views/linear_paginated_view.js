@@ -19,7 +19,13 @@ const LinearPageinatedView = ({ pageContent, header, pageIndex }) => {
                     pageIndex: action.pageIndex,
                 };
             case "BACK_PAGE":
-                const newIndex = state.pageIndex <= 0 ? 0 : state.pageIndex - 1;
+                // Todo this logic breaks my functional paradigm
+                var newIndex = state.pageIndex <= 0 ? 0 : state.pageIndex - 1;
+
+                while (pageContent[newIndex].disabled && newIndex > 0) {
+                    newIndex = newIndex - 1;
+                }
+
                 return {
                     ...state,
                     pageIndex: newIndex,
