@@ -4,6 +4,7 @@ import {
     Typography,
     TextField,
     InputAdornment,
+    CircularProgress,
 } from "@mui/material";
 import AccountManagementComponent from "./account_management_component";
 import { useState, useReducer } from "react";
@@ -39,6 +40,8 @@ const CreateTransactionComponent = () => {
 
     const [transferAmount, setTransferAmount] = useState(0.0);
 
+    const [loading, setLoading] = useState(false);
+
     const goBack = () => {
         dispatch({
             type: "CHANGE_VIEW",
@@ -47,8 +50,8 @@ const CreateTransactionComponent = () => {
     };
 
     const onAccountSelected = (account) => {
+        console.log(account);
         if (state.accountSelectType === "source") {
-            console.log(account);
             setSourceAccount(account);
         } else if (state.accountSelectType === "destination") {
             setDestinationAccount(account);
@@ -65,17 +68,28 @@ const CreateTransactionComponent = () => {
         const destinationAccountId = destinationAccount.id;
         const amount = transferAmount;
 
+        setLoading(true);
+
         cloudFunctions
             .createTransfer({
                 source: sourceAccountId,
                 destination: destinationAccountId,
-                amount: transferAmount,
+                amount: amount,
             })
             .then((resp) => {
+                console.log("new transfer created with id:");
                 console.log(resp);
+
+                dispatch({
+                    type: "CHANGE_VIEW",
+                    page: "confirmed",
+                });
             })
             .catch((error) => {
                 console.log(error);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     };
 
@@ -158,8 +172,8 @@ const CreateTransactionComponent = () => {
                 </Button>
                 <AccountManagementComponent
                     onSelected={onAccountSelected}
+                    includeWallet={true}
                 ></AccountManagementComponent>
-                <Button variant="secondary">Link New Account</Button>
             </Stack>
         );
     } else if (state.page === "review") {
@@ -187,18 +201,31 @@ const CreateTransactionComponent = () => {
 
                 <Typography>{"Amount: " + transferAmount}</Typography>
 
-                <Button variant="primary" onClick={onComplete}>
-                    Confirm Transfer
+                <Button
+                    variant="primary"
+                    onClick={onComplete}
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <CircularProgress color="dark" size={30} />
+                    ) : (
+                        "Confirm Transfer"
+                    )}
                 </Button>
             </Stack>
         );
     } else if (state.page === "confirmed") {
-        <Stack spacing={2}>
-            <Typography>Transfer Submitted</Typography>
-            <Typography>
-                Funds will be available within 4 business days
-            </Typography>
-        </Stack>;
+        return (
+            <Stack spacing={2}>
+                <Typography>Transfer Submitted</Typography>
+                <Button variant="mini" onClick={goBack}>
+                    Back
+                </Button>
+                <Typography>
+                    Funds will be available within 4 business days
+                </Typography>
+            </Stack>
+        );
     }
 
     return (

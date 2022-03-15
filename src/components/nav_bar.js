@@ -8,6 +8,7 @@ import { useCloudFunctions } from "../hooks/use_cloud_functions";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserSignUpState } from "../slices/user_slice";
 import { selectUserSignUpState } from "../slices/user_slice";
+import { selectWalletBalance } from "../slices/wallet_slice";
 
 const NavBar = ({}) => {
     const auth = useAuth();
@@ -26,6 +27,8 @@ const NavBar = ({}) => {
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
     }, [dispatch, userSignUpStateStatus, auth.user]);
+
+    const walletBalance = useSelector(selectWalletBalance);
 
     return (
         <Toolbar style={{ padding: 0, width: "100%" }}>
@@ -149,7 +152,7 @@ const NavBar = ({}) => {
                                                 navigate("/transfer");
                                             }}
                                         >
-                                            $0.00
+                                            {"$" + walletBalance}
                                         </Button>
                                     </Stack>
                                 </Stack>

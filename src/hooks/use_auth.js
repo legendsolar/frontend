@@ -118,6 +118,7 @@ function useProvideAuth() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             console.log("use auth: user auth state changed");
+            console.log(user);
             console.log("clearing user state");
             dispatch(clearUserState);
             setUser(user);

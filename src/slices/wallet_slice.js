@@ -1,9 +1,11 @@
+import { ResetTvRounded } from "@mui/icons-material";
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import { useAuth } from "../hooks/use_auth";
 
 const initialState = {
     balance: {
         value: null,
+        id: null,
         status: "idle",
         error: null,
     },
@@ -24,41 +26,35 @@ export const fetchWalletBalance = createAsyncThunk(
         const returned = await cloudFunctions.getWalletBalance();
         console.log(returned);
         const balance = returned.data.balance;
-        return balance;
+        return {
+            balance: balance,
+            id: returned.data.walletId,
+        };
     }
 );
 
 export const fetchAccounts = createAsyncThunk(
     "dwolla/fetchAccounts",
     async (cloudFunctions) => {
-        // const returned = await cloudFunctions.getLinkedAccounts();
-        // console.log(returned);
-        // const accounts = returned.data;
+        const returned = await cloudFunctions.getLinkedAccounts();
 
-        const accounts = [
-            {
-                name: "Checking Account",
-                institution: "Bank of America",
-                type: "Checking",
-                source: "Linked with Plaid",
-                id: "fakeId1",
-            },
-            {
-                name: "Savings Account",
-                institution: "Citibank",
-                type: "Savings",
-                source: "Linked with Plaid",
-                id: "fakeId2",
-            },
+        console.log("linked accounts");
+        console.log(returned);
 
-            {
-                name: "Savings Account",
-                institution: "USB",
-                type: "Savings",
+        const accounts = returned.data.map((returnedAccount) => {
+            const [institution, type, name] = returnedAccount.name.split("|");
+
+            return {
+                name: name,
+                institution: institution,
+                type: returnedAccount.bankAccountType,
+                id: returnedAccount.id,
                 source: "Linked with Plaid",
-                id: "fakeId3",
-            },
-        ];
+            };
+        });
+
+        console.log(accounts);
+
         return accounts;
     }
 );
@@ -74,7 +70,8 @@ const walletSlice = createSlice({
             })
             .addCase(fetchWalletBalance.fulfilled, (state, action) => {
                 state.balance.status = "succeeded";
-                state.balance.value = action.payload;
+                state.balance.value = action.payload.balance;
+                state.balance.id = action.payload.id;
             })
             .addCase(fetchWalletBalance.rejected, (state, action) => {
                 state.balance.status = "failed";
@@ -107,6 +104,14 @@ export const selectAllAccounts = (state) => {
 export const selectWalletBalance = (state) => {
     if (state.wallet.balance.value) {
         return state.wallet.balance.value;
+    }
+
+    return null;
+};
+
+export const selectWalletId = (state) => {
+    if (state.wallet.balance.id) {
+        return state.wallet.balance.id;
     }
 
     return null;
