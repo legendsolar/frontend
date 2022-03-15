@@ -345,6 +345,7 @@ const themeOptions = {
                         fontWeight: 600,
                         fontSize: "12px",
                         lineHeight: "14px",
+                        height: "50px",
                         textTransform: "uppercase",
                         color: paletteOptions.palette.white.main,
                         "&:hover": {
@@ -364,6 +365,20 @@ const themeOptions = {
                         "&:hover": {
                             opacity: "0.75",
                             backgroundColor: "none",
+                        },
+                    },
+                },
+
+                {
+                    props: { variant: "header-filled" },
+                    style: {
+                        ...typographyOptions.typography.subtitle1,
+                        height: "50px",
+                        backgroundColor: paletteOptions.palette.white.main,
+                        color: paletteOptions.palette.blackDusk.main,
+                        "&:hover": {
+                            opacity: "0.75",
+                            backgroundColor: paletteOptions.palette.white.main,
                         },
                     },
                 },

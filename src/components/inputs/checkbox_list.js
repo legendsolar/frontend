@@ -40,7 +40,12 @@ function CheckboxList({ options, precheckedList, onInputChange }) {
         <Stack spacing={2}>
             {Object.entries(options).map(([key, option]) => {
                 return (
-                    <Box sx={{ height: "88px" }} key={key}>
+                    <Box
+                        sx={{
+                            height: "88px",
+                        }}
+                        key={key}
+                    >
                         <Stack
                             direction="row"
                             alignItems="flex-start"

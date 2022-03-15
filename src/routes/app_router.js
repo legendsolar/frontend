@@ -67,6 +67,18 @@ function AppRouter() {
                 />
 
                 <Route
+                    path="/complete-account"
+                    element={
+                        <ProtectedRoute
+                            disallowedUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
+                            disallowedPath="/explore"
+                        >
+                            <SignUpProcessPage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
                     path="/"
                     element={
                         <ProtectedRoute
@@ -102,6 +114,18 @@ function AppRouter() {
                 />
 
                 <Route
+                    path="/wallet"
+                    element={
+                        <ProtectedRoute
+                            requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
+                            requiredPath="/complete-account"
+                        >
+                            <TransferPage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
                     path="/documents"
                     element={
                         <ProtectedRoute
@@ -113,17 +137,6 @@ function AppRouter() {
                     }
                 />
 
-                <Route
-                    path="/complete-account"
-                    element={
-                        <ProtectedRoute
-                            disallowedUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
-                            disallowedPath="/explore"
-                        >
-                            <SignUpProcessPage />
-                        </ProtectedRoute>
-                    }
-                />
                 <Route
                     path="/transactions"
                     element={
