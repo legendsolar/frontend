@@ -38,6 +38,7 @@ const LinearPageinatedView = ({ pageContent, header, pageIndex }) => {
                 <ListItemButton
                     sx={{ ml: -4, mr: -4, height: "88px" }}
                     key={index}
+                    selected={index == state.pageIndex}
                     onClick={() => {
                         dispatch({
                             type: "CHANGE_PAGE",
