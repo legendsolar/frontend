@@ -4,7 +4,7 @@ import GoogleLogo from "../icons/google_logo";
 const GoogleIconButton = ({ label, onClick }) => {
     return (
         <Button variant="medium" onClick={onClick}>
-            <GoogleLogo sx={{ ml: 2 }}></GoogleLogo>
+            <GoogleLogo sx={{ ml: 2 }} height="60px"></GoogleLogo>
             <Stack
                 direction="row"
                 justifyContent="center"

@@ -1,11 +1,10 @@
-const GoogleLogo = () => {
+const GoogleLogo = ({ width, height }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
-            width="46"
-            height="46"
             viewBox="0 0 46 46"
+            height={height}
         >
             <defs>
                 <filter
