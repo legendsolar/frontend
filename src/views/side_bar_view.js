@@ -31,13 +31,51 @@ const SideBarView = ({
     );
 
     const getDrawerTop = () => {
-        if (drawerAppearsOnTop) return wrappedDrawer;
+        if (drawerAppearsOnTop)
+            return (
+                <Container
+                    sx={{
+                        width: "100%",
+                        pl: 0,
+                        pr: 0,
+                        mb: {
+                            sm: 4,
+                            md: 0,
+                        },
+                        display: {
+                            sm: "block",
+                            md: "none",
+                        },
+                    }}
+                >
+                    <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
+                </Container>
+            );
 
         return null;
     };
 
     const getDrawerBottom = () => {
-        if (drawerAppearsOnBotton) return wrappedDrawer;
+        if (drawerAppearsOnBotton)
+            return (
+                <Container
+                    sx={{
+                        width: "100%",
+                        pl: 0,
+                        pr: 0,
+                        mt: {
+                            sm: 4,
+                            md: 0,
+                        },
+                        display: {
+                            sm: "block",
+                            md: "none",
+                        },
+                    }}
+                >
+                    <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
+                </Container>
+            );
 
         return null;
     };

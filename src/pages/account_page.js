@@ -70,14 +70,14 @@ const AccountPage = () => {
 
                     <DefaultComponent
                         disabled={true}
-                        ref={(el) => (contentRefs.current[0] = el)}
+                        ref={(el) => (contentRefs.current[1] = el)}
                     >
                         <AccreditationStatus></AccreditationStatus>
                     </DefaultComponent>
 
                     <DefaultComponent
                         disabled={false}
-                        ref={(el) => (contentRefs.current[0] = el)}
+                        ref={(el) => (contentRefs.current[2] = el)}
                     >
                         <AccountManagementComponent></AccountManagementComponent>
                     </DefaultComponent>
