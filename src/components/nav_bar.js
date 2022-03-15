@@ -133,6 +133,7 @@ const NavBar = ({}) => {
                             userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED") && (
                             <Button
                                 variant="medium"
+                                disabled={true}
                                 onClick={() => {
                                     redirectToHomePage();
                                 }}

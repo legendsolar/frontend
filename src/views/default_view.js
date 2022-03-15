@@ -42,7 +42,7 @@ const DefaultView = (props) => {
                     },
                     mr: "auto",
                     ml: "auto",
-                    mt: 6,
+                    mt: 16,
                 }}
             >
                 {props.children}
