@@ -8,6 +8,7 @@ import {
     InputLabel,
     Select,
     MenuItem,
+    FormHelperText,
 } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 import { get, ref, set } from "firebase/database";
@@ -227,6 +228,8 @@ const ModifyUserInfo = ({ onValid, onChange, onLoadingChange }) => {
                     <FormControl variant="filled" fullWidth>
                         <InputLabel>State</InputLabel>
                         <Select
+                            error={true}
+                            helperText={"state"}
                             name="state"
                             value={formValues.state.value}
                             onChange={handleInputChange}
@@ -239,6 +242,13 @@ const ModifyUserInfo = ({ onValid, onChange, onLoadingChange }) => {
                                 );
                             })}
                         </Select>
+                        {!!formValues.state.error ? (
+                            <FormHelperText error>
+                                {formValues.state.errMsg}
+                            </FormHelperText>
+                        ) : (
+                            <></>
+                        )}
                     </FormControl>
                 </Grid>
 
