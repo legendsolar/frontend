@@ -62,6 +62,7 @@ const Weather = ({ temp, state, code }) => {
             <Player
                 autoplay
                 loop
+                speed={0.45}
                 src={lottieJson}
                 style={{ height: "200px", width: "200px" }}
             ></Player>
