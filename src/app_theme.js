@@ -19,12 +19,6 @@ const spacing = (s) => `${s * 5}px`;
 
 const paletteOptions = {
     palette: {
-        primary: {
-            main: blackDawn,
-            light: blackDusk,
-            dark: whiteFog,
-            contrastText: "#fff",
-        },
         dark: {
             main: "#000",
             contrastText: "#FFF",
@@ -86,73 +80,100 @@ const paletteOptions = {
         inactive: {
             main: "#636E72",
         },
+
+        // Override MUI defaults
+        error: {
+            main: eraserRed,
+            contrastText: "#FFF",
+            dark: "#904d4c",
+            light: "#c3807e",
+        },
+        primary: {
+            main: blackDawn,
+            light: blackDusk,
+            dark: whiteFog,
+            contrastText: "#fff",
+        },
     },
 };
 
-const themeOptions = {
-    spacing: spacing,
+const typographyOptions = {
     typography: {
         fontFamily: "Be Vietnam Pro",
         fontSize: "12px",
         lineHeight: "12px",
+        color: paletteOptions.palette.blackDusk.main,
         headline1: {
             fontWeight: 600,
             fontSize: "60px",
             lineHeight: "76px",
+            color: paletteOptions.palette.blackDusk.main,
         },
         subtitle1: {
             fontWeight: 600,
             fontSize: "20px",
             lineHeight: "25.3px",
+            color: paletteOptions.palette.blackDusk.main,
         },
         body1: {
             fontSize: "20px",
             lineHeight: "20px",
+            color: paletteOptions.palette.blackDusk.main,
         },
         headline2: {
             fontWeight: "bold",
             fontSize: "36px",
             lineHeight: "45.54px",
+            color: paletteOptions.palette.blackDusk.main,
         },
         subtitle2: {
             fontWeight: 600,
             fontSize: "18px",
             lineHeight: "22.77px",
+            color: paletteOptions.palette.blackDusk.main,
         },
         body2: {
             fontWeight: "normal",
             fontSize: "18px",
+            color: paletteOptions.palette.blackDusk.main,
             lineHeight: "22.77px",
         },
         description: {
             fontSize: "14px",
             lineHeight: "17.71px",
-            color: blackDawn,
+            color: paletteOptions.palette.blackDusk.main,
         },
         smallHeadline: {
             fontSize: "24px",
             fontWeight: "bold",
             fontWeight: 700,
+            color: paletteOptions.palette.blackDusk.main,
             lineHeight: "30.36px",
         },
         subtitle3: {
             fontSize: "14px",
             fontWeight: 600,
+            color: paletteOptions.palette.blackDusk.main,
             lineHeight: "17.71px",
         },
         label: {
             fontSize: "12px",
             lineHeight: "15.18px",
+            color: paletteOptions.palette.blackDusk.main,
             fontWeight: 400,
         },
         smallLabel: {
             fontFamily: "Azeret Mono",
             fontSize: "12px",
             fontWeight: 800,
+            color: paletteOptions.palette.blackDusk.main,
             textTransform: "uppercase",
-            color: paletteOptions.palette.blackDawn.main,
         },
     },
+};
+
+const themeOptions = {
+    spacing: spacing,
     components: {
         // Careful, MuiPaper is used for non-obvious components like AppBar ect
         MuiPaper: {
@@ -406,6 +427,7 @@ const themeOptions = {
             },
         },
 
+        // Higher class of text fields
         MuiTextField: {
             defaultProps: {
                 variant: "filled",
@@ -413,13 +435,14 @@ const themeOptions = {
             },
         },
 
-        // MuiTextBoxes
+        // MuiTextBoxes base class
         MuiFilledInput: {
             styleOverrides: {
                 root: {
+                    ...typographyOptions.typography.subtitle2,
                     borderRadius: "10px",
                     backgroundColor: paletteOptions.palette.whiteFog.main,
-                    color: paletteOptions.palette.whiteFog.contrastText,
+                    color: paletteOptions.palette.blackDusk.main,
 
                     borderBottom: "none",
                     "&&&:before": {
@@ -432,16 +455,27 @@ const themeOptions = {
             },
         },
 
-        // "Hint text"
+        // "Hint text" in text fields
         MuiInputLabel: {
             styleOverrides: {
                 root: {
+                    ...typographyOptions.typography.subtitle2,
                     zIndex: 1,
-                    // color: paletteOptions.palette.whiteFog.contrastText,
+                    color: paletteOptions.palette.blackDawn.main,
                 },
             },
         },
 
+        // Error / helper text below text fields
+        MuiFormHelperText: {
+            styleOverrides: {
+                root: {
+                    ...typographyOptions.typography.smallLabel,
+                },
+            },
+        },
+
+        // All checkboxes
         MuiCheckbox: {
             styleOverrides: {
                 root: {
@@ -456,6 +490,8 @@ const themeOptions = {
     },
 };
 
-const appTheme = createTheme(deepmerge(themeOptions, paletteOptions));
+const appTheme = createTheme(
+    deepmerge(themeOptions, deepmerge(paletteOptions, typographyOptions))
+);
 
 export { appTheme };
