@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAllAccounts, fetchAccounts } from "../../slices/wallet_slice";
 import LoadingComponent from "../loading_component";
 
-const AccountManagementComponent = () => {
+const AccountManagementComponent = ({ onSelected, includeWallet }) => {
     const cloudFunctions = useCloudFunctions();
     const dispatch = useDispatch();
     const accountStatus = useSelector((state) => state.wallet.accounts.status);
@@ -27,10 +27,17 @@ const AccountManagementComponent = () => {
 
     return (
         <div>
-            <Typography variant="smallHeadline">Connected Accounts</Typography>
             <List>
                 {accounts.map((account, index) => (
-                    <ListItemButton key={index} sx={{ ml: -4, mr: -4 }}>
+                    <ListItemButton
+                        key={index}
+                        sx={{ ml: -4, mr: -4 }}
+                        onClick={() => {
+                            if (onSelected) {
+                                onSelected(account);
+                            }
+                        }}
+                    >
                         <Stack
                             direction="row"
                             justifyContent={"space-between"}

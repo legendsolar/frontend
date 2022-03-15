@@ -41,12 +41,14 @@ export const fetchAccounts = createAsyncThunk(
                 institution: "Bank of America",
                 type: "Checking",
                 source: "Linked with Plaid",
+                id: "fakeId1",
             },
             {
                 name: "Savings Account",
                 institution: "Citibank",
                 type: "Savings",
                 source: "Linked with Plaid",
+                id: "fakeId2",
             },
 
             {
@@ -54,6 +56,7 @@ export const fetchAccounts = createAsyncThunk(
                 institution: "USB",
                 type: "Savings",
                 source: "Linked with Plaid",
+                id: "fakeId3",
             },
         ];
         return accounts;

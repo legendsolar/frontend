@@ -9,7 +9,7 @@ import ScrollToSidebar from "../components/scroll_to_sidebar";
 import MemberHeader from "../components/member_header";
 import AccountLinkComponent from "../components/transactions/account_link_component";
 import CreateTransactionComponent from "../components/transactions/create_transaction_component";
-import AccountListComponent from "../components/transactions/account_list_component";
+import AccountListComponent from "../components/transactions/account_management_component";
 import { useDispatch, useSelector } from "react-redux";
 import { selectWalletBalance } from "../slices/wallet_slice";
 import { fetchWalletBalance } from "../slices/wallet_slice";
@@ -71,13 +71,6 @@ const TransferPage = () => {
                     <Paper
                         variant="container"
                         ref={(el) => (contentRefs.current[1] = el)}
-                    >
-                        <Wallet></Wallet>
-                    </Paper>
-
-                    <Paper
-                        variant="container"
-                        ref={(el) => (contentRefs.current[2] = el)}
                     >
                         <AccountListComponent></AccountListComponent>
                     </Paper>
