@@ -27,20 +27,8 @@ const NavBar = ({}) => {
         }
     }, [dispatch, userSignUpStateStatus, auth.user]);
 
-    const backgroundColor = auth.user ? "blackDusk.main" : "blackDawn.main";
-
     return (
         <Toolbar style={{ padding: 0, width: "100%" }}>
-            <Box
-                position="absolute"
-                sx={{
-                    height: "300px",
-                    width: "100%",
-                    backgroundColor: backgroundColor,
-                    zIndex: -10,
-                }}
-            ></Box>
-
             <Box
                 sx={{
                     width: "100%",
