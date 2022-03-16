@@ -113,14 +113,15 @@ const CreateDwollaAccount = ({ onComplete }) => {
 
     return (
         <Stack spacing={4}>
-            <Divider sx={{ mt: 4 }}></Divider>
+            <Divider sx={{ mt: 4, ml: -4, mr: -4 }}></Divider>
             <Typography variant="body">
                 All your earnings and dividends on Legends Solar will be
                 deposited into your ‘Legends Wallet’. Use the wallet to transfer
                 funds to your personal checking account. To create your Legends
                 Wallet, we require some personal information.
             </Typography>
-            <Divider></Divider>
+
+            <Divider sx={{ mt: 4, ml: -4, mr: -4 }}></Divider>
 
             <Typography variant="subtitle2">Mailing Address</Typography>
 
@@ -134,9 +135,8 @@ const CreateDwollaAccount = ({ onComplete }) => {
                 direction={"row"}
                 alignItems={"center"}
                 justifyContent={"space-between"}
-                sx={{ pl: 2 }}
             >
-                <Typography variant="subtitle1">
+                <Typography variant="subtitle2">
                     Personal Information
                 </Typography>
                 {/* <Chip variant="selected" label="Why do we need this?"></Chip> */}

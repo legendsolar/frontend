@@ -230,7 +230,6 @@ const ModifyUserInfo = ({ onValid, onChange, onLoadingChange }) => {
                     <FormControl variant="filled" fullWidth>
                         <InputLabel>State</InputLabel>
                         <Select
-                            error={true}
                             helperText={"state"}
                             name="state"
                             value={formValues.state.value}

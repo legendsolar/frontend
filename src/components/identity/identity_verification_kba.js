@@ -1,4 +1,4 @@
-import { Typography, Stack, Button } from "@mui/material";
+import { Typography, Stack, Button, CircularProgress } from "@mui/material";
 import ImageUpload from "../image_upload";
 import MultiSelect from "../multiselect";
 import { useEffect, useState } from "react";
@@ -55,6 +55,12 @@ const IdentityVerificationKBA = ({ onComplete }) => {
             <Typography variant="description">
                 We need to ask a few questions to verify your identity
             </Typography>
+
+            <Typography variant="description">
+                [Debug] We need to ask a few questions to verify your identity
+            </Typography>
+
+            {loading && <CircularProgress></CircularProgress>}
 
             {kbaQuestions &&
                 kbaQuestions.map((question) => {

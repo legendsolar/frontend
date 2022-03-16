@@ -132,15 +132,13 @@ const CompleteAccountPage = () => {
             sidebar: false,
         },
         {
-            title: "Create Wallet",
+            title: "Complete Sign Up",
             content: (
                 <Stack spacing={6}>
                     <Typography variant="body2">
-                        On Legends, earnings are deposited into your ‘Legends
-                        Wallet’, where you can save them, reinvest them in
-                        future offerings or deposit them in your checking
-                        account. The Legends Wallet will never withdraw funds
-                        from your checking account.
+                        Your account has been created and you are now able to
+                        invest in panels on Legends Solar. Click continue to
+                        explore our available offerings.
                     </Typography>
 
                     <Button

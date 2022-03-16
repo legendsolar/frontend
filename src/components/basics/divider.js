@@ -6,7 +6,7 @@ const Divider = ({ sx }) => {
             sx={{
                 height: "2px",
                 backgroundColor: "whiteFog.main",
-                width: "100%",
+                // width: "100%",
                 ...sx,
             }}
         ></Box>
