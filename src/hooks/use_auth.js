@@ -12,6 +12,8 @@ import {
 import { GoogleAuthProvider } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { clearUserState } from "../slices/user_slice";
+import { clearTransactionState } from "../slices/transfer_slice";
+import { clearWalletState } from "../slices/wallet_slice";
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...
@@ -120,7 +122,12 @@ function useProvideAuth() {
             console.log("use auth: user auth state changed");
             console.log(user);
             console.log("clearing user state");
-            dispatch(clearUserState);
+            dispatch(clearUserState());
+            dispatch(clearTransactionState());
+            dispatch(clearWalletState());
+
+            console.log("dispatch should have finished");
+
             setUser(user);
             setIsAuthenticating(false);
         });
@@ -135,6 +142,7 @@ function useProvideAuth() {
         signin,
         signup,
         signout,
+
         signInWithGoogle,
         // userDataSnap,
     };

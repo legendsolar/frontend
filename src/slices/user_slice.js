@@ -33,7 +33,8 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         clearUserState(state) {
-            state = initialState;
+            console.log("clearing user state");
+            return { ...initialState };
         },
     },
     extraReducers(builder) {

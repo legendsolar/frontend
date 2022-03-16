@@ -62,7 +62,12 @@ export const fetchAccounts = createAsyncThunk(
 const walletSlice = createSlice({
     name: "wallet",
     initialState,
-    reducers: {},
+    reducers: {
+        clearWalletState(state) {
+            console.log("clearing wallet");
+            return { ...initialState };
+        },
+    },
     extraReducers(builder) {
         builder
             .addCase(fetchWalletBalance.pending, (state, action) => {
@@ -117,4 +122,5 @@ export const selectWalletId = (state) => {
     return null;
 };
 
+export const { clearWalletState } = walletSlice.actions;
 export default walletSlice.reducer;
