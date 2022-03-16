@@ -236,7 +236,8 @@ const themeOptions = {
         MuiGrid: {
             // Default spacing for all Grid layouts
             defaultProps: {
-                spacing: 2,
+                rowSpacing: 2,
+                columnSpacing: 2,
             },
         },
 
@@ -473,7 +474,7 @@ const themeOptions = {
                 root: {
                     ...typographyOptions.typography.subtitle2,
                     borderRadius: "10px",
-                    backgroundColor: paletteOptions.palette.whiteFog.main,
+                    backgroundColor: paletteOptions.palette.whiteHaze.main,
                     color: paletteOptions.palette.blackDusk.main,
 
                     borderBottom: "none",

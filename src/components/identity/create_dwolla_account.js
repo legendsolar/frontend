@@ -6,7 +6,6 @@ import {
     Paper,
     Grid,
     Chip,
-    Divider,
     CircularProgress,
 } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
@@ -16,6 +15,8 @@ import { Button, Typography } from "@mui/material";
 import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+import Divider from "../basics/divider";
 
 import { useDatabaseObjectData, useDatabase } from "reactfire";
 import { useCloudFunctions } from "../../hooks/use_cloud_functions";
@@ -111,11 +112,17 @@ const CreateDwollaAccount = ({ onComplete }) => {
     };
 
     return (
-        <Stack>
-            <Typography variant="description">
-                This information will be used to verify your ownership of
-                accounts provided and prevent fraud.{" "}
+        <Stack spacing={4}>
+            <Divider sx={{ mt: 4 }}></Divider>
+            <Typography variant="body">
+                All your earnings and dividends on Legends Solar will be
+                deposited into your ‘Legends Wallet’. Use the wallet to transfer
+                funds to your personal checking account. To create your Legends
+                Wallet, we require some personal information.
             </Typography>
+            <Divider></Divider>
+
+            <Typography variant="subtitle2">Mailing Address</Typography>
 
             <ModifyUserInfo
                 onValid={(unprotectedUserInfo) => {
@@ -129,8 +136,10 @@ const CreateDwollaAccount = ({ onComplete }) => {
                 justifyContent={"space-between"}
                 sx={{ pl: 2 }}
             >
-                <Typography variant="subtitle1">Identification</Typography>
-                <Chip variant="selected" label="Why do we need this?"></Chip>
+                <Typography variant="subtitle1">
+                    Personal Information
+                </Typography>
+                {/* <Chip variant="selected" label="Why do we need this?"></Chip> */}
             </Stack>
 
             <ProtectedUserInfo

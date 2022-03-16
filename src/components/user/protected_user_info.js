@@ -115,81 +115,85 @@ const ProtectedUserInfo = ({
     };
 
     return (
-        <Grid container spacing={2} sx={{ width: "100%", mt: 1 }}>
-            <Grid item xs={12} md={12} lg={4}>
-                <Typography variant="subtitle3">
-                    {"SSN " +
-                        (fullSSNRequired
-                            ? "(complete SSN required)"
-                            : "(first four digits requried)")}
-                </Typography>
-                <TextField
-                    error={!!formValues.ssn.error}
-                    helperText={formValues.ssn.errMsg}
-                    name="ssn"
-                    label={
-                        fullSSNRequired ? "Complete SSN" : "Last four digits"
-                    }
-                    variant="filled"
-                    value={formValues.ssn.value}
-                    onChange={handleInputChange}
-                    fullWidth
-                    type="password"
-                ></TextField>
-            </Grid>
+        <div>
+            <Grid container sx={{ width: "100%" }}>
+                <Grid item xs={12} md={12} lg={4}>
+                    <Typography variant="subtitle3">
+                        {"SSN " +
+                            (fullSSNRequired
+                                ? "(complete SSN required)"
+                                : "(first four digits requried)")}
+                    </Typography>
+                    <TextField
+                        error={!!formValues.ssn.error}
+                        helperText={formValues.ssn.errMsg}
+                        name="ssn"
+                        label={
+                            fullSSNRequired
+                                ? "Complete SSN"
+                                : "Last four digits"
+                        }
+                        variant="filled"
+                        value={formValues.ssn.value}
+                        onChange={handleInputChange}
+                        fullWidth
+                        type="password"
+                    ></TextField>
+                </Grid>
 
-            <Grid item xs={12} md={12} lg={8}>
-                <Typography variant="subtitle3">Birthday</Typography>
+                <Grid item xs={12} md={12} lg={8}>
+                    <Typography variant="subtitle3">Birthday</Typography>
 
-                <Grid container spacing={2} sx={{ width: "100%" }}>
-                    <Grid item xs={4} md={4}>
-                        <TextField
-                            error={!!formValues.day.error}
-                            helperText={formValues.day.errMsg}
-                            name="day"
-                            label="Day"
-                            variant="filled"
-                            type="number"
-                            value={formValues.day.value}
-                            onChange={handleInputChange}
-                            fullWidth
-                        ></TextField>
-                    </Grid>
-
-                    <Grid item xs={4} md={4}>
-                        <FormControl variant="filled" fullWidth>
-                            <InputLabel>Month</InputLabel>
-                            <Select
-                                name="month"
-                                value={formValues.month.value}
+                    <Grid container sx={{ width: "100%" }}>
+                        <Grid item xs={4} md={4}>
+                            <TextField
+                                error={!!formValues.day.error}
+                                helperText={formValues.day.errMsg}
+                                name="day"
+                                label="Day"
+                                variant="filled"
+                                type="number"
+                                value={formValues.day.value}
                                 onChange={handleInputChange}
-                            >
-                                {months.map((month) => {
-                                    return (
-                                        <MenuItem key={month} value={month}>
-                                            {month}
-                                        </MenuItem>
-                                    );
-                                })}
-                            </Select>
-                        </FormControl>
-                    </Grid>
+                                fullWidth
+                            ></TextField>
+                        </Grid>
 
-                    <Grid item xs={4} md={4}>
-                        <TextField
-                            error={!!formValues.year.error}
-                            helperText={formValues.year.errMsg}
-                            name="year"
-                            label="Year"
-                            variant="filled"
-                            value={formValues.year.value}
-                            onChange={handleInputChange}
-                            fullWidth
-                        ></TextField>
+                        <Grid item xs={4} md={4}>
+                            <FormControl variant="filled" fullWidth>
+                                <InputLabel>Month</InputLabel>
+                                <Select
+                                    name="month"
+                                    value={formValues.month.value}
+                                    onChange={handleInputChange}
+                                >
+                                    {months.map((month) => {
+                                        return (
+                                            <MenuItem key={month} value={month}>
+                                                {month}
+                                            </MenuItem>
+                                        );
+                                    })}
+                                </Select>
+                            </FormControl>
+                        </Grid>
+
+                        <Grid item xs={4} md={4}>
+                            <TextField
+                                error={!!formValues.year.error}
+                                helperText={formValues.year.errMsg}
+                                name="year"
+                                label="Year"
+                                variant="filled"
+                                value={formValues.year.value}
+                                onChange={handleInputChange}
+                                fullWidth
+                            ></TextField>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>
+        </div>
     );
 };
 

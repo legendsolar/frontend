@@ -90,29 +90,6 @@ function useProvideAuth() {
             });
     };
 
-    // const userDataSnap = () => {
-    //     if (user.uid) {
-    //         return useObject(ref(database, "users/" + user.uid));
-    //     }
-    //     return null;
-    // };
-
-    // const sendPasswordResetEmail = (email) => {
-    //     return firebase
-    //         .auth()
-    //         .sendPasswordResetEmail(email)
-    //         .then(() => {
-    //             return true;
-    //         });
-    // };
-    // const confirmPasswordReset = (code, password) => {
-    //     return firebase
-    //         .auth()
-    //         .confirmPasswordReset(code, password)
-    //         .then(() => {
-    //             return true;
-    //         });
-    // };
     // Subscribe to user on mount
     // Because this sets state in the callback it will cause any ...
     // ... component that utilizes this hook to re-render with the ...

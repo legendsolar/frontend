@@ -101,7 +101,7 @@ const CompleteAccountPage = () => {
                 userSignUpOrder(userSignUpState) < signUpOrder.ACCOUNT_CREATED,
         },
         {
-            title: "Personal Information",
+            title: "Create Wallet",
             content: (
                 <CreateDwollaAccount
                     onComplete={onComplete}
