@@ -13,65 +13,32 @@ const userCheckingId = "8aa7d0a0-d563-45a1-9c8d-7fb441230636";
 
 export const fetchTransactions = createAsyncThunk(
     "dwolla/fetchTransactions",
-    async (userId) => {
-        // const dwolla = dwollaInterface(
-        //     dwollaSandboxConfig.url,
-        //     dwollaCallWrapper
-        // );
-        // const rawTransferObject = await dwolla.searchTransfers(userId);
-        // console.log(rawTransferObject);
-        // const transferArray = getTransferArrayFromQuery(rawTransferObject);
-        // // const namedTransferArray = await Promise.all(
-        // //     transferArray.map(async (transfer) => {
-        // //         const sourceInfo = await dwolla.getFundingSource(
-        // //             getTransferSourceFundingId(transfer)
-        // //         );
-        // //         const destInfo = await dwolla.getFundingSource(
-        // //             getTransferDestinationFundingId(transfer)
-        // //         );
-        // //         console.log(sourceInfo);
-        // //         console.log(destInfo);
-        // //         return { ...transfer };
-        // //     })
-        // // );
-        // console.log(transferArray);
-        // // console.log(namedTransferArray);
-        // return transferArray;
+    async (cloudFunctions) => {
+        const transactions = (
+            await cloudFunctions.getRecentTransfers({
+                count: 10,
+            })
+        ).data.transfers;
 
-        return [
-            {
-                title: "Dividend Payment",
-                source: "Solar SPV",
-                destination: "Legends Wallet",
-                amount: {
-                    value: Math.random() * 100,
-                },
-            },
-            {
-                title: "Dividend Payment",
-                source: "Solar SPV",
-                destination: "Legends Wallet",
-                amount: {
-                    value: Math.random() * 100,
-                },
-            },
-            {
-                title: "Dividend Payment",
-                source: "Solar SPV",
-                destination: "Legends Wallet",
-                amount: {
-                    value: Math.random() * 100,
-                },
-            },
-            {
-                title: "Dividend Payment",
-                source: "Solar SPV",
-                destination: "Legends Wallet",
-                amount: {
-                    value: Math.random() * 100,
-                },
-            },
-        ];
+        console.log("transactions");
+        console.log(transactions);
+
+        const transformedTransactionList = transactions.map((transaction) => {
+            console.log(transaction);
+            return {
+                title: "Unknown",
+                id: transaction.id,
+                source: transaction.sourceId,
+                destination: transaction.destinationId,
+                amount: transaction.amount,
+                created: new Date(transaction.created),
+                status: transaction.status,
+            };
+        });
+
+        console.log(transformedTransactionList);
+
+        return transformedTransactionList;
     }
 );
 

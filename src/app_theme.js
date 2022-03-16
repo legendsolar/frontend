@@ -507,6 +507,18 @@ const themeOptions = {
             },
         },
 
+        // InputLabel helper text
+        // MuiInputLabel: {
+        //     variants: [
+        //         {
+        //             // props: { variant: "filled" },
+        //             // style: {
+        //             //     transform: "translate(12px, 16px) scale(1)",
+        //             // },
+        //         },
+        //     ],
+        // },
+
         // All checkboxes
         MuiCheckbox: {
             styleOverrides: {

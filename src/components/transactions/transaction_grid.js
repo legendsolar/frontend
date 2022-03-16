@@ -20,10 +20,12 @@ const TransactionGrid = ({ title, transactions }) => {
                             <TransactionComponent
                                 title={
                                     "title" in transaction
-                                        ? transaction.title
+                                        ? transaction.title +
+                                          " : " +
+                                          transaction.status
                                         : transaction.status
                                 }
-                                amount={parseFloat(transaction.amount.value)}
+                                amount={parseFloat(transaction.amount)}
                                 source={
                                     "source" in transaction
                                         ? transaction.source

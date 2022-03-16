@@ -11,8 +11,14 @@ import { useState } from "react";
 import { months } from "../../utils/static_lists";
 import { getYear } from "date-fns";
 import { format } from "date-fns";
+import { validateSSN } from "../../utils/validate_inputs";
 
-const ProtectedUserInfo = ({ onChange, onValid, disabled }) => {
+const ProtectedUserInfo = ({
+    onChange,
+    onValid,
+    disabled,
+    fullSSNRequired = true,
+}) => {
     const startingValues = {
         day: {
             value: "",
@@ -73,16 +79,10 @@ const ProtectedUserInfo = ({ onChange, onValid, disabled }) => {
             formData.year.errMsg = undefined;
         }
 
-        if (!formData.ssn.value || !formData.ssn.value.match(/\d{4}/g)) {
-            formData.ssn.error = true;
-            formData.ssn.errMsg = "SSN format invalid";
-        } else if (parseInt(formData.ssn.value) > 10000) {
-            formData.ssn.error = true;
-            formData.ssn.errMsg = "Only the first four digits are needed";
-        } else {
-            formData.ssn.error = false;
-            formData.ssn.errMsg = undefined;
-        }
+        const errObj = validateSSN(formData.ssn.value, fullSSNRequired);
+
+        formData.ssn.error = errObj.error;
+        formData.ssn.errMsg = errObj.errMsg;
 
         setFormValues(formData);
 
@@ -121,12 +121,19 @@ const ProtectedUserInfo = ({ onChange, onValid, disabled }) => {
     return (
         <Grid container spacing={2} sx={{ width: "100%", mt: 1 }}>
             <Grid item xs={12} md={12} lg={4}>
-                <Typography variant="subtitle3">SSN</Typography>
+                <Typography variant="subtitle3">
+                    {"SSN " +
+                        (fullSSNRequired
+                            ? "(complete SSN required)"
+                            : "(first four digits requried)")}
+                </Typography>
                 <TextField
                     error={!!formValues.ssn.error}
                     helperText={formValues.ssn.errMsg}
                     name="ssn"
-                    label="Last four digits"
+                    label={
+                        fullSSNRequired ? "Complete SSN" : "Last four digits"
+                    }
                     variant="filled"
                     value={formValues.ssn.value}
                     onChange={handleInputChange}

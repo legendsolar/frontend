@@ -5,21 +5,22 @@ import PropTypes from "prop-types";
 import {
     selectTransactions,
     fetchTransactions,
-} from "../../slices/transaction_slice";
+} from "../../slices/transfer_slice";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 import { useEffect } from "react";
 import TransactionGrid from "./transaction_grid";
 
 const RecentTransfers = () => {
     const dispatch = useDispatch();
+    const cloudFunctions = useCloudFunctions();
 
     const transactionStatus = useSelector((state) => state.transactions.status);
     const transactions = useSelector(selectTransactions);
 
     useEffect(() => {
         if (transactionStatus === "idle") {
-            dispatch(fetchTransactions());
+            dispatch(fetchTransactions(cloudFunctions));
         }
     }, [transactionStatus, dispatch]);
 

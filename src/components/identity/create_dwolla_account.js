@@ -1,5 +1,6 @@
 import {
     Alert,
+    Collapse,
     Box,
     Stack,
     Paper,
@@ -14,19 +15,39 @@ import { useAuth } from "../../hooks/use_auth";
 import { Button, Typography } from "@mui/material";
 import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { useDatabaseObjectData, useDatabase } from "reactfire";
 import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 import LoadingComponent from "../loading_component";
 import ModifyUserInfo from "../user/modify_user_info";
 import ProtectedUserInfo from "../user/protected_user_info";
+import {
+    fetchUserSignUpState,
+    selectUserSignUpState,
+} from "../../slices/user_slice";
 
 const CreateDwollaAccount = ({ onComplete }) => {
     const auth = useAuth();
-    const user = auth.user;
+    const dispatch = useDispatch();
+    const cloudFunctions = useCloudFunctions();
 
-    const attemptCreateNewDwollaVerifiedUser =
-        useCloudFunctions().attemptCreateNewDwollaVerifiedUser;
+    const userSignUpStateStatus = useSelector(
+        (state) => state.user.signUpState.status
+    );
+
+    useEffect(() => {
+        if (userSignUpStateStatus === "idle" && auth.user) {
+            dispatch(fetchUserSignUpState(cloudFunctions));
+        }
+    }, [dispatch, userSignUpStateStatus, auth.user]);
+
+    const userSignUpState = useSelector(selectUserSignUpState);
+
+    const dwollaUpdateOrCreateFunction =
+        userSignUpState === "ACCREDATION_VERIF_COMPLETE"
+            ? cloudFunctions.attemptCreateNewDwollaVerifiedUser
+            : cloudFunctions.updateDwollaUser;
 
     const [loading, setLoading] = useState(false);
     const [inputValid, setInputValid] = useState([false, false]);
@@ -53,11 +74,9 @@ const CreateDwollaAccount = ({ onComplete }) => {
             ssn: userInfo.ssn.value,
         };
 
-        console.log(dwollaObject);
-
         setLoading(true);
 
-        attemptCreateNewDwollaVerifiedUser(dwollaObject)
+        dwollaUpdateOrCreateFunction(dwollaObject)
             .then((resp) => {
                 console.log(resp);
                 onComplete();
@@ -123,7 +142,12 @@ const CreateDwollaAccount = ({ onComplete }) => {
                     {"Sorry, retry! " + submitErrorMessage}
                 </Alert>
             )}
-
+            <Collapse in={true}>
+                <Alert severity="error">
+                    Additional verification is required. Double check that your
+                    information is correct and enter your complete 9 digit SSN
+                </Alert>
+            </Collapse>
             <Button
                 variant="primary"
                 disabled={!inputValid.every((valid) => valid)}

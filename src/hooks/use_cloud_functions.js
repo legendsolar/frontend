@@ -53,7 +53,7 @@ const useProvideCloudFunctions = (functions) => {
 
     const createTransfer = httpsCallable(functions, "createTransfer_https_ext");
 
-    const getRecentTransfer = httpsCallable(
+    const getRecentTransfers = httpsCallable(
         functions,
         "getRecentTransfer_https_ext"
     );
@@ -88,7 +88,7 @@ const useProvideCloudFunctions = (functions) => {
         getUserSignUpState,
         getWalletBalance,
         createTransfer,
-        getRecentTransfer,
+        getRecentTransfers,
         getKBASession,
         returnKBASessionResponse,
         receiveIdVerificationDocument,

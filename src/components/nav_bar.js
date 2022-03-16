@@ -152,7 +152,10 @@ const NavBar = ({}) => {
                                                 navigate("/transfer");
                                             }}
                                         >
-                                            {"$" + walletBalance}
+                                            {"$" +
+                                                (walletBalance
+                                                    ? walletBalance
+                                                    : "-")}
                                         </Button>
                                     </Stack>
                                 </Stack>
