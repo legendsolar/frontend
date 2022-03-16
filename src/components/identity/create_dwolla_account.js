@@ -49,6 +49,8 @@ const CreateDwollaAccount = ({ onComplete }) => {
             ? cloudFunctions.attemptCreateNewDwollaVerifiedUser
             : cloudFunctions.updateDwollaUser;
 
+    const fullSSNRequired = userSignUpState === "DWOLLA_ACCOUNT_RETRY_REQ";
+
     const [loading, setLoading] = useState(false);
     const [inputValid, setInputValid] = useState([false, false]);
     const [userInfo, setUserInfo] = useState(false);
@@ -132,6 +134,7 @@ const CreateDwollaAccount = ({ onComplete }) => {
             </Stack>
 
             <ProtectedUserInfo
+                fullSSNRequired={fullSSNRequired}
                 onValid={(protectedUserInfo) => {
                     onValidInfo(protectedUserInfo, 1);
                 }}
@@ -142,7 +145,7 @@ const CreateDwollaAccount = ({ onComplete }) => {
                     {"Sorry, retry! " + submitErrorMessage}
                 </Alert>
             )}
-            <Collapse in={true}>
+            <Collapse in={fullSSNRequired}>
                 <Alert severity="error">
                     Additional verification is required. Double check that your
                     information is correct and enter your complete 9 digit SSN

@@ -17,7 +17,7 @@ const ProtectedUserInfo = ({
     onChange,
     onValid,
     disabled,
-    fullSSNRequired = true,
+    fullSSNRequired,
 }) => {
     const startingValues = {
         day: {
@@ -109,10 +109,6 @@ const ProtectedUserInfo = ({
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-
-        console.log(event.target);
-        console.log(formValues);
-
         const updatedObject = { ...formValues };
         updatedObject[name].value = value;
         formDataValid(updatedObject);
