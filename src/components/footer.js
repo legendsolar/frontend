@@ -8,7 +8,7 @@ const Footer = () => {
                 <Grid item xs={12} md={8}>
                     <Stack>
                         <DefaultComponent>
-                            <Grid container>
+                            <Grid container spacing={2}>
                                 <Grid item xs={12} md={4}>
                                     <Stack>
                                         <Typography variant="smallHeadline">

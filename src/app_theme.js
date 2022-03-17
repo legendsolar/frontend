@@ -188,7 +188,7 @@ const themeOptions = {
                     style: {
                         padding: spacing(4),
                         borderRadius: "15px",
-                        boxShadow: "0px 0px 15px rgba(99, 110, 114, 0.5)",
+                        boxShadow: "0 0 15px 0 rgb(99 110 114 / 35%)",
                         overflow: "hidden",
                     },
                 },
