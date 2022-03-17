@@ -457,6 +457,8 @@ const themeOptions = {
                     lineHeight: "20px",
                     textTransform: "none",
                     borderRadius: "5px",
+                    whiteSpace: "nowrap",
+                    minWidth: "auto",
                 },
             },
         },

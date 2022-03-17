@@ -90,6 +90,7 @@ const CreateTransactionComponent = () => {
             })
             .finally(() => {
                 setLoading(false);
+
                 setSourceAccount(null);
                 setDestinationAccount(null);
                 setTransferAmount(null);
