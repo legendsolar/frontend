@@ -95,10 +95,16 @@ const CreateDwollaAccount = ({ onComplete }) => {
             });
     };
 
-    const onValidInfo = (newInfo, formId) => {
+    const onUpdate = (newInfo, formId) => {
+        const error = Object.keys(newInfo)
+            .map((key) => {
+                return newInfo[key].error;
+            })
+            .some((el) => el);
+
         const newInputValid = [...inputValid];
 
-        if (!newInfo) {
+        if (!newInfo || error) {
             newInputValid[formId] = false;
         } else {
             newInputValid[formId] = true;
@@ -107,6 +113,8 @@ const CreateDwollaAccount = ({ onComplete }) => {
                 ...newInfo,
             });
         }
+
+        console.log(newInputValid);
 
         setInputValid(newInputValid);
     };
@@ -126,8 +134,8 @@ const CreateDwollaAccount = ({ onComplete }) => {
             <Typography variant="subtitle2">Mailing Address</Typography>
 
             <ModifyUserInfo
-                onValid={(unprotectedUserInfo) => {
-                    onValidInfo(unprotectedUserInfo, 0);
+                onUpdate={(unprotectedUserInfo) => {
+                    onUpdate(unprotectedUserInfo, 0);
                 }}
             ></ModifyUserInfo>
 
@@ -144,8 +152,8 @@ const CreateDwollaAccount = ({ onComplete }) => {
 
             <ProtectedUserInfo
                 fullSSNRequired={fullSSNRequired}
-                onValid={(protectedUserInfo) => {
-                    onValidInfo(protectedUserInfo, 1);
+                onUpdate={(protectedUserInfo) => {
+                    onUpdate(protectedUserInfo, 1);
                 }}
             ></ProtectedUserInfo>
 

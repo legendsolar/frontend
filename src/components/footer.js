@@ -1,7 +1,7 @@
 import { Grid, Typography, Box, Stack } from "@mui/material";
 import DefaultComponent from "./default_component";
 
-const Footer = (props) => {
+const Footer = () => {
     return (
         <Box sx={{ mt: 10 }}>
             <Grid container spacing={4}>

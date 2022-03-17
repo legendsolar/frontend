@@ -25,7 +25,7 @@ const DefaultView = (props) => {
                     zIndex: -1,
                 }}
             ></Box>
-            {/* <Box
+            <Box
                 position="fixed"
                 top={0}
                 bottom={0}
@@ -37,7 +37,7 @@ const DefaultView = (props) => {
                     backgroundColor: "whiteHaze.main",
                     zIndex: -2,
                 }}
-            ></Box> */}
+            ></Box>
             <NavBar></NavBar>
             <Box
                 sx={{

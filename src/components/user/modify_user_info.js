@@ -22,7 +22,7 @@ import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 import LoadingComponent from "../loading_component";
 import { states } from "../../utils/static_lists";
 
-const ModifyUserInfo = ({ onValid, onChange, onLoadingChange }) => {
+const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange }) => {
     const auth = useAuth();
     const user = auth.user;
 
@@ -111,15 +111,7 @@ const ModifyUserInfo = ({ onValid, onChange, onLoadingChange }) => {
 
         setFormValues(formData);
 
-        const error = Object.keys(formData)
-            .map((key) => {
-                return formValues[key].error;
-            })
-            .some((el) => el);
-
-        if (!error) {
-            onValid(formData);
-        }
+        onUpdate(formData);
     };
 
     const [formValues, setFormValues] = useState(startingValues);
@@ -164,7 +156,7 @@ const ModifyUserInfo = ({ onValid, onChange, onLoadingChange }) => {
 
     return (
         <div>
-            <Grid container sx={{ width: "100%" }}>
+            <Grid container spacing={2} sx={{ width: "100%" }}>
                 <Grid item xs={12} md={6}>
                     <TextField
                         error={!!formValues.firstName.error}

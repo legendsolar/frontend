@@ -15,7 +15,7 @@ import { validateSSN } from "../../utils/validate_inputs";
 
 const ProtectedUserInfo = ({
     onChange,
-    onValid,
+    onUpdate,
     disabled,
     fullSSNRequired,
 }) => {
@@ -102,9 +102,8 @@ const ProtectedUserInfo = ({
                     "yyyy-MM-dd"
                 ),
             };
-
-            onValid(formData);
         }
+        onUpdate(formData);
     };
 
     const handleInputChange = (event) => {
@@ -116,7 +115,7 @@ const ProtectedUserInfo = ({
 
     return (
         <div>
-            <Grid container sx={{ width: "100%" }}>
+            <Grid container spacing={2} sx={{ width: "100%" }}>
                 <Grid item xs={12} md={12} lg={4}>
                     <Typography variant="subtitle3">
                         {"SSN " +
@@ -144,7 +143,7 @@ const ProtectedUserInfo = ({
                 <Grid item xs={12} md={12} lg={8}>
                     <Typography variant="subtitle3">Birthday</Typography>
 
-                    <Grid container sx={{ width: "100%" }}>
+                    <Grid container spacing={2} sx={{ width: "100%" }}>
                         <Grid item xs={4} md={4}>
                             <TextField
                                 error={!!formValues.day.error}
