@@ -1,5 +1,7 @@
 import { Grid, Typography, Box, Stack } from "@mui/material";
 import DefaultComponent from "./default_component";
+import LassorImg from "../assets/Lassor.png";
+import NeraImg from "../assets/Nera.png";
 
 const Footer = () => {
     return (
@@ -101,7 +103,9 @@ const Footer = () => {
                                         style={{
                                             width: "70px",
                                             height: "70px",
+                                            borderRadius: "5px",
                                         }}
+                                        src={NeraImg}
                                     ></img>
                                     <Stack>
                                         <Typography variant="subtitle1">
@@ -117,7 +121,9 @@ const Footer = () => {
                                         style={{
                                             width: "70px",
                                             height: "70px",
+                                            borderRadius: "5px",
                                         }}
+                                        src={LassorImg}
                                     ></img>
                                     <Stack>
                                         <Typography variant="subtitle1">
