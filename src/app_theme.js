@@ -233,13 +233,14 @@ const themeOptions = {
             ],
         },
 
-        MuiGrid: {
-            // Default spacing for all Grid layouts
-            defaultProps: {
-                rowSpacing: 2,
-                columnSpacing: 2,
-            },
-        },
+        // MuiGrid: {
+        //     // Default spacing for all Grid layouts
+        //     // These don't work - can't override
+        //     // defaultProps: {
+        //     //     rowSpacing: 2,
+        //     //     columnSpacing: 2,
+        //     // },
+        // },
 
         MuiStack: {
             defaultProps: {

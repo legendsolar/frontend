@@ -3,13 +3,19 @@ import DefaultErrorBoundary from "../components/errors/default_error_boundary";
 import NavBar from "../components/nav_bar";
 import UserStatus from "../components/user_status";
 import { useAuth } from "../hooks/use_auth";
+import Footer from "../components/footer";
 
 const DefaultView = (props) => {
     const auth = useAuth();
     const backgroundColor = auth.user ? "blackDusk.main" : "blackDawn.main";
 
     return (
-        <Box justifyContent="center" alignItems="center" width="100%">
+        <Box
+            justifyContent="center"
+            alignItems="center"
+            width="100%"
+            height="100%"
+        >
             <Box
                 position="absolute"
                 sx={{
@@ -19,7 +25,7 @@ const DefaultView = (props) => {
                     zIndex: -1,
                 }}
             ></Box>
-            <Box
+            {/* <Box
                 position="fixed"
                 top={0}
                 bottom={0}
@@ -31,7 +37,7 @@ const DefaultView = (props) => {
                     backgroundColor: "whiteHaze.main",
                     zIndex: -2,
                 }}
-            ></Box>
+            ></Box> */}
             <NavBar></NavBar>
             <Box
                 sx={{
@@ -46,6 +52,8 @@ const DefaultView = (props) => {
                 }}
             >
                 {props.children}
+
+                <Footer></Footer>
             </Box>
         </Box>
     );

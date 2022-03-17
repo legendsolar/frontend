@@ -152,7 +152,9 @@ const CompleteAccountPage = () => {
                     </Button>
                 </Stack>
             ),
-            disabled: userSignUpOrder(userSignUpState) < 5,
+            disabled:
+                userSignUpOrder(userSignUpState) <
+                signUpOrder.DWOLLA_ACCOUNT_KBA_REQ,
             sidebar: true,
         },
     ];

@@ -82,7 +82,7 @@ const SideBarView = ({
 
     return (
         <DefaultView>
-            <Grid container spacing={6}>
+            <Grid container rowSpacing={7}>
                 {!!header && (
                     <Grid item xs={12}>
                         {header}
