@@ -150,7 +150,7 @@ const Footer = () => {
                 <div></div>
             </Grid>
 
-            <Stack sx={{ mt: 8 }}>
+            <Stack sx={{ mt: 8, p: 4 }}>
                 <Typography variant="subtitle3">Disclaimer</Typography>
                 <div>
                     <Grid container spacing={4}>

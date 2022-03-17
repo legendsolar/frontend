@@ -49,6 +49,7 @@ const PlaidLink = ({ onSuccess }) => {
                 publicToken: public_token,
                 accountId: metadata.account_id,
                 name: accountName,
+                metadata: metadata,
             }).then(({ data }) => {
                 console.log("access token obtained");
                 console.log(data);
