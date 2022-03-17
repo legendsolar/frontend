@@ -1,8 +1,7 @@
 import React from "react";
 import { ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
-import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import LoadingComponent from "./loading_component";
 import { useUser, useDatabase, useDatabaseObjectData } from "reactfire";
 function UserDebugPaper(props) {
@@ -17,7 +16,7 @@ function UserDebugPaper(props) {
     }
 
     return (
-        <Paper sx={{ minWidth: 275 }} variant="container">
+        <Box sx={{ minWidth: 275 }}>
             <Typography
                 sx={{ fontSize: 14 }}
                 color="text.secondary"
@@ -133,7 +132,7 @@ function UserDebugPaper(props) {
             <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
                 {userData ? `${userData?.phone?.mobile}` : "error"}
             </Typography>
-        </Paper>
+        </Box>
     );
 }
 export default UserDebugPaper;

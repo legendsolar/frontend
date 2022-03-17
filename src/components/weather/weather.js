@@ -1,4 +1,4 @@
-import { Paper, Typography, Stack } from "@mui/material";
+import { Box, Paper, Typography, Stack } from "@mui/material";
 import { Player } from "@lottiefiles/react-lottie-player";
 import PropTypes from "prop-types";
 import CloudyLottieJson from "../../assets/weather_icons/cloudy/data.json";
@@ -8,6 +8,7 @@ import RainShowerLottieJson from "../../assets/weather_icons/rain_shower/data.js
 import SnowLottieJson from "../../assets/weather_icons/snowfall/data.json";
 import StarryNightJson from "../../assets/weather_icons/starry_night/data.json";
 import FogJson from "../../assets/weather_icons/foggy/data.json";
+import DefaultComponent from "../default_component";
 
 const codeConverter = (code) => {
     const regex = {
@@ -47,13 +48,7 @@ const Weather = ({ temp, state, code }) => {
     const lottieJson = codeConverter(code);
 
     return (
-        <Paper
-            sx={{
-                minWidth: 275,
-                "& .MuiTextField-root": { m: 1 },
-            }}
-            variant="container"
-        >
+        <Box>
             <Stack direction="row" justifyContent="space-between">
                 <Typography variant="smallHeadline">Weather</Typography>
                 <Typography variant="headline1">{temp}&deg;</Typography>
@@ -74,7 +69,7 @@ const Weather = ({ temp, state, code }) => {
             >
                 {state}
             </Typography>
-        </Paper>
+        </Box>
     );
 };
 

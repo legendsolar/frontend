@@ -1,7 +1,4 @@
-import { Typography } from "@mui/material";
-import { Paper } from "@mui/material";
-import Chip from "@mui/material/Chip";
-import { Stack } from "@mui/material";
+import { Typography, Box, Paper, Chip, Stack } from "@mui/material";
 import PropTypes from "prop-types";
 
 import { useState } from "react";
@@ -9,10 +6,7 @@ const CumulativeImpact = ({ cumulativeData, unitOpts }) => {
     const [historyState, setHistoryState] = useState("week");
 
     return (
-        <Paper
-            variant={"container"}
-            sx={{ minWidth: 300, minHeight: 288, height: "100%" }}
-        >
+        <Box sx={{ minWidth: 300, minHeight: 288, height: "100%" }}>
             <Stack
                 justifyContent="space-between"
                 spacing={1}
@@ -94,7 +88,7 @@ const CumulativeImpact = ({ cumulativeData, unitOpts }) => {
                     ></Chip>
                 </Stack>
             </Stack>
-        </Paper>
+        </Box>
     );
 };
 

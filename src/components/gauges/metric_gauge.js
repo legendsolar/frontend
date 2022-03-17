@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { Typography } from "@mui/material";
 import styles from "./metric_gauge.module.css";
@@ -40,7 +39,7 @@ function MetricGauge({
     const strokeCurrentLength =
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
     return (
-        <Paper variant={"container"} sx={{ minWidth: "300px" }}>
+        <Box sx={{ minWidth: "300px" }}>
             <Stack alignItems={"center"}>
                 <Stack
                     direction="row"
@@ -135,7 +134,7 @@ function MetricGauge({
                     </Typography>
                 </Stack>
             </Stack>
-        </Paper>
+        </Box>
     );
 }
 

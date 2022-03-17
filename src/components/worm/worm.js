@@ -1,4 +1,4 @@
-import Paper from "@mui/material/Paper";
+import { Paper, Box } from "@mui/material";
 import * as d3 from "d3";
 import { useChartDimensions } from "../../hooks/use_chart_dimensions";
 import { useMemo, useRef, useState } from "react";
@@ -157,13 +157,9 @@ function Worm({ rawData, loading, error }) {
     const SunXPos = xScale(xAccessor(data[data.length - 1]));
 
     return (
-        <Paper
-            variant={"container"}
-            sx={{ p: 0, width: "100%" }}
-            style={{ overflow: "hidden" }}
-        >
+        <Box sx={{ p: 0, width: "100%" }} style={{ overflow: "hidden" }}>
             <Stack sx={{ p: 2 }} direction="row" justifyContent="space-between">
-                <Typography variant={"subtitle1"}>Productivity</Typography>
+                <Typography variant={"smallHeadline"}>Productivity</Typography>
                 <Typography variant={"subtitle2"}>
                     {format(new Date(), "p")}
                 </Typography>
@@ -256,7 +252,7 @@ function Worm({ rawData, loading, error }) {
                     </g>
                 </svg>
             </div>
-        </Paper>
+        </Box>
     );
 }
 export default Worm;

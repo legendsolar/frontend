@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import { Paper, Box } from "@mui/material";
 import { useState } from "react";
+import DefaultErrorBoundary from "./errors/default_error_boundary";
 
 const DefaultComponent = forwardRef(
     ({ inactive, disabled, children, sx }, ref) => {
@@ -18,13 +19,15 @@ const DefaultComponent = forwardRef(
                 }}
                 ref={ref}
             >
-                <Box
-                    sx={{
-                        opacity: opacity,
-                    }}
-                >
-                    {children}
-                </Box>
+                <DefaultErrorBoundary>
+                    <Box
+                        sx={{
+                            opacity: opacity,
+                        }}
+                    >
+                        {children}
+                    </Box>
+                </DefaultErrorBoundary>
             </Paper>
         );
     }

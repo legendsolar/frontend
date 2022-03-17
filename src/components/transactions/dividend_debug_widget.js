@@ -30,9 +30,7 @@ function DividendWidget(props) {
                 "& .MuiTextField-root": { m: 1 },
             }}
         >
-            <Typography variant="dashboardHeader" gutterBottom>
-                Dividends
-            </Typography>
+            <Typography variant="smallHeadline">Dividends</Typography>
 
             {!dividendLoading &&
                 !dividendError &&
