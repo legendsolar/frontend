@@ -15,6 +15,7 @@ import { selectWalletBalance } from "../slices/wallet_slice";
 import { fetchWalletBalance } from "../slices/wallet_slice";
 import { useCloudFunctions } from "../hooks/use_cloud_functions";
 import RecentTransfers from "../components/transactions/recent_transfers";
+import AllTransfersDataGrid from "../components/all_transfers_data_grid";
 
 const TransferPage = () => {
     const auth = useAuth();

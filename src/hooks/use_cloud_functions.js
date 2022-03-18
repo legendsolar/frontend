@@ -58,6 +58,11 @@ const useProvideCloudFunctions = (functions) => {
         "getRecentTransfer_https_ext"
     );
 
+    const generateTransferSummary = httpsCallable(
+        functions,
+        "generateTransferSummary_https_ext"
+    );
+
     const getKBASession = httpsCallable(functions, "getKBASession_https_ext");
 
     const returnKBASessionResponse = httpsCallable(
@@ -94,5 +99,6 @@ const useProvideCloudFunctions = (functions) => {
         receiveIdVerificationDocument,
         attemptCreateNewDwollaVerifiedUser,
         getLinkedAccounts,
+        generateTransferSummary,
     };
 };
