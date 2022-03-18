@@ -8,6 +8,7 @@ import Footer from "../components/footer";
 const DefaultView = (props) => {
     const auth = useAuth();
     const backgroundColor = auth.user ? "blackDusk.main" : "blackDawn.main";
+    const headerHeight = "300px";
 
     return (
         <Box
@@ -19,16 +20,15 @@ const DefaultView = (props) => {
             <Box
                 position="absolute"
                 sx={{
-                    height: "300px",
+                    height: headerHeight,
                     width: "100%",
                     backgroundColor: backgroundColor,
                     zIndex: -1,
-                    transform: "translate3d(0, 0, -10px)",
                 }}
             ></Box>
             <Box
                 position="fixed"
-                top={0}
+                top={headerHeight}
                 bottom={0}
                 left={0}
                 right={0}
@@ -37,7 +37,7 @@ const DefaultView = (props) => {
                     height: "100%",
                     backgroundColor: "whiteHaze.main",
                     zIndex: -2,
-                    transform: "translate3d(0, 0, -20px)",
+                    transform: "translate3d(0, 0, -10px)",
                 }}
             ></Box>
             <NavBar></NavBar>

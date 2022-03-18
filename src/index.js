@@ -10,9 +10,9 @@ import LogRocket from "logrocket";
 
 import appSettings from "./app_settings";
 
-import smoothscroll from "smoothscroll-polyfill";
+// import smoothscroll from "smoothscroll-polyfill";
 
-smoothscroll.polyfill();
+// smoothscroll.polyfill();
 
 if (appSettings.sentryEnabled)
     Sentry.init({

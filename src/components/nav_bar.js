@@ -31,7 +31,12 @@ const NavBar = ({}) => {
     const walletBalance = useSelector(selectWalletBalance);
 
     return (
-        <Toolbar style={{ padding: 0, width: "100%" }}>
+        <Toolbar
+            style={{
+                padding: 0,
+                width: "100%",
+            }}
+        >
             <Box
                 sx={{
                     width: "100%",
@@ -54,6 +59,7 @@ const NavBar = ({}) => {
                         sx={{
                             width: "100%",
                             zIndex: 1,
+                            transform: "translate3d(0, 0, 0px)",
                         }}
                     >
                         <Box

@@ -41,14 +41,14 @@ const ProtectedRoute = ({
         }
     }, [dispatch, userSignUpStateStatus, auth.user]);
 
-    useEffect(() => {
-        if (auth.isAuthenticating) {
-            setTimeout(() => {
-                console.error("timed out");
-                navigate("/error");
-            }, AppSettings.timeout_ms);
-        }
-    }, [auth.isAuthenticating]);
+    // useEffect(() => {
+    //     if (auth.isAuthenticating) {
+    //         setTimeout(() => {
+    //             console.error("timed out");
+    //             navigate("/error");
+    //         }, AppSettings.timeout_ms);
+    //     }
+    // }, [auth.isAuthenticating]);
 
     if (
         disallowedUserStates &&
