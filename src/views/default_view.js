@@ -23,6 +23,7 @@ const DefaultView = (props) => {
                     width: "100%",
                     backgroundColor: backgroundColor,
                     zIndex: -1,
+                    transform: "translate3d(0, 0, -10px)",
                 }}
             ></Box>
             <Box
@@ -36,6 +37,7 @@ const DefaultView = (props) => {
                     height: "100%",
                     backgroundColor: "whiteHaze.main",
                     zIndex: -2,
+                    transform: "translate3d(0, 0, -20px)",
                 }}
             ></Box>
             <NavBar></NavBar>
