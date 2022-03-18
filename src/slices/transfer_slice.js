@@ -24,12 +24,26 @@ export const fetchTransactions = createAsyncThunk(
         console.log(transactions);
 
         const transformedTransactionList = transactions.map((transaction) => {
-            console.log(transaction);
+            var title = "Unkown";
+            if (transaction.sourceAccountMetaData.type === "wallet") {
+                title = "Wallet to Bank Transfer";
+            }
+
+            if (transaction.destinationAccountMetaData.type === "wallet") {
+                title = "Solar Dividend Payout";
+            }
+
             return {
-                title: "Unknown",
+                title: title,
                 id: transaction.id,
-                source: transaction.sourceId,
-                destination: transaction.destinationId,
+                sourceName: transaction.sourceAccountMetaData.name,
+                sourceId: transaction.sourceAccountMetaData.dwollaId,
+                sourceMask: transaction.sourceAccountMetaData.mask,
+
+                destinationName: transaction.destinationAccountMetaData.name,
+                destinationId: transaction.destinationAccountMetaData.dwollaId,
+                destinationMask: transaction.destinationAccountMetaData.mask,
+
                 amount: transaction.amount,
                 created: new Date(transaction.created),
                 status: transaction.status,
