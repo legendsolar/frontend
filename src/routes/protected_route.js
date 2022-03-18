@@ -1,6 +1,6 @@
 import { useAuth } from "../hooks/use_auth";
 import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import LoadingView from "../views/loading_view";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import {
 } from "../slices/user_slice";
 import PropTypes from "prop-types";
 import ErrorPage from "../pages/error_page";
+import AppSettings from "../app_settings";
 
 const ProtectedRoute = ({
     children,
@@ -21,6 +22,7 @@ const ProtectedRoute = ({
 }) => {
     const auth = useAuth();
     const location = useLocation();
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     const cloudFunctions = useCloudFunctions();
@@ -38,6 +40,15 @@ const ProtectedRoute = ({
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
     }, [dispatch, userSignUpStateStatus, auth.user]);
+
+    useEffect(() => {
+        if (auth.isAuthenticating) {
+            setTimeout(() => {
+                console.error("timed out");
+                navigate("/error");
+            }, AppSettings.timeout_ms);
+        }
+    }, [auth.isAuthenticating]);
 
     if (
         disallowedUserStates &&

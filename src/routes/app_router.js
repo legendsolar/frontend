@@ -29,6 +29,8 @@ import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
 import { useSelector, useDispatch } from "react-redux";
 import InvestPage from "../pages/invest_page";
+import ErrorPage from "../pages/error_page";
+import NotFoundPage from "../pages/not_found_page";
 
 function AppRouter() {
     const app = useFirebaseApp();
@@ -49,6 +51,9 @@ function AppRouter() {
     return (
         <div>
             <Routes>
+                <Route path="/error" element={<ErrorPage />} />
+
+                {/** No auth required */}
                 <Route
                     path="/signin"
                     element={
@@ -172,6 +177,8 @@ function AppRouter() {
                 <Route path="/loading" element={<LoadingView />} />
                 <Route path="/gridView" element={<GridPage />} />
                 <Route path="/playground" element={<PlaygroundPage />} />
+
+                <Route path="/:path" element={<NotFoundPage />} />
             </Routes>
         </div>
     );
