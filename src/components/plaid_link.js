@@ -3,6 +3,9 @@ import { usePlaidLink } from "react-plaid-link";
 import { useAuth } from "./../hooks/use_auth";
 
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchAccounts } from "../slices/wallet_slice";
+
 import {
     createPlaidLinkToken,
     exchangePublicTokenForAccessToken,
@@ -15,6 +18,8 @@ const PlaidLink = ({ onSuccess }) => {
     const createPlaidLinkToken = cloudFunctions.createPlaidLinkToken;
     const exchangePublicTokenForAccessToken =
         cloudFunctions.exchangePublicTokenForAccessToken;
+
+    const dispatch = useDispatch();
 
     const [token, setToken] = useState("");
     const [publicToken, setPublicToken] = useState("-");
@@ -61,6 +66,9 @@ const PlaidLink = ({ onSuccess }) => {
                 console.log(data.processorToken);
 
                 setProcessorToken(data.processorToken);
+
+                dispatch(fetchAccounts(cloudFunctions));
+
                 onSuccess();
             });
         },

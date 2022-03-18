@@ -10,9 +10,12 @@ import AccountManagementComponent from "./account_management_component";
 import { useState, useReducer } from "react";
 import ErrorComponent from "../errors/error_component";
 import { useCloudFunctions } from "../../hooks/use_cloud_functions";
+import { fetchTransactions } from "../../slices/transfer_slice";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreateTransactionComponent = () => {
     const cloudFunctions = useCloudFunctions();
+    const globalDispatch = useDispatch();
 
     const initialState = {
         page: "setup",
@@ -39,6 +42,8 @@ const CreateTransactionComponent = () => {
     const [destinationAccount, setDestinationAccount] = useState(null);
 
     const [transferAmount, setTransferAmount] = useState(0.0);
+
+    const transactionStatus = useSelector((state) => state.transactions.status);
 
     const [loading, setLoading] = useState(false);
 
@@ -79,6 +84,14 @@ const CreateTransactionComponent = () => {
             .then((resp) => {
                 console.log("new transfer created with id:");
                 console.log(resp);
+
+                // Refresh transactions
+                if (
+                    transactionStatus === "idle" ||
+                    transactionStatus === "succeeded"
+                ) {
+                    globalDispatch(fetchTransactions(cloudFunctions));
+                }
 
                 dispatch({
                     type: "CHANGE_VIEW",
