@@ -1,5 +1,8 @@
 const scrollToEl = (el, offset = -40) => {
-    window.scrollTo(0, el.offsetTop + offset);
+    window.scrollTo({
+        top: el.offsetTop + offset,
+        behavior: "smooth",
+    });
 };
 
 export default scrollToEl;
