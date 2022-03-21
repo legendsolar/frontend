@@ -2,12 +2,10 @@ import { Grid, Typography, Paper } from "@mui/material";
 import TransactionComponent from "./transfer_component";
 import PropTypes from "prop-types";
 
-const TransactionGrid = ({ title, transactions }) => {
+const TransactionGrid = ({ transactions }) => {
     console.log("loaded: " + transactions);
     return (
         <div>
-            <Typography variant="smallHeadline">{title}</Typography>
-
             <Grid
                 container
                 sx={{ mt: 1 }}

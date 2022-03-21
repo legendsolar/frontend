@@ -26,13 +26,15 @@ const RecentTransfers = () => {
 
     if (transactionStatus === "loading") {
         return <Typography>loading</Typography>;
-    } else if (transactionStatus === "succeeded") {
+    } else if (transactionStatus === "succeeded" && transactions.length > 0) {
         return (
             <TransactionGrid
                 title={"Recent Transactions"}
                 transactions={transactions}
             ></TransactionGrid>
         );
+    } else if (transactionStatus === "succeeded" && transactions.length == 0) {
+        return <Typography>No transactions found </Typography>;
     } else {
         return <Typography>error</Typography>;
     }

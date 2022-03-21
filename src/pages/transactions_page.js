@@ -36,33 +36,34 @@ const TransactionPage = (props) => {
             }
             mainContent={
                 <Stack spacing={4}>
-                    <Paper
-                        variant="container"
+                    <DefaultComponent
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
+                        <Typography variant="smallHeadline">
+                            Dividend Earnings
+                        </Typography>
                         <RecentTransfers></RecentTransfers>
-                    </Paper>
+                    </DefaultComponent>
 
                     <DefaultComponent
-                        variant="container"
                         ref={(el) => (contentRefs.current[1] = el)}
                     >
                         <Typography variant="smallHeadline">
                             Bank Transfers
                         </Typography>
+                        <RecentTransfers></RecentTransfers>
                     </DefaultComponent>
 
                     <DefaultComponent
-                        variant="container"
                         ref={(el) => (contentRefs.current[2] = el)}
                     >
                         <Typography variant="smallHeadline">
                             Investments
                         </Typography>
+                        <RecentTransfers></RecentTransfers>
                     </DefaultComponent>
 
                     <DefaultComponent
-                        variant="container"
                         ref={(el) => (contentRefs.current[3] = el)}
                     >
                         <AllTransfersDataGrid></AllTransfersDataGrid>
