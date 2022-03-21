@@ -1,4 +1,5 @@
 export const signUpOrder = {
+    NO_ACCOUNT: -1,
     ACCOUNT_CREATED: 0,
     ACCREDATION_VERIF_COMPLETE: 1,
     DWOLLA_ACCOUNT_RETRY_REQ: 2,

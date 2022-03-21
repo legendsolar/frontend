@@ -71,7 +71,7 @@ const LinearPageinatedView = ({ pageContent, header, pageIndex }) => {
                     type: "BACK_PAGE",
                 });
             }}
-            backDisabled={state.pageIndex <= 0}
+            backDisabled={index <= 0 || pageContent[index - 1].disabled}
         >
             {content.content}
         </PageinatedComponent>

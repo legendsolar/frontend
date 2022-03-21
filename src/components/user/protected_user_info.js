@@ -121,7 +121,7 @@ const ProtectedUserInfo = ({
                         {"SSN " +
                             (fullSSNRequired
                                 ? "(complete SSN required)"
-                                : "(first four digits requried)")}
+                                : "(last four digits requried)")}
                     </Typography>
                     <TextField
                         error={!!formValues.ssn.error}

@@ -54,11 +54,13 @@ const userSlice = createSlice({
 });
 
 export const selectUserSignUpState = (state) => {
-    try {
-        return state.user.signUpState.value;
-    } catch (error) {
-        return "UNKNOWN";
+    const signUpState = state?.user?.signUpState?.value;
+
+    if (signUpState) {
+        return signUpState;
     }
+
+    return "NO_ACCOUNT";
 };
 
 export const { clearUserState } = userSlice.actions;

@@ -31,6 +31,7 @@ import { useSelector, useDispatch } from "react-redux";
 import InvestPage from "../pages/invest_page";
 import ErrorPage from "../pages/error_page";
 import NotFoundPage from "../pages/not_found_page";
+import { signUpOrder } from "../utils/user_sign_up_state";
 
 function AppRouter() {
     const app = useFirebaseApp();
@@ -72,16 +73,11 @@ function AppRouter() {
                 />
 
                 <Route
-                    path="/complete-account"
-                    element={
-                        <ProtectedRoute
-                            disallowedUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
-                            disallowedPath="/explore"
-                        >
-                            <SignUpProcessPage />
-                        </ProtectedRoute>
-                    }
+                    path="/complete-account/:step"
+                    element={<SignUpProcessPage />}
                 />
+
+                {/** Auth required */}
 
                 <Route
                     path="/"

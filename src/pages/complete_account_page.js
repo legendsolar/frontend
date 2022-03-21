@@ -21,13 +21,19 @@ import {
 import IdentityVerificationDocument from "../components/identity/identity_verification_document";
 import DefaultView from "../views/default_view";
 import { useCloudFunctions } from "../hooks/use_cloud_functions";
+import { useParams } from "react-router-dom";
 import scrollToEl from "../utils/scroll_to_el";
 
 import LinearPageinatedView from "../views/linear_paginated_view";
 import { signUpOrder, userSignUpOrder } from "../utils/user_sign_up_state";
+import SignUpComponent from "../components/sign_up_component";
 
 const CompleteAccountPage = () => {
+    const { step } = useParams();
+    console.log(step);
+
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const cloudFunctions = useCloudFunctions();
     const auth = useAuth();
     const user = auth.user;
@@ -37,6 +43,8 @@ const CompleteAccountPage = () => {
     );
 
     const userSignUpState = useSelector(selectUserSignUpState);
+
+    console.log("user state: " + userSignUpState);
 
     const requestUpdateState = () => {
         if (
@@ -60,36 +68,36 @@ const CompleteAccountPage = () => {
         }
     }, [dispatch, auth.user, auth.isAuthenticating, userSignUpStateStatus]);
 
-    const navigate = useNavigate();
-    const contentRefs = useRef([]);
-
-    const database = useDatabase();
-    const { status, data: userInfo } = useDatabaseObjectData(
-        ref(database, "users/" + user.uid)
-    );
-
     const onComplete = () => {
         requestUpdateState();
     };
 
-    if (status === "loading" || userSignUpStateStatus === "loading") {
+    if (userSignUpStateStatus === "loading") {
         return <LoadingView></LoadingView>;
     }
 
     const userStatePageIndexMap = {
-        ACCOUNT_CREATED: 0,
-
+        NO_ACCOUNT: 0,
+        ACCOUNT_CREATED: 1,
         // Keep user in complete account flow for retry state
-        ACCREDATION_VERIF_COMPLETE: 1,
-        DWOLLA_ACCOUNT_RETRY_REQ: 1,
-        DWOLLA_ACCOUNT_KBA_REQ: 2,
-        DWOLLA_ACCOUNT_DOCUMENT_REQ: 3,
-        DWOLLA_ACCOUNT_VERIFIED: 4,
+        ACCREDATION_VERIF_COMPLETE: 2,
+        DWOLLA_ACCOUNT_RETRY_REQ: 2,
+        DWOLLA_ACCOUNT_KBA_REQ: 3,
+        DWOLLA_ACCOUNT_DOCUMENT_REQ: 4,
+        DWOLLA_ACCOUNT_VERIFIED: 5,
     };
 
     const pageIndex = userStatePageIndexMap[userSignUpState];
 
     const pageContent = [
+        {
+            title: "Create Account",
+            content: (
+                <SignUpComponent onComplete={onComplete}></SignUpComponent>
+            ),
+            disabled:
+                userSignUpOrder(userSignUpState) != signUpOrder.NO_ACCOUNT,
+        },
         {
             title: "Accreditation",
             content: (

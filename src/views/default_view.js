@@ -7,7 +7,7 @@ import Footer from "../components/footer";
 
 const DefaultView = (props) => {
     const auth = useAuth();
-    const backgroundColor = !!auth.user ? "blackDusk.main" : "blackDawn.main";
+    const backgroundColor = !!auth?.user ? "blackDusk.main" : "blackDawn.main";
     const headerHeight = "300px";
 
     return (
