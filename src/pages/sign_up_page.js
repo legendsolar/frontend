@@ -13,7 +13,6 @@ import {
     Collapse,
     Alert,
     AlertTitle,
-    IconButton,
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -23,9 +22,12 @@ import FullPageComponentView from "../views/full_page_component_view";
 import GoogleSignUp from "../components/buttons/google_icon_button";
 import LoadingView from "../views/loading_view";
 import CenteredComponentView from "../views/centered_component_view";
-import GoogleIconButton from "../components/buttons/google_icon_button";
+import IconButton from "../components/buttons/google_icon_button";
 import ContentDivider from "../components/basics/content_divider";
 import { authErrorTranslator } from "../utils/auth_error_translator";
+import GoogleLogo from "../components/icons/google_logo";
+import EmailIcon from "@mui/icons-material/Email";
+import GoogleIcon from "@mui/icons-material/Google";
 
 export default function SignUpView() {
     const authHook = useAuth();
@@ -126,8 +128,14 @@ export default function SignUpView() {
             <Box>
                 <Stack spacing={4}>
                     <Typography variant="subtitle1">Create Account</Typography>
-                    <GoogleIconButton
+                    <IconButton
                         label="Sign up with Google"
+                        color="whiteHaze"
+                        icon={
+                            <GoogleIcon
+                                sx={{ ml: 2, fontSize: "18px" }}
+                            ></GoogleIcon>
+                        }
                         onClick={() => {
                             authHook
                                 .signInWithGoogle()
@@ -138,58 +146,38 @@ export default function SignUpView() {
                                     handleFirebaseError(error);
                                 });
                         }}
-                    ></GoogleIconButton>
+                    ></IconButton>
                     <ContentDivider>
                         <Typography align="center" variant="smallLabel">
                             or
                         </Typography>
                     </ContentDivider>
-                    <TextField
-                        error={!!formValues.email.error}
-                        helperText={formValues.email.errMsg}
-                        margin="normal"
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        onChange={handleInputChange}
-                    />
-                    <TextField
-                        error={!!formValues.password.error}
-                        helperText={formValues.password.errMsg}
-                        margin="normal"
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={handleInputChange}
-                    />
-                    <Button
-                        variant="primary"
-                        onClick={handleSubmit}
-                        disabled={isDisabled()}
+
+                    <IconButton
+                        label="Sign up with email"
                         color="legendaryGreen"
-                        sx={{ width: "100%" }}
-                    >
-                        Create Account
-                    </Button>
+                        icon={
+                            <EmailIcon
+                                sx={{ ml: 2, fontSize: "18px" }}
+                            ></EmailIcon>
+                        }
+                        onClick={() => {
+                            navigate("/complete-account/create");
+                        }}
+                    ></IconButton>
 
                     <Stack direction="row" justifyContent={"flex-end"}>
-                        <Stack spacing={2} alignItems={"flex-end"}>
-                            <Typography variant="smallLabel">
-                                Already have an account
-                            </Typography>
-                            <Button
-                                variant="medium"
-                                onClick={() => {
-                                    navigate("/signIn");
-                                }}
-                                sx={{ width: "120px" }}
-                            >
-                                Sign In
-                            </Button>
-                        </Stack>
+                        <Typography variant="smallLabel">
+                            Have an account?
+                        </Typography>
+
+                        <Typography
+                            variant="smallLabel"
+                            color="grassGreen.main"
+                            onClick={() => navigate("/signin")}
+                        >
+                            Login
+                        </Typography>
                     </Stack>
                 </Stack>
             </Box>

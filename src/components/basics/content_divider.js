@@ -12,9 +12,9 @@ const ContentDivider = ({ sx, children }) => {
             justifyContent="center"
             alignItems="center"
         >
-            <Divider sx={{ mr: 2 }} />
+            <Divider sx={{ mr: 0, width: "100%" }} />
             {children}
-            <Divider sx={{ ml: 2 }} />
+            <Divider sx={{ ml: 2, width: "100%" }} />
         </Stack>
     );
 };

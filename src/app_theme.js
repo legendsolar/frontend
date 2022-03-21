@@ -25,11 +25,11 @@ const paletteOptions = {
         },
         light: {
             main: "#FFF",
-            contrastText: "#000",
+            contrastText: blackDawn,
         },
         white: {
             main: "#FFF",
-            contrastText: "#000",
+            contrastText: blackDawn,
         },
         legendaryGreen: {
             main: legendaryGreen,
@@ -39,13 +39,13 @@ const paletteOptions = {
         },
         whiteHaze: {
             main: whiteHaze,
-            contrastText: "#000",
+            contrastText: blackDawn,
             dark: "#d3d3d3",
             light: "#ededed",
         },
         whiteFog: {
             main: whiteFog,
-            contrastText: "#000",
+            contrastText: blackDawn,
             dark: "#bcbcbc",
             light: "#efefef",
         },
@@ -170,7 +170,7 @@ const typographyOptions = {
             fontFamily: "Azeret Mono",
             fontSize: "12px",
             lineHeight: "14px",
-            fontWeight: 800,
+            fontWeight: 600,
             color: paletteOptions.palette.blackDusk.main,
             textTransform: "uppercase",
         },

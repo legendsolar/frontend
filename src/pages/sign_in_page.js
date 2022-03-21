@@ -1,26 +1,13 @@
 import { useState } from "react";
 
-import {
-    Link,
-    Grid,
-    Box,
-    Paper,
-    Button,
-    TextField,
-    Typography,
-    Stack,
-    Collapse,
-    Alert,
-    AlertTitle,
-    IconButton,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Box, Button, TextField, Typography, Stack } from "@mui/material";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate, useLocation } from "react-router-dom";
 import CenteredComponentView from "../views/centered_component_view";
-import GoogleIconButton from "../components/buttons/google_icon_button";
+import IconButton from "../components/buttons/google_icon_button";
 import ContentDivider from "../components/basics/content_divider";
 import { authErrorTranslator } from "../utils/auth_error_translator";
+import GoogleIcon from "@mui/icons-material/Google";
 
 function SignInView() {
     const authHook = useAuth();
@@ -118,19 +105,25 @@ function SignInView() {
             <Box component="form" onSubmit={handleSubmit} noValidate>
                 <Stack spacing={4}>
                     <Typography variant="subtitle1">Login</Typography>
-                    <GoogleIconButton
+                    <IconButton
                         label="Sign in with Google"
+                        color="whiteHaze"
+                        icon={
+                            <GoogleIcon
+                                sx={{ ml: 2, fontSize: "18px" }}
+                            ></GoogleIcon>
+                        }
                         onClick={() => {
                             authHook
                                 .signInWithGoogle()
                                 .then(() => {
-                                    onSuccessfulSignIn();
+                                    onSuccessfulSignUp();
                                 })
                                 .catch((error) => {
                                     handleFirebaseError(error);
                                 });
                         }}
-                    ></GoogleIconButton>
+                    ></IconButton>
 
                     <ContentDivider>
                         <Typography align="center" variant="smallLabel">

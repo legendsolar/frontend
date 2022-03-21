@@ -1,17 +1,27 @@
 import { Stack, Button, Typography } from "@mui/material/";
 import GoogleLogo from "../icons/google_logo";
 
-const GoogleIconButton = ({ label, onClick }) => {
+const IconButton = ({ label, onClick, icon, color }) => {
     return (
-        <Button variant="medium" onClick={onClick}>
-            <GoogleLogo sx={{ ml: 2 }} height="60px"></GoogleLogo>
+        <Button
+            variant="medium"
+            onClick={onClick}
+            sx={{
+                backgroundColor: color + ".main",
+                color: color + ".contrastText",
+            }}
+        >
+            {icon}
             <Stack
                 direction="row"
-                justifyContent="center"
                 alignItems="center"
-                sx={{ width: "100%", ml: -9 }}
+                sx={{ width: "100%", ml: 8 }}
             >
-                <Typography justifyContent="center" variant="smallLabel">
+                <Typography
+                    justifyContent="center"
+                    variant="smallLabel"
+                    color={color + ".contrastText"}
+                >
                     {label}
                 </Typography>
             </Stack>
@@ -19,4 +29,4 @@ const GoogleIconButton = ({ label, onClick }) => {
     );
 };
 
-export default GoogleIconButton;
+export default IconButton;
