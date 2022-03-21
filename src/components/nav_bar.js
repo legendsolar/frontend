@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserSignUpState } from "../slices/user_slice";
 import { selectUserSignUpState } from "../slices/user_slice";
 import { selectWalletBalance } from "../slices/wallet_slice";
+import { fetchWalletBalance } from "../slices/wallet_slice";
 
 const NavBar = ({}) => {
     const auth = useAuth();
@@ -21,12 +22,19 @@ const NavBar = ({}) => {
         (state) => state.user.signUpState.status
     );
     const userSignUpState = useSelector(selectUserSignUpState);
+    const balanceStatus = useSelector((state) => state.wallet.balance.status);
 
     useEffect(() => {
         if (userSignUpStateStatus === "idle" && auth.user) {
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
     }, [dispatch, userSignUpStateStatus, auth.user]);
+
+    useEffect(() => {
+        if (balanceStatus === "idle") {
+            dispatch(fetchWalletBalance(cloudFunctions));
+        }
+    }, [dispatch, balanceStatus]);
 
     const walletBalance = useSelector(selectWalletBalance);
 

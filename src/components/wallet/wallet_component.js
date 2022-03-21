@@ -35,11 +35,13 @@ const Wallet = () => {
         if (balanceStatus === "idle") {
             dispatch(fetchWalletBalance(cloudFunctions));
         }
+    }, [balanceStatus, dispatch]);
 
+    useEffect(() => {
         if (accountStatus === "idle") {
             dispatch(fetchAccounts(cloudFunctions));
         }
-    }, [balanceStatus, accountStatus, dispatch]);
+    }, [accountStatus, dispatch]);
 
     const accounts = useSelector(selectAllAccounts);
     const [transferAmount, setTransferAmount] = useState(0.0);
