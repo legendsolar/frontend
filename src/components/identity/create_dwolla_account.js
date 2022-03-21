@@ -27,6 +27,7 @@ import {
     fetchUserSignUpState,
     selectUserSignUpState,
 } from "../../slices/user_slice";
+import { transformUserDataToDwollaObject } from "./utils";
 
 const CreateDwollaAccount = ({ onComplete }) => {
     const auth = useAuth();
@@ -61,21 +62,7 @@ const CreateDwollaAccount = ({ onComplete }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const dwollaObject = {
-            name: {
-                first: userInfo.firstName.value,
-                last: userInfo.lastName.value,
-            },
-            address: {
-                streetAddress: userInfo.streetAddress.value,
-                streetAddress2: userInfo.streetAddress2.value,
-                city: userInfo.city.value,
-                state: userInfo.state.value,
-                postalCode: userInfo.postalCode.value,
-            },
-            dateOfBirth: userInfo.dateOfBirth.value,
-            ssn: userInfo.ssn.value,
-        };
+        const dwollaObject = transformUserDataToDwollaObject(userInfo);
 
         setLoading(true);
 

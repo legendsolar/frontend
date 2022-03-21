@@ -17,6 +17,7 @@ import AccountLinkComponent from "../components/transactions/account_link_compon
 import DefaultComponent from "../components/default_component";
 import AccreditationStatus from "../components/accreditation_status";
 import AccountManagementComponent from "../components/transactions/account_management_component";
+import UpdateUserInfo from "../components/identity/update_user_info";
 
 const AccountPage = () => {
     const auth = useAuth();
@@ -26,7 +27,6 @@ const AccountPage = () => {
 
     const drawerTitles = [
         "Personal Information",
-        "Accreditation",
         "Bank Information",
         "Investments",
         "Communication",
@@ -59,27 +59,24 @@ const AccountPage = () => {
             mainContent={
                 <Stack spacing={6}>
                     <DefaultComponent
-                        disabled={true}
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
                         <Typography variant="smallHeadline">
                             Personal Information
                         </Typography>
-                        <ModifyUserInfo></ModifyUserInfo>
-                    </DefaultComponent>
-
-                    <DefaultComponent
-                        disabled={true}
-                        ref={(el) => (contentRefs.current[1] = el)}
-                    >
-                        <AccreditationStatus></AccreditationStatus>
+                        <UpdateUserInfo></UpdateUserInfo>
                     </DefaultComponent>
 
                     <DefaultComponent
                         disabled={false}
                         ref={(el) => (contentRefs.current[2] = el)}
                     >
-                        <AccountManagementComponent></AccountManagementComponent>
+                        <Typography variant="smallHeadline">
+                            Connected Accounts
+                        </Typography>
+                        <AccountManagementComponent
+                            includeWallet={false}
+                        ></AccountManagementComponent>
                     </DefaultComponent>
                 </Stack>
             }

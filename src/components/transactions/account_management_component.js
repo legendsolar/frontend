@@ -85,51 +85,55 @@ const AccountManagementComponent = ({ onSelected, includeWallet }) => {
     };
 
     return (
-        <div>
-            <List>
-                {accounts.map((account, index) => (
-                    <ListItemButton
-                        key={index}
-                        sx={{ ml: -4, mr: -4 }}
-                        onClick={() => {
-                            if (onSelected) {
-                                onSelected(account);
-                            }
-                        }}
-                    >
-                        <Stack
-                            direction="row"
-                            justifyContent={"space-between"}
-                            sx={{ width: "100%" }}
+        <Stack spacing={6}>
+            {accounts.length <= 0 ? (
+                <Typography>No connected accounts found</Typography>
+            ) : (
+                <List>
+                    {accounts.map((account, index) => (
+                        <ListItemButton
+                            key={index}
+                            sx={{ ml: -4, mr: -4 }}
+                            onClick={() => {
+                                if (onSelected) {
+                                    onSelected(account);
+                                }
+                            }}
                         >
-                            <Stack>
-                                <Typography variant="subtitle1">
-                                    {account.name}
-                                </Typography>
-                                <Typography variant="subtitle3">
-                                    {account.source}
-                                </Typography>
-                            </Stack>
+                            <Stack
+                                direction="row"
+                                justifyContent={"space-between"}
+                                sx={{ width: "100%" }}
+                            >
+                                <Stack>
+                                    <Typography variant="subtitle1">
+                                        {account.name}
+                                    </Typography>
+                                    <Typography variant="subtitle3">
+                                        {account.source}
+                                    </Typography>
+                                </Stack>
 
-                            <Stack alignItems={"flex-end"}>
-                                <Typography variant="subtitle1">
-                                    {account.institution}
-                                </Typography>
-                                <Typography variant="subtitle3">
-                                    {accountNumberString}
-                                </Typography>
-                                <Button variant="small" disable={false}>
-                                    Remove
-                                </Button>
+                                <Stack alignItems={"flex-end"}>
+                                    <Typography variant="subtitle1">
+                                        {account.institution}
+                                    </Typography>
+                                    <Typography variant="subtitle3">
+                                        {accountNumberString}
+                                    </Typography>
+                                    <Button variant="small" disable={false}>
+                                        Remove
+                                    </Button>
+                                </Stack>
                             </Stack>
-                        </Stack>
-                    </ListItemButton>
-                ))}
-                {walletItem()}
-            </List>
+                        </ListItemButton>
+                    ))}
+                    {walletItem()}
+                </List>
+            )}
 
             <PlaidLink></PlaidLink>
-        </div>
+        </Stack>
     );
 };
 

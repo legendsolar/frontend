@@ -22,7 +22,7 @@ import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 import LoadingComponent from "../loading_component";
 import { states } from "../../utils/static_lists";
 
-const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange }) => {
+const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
     const auth = useAuth();
     const user = auth.user;
 
@@ -161,6 +161,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange }) => {
                     <TextField
                         error={!!formValues.firstName.error}
                         helperText={formValues.firstName.errMsg}
+                        disabled={disabled?.firstName}
                         name="firstName"
                         label="First Name"
                         variant="filled"
@@ -173,6 +174,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange }) => {
                     <TextField
                         error={!!formValues.lastName.error}
                         helperText={formValues.lastName.errMsg}
+                        disabled={disabled?.firstName}
                         name="lastName"
                         label="Last Name"
                         value={formValues.lastName.value}
@@ -184,6 +186,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange }) => {
                     <TextField
                         error={!!formValues.streetAddress.error}
                         helperText={formValues.streetAddress.errMsg}
+                        disabled={disabled?.streetAddress}
                         name="streetAddress"
                         label="Street Address"
                         value={formValues.streetAddress.value}
@@ -196,6 +199,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange }) => {
                     <TextField
                         error={!!formValues.streetAddress2.error}
                         helperText={formValues.streetAddress2.errMsg}
+                        disabled={disabled?.streetAddress2}
                         name="streetAddress2"
                         label="Apartment #"
                         variant="filled"
@@ -209,6 +213,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange }) => {
                     <TextField
                         error={!!formValues.city.error}
                         helperText={formValues.city.errMsg}
+                        disabled={disabled?.city}
                         name="city"
                         label="City"
                         variant="filled"
@@ -225,6 +230,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange }) => {
                             helperText={"state"}
                             name="state"
                             value={formValues.state.value}
+                            disabled={disabled?.state}
                             onChange={handleInputChange}
                         >
                             {states.map((state) => {
@@ -249,6 +255,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange }) => {
                     <TextField
                         error={!!formValues.postalCode.error}
                         helperText={formValues.postalCode.errMsg}
+                        disabled={disabled?.postalCode}
                         name="postalCode"
                         label="Zip Code"
                         variant="filled"

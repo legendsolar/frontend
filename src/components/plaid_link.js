@@ -80,31 +80,10 @@ const PlaidLink = ({ onSuccess }) => {
                     open();
                 }}
                 disabled={!ready}
-                variant="primary"
+                variant="secondary"
             >
-                Link with Plaid
+                Link New Account
             </Button>
-            <Typography variant="description">{"[DEBUG]\n"}</Typography>
-
-            <Typography variant="description">
-                {"link token: " + token}
-            </Typography>
-
-            <Typography variant="description">
-                {"public token: " + publicToken}
-            </Typography>
-
-            <Typography variant="description">
-                {"access token: " + accessToken}
-            </Typography>
-
-            <Typography variant="description">
-                {"dwolla processor token: " + processorToken}
-            </Typography>
-
-            <Typography variant="description">
-                [Debug] Bank Credentials are: user_good, pass_good for any bank
-            </Typography>
         </Stack>
     );
 };
