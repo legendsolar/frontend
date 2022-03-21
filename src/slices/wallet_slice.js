@@ -103,7 +103,7 @@ export const selectAllAccounts = (state) => {
         return state.wallet.accounts.value;
     }
 
-    return null;
+    return [];
 };
 
 export const selectWalletBalance = (state) => {

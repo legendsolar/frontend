@@ -5,13 +5,24 @@ import {
     TextField,
     InputAdornment,
     CircularProgress,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    FormHelperText,
 } from "@mui/material";
 import AccountManagementComponent from "./account_management_component";
-import { useState, useReducer } from "react";
+import { useState, useReducer, useEffect } from "react";
 import ErrorComponent from "../errors/error_component";
 import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 import { fetchTransactions } from "../../slices/transfer_slice";
 import { useDispatch, useSelector } from "react-redux";
+import {
+    fetchAccounts,
+    selectAllAccounts,
+    selectWalletId,
+} from "../../slices/wallet_slice";
+import LoadingComponent from "../loading_component";
 
 const CreateTransactionComponent = () => {
     const cloudFunctions = useCloudFunctions();
@@ -29,10 +40,8 @@ const CreateTransactionComponent = () => {
                     page: action.page,
                     accountSelectType: action.accountSelectType,
                 };
-            case "BACK":
-                return;
-            case "review":
-                return;
+            default:
+                return state;
         }
     };
 
@@ -41,11 +50,31 @@ const CreateTransactionComponent = () => {
     const [sourceAccount, setSourceAccount] = useState(null);
     const [destinationAccount, setDestinationAccount] = useState(null);
 
-    const [transferAmount, setTransferAmount] = useState(0.0);
+    const [transferAmount, setTransferAmount] = useState(undefined);
 
     const transactionStatus = useSelector((state) => state.transactions.status);
 
     const [loading, setLoading] = useState(false);
+
+    const accountStatus = useSelector((state) => state.wallet.accounts.status);
+
+    const walletId = useSelector(selectWalletId);
+
+    const walletObject = {
+        name: "Wallet",
+        source: "Created on Legends",
+        type: "wallet",
+        institution: "Legends",
+        id: walletId,
+    };
+
+    useEffect(() => {
+        if (accountStatus === "idle") {
+            dispatch(fetchAccounts(cloudFunctions));
+        }
+    }, [accountStatus, dispatch]);
+
+    const accounts = [walletObject, ...useSelector(selectAllAccounts)];
 
     const goBack = () => {
         dispatch({
@@ -54,18 +83,15 @@ const CreateTransactionComponent = () => {
         });
     };
 
-    const onAccountSelected = (account) => {
-        console.log(account);
-        if (state.accountSelectType === "source") {
-            setSourceAccount(account);
-        } else if (state.accountSelectType === "destination") {
-            setDestinationAccount(account);
-        }
+    const onAccountSelected = (event) => {
+        const { name, value } = event.target;
 
-        dispatch({
-            type: "CHANGE_VIEW",
-            page: "setup",
-        });
+        console.log(event.target);
+        if (name === "sourceAccount") {
+            setSourceAccount(value);
+        } else if (name === "destinationAccount") {
+            setDestinationAccount(value);
+        }
     };
 
     const onComplete = () => {
@@ -107,49 +133,22 @@ const CreateTransactionComponent = () => {
                 setSourceAccount(null);
                 setDestinationAccount(null);
                 setTransferAmount(null);
+
+                dispatch({
+                    type: "CHANGE_VIEW",
+                    page: "setup",
+                });
             });
     };
+
+    if (!accounts || accountStatus !== "succeeded") {
+        return <LoadingComponent></LoadingComponent>;
+    }
+    console.log(accounts);
 
     if (state.page === "setup") {
         return (
             <Stack spacing={2}>
-                <Typography>Set up transfer</Typography>
-                <Typography>
-                    {"From: " +
-                        sourceAccount?.institution +
-                        " " +
-                        sourceAccount?.name}
-                </Typography>
-                <Button
-                    variant="secondary"
-                    onClick={() => {
-                        dispatch({
-                            type: "CHANGE_VIEW",
-                            page: "selectAccount",
-                            accountSelectType: "source",
-                        });
-                    }}
-                >
-                    Edit
-                </Button>
-                <Typography>
-                    {"To: " +
-                        destinationAccount?.institution +
-                        " " +
-                        destinationAccount?.name}
-                </Typography>
-                <Button
-                    variant="secondary"
-                    onClick={() => {
-                        dispatch({
-                            type: "CHANGE_VIEW",
-                            page: "selectAccount",
-                            accountSelectType: "destination",
-                        });
-                    }}
-                >
-                    Edit
-                </Button>
                 <TextField
                     name="amount"
                     type="number"
@@ -165,8 +164,48 @@ const CreateTransactionComponent = () => {
                         setTransferAmount(value);
                     }}
                 ></TextField>
+
+                <FormControl variant="filled" fullWidth>
+                    <InputLabel>From</InputLabel>
+                    <Select
+                        helperText={"From"}
+                        name="sourceAccount"
+                        value={sourceAccount}
+                        onChange={onAccountSelected}
+                    >
+                        {accounts.map((account, index) => {
+                            return (
+                                <MenuItem key={account.id} value={account}>
+                                    {account.name}
+                                </MenuItem>
+                            );
+                        })}
+                    </Select>
+                </FormControl>
+
+                <FormControl variant="filled" fullWidth>
+                    <InputLabel>To</InputLabel>
+                    <Select
+                        helperText={"To"}
+                        name="destinationAccount"
+                        value={destinationAccount}
+                        onChange={onAccountSelected}
+                    >
+                        {accounts.map((account, index) => {
+                            return (
+                                <MenuItem key={account.id} value={account}>
+                                    {account.name}
+                                </MenuItem>
+                            );
+                        })}
+                    </Select>
+                </FormControl>
+
                 <Button
                     variant="primary"
+                    disabled={
+                        !destinationAccount || !sourceAccount || !transferAmount
+                    }
                     onClick={() => {
                         dispatch({
                             type: "CHANGE_VIEW",
@@ -177,20 +216,6 @@ const CreateTransactionComponent = () => {
                     {" "}
                     Review Transfer
                 </Button>
-            </Stack>
-        );
-    } else if (state.page === "selectAccount") {
-        return (
-            <Stack spacing={2}>
-                <Typography>Select Account</Typography>
-
-                <Button variant="mini" onClick={goBack}>
-                    Back
-                </Button>
-                <AccountManagementComponent
-                    onSelected={onAccountSelected}
-                    includeWallet={true}
-                ></AccountManagementComponent>
             </Stack>
         );
     } else if (state.page === "review") {
