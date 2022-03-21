@@ -76,7 +76,9 @@ function ComponentGrid(props) {
     return (
         <Grid container spacing={2} sx={{ width: "100%" }}>
             <Grid item xs={12}>
-                <WormLive assetId={assetDisplayId.id}></WormLive>
+                <DefaultComponent sx={{ m: 0, p: 0 }}>
+                    <WormLive assetId={assetDisplayId.id}></WormLive>
+                </DefaultComponent>
             </Grid>
 
             <Grid item xs={12}>
