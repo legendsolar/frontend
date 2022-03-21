@@ -1,31 +1,14 @@
 import { useState } from "react";
 
-import {
-    Typography,
-    Box,
-    Grid,
-    Stack,
-    Link,
-    TextField,
-    CssBaseline,
-    Button,
-    Paper,
-    Collapse,
-    Alert,
-    AlertTitle,
-} from "@mui/material";
+import { Typography, Box, Stack } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
-import FullPageComponentView from "../views/full_page_component_view";
-import GoogleSignUp from "../components/buttons/google_icon_button";
-import LoadingView from "../views/loading_view";
 import CenteredComponentView from "../views/centered_component_view";
 import IconButton from "../components/buttons/google_icon_button";
 import ContentDivider from "../components/basics/content_divider";
 import { authErrorTranslator } from "../utils/auth_error_translator";
-import GoogleLogo from "../components/icons/google_logo";
 import EmailIcon from "@mui/icons-material/Email";
 import GoogleIcon from "@mui/icons-material/Google";
 
