@@ -51,6 +51,8 @@ const ProtectedRoute = ({
     // }, [auth.isAuthenticating]);
 
     if (
+        userSignUpState &&
+        userSignUpState !== "NO_ACCOUNT" &&
         disallowedUserStates &&
         disallowedUserStates.indexOf(userSignUpState) > -1
     ) {
@@ -66,6 +68,8 @@ const ProtectedRoute = ({
     }
 
     if (
+        userSignUpState &&
+        userSignUpState !== "NO_ACCOUNT" &&
         requiredUserStates &&
         requiredUserStates.indexOf(userSignUpState) === -1
     ) {
