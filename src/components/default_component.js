@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { Paper, Box } from "@mui/material";
+import { Paper, Stack } from "@mui/material";
 import { useState } from "react";
 import DefaultErrorBoundary from "./errors/default_error_boundary";
 
@@ -20,13 +20,14 @@ const DefaultComponent = forwardRef(
                 ref={ref}
             >
                 <DefaultErrorBoundary>
-                    <Box
+                    <Stack
                         sx={{
                             opacity: opacity,
                         }}
+                        spacing={6}
                     >
                         {children}
-                    </Box>
+                    </Stack>
                 </DefaultErrorBoundary>
             </Paper>
         );

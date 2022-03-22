@@ -16,6 +16,7 @@ import { fetchWalletBalance } from "../slices/wallet_slice";
 import { useCloudFunctions } from "../hooks/use_cloud_functions";
 import RecentTransfers from "../components/transactions/recent_transfers";
 import AllTransfersDataGrid from "../components/all_transfers_data_grid";
+import DefaultComponent from "../components/default_component";
 
 const TransferPage = () => {
     const auth = useAuth();
@@ -62,27 +63,35 @@ const TransferPage = () => {
                 ></ScrollToSidebar>
             }
             mainContent={
-                <Stack spacing={2}>
-                    <Paper
-                        variant="container"
+                <Stack spacing={4}>
+                    <DefaultComponent
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
+                        <Typography variant="smallHeadline">
+                            Transfer Money
+                        </Typography>
                         <CreateTransactionComponent></CreateTransactionComponent>
-                    </Paper>
+                    </DefaultComponent>
 
-                    <Paper
-                        variant="container"
-                        ref={(el) => (contentRefs.current[1] = el)}
-                    >
-                        <AccountListComponent></AccountListComponent>
-                    </Paper>
-
-                    <Paper
+                    <DefaultComponent
                         variant="container"
                         ref={(el) => (contentRefs.current[2] = el)}
                     >
+                        <Typography variant="smallHeadline">
+                            Recent Transfers
+                        </Typography>
                         <RecentTransfers></RecentTransfers>
-                    </Paper>
+                    </DefaultComponent>
+
+                    <DefaultComponent
+                        variant="container"
+                        ref={(el) => (contentRefs.current[1] = el)}
+                    >
+                        <Typography variant="smallHeadline">
+                            Connected Accounts
+                        </Typography>
+                        <AccountListComponent></AccountListComponent>
+                    </DefaultComponent>
                 </Stack>
             }
         ></SideBarNavView>

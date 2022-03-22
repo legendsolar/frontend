@@ -84,7 +84,7 @@ function AppRouter() {
                     element={
                         <ProtectedRoute
                             requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
-                            requiredPath="/complete-account"
+                            requiredPath="/complete-account/create"
                         >
                             <PortfolioPage />
                         </ProtectedRoute>
@@ -95,7 +95,7 @@ function AppRouter() {
                     element={
                         <ProtectedRoute
                             requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
-                            requiredPath="/complete-account"
+                            requiredPath="/complete-account/create"
                         >
                             <AccountPage />
                         </ProtectedRoute>
@@ -107,7 +107,7 @@ function AppRouter() {
                     element={
                         <ProtectedRoute
                             requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
-                            requiredPath="/complete-account"
+                            requiredPath="/complete-account/create"
                         >
                             <TransferPage />
                         </ProtectedRoute>
@@ -119,7 +119,7 @@ function AppRouter() {
                     element={
                         <ProtectedRoute
                             requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
-                            requiredPath="/complete-account"
+                            requiredPath="/complete-account/create"
                         >
                             <TransferPage />
                         </ProtectedRoute>
@@ -131,7 +131,7 @@ function AppRouter() {
                     element={
                         <ProtectedRoute
                             requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
-                            requiredPath="/complete-account"
+                            requiredPath="/complete-account/create"
                         >
                             <DocumentPage />
                         </ProtectedRoute>
@@ -143,7 +143,7 @@ function AppRouter() {
                     element={
                         <ProtectedRoute
                             requiredUserStates={["DWOLLA_ACCOUNT_VERIFIED"]}
-                            requiredPath="/complete-account"
+                            requiredPath="/complete-account/create"
                         >
                             <TransactionView />
                         </ProtectedRoute>
