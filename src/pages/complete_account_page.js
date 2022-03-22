@@ -87,6 +87,12 @@ const CompleteAccountPage = () => {
         DWOLLA_ACCOUNT_VERIFIED: 5,
     };
 
+    window.history.replaceState(
+        null,
+        null,
+        "/complete-account/" + userSignUpState
+    );
+
     const pageIndex = userStatePageIndexMap[userSignUpState];
 
     const pageContent = [
