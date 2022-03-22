@@ -38,13 +38,13 @@ const SizingDemo = ({}) => {
                         variant="headline1"
                         color="legendaryGreen.contrastText"
                     >
-                        {dms.width + " x " + dms.height}
+                        {dms.width + "px width"}
                     </Typography>
                 </Box>
 
                 <div>
                     <Grid container spacing={6}>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={4}>
                             <Box
                                 sx={{
                                     backgroundColor: "legendaryGreen.main",
@@ -64,7 +64,7 @@ const SizingDemo = ({}) => {
                             </Box>
                         </Grid>
 
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={8}>
                             <Box
                                 sx={{
                                     backgroundColor: "legendaryGreen.main",
@@ -84,7 +84,47 @@ const SizingDemo = ({}) => {
                             </Box>
                         </Grid>
 
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={8}>
+                            <Box
+                                sx={{
+                                    backgroundColor: "legendaryGreen.main",
+                                    width: "100%",
+                                    height: "300px",
+                                }}
+                                display="flex"
+                                alignItems="center"
+                                justifyContent="center"
+                            >
+                                <Typography
+                                    variant="smallHeadline"
+                                    color="legendaryGreen.contrastText"
+                                >
+                                    Grid Item 3
+                                </Typography>
+                            </Box>
+                        </Grid>
+
+                        <Grid item xs={12} md={4}>
+                            <Box
+                                sx={{
+                                    backgroundColor: "legendaryGreen.main",
+                                    width: "100%",
+                                    height: "300px",
+                                }}
+                                display="flex"
+                                alignItems="center"
+                                justifyContent="center"
+                            >
+                                <Typography
+                                    variant="smallHeadline"
+                                    color="legendaryGreen.contrastText"
+                                >
+                                    Grid Item 4
+                                </Typography>
+                            </Box>
+                        </Grid>
+
+                        <Grid item xs={12} md={8}>
                             <div>
                                 <Grid container spacing={6}>
                                     <Grid item xs={12} md={6}>
@@ -132,7 +172,7 @@ const SizingDemo = ({}) => {
                             </div>
                         </Grid>
 
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={4}>
                             <Box
                                 sx={{
                                     backgroundColor: "legendaryGreen.main",
@@ -147,7 +187,7 @@ const SizingDemo = ({}) => {
                                     variant="smallHeadline"
                                     color="legendaryGreen.contrastText"
                                 >
-                                    Grid Item 3
+                                    Grid Item 5
                                 </Typography>
                             </Box>
                         </Grid>
