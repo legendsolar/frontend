@@ -80,12 +80,13 @@ const CompleteAccountPage = () => {
     const userStatePageIndexMap = {
         NO_ACCOUNT: 0,
         ACCOUNT_CREATED: 1,
+        ACCEPTANCE_COMPLETE: 2,
         // Keep user in complete account flow for retry state
-        ACCREDATION_VERIF_COMPLETE: 2,
-        DWOLLA_ACCOUNT_RETRY_REQ: 2,
-        DWOLLA_ACCOUNT_KBA_REQ: 3,
-        DWOLLA_ACCOUNT_DOCUMENT_REQ: 4,
-        DWOLLA_ACCOUNT_VERIFIED: 5,
+        ACCREDATION_VERIF_COMPLETE: 3,
+        DWOLLA_ACCOUNT_RETRY_REQ: 3,
+        DWOLLA_ACCOUNT_KBA_REQ: 4,
+        DWOLLA_ACCOUNT_DOCUMENT_REQ: 5,
+        DWOLLA_ACCOUNT_VERIFIED: 6,
     };
 
     window.history.replaceState(
@@ -114,7 +115,7 @@ const CompleteAccountPage = () => {
                 ></PolicyAcceptanceComponent>
             ),
             disabled:
-                userSignUpOrder(userSignUpState) != signUpOrder.ACCOUNT_CREATED,
+                userSignUpOrder(userSignUpState) < signUpOrder.ACCOUNT_CREATED,
         },
 
         {

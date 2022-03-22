@@ -74,7 +74,7 @@ function AppRouter() {
                 />
 
                 <Route
-                    path="/complete-account/:step"
+                    path="/complete-account/:status"
                     element={<SignUpProcessPage />}
                 />
 

@@ -44,6 +44,11 @@ const useProvideCloudFunctions = (functions) => {
         "getUserSignUpState_https_ext"
     );
 
+    const updateUserAcceptanceState = httpsCallable(
+        functions,
+        "updateUserAcceptanceState_https_ext"
+    );
+
     /** Dwolla */
 
     const getWalletBalance = httpsCallable(
@@ -91,6 +96,7 @@ const useProvideCloudFunctions = (functions) => {
         createPlaidLinkToken,
         exchangePublicTokenForAccessToken,
         getUserSignUpState,
+        updateUserAcceptanceState,
         getWalletBalance,
         createTransfer,
         getRecentTransfers,

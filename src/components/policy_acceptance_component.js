@@ -2,9 +2,12 @@ import { Stack, Typography } from "@mui/material";
 import ScrollBottomToComplete from "./scroll_bottom_complete";
 import PrivacyPolicy from "../assets/legal/privacy.js";
 import TermsAndConditions from "../assets/legal/termsAndConditions.js";
+import { useCloudFunctions } from "../hooks/use_cloud_functions";
 import { useState } from "react";
 
 const PolicyAcceptanceComponent = ({ onComplete }) => {
+    const cloudFunctions = useCloudFunctions();
+
     const initialState = {
         privacy: false,
         privacyVersion: null,
@@ -24,7 +27,20 @@ const PolicyAcceptanceComponent = ({ onComplete }) => {
             newPolicyAcceptance.privacy &&
             newPolicyAcceptance.termsAndConditions
         ) {
-            onComplete();
+            cloudFunctions
+                .updateUserAcceptanceState({
+                    privacy: {
+                        accepted: newPolicyAcceptance.privacy,
+                        version: null,
+                    },
+                    termsAndConditions: {
+                        accepted: newPolicyAcceptance.termsAndConditions,
+                        version: null,
+                    },
+                })
+                .then(() => {
+                    onComplete();
+                });
         }
     };
 
