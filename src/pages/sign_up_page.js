@@ -56,7 +56,7 @@ export default function SignUpView() {
     };
 
     const onSuccessfulSignUp = () => {
-        navigate("/complete-account");
+        navigate("/complete-account/create");
     };
 
     const handleFirebaseError = (error) => {

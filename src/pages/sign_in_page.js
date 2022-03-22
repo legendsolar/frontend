@@ -58,7 +58,7 @@ function SignInView() {
     };
 
     const onSuccessfulSignUp = () => {
-        navigate("/complete-account");
+        navigate("/complete-account/create");
     };
 
     const handleFirebaseError = (error) => {
