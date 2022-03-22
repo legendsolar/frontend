@@ -11,26 +11,15 @@ import { useEffect } from "react";
 
 const columns = [
     {
-        field: "index",
-        headername: "ID",
-        width: 50,
-    },
-    {
         field: "created",
-        headername: "Date",
+        headerName: "Date",
         width: 150,
-        editable: false,
-    },
-    {
-        field: "title",
-        headerName: "Type",
-        width: 120,
         editable: false,
     },
     {
         field: "status",
         headerName: "Status",
-        width: 110,
+        width: 80,
         editable: false,
     },
     {
