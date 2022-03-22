@@ -27,6 +27,7 @@ import scrollToEl from "../utils/scroll_to_el";
 import LinearPageinatedView from "../views/linear_paginated_view";
 import { signUpOrder, userSignUpOrder } from "../utils/user_sign_up_state";
 import SignUpComponent from "../components/sign_up_component";
+import PolicyAcceptanceComponent from "../components/policy_acceptance_component";
 
 const CompleteAccountPage = () => {
     const { step } = useParams();
@@ -104,6 +105,18 @@ const CompleteAccountPage = () => {
             disabled:
                 userSignUpOrder(userSignUpState) != signUpOrder.NO_ACCOUNT,
         },
+
+        {
+            title: "Privacy and Conditions",
+            content: (
+                <PolicyAcceptanceComponent
+                    onComplete={onComplete}
+                ></PolicyAcceptanceComponent>
+            ),
+            disabled:
+                userSignUpOrder(userSignUpState) != signUpOrder.ACCOUNT_CREATED,
+        },
+
         {
             title: "Accreditation",
             content: (
@@ -112,7 +125,8 @@ const CompleteAccountPage = () => {
                 ></AccreditationStatus>
             ),
             disabled:
-                userSignUpOrder(userSignUpState) < signUpOrder.ACCOUNT_CREATED,
+                userSignUpOrder(userSignUpState) <
+                signUpOrder.ACCEPTANCE_COMPLETE,
         },
         {
             title: "Create Wallet",
