@@ -1,23 +1,23 @@
 import { useState } from "react";
 import { Box, Button, Typography, Stack } from "@mui/material";
 
-const ScrollBottomToComplete = ({ onComplete, children }) => {
+const ScrollBottomToComplete = ({ onComplete, children, completed }) => {
     const [completeScroll, setCompleteScroll] = useState(false);
 
     const onScroll = (event) => {
         const target = event.target;
 
-        console.log(
-            target.scrollHeight - target.scrollTop,
-            target.clientHeight
-        );
+        // console.log(
+        //     target.scrollHeight - target.scrollTop,
+        //     target.clientHeight
+        // );
         if (target.scrollHeight - target.scrollTop <= target.clientHeight + 2) {
             setCompleteScroll(true);
         }
     };
 
     const onSubmit = (event) => {
-        onComplete();
+        onComplete(event);
     };
 
     return (
@@ -36,10 +36,10 @@ const ScrollBottomToComplete = ({ onComplete, children }) => {
             </Box>
             <Button
                 variant="primary"
-                disabled={!completeScroll}
+                disabled={!completeScroll || completed}
                 onClick={onSubmit}
             >
-                Agree
+                {completed ? "Accepted" : "Agree"}
             </Button>
 
             <Typography variant="smallLabel">
