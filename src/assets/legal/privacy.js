@@ -1,6 +1,7 @@
+export default ` 
 <style>
   [data-custom-class='body'], [data-custom-class='body'] * {
-          background: #ffffff !important;
+          background: #f5f5f5 !important;
         }
 [data-custom-class='title'], [data-custom-class='title'] * {
           font-family: Arial !important;
@@ -52,3 +53,4 @@ word-break: break-word !important;
     </style>
       </div>
       
+     `;
