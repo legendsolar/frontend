@@ -108,15 +108,17 @@ const CreateDwollaAccount = ({ onComplete }) => {
 
     return (
         <Stack spacing={4}>
-            <Divider sx={{ mt: 4, ml: -4, mr: -4 }}></Divider>
-            <Typography variant="body">
-                All your earnings and dividends on Legends Solar will be
-                deposited into your ‘Legends Wallet’. Use the wallet to transfer
-                funds to your personal checking account. To create your Legends
-                Wallet, we require some personal information.
+            <Typography variant="subtitle1">
+                When your solar panels sell electricity and earn cash, dividends
+                are sent to your Legends Wallet, which you can access here. You
+                can transfer funds to linked bank accounts.
             </Typography>
 
-            <Divider sx={{ mt: 4, ml: -4, mr: -4 }}></Divider>
+            <Typography variant="body">
+                We require this information to securely create your Legends
+                Wallet. This information will not be used for marketing
+                purposes.
+            </Typography>
 
             <Typography variant="subtitle2">Mailing Address</Typography>
 

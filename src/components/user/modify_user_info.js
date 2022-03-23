@@ -201,7 +201,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
                         helperText={formValues.streetAddress2.errMsg}
                         disabled={disabled?.streetAddress2}
                         name="streetAddress2"
-                        label="Apartment #"
+                        label="Apt Number, PO Box, ect (optional)"
                         variant="filled"
                         value={formValues.streetAddress2.value}
                         onChange={handleInputChange}
