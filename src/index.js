@@ -14,7 +14,7 @@ import smoothscroll from "smoothscroll-polyfill";
 
 smoothscroll.polyfill();
 
-if (appSettings.sentryEnabled)
+if (appSettings.sentry.enabled)
     Sentry.init({
         dsn: "https://befcf88557b54a7c939b8fdacec0cc62@o1127533.ingest.sentry.io/6169541",
         integrations: [new Integrations.BrowserTracing()],
@@ -22,19 +22,18 @@ if (appSettings.sentryEnabled)
         // Set tracesSampleRate to 1.0 to capture 100%
         // of transactions for performance monitoring.
         // We recommend adjusting this value in production
-        tracesSampleRate: 1.0,
+        tracesSampleRate: appSettings.sentry.sampleRate,
     });
 
-if (appSettings.fullStoryEnabled) {
+if (appSettings.fullStory.enabled) {
     FullStory.init({
         orgId: "18J59K",
     });
 }
 
-// if (appSettings.logRocketEnabled) {
-//     console.log("log rocket enabled");
-LogRocket.init("d6ndfk/legends-alpha");
-// }
+if (appSettings.logRocket.enabled) {
+    LogRocket.init("d6ndfk/legends-alpha");
+}
 
 ReactDOM.render(
     <React.StrictMode>
