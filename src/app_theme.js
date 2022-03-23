@@ -179,6 +179,15 @@ const typographyOptions = {
 
 const themeOptions = {
     spacing: spacing,
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 320, // webflow phone
+            md: 568, // webflow side phone
+            lg: 768, // webflow tablet
+            xl: 1200, // not used currently
+        },
+    },
     components: {
         // Careful, MuiPaper is used for non-obvious components like AppBar ect
         MuiPaper: {

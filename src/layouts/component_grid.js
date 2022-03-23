@@ -81,7 +81,7 @@ function ComponentGrid(props) {
                 </DefaultComponent>
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
                 <DefaultComponent>
                     <EarningsGauge assetId={assetDisplayId.id}></EarningsGauge>
                 </DefaultComponent>
@@ -102,12 +102,12 @@ function ComponentGrid(props) {
                     ></CarbonCumulativeImpact>
                 </DefaultComponent>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
                 <DefaultComponent>
                     <CarbonGauge assetId={assetDisplayId.id}></CarbonGauge>
                 </DefaultComponent>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
                 <DefaultComponent>
                     <GenerationGauge
                         assetId={assetDisplayId.id}

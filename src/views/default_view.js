@@ -46,9 +46,9 @@ const DefaultView = (props) => {
             <Box
                 sx={{
                     width: {
-                        sm: "550px",
-                        md: "850px",
-                        lg: "1100px",
+                        sm: "300px",
+                        md: "500px",
+                        lg: "1250px",
                     },
                     mr: "auto",
                     ml: "auto",
