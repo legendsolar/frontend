@@ -87,6 +87,8 @@ const CompleteAccountPage = () => {
         DWOLLA_ACCOUNT_KBA_REQ: 4,
         DWOLLA_ACCOUNT_DOCUMENT_REQ: 5,
         DWOLLA_ACCOUNT_VERIFIED: 6,
+
+        NOT_ACCREDITED: 7,
     };
 
     window.history.replaceState(
@@ -96,6 +98,8 @@ const CompleteAccountPage = () => {
     );
 
     const pageIndex = userStatePageIndexMap[userSignUpState];
+
+    console.log("page index", pageIndex);
 
     const pageContent = [
         {
@@ -185,6 +189,31 @@ const CompleteAccountPage = () => {
                 userSignUpOrder(userSignUpState) <
                 signUpOrder.DWOLLA_ACCOUNT_KBA_REQ,
             sidebar: true,
+        },
+
+        {
+            title: "Not Accredited",
+            content: (
+                <Stack spacing={6}>
+                    <Typography variant="headline2">
+                        Sorry, only accredited investors can sign up
+                    </Typography>
+
+                    <Typography variant="body2">
+                        {`Reserve panels instead, and we'll be in touch if/when 
+                        we are able to sell panels to non-accredited investors`}
+                    </Typography>
+
+                    <Button
+                        variant="primary"
+                        href="https://www.legends.solar/reserve-panels"
+                    >
+                        Reserve Panels
+                    </Button>
+                </Stack>
+            ),
+            disabled: userSignUpState !== "NOT_ACCREDITED",
+            sidebar: false,
         },
     ];
 

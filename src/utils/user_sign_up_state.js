@@ -14,5 +14,5 @@ export const userSignUpOrder = (state) => {
         return signUpOrder[state];
     }
 
-    return -1;
+    return -2;
 };
