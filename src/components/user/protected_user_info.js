@@ -124,6 +124,7 @@ const ProtectedUserInfo = ({
                                 : "(last four digits requried)")}
                     </Typography>
                     <TextField
+                        data-private
                         error={!!formValues.ssn.error}
                         helperText={formValues.ssn.errMsg}
                         name="ssn"
@@ -146,6 +147,7 @@ const ProtectedUserInfo = ({
                     <Grid container spacing={2} sx={{ width: "100%" }}>
                         <Grid item xs={4} md={4}>
                             <TextField
+                                data-private
                                 error={!!formValues.day.error}
                                 helperText={formValues.day.errMsg}
                                 name="day"
@@ -162,6 +164,7 @@ const ProtectedUserInfo = ({
                             <FormControl variant="filled" fullWidth>
                                 <InputLabel>Month</InputLabel>
                                 <Select
+                                    data-private
                                     name="month"
                                     value={formValues.month.value}
                                     onChange={handleInputChange}
@@ -179,6 +182,7 @@ const ProtectedUserInfo = ({
 
                         <Grid item xs={4} md={4}>
                             <TextField
+                                data-private
                                 error={!!formValues.year.error}
                                 helperText={formValues.year.errMsg}
                                 name="year"
