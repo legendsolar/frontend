@@ -41,6 +41,7 @@ const ExplorePage = () => {
                     {Object.entries(investmentOpportunities).map(
                         ([key, investment], i) => (
                             <DefaultComponent
+                                key={i}
                                 ref={(el) => (contentRefs.current[i] = el)}
                             >
                                 <Stack spacing={4}>

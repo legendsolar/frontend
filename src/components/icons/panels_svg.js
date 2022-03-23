@@ -536,7 +536,7 @@ const PanelsSvg = ({ color, width, height }) => (
                 width="416.183"
                 height="207.944"
                 filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
+                colorInterpolationFilters="sRGB"
             >
                 <feBlend
                     in="SourceGraphic"
