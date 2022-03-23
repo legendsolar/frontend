@@ -161,10 +161,13 @@ const ProtectedUserInfo = ({
                         </Grid>
 
                         <Grid item xs={4} md={4}>
-                            <FormControl variant="filled" fullWidth>
+                            <FormControl
+                                variant="filled"
+                                fullWidth
+                                data-private
+                            >
                                 <InputLabel>Month</InputLabel>
                                 <Select
-                                    data-private
                                     name="month"
                                     value={formValues.month.value}
                                     onChange={handleInputChange}
