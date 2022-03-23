@@ -25,6 +25,7 @@ const DefaultView = (props) => {
                     width: "100%",
                     backgroundColor: backgroundColor,
                     zIndex: -1,
+                    transform: "translate3d(0, 0, -5px)",
                 }}
             ></Box>
             <Box

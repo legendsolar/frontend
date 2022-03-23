@@ -11,6 +11,7 @@ import ContentDivider from "../components/basics/content_divider";
 import { authErrorTranslator } from "../utils/auth_error_translator";
 import EmailIcon from "@mui/icons-material/Email";
 import GoogleIcon from "@mui/icons-material/Google";
+import GoogleLogo from "../components/icons/google_logo";
 
 export default function SignUpView() {
     const authHook = useAuth();
@@ -114,11 +115,7 @@ export default function SignUpView() {
                     <IconButton
                         label="Sign up with Google"
                         color="whiteHaze"
-                        icon={
-                            <GoogleIcon
-                                sx={{ ml: 2, fontSize: "18px" }}
-                            ></GoogleIcon>
-                        }
+                        icon={<GoogleLogo height={"64px"}></GoogleLogo>}
                         onClick={() => {
                             authHook
                                 .signInWithGoogle()
@@ -141,7 +138,7 @@ export default function SignUpView() {
                         color="legendaryGreen"
                         icon={
                             <EmailIcon
-                                sx={{ ml: 2, fontSize: "18px" }}
+                                sx={{ ml: 3, fontSize: "18px" }}
                             ></EmailIcon>
                         }
                         onClick={() => {

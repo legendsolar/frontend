@@ -8,6 +8,7 @@ import IconButton from "../components/buttons/google_icon_button";
 import ContentDivider from "../components/basics/content_divider";
 import { authErrorTranslator } from "../utils/auth_error_translator";
 import GoogleIcon from "@mui/icons-material/Google";
+import GoogleLogo from "../components/icons/google_logo";
 
 function SignInView() {
     const authHook = useAuth();
@@ -108,11 +109,7 @@ function SignInView() {
                     <IconButton
                         label="Sign in with Google"
                         color="whiteHaze"
-                        icon={
-                            <GoogleIcon
-                                sx={{ ml: 2, fontSize: "18px" }}
-                            ></GoogleIcon>
-                        }
+                        icon={<GoogleLogo height={"64px"}></GoogleLogo>}
                         onClick={() => {
                             authHook
                                 .signInWithGoogle()
