@@ -18,6 +18,7 @@ const ProtectedUserInfo = ({
     onUpdate,
     disabled,
     fullSSNRequired,
+    completed,
 }) => {
     const startingValues = {
         day: {
@@ -127,6 +128,7 @@ const ProtectedUserInfo = ({
                         data-private
                         error={!!formValues.ssn.error}
                         helperText={formValues.ssn.errMsg}
+                        disabled={completed}
                         name="ssn"
                         label={
                             fullSSNRequired
@@ -134,7 +136,7 @@ const ProtectedUserInfo = ({
                                 : "Last four digits"
                         }
                         variant="filled"
-                        value={formValues.ssn.value}
+                        value={completed ? "•••••••••" : formValues.ssn.value}
                         onChange={handleInputChange}
                         fullWidth
                         type="password"
@@ -150,11 +152,12 @@ const ProtectedUserInfo = ({
                                 data-private
                                 error={!!formValues.day.error}
                                 helperText={formValues.day.errMsg}
+                                disabled={completed}
                                 name="day"
                                 label="Day"
                                 variant="filled"
-                                type="number"
-                                value={formValues.day.value}
+                                type={completed ? "string" : "number"}
+                                value={completed ? "••" : formValues.day.value}
                                 onChange={handleInputChange}
                                 fullWidth
                             ></TextField>
@@ -164,18 +167,28 @@ const ProtectedUserInfo = ({
                             <FormControl
                                 variant="filled"
                                 fullWidth
+                                disabled={completed}
                                 data-private
                             >
                                 <InputLabel>Month</InputLabel>
                                 <Select
                                     name="month"
-                                    value={formValues.month.value}
+                                    value={
+                                        completed
+                                            ? "••••"
+                                            : formValues.month.value
+                                    }
                                     onChange={handleInputChange}
                                 >
                                     {months.map((month) => {
                                         return (
-                                            <MenuItem key={month} value={month}>
-                                                {month}
+                                            <MenuItem
+                                                key={month}
+                                                value={
+                                                    completed ? "••••" : month
+                                                }
+                                            >
+                                                {completed ? "••••" : month}
                                             </MenuItem>
                                         );
                                     })}
@@ -188,10 +201,13 @@ const ProtectedUserInfo = ({
                                 data-private
                                 error={!!formValues.year.error}
                                 helperText={formValues.year.errMsg}
+                                disabled={completed}
                                 name="year"
                                 label="Year"
                                 variant="filled"
-                                value={formValues.year.value}
+                                value={
+                                    completed ? "••••" : formValues.year.value
+                                }
                                 onChange={handleInputChange}
                                 fullWidth
                             ></TextField>

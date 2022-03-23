@@ -142,6 +142,7 @@ const CreateDwollaAccount = ({ onComplete }) => {
                 onUpdate={(protectedUserInfo) => {
                     onUpdate(protectedUserInfo, 1);
                 }}
+                completed={userSignUpState == "DWOLLA_ACCOUNT_VERIFIED"}
             ></ProtectedUserInfo>
 
             {submitErrorMessage && (
