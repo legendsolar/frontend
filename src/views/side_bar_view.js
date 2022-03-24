@@ -33,7 +33,7 @@ const SideBarView = ({
     const getDrawerTop = () => {
         if (drawerAppearsOnTop)
             return (
-                <Container
+                <Box
                     sx={{
                         width: "100%",
                         pl: 0,
@@ -49,7 +49,7 @@ const SideBarView = ({
                     }}
                 >
                     <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
-                </Container>
+                </Box>
             );
 
         return null;
@@ -58,7 +58,7 @@ const SideBarView = ({
     const getDrawerBottom = () => {
         if (drawerAppearsOnBotton)
             return (
-                <Container
+                <Box
                     sx={{
                         width: "100%",
                         pl: 0,
@@ -74,7 +74,7 @@ const SideBarView = ({
                     }}
                 >
                     <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
-                </Container>
+                </Box>
             );
 
         return null;
