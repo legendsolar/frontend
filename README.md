@@ -37,13 +37,13 @@ Tags are deployed to the production environment, [legends alpha prod](https://co
   - xs: 0px
   - sm: 478px (Webflow Phone)
     - Content Width: 10px margin left and right
-    - Thus width can 458 be to 747px
+    - Thus width can 0px to 458px 
   - md: 767px (Webflow Landscape Phone)
     - Content Width: 10px margin left and right
-    - Thus width can be 747px to 971px
+    - Thus width can be 458px to 767px 
   - lg: 991px (Webflow tablet)
     - Content Width: 20px margin left and right
-    - Thus width can be 747px to 971px
+    - Thus width can be 767px to 971px
   - xl: >991px (Webflow desktop)
     - Content Width: 20px margin left and right to max width of 1100px
     - Bumped to 1235px max width to match Figma
