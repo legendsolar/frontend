@@ -45,11 +45,35 @@ const ExplorePage = () => {
                                 ref={(el) => (contentRefs.current[i] = el)}
                             >
                                 <Stack spacing={4}>
-                                    <Typography variant="smallHeadline">
-                                        {investment.title}
-                                    </Typography>
+                                    <Stack
+                                        direction="row"
+                                        alignItems="center"
+                                        justifyContent={"space-between"}
+                                    >
+                                        <Typography variant="headline2">
+                                            {investment.title}
+                                        </Typography>
+                                        <Typography variant="smallHeadline">
+                                            {investment.minInvestment}
+                                        </Typography>
+                                    </Stack>
                                     <Grid container>
-                                        <Grid item xs={12} lg={8}>
+                                        <Grid item xs={12} lg={6}>
+                                            <PanelsSvg
+                                                color={
+                                                    theme.palette[
+                                                        investment.color
+                                                    ].main
+                                                }
+                                            ></PanelsSvg>
+                                        </Grid>
+
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            lg={6}
+                                            sx={{ height: "100%" }}
+                                        >
                                             <Box
                                                 sx={{
                                                     height: "240px",
@@ -64,64 +88,57 @@ const ExplorePage = () => {
                                                         xs: 4,
                                                         lg: 0,
                                                     },
+                                                    p: 4,
                                                 }}
                                                 display="flex"
                                                 justifyContent={"center"}
                                                 alignItems="center"
                                             >
-                                                <PanelsSvg
-                                                    color={
-                                                        theme.palette[
-                                                            investment.color
-                                                        ].main
+                                                <Stack
+                                                    justifyContent={
+                                                        "space-between"
                                                     }
-                                                ></PanelsSvg>
+                                                    sx={{ height: "100%" }}
+                                                    spacing={4}
+                                                >
+                                                    <Typography variant="smallHeadline">
+                                                        Specifications
+                                                    </Typography>
+                                                    {investment.metrics.map(
+                                                        ({ metric, value }) => (
+                                                            <Stack
+                                                                direction="row"
+                                                                justifyContent={
+                                                                    "space-between"
+                                                                }
+                                                                alignItems="center"
+                                                                key={
+                                                                    metric +
+                                                                    value
+                                                                }
+                                                            >
+                                                                <Typography variant="subtitle3">
+                                                                    {metric}
+                                                                </Typography>
+                                                                <Typography variant="subtitle2">
+                                                                    {value}
+                                                                </Typography>
+                                                            </Stack>
+                                                        )
+                                                    )}
+                                                </Stack>
                                             </Box>
                                         </Grid>
-
-                                        <Grid
-                                            item
-                                            xs={12}
-                                            lg={4}
-                                            sx={{ height: "100%" }}
-                                        >
-                                            <Stack
-                                                justifyContent={"space-between"}
-                                                sx={{ height: "100%" }}
-                                                spacing={4}
-                                            >
-                                                {investment.metrics.map(
-                                                    ({ metric, value }) => (
-                                                        <Stack
-                                                            direction="row"
-                                                            justifyContent={
-                                                                "space-between"
-                                                            }
-                                                            alignItems="center"
-                                                            key={metric + value}
-                                                        >
-                                                            <Typography variant="subtitle1">
-                                                                {metric}
-                                                            </Typography>
-                                                            <Typography variant="subtitle2">
-                                                                {value}
-                                                            </Typography>
-                                                        </Stack>
-                                                    )
-                                                )}
-                                                <Button
-                                                    variant="primary"
-                                                    onClick={() => {
-                                                        navigate(
-                                                            "/invest/" + key
-                                                        );
-                                                    }}
-                                                >
-                                                    View executive summary
-                                                </Button>
-                                            </Stack>
-                                        </Grid>
                                     </Grid>
+
+                                    <Button
+                                        variant="primary"
+                                        onClick={() => {
+                                            navigate("/invest/" + key);
+                                        }}
+                                    >
+                                        Executive summary
+                                    </Button>
                                 </Stack>
                             </DefaultComponent>
                         )

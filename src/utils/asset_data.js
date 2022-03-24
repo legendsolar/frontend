@@ -1,14 +1,19 @@
 const investmentOpportunities = {
     santa_rosa: {
         title: "Santa Rosa Solar",
+        minInvestment: "$131,000",
         metrics: [
             {
-                metric: "Available Panels",
-                value: "300/300",
+                metric: "Number of panels",
+                value: "114",
             },
             {
-                metric: "Minimum Investment",
-                value: "$74,500",
+                metric: "Make & model",
+                value: "Phono Solar 400W",
+            },
+            {
+                metric: "Watts Installed",
+                value: "45,600 W",
             },
         ],
         content: [
@@ -70,14 +75,19 @@ const investmentOpportunities = {
 
     glassboro: {
         title: "Glassboro Solar",
+        minInvestment: "$131,000",
         metrics: [
             {
-                metric: "Available Panels",
-                value: "300/300",
+                metric: "Number of panels",
+                value: "114",
             },
             {
-                metric: "Minimum Investment",
-                value: "$74,500",
+                metric: "Make & model",
+                value: "Phono Solar 400W",
+            },
+            {
+                metric: "Watts Installed",
+                value: "45,600 W",
             },
         ],
         color: "pencilYellow",
@@ -85,14 +95,20 @@ const investmentOpportunities = {
 
     lake_elsinore: {
         title: "Lake Elsinore Solar",
+        minInvestment: "$131,000",
+
         metrics: [
             {
-                metric: "Available Panels",
-                value: "300/300",
+                metric: "Number of panels",
+                value: "114",
             },
             {
-                metric: "Minimum Investment",
-                value: "$74,500",
+                metric: "Make & model",
+                value: "Phono Solar 400W",
+            },
+            {
+                metric: "Watts Installed",
+                value: "45,600 W",
             },
         ],
         color: "grassGreen",
@@ -100,14 +116,21 @@ const investmentOpportunities = {
 
     lindenwold: {
         title: "Lindenwold Solar",
+
+        minInvestment: "$131,000",
+
         metrics: [
             {
-                metric: "Available Panels",
-                value: "300/300",
+                metric: "Number of panels",
+                value: "114",
             },
             {
-                metric: "Minimum Investment",
-                value: "$74,500",
+                metric: "Make & model",
+                value: "Phono Solar 400W",
+            },
+            {
+                metric: "Watts Installed",
+                value: "45,600 W",
             },
         ],
         color: "eraserRed",

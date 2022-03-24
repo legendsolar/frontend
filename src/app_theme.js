@@ -184,8 +184,7 @@ const themeOptions = {
             xs: 0,
             sm: 320, // webflow phone
             md: 568, // webflow side phone
-            lg: 768, // webflow tablet
-            xl: 1200, // not used currently
+            lg: 1300, // desktop
         },
     },
     components: {

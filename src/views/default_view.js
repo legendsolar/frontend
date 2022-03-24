@@ -48,7 +48,8 @@ const DefaultView = (props) => {
                     width: {
                         sm: "300px",
                         md: "500px",
-                        lg: "1250px",
+                        lg: "700px",
+                        xl: "1250px",
                     },
                     mr: "auto",
                     ml: "auto",
