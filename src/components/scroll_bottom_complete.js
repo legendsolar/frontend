@@ -28,7 +28,7 @@ const ScrollBottomToComplete = ({ onComplete, children, completed }) => {
                     backgroundColor: "whiteHaze.main",
                     borderRadius: "5px",
                     overflow: "auto",
-                    height: "900px",
+                    height: "95vh",
                     p: 2,
                 }}
             >
