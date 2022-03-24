@@ -21,6 +21,7 @@ import { useDatabaseObjectData, useDatabase } from "reactfire";
 import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 import LoadingComponent from "../loading_component";
 import { states } from "../../utils/static_lists";
+import { validatePostalCode } from "../../validation/user_data_validation";
 
 const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
     const auth = useAuth();
@@ -98,16 +99,9 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
             formData.state.errMsg = undefined;
         }
 
-        if (!formData.postalCode.value) {
-            formData.postalCode.error = true;
-            formData.postalCode.errMsg = "Zip code required";
-        } else if (formData.postalCode.value.length !== 5) {
-            formData.postalCode.error = true;
-            formData.postalCode.errMsg = "Zip code invalid";
-        } else {
-            formData.postalCode.error = false;
-            formData.postalCode.errMsg = undefined;
-        }
+        const errObj = validatePostalCode(formData.postalCode.value);
+        formData.postalCode.error = errObj.error;
+        formData.postalCode.errMsg = errObj.errMsg;
 
         setFormValues(formData);
 

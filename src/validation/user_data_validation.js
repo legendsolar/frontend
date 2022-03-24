@@ -30,3 +30,22 @@ export const validateSSN = (input, fullSSNRequired = false) => {
         errMsg: undefined,
     };
 };
+
+export const validatePostalCode = (input) => {
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "Zip code required",
+        };
+    } else if (!input.length || input.length !== 5 || !input.match(/\d+/g)) {
+        return {
+            error: true,
+            errMsg: "Zip code invalid",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};

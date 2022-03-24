@@ -11,7 +11,7 @@ import { useState } from "react";
 import { months } from "../../utils/static_lists";
 import { getYear } from "date-fns";
 import { format } from "date-fns";
-import { validateSSN } from "../../utils/validate_inputs";
+import { validateSSN } from "../../validation/user_data_validation";
 
 const ProtectedUserInfo = ({
     onChange,
