@@ -29,6 +29,22 @@ Deploys site to a public preview url based on current branch and commit. The `le
 Commits are automatically deployed to the staging project [legends alpha dev](https://console.firebase.google.com/u/1/project/legends-alpha/overview).
 
 Tags are deployed to the production environment, [legends alpha prod](https://console.firebase.google.com/u/1/project/legends-alpha-prod/overview).
-
-## Issues
-- Firebase Cloud Functions do not display meaningful error messages if they are broken when called through the functions API. They will return some error about an invalid CORS response even though that is not the case.
+## Sizing
+- Figma:
+  - Total Width: 1440 px
+  - Content Width: 1235 px
+- Cutoffs:
+  - xs: 0px
+  - sm: 478px (Webflow Phone)
+    - Content Width: 10px margin left and right
+    - Thus width can 458 be to 747px
+  - md: 767px (Webflow Landscape Phone)
+    - Content Width: 10px margin left and right
+    - Thus width can be 747px to 971px
+  - lg: 991px (webflow tablet)
+    - Content Width: 20px margin left and right
+    - Thus width can be 747px to 971px
+  - xl: >991px (webflow desktop)
+    - Content Width: 20px margin left and right to max width of 1100px
+    - Bumped to 1235px max width to match Figma
+    - Width can be 971px to 1235px 

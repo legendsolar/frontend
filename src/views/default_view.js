@@ -45,11 +45,18 @@ const DefaultView = (props) => {
             <NavBar></NavBar>
             <Box
                 sx={{
-                    width: {
-                        sm: "300px",
-                        md: "500px",
-                        lg: "700px",
-                        xl: "1250px",
+                    maxWidth: "1275px",
+                    pl: {
+                        sm: "10px",
+                        md: "10px",
+                        lg: "20px",
+                        xl: "20px",
+                    },
+                    pr: {
+                        sm: "10px",
+                        md: "10px",
+                        lg: "20px",
+                        xl: "20px",
                     },
                     mr: "auto",
                     ml: "auto",

@@ -177,15 +177,29 @@ const typographyOptions = {
     },
 };
 
+/**
+ *  Spacing:
+ *
+ *  Figma:
+ *     - Total Width: 1440 px
+ *     - Content Width: 1235 px
+ *
+ *  Webflow Cutoffs:
+ *     - xs: 0
+ *     -
+ *
+ *
+ */
+
 const themeOptions = {
     spacing: spacing,
     breakpoints: {
         values: {
             xs: 0,
-            sm: 320, // webflow phone
-            md: 568, // webflow side phone
-            lg: 800, // desktop
-            xl: 1300, // desktop
+            sm: 0, // webflow phone
+            md: 478, // webflow landscape phone
+            lg: 767, // webflow tablet
+            xl: 991, // desktop
         },
     },
     components: {
