@@ -164,8 +164,11 @@ const CreateTransactionComponent = () => {
                     }}
                     onChange={(e) => {
                         const { name, value } = e.target;
-
-                        const validatedAmount = validateTransferAmount(value);
+                        setTransferAmount(value);
+                    }}
+                    onBlur={(e) => {
+                        const validatedAmount =
+                            validateTransferAmount(transferAmount);
 
                         setTransferAmount(validatedAmount.value);
                     }}
