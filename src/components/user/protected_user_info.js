@@ -122,7 +122,7 @@ const ProtectedUserInfo = ({
                         {"SSN " +
                             (fullSSNRequired
                                 ? "(complete SSN required)"
-                                : "(last four digits requried)")}
+                                : "(last four digits required)")}
                     </Typography>
                     <TextField
                         data-private
