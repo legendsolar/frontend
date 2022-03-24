@@ -22,6 +22,9 @@ import {
     selectAllAccounts,
     selectWalletId,
 } from "../../slices/wallet_slice";
+
+import { validateTransferAmount } from "../../validation/transaction_validation";
+
 import LoadingComponent from "../loading_component";
 
 const CreateTransactionComponent = () => {
@@ -161,7 +164,10 @@ const CreateTransactionComponent = () => {
                     }}
                     onChange={(e) => {
                         const { name, value } = e.target;
-                        setTransferAmount(value);
+
+                        const validatedAmount = validateTransferAmount(value);
+
+                        setTransferAmount(validatedAmount.value);
                     }}
                 ></TextField>
 
