@@ -165,7 +165,7 @@ const CreateDwollaAccount = ({ onComplete }) => {
                 onClick={handleSubmit}
             >
                 {loading ? (
-                    <CircularProgress color="dark" size={30} />
+                    <CircularProgress color="light" size={30} />
                 ) : (
                     "Continue"
                 )}
