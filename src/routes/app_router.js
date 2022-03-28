@@ -33,6 +33,7 @@ import ErrorPage from "../pages/error_page";
 import NotFoundPage from "../pages/not_found_page";
 import { signUpOrder } from "../utils/user_sign_up_state";
 import SizingDemo from "../debug/sizing_demo";
+import AirtableTestPage from "../pages/airtable_test_page";
 
 function AppRouter() {
     const app = useFirebaseApp();
@@ -175,6 +176,7 @@ function AppRouter() {
                 <Route path="/loading" element={<LoadingView />} />
                 <Route path="/gridView" element={<GridPage />} />
                 <Route path="/playground" element={<PlaygroundPage />} />
+                <Route path="/airtable" element={<AirtableTestPage />} />
 
                 <Route path="/:path" element={<NotFoundPage />} />
             </Routes>
