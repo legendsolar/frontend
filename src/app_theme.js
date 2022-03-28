@@ -372,10 +372,16 @@ const themeOptions = {
                         lineHeight: "14px",
                         height: "50px",
                         textTransform: "uppercase",
-                        color: paletteOptions.palette.white.main,
+                        color: "#FFF",
                         "&:hover": {
                             opacity: "0.75",
-                            backgroundColor: "none",
+                            backgroundColor: "transparent",
+                        },
+
+                        "&:disabled": {
+                            color: "#FFF",
+                            opacity: "0.75",
+                            backgroundColor: "transparent",
                         },
                     },
                 },

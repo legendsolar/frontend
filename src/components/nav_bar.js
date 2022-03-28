@@ -178,13 +178,13 @@ const NavBar = ({}) => {
                         {(!auth.user ||
                             userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED") && (
                             <Button
-                                variant="medium"
+                                variant="header"
                                 disabled={true}
                                 onClick={() => {
                                     redirectToHomePage();
                                 }}
                             >
-                                Return Home
+                                Back to homepage
                             </Button>
                         )}
                     </Stack>
