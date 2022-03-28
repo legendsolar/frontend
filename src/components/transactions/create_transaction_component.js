@@ -230,12 +230,6 @@ const CreateTransactionComponent = () => {
     } else if (state.page === "review") {
         return (
             <Stack spacing={2}>
-                <Typography>Review Transfer</Typography>
-
-                <Button variant="mini" onClick={goBack}>
-                    Back
-                </Button>
-
                 <Typography>
                     {"From: " +
                         sourceAccount?.institution +
@@ -262,6 +256,10 @@ const CreateTransactionComponent = () => {
                     ) : (
                         "Confirm Transfer"
                     )}
+                </Button>
+
+                <Button variant="secondary" onClick={goBack}>
+                    Edit Transfer
                 </Button>
             </Stack>
         );
