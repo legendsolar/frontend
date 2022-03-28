@@ -22,9 +22,13 @@ function SignInView() {
     const initValues = {
         email: {
             value: "",
+            error: false,
+            errMsg: "",
         },
         password: {
             value: "",
+            error: false,
+            errMsg: "",
         },
     };
 
@@ -36,7 +40,7 @@ function SignInView() {
             formData.password.errMsg = "Password required";
         } else {
             formData.password.error = false;
-            formData.password.errMsg = undefined;
+            formData.password.errMsg = "";
         }
 
         if (!formData.email.value) {
@@ -44,7 +48,7 @@ function SignInView() {
             formData.email.errMsg = "Email required";
         } else {
             formData.email.error = false;
-            formData.email.errMsg = undefined;
+            formData.email.errMsg = "";
         }
 
         setFormValues(formData);

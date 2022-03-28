@@ -4,7 +4,7 @@ import GoogleLogo from "../icons/google_logo";
 const IconButton = ({ label, onClick, icon, color }) => {
     return (
         <Button
-            variant="medium"
+            variant="secondary"
             onClick={onClick}
             sx={{
                 backgroundColor: color + ".main",
