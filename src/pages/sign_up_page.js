@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Typography, Box, Stack } from "@mui/material";
+import { Typography, Box, Stack, Button } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../hooks/use_auth";
@@ -147,17 +147,21 @@ export default function SignUpView() {
                     ></IconButton>
 
                     <Stack direction="row" justifyContent={"flex-end"}>
-                        <Typography variant="smallLabel">
-                            Have an account?
-                        </Typography>
-
-                        <Typography
-                            variant="smallLabel"
-                            color="grassGreen.main"
+                        <Button
+                            variant="text"
                             onClick={() => navigate("/signin")}
                         >
-                            Login
-                        </Typography>
+                            <Typography variant="smallLabel">
+                                {"Have an account? "}
+                            </Typography>
+                            <Typography
+                                variant="smallLabel"
+                                color="grassGreen.main"
+                                sx={{ ml: 1 }}
+                            >
+                                {" Login"}
+                            </Typography>
+                        </Button>
                     </Stack>
                 </Stack>
             </Box>

@@ -381,6 +381,19 @@ const themeOptions = {
                 },
 
                 {
+                    props: { variant: "text" },
+                    style: {
+                        backgroundColor: "transparent",
+                        color: "none",
+                        "&:hover": {
+                            opacity: "0.75",
+                            backgroundColor: "transparent",
+                            // color: "rgba(255, 255, 255, 0.5)",
+                        },
+                    },
+                },
+
+                {
                     props: { variant: "header-outlined" },
                     style: {
                         ...typographyOptions.typography.smallLabel,
@@ -482,6 +495,10 @@ const themeOptions = {
                     borderRadius: "5px",
                     whiteSpace: "nowrap",
                     minWidth: "auto",
+                    "&:hover": {
+                        backgroundColor: "transparent",
+                    },
+                    backgroundColor: "transparent",
                 },
             },
         },

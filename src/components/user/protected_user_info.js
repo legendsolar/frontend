@@ -148,22 +148,6 @@ const ProtectedUserInfo = ({
 
                     <Grid container spacing={2} sx={{ width: "100%" }}>
                         <Grid item xs={4} md={4}>
-                            <TextField
-                                data-private
-                                error={!!formValues.day.error}
-                                helperText={formValues.day.errMsg}
-                                disabled={completed}
-                                name="day"
-                                label="Day"
-                                variant="filled"
-                                type={completed ? "string" : "number"}
-                                value={completed ? "••" : formValues.day.value}
-                                onChange={handleInputChange}
-                                fullWidth
-                            ></TextField>
-                        </Grid>
-
-                        <Grid item xs={4} md={4}>
                             <FormControl
                                 variant="filled"
                                 fullWidth
@@ -194,6 +178,22 @@ const ProtectedUserInfo = ({
                                     })}
                                 </Select>
                             </FormControl>
+                        </Grid>
+
+                        <Grid item xs={4} md={4}>
+                            <TextField
+                                data-private
+                                error={!!formValues.day.error}
+                                helperText={formValues.day.errMsg}
+                                disabled={completed}
+                                name="day"
+                                label="Day"
+                                variant="filled"
+                                type={completed ? "string" : "number"}
+                                value={completed ? "••" : formValues.day.value}
+                                onChange={handleInputChange}
+                                fullWidth
+                            ></TextField>
                         </Grid>
 
                         <Grid item xs={4} md={4}>
