@@ -390,6 +390,11 @@ const themeOptions = {
                     props: { variant: "text" },
                     style: {
                         backgroundColor: "transparent",
+                        alignItems: "start",
+                        justifyContent: "start",
+                        whiteSpace: "normal",
+                        borderRadius: "none",
+                        padding: "0px",
                         color: "none",
                         "&:hover": {
                             opacity: "0.75",

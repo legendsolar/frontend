@@ -1,4 +1,4 @@
-import { Grid, Typography, Box, Stack } from "@mui/material";
+import { Grid, Typography, Box, Stack, Button } from "@mui/material";
 import DefaultComponent from "./default_component";
 import LassorImg from "../assets/Lassor.png";
 import NeraImg from "../assets/Nera.png";
@@ -11,54 +11,174 @@ const Footer = () => {
                     <Stack>
                         <DefaultComponent>
                             <Grid container spacing={2}>
-                                <Grid item xs={12} md={4}>
+                                <Grid item xs={12} lg={3}>
                                     <Stack>
                                         <Typography variant="smallHeadline">
                                             Company
                                         </Typography>
-                                        <Typography variant="body2">
-                                            Reserve Panels
-                                        </Typography>
-                                        <Typography variant="body2">
-                                            About us
-                                        </Typography>
-                                        <Typography variant="body2">
-                                            The team
-                                        </Typography>
+
+                                        <Button
+                                            href={
+                                                "https://www.legends.solar/reserve-panels"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                Reserve Panels
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            href={
+                                                "https://www.legends.solar/about-legends"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                About us
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            href={
+                                                "https://www.legends.solar/the-team"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                The team
+                                            </Typography>
+                                        </Button>
                                     </Stack>
                                 </Grid>
 
-                                <Grid item xs={12} md={4}>
+                                <Grid item xs={12} lg={3}>
                                     <Stack>
-                                        <Typography variant="smallHeadline">
-                                            Learn
-                                        </Typography>
-                                        <Typography variant="body2">
-                                            How it works
-                                        </Typography>
-                                        <Typography variant="body2">
-                                            FAQs
-                                        </Typography>
-                                        <Typography variant="body2">
-                                            News Room
-                                        </Typography>
+                                        <Button
+                                            href={
+                                                "https://www.legends.solar/reserve-panels"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="smallHeadline">
+                                                Learn
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            href={
+                                                "https://www.legends.solar/how-it-works"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                How it works
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            href={
+                                                "https://www.legends.solar/faqs"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                FAQs
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            href={
+                                                "https://www.legends.solar/news-room"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                News Room
+                                            </Typography>
+                                        </Button>
                                     </Stack>
                                 </Grid>
 
-                                <Grid item xs={12} md={4}>
+                                <Grid item xs={12} lg={3}>
                                     <Stack>
                                         <Typography variant="smallHeadline">
                                             Connect
                                         </Typography>
-                                        <Typography variant="body2">
-                                            Twitter
+
+                                        <Button
+                                            href={
+                                                "https://twitter.com/legends_solar"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                Twitter
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            href={
+                                                "https://www.instagram.com/legends.solar/"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                Instagram
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            href={
+                                                "https://www.linkedin.com/company/legendssolar/"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                LinkedIn
+                                            </Typography>
+                                        </Button>
+                                    </Stack>
+                                </Grid>
+
+                                <Grid item xs={12} lg={3}>
+                                    <Stack>
+                                        <Typography variant="smallHeadline">
+                                            Legal
                                         </Typography>
-                                        <Typography variant="body2">
-                                            Instagram
-                                        </Typography>
-                                        <Typography variant="body2">
-                                            LinkedIn
-                                        </Typography>
+
+                                        <Button
+                                            href={
+                                                "https://www.legends.solar/legal/privacy-policy"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                Privacy Policy
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            href={
+                                                "https://www.legends.solar/legal/terms-and-conditions"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                Terms & Conditions
+                                            </Typography>
+                                        </Button>
+
+                                        <Button
+                                            href={
+                                                "https://www.legends.solar/legal/legal"
+                                            }
+                                            variant="text"
+                                        >
+                                            <Typography variant="body2">
+                                                Disclaimer
+                                            </Typography>
+                                        </Button>
                                     </Stack>
                                 </Grid>
                             </Grid>
@@ -98,42 +218,55 @@ const Footer = () => {
                                 <Typography variant="smallHeadline">
                                     Contact Us
                                 </Typography>
-                                <Stack direction="row">
-                                    <img
-                                        style={{
-                                            width: "70px",
-                                            height: "70px",
-                                            borderRadius: "5px",
-                                        }}
-                                        src={NeraImg}
-                                    ></img>
-                                    <Stack>
-                                        <Typography variant="subtitle1">
-                                            Nera Lerner
-                                        </Typography>
-                                        <Typography variant="label">
-                                            Co-Founder & COO
-                                        </Typography>
+
+                                <Button
+                                    href={
+                                        "mailto:nera@LetsBeLegends.com?subject=Let%27s%20Be%20Legends"
+                                    }
+                                >
+                                    <Stack direction="row">
+                                        <img
+                                            style={{
+                                                width: "70px",
+                                                height: "70px",
+                                                borderRadius: "5px",
+                                            }}
+                                            src={NeraImg}
+                                        ></img>
+                                        <Stack>
+                                            <Typography variant="subtitle1">
+                                                Nera Lerner
+                                            </Typography>
+                                            <Typography variant="label">
+                                                Co-Founder & COO
+                                            </Typography>
+                                        </Stack>
                                     </Stack>
-                                </Stack>
-                                <Stack direction="row">
-                                    <img
-                                        style={{
-                                            width: "70px",
-                                            height: "70px",
-                                            borderRadius: "5px",
-                                        }}
-                                        src={LassorImg}
-                                    ></img>
-                                    <Stack>
-                                        <Typography variant="subtitle1">
-                                            Lassor Feasley
-                                        </Typography>
-                                        <Typography variant="label">
-                                            Co-Founder & CEO
-                                        </Typography>
+                                </Button>
+                                <Button
+                                    href={
+                                        "mailto:lassor@LetsBeLegends.com?subject=Let%27s%20Be%20Legends"
+                                    }
+                                >
+                                    <Stack direction="row">
+                                        <img
+                                            style={{
+                                                width: "70px",
+                                                height: "70px",
+                                                borderRadius: "5px",
+                                            }}
+                                            src={LassorImg}
+                                        ></img>
+                                        <Stack>
+                                            <Typography variant="subtitle1">
+                                                Lassor Feasley
+                                            </Typography>
+                                            <Typography variant="label">
+                                                Founder & CEO
+                                            </Typography>
+                                        </Stack>
                                     </Stack>
-                                </Stack>
+                                </Button>
                             </Stack>
                         </DefaultComponent>
 
