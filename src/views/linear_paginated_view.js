@@ -39,6 +39,7 @@ const LinearPageinatedView = ({ pageContent, header, pageIndex }) => {
     const [state, dispatch] = useReducer(reducer, initState);
 
     const titles = pageContent.map((content, index) => {
+        console.log(content.disabled);
         if (content.sidebar !== false) {
             return (
                 <ListItemButton

@@ -108,7 +108,7 @@ const CompleteAccountPage = () => {
                 <SignUpComponent onComplete={onComplete}></SignUpComponent>
             ),
             disabled:
-                userSignUpOrder(userSignUpState) != signUpOrder.NO_ACCOUNT,
+                userSignUpOrder(userSignUpState) !== signUpOrder.NO_ACCOUNT,
         },
 
         {
@@ -119,7 +119,8 @@ const CompleteAccountPage = () => {
                 ></PolicyAcceptanceComponent>
             ),
             disabled:
-                userSignUpOrder(userSignUpState) < signUpOrder.ACCOUNT_CREATED,
+                userSignUpOrder(userSignUpState) !==
+                signUpOrder.ACCOUNT_CREATED,
         },
 
         {
@@ -130,7 +131,7 @@ const CompleteAccountPage = () => {
                 ></AccreditationStatus>
             ),
             disabled:
-                userSignUpOrder(userSignUpState) <
+                userSignUpOrder(userSignUpState) !=
                 signUpOrder.ACCEPTANCE_COMPLETE,
         },
         {
@@ -141,7 +142,7 @@ const CompleteAccountPage = () => {
                 ></CreateDwollaAccount>
             ),
             disabled:
-                userSignUpOrder(userSignUpState) <
+                userSignUpOrder(userSignUpState) !==
                 signUpOrder.ACCREDATION_VERIF_COMPLETE,
         },
         {
@@ -189,8 +190,8 @@ const CompleteAccountPage = () => {
                 </Stack>
             ),
             disabled:
-                userSignUpOrder(userSignUpState) <
-                signUpOrder.DWOLLA_ACCOUNT_KBA_REQ,
+                userSignUpOrder(userSignUpState) !==
+                signUpOrder.DWOLLA_ACCOUNT_VERIFIED,
             sidebar: true,
         },
 

@@ -49,7 +49,7 @@ function CheckboxList({ options, precheckedList, onInputChange }) {
                         <Stack
                             direction="row"
                             alignItems="flex-start"
-                            spacing={0}
+                            spacing={2}
                         >
                             <Checkbox
                                 sx={{
