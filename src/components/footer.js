@@ -11,7 +11,7 @@ const Footer = () => {
                     <Stack>
                         <DefaultComponent>
                             <Grid container spacing={2}>
-                                <Grid item xs={12} lg={3}>
+                                <Grid item xs={12} sm={6} lg={3}>
                                     <Stack>
                                         <Typography variant="smallHeadline">
                                             Company
@@ -52,7 +52,7 @@ const Footer = () => {
                                     </Stack>
                                 </Grid>
 
-                                <Grid item xs={12} lg={3}>
+                                <Grid item xs={12} sm={6} lg={3}>
                                     <Stack>
                                         <Button
                                             href={
@@ -100,7 +100,7 @@ const Footer = () => {
                                     </Stack>
                                 </Grid>
 
-                                <Grid item xs={12} lg={3}>
+                                <Grid item xs={12} sm={6} lg={3}>
                                     <Stack>
                                         <Typography variant="smallHeadline">
                                             Connect
@@ -141,7 +141,7 @@ const Footer = () => {
                                     </Stack>
                                 </Grid>
 
-                                <Grid item xs={12} lg={3}>
+                                <Grid item xs={12} sm={6} lg={3}>
                                     <Stack>
                                         <Typography variant="smallHeadline">
                                             Legal

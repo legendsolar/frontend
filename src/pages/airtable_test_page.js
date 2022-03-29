@@ -21,7 +21,7 @@ const AirtableTestPage = () => {
 
         console.log(solarTable);
 
-        solarTable.selectRecordsAsync().then((result) => {
+        solarTable.select().then((result) => {
             const records = result.records;
             console.log(records);
             setRecords(records);
