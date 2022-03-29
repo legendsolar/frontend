@@ -35,7 +35,7 @@ const DesignSysDemo = (props) => {
             <Paper variant="container">
                 <Stack>
                     <Typography variant="subtitle2">{"Typography"}</Typography>
-                    <Typography variant="headline1">Headline 1</Typography>
+                    <Typography variant="headline1">{"Headline 1"}</Typography>
                     <Typography variant="subtitle1">Subtitle 1</Typography>
                     <Typography variant="body1">Body 1</Typography>
                     <Typography variant="headline2">Headline 2</Typography>
