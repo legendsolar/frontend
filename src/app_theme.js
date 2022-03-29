@@ -304,7 +304,7 @@ const themeOptions = {
                         color: paletteOptions.palette.legendaryGreen
                             .contrastText,
                         fontWeight: 400,
-                        height: "55px",
+                        height: "74px",
                         boxShadow: "0px 0px 25px rgba(99, 110, 114, 0.25)",
 
                         "&:hover": {
@@ -332,7 +332,7 @@ const themeOptions = {
                 {
                     props: { variant: "secondary" },
                     style: {
-                        height: "55px",
+                        height: "44px",
                         backgroundColor: paletteOptions.palette.blackDawn.main,
                         color: paletteOptions.palette.blackDawn.contrastText,
 

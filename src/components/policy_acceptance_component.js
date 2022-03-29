@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../hooks/use_auth";
 import { useDatabase } from "reactfire";
 import { useDatabaseObjectData } from "reactfire";
+import LoadingComponent from "./loading_component";
 
 const PolicyAcceptanceComponent = ({ onComplete }) => {
     const cloudFunctions = useCloudFunctions();
@@ -58,9 +59,11 @@ const PolicyAcceptanceComponent = ({ onComplete }) => {
         setPolicyAcceptance(newPolicyAcceptance);
 
         if (
-            newPolicyAcceptance.privacy &&
+            newPolicyAcceptance.privacy ||
             newPolicyAcceptance.termsAndConditions
         ) {
+            setLoading(true);
+
             cloudFunctions
                 .updateUserAcceptanceState({
                     privacy: {
@@ -74,35 +77,42 @@ const PolicyAcceptanceComponent = ({ onComplete }) => {
                 })
                 .then(() => {
                     onComplete();
+                    setLoading(false);
                 });
         }
     };
 
+    if (loading) {
+        return <LoadingComponent></LoadingComponent>;
+    }
+
     return (
         <Stack spacing={6}>
-            <Typography variant="smallHeadline">Privacy Notice</Typography>
-            <ScrollBottomToComplete
-                onComplete={(event) => {
-                    onCompleteItem(event, "privacy");
-                }}
-                completed={policyAcceptance.privacy}
-            >
-                <div dangerouslySetInnerHTML={{ __html: PrivacyPolicy }}></div>
-            </ScrollBottomToComplete>
+            {!policyAcceptance.privacy && (
+                <ScrollBottomToComplete
+                    onComplete={(event) => {
+                        onCompleteItem(event, "privacy");
+                    }}
+                    completed={policyAcceptance.privacy}
+                >
+                    <div
+                        dangerouslySetInnerHTML={{ __html: PrivacyPolicy }}
+                    ></div>
+                </ScrollBottomToComplete>
+            )}
 
-            <Typography variant="smallHeadline">
-                Terms and Conditions
-            </Typography>
-            <ScrollBottomToComplete
-                onComplete={(event) => {
-                    onCompleteItem(event, "termsAndConditions");
-                }}
-                completed={policyAcceptance.termsAndConditions}
-            >
-                <div
-                    dangerouslySetInnerHTML={{ __html: TermsAndConditions }}
-                ></div>
-            </ScrollBottomToComplete>
+            {policyAcceptance.privacy && (
+                <ScrollBottomToComplete
+                    onComplete={(event) => {
+                        onCompleteItem(event, "termsAndConditions");
+                    }}
+                    completed={policyAcceptance.termsAndConditions}
+                >
+                    <div
+                        dangerouslySetInnerHTML={{ __html: TermsAndConditions }}
+                    ></div>
+                </ScrollBottomToComplete>
+            )}
         </Stack>
     );
 };

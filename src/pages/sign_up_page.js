@@ -26,85 +26,12 @@ export default function SignUpView() {
         },
     };
 
-    const [formValues, setFormValues] = useState(initValues);
-
-    const formDataValid = (formData) => {
-        if (!formData.password.value) {
-            formData.password.error = true;
-            formData.password.errMsg = "Password required";
-        } else {
-            formData.password.error = false;
-            formData.password.errMsg = undefined;
-        }
-
-        if (!formData.email.value) {
-            formData.email.error = true;
-            formData.email.errMsg = "Email required";
-        } else {
-            formData.email.error = false;
-            formData.email.errMsg = undefined;
-        }
-
-        setFormValues(formData);
-    };
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-
-        const updatedObject = { ...formValues };
-        updatedObject[name].value = value;
-        formDataValid(updatedObject);
-    };
-
     const onSuccessfulSignUp = () => {
         navigate("/complete-account/create");
     };
 
     const handleFirebaseError = (error) => {
         const translatedError = authErrorTranslator(error);
-
-        const newFormValues = { ...formValues };
-        newFormValues[translatedError.type].error = true;
-        newFormValues[translatedError.type].errMsg = translatedError.message;
-
-        setFormValues(newFormValues);
-    };
-
-    const handleSubmit = (event) => {
-        console.log("submit");
-        event.preventDefault();
-
-        authHook
-            .signup(formValues.email.value, formValues.password.value)
-            .then(() => {
-                onSuccessfulSignUp();
-            })
-            .catch((error) => {
-                const translatedError = authErrorTranslator(error);
-
-                const newFormValues = { ...formValues };
-                newFormValues[translatedError.type].error = true;
-                newFormValues[translatedError.type].errMsg =
-                    translatedError.message;
-
-                setFormValues(newFormValues);
-
-                console.log("error");
-                console.log(error);
-                console.log(error.message);
-                console.log(error.code);
-            });
-    };
-
-    const isDisabled = () => {
-        const error = Object.keys(formValues)
-            .map((key) => {
-                return formValues[key].error !== false;
-            })
-            .some((el) => el);
-        console.log(error);
-
-        return error;
     };
 
     return (

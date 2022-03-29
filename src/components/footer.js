@@ -18,13 +18,11 @@ const Footer = () => {
                                         </Typography>
 
                                         <Button
-                                            href={
-                                                "https://www.legends.solar/reserve-panels"
-                                            }
+                                            href={"https://www.legends.solar/"}
                                             variant="text"
                                         >
                                             <Typography variant="body2">
-                                                Reserve Panels
+                                                Home
                                             </Typography>
                                         </Button>
 

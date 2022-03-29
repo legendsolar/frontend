@@ -117,20 +117,14 @@ const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
 
     return (
         <div>
-            <Stack
-                sx={{
-                    m: 4,
-                }}
-                spacing={2}
-                justifyContent="space-between"
-            >
-                <Typography variant="body2">
+            <Stack spacing={2}>
+                <Typography variant="subtitle1">
                     Legends Solar offers private placements regulated by the SEC
                     under Regulation D. All investors must be accredited in
                     order to participate in Legends Solar offerings.
                 </Typography>
 
-                <Typography variant="label" sx={{ mt: 5 }}>
+                <Typography variant="subtitle2" sx={{ mt: 7 }}>
                     Check all that apply
                 </Typography>
 

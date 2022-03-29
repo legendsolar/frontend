@@ -49,3 +49,17 @@ export const validatePostalCode = (input) => {
         };
     }
 };
+
+export const validatePassword = (input) => {
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "Password required",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};

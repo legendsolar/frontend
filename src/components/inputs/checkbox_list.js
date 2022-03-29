@@ -52,6 +52,11 @@ function CheckboxList({ options, precheckedList, onInputChange }) {
                             spacing={0}
                         >
                             <Checkbox
+                                sx={{
+                                    fontSize: "22px",
+                                    mt: "auto",
+                                    mb: "auto",
+                                }}
                                 checked={checkedList[key]}
                                 disabled={exclusive ? exclusive != key : false}
                                 onChange={(event) => {

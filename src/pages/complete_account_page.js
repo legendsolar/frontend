@@ -112,7 +112,7 @@ const CompleteAccountPage = () => {
         },
 
         {
-            title: "Privacy and Conditions",
+            title: "Terms and Privacy",
             content: (
                 <PolicyAcceptanceComponent
                     onComplete={onComplete}
