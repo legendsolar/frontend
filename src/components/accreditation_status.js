@@ -12,6 +12,7 @@ import CheckboxList from "./inputs/checkbox_list";
 import { useDatabaseObjectData, useDatabase } from "reactfire";
 import { set, ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
+import Divider from "./basics/divider";
 
 const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
     const auth = useAuth();
@@ -117,7 +118,7 @@ const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
 
     return (
         <div>
-            <Stack spacing={2}>
+            <Stack spacing={4}>
                 <Typography variant="subtitle1">
                     Legends Solar offers private placements regulated by the SEC
                     under Regulation D. All investors must be accredited in
@@ -128,13 +129,19 @@ const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
                     Check all that apply
                 </Typography>
 
-                <CheckboxList
-                    options={accreditationOptionsList}
-                    precheckedList={checkedList}
-                    onInputChange={(checkboxListChecked) => {
-                        setCheckedList(checkboxListChecked);
-                    }}
-                ></CheckboxList>
+                <div style={{ margin: "10px 0px 0px 0px" }}>
+                    <Divider></Divider>
+
+                    <CheckboxList
+                        options={accreditationOptionsList}
+                        precheckedList={checkedList}
+                        onInputChange={(checkboxListChecked) => {
+                            setCheckedList(checkboxListChecked);
+                        }}
+                    ></CheckboxList>
+
+                    <Divider></Divider>
+                </div>
 
                 <Button
                     variant="primary"

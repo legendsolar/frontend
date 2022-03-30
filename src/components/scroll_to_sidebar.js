@@ -30,7 +30,7 @@ const ScrollToSidebar = ({
                         >
                             <Typography variant="subtitle1">{text}</Typography>
                         </ListItemButton>
-                        {index !== list.length - 1 && <Divider></Divider>}
+                        {/* {index !== list.length - 1 && <Divider></Divider>} */}
                     </div>
                 ))}
                 {getAdditionalButtons()}
