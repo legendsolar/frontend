@@ -7,14 +7,27 @@ import {
     Typography,
     FormHelperText,
 } from "@mui/material";
+import PropTypes from "prop-types";
+import { useState } from "react";
 
-const MultiSelect = ({ id, text, fields, value, error, onChangeListener }) => {
+const MultiSelect = ({
+    name,
+    text,
+    fields,
+    value,
+    error,
+    onChangeListener,
+}) => {
+    const [selectedValue, setSelectedValue] = useState(value);
+
     const handleChange = (event) => {
         const value = event.target.value;
 
+        setSelectedValue(value);
+
         onChangeListener({
-            id: id,
             value: value,
+            name: name,
         });
     };
 
@@ -23,14 +36,14 @@ const MultiSelect = ({ id, text, fields, value, error, onChangeListener }) => {
             <InputLabel>{text}</InputLabel>
             <Select
                 helperText={text}
-                name={id}
-                value={value}
-                onChange={onChangeListener}
+                name={name}
+                value={selectedValue}
+                onChange={handleChange}
             >
                 {fields.map((field) => {
                     return (
-                        <MenuItem key={field} value={field}>
-                            {field}
+                        <MenuItem key={field.id} value={field.id}>
+                            {field.text}
                         </MenuItem>
                     );
                 })}
@@ -42,6 +55,22 @@ const MultiSelect = ({ id, text, fields, value, error, onChangeListener }) => {
             )}
         </FormControl>
     );
+};
+
+MultiSelect.propTypes = {
+    name: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    fields: PropTypes.array,
+    value: PropTypes.string,
+    error: PropTypes.shape({
+        error: PropTypes.bool,
+        errMsg: PropTypes.string,
+    }),
+    onChangeListener: PropTypes.func,
+};
+
+MultiSelect.defaultProps = {
+    onChangeListener: () => {},
 };
 
 export default MultiSelect;

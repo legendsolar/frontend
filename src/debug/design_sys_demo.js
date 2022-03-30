@@ -15,6 +15,7 @@ import Wallet from "../components/wallet/wallet_component";
 import UserStatus from "../components/user_status";
 import DefaultComponent from "../components/default_component";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
+import MultiSelect from "../components/multiselect";
 
 const DesignSysDemo = (props) => {
     const theme = useTheme();
@@ -206,6 +207,32 @@ const DesignSysDemo = (props) => {
                         value={""}
                         // InputProps={{ disableUnderline: true }}
                     ></TextField>
+
+                    <MultiSelect
+                        name="MultiselectName"
+                        text="Multiselect"
+                        value="a"
+                        fields={[
+                            {
+                                id: 1,
+                                text: "Field 1",
+                            },
+                            {
+                                id: 2,
+                                text: "Field 2",
+                            },
+                            {
+                                id: 3,
+                                text: "Field 3",
+                            },
+                        ]}
+                        onChangeListener={({ value, name }) => {
+                            console.log("selected: ", {
+                                value: value,
+                                name: name,
+                            });
+                        }}
+                    ></MultiSelect>
                 </Stack>
             </Paper>
 
