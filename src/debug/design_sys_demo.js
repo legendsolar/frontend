@@ -14,6 +14,7 @@ import CheckboxList from "../components/inputs/checkbox_list";
 import Wallet from "../components/wallet/wallet_component";
 import UserStatus from "../components/user_status";
 import DefaultComponent from "../components/default_component";
+import ScrollToSidebar from "../components/scroll_to_sidebar";
 
 const DesignSysDemo = (props) => {
     const theme = useTheme();
@@ -183,6 +184,15 @@ const DesignSysDemo = (props) => {
                     ></CheckboxList>
                 </Stack>
             </Paper>
+
+            <ScrollToSidebar
+                header={
+                    <Typography variant="smallHeadline">
+                        Scroll To Sidebar
+                    </Typography>
+                }
+                contentTitles={["Title 1", "Title 2", "Title 3", "Title 4"]}
+            ></ScrollToSidebar>
 
             <Paper variant="container">
                 <Stack>
