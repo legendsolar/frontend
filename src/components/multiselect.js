@@ -18,10 +18,12 @@ const MultiSelect = ({
     error,
     onChangeListener,
 }) => {
-    const [selectedValue, setSelectedValue] = useState(value);
+    const [selectedValue, setSelectedValue] = useState(null);
 
     const handleChange = (event) => {
         const value = event.target.value;
+
+        console.log(value);
 
         setSelectedValue(value);
 

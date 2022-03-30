@@ -27,8 +27,8 @@ const IdentityVerificationKBA = ({ onComplete }) => {
             });
     }, []);
 
-    const onQuestionUpdate = ({ id, value }) => {
-        setSelected({ ...selected, [id]: value });
+    const onQuestionUpdate = ({ value, name }) => {
+        setSelected({ ...selected, [name]: value });
     };
 
     const submitDisabled = () => {
@@ -67,10 +67,9 @@ const IdentityVerificationKBA = ({ onComplete }) => {
                     return (
                         <MultiSelect
                             key={question.id}
-                            id={question.id}
+                            name={question.id}
                             text={question.text}
                             fields={question.answers}
-                            value={selected[question.id]}
                             onChangeListener={onQuestionUpdate}
                         ></MultiSelect>
                     );
