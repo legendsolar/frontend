@@ -45,7 +45,7 @@ const InvestPage = () => {
         <Stack spacing={4}>
             <Typography variant="smallHeadline">Pre-commit</Typography>
             <PanelsSvg color={theme.palette[asset.color].main}></PanelsSvg>
-            <MetricList valuePairs={asset.metrics}></MetricList>
+            <MetricList valuePairs={asset.metrics} dividers={true}></MetricList>
             <Button
                 variant="primary"
                 onClick={() =>
@@ -63,18 +63,7 @@ const InvestPage = () => {
     const sidebarReviewState = (
         <Stack spacing={4}>
             <PanelsSvg color={theme.palette.skyBlue.main}></PanelsSvg>
-            <MetricList
-                valuePairs={[
-                    {
-                        metric: "Total panels",
-                        value: "300/300",
-                    },
-                    {
-                        metric: "Total Investment",
-                        value: "$74,500",
-                    },
-                ]}
-            ></MetricList>
+            <MetricList valuePairs={asset.metrics}></MetricList>
 
             {state.userState === "REVIEWING" && (
                 <Button

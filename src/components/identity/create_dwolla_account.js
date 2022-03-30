@@ -120,6 +120,8 @@ const CreateDwollaAccount = ({ onComplete }) => {
                 purposes.
             </Typography>
 
+            <Divider></Divider>
+
             <Typography variant="subtitle2">Mailing Address</Typography>
 
             <ModifyUserInfo
@@ -127,6 +129,8 @@ const CreateDwollaAccount = ({ onComplete }) => {
                     onUpdate(unprotectedUserInfo, 0);
                 }}
             ></ModifyUserInfo>
+
+            <Divider></Divider>
 
             <Stack
                 direction={"row"}

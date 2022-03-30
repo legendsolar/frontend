@@ -59,13 +59,22 @@ const ExplorePage = () => {
                                     </Stack>
                                     <Grid container>
                                         <Grid item xs={12} lg={6}>
-                                            <PanelsSvg
-                                                color={
-                                                    theme.palette[
-                                                        investment.color
-                                                    ].main
-                                                }
-                                            ></PanelsSvg>
+                                            <Box
+                                                sx={{
+                                                    height: "100%",
+                                                }}
+                                                display="flex"
+                                                justifyContent={"center"}
+                                                alignItems="center"
+                                            >
+                                                <PanelsSvg
+                                                    color={
+                                                        theme.palette[
+                                                            investment.color
+                                                        ].main
+                                                    }
+                                                ></PanelsSvg>
+                                            </Box>
                                         </Grid>
 
                                         <Grid
@@ -104,7 +113,7 @@ const ExplorePage = () => {
                                                     <Typography variant="smallHeadline">
                                                         Specifications
                                                     </Typography>
-                                                    {investment.metrics.map(
+                                                    {investment.specifications.map(
                                                         ({ metric, value }) => (
                                                             <Stack
                                                                 direction="row"

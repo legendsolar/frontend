@@ -4,6 +4,24 @@ const investmentOpportunities = {
         minInvestment: "$131,000",
         metrics: [
             {
+                metric: "Location",
+                value: "2868 Dutton Meadow Santa Rosa, CA 95407",
+            },
+            {
+                metric: "Panels",
+                value: "114",
+            },
+            {
+                metric: "Watts Installed",
+                value: "46,600",
+            },
+            {
+                metric: "Total Investment",
+                value: "$131,000",
+            },
+        ],
+        specifications: [
+            {
                 metric: "Number of panels",
                 value: "114",
             },
@@ -90,6 +108,21 @@ const investmentOpportunities = {
                 value: "45,600 W",
             },
         ],
+
+        specifications: [
+            {
+                metric: "Number of panels",
+                value: "114",
+            },
+            {
+                metric: "Make & model",
+                value: "Phono Solar 400W",
+            },
+            {
+                metric: "Watts Installed",
+                value: "45,600 W",
+            },
+        ],
         color: "pencilYellow",
     },
 
@@ -98,6 +131,21 @@ const investmentOpportunities = {
         minInvestment: "$131,000",
 
         metrics: [
+            {
+                metric: "Number of panels",
+                value: "114",
+            },
+            {
+                metric: "Make & model",
+                value: "Phono Solar 400W",
+            },
+            {
+                metric: "Watts Installed",
+                value: "45,600 W",
+            },
+        ],
+
+        specifications: [
             {
                 metric: "Number of panels",
                 value: "114",
@@ -120,6 +168,21 @@ const investmentOpportunities = {
         minInvestment: "$131,000",
 
         metrics: [
+            {
+                metric: "Number of panels",
+                value: "114",
+            },
+            {
+                metric: "Make & model",
+                value: "Phono Solar 400W",
+            },
+            {
+                metric: "Watts Installed",
+                value: "45,600 W",
+            },
+        ],
+
+        specifications: [
             {
                 metric: "Number of panels",
                 value: "114",

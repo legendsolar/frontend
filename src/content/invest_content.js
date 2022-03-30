@@ -28,62 +28,54 @@ const InvestContent = ({ assetId }) => {
                             {asset.title}
                         </Typography>
                     </Stack>
-                    <Typography variant="smallHeadline">
+                    <Typography variant="body">
                         Legends Incorporated is offering equity in four separate
                         commercial solar facilities to accredited investors.
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography variant="body">
                         Two facilities are in in New Jersey and two in
                         California. Each solar facility is on an ‘Extra Space
                         Mini Storage’ managed property owned by the REIT Merit
                         Hill Capital.
                     </Typography>
 
-                    <Typography variant="body2">
-                        Once operational, these facilities will earn a stream of
-                        payments from Extra Space as well as tax benefits.
-                        Payments will be fixed, regardless of solar
-                        productivity.
+                    <Typography variant="body">
+                        Merit Hill is a leading self-storage owner with more
+                        than 200 properties in 33 states. Extra Space Storage
+                        manages and operates dozens of Merit Hill properties.
                     </Typography>
 
-                    <Typography variant="body2">
+                    <Typography variant="body">
+                        Once operational, this facility will earn a stream of
+                        payments from Extra Space as well as tax benefits.
+                        Payments will be fixed, regardless of solar
+                        productivity. The panels are covered by an installation,
+                        equipment, and workmanship warranty for the full
+                        duration of the holding period.
+                    </Typography>
+
+                    <Typography variant="subtitle2">
                         To effectively monetize the tax benefits this investment
                         provides, you should meet the following criteria:
                     </Typography>
 
-                    <Typography variant="body2">
-                        Up to ~55% of net return will be attributable to tax
-                        incentives. The remaining return is derived from power
-                        purchase payments from Merit Hill. These power purchase
-                        payments are shielded from federal income taxes via
-                        depreciation benefits. Please carefully review the
-                        attached pro forma and discuss if it is right for you
-                        with your financial advisors. As always, feel free to
-                        reach out to me with additional questions.
-                    </Typography>
-                </Stack>
-            </DefaultComponent>
-
-            <DefaultComponent>
-                <Stack spacing={4}>
-                    <Typography variant="smallHeadline">
-                        About Merit Hill and Extra Space
+                    <Typography variant="subtitle1">
+                        One | Taxable income
                     </Typography>
 
                     <Typography variant="body2">
-                        Merit Hill is a leading self-storage owner/operator with
-                        more than 200 properties in 33 states. Extra Space Mini
-                        Storage manages and operates dozens of Merit Hill
-                        properties. Once operational, these facilities will earn
-                        a stream of payments from Extra Space as well as tax
-                        benefits. Payments will be fixed, regardless of solar
-                        productivity.
+                        You can only access the tax benefits of this investment
+                        if you are able to deduct significant tax benefits.
                     </Typography>
 
                     <Typography variant="subtitle1">
-                        Merit Hill will both be the only source of revenue and
-                        the purchaser of this facility after the 7 year holding
-                        period.
+                        Two | High tax rate
+                    </Typography>
+
+                    <Typography variant="body2">
+                        The higher your tax rate, the more efficiently you will
+                        be able to monetize the special depreciation benefits of
+                        this investment.
                     </Typography>
                 </Stack>
             </DefaultComponent>
@@ -111,20 +103,21 @@ const InvestContent = ({ assetId }) => {
                             <MetricList
                                 valuePairs={[
                                     {
-                                        metric: "Kilowatts",
-                                        value: "450",
+                                        metric: "Investor Funds",
+                                        value: "$131,000",
                                     },
 
                                     {
-                                        metric: "Make & Model",
-                                        value: "Panasonic Evervolt",
+                                        metric: "Hold Term",
+                                        value: "7 years",
                                     },
 
                                     {
-                                        metric: "Operating since",
-                                        value: "July 2022",
+                                        metric: "Estimated ROI",
+                                        value: "10.0%",
                                     },
                                 ]}
+                                dividers={true}
                             ></MetricList>
                         </Stack>
                     </DefaultComponent>
@@ -140,20 +133,21 @@ const InvestContent = ({ assetId }) => {
                             <MetricList
                                 valuePairs={[
                                     {
-                                        metric: "Kilowatts",
-                                        value: "450",
+                                        metric: "Number of Panels",
+                                        value: "114",
                                     },
 
                                     {
                                         metric: "Make & Model",
-                                        value: "Panasonic Evervolt",
+                                        value: "Phono Solar 400W",
                                     },
 
                                     {
-                                        metric: "Operating since",
-                                        value: "July 2022",
+                                        metric: "Watts Installed",
+                                        value: "46,600",
                                     },
                                 ]}
+                                dividers={true}
                             ></MetricList>
                         </Stack>
                     </DefaultComponent>
@@ -172,13 +166,6 @@ const InvestContent = ({ assetId }) => {
                         purchase payments from Merit Hill. These power purchase
                         payments are shielded from federal income taxes via
                         depreciation benefits.
-                    </Typography>
-
-                    <Typography variant="subtitle1">
-                        Please carefully review the attached pro forma and
-                        discuss if it is right for you with your financial
-                        advisors. As always, feel free to reach out to me with
-                        additional questions.
                     </Typography>
                 </Stack>
             </DefaultComponent>
