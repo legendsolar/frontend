@@ -38,45 +38,55 @@ function CheckboxList({ options, precheckedList, onInputChange }) {
 
     return (
         <Stack spacing={2}>
-            {Object.entries(options).map(([key, option]) => {
+            {Object.entries(options).map(([key, option], index, list) => {
                 return (
-                    <Box
-                        sx={{
-                            height: "88px",
-                        }}
-                        key={key}
-                    >
-                        <Stack
-                            direction="row"
-                            alignItems="flex-start"
-                            spacing={2}
+                    <div style={{ margin: "0px" }}>
+                        <Box
+                            sx={{
+                                height: "88px",
+                                display: "flex",
+                            }}
+                            alignItems="center"
+                            key={key}
                         >
-                            <Checkbox
-                                sx={{
-                                    fontSize: "22px",
-                                    mt: "auto",
-                                    mb: "auto",
-                                }}
-                                checked={checkedList[key]}
-                                disabled={exclusive ? exclusive != key : false}
-                                onChange={(event) => {
-                                    setCheckedItem(key, event.target.checked);
-                                }}
-                            ></Checkbox>
-                            <Stack spacing={0}>
-                                <Typography
-                                    sx={{ mt: 1, mb: 1 }}
-                                    variant="subtitle1"
-                                >
-                                    {option.title}
-                                </Typography>
+                            <Stack
+                                direction="row"
+                                alignItems="flex-start"
+                                spacing={2}
+                            >
+                                <Checkbox
+                                    sx={{
+                                        fontSize: "22px",
+                                        mt: "auto",
+                                        mb: "auto",
+                                    }}
+                                    checked={checkedList[key]}
+                                    disabled={
+                                        exclusive ? exclusive != key : false
+                                    }
+                                    onChange={(event) => {
+                                        setCheckedItem(
+                                            key,
+                                            event.target.checked
+                                        );
+                                    }}
+                                ></Checkbox>
+                                <Stack spacing={0}>
+                                    <Typography
+                                        sx={{ mt: 1, mb: 1 }}
+                                        variant="subtitle1"
+                                    >
+                                        {option.title}
+                                    </Typography>
 
-                                <Typography variant="description">
-                                    {option.description}
-                                </Typography>
+                                    <Typography variant="description">
+                                        {option.description}
+                                    </Typography>
+                                </Stack>
                             </Stack>
-                        </Stack>
-                    </Box>
+                        </Box>
+                        {index !== list.length - 1 && <Divider></Divider>}
+                    </div>
                 );
             })}
         </Stack>

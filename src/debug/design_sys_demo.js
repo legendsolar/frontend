@@ -1,14 +1,6 @@
 import { useState } from "react";
 import { TextField, useTheme } from "@mui/material";
-import {
-    Paper,
-    Button,
-    Stack,
-    Typography,
-    Box,
-    Divider,
-    Checkbox,
-} from "@mui/material";
+import { Paper, Button, Stack, Typography, Box, Divider } from "@mui/material";
 
 import MetricGauge from "../components/gauges/metric_gauge";
 import CumulativeImpact from "../components/gauges/cumulative_impact";

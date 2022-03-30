@@ -19,21 +19,15 @@ const InvestContent = ({ assetId }) => {
     return (
         <Stack spacing={4}>
             <DefaultComponent>
-                <Stack>
-                    <Typography variant="smallHeadline">
-                        Execuive Summary
-                    </Typography>
-                    <Typography variant="headline2">{asset.title}</Typography>
-                </Stack>
-            </DefaultComponent>
-
-            <DefaultComponent>
-                <Typography variant="smallHeadline">Photography</Typography>
-                <img style={{ width: "100%" }} src={SolarPicture}></img>
-            </DefaultComponent>
-
-            <DefaultComponent>
                 <Stack spacing={4}>
+                    <Stack>
+                        <Typography variant="smallHeadline">
+                            Execuive Summary
+                        </Typography>
+                        <Typography variant="headline2">
+                            {asset.title}
+                        </Typography>
+                    </Stack>
                     <Typography variant="smallHeadline">
                         Legends Incorporated is offering equity in four separate
                         commercial solar facilities to accredited investors.
