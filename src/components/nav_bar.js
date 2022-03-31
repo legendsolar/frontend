@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useAuth } from "../hooks/use_auth";
 import { Button, Stack, Typography, Toolbar, Box, AppBar } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -25,10 +25,16 @@ const NavBar = ({}) => {
     const balanceStatus = useSelector((state) => state.wallet.balance.status);
 
     useEffect(() => {
-        console.log("loading user state nav bar " + userSignUpStateStatus);
+        console.log("nav bar user sign up status: " + userSignUpStateStatus);
+
         if (userSignUpStateStatus === "idle" && auth.user) {
             console.log("dispatch user state, line 30 nav bar");
             dispatch(fetchUserSignUpState(cloudFunctions));
+
+            console.log("dispatch complete ");
+            console.log(
+                "post dispatch sign up status: " + userSignUpStateStatus
+            );
         }
     }, [dispatch, userSignUpStateStatus, auth.user]);
 

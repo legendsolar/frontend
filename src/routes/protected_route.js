@@ -1,5 +1,5 @@
 import { useAuth } from "../hooks/use_auth";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import LoadingView from "../views/loading_view";
@@ -12,6 +12,7 @@ import {
 import PropTypes from "prop-types";
 import ErrorPage from "../pages/error_page";
 import AppSettings from "../app_settings";
+import store from "../store";
 
 const ProtectedRoute = ({
     children,
@@ -33,17 +34,28 @@ const ProtectedRoute = ({
 
     const userSignUpState = useSelector(selectUserSignUpState);
 
+    const status = store.getState().user.signUpState.status;
+
     useEffect(() => {
         console.log(
-            "loading user state protected route " + userSignUpStateStatus
+            "protected route user sign up status: " + userSignUpStateStatus
         );
+
         if (userSignUpStateStatus === "idle" && auth.user) {
             console.log(
                 "dispatch user sign up state: line 39, protected route"
             );
+
+            console.log("getState status:" + status);
+            console.log("useSelector status:" + userSignUpStateStatus);
             dispatch(fetchUserSignUpState(cloudFunctions));
+
+            console.log("dispatch complete ");
+            console.log(
+                "post dispatch sign up status: " + userSignUpStateStatus
+            );
         }
-    }, [dispatch, userSignUpStateStatus, auth.user]);
+    }, [dispatch, status, auth.user]);
 
     // useEffect(() => {
     //     if (auth.isAuthenticating) {

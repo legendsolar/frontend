@@ -20,11 +20,26 @@ const userWalletId = "da85e28e-2dfb-4690-bfe7-b53818214da3";
 const userCheckingDWOLLA_ACCOUNT_VERIFIEDId =
     "8aa7d0a0-d563-45a1-9c8d-7fb441230636";
 
+var count = 0;
+
 export const fetchUserSignUpState = createAsyncThunk(
     "user/fetchUserState",
-    async (cloudFunctions) => {
-        console.log("user sign up thunk running");
+    async (cloudFunctions, thunkApi) => {
+        const state = thunkApi.getState();
+
+        console.log("count " + count);
+
+        count++;
+
+        console.log(
+            "fetch user sign up state: " + selectUserSignUpStateStatus(state)
+        );
+
+        // status === loading
+
         const resp = await cloudFunctions.getUserSignUpState();
+
+        console.log("fetch user status complete");
         return resp.data;
     }
 );
@@ -42,7 +57,6 @@ const userSlice = createSlice({
         builder
             .addCase(fetchUserSignUpState.pending, (state, action) => {
                 state.signUpState.status = "loading";
-                console.log("user sign up state pending");
             })
             .addCase(fetchUserSignUpState.fulfilled, (state, action) => {
                 state.signUpState.status = "succeeded";
@@ -63,6 +77,12 @@ export const selectUserSignUpState = (state) => {
     }
 
     return "NO_ACCOUNT";
+};
+
+export const selectUserSignUpStateStatus = (state) => {
+    const status = state.user.signUpState.status;
+
+    return status;
 };
 
 export const { clearUserState } = userSlice.actions;
