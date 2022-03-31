@@ -67,6 +67,8 @@ const PlaidLink = ({ onSuccess }) => {
 
                 setProcessorToken(data.processorToken);
 
+                console.log("fetch accounts, line 70 plaid link");
+
                 dispatch(fetchAccounts(cloudFunctions));
 
                 onSuccess();

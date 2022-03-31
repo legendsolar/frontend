@@ -96,15 +96,22 @@ function useProvideAuth() {
     // ... latest auth object.
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            console.log("use auth: user auth state changed");
-            console.log(user);
-            console.log("clearing user state");
-            dispatch(clearUserState());
-            dispatch(clearTransactionState());
-            dispatch(clearWalletState());
+            if (!user) {
+                console.log("use auth: user auth state changed");
+                console.log(user);
+                console.log("clearing user state");
 
-            console.log("dispatch should have finished");
+                console.log("dispatch clear user state: line 104, use auth");
+                console.log(
+                    "dispatch clear transaction state: line 104, use auth"
+                );
+                console.log("dispatch clear wallet state: line 104, use auth");
+                dispatch(clearUserState());
+                dispatch(clearTransactionState());
+                dispatch(clearWalletState());
 
+                console.log("dispatch should have finished");
+            }
             setUser(user);
             setIsAuthenticating(false);
         });

@@ -53,8 +53,7 @@ const CompleteAccountPage = () => {
             userSignUpStateStatus === "succeeded" ||
             userSignUpStateStatus === "rejected"
         ) {
-            console.log("requested state update");
-            console.log(userSignUpStateStatus);
+            console.log("dispatch user state: line 56, complete account page");
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
     };

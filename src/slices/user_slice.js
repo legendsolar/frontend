@@ -23,6 +23,7 @@ const userCheckingDWOLLA_ACCOUNT_VERIFIEDId =
 export const fetchUserSignUpState = createAsyncThunk(
     "user/fetchUserState",
     async (cloudFunctions) => {
+        console.log("user sign up thunk running");
         const resp = await cloudFunctions.getUserSignUpState();
         return resp.data;
     }
@@ -41,6 +42,7 @@ const userSlice = createSlice({
         builder
             .addCase(fetchUserSignUpState.pending, (state, action) => {
                 state.signUpState.status = "loading";
+                console.log("user sign up state pending");
             })
             .addCase(fetchUserSignUpState.fulfilled, (state, action) => {
                 state.signUpState.status = "succeeded";

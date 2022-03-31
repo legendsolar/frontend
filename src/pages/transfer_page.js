@@ -31,6 +31,7 @@ const TransferPage = () => {
 
     useEffect(() => {
         if (balanceStatus === "idle") {
+            console.log("dispatch wallet: line 36, transfer page");
             dispatch(fetchWalletBalance(cloudFunctions));
         }
     }, [balanceStatus, dispatch]);

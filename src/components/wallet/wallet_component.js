@@ -33,12 +33,14 @@ const Wallet = () => {
 
     useEffect(() => {
         if (balanceStatus === "idle") {
+            console.log("dispatch fetch wallet: line 36, wallet component");
             dispatch(fetchWalletBalance(cloudFunctions));
         }
     }, [balanceStatus, dispatch]);
 
     useEffect(() => {
         if (accountStatus === "idle") {
+            console.log("dispatch fetch accounts: line 42, wallet component");
             dispatch(fetchAccounts(cloudFunctions));
         }
     }, [accountStatus, dispatch]);

@@ -34,9 +34,13 @@ const ProtectedRoute = ({
     const userSignUpState = useSelector(selectUserSignUpState);
 
     useEffect(() => {
-        console.log("loading user state " + userSignUpStateStatus);
+        console.log(
+            "loading user state protected route " + userSignUpStateStatus
+        );
         if (userSignUpStateStatus === "idle" && auth.user) {
-            console.log("dispatch protected");
+            console.log(
+                "dispatch user sign up state: line 39, protected route"
+            );
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
     }, [dispatch, userSignUpStateStatus, auth.user]);

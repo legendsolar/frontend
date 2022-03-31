@@ -40,6 +40,9 @@ const CreateDwollaAccount = ({ onComplete }) => {
 
     useEffect(() => {
         if (userSignUpStateStatus === "idle" && auth.user) {
+            console.log(
+                "dispatch fetch user state: line 46, create dwolla account"
+            );
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
     }, [dispatch, userSignUpStateStatus, auth.user]);

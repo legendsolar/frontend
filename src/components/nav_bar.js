@@ -25,13 +25,16 @@ const NavBar = ({}) => {
     const balanceStatus = useSelector((state) => state.wallet.balance.status);
 
     useEffect(() => {
+        console.log("loading user state nav bar " + userSignUpStateStatus);
         if (userSignUpStateStatus === "idle" && auth.user) {
+            console.log("dispatch user state, line 30 nav bar");
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
     }, [dispatch, userSignUpStateStatus, auth.user]);
 
     useEffect(() => {
         if (balanceStatus === "idle") {
+            console.log("fetch wallet, line 37 nav bar");
             dispatch(fetchWalletBalance(cloudFunctions));
         }
     }, [dispatch, balanceStatus]);

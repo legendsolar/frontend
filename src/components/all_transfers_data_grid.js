@@ -104,6 +104,7 @@ const AllTransfersDataGrid = (props) => {
 
     useEffect(() => {
         if (transactionStatus === "idle") {
+            console.log("fetch transactions, line 108 all transactions");
             dispatch(fetchTransactions(cloudFunctions));
         }
     }, [transactionStatus, dispatch]);

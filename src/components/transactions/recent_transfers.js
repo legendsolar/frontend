@@ -20,6 +20,9 @@ const RecentTransfers = () => {
 
     useEffect(() => {
         if (transactionStatus === "idle") {
+            console.log(
+                "dispatch fetch transactions: line 24, recent transfers"
+            );
             dispatch(fetchTransactions(cloudFunctions));
         }
     }, [transactionStatus, dispatch]);

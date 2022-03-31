@@ -20,6 +20,9 @@ const AccountManagementComponent = ({ onSelected, includeWallet }) => {
 
     useEffect(() => {
         if (accountStatus === "idle") {
+            console.log(
+                "dispatch fetch accounts : line 26, account management component"
+            );
             dispatch(fetchAccounts(cloudFunctions));
         }
     }, [accountStatus, dispatch]);

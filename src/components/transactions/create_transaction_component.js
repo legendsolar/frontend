@@ -73,6 +73,9 @@ const CreateTransactionComponent = () => {
 
     useEffect(() => {
         if (accountStatus === "idle") {
+            console.log(
+                "dispatch fetch accounts : line 79, create transaction page"
+            );
             dispatch(fetchAccounts(cloudFunctions));
         }
     }, [accountStatus, dispatch]);
