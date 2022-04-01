@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useLayoutEffect, useMemo } from "react";
 import { useAuth } from "../hooks/use_auth";
 import { Button, Stack, Typography, Toolbar, Box, AppBar } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -10,6 +10,7 @@ import { fetchUserSignUpState } from "../slices/user_slice";
 import { selectUserSignUpState } from "../slices/user_slice";
 import { selectWalletBalance } from "../slices/wallet_slice";
 import { fetchWalletBalance } from "../slices/wallet_slice";
+import store from "../store";
 
 const NavBar = ({}) => {
     const auth = useAuth();
@@ -25,9 +26,13 @@ const NavBar = ({}) => {
     const balanceStatus = useSelector((state) => state.wallet.balance.status);
 
     useEffect(() => {
-        console.log("nav bar user sign up status: " + userSignUpStateStatus);
+        console.log(
+            "nav bar user sign up status: ",
+            userSignUpStateStatus,
+            !!auth.user
+        );
 
-        if (userSignUpStateStatus === "idle" && auth.user) {
+        if (store.getState().user.signUpState.status === "idle" && auth.user) {
             console.log("dispatch user state, line 30 nav bar");
             dispatch(fetchUserSignUpState(cloudFunctions));
 
@@ -36,7 +41,7 @@ const NavBar = ({}) => {
                 "post dispatch sign up status: " + userSignUpStateStatus
             );
         }
-    }, [dispatch, userSignUpStateStatus, auth.user]);
+    }, [dispatch, store.getState().user.signUpState.status, auth.user]);
 
     useEffect(() => {
         if (balanceStatus === "idle") {

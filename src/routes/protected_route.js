@@ -1,5 +1,5 @@
 import { useAuth } from "../hooks/use_auth";
-import { useEffect, useMemo } from "react";
+import { useEffect, useLayoutEffect, useMemo } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import LoadingView from "../views/loading_view";
@@ -38,10 +38,12 @@ const ProtectedRoute = ({
 
     useEffect(() => {
         console.log(
-            "protected route user sign up status: " + userSignUpStateStatus
+            "protected route user sign up status: ",
+            userSignUpStateStatus,
+            !!auth.user
         );
 
-        if (userSignUpStateStatus === "idle" && auth.user) {
+        if (store.getState().user.signUpState.status === "idle" && auth.user) {
             console.log(
                 "dispatch user sign up state: line 39, protected route"
             );
@@ -55,7 +57,7 @@ const ProtectedRoute = ({
                 "post dispatch sign up status: " + userSignUpStateStatus
             );
         }
-    }, [dispatch, status, auth.user]);
+    }, [dispatch, store.getState().user.signUpState.status, auth.user]);
 
     // useEffect(() => {
     //     if (auth.isAuthenticating) {
