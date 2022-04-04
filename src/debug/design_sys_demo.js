@@ -326,8 +326,6 @@ const DesignSysDemo = (props) => {
                 }}
             ></MetricGauge>
 
-            <AccountList></AccountList>
-
             <Divider sx={{ m: 2 }} />
             <Typography variant="subtitle1">CumulativeImpact</Typography>
 
