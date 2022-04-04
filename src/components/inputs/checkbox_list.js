@@ -45,9 +45,21 @@ function CheckboxList({ options, precheckedList, onInputChange }) {
                             sx={{
                                 height: "88px",
                                 display: "flex",
+                                ml: -4,
+                                mr: -4,
+                                pr: 4,
+                                pl: 4,
+                                "&:hover": {
+                                    backgroundColor: "whiteFog.main",
+                                },
                             }}
                             alignItems="center"
                             key={key}
+                            onClick={(event) => {
+                                if (!(exclusive ? exclusive != key : false)) {
+                                    setCheckedItem(key, !checkedList[key]);
+                                }
+                            }}
                         >
                             <Stack
                                 direction="row"
