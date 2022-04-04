@@ -98,10 +98,12 @@ const CreateTransactionComponent = () => {
 
         console.log(event.target);
         console.log(name, value);
+
+        const account = accounts.filter((account) => account.id === value)[0];
         if (name === "sourceAccount") {
-            setSourceAccount(value);
+            setSourceAccount(account);
         } else if (name === "destinationAccount") {
-            setDestinationAccount(value);
+            setDestinationAccount(account);
         }
     };
 
@@ -129,11 +131,6 @@ const CreateTransactionComponent = () => {
                 ) {
                     globalDispatch(fetchTransactions(cloudFunctions));
                 }
-
-                dispatch({
-                    type: "CHANGE_VIEW",
-                    page: "confirmed",
-                });
             })
             .catch((error) => {
                 console.log(error);
@@ -141,13 +138,9 @@ const CreateTransactionComponent = () => {
             .finally(() => {
                 setLoading(false);
 
-                setSourceAccount(null);
-                setDestinationAccount(null);
-                setTransferAmount(null);
-
                 dispatch({
                     type: "CHANGE_VIEW",
-                    page: "setup",
+                    page: "confirmed",
                 });
             });
     };
@@ -157,10 +150,14 @@ const CreateTransactionComponent = () => {
     }
     console.log("accounts: ");
     console.log(accounts);
+    console.log(sourceAccount);
+    console.log(destinationAccount);
 
     if (state.page === "setup") {
         return (
             <Stack spacing={2}>
+                <Typography variant="smallHeadline">Transfer Cash</Typography>
+
                 <TextField
                     name="amount"
                     type="number"
@@ -221,13 +218,19 @@ const CreateTransactionComponent = () => {
     } else if (state.page === "review") {
         return (
             <Stack spacing={2}>
-                <Button onClick={goBack} variant="mono">
-                    <ArrowBackIcon
-                        sx={{
-                            fontSize: "22px",
-                        }}
-                    ></ArrowBackIcon>
-                </Button>
+                <Stack direction="row" alignItems="center">
+                    <Button onClick={goBack} variant="mono">
+                        <ArrowBackIcon
+                            sx={{
+                                fontSize: "22px",
+                            }}
+                        ></ArrowBackIcon>
+                    </Button>
+
+                    <Typography variant="smallHeadline">
+                        {"Confirm Transfer"}
+                    </Typography>
+                </Stack>
 
                 <TransactionComponent
                     title={"May 25th, 2022"}
@@ -236,7 +239,7 @@ const CreateTransactionComponent = () => {
                     destination={destinationAccount?.name}
                 ></TransactionComponent>
 
-                <Typography>{`${transferAmount} will be deducted from your Legends Wallet within the next several days. It may take up to 5 days to transfer.`}</Typography>
+                <Typography>{`$${transferAmount} will be deducted from your Legends Wallet within the next several days. It may take up to 5 days to transfer.`}</Typography>
 
                 <Button
                     variant="primary"
@@ -254,13 +257,33 @@ const CreateTransactionComponent = () => {
     } else if (state.page === "confirmed") {
         return (
             <Stack spacing={2}>
-                <Typography>Transfer Submitted</Typography>
-                <Button variant="mini" onClick={goBack}>
-                    Back
-                </Button>
-                <Typography>
-                    Funds will be available within 4 business days
+                <Typography variant="smallHeadline">
+                    Transfer Pending
                 </Typography>
+
+                <TransactionComponent
+                    title={"May 25th, 2022"}
+                    amount={transferAmount}
+                    source={sourceAccount?.name}
+                    destination={destinationAccount?.name}
+                ></TransactionComponent>
+
+                <Typography>{`$${transferAmount} will be deducted from your Legends Wallet within the next several days. It may take up to 5 days to transfer.`}</Typography>
+
+                <Button
+                    variant="primary"
+                    sx={{
+                        backgroundColor: "pencilYellow.main",
+                    }}
+                    onClick={onComplete}
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <CircularProgress color="dark" size={30} />
+                    ) : (
+                        "Transfer Pending"
+                    )}
+                </Button>
             </Stack>
         );
     }

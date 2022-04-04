@@ -68,9 +68,6 @@ const TransferPage = () => {
                     <DefaultComponent
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
-                        <Typography variant="smallHeadline">
-                            Transfer Money
-                        </Typography>
                         <CreateTransactionComponent></CreateTransactionComponent>
                     </DefaultComponent>
 
