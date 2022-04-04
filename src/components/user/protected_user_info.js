@@ -82,7 +82,12 @@ const ProtectedUserInfo = ({
             })
             .some((el) => el);
 
-        if (!error) {
+        if (
+            !error &&
+            updatedObject.month.value &&
+            updatedObject.day.value &&
+            updatedObject.year.value
+        ) {
             updatedObject.dateOfBirth = {
                 // Need to ignore time of day to ensure no strange time zone issues
                 value: format(

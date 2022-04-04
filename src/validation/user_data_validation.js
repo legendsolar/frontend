@@ -23,7 +23,7 @@ export const validateSSN = (input, fullSSNRequired = false) => {
     } else if (!fullSSNRequired && input.length != 4) {
         return {
             error: true,
-            errMsg: "Just the last 4 digits are required",
+            errMsg: "The last 4 digits are required",
         };
     }
 
