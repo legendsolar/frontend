@@ -374,6 +374,23 @@ const themeOptions = {
                 },
 
                 {
+                    props: { variant: "bubble" },
+                    style: {
+                        ...typographyOptions.body2,
+                        height: "43px",
+                        width: "fit-content",
+                        paddingLeft: "20px",
+                        paddingRight: "20px",
+                        borderRadius: "40px",
+                        border: "1.5px solid",
+                        backgroundColor: "transparent",
+                        "&:hover": {
+                            backgroundColor: "transparent",
+                        },
+                    },
+                },
+
+                {
                     props: { variant: "header" },
                     style: {
                         fontFamily: "Azeret Mono",

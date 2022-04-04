@@ -154,11 +154,18 @@ const DesignSysDemo = (props) => {
                         Secondary Button
                     </Button>
 
+                    <Typography variant="subtitle3">Mini</Typography>
                     <Button variant="mini">Mini Button</Button>
                     <Button variant="mini" disabled={true}>
                         Mini Button
                     </Button>
                     <Typography variant="subtitle3">Others</Typography>
+
+                    <Button variant="bubble">Bubble Regular</Button>
+
+                    <Button variant="bubble" sx={{ color: "eraserRed.main" }}>
+                        Bubble Color
+                    </Button>
 
                     <Button variant="header">Header Button</Button>
                 </Stack>

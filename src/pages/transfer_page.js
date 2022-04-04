@@ -17,6 +17,7 @@ import { useCloudFunctions } from "../hooks/use_cloud_functions";
 import RecentTransfers from "../components/transactions/recent_transfers";
 import AllTransfersDataGrid from "../components/all_transfers_data_grid";
 import DefaultComponent from "../components/default_component";
+import SideBar from "../components/sidebar_component";
 
 const TransferPage = () => {
     const auth = useAuth();
@@ -47,30 +48,12 @@ const TransferPage = () => {
     return (
         <SideBarNavView
             drawer={
-                <ScrollToSidebar
-                    header={
-                        <Stack sx={{ p: 2 }}>
-                            <MemberHeader></MemberHeader>
-                            <Typography variant="smallHeadline">
-                                Balance
-                            </Typography>
-                            <Typography variant="headline1">
-                                {"$" + balance}
-                            </Typography>
-                        </Stack>
-                    }
-                    contentTitles={drawerTitles}
-                    refs={contentRefs}
-                ></ScrollToSidebar>
+                <SideBar>
+                    <CreateTransactionComponent></CreateTransactionComponent>
+                </SideBar>
             }
             mainContent={
                 <Stack spacing={4}>
-                    <DefaultComponent
-                        ref={(el) => (contentRefs.current[0] = el)}
-                    >
-                        <CreateTransactionComponent></CreateTransactionComponent>
-                    </DefaultComponent>
-
                     <DefaultComponent
                         variant="container"
                         ref={(el) => (contentRefs.current[2] = el)}
