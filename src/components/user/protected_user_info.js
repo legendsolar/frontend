@@ -9,9 +9,13 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { months } from "../../utils/static_lists";
-import { getYear } from "date-fns";
 import { format } from "date-fns";
-import { validateSSN } from "../../validation/user_data_validation";
+import {
+    validateMonth,
+    validateDay,
+    validateYear,
+    validateSSN,
+} from "../../validation/user_data_validation";
 
 const ProtectedUserInfo = ({
     onChange,
@@ -41,77 +45,57 @@ const ProtectedUserInfo = ({
 
     const [formValues, setFormValues] = useState(startingValues);
 
-    const formDataValid = (formData) => {
-        if (!formData.day.value) {
-            formData.day.error = true;
-            formData.day.errMsg = "Day required";
-        } else if (parseInt(formData.day.value) > 31) {
-            formData.day.error = true;
-            formData.day.errMsg = "Day invalid";
-        } else {
-            formData.day.error = false;
-            formData.day.errMsg = undefined;
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        const updatedObject = { ...formValues };
+
+        switch (name) {
+            case "day":
+                updatedObject[name] = {
+                    ...validateDay(value),
+                };
+                break;
+
+            case "month":
+                updatedObject[name] = {
+                    ...validateMonth(value),
+                };
+                break;
+
+            case "year":
+                updatedObject[name] = {
+                    ...validateYear(value),
+                };
+                break;
+
+            case "ssn":
+                updatedObject[name] = {
+                    ...validateSSN(value),
+                };
+                break;
         }
+        updatedObject[name].value = value;
 
-        if (!formData.month.value) {
-            formData.month.error = true;
-            formData.month.errMsg = "Month required";
-        } else {
-            formData.month.error = false;
-            formData.month.errMsg = undefined;
-        }
-
-        if (!formData.year.value) {
-            formData.year.error = true;
-            formData.year.errMsg = "Year required";
-        } else if (parseInt(formData.year.value) > getYear(new Date()) - 17) {
-            formData.year.error = true;
-            formData.year.errMsg =
-                "You must be 18 or older to register on legends";
-        } else if (parseInt(formData.year.value) > getYear(new Date()) - 17) {
-            formData.year.error = true;
-            formData.year.errMsg =
-                "You must be 18 or older to register on legends";
-        } else if (parseInt(formData.year.value) < getYear(new Date()) - 130) {
-            formData.year.error = true;
-            formData.year.errMsg = "Year invalid";
-        } else {
-            formData.year.error = false;
-            formData.year.errMsg = undefined;
-        }
-
-        const errObj = validateSSN(formData.ssn.value, fullSSNRequired);
-
-        formData.ssn.error = errObj.error;
-        formData.ssn.errMsg = errObj.errMsg;
-
-        setFormValues(formData);
-
-        const error = Object.keys(formData)
+        const error = Object.keys(updatedObject)
             .map((key) => {
-                return formData[key].error;
+                return updatedObject[key].error;
             })
             .some((el) => el);
 
         if (!error) {
-            formData.dateOfBirth = {
+            updatedObject.dateOfBirth = {
                 // Need to ignore time of day to ensure no strange time zone issues
                 value: format(
                     new Date(
-                        `${formData.month.value} ${formData.day.value}, ${formData.year.value}`
+                        `${updatedObject.month.value} ${updatedObject.day.value}, ${updatedObject.year.value}`
                     ),
                     "yyyy-MM-dd"
                 ),
             };
         }
-        onUpdate(formData);
-    };
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        const updatedObject = { ...formValues };
-        updatedObject[name].value = value;
-        formDataValid(updatedObject);
+        setFormValues(updatedObject);
+        onUpdate(updatedObject);
     };
 
     return (

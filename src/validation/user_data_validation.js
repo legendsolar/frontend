@@ -1,3 +1,5 @@
+import { getYear } from "date-fns";
+
 export const validateSSN = (input, fullSSNRequired = false) => {
     if (!input) {
         return {
@@ -160,6 +162,63 @@ export const validateState = (input) => {
         return {
             error: true,
             errMsg: "State required",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};
+
+export const validateDay = (input) => {
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "Day required",
+        };
+    } else if (parseInt(input) > 31) {
+        return {
+            error: true,
+            errMsg: "Day invalid",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};
+
+export const validateMonth = (input) => {
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "Month required",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};
+
+export const validateYear = (input) => {
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "Year required",
+        };
+    } else if (parseInt(input) > getYear(new Date()) - 17) {
+        return {
+            error: true,
+            errMsg: "You must be 18 or older to register on legends",
+        };
+    } else if (parseInt(input) < getYear(new Date()) - 130) {
+        return {
+            error: true,
+            errMsg: "Year invalid",
         };
     } else {
         return {

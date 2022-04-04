@@ -66,56 +66,6 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
         },
     };
 
-    const formDataValid = (formData) => {
-        if (!formData.firstName.value) {
-            formData.firstName.error = true;
-            formData.firstName.errMsg = "First name required";
-        } else {
-            formData.firstName.error = false;
-            formData.firstName.errMsg = undefined;
-        }
-
-        if (!formData.lastName.value) {
-            formData.lastName.error = true;
-            formData.lastName.errMsg = "Last name required";
-        } else {
-            formData.lastName.error = false;
-            formData.lastName.errMsg = undefined;
-        }
-
-        if (!formData.streetAddress.value) {
-            formData.streetAddress.error = true;
-            formData.streetAddress.errMsg = "Street required";
-        } else {
-            formData.streetAddress.error = false;
-            formData.streetAddress.errMsg = undefined;
-        }
-
-        if (!formData.city.value) {
-            formData.city.error = true;
-            formData.city.errMsg = "City required";
-        } else {
-            formData.city.error = false;
-            formData.city.errMsg = undefined;
-        }
-
-        if (!formData.state.value) {
-            formData.state.error = true;
-            formData.state.errMsg = "State required";
-        } else {
-            formData.state.error = false;
-            formData.state.errMsg = undefined;
-        }
-
-        const errObj = validatePostalCode(formData.postalCode.value);
-        formData.postalCode.error = errObj.error;
-        formData.postalCode.errMsg = errObj.errMsg;
-
-        setFormValues(formData);
-
-        onUpdate(formData);
-    };
-
     const [formValues, setFormValues] = useState(startingValues);
     const [submitErrorMessage, setSubmitErrorMessage] = useState(undefined);
 
@@ -194,6 +144,8 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
         }
         updatedObject[name].value = value;
         setFormValues(updatedObject);
+
+        onUpdate(updatedObject);
     };
 
     if (loading) {
