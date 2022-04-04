@@ -28,6 +28,7 @@ import LinearPageinatedView from "../views/linear_paginated_view";
 import { signUpOrder, userSignUpOrder } from "../utils/user_sign_up_state";
 import SignUpComponent from "../components/sign_up_component";
 import PolicyAcceptanceComponent from "../components/policy_acceptance_component";
+import scrollToPosition from "../utils/scroll_to_position";
 
 const CompleteAccountPage = () => {
     const { step } = useParams();
@@ -65,6 +66,8 @@ const CompleteAccountPage = () => {
             userSignUpStateStatus === "idle"
         ) {
             requestUpdateState();
+
+            scrollToPosition(0);
         }
     }, [dispatch, auth.user, auth.isAuthenticating, userSignUpStateStatus]);
 

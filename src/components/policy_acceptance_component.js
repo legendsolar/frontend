@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../hooks/use_auth";
 import { useDatabase } from "reactfire";
 import { useDatabaseObjectData } from "reactfire";
+import scrollToPosition from "./../utils/scroll_to_position";
 import LoadingComponent from "./loading_component";
 
 const PolicyAcceptanceComponent = ({ onComplete }) => {
@@ -63,6 +64,8 @@ const PolicyAcceptanceComponent = ({ onComplete }) => {
             newPolicyAcceptance.termsAndConditions
         ) {
             setLoading(true);
+
+            scrollToPosition(0);
 
             cloudFunctions
                 .updateUserAcceptanceState({

@@ -137,7 +137,7 @@ const SignUpComponent = ({ onComplete }) => {
                             id="lastName"
                             label="Last Name"
                             name="lastName"
-                            autoComplete="email"
+                            autoComplete="lastName"
                             onChange={handleInputChange}
                         />
                     </Grid>
@@ -161,7 +161,7 @@ const SignUpComponent = ({ onComplete }) => {
                             id="phoneNumber"
                             label="Phone number"
                             name="phoneNumber"
-                            autoComplete="email"
+                            autoComplete="phoneNumber"
                             onChange={handleInputChange}
                         />
                     </Grid>
