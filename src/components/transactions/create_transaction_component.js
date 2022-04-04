@@ -11,6 +11,9 @@ import {
     MenuItem,
     FormHelperText,
 } from "@mui/material";
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
 import AccountManagementComponent from "./account_management_component";
 import { useState, useReducer, useEffect } from "react";
 import ErrorComponent from "../errors/error_component";
@@ -24,8 +27,9 @@ import {
 } from "../../slices/wallet_slice";
 
 import { validateTransferAmount } from "../../validation/transaction_validation";
-
+import TransactionComponent from "../transactions/transfer_component";
 import LoadingComponent from "../loading_component";
+import MultiSelect from "../multiselect";
 
 const CreateTransactionComponent = () => {
     const cloudFunctions = useCloudFunctions();
@@ -93,6 +97,7 @@ const CreateTransactionComponent = () => {
         const { name, value } = event.target;
 
         console.log(event.target);
+        console.log(name, value);
         if (name === "sourceAccount") {
             setSourceAccount(value);
         } else if (name === "destinationAccount") {
@@ -150,6 +155,7 @@ const CreateTransactionComponent = () => {
     if (!accounts || accountStatus !== "succeeded") {
         return <LoadingComponent></LoadingComponent>;
     }
+    console.log("accounts: ");
     console.log(accounts);
 
     if (state.page === "setup") {
@@ -177,41 +183,23 @@ const CreateTransactionComponent = () => {
                     }}
                 ></TextField>
 
-                <FormControl variant="filled" fullWidth>
-                    <InputLabel>From</InputLabel>
-                    <Select
-                        helperText={"From"}
-                        name="sourceAccount"
-                        value={sourceAccount}
-                        onChange={onAccountSelected}
-                    >
-                        {accounts.map((account, index) => {
-                            return (
-                                <MenuItem key={account.id} value={account}>
-                                    {account.name}
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
-                </FormControl>
+                <MultiSelect
+                    name={"sourceAccount"}
+                    text="From"
+                    fields={accounts.map((account) => {
+                        return { ...account, text: account.name };
+                    })}
+                    onChangeListener={onAccountSelected}
+                ></MultiSelect>
 
-                <FormControl variant="filled" fullWidth>
-                    <InputLabel>To</InputLabel>
-                    <Select
-                        helperText={"To"}
-                        name="destinationAccount"
-                        value={destinationAccount}
-                        onChange={onAccountSelected}
-                    >
-                        {accounts.map((account, index) => {
-                            return (
-                                <MenuItem key={account.id} value={account}>
-                                    {account.name}
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
-                </FormControl>
+                <MultiSelect
+                    name={"destinationAccount"}
+                    text="To"
+                    fields={accounts.map((account) => {
+                        return { ...account, text: account.name };
+                    })}
+                    onChangeListener={onAccountSelected}
+                ></MultiSelect>
 
                 <Button
                     variant="primary"
@@ -233,21 +221,22 @@ const CreateTransactionComponent = () => {
     } else if (state.page === "review") {
         return (
             <Stack spacing={2}>
-                <Typography>
-                    {"From: " +
-                        sourceAccount?.institution +
-                        " " +
-                        sourceAccount?.name}
-                </Typography>
+                <Button onClick={goBack} variant="mono">
+                    <ArrowBackIcon
+                        sx={{
+                            fontSize: "22px",
+                        }}
+                    ></ArrowBackIcon>
+                </Button>
 
-                <Typography>
-                    {"To: " +
-                        destinationAccount?.institution +
-                        " " +
-                        destinationAccount?.name}
-                </Typography>
+                <TransactionComponent
+                    title={"May 25th, 2022"}
+                    amount={transferAmount}
+                    source={sourceAccount?.name}
+                    destination={destinationAccount?.name}
+                ></TransactionComponent>
 
-                <Typography>{"Amount: " + transferAmount}</Typography>
+                <Typography>{`${transferAmount} will be deducted from your Legends Wallet within the next several days. It may take up to 5 days to transfer.`}</Typography>
 
                 <Button
                     variant="primary"
@@ -259,10 +248,6 @@ const CreateTransactionComponent = () => {
                     ) : (
                         "Confirm Transfer"
                     )}
-                </Button>
-
-                <Button variant="secondary" onClick={goBack}>
-                    Edit Transfer
                 </Button>
             </Stack>
         );

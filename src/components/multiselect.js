@@ -27,11 +27,11 @@ const MultiSelect = ({
 
         setSelectedValue(value);
 
-        onChangeListener({
-            value: value,
-            name: name,
-        });
+        onChangeListener(event);
     };
+
+    console.log("fields: ");
+    console.log(fields);
 
     return (
         <FormControl variant="filled" fullWidth>

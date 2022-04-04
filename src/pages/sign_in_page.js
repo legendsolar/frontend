@@ -9,6 +9,11 @@ import ContentDivider from "../components/basics/content_divider";
 import { authErrorTranslator } from "../utils/auth_error_translator";
 import GoogleIcon from "@mui/icons-material/Google";
 import GoogleLogo from "../components/icons/google_logo";
+import {
+    validateEmail,
+    validatePassword,
+} from "../validation/user_data_validation";
+import { UpdateOutlined } from "@mui/icons-material";
 
 function SignInView() {
     const authHook = useAuth();
@@ -58,8 +63,24 @@ function SignInView() {
         const { name, value } = event.target;
 
         const updatedObject = { ...formValues };
-        updatedObject[name].value = value;
-        formDataValid(updatedObject);
+
+        switch (name) {
+            case "email":
+                updatedObject[name] = {
+                    ...validateEmail(value),
+                    value: value,
+                };
+                break;
+
+            case "password":
+                updatedObject[name] = {
+                    ...validatePassword(value),
+                    value: value,
+                };
+                break;
+        }
+
+        setFormValues(updatedObject);
     };
 
     const onSuccessfulSignUp = () => {

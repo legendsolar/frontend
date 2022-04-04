@@ -63,3 +63,24 @@ export const validatePassword = (input) => {
         };
     }
 };
+
+export const validateEmail = (input) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "Email required",
+        };
+    } else if (!emailRegex.test(input)) {
+        return {
+            error: true,
+            errMsg: "Email format invalid",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};

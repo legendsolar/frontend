@@ -4,14 +4,19 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import PropTypes from "prop-types";
 
 const TransactionComponent = ({ title, amount, source, destination, date }) => {
+    const amountString = () => {
+        try {
+            return amount.toFixed(2);
+        } catch {
+            return amount;
+        }
+    };
     return (
         <Container sx={{ width: "340px" }}>
             <Stack direction="row" justifyContent="space-between" sx={{ m: 1 }}>
                 <Typography variant="label">{title}</Typography>
 
-                <Typography variant="label">
-                    {"$" + amount.toFixed(2)}
-                </Typography>
+                <Typography variant="label">{"$" + amountString()}</Typography>
             </Stack>
 
             <Container
