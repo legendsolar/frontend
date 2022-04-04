@@ -171,6 +171,20 @@ export const validateState = (input) => {
     }
 };
 
+export const validatePhoneNumber = (input) => {
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "Phone number required",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};
+
 export const validateDay = (input) => {
     if (!input) {
         return {
