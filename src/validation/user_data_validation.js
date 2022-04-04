@@ -84,3 +84,87 @@ export const validateEmail = (input) => {
         };
     }
 };
+
+export const validateFirstName = (input) => {
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "First name required",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};
+
+export const validateLastName = (input) => {
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "Last name required",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};
+
+export const validateStreetAddress = (input) => {
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "Street address required",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};
+
+export const validateStreetAddressTwo = (input) => {
+    // if (!input) {
+    //     return {
+    //         error: true,
+    //         errMsg: "Last name required",
+    //     };
+    // } else {
+    return {
+        error: false,
+        errMsg: undefined,
+    };
+    // }
+};
+
+export const validateCity = (input) => {
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "City required",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};
+
+export const validateState = (input) => {
+    if (!input) {
+        return {
+            error: true,
+            errMsg: "State required",
+        };
+    } else {
+        return {
+            error: false,
+            errMsg: undefined,
+        };
+    }
+};

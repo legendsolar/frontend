@@ -39,26 +39,6 @@ function SignInView() {
 
     const [formValues, setFormValues] = useState(initValues);
 
-    const formDataValid = (formData) => {
-        if (!formData.password.value) {
-            formData.password.error = true;
-            formData.password.errMsg = "Password required";
-        } else {
-            formData.password.error = false;
-            formData.password.errMsg = "";
-        }
-
-        if (!formData.email.value) {
-            formData.email.error = true;
-            formData.email.errMsg = "Email required";
-        } else {
-            formData.email.error = false;
-            formData.email.errMsg = "";
-        }
-
-        setFormValues(formData);
-    };
-
     const handleInputChange = (event) => {
         const { name, value } = event.target;
 

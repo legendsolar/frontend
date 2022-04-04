@@ -21,7 +21,15 @@ import { useDatabaseObjectData, useDatabase } from "reactfire";
 import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 import LoadingComponent from "../loading_component";
 import { states } from "../../utils/static_lists";
-import { validatePostalCode } from "../../validation/user_data_validation";
+import {
+    validateCity,
+    validateFirstName,
+    validateLastName,
+    validatePostalCode,
+    validateState,
+    validateStreetAddress,
+    validateStreetAddressTwo,
+} from "../../validation/user_data_validation";
 
 const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
     const auth = useAuth();
@@ -140,8 +148,52 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
         const { name, value } = event.target;
 
         const updatedObject = { ...formValues };
+
+        switch (name) {
+            case "firstName":
+                updatedObject[name] = {
+                    ...validateFirstName(value),
+                };
+                break;
+
+            case "lastName":
+                updatedObject[name] = {
+                    ...validateLastName(value),
+                };
+                break;
+
+            case "streetAddress":
+                updatedObject[name] = {
+                    ...validateStreetAddress(value),
+                };
+                break;
+
+            case "streetAddress2":
+                updatedObject[name] = {
+                    ...validateStreetAddressTwo(value),
+                };
+                break;
+
+            case "city":
+                updatedObject[name] = {
+                    ...validateCity(value),
+                };
+                break;
+
+            case "state":
+                updatedObject[name] = {
+                    ...validateState(value),
+                };
+                break;
+
+            case "postalCode":
+                updatedObject[name] = {
+                    ...validatePostalCode(value),
+                };
+                break;
+        }
         updatedObject[name].value = value;
-        formDataValid(updatedObject);
+        setFormValues(updatedObject);
     };
 
     if (loading) {

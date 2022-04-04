@@ -1,9 +1,11 @@
 import { useState } from "react";
-
 import { Box, Stack, TextField, Button } from "@mui/material";
-
 import { useAuth } from "../hooks/use_auth";
 import { authErrorTranslator } from "../utils/auth_error_translator";
+import {
+    validateEmail,
+    validatePassword,
+} from "../validation/user_data_validation";
 
 const SignUpComponent = ({ onComplete }) => {
     const authHook = useAuth();
@@ -19,32 +21,28 @@ const SignUpComponent = ({ onComplete }) => {
 
     const [formValues, setFormValues] = useState(initValues);
 
-    const formDataValid = (formData) => {
-        if (!formData.password.value) {
-            formData.password.error = true;
-            formData.password.errMsg = "Password required";
-        } else {
-            formData.password.error = false;
-            formData.password.errMsg = undefined;
-        }
-
-        if (!formData.email.value) {
-            formData.email.error = true;
-            formData.email.errMsg = "Email required";
-        } else {
-            formData.email.error = false;
-            formData.email.errMsg = undefined;
-        }
-
-        setFormValues(formData);
-    };
-
     const handleInputChange = (event) => {
         const { name, value } = event.target;
 
         const updatedObject = { ...formValues };
-        updatedObject[name].value = value;
-        formDataValid(updatedObject);
+
+        switch (name) {
+            case "email":
+                updatedObject[name] = {
+                    ...validateEmail(value),
+                    value: value,
+                };
+                break;
+
+            case "password":
+                updatedObject[name] = {
+                    ...validatePassword(value),
+                    value: value,
+                };
+                break;
+        }
+
+        setFormValues(updatedObject);
     };
 
     const onSuccessfulSignUp = () => {
