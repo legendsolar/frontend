@@ -34,6 +34,7 @@ import NotFoundPage from "../pages/not_found_page";
 import { signUpOrder } from "../utils/user_sign_up_state";
 import SizingDemo from "../debug/sizing_demo";
 import AirtableTestPage from "../pages/airtable_test_page";
+import ComponentView from "../views/component_view";
 
 function AppRouter() {
     const app = useFirebaseApp();
@@ -173,6 +174,7 @@ function AppRouter() {
                 {/* Debug */}
                 <Route path="/designSysDemo" element={<DesignSysDemo />} />
                 <Route path="/sizingDemo" element={<SizingDemo />} />
+                <Route path="/component" element={<ComponentView />} />
                 <Route path="/loading" element={<LoadingView />} />
                 <Route path="/gridView" element={<GridPage />} />
                 <Route path="/playground" element={<PlaygroundPage />} />
