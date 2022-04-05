@@ -237,6 +237,8 @@ const CreateTransactionComponent = () => {
                     amount={transferAmount}
                     source={sourceAccount?.name}
                     destination={destinationAccount?.name}
+                    status={"In Review"}
+                    color={"legendaryGreen"}
                 ></TransactionComponent>
 
                 <Typography>{`$${transferAmount} will be deducted from your Legends Wallet within the next several days. It may take up to 5 days to transfer.`}</Typography>
@@ -266,6 +268,8 @@ const CreateTransactionComponent = () => {
                     amount={transferAmount}
                     source={sourceAccount?.name}
                     destination={destinationAccount?.name}
+                    color={"pencilYellow"}
+                    status={"Pending"}
                 ></TransactionComponent>
 
                 <Typography>{`$${transferAmount} will be deducted from your Legends Wallet within the next several days. It may take up to 5 days to transfer.`}</Typography>

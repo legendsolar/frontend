@@ -7,7 +7,15 @@ import BankAccountIcon from "../../assets/icons/bank_account_icon.png";
 import PanelIcon from "../../assets/icons/panel_icon.png";
 import WalletIcon from "../../assets/icons/wallet_icon.png";
 
-const TransactionComponent = ({ title, amount, source, destination, date }) => {
+const TransactionComponent = ({
+    title,
+    amount,
+    source,
+    destination,
+    date,
+    status,
+    color,
+}) => {
     const amountString = () => {
         try {
             return amount.toFixed(2);
@@ -87,7 +95,7 @@ const TransactionComponent = ({ title, amount, source, destination, date }) => {
 
                 <Box
                     sx={{
-                        backgroundColor: "legendaryGreen.main",
+                        backgroundColor: color + ".main",
                         width: "20px",
                         position: "absolute",
                         right: 0,
@@ -99,7 +107,7 @@ const TransactionComponent = ({ title, amount, source, destination, date }) => {
                         sx={{
                             m: 0,
                             position: "absolute",
-                            color: "legendaryGreen.contrastText",
+                            color: color + ".contrastText",
                             top: "50%",
                             left: "50%",
                             transform:
@@ -108,10 +116,12 @@ const TransactionComponent = ({ title, amount, source, destination, date }) => {
                             fontSize: "10px",
                             verticalAlign: "middle",
                             textAlign: "center",
+                            whiteSpace: "nowrap",
+                            textTransform: "uppercase",
                             fontWeight: 800,
                         }}
                     >
-                        {"Status"}
+                        {status ? status : "Unknown"}
                     </Typography>
                 </Box>
             </Container>
@@ -131,6 +141,11 @@ TransactionComponent.propTypes = {
     source: PropTypes.string.isRequired,
     destination: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date),
+};
+
+TransactionComponent.defaultProps = {
+    status: "Unknown",
+    color: "legendaryGreen",
 };
 
 export default TransactionComponent;
