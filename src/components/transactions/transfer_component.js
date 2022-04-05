@@ -27,7 +27,7 @@ const TransactionComponent = ({ title, amount, source, destination, date }) => {
     const walletIcon = <img style={{ width: "87px" }} src={WalletIcon}></img>;
 
     return (
-        <Container sx={{ width: "340px" }}>
+        <Container sx={{ width: "100%", minWidth: "320px" }}>
             <Stack direction="row" justifyContent="space-between" sx={{ m: 1 }}>
                 <Typography variant="label">{title}</Typography>
 
@@ -46,9 +46,11 @@ const TransactionComponent = ({ title, amount, source, destination, date }) => {
                 <div
                     style={{
                         position: "absolute",
-                        transform: "translate(-25%,-25%) rotate(45deg) ",
-                        width: "180px",
-                        height: "180px",
+                        transform: "translate(-50%,-50%) rotate(45deg) ",
+                        top: "50%",
+                        left: "0%",
+                        width: "75%",
+                        aspectRatio: "1 / 1",
                         backgroundColor: "#EBEBEB",
                     }}
                 ></div>
