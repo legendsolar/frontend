@@ -3,6 +3,10 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import PropTypes from "prop-types";
 
+import BankAccountIcon from "../../assets/icons/bank_account_icon.png";
+import PanelIcon from "../../assets/icons/panel_icon.png";
+import WalletIcon from "../../assets/icons/wallet_icon.png";
+
 const TransactionComponent = ({ title, amount, source, destination, date }) => {
     const amountString = () => {
         try {
@@ -11,6 +15,17 @@ const TransactionComponent = ({ title, amount, source, destination, date }) => {
             return amount;
         }
     };
+
+    const bankAccountIcon = (
+        <img style={{ width: "87px" }} src={BankAccountIcon}></img>
+    );
+
+    const solarAccountIcon = (
+        <img style={{ width: "87px" }} src={PanelIcon}></img>
+    );
+
+    const walletIcon = <img style={{ width: "87px" }} src={WalletIcon}></img>;
+
     return (
         <Container sx={{ width: "340px" }}>
             <Stack direction="row" justifyContent="space-between" sx={{ m: 1 }}>
@@ -55,12 +70,7 @@ const TransactionComponent = ({ title, amount, source, destination, date }) => {
                         alignItems="center"
                         sx={{ width: "50%" }}
                     >
-                        <AccountBalanceIcon
-                            sx={{
-                                fontSize: "32px",
-                                color: "blackDusk.main",
-                            }}
-                        ></AccountBalanceIcon>
+                        {bankAccountIcon}
                     </Box>
 
                     <Box
@@ -69,12 +79,7 @@ const TransactionComponent = ({ title, amount, source, destination, date }) => {
                         alignItems="center"
                         sx={{ width: "50%" }}
                     >
-                        <WbSunnyIcon
-                            sx={{
-                                fontSize: "32px",
-                                color: "blackDusk.main",
-                            }}
-                        ></WbSunnyIcon>
+                        {solarAccountIcon}
                     </Box>
                 </Stack>
             </Container>
