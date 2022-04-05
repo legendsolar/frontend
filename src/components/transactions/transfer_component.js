@@ -82,6 +82,36 @@ const TransactionComponent = ({ title, amount, source, destination, date }) => {
                         {solarAccountIcon}
                     </Box>
                 </Stack>
+
+                <Box
+                    sx={{
+                        backgroundColor: "legendaryGreen.main",
+                        width: "20px",
+                        position: "absolute",
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            m: 0,
+                            position: "absolute",
+                            color: "legendaryGreen.contrastText",
+                            top: "50%",
+                            left: "50%",
+                            transform:
+                                "translateX(-50%) translateY(-50%) rotate(90deg);",
+                            fontFamily: "Azeret Mono",
+                            fontSize: "10px",
+                            verticalAlign: "middle",
+                            textAlign: "center",
+                            fontWeight: 800,
+                        }}
+                    >
+                        {"Status"}
+                    </Typography>
+                </Box>
             </Container>
 
             <Stack direction="row" justifyContent="space-between" sx={{ m: 1 }}>
