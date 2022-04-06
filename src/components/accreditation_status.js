@@ -14,7 +14,11 @@ import { set, ref } from "firebase/database";
 import { useAuth } from "../hooks/use_auth";
 import Divider from "./basics/divider";
 
-const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
+const AccreditationStatus = ({
+    onComplete,
+    completeButtonMessage,
+    completed,
+}) => {
     const auth = useAuth();
     const user = auth.user;
 
@@ -118,31 +122,22 @@ const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
 
     return (
         <div>
-            <Stack spacing={4}>
-                <Typography variant="subtitle1">
-                    Legends Solar offers private placements regulated by the SEC
-                    under Regulation D. All investors must be accredited in
-                    order to participate in Legends Solar offerings.
-                </Typography>
+            <div style={{ margin: "10px 0px 0px 0px" }}>
+                <Divider></Divider>
 
-                <Typography variant="subtitle2" sx={{ mt: 7 }}>
-                    Check all that apply
-                </Typography>
+                <CheckboxList
+                    options={accreditationOptionsList}
+                    precheckedList={checkedList}
+                    onInputChange={(checkboxListChecked) => {
+                        setCheckedList(checkboxListChecked);
+                    }}
+                    disabled={completed}
+                ></CheckboxList>
 
-                <div style={{ margin: "10px 0px 0px 0px" }}>
-                    <Divider></Divider>
+                <Divider></Divider>
+            </div>
 
-                    <CheckboxList
-                        options={accreditationOptionsList}
-                        precheckedList={checkedList}
-                        onInputChange={(checkboxListChecked) => {
-                            setCheckedList(checkboxListChecked);
-                        }}
-                    ></CheckboxList>
-
-                    <Divider></Divider>
-                </div>
-
+            {!completed && (
                 <Button
                     variant="primary"
                     disabled={
@@ -160,7 +155,7 @@ const AccreditationStatus = ({ onComplete, completeButtonMessage }) => {
                         "Continue"
                     )}
                 </Button>
-            </Stack>
+            )}
         </div>
     );
 };

@@ -128,9 +128,21 @@ const CompleteAccountPage = () => {
         {
             title: "Accreditation",
             content: (
-                <AccreditationStatus
-                    onComplete={onComplete}
-                ></AccreditationStatus>
+                <Stack spacing={4}>
+                    <Typography variant="subtitle1">
+                        Legends Solar offers private placements regulated by the
+                        SEC under Regulation D. All investors must be accredited
+                        in order to participate in Legends Solar offerings.
+                    </Typography>
+
+                    <Typography variant="subtitle2" sx={{ mt: 7 }}>
+                        Check all that apply
+                    </Typography>
+
+                    <AccreditationStatus
+                        onComplete={onComplete}
+                    ></AccreditationStatus>
+                </Stack>
             ),
             disabled:
                 userSignUpOrder(userSignUpState) !=

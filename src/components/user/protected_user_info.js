@@ -107,12 +107,7 @@ const ProtectedUserInfo = ({
         <div>
             <Grid container spacing={2} sx={{ width: "100%" }}>
                 <Grid item xs={12} md={12} lg={4}>
-                    <Typography variant="subtitle3">
-                        {"SSN " +
-                            (fullSSNRequired
-                                ? "(complete SSN required)"
-                                : "(last four digits required)")}
-                    </Typography>
+                    <Typography variant="subtitle3">{"SSN "}</Typography>
                     <TextField
                         data-private
                         error={!!formValues.ssn.error}

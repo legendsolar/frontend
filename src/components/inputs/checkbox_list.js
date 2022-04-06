@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, Checkbox, Stack, Typography } from "@mui/material";
 import Divider from "../basics/divider";
 import PropTypes from "prop-types";
-function CheckboxList({ options, precheckedList, onInputChange }) {
+function CheckboxList({ options, precheckedList, onInputChange, disabled }) {
     const [checkedList, setCheckedList] = useState(
         Object.fromEntries(
             Object.entries(options).map(([key, option]) => [key, false])
@@ -56,7 +56,10 @@ function CheckboxList({ options, precheckedList, onInputChange }) {
                             alignItems="center"
                             key={key}
                             onClick={(event) => {
-                                if (!(exclusive ? exclusive != key : false)) {
+                                if (
+                                    !disabled &&
+                                    !(exclusive ? exclusive != key : false)
+                                ) {
                                     setCheckedItem(key, !checkedList[key]);
                                 }
                             }}
@@ -74,7 +77,9 @@ function CheckboxList({ options, precheckedList, onInputChange }) {
                                     }}
                                     checked={checkedList[key]}
                                     disabled={
-                                        exclusive ? exclusive != key : false
+                                        exclusive
+                                            ? exclusive != key
+                                            : false || disabled
                                     }
                                     onChange={(event) => {
                                         setCheckedItem(

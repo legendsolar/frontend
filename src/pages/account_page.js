@@ -8,6 +8,7 @@ import {
     Typography,
     ListItemButton,
 } from "@mui/material";
+import Divider from "../components/basics/divider";
 import Wallet from "../components/wallet/wallet_component";
 import ModifyUserInfo from "../components/user/modify_user_info";
 import SideBarNavView from "../views/side_bar_view";
@@ -18,6 +19,8 @@ import DefaultComponent from "../components/default_component";
 import AccreditationStatus from "../components/accreditation_status";
 import AccountManagementComponent from "../components/transactions/account_management_component";
 import UpdateUserInfo from "../components/identity/update_user_info";
+import ProtectedUserInfo from "../components/user/protected_user_info";
+import RecentTransfers from "../components/transactions/recent_transfers";
 
 const AccountPage = () => {
     const auth = useAuth();
@@ -27,9 +30,9 @@ const AccountPage = () => {
 
     const drawerTitles = [
         "Personal Information",
-        "Bank Information",
-        "Investments",
-        "Communication",
+        "Accreditation",
+        "Connected Accounts",
+        "Investment History",
     ];
 
     return (
@@ -51,7 +54,12 @@ const AccountPage = () => {
                                 auth.signout();
                             }}
                         >
-                            <Typography variant="subtitle1">Log Out</Typography>
+                            <Typography
+                                variant="subtitle1"
+                                sx={{ fontWeight: "800" }}
+                            >
+                                Log Out
+                            </Typography>
                         </ListItemButton>
                     }
                 ></ScrollToSidebar>
@@ -64,12 +72,27 @@ const AccountPage = () => {
                         <Typography variant="smallHeadline">
                             Personal Information
                         </Typography>
+
+                        <Divider></Divider>
+
+                        <Typography variant="subtitle2">
+                            Mailing Address
+                        </Typography>
+
                         <UpdateUserInfo></UpdateUserInfo>
+
+                        <Divider></Divider>
+
+                        <Typography variant="subtitle2">
+                            Personal Information
+                        </Typography>
+
+                        <ProtectedUserInfo completed={true}></ProtectedUserInfo>
                     </DefaultComponent>
 
                     <DefaultComponent
                         disabled={false}
-                        ref={(el) => (contentRefs.current[2] = el)}
+                        ref={(el) => (contentRefs.current[1] = el)}
                     >
                         <Typography variant="smallHeadline">
                             Connected Accounts
@@ -77,6 +100,37 @@ const AccountPage = () => {
                         <AccountManagementComponent
                             includeWallet={false}
                         ></AccountManagementComponent>
+                    </DefaultComponent>
+
+                    <DefaultComponent
+                        ref={(el) => (contentRefs.current[2] = el)}
+                    >
+                        <Typography variant="smallHeadline">
+                            Accreditation
+                        </Typography>
+
+                        <Typography variant="subtitle1">
+                            Legends Solar offers private placements regulated by
+                            the SEC under Regulation D. All investors must be
+                            accredited in order to participate in Legends Solar
+                            offerings.
+                        </Typography>
+
+                        <Typography variant="subtitle2">
+                            Your selected accreditation method
+                        </Typography>
+                        <AccreditationStatus
+                            completed={true}
+                        ></AccreditationStatus>
+                    </DefaultComponent>
+
+                    <DefaultComponent
+                        ref={(el) => (contentRefs.current[3] = el)}
+                    >
+                        <Typography variant="smallHeadline">
+                            Investment History
+                        </Typography>
+                        <RecentTransfers></RecentTransfers>
                     </DefaultComponent>
                 </Stack>
             }
