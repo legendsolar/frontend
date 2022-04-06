@@ -17,6 +17,9 @@ const DefaultView = (props) => {
             alignItems="center"
             width="100%"
             height="100%"
+            sx={{
+                transform: "translate3d(0, 0, 0)",
+            }}
         >
             <Box
                 position="absolute"
