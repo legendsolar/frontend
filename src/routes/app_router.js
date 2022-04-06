@@ -34,7 +34,7 @@ import NotFoundPage from "../pages/not_found_page";
 import { signUpOrder } from "../utils/user_sign_up_state";
 import SizingDemo from "../debug/sizing_demo";
 import AirtableTestPage from "../pages/airtable_test_page";
-import ComponentView from "../views/component_view";
+import ComponentView from "../component_view";
 
 function AppRouter() {
     const app = useFirebaseApp();

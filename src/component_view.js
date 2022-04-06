@@ -1,14 +1,14 @@
 import React, { useState, useEffect, lazy } from "react";
-import { Typography, Box, Grid } from "@mui/material";
 
-import { DocumentIcon } from "../components/icons/document_icon";
-import { ErrorGauge } from "../components/gauges/live_metric_gauge";
-import ErrorComponent from "../components/errors/error_component";
-
-const subredditsToShow = ["./c", "./d", "./e"];
+const subredditsToShow = ["./views/c", "./components/basics/test"];
 
 const importView = (subreddit) =>
-    lazy(() => import(`${subreddit}`).catch(() => import(`./error`)));
+    lazy(() =>
+        import(`${subreddit}`).catch((e) => {
+            console.log(e);
+            return import(`./views/error`);
+        })
+    );
 
 function ComponentView() {
     const [views, setViews] = useState([]);
@@ -16,9 +16,9 @@ function ComponentView() {
     useEffect(() => {
         async function loadViews() {
             const componentPromises = subredditsToShow.map(
-                async (subreddit) => {
+                async (subreddit, idx) => {
                     const Component = await importView(subreddit);
-                    return <Component key={subreddit} />;
+                    return <Component key={idx} />;
                 }
             );
 

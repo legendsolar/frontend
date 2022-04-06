@@ -4,7 +4,7 @@ import SolarPicture from "../assets/solar_frame.png";
 import PanelsSvg from "../components/icons/panels_svg";
 import { useTheme } from "@mui/material";
 import MetricList from "../components/summary/metric_list";
-import { DocumentIcon } from "../components/icons/document_icon";
+import DocumentIcon from "../components/icons/document_icon";
 import investmentOpportunities from "../utils/asset_data";
 import ErrorComponent from "../components/errors/error_component";
 import DocumentComponent from "../components/document_component";

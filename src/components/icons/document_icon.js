@@ -1,4 +1,4 @@
-export const DocumentIcon = ({ color, darkColor, width = 55 }) => {
+export default ({ color, darkColor, width = 55 }) => {
     return (
         <svg
             width={width}

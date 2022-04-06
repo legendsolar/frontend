@@ -1,6 +1,6 @@
 import { Stack, List, ListItemButton, Typography } from "@mui/material/";
 import DownloadIcon from "@mui/icons-material/Download";
-import { DocumentIcon } from "./icons/document_icon";
+import DocumentIcon from "./icons/document_icon";
 import { useStorage } from "reactfire";
 import { ref, getDownloadURL } from "firebase/storage";
 import { useTheme } from "@mui/material";
