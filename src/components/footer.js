@@ -187,17 +187,57 @@ const Footer = () => {
                                 <Typography variant="smallHeadline">
                                     Recent Announcements
                                 </Typography>
-                                <Typography variant="body2">
-                                    Sed posuere consectetur est at lobortis.
-                                </Typography>
 
-                                <Typography variant="body2">
-                                    Sed posuere consectetur est at lobortis.
-                                </Typography>
+                                <Button
+                                    href={
+                                        "https://www.legends.solar/news-room/same-coin"
+                                    }
+                                    variant="text"
+                                >
+                                    <Stack spacing={1}>
+                                        <Typography variant="subtitle3">
+                                            February 17, 2022
+                                        </Typography>
+                                        <Typography variant="smallHeadline">
+                                            Impact and alternative investing:
+                                            Two sides of the same coin
+                                        </Typography>
+                                    </Stack>
+                                </Button>
 
-                                <Typography variant="body2">
-                                    Sed posuere consectetur est at lobortis.
-                                </Typography>
+                                <Button
+                                    href={
+                                        "https://www.legends.solar/news-room/why-building-solar-urban-regions-creates-a-more-powerful-impact"
+                                    }
+                                    variant="text"
+                                >
+                                    <Stack spacing={1}>
+                                        <Typography variant="subtitle3">
+                                            February 1, 2022
+                                        </Typography>
+                                        <Typography variant="smallHeadline">
+                                            Why building solar in urban regions
+                                            creates a more powerful impact
+                                        </Typography>
+                                    </Stack>
+                                </Button>
+
+                                <Button
+                                    href={
+                                        "https://www.legends.solar/news-room/legends-solar-announces-close-of-pre-seed-financing"
+                                    }
+                                    variant="text"
+                                >
+                                    <Stack spacing={1}>
+                                        <Typography variant="subtitle3">
+                                            December 30, 2021
+                                        </Typography>
+                                        <Typography variant="smallHeadline">
+                                            Legends Solar accounces close of
+                                            pre-seed financing
+                                        </Typography>
+                                    </Stack>
+                                </Button>
                             </Stack>
                         </DefaultComponent>
                     </Stack>
