@@ -18,9 +18,9 @@ const MemberHeader = ({ sx }) => {
     const memberInfo = "Member since 2022";
 
     return (
-        <Stack sx={sx ? sx : {}}>
+        <Stack sx={sx ? sx : {}} spacing={0}>
             <Typography variant="headline2">{name}</Typography>
-            <Typography variant="label">{memberInfo}</Typography>
+            <Typography variant="smallLabel">{memberInfo}</Typography>
         </Stack>
     );
 };

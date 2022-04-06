@@ -7,6 +7,8 @@ import MetricList from "../components/summary/metric_list";
 import { DocumentIcon } from "../components/icons/document_icon";
 import investmentOpportunities from "../utils/asset_data";
 import ErrorComponent from "../components/errors/error_component";
+import DocumentComponent from "../components/document_component";
+import DownloadIcon from "@mui/icons-material/Download";
 
 const InvestContent = ({ assetId }) => {
     const theme = useTheme();
@@ -171,64 +173,46 @@ const InvestContent = ({ assetId }) => {
             </DefaultComponent>
 
             <DefaultComponent>
+                <Stack direction={"row"}>
+                    <DocumentIcon
+                        color={theme.palette.skyBlue.main}
+                        darkColor={theme.palette.skyBlue.dark}
+                    ></DocumentIcon>
+                    <Stack>
+                        <Typography variant="smallHeadline">
+                            Legends Santa Rosa Solar Pro Forma PDF
+                        </Typography>
+
+                        <Stack direction={"row"}>
+                            <DownloadIcon></DownloadIcon>
+                            <Typography variant="label">
+                                Click to download
+                            </Typography>
+                        </Stack>
+                    </Stack>
+                </Stack>
+            </DefaultComponent>
+
+            <DefaultComponent>
                 <Stack spacing={4}>
                     <Typography variant="smallHeadline">Documents</Typography>
-                    <Typography variant="description">
-                        Currently unavailable
-                    </Typography>
 
-                    <Grid container spacing={2} sx={{ width: "100%" }}>
-                        <Grid item xs={12} lg={4}>
-                            <Stack
-                                direction="row"
-                                justifyContent={"flex-start"}
-                                alignItems="center"
-                                spacing={2}
-                            >
-                                <DocumentIcon
-                                    color={theme.palette.skyBlue.main}
-                                    darkColor={theme.palette.skyBlue.dark}
-                                ></DocumentIcon>
-                                <Typography variant="subtitle1">
-                                    Prospectus
-                                </Typography>
-                            </Stack>
-                        </Grid>
-
-                        <Grid item xs={12} lg={4}>
-                            <Stack
-                                direction="row"
-                                justifyContent={"flex-start"}
-                                alignItems="center"
-                                spacing={2}
-                            >
-                                <DocumentIcon
-                                    color={theme.palette.pencilYellow.main}
-                                    darkColor={theme.palette.pencilYellow.dark}
-                                ></DocumentIcon>
-                                <Typography variant="subtitle1">
-                                    {`Subscription \nAgreement`}
-                                </Typography>
-                            </Stack>
-                        </Grid>
-
-                        <Grid item xs={12} lg={4}>
-                            <Stack
-                                direction="row"
-                                justifyContent={"flex-start"}
-                                alignItems="center"
-                                spacing={2}
-                            >
-                                <DocumentIcon
-                                    color={theme.palette.grassGreen.main}
-                                    darkColor={theme.palette.grassGreen.dark}
-                                ></DocumentIcon>
-                                <Typography variant="subtitle1">
-                                    {`Wiring \nInstructions`}
-                                </Typography>
-                            </Stack>
-                        </Grid>
-                    </Grid>
+                    <DocumentComponent
+                        documents={[
+                            {
+                                title: "Pro Forma",
+                                color: "skyBlue",
+                            },
+                            {
+                                title: "Purchase Agreement",
+                                color: "pencilYellow",
+                            },
+                            {
+                                title: "Billing Agreement",
+                                color: "eraserRed",
+                            },
+                        ]}
+                    ></DocumentComponent>
                 </Stack>
             </DefaultComponent>
         </Stack>

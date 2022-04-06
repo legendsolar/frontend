@@ -3,8 +3,10 @@ import DownloadIcon from "@mui/icons-material/Download";
 import { DocumentIcon } from "./icons/document_icon";
 import { useStorage } from "reactfire";
 import { ref, getDownloadURL } from "firebase/storage";
+import { useTheme } from "@mui/material";
 
 const DocumentComponent = ({ documents }) => {
+    const theme = useTheme();
     const storage = useStorage();
     const documentRef = ref(
         storage,
@@ -28,6 +30,10 @@ const DocumentComponent = ({ documents }) => {
         });
     };
 
+    const colorName = (documentObject) => {
+        return "color" in documentObject ? documentObject.color : "skyBlue";
+    };
+
     return (
         <List>
             {documents.map((documentItem, index) => (
@@ -43,13 +49,18 @@ const DocumentComponent = ({ documents }) => {
                             width: "100%",
                         }}
                         direction="row"
-                        justifyContent="space-between"
+                        justifyContent={"flex-start"}
                     >
+                        <DocumentIcon
+                            color={theme.palette[colorName(documentItem)].main}
+                            darkColor={
+                                theme.palette[colorName(documentItem)].dark
+                            }
+                            width={25}
+                        ></DocumentIcon>
                         <Typography variant="subtitle1">
                             {documentItem.title}
                         </Typography>
-
-                        <DownloadIcon></DownloadIcon>
                     </Stack>
                 </ListItemButton>
             ))}

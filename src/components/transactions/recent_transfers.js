@@ -11,7 +11,7 @@ import { useCloudFunctions } from "../../hooks/use_cloud_functions";
 import { useEffect } from "react";
 import TransactionGrid from "./transaction_grid";
 
-const RecentTransfers = () => {
+const RecentTransfers = (transferType) => {
     const dispatch = useDispatch();
     const cloudFunctions = useCloudFunctions();
 

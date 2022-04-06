@@ -1,8 +1,8 @@
-export const DocumentIcon = ({ color, darkColor }) => {
+export const DocumentIcon = ({ color, darkColor, width = 55 }) => {
     return (
         <svg
-            width="55"
-            height="69"
+            width={width}
+            height={(69 / 55) * width}
             viewBox="0 0 55 69"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

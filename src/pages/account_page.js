@@ -30,7 +30,6 @@ const AccountPage = () => {
 
     const drawerTitles = [
         "Personal Information",
-        "Accreditation",
         "Connected Accounts",
         "Investment History",
     ];
@@ -39,11 +38,7 @@ const AccountPage = () => {
         <SideBarNavView
             drawer={
                 <ScrollToSidebar
-                    header={
-                        <Stack sx={{ p: 2 }}>
-                            <MemberHeader></MemberHeader>
-                        </Stack>
-                    }
+                    header={<MemberHeader></MemberHeader>}
                     contentTitles={drawerTitles}
                     refs={contentRefs}
                     additionalButtons={
@@ -104,28 +99,6 @@ const AccountPage = () => {
 
                     <DefaultComponent
                         ref={(el) => (contentRefs.current[2] = el)}
-                    >
-                        <Typography variant="smallHeadline">
-                            Accreditation
-                        </Typography>
-
-                        <Typography variant="subtitle1">
-                            Legends Solar offers private placements regulated by
-                            the SEC under Regulation D. All investors must be
-                            accredited in order to participate in Legends Solar
-                            offerings.
-                        </Typography>
-
-                        <Typography variant="subtitle2">
-                            Your selected accreditation method
-                        </Typography>
-                        <AccreditationStatus
-                            completed={true}
-                        ></AccreditationStatus>
-                    </DefaultComponent>
-
-                    <DefaultComponent
-                        ref={(el) => (contentRefs.current[3] = el)}
                     >
                         <Typography variant="smallHeadline">
                             Investment History
