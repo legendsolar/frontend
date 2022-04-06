@@ -117,7 +117,7 @@ const CreateDwollaAccount = ({ onComplete }) => {
                 can transfer funds to linked bank accounts.
             </Typography>
 
-            <Typography variant="body">
+            <Typography variant="body1">
                 We require this information to securely create your Legends
                 Wallet. This information will not be used for marketing
                 purposes.

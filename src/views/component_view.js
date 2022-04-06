@@ -5,7 +5,7 @@ import { DocumentIcon } from "../components/icons/document_icon";
 import { ErrorGauge } from "../components/gauges/live_metric_gauge";
 import ErrorComponent from "../components/errors/error_component";
 
-const subredditsToShow = ["./c", "./d"];
+const subredditsToShow = ["./c", "./d", "./e"];
 
 const importView = (subreddit) =>
     lazy(() => import(`${subreddit}`).catch(() => import(`./error`)));
