@@ -109,8 +109,6 @@ const SignUpComponent = ({ onComplete }) => {
                 return formValues[key].error !== false;
             })
             .some((el) => el);
-        console.log(error);
-
         return error;
     };
 

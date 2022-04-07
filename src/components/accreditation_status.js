@@ -139,6 +139,10 @@ const AccreditationStatus = ({
 
             {!completed && (
                 <Button
+                    sx={{
+                        width: "100%",
+                        mt: 4,
+                    }}
                     variant="primary"
                     disabled={
                         (checkedList &&
