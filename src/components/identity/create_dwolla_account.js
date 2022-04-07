@@ -104,8 +104,6 @@ const CreateDwollaAccount = ({ onComplete }) => {
             });
         }
 
-        console.log(newInputValid);
-
         setInputValid(newInputValid);
     };
 

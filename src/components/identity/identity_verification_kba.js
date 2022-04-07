@@ -27,8 +27,11 @@ const IdentityVerificationKBA = ({ onComplete }) => {
             });
     }, []);
 
-    const onQuestionUpdate = ({ value, name }) => {
-        setSelected({ ...selected, [name]: value });
+    console.log({ kbaQuestions: kbaQuestions });
+    console.log({ selected: selected });
+
+    const onQuestionUpdate = (event) => {
+        setSelected({ ...selected, [event.target.name]: event.target.value });
     };
 
     const submitDisabled = () => {
@@ -42,25 +45,18 @@ const IdentityVerificationKBA = ({ onComplete }) => {
     const onSubmit = () => {
         console.log("submitted kba");
         console.log(selected);
+        setLoading(true);
         returnKBASessionResponse(selected).then(() => {
+            setLoading(false);
             onComplete();
         });
     };
 
     return (
         <Stack spacing={2}>
-            <Typography variant="smallHeadline">
-                Identity Verification
-            </Typography>
             <Typography variant="description">
                 We need to ask a few questions to verify your identity
             </Typography>
-
-            <Typography variant="description">
-                [Debug] We need to ask a few questions to verify your identity
-            </Typography>
-
-            {loading && <CircularProgress></CircularProgress>}
 
             {kbaQuestions &&
                 kbaQuestions.map((question) => {
@@ -82,7 +78,11 @@ const IdentityVerificationKBA = ({ onComplete }) => {
                 }}
                 disabled={submitDisabled()}
             >
-                Submit
+                {loading ? (
+                    <CircularProgress color="light"></CircularProgress>
+                ) : (
+                    "Submit"
+                )}
             </Button>
         </Stack>
     );
