@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./app";
-import { BrowserRouter } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import * as FullStory from "@fullstory/browser";
@@ -13,6 +11,20 @@ import appSettings from "./app_settings";
 import smoothscroll from "smoothscroll-polyfill";
 
 smoothscroll.polyfill();
+
+console.log("loading: " + process.env.REACT_APP_BUILD_TARGET);
+
+function importBuildTarget() { 
+  if (process.env.REACT_APP_BUILD_TARGET === "APP") { 
+    return import("./app.js"); 
+  } else if (process.env.REACT_APP_BUILD_TARGET === "TEST") { 
+    return import("./test.js"); 
+  } else { 
+    return Promise.reject(
+      new Error("No such build target: " + process.env.REACT_APP_BUILD_TARGET)
+    ); 
+  } 
+} 
 
 if (appSettings.sentry.enabled)
     Sentry.init({
@@ -35,11 +47,11 @@ if (appSettings.logRocket.enabled) {
     LogRocket.init("d6ndfk/legends-alpha");
 }
 
-ReactDOM.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </React.StrictMode>,
-    document.getElementById("root")
+importBuildTarget().then(({ default: Environment }) => 
+  ReactDOM.render( 
+    <React.StrictMode> 
+      <Environment /> 
+    </React.StrictMode>
+  , document.getElementById("root") 
+  ) 
 );

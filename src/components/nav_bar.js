@@ -14,8 +14,9 @@ import store from "../store";
 
 const NavBar = ({}) => {
     const auth = useAuth();
+    const user = auth.user;
+
     const navigate = useNavigate();
-    const location = useLocation();
     const cloudFunctions = useCloudFunctions();
     const dispatch = useDispatch();
 
@@ -44,11 +45,11 @@ const NavBar = ({}) => {
     }, [dispatch, store.getState().user.signUpState.status, auth.user]);
 
     useEffect(() => {
-        if (balanceStatus === "idle") {
+        if (balanceStatus === "idle" && user) {
             console.log("fetch wallet, line 37 nav bar");
             dispatch(fetchWalletBalance(cloudFunctions));
         }
-    }, [dispatch, balanceStatus]);
+    }, [user, dispatch, balanceStatus]);
 
     const walletBalance = useSelector(selectWalletBalance);
 

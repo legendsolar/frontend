@@ -32,7 +32,7 @@ function MetricGauge({
         marginBottom: 0,
     });
 
-    const normalizedCurrentValue = error ? 0.5 : currentValue / (max - min);
+    const normalizedCurrentValue = error ? 0.5 : (currentValue-min) / (max - min);
 
     const currentAngle = error
         ? 270
