@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { Typography } from "@mui/material";
+import { Typography , useTheme } from "@mui/material";
 import styles from "./metric_gauge.module.css";
 import LivePill from "../pills/live_pill";
 import { useChartDimensions } from "../../hooks/use_chart_dimensions";
@@ -23,6 +23,8 @@ function MetricGauge({
 
     error,
 }) {
+    const theme = useTheme();
+
     const [ref, dms] = useChartDimensions({
         marginLeft: 0,
         marginRight: 0,
@@ -38,6 +40,9 @@ function MetricGauge({
     const strokeTotalLength = circleRadius * Math.PI * 2;
     const strokeCurrentLength =
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
+
+    
+
     return (
         <Box sx={{ minWidth: "300px" }}>
             <Stack alignItems={"center"}>
@@ -74,7 +79,7 @@ function MetricGauge({
                                     r={circleRadius}
                                 />
                                 <circle
-                                    stroke={unitOpts.strokeColor}
+                                    stroke={theme.palette[unitOpts.strokeColor].main}
                                     r={circleRadius}
                                     stroke-dasharray={`${strokeCurrentLength} ${strokeTotalLength}`}
                                 />
@@ -106,8 +111,8 @@ function MetricGauge({
                 >
                     <Typography variant="label">
                         {error
-                            ? unitOpts.unit + "-"
-                            : min + " " + unitOpts.unit}
+                            ? `${unitOpts.unit  }-`
+                            : `${min  } ${  unitOpts.unit}`}
                     </Typography>
 
                     <Typography variant="body1">
@@ -116,8 +121,8 @@ function MetricGauge({
 
                     <Typography variant="label">
                         {error
-                            ? unitOpts.unit + "-"
-                            : max + " " + unitOpts.unit}
+                            ? `${unitOpts.unit  }-`
+                            : `${max  } ${  unitOpts.unit}`}
                     </Typography>
                 </Stack>
 

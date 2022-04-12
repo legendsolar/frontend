@@ -1,9 +1,18 @@
 import React, { useState, useEffect, lazy } from "react";
 
-const componentPaths = [
+const components = [{
+    path: 
     "./components/basics/test", 
+    name: "BasicTest"
+}, {
+    path: 
     "./tests/transaction_test", 
-    "./tests/metric_gauge_test"];
+    name: "TransferComponent"
+},{
+    path:     "./tests/metric_gauge_test",
+    name: "MetricGauge"
+}
+];
 
 const importView = (subreddit) =>
     lazy(() =>
@@ -15,13 +24,13 @@ const importView = (subreddit) =>
 
 function ComponentView() {
     const [views, setViews] = useState([]);
-    const [selectedComponent, setSelectedComponent] = useState(componentPaths[0]);
+    const [selectedComponent, setSelectedComponent] = useState(components[0].name);
 
     useEffect(() => {
         async function loadViews() {
-            const componentPromises = componentPaths.filter((path) => path === selectedComponent).map(
-                async (subreddit, idx) => {
-                    const Component = await importView(subreddit);
+            const componentPromises = components.filter((component) => component.name === selectedComponent).map(
+                async (component, idx) => {
+                    const Component = await importView(component.path);
                     return <Component key={idx} />;
                 }
             );
@@ -30,9 +39,9 @@ function ComponentView() {
         }
 
         loadViews();
-    }, [componentPaths, selectedComponent]);
+    }, [components, selectedComponent]);
 
-    const renderedComponents = componentPaths.map((component) => (<option>{component}</option>))
+    const renderedComponents = components.map((component) => (<option>{component.name}</option>));
 
     return (
         <div>
@@ -41,7 +50,7 @@ function ComponentView() {
            </select>
            <p>selected component: {selectedComponent}</p> 
             <hr></hr>
-        <React.Suspense fallback="Loading component...">
+        <React.Suspense fallback="Loading component... (components with images may take a few seconds)">
             <div className="container">{views}</div>
         </React.Suspense>
 

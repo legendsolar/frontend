@@ -9,7 +9,7 @@ const TestMetricGauge = () => <MetricGauge
             unit: "unit",
             liveMessage: "LIVE",
             unitDescription: "unit description",
-            strokeColor: "#ff0000",
+            strokeColor: "legendaryGreen",
         }}
     >
     </MetricGauge>
