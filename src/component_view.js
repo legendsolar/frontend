@@ -8,9 +8,14 @@ const components = [{
     path: 
     "./tests/transaction_test", 
     name: "TransferComponent"
-},{
+},
+{
     path:     "./tests/metric_gauge_test",
     name: "MetricGauge"
+},
+{
+    path:     "./tests/account_list_test",
+    name: "AccountList"
 }
 ];
 
