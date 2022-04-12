@@ -170,4 +170,5 @@ MetricGauge.defaultProps = {
     gaugeAngleTravel: 180,
     error: false,
 };
+
 export default MetricGauge;
