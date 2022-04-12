@@ -1,6 +1,9 @@
 import React, { useState, useEffect, lazy } from "react";
 
-const subredditsToShow = ["./views/c", "./components/basics/test"];
+const componentPaths = [
+    "./components/basics/test", 
+    "./tests/transaction_test", 
+    "./tests/metric_gauge_test"];
 
 const importView = (subreddit) =>
     lazy(() =>
@@ -12,10 +15,11 @@ const importView = (subreddit) =>
 
 function ComponentView() {
     const [views, setViews] = useState([]);
+    const [selectedComponent, setSelectedComponent] = useState(componentPaths[0]);
 
     useEffect(() => {
         async function loadViews() {
-            const componentPromises = subredditsToShow.map(
+            const componentPromises = componentPaths.filter((path) => path === selectedComponent).map(
                 async (subreddit, idx) => {
                     const Component = await importView(subreddit);
                     return <Component key={idx} />;
@@ -26,12 +30,22 @@ function ComponentView() {
         }
 
         loadViews();
-    }, [subredditsToShow]);
+    }, [componentPaths, selectedComponent]);
+
+    const renderedComponents = componentPaths.map((component) => (<option>{component}</option>))
 
     return (
-        <React.Suspense fallback="Loading views...">
+        <div>
+           <select value={selectedComponent} onChange={(event)=>setSelectedComponent(event.target.value)}>
+                {renderedComponents}
+           </select>
+           <p>selected component: {selectedComponent}</p> 
+            <hr></hr>
+        <React.Suspense fallback="Loading component...">
             <div className="container">{views}</div>
         </React.Suspense>
+
+        </div>
     );
 }
 
