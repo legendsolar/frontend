@@ -36,7 +36,7 @@ function ComponentView() {
             const componentPromises = components.filter((component) => component.name === selectedComponent).map(
                 async (component, idx) => {
                     const Component = await importView(component.path);
-                    return <Component key={idx} />;
+                    return <Component key={component.name} />;
                 }
             );
 
