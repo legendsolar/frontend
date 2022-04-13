@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 import { useAuth } from "../hooks/use_auth";
 
 import { Paper, Stack, Button, Typography } from "@mui/material";
-import Wallet from "../components/wallet/wallet_component";
 import ModifyUserInfo from "../components/user/modify_user_info";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";

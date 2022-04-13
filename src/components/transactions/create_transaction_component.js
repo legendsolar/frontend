@@ -14,27 +14,19 @@ import {
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-import AccountManagementComponent from "./account_management_component";
 import { useState, useReducer, useEffect } from "react";
 import ErrorComponent from "../errors/error_component";
-import { useCloudFunctions } from "../../hooks/use_cloud_functions";
-import { fetchTransactions } from "../../slices/transfer_slice";
-import { useDispatch, useSelector } from "react-redux";
-import {
-    fetchAccounts,
-    selectAllAccounts,
-    selectWalletId,
-} from "../../slices/wallet_slice";
 
 import { validateTransferAmount } from "../../validation/transaction_validation";
 import TransactionComponent from "../transactions/transfer_component";
 import LoadingComponent from "../loading_component";
 import MultiSelect from "../multiselect";
 
-const CreateTransactionComponent = () => {
-    const cloudFunctions = useCloudFunctions();
-    const globalDispatch = useDispatch();
-
+const CreateTransactionComponent = ({
+    accounts,
+    loading,
+    onComplete
+}) => {
     const initialState = {
         page: "setup",
     };
@@ -53,38 +45,16 @@ const CreateTransactionComponent = () => {
     };
 
     const [state, dispatch] = useReducer(reducer, initialState);
-
     const [sourceAccount, setSourceAccount] = useState(null);
     const [destinationAccount, setDestinationAccount] = useState(null);
-
     const [transferAmount, setTransferAmount] = useState(undefined);
-
-    const transactionStatus = useSelector((state) => state.transactions.status);
-
-    const [loading, setLoading] = useState(false);
-
-    const accountStatus = useSelector((state) => state.wallet.accounts.status);
-
-    const walletId = useSelector(selectWalletId);
 
     const walletObject = {
         name: "Wallet",
         source: "Created on Legends",
         type: "wallet",
         institution: "Legends",
-        id: walletId,
     };
-
-    useEffect(() => {
-        if (accountStatus === "idle") {
-            console.log(
-                "dispatch fetch accounts : line 79, create transaction page"
-            );
-            dispatch(fetchAccounts(cloudFunctions));
-        }
-    }, [accountStatus, dispatch]);
-
-    const accounts = [walletObject, ...useSelector(selectAllAccounts)];
 
     const goBack = () => {
         dispatch({
@@ -107,51 +77,9 @@ const CreateTransactionComponent = () => {
         }
     };
 
-    const onComplete = () => {
-        const sourceAccountId = sourceAccount.id;
-        const destinationAccountId = destinationAccount.id;
-        const amount = transferAmount;
-
-        setLoading(true);
-
-        cloudFunctions
-            .createTransfer({
-                source: sourceAccountId,
-                destination: destinationAccountId,
-                amount: amount,
-            })
-            .then((resp) => {
-                console.log("new transfer created with id:");
-                console.log(resp);
-
-                // Refresh transactions
-                if (
-                    transactionStatus === "idle" ||
-                    transactionStatus === "succeeded"
-                ) {
-                    globalDispatch(fetchTransactions(cloudFunctions));
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                setLoading(false);
-
-                dispatch({
-                    type: "CHANGE_VIEW",
-                    page: "confirmed",
-                });
-            });
-    };
-
-    if (!accounts || accountStatus !== "succeeded") {
+    if (loading) {
         return <LoadingComponent></LoadingComponent>;
     }
-    console.log("accounts: ");
-    console.log(accounts);
-    console.log(sourceAccount);
-    console.log(destinationAccount);
 
     if (state.page === "setup") {
         return (

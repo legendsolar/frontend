@@ -1,3 +1,4 @@
+import { ErrorBoundary } from "@sentry/react";
 import React, { useState, useEffect, lazy } from "react";
 
 const components = [{
@@ -16,6 +17,10 @@ const components = [{
 {
     path:     "./tests/account_list_test",
     name: "AccountList"
+},
+{
+    path:     "./tests/test_create_transaction",
+    name: "TestCreateTransaction"
 }
 ];
 
@@ -56,7 +61,9 @@ function ComponentView() {
            <p>selected component: {selectedComponent}</p> 
             <hr></hr>
         <React.Suspense fallback="Loading component... (components with images may take a few seconds)">
+       <ErrorBoundary>
             <div className="container">{views}</div>
+       </ErrorBoundary> 
         </React.Suspense>
 
         </div>

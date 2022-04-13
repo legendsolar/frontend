@@ -9,7 +9,6 @@ import {
     ListItemButton,
 } from "@mui/material";
 import Divider from "../components/basics/divider";
-import Wallet from "../components/wallet/wallet_component";
 import ModifyUserInfo from "../components/user/modify_user_info";
 import SideBarNavView from "../views/side_bar_view";
 import ScrollToSidebar from "../components/scroll_to_sidebar";
