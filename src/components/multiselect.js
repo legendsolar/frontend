@@ -14,17 +14,11 @@ const MultiSelect = ({
     name,
     text,
     fields,
-    value,
+    selected,
     error,
     onChangeListener,
 }) => {
-    const [selectedValue, setSelectedValue] = useState(null);
-
     const handleChange = (event) => {
-        const value = event.target.value;
-
-        setSelectedValue(value);
-
         onChangeListener(event);
     };
 
@@ -34,12 +28,12 @@ const MultiSelect = ({
             <Select
                 helperText={text}
                 name={name}
-                value={selectedValue}
+                value={selected?.value ? selected.value : ''}
                 onChange={handleChange}
             >
                 {fields.map((field) => {
                     return (
-                        <MenuItem key={field.id} value={field.id}>
+                        <MenuItem key={field.id} value={field.value}>
                             {field.text}
                         </MenuItem>
                     );
