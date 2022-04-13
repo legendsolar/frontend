@@ -26,11 +26,11 @@ const TestMultiselect = () => {
 
     const onChangeListener = (event) => {
         setSelected(event.target);
-alert(JSON.stringify(event.target));
     }
+
     return (<MultiSelect
         name="testMultiselect"
-        text="Test Multiselect"
+        text="Test Multiselect Text"
         fields={fields}
         selected={selected}
         error={null}

@@ -41,9 +41,8 @@ const MultiSelect = ({
             </Select>
             {!!error ? (
                 <FormHelperText error>{error.errMsg}</FormHelperText>
-            ) : (
-                <></>
-            )}
+            ) : null
+            }
         </FormControl>
     );
 };

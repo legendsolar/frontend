@@ -55,7 +55,7 @@
     "start:emulators": "env-cmd -f ./.env.emulator react-scripts start",
     "start:test": "env-cmd -f ./.env.test react-scripts start",
     "build": "env-cmd -f ./.env.dev react-scripts build",
-    "build:unobs": "env-cmd -f ./.env.dev react-scripts build",
+    "build:test": "env-cmd -f ./.env.test react-scripts build",
     "build:prod": "env-cmd -f ./.env.prod react-scripts build",
     "preview": "firebase use dev && firebase hosting:channel:deploy `git branch --show-current`-`git rev-parse HEAD`",
     "preview:prod": "firebase use prod && firebase hosting:channel:deploy `git branch --show-current`-`git rev-parse HEAD`",
