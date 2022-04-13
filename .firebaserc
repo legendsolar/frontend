@@ -4,5 +4,16 @@
     "prod": "legends-alpha-prod",
     "default": "legends-alpha"
   },
-  "targets": {}
+  "targets": {
+    "legends-alpha": {
+      "hosting": {
+        "app": [
+          "legends-alpha"
+        ],
+        "component-staging": [
+          "legends-component-staging"
+        ]
+      }
+    }
+  }
 }

@@ -1,5 +1,23 @@
 {
-  "hosting": {
+  "hosting": [
+
+  {
+    "target": "app",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  {
+    "target": "component-staging",
     "public": "build",
     "ignore": [
       "firebase.json",
@@ -13,4 +31,6 @@
       }
     ]
   }
+  ]
+  
 }

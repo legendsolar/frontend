@@ -33,6 +33,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_LEGENDS_ALPHA }}'
           channelId: live
           projectId: legends-alpha
+          target: app
       - run: npm ci && npm run build:test
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -40,4 +41,5 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_LEGENDS_ALPHA }}'
           channelId: live
           projectId: legends-component-staging
+          target: component-staging
 
