@@ -21,7 +21,7 @@ const SignUpComponent = ({initialValues, errors, onSubmit}) => {
             lastName: '',
             phone: '',
         },
-        validationSchema: yup.object({
+        validationSchema: yup.object().shape({
             email: validateEmail(),
             password: validatePassword(),
             firstName: validateFirstName(),
@@ -49,6 +49,7 @@ const SignUpComponent = ({initialValues, errors, onSubmit}) => {
                             }
                             value={formik.values.firstName}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                             id="firstName"
                             label="First Name"
                             name="firstName"
@@ -68,6 +69,7 @@ const SignUpComponent = ({initialValues, errors, onSubmit}) => {
                             }
                             value={formik.values.lastName}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                             id="lastName"
                             label="Last Name"
                             name="lastName"
@@ -86,6 +88,7 @@ const SignUpComponent = ({initialValues, errors, onSubmit}) => {
                             }
                             value={formik.values.email}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                             id="email"
                             label="Email Address"
                             name="email"
@@ -105,6 +108,7 @@ const SignUpComponent = ({initialValues, errors, onSubmit}) => {
                             }
                             value={formik.values.phoneNumber}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                             id="phoneNumber"
                             label="Phone number"
                             name="phoneNumber"
@@ -124,6 +128,7 @@ const SignUpComponent = ({initialValues, errors, onSubmit}) => {
                             }
                             value={formik.values.password}
                             onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                             name="password"
                             label="Password"
                             type="password"
