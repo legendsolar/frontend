@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import {useState} from 'react';
-import {Grid, Box, TextField, Button} from '@mui/material';
+import {Grid, Box, TextField, Button, CircularProgress} from '@mui/material';
 import {
     validateEmail,
     validatePassword,
@@ -12,24 +12,21 @@ import {
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 
-const SignUpComponent = ({initialValues, errors, onSubmit}) => {
+const SignUpComponent = ({initialValues, customValidateData, onSubmit}) => {
     const formik = useFormik({
-        initialValues: {
-            email: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            phone: '',
-        },
+        initialValues: initialValues,
         validationSchema: yup.object().shape({
             email: validateEmail(),
             password: validatePassword(),
             firstName: validateFirstName(),
             lastName: validateLastName(),
-            phone: validatePhoneNumber(),
+            phoneNumber: validatePhoneNumber(),
         }),
-        onSubmit: (values) => {
-            onSubmit(values);
+        onSubmit: async (values) => {
+            const valid = await customValidateData(values);
+            if (valid) {
+                onSubmit(values);
+            }
         },
     });
 
@@ -141,11 +138,20 @@ const SignUpComponent = ({initialValues, errors, onSubmit}) => {
                 <Button
                     variant="primary"
                     onClick={formik.handleSubmit}
-                    disabled={!formik.isValid || !formik.dirty}
+                    disabled={
+                        formik.isValidating ||
+                        formik.isSubmitting ||
+                        !formik.dirty ||
+                        !formik.isValid
+                    }
                     color="legendaryGreen"
                     sx={{width: '100%', mt: 4}}
                 >
-                    Continue
+                    {formik.isValidating || formik.isSubmitting ? (
+                        <CircularProgress color="light"></CircularProgress>
+                    ) : (
+                        'Continue'
+                    )}
                 </Button>
             </form>
         </Box>
@@ -160,8 +166,19 @@ SignUpComponent.propTypes = {
         lastName: PropTypes.string,
         phoneNumber: PropTypes.string,
     }),
-    errors: PropTypes.any,
+    customValidateData: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
+};
+
+SignUpComponent.defaultProps = {
+    initialValues: {
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+    },
+    customValidateData: () => {},
 };
 
 export default SignUpComponent;
