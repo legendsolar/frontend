@@ -20,15 +20,19 @@ const components = [
     },
     {
         path: './tests/test_create_transaction',
-        name: 'TestCreateTransaction',
+        name: 'CreateTransaction',
     },
     {
         path: './tests/test_multiselect',
-        name: 'TestMultiselect',
+        name: 'Multiselect',
     },
     {
         path: './tests/test_sign_up_option',
-        name: 'TestSignUpOption',
+        name: 'SignUpOption',
+    },
+    {
+        path: './tests/test_sign_up',
+        name: 'SignUp',
     },
 ];
 
@@ -40,7 +44,7 @@ const importView = (subreddit) =>
         }),
     );
 
-function ComponentView() {
+const ComponentView = () => {
     const [views, setViews] = useState([]);
     const [selectedComponent, setSelectedComponent] = useState(
         components[0].name,
@@ -82,6 +86,6 @@ function ComponentView() {
             </React.Suspense>
         </div>
     );
-}
+};
 
 export default ComponentView;

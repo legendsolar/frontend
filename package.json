@@ -28,6 +28,7 @@
     "env-cmd": "^10.1.0",
     "firebase": "^9.6.7",
     "firebaseui": "^0.600.0",
+    "formik": "^2.2.9",
     "js-easing-functions": "^1.0.3",
     "logrocket": "^2.2.0",
     "lottie-web": "^5.8.1",
@@ -47,7 +48,8 @@
     "smoothscroll-polyfill": "^0.4.4",
     "tinycolor2": "^1.4.2",
     "tslib": "^2.3.1",
-    "web-vitals": "^2.1.2"
+    "web-vitals": "^2.1.2",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "env-cmd -f ./.env.dev react-scripts start",
