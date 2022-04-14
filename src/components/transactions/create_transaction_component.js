@@ -21,6 +21,7 @@ import { validateTransferAmount } from "../../validation/transaction_validation"
 import TransactionComponent from "../transactions/transfer_component";
 import LoadingComponent from "../loading_component";
 import MultiSelect from "../multiselect";
+import { display } from "@mui/system";
 
 const CreateTransactionComponent = ({
     accounts,
@@ -49,13 +50,6 @@ const CreateTransactionComponent = ({
     const [destinationAccount, setDestinationAccount] = useState(null);
     const [transferAmount, setTransferAmount] = useState(undefined);
 
-    const walletObject = {
-        name: "Wallet",
-        source: "Created on Legends",
-        type: "wallet",
-        institution: "Legends",
-    };
-
     const goBack = () => {
         dispatch({
             type: "CHANGE_VIEW",
@@ -63,13 +57,19 @@ const CreateTransactionComponent = ({
         });
     };
 
+    const displayAccounts = accounts.map((account) => {
+        return { ...account, text: account.name, value: account.id};
+    });
+
     const onAccountSelected = (event) => {
         const { name, value } = event.target;
 
-        console.log(event.target);
+        console.log(event);
         console.log(name, value);
 
-        const account = accounts.filter((account) => account.id === value)[0];
+        const account = displayAccounts.filter((account) => account.id === value)[0];
+
+        console.log(account);
         if (name === "sourceAccount") {
             setSourceAccount(account);
         } else if (name === "destinationAccount") {
@@ -111,18 +111,16 @@ const CreateTransactionComponent = ({
                 <MultiSelect
                     name={"sourceAccount"}
                     text="From"
-                    fields={accounts.map((account) => {
-                        return { ...account, text: account.name };
-                    })}
+                    selected={sourceAccount}
+                    fields={displayAccounts}
                     onChangeListener={onAccountSelected}
                 ></MultiSelect>
 
                 <MultiSelect
                     name={"destinationAccount"}
                     text="To"
-                    fields={accounts.map((account) => {
-                        return { ...account, text: account.name };
-                    })}
+                    selected={destinationAccount}
+                    fields={displayAccounts}
                     onChangeListener={onAccountSelected}
                 ></MultiSelect>
 

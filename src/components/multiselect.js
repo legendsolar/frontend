@@ -28,7 +28,7 @@ const MultiSelect = ({
             <Select
                 helperText={text}
                 name={name}
-                value={selected?.value ? selected.value : ''}
+                value={selected?.value != null ? selected.value : ''}
                 onChange={handleChange}
             >
                 {fields.map((field) => {
