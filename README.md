@@ -2,33 +2,67 @@
 
 This is the central repository for the Legends App. It primarily leverages [React](https://reactjs.org/) and [MUI](https://mui.com/).
 
-## Commands
+## NPM Commands
 
-### `start`
+### `npm run start`
 Starts a locally hosted version of the site running on the [legends alpha dev](https://console.firebase.google.com/u/1/project/legends-alpha/overview) backend.
 
-### `start:prod`
+### `npm run start:prod`
 Starts a locally hosted version of the site running on the [legends alpha prod](https://console.firebase.google.com/u/1/project/legends-alpha-prod/overview) backend.
 
-### `start:emulator`
+### `npm run start:emulator`
 Starts a locally hosted version of the site running on the emulator backend. Emulators must be started in the `backend` project for this to work properly.
 
-### `build`
+### `npm run build`
 Builds app to `./build` using the [legends alpha dev](https://console.firebase.google.com/u/1/project/legends-alpha/overview) backend.
 
-### `build:prod`
+### `npm run build:prod`
 Builds app to `./build` using the [legends alpha prod](https://console.firebase.google.com/u/1/project/legends-alpha-prod/overview) backend.
 
-### `preview`
+### `npm run preview`
 Deploys site to a public preview url based on current branch and commit. The `legends alpha dev` project will be used. Url will be of form: `https://legends-alpha--<branch name>-<hash>-<random string>.web.app`.
 
-### `preview:prod`
+### `npm run preview:prod`
 Deploys site to a public preview url based on current branch and commit. The `legends alpha prod` project will be used. Url will be of form: `https://legends-alpha-prod--<branch name>-<hash>-<random string>.web.app`.
 
 ## Deploying
 Commits are automatically deployed to the staging project [legends alpha dev](https://console.firebase.google.com/u/1/project/legends-alpha/overview).
 
 Tags are deployed to the production environment, [legends alpha prod](https://console.firebase.google.com/u/1/project/legends-alpha-prod/overview).
+
+## Organization
+Terms:
+- Page: content displayed on URL endpoint
+- Layout: layout of a page
+- View: A specific layout and combination of components used across multiple pages
+
+Structure: 
+- src (all react content)
+  - assets (static assets, ie images, lotties ect)
+  - components (all isolated components .jsx)
+    - invest_assets (assets to invest in)
+    - basics (basic components)
+    - buttons
+    - errors
+    - gauges
+    - icons
+    - identity
+    - inputs
+    - user
+    -  
+    - pills
+  - debug (debug pages and content)
+  - fonts (fonts)
+  - hooks (custom hooks)
+  - layouts (page layouts)
+  - pages (route endpoints)
+  - slices (redux slices)
+  - tests (live tests of components)
+  - utils (utility functions)
+  - validation (user input validation)
+  - views (all views)
+  - webflow (any webflow interaction code)
+
 ## Sizing
 - Figma:
   - Total Width: 1440 px
