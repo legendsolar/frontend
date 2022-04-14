@@ -25,6 +25,10 @@ const components = [{
 {
     path: "./tests/test_multiselect",
     name: "TestMultiselect"
+},
+{
+    path: "./tests/test_sign_up_option",
+    name: "TestSignUpOption"
 }
 ];
 

@@ -1,9 +1,5 @@
 import { useEffect } from "react";
 import { Typography, Stack, Button } from "@mui/material";
-import { useRef } from "react";
-import { ref } from "firebase/database";
-import SideBarNavView from "../views/side_bar_view";
-import ScrollToSidebar from "../components/scroll_to_sidebar";
 import { useAuth } from "../hooks/use_auth";
 import { useNavigate } from "react-router-dom";
 import AccreditationStatus from "../components/accreditation_status";
@@ -26,7 +22,7 @@ import scrollToEl from "../utils/scroll_to_el";
 
 import LinearPageinatedView from "../views/linear_paginated_view";
 import { signUpOrder, userSignUpOrder } from "../utils/user_sign_up_state";
-import SignUpComponent from "../components/sign_up_component";
+import SignUpComponent from "../components/user/sign_up_component";
 import PolicyAcceptanceComponent from "../components/policy_acceptance_component";
 import scrollToPosition from "../utils/scroll_to_position";
 

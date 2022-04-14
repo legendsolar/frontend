@@ -12,19 +12,11 @@ import { authErrorTranslator } from "../utils/auth_error_translator";
 import EmailIcon from "@mui/icons-material/Email";
 import GoogleIcon from "@mui/icons-material/Google";
 import GoogleLogo from "../components/icons/google_logo";
+import SignUpOptionComponent from "../components/user/sign_up_option_component";
 
 export default function SignUpView() {
     const authHook = useAuth();
     const navigate = useNavigate();
-
-    const initValues = {
-        email: {
-            value: "",
-        },
-        password: {
-            value: "",
-        },
-    };
 
     const onSuccessfulSignUp = () => {
         navigate("/complete-account/create");
@@ -34,16 +26,7 @@ export default function SignUpView() {
         const translatedError = authErrorTranslator(error);
     };
 
-    return (
-        <CenteredComponentView>
-            <Box>
-                <Stack spacing={4}>
-                    <Typography variant="subtitle1">Create Account</Typography>
-                    <IconButton
-                        label="Sign up with Google"
-                        color="whiteHaze"
-                        icon={<GoogleLogo height={"64px"}></GoogleLogo>}
-                        onClick={() => {
+    const signUpWithGoogle = () => {
                             authHook
                                 .signInWithGoogle()
                                 .then(() => {
@@ -52,46 +35,25 @@ export default function SignUpView() {
                                 .catch((error) => {
                                     handleFirebaseError(error);
                                 });
-                        }}
-                    ></IconButton>
-                    <ContentDivider>
-                        <Typography align="center" variant="smallLabel">
-                            or
-                        </Typography>
-                    </ContentDivider>
+    }
 
-                    <IconButton
-                        label="Sign up with email"
-                        color="legendaryGreen"
-                        icon={
-                            <EmailIcon
-                                sx={{ ml: 3, fontSize: "18px" }}
-                            ></EmailIcon>
-                        }
-                        onClick={() => {
+    const signUpWithEmail = () => {
+
                             navigate("/complete-account/create");
-                        }}
-                    ></IconButton>
+    }
 
-                    <Stack direction="row" justifyContent={"flex-end"}>
-                        <Button
-                            variant="text"
-                            onClick={() => navigate("/signin")}
-                        >
-                            <Typography variant="smallLabel">
-                                {"Have an account? "}
-                            </Typography>
-                            <Typography
-                                variant="smallLabel"
-                                color="grassGreen.main"
-                                sx={{ ml: 1 }}
-                            >
-                                {" Login"}
-                            </Typography>
-                        </Button>
-                    </Stack>
-                </Stack>
-            </Box>
+    const navigateToSignIn = ()=> {
+
+                             navigate("/signin");
+    }
+
+    return (
+        <CenteredComponentView>
+            <SignUpOptionComponent
+                onSignUpWithGoogle={signUpWithGoogle}
+                onSignUpWithEmail={signUpWithEmail} 
+                onNavigateToSignIn={navigateToSignIn}
+            ></SignUpOptionComponent>
         </CenteredComponentView>
     );
 }

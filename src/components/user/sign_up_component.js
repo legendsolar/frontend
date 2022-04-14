@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Grid, Box, Stack, TextField, Button } from "@mui/material";
-import { useAuth } from "../hooks/use_auth";
-import { authErrorTranslator } from "../utils/auth_error_translator";
+import { useAuth } from "../../hooks/use_auth";
+import { authErrorTranslator } from "../../utils/auth_error_translator";
 import {
     validateEmail,
     validatePassword,
     validatePhoneNumber,
     validateLastName,
     validateFirstName,
-} from "../validation/user_data_validation";
+} from "../../validation/user_data_validation";
 
 const SignUpComponent = ({ onComplete }) => {
     const authHook = useAuth();
