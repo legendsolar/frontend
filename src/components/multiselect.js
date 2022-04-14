@@ -1,14 +1,11 @@
 import {
-    Box,
     InputLabel,
     MenuItem,
     FormControl,
     Select,
-    Typography,
     FormHelperText,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import { useState } from "react";
 
 const MultiSelect = ({
     name,
@@ -50,8 +47,13 @@ const MultiSelect = ({
 MultiSelect.propTypes = {
     name: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    fields: PropTypes.array,
-    value: PropTypes.string,
+    fields: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            value: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired
+        })
+    ).isRequired,
     error: PropTypes.shape({
         error: PropTypes.bool,
         errMsg: PropTypes.string,
@@ -61,6 +63,7 @@ MultiSelect.propTypes = {
 
 MultiSelect.defaultProps = {
     onChangeListener: () => {},
+    error: undefined
 };
 
 export default MultiSelect;
