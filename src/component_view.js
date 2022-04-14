@@ -34,6 +34,10 @@ const components = [
         path: './tests/test_sign_up',
         name: 'SignUp',
     },
+    {
+        path: './tests/test_checkbox_list',
+        name: 'CheckboxList',
+    },
 ];
 
 const importView = (subreddit) =>
