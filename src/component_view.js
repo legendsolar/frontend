@@ -116,12 +116,22 @@ const ComponentView = () => {
             <select
                 name={base.name}
                 key={base.name}
-                value={selectedComponent}
-                onChange={(event) => setSelectedComponent(event.target.value)}
-                onSelect={(event) => setSelectedComponent(event.target.value)}
+                value={
+                    base.name === selectedComponent?.base
+                        ? selectedComponent?.name
+                        : ''
+                }
+                onChange={(event) =>
+                    setSelectedComponent({
+                        base: base.name,
+                        name: event.target.value,
+                    })
+                }
             >
                 {base.tests &&
-                    base.tests.map((test) => <option>{test.name}</option>)}
+                    base.tests.map((test) => (
+                        <option value={test.name}>{test.name}</option>
+                    ))}
                 <option>{null}</option>
             </select>
         </div>
@@ -130,7 +140,11 @@ const ComponentView = () => {
     return (
         <div>
             {renderedComponentOptionList}
-            <p>selected component: {selectedComponent}</p>
+            <p>
+                {selectedComponent
+                    ? `selected component:${selectedComponent.base}/${selectedComponent.name}`
+                    : 'none selected'}
+            </p>
             <hr></hr>
             <React.Suspense fallback="Loading component... (components with images may take a few seconds)">
                 <ErrorBoundary>
