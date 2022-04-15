@@ -11,9 +11,10 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
-    plugins: ['react'],
+    plugins: ['react', 'eslint-plugin-absolute-imports'],
     rules: {
         'react/react-in-jsx-scope': 'off',
         'no-irregular-whitespace': 'off',
+        'absolute-imports/only-absolute-imports': ['error'],
     },
 };
