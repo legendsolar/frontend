@@ -28,14 +28,18 @@ const basePaths = [
             },
         ],
     },
-    // {
-    //     path: './components/buttons',
-    //     name: 'buttons',
-    // },
-    // {
-    //     path: './components/buttons',
-    //     name: 'buttons',
-    // },
+    {
+        // path: './components/basics',
+        name: 'errors',
+        tests: [
+            {
+                name: 'test_default_error_boundary',
+            },
+            {
+                name: 'test_error_component',
+            },
+        ],
+    },
     // {
     //     path: './components/errors',
     //     name: 'errors',
