@@ -96,15 +96,16 @@ const importComponent = (path) =>
 
 const ComponentView = () => {
     const [views, setViews] = useState([]);
+    const [expanded, setExpanded] = useState(true);
     const [selectedComponent, setSelectedComponent] = useState(null);
 
     useEffect(() => {
         async function loadViews() {
             const componentPromises = basePaths
-                .filter((base) => base.name === selectedComponent.base)
+                .filter((base) => base.name === selectedComponent?.base)
                 .map(async (base, idx) => {
                     const test = base.tests.filter(
-                        (test) => test.name === selectedComponent.name,
+                        (test) => test.name === selectedComponent?.name,
                     )[0];
                     if (test) {
                         const path = `./components/${base.name}/tests/${test.name}`;
@@ -126,7 +127,7 @@ const ComponentView = () => {
             <p>{base.name}</p>
             <select
                 name={base.name}
-                key={base.name}
+                key={nanoid()}
                 value={
                     base.name === selectedComponent?.base
                         ? selectedComponent?.name
@@ -141,18 +142,20 @@ const ComponentView = () => {
             >
                 {base.tests &&
                     base.tests.map((test) => (
-                        <option value={test.name}>{test.name}</option>
+                        <option key={nanoid()} value={test.name}>
+                            {test.name}
+                        </option>
                     ))}
-                <option>{null}</option>
+                <option key={nanoid()}>{null}</option>
             </select>
         </div>
     ));
 
-    return (
-        <div>
+    const expandedView = (
+        <div key={nanoid()}>
             <h4>legends interal component testing tool</h4>
-            <a href="https://github.com/legendsolar/frontend">
-                info on how to use this tool
+            <a href="https://github.com/legendsolar/frontend/blob/main/tools.md">
+                info
             </a>
             {renderedComponentOptionList}
             <p>
@@ -160,7 +163,27 @@ const ComponentView = () => {
                     ? `selected component:${selectedComponent.base}/${selectedComponent.name}`
                     : 'none selected'}
             </p>
+            <button onClick={() => setExpanded(false)}>hide header</button>
             <hr></hr>
+        </div>
+    );
+
+    const hiddenView = (
+        <div key={nanoid()}>
+            style=
+            {{
+                position: 'absolute',
+                top: '0px',
+                right: '0px',
+                zIndex: 1000,
+            }}
+            ><button onClick={() => setExpanded(true)}>show header</button>
+        </div>
+    );
+
+    return (
+        <div>
+            {expanded ? expandedView : hiddenView}
             <React.Suspense fallback="Loading component... (components with images may take a few seconds)">
                 <ErrorBoundary>
                     <div className="container">{views}</div>
