@@ -150,6 +150,10 @@ const ComponentView = () => {
 
     return (
         <div>
+            <h4>legends interal component testing tool</h4>
+            <a href="https://github.com/legendsolar/frontend">
+                info on how to use this tool
+            </a>
             {renderedComponentOptionList}
             <p>
                 {selectedComponent
