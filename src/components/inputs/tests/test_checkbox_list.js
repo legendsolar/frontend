@@ -1,5 +1,4 @@
-import {onIdTokenChanged} from 'firebase/auth';
-import CheckboxList from 'components/inputs/checkbox_list';
+import CheckboxList from '../checkbox_list';
 
 const options = [
     {

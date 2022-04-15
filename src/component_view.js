@@ -5,7 +5,6 @@ import {select} from 'd3';
 
 const basePaths = [
     {
-        // path: './components/basics',
         name: 'basics',
         tests: [
             {
@@ -20,7 +19,6 @@ const basePaths = [
         ],
     },
     {
-        // path: './components/basics',
         name: 'buttons',
         tests: [
             {
@@ -30,7 +28,6 @@ const basePaths = [
     },
 
     {
-        // path: './components/basics',
         name: 'errors',
         tests: [
             {
@@ -43,7 +40,6 @@ const basePaths = [
     },
 
     {
-        // path: './components/basics',
         name: 'gauges',
         tests: [
             {
@@ -56,7 +52,6 @@ const basePaths = [
     },
 
     {
-        // path: './components/basics',
         name: 'icons',
         tests: [
             {
@@ -74,6 +69,17 @@ const basePaths = [
         ],
     },
 
+    {
+        name: 'inputs',
+        tests: [
+            {
+                name: 'test_multiselect',
+            },
+            {
+                name: 'test_checkbox_list',
+            },
+        ],
+    },
     // {
     //     path: './components/errors',
     //     name: 'errors',

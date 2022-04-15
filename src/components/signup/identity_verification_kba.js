@@ -1,5 +1,5 @@
 import {Typography, Stack, Button, CircularProgress} from '@mui/material';
-import MultiSelect from 'components/utils/multiselect';
+import MultiSelect from 'components/inputs/multiselect';
 import {useEffect, useState} from 'react';
 import {useCloudFunctions} from 'hooks/use_cloud_functions';
 
