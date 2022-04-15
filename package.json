@@ -46,6 +46,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-immutable-state-invariant": "^2.1.0",
     "smoothscroll-polyfill": "^0.4.4",
+    "source-map-explorer": "^2.5.2",
     "tinycolor2": "^1.4.2",
     "tslib": "^2.3.1",
     "web-vitals": "^2.1.2",
@@ -61,7 +62,8 @@
     "build:prod": "env-cmd -f ./.env.prod react-scripts build",
     "preview": "firebase use dev && firebase hosting:channel:deploy `git branch --show-current`-`git rev-parse HEAD`",
     "preview:prod": "firebase use prod && firebase hosting:channel:deploy `git branch --show-current`-`git rev-parse HEAD`",
-    "parseWebflowFooter": "node webflow_html_parser.js"
+    "parseWebflowFooter": "node webflow_html_parser.js",
+    "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": [
