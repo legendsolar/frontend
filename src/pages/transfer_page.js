@@ -1,19 +1,19 @@
 import {useRef, useEffect} from 'react';
-import {useAuth} from '../hooks/use_auth';
+import {useAuth} from 'hooks/use_auth';
 
 import {Paper, Stack, Button, Typography} from '@mui/material';
-import SideBarNavView from '../views/side_bar_view';
+import SideBarNavView from 'views/side_bar_view';
 
-import AccountListComponent from '../components/transfers/account_list_component';
-import CreateTransferComponent from '../components/transfers/create_transfer_component';
+import AccountListComponent from 'components/transfers/account_list_component';
+import CreateTransferComponent from 'components/transfers/create_transfer_component';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {selectWalletBalance} from '../slices/wallet_slice';
-import {fetchWalletBalance} from '../slices/wallet_slice';
-import {useCloudFunctions} from '../hooks/use_cloud_functions';
-import RecentTransfers from '../components/transfers/recent_transfers';
-import DefaultComponent from '../components/utils/default_component';
-import SideBar from '../components/utils/sidebar_component';
+import {selectWalletBalance} from 'slices/wallet_slice';
+import {fetchWalletBalance} from 'slices/wallet_slice';
+import {useCloudFunctions} from 'hooks/use_cloud_functions';
+import RecentTransfers from 'components/transfers/recent_transfers';
+import DefaultComponent from 'components/utils/default_component';
+import SideBar from 'components/utils/sidebar_component';
 
 const TransferPage = () => {
     const auth = useAuth();

@@ -1,12 +1,12 @@
 import {Box, Typography, Paper, Stack, Button, Grid} from '@mui/material';
-import DefaultComponent from '../components/utils/default_component';
-import SolarPicture from '../assets/solar_frame.png';
-import PanelsSvg from '../components/icons/panels_svg';
+import DefaultComponent from 'components/utils/default_component';
+import SolarPicture from 'assets/solar_frame.png';
+import PanelsSvg from 'components/icons/panels_svg';
 import {useTheme} from '@mui/material';
-import MetricList from '../components/summary/metric_list';
-import investmentOpportunities from '../utils/asset_data';
-import ErrorComponent from '../components/errors/error_component';
-import DocumentIcon from '../components/icons/document_icon';
+import MetricList from 'components/summary/metric_list';
+import investmentOpportunities from 'utils/asset_data';
+import ErrorComponent from 'components/errors/error_component';
+import DocumentIcon from 'components/icons/document_icon';
 
 const InvestContent = ({assetId}) => {
     const theme = useTheme();

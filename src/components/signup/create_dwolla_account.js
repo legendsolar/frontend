@@ -1,18 +1,15 @@
 import {Alert, Collapse, Stack, CircularProgress} from '@mui/material';
-import {useAuth} from '../../hooks/use_auth';
+import {useAuth} from 'hooks/use_auth';
 import {Button, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
-import Divider from '../basics/divider';
-import {useCloudFunctions} from '../../hooks/use_cloud_functions';
-import ModifyUserInfo from '../user/modify_user_info';
-import ProtectedUserInfo from '../user/protected_user_info';
-import {
-    fetchUserSignUpState,
-    selectUserSignUpState,
-} from '../../slices/user_slice';
-import {transformUserDataToDwollaObject} from './utils';
+import Divider from 'components/basics/divider';
+import {useCloudFunctions} from 'hooks/use_cloud_functions';
+import ModifyUserInfo from 'components/user/modify_user_info';
+import ProtectedUserInfo from 'components/user/protected_user_info';
+import {fetchUserSignUpState, selectUserSignUpState} from 'slices/user_slice';
+import {transformUserDataToDwollaObject} from 'components/signup/utils';
 
 const CreateDwollaAccount = ({onComplete}) => {
     const auth = useAuth();

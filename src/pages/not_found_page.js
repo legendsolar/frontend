@@ -1,6 +1,6 @@
 import {Box} from '@mui/material';
-import DefaultComponent from '../components/utils/default_component';
-import DefaultView from '../views/default_view';
+import DefaultComponent from 'components/utils/default_component';
+import DefaultView from 'views/default_view';
 import {useParams} from 'react-router-dom';
 
 const NotFoundPage = ({}) => {

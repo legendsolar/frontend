@@ -1,7 +1,7 @@
-import Weather from "./weather";
-import { useState, useEffect } from "react";
+import Weather from 'components/weather/weather';
+import {useState, useEffect} from 'react';
 
-const openWeatherApiKey = "8891a27f5e9762cd6d64fd19264db5d6";
+const openWeatherApiKey = '8891a27f5e9762cd6d64fd19264db5d6';
 
 function loadWeatherPromise(apiKey, lat, long) {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=imperial`;
@@ -22,12 +22,12 @@ const WeatherLive = (props) => {
         loadWeatherPromise(openWeatherApiKey, 40.712778, -74.006111).then(
             (response) => {
                 setWeatherObj(response);
-            }
+            },
         );
     }, []);
 
-    var description = "error loading weather";
-    var temp = "-";
+    var description = 'error loading weather';
+    var temp = '-';
     var code = 0;
     if (weatherObj.weather) {
         console.log(weatherObj.weather);

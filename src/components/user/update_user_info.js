@@ -1,8 +1,8 @@
 import {Stack, Button, CircularProgress} from '@mui/material';
-import ModifyUserInfo from './modify_user_info';
+import ModifyUserInfo from 'components/user/modify_user_info';
 import {useState} from 'react';
-import {useCloudFunctions} from '../../hooks/use_cloud_functions';
-import {transformUserDataToDwollaObject} from '../signup/utils';
+import {useCloudFunctions} from 'hooks/use_cloud_functions';
+import {transformUserDataToDwollaObject} from 'components/signup/utils';
 
 const UpdateUserInfo = () => {
     const cloudFunctions = useCloudFunctions();

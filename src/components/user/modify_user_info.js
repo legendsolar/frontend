@@ -12,15 +12,15 @@ import {
 } from '@mui/material';
 import useTheme from '@mui/material/styles/useTheme';
 import {get, ref, set} from 'firebase/database';
-import {useAuth} from '../../hooks/use_auth';
+import {useAuth} from 'hooks/use_auth';
 import {Button, Typography} from '@mui/material';
 import {TextField} from '@mui/material';
 import {useEffect, useState} from 'react';
 
 import {useDatabaseObjectData, useDatabase} from 'reactfire';
-import {useCloudFunctions} from '../../hooks/use_cloud_functions';
-import LoadingComponent from '../utils/loading_component';
-import {states} from '../../utils/static_lists';
+import {useCloudFunctions} from 'hooks/use_cloud_functions';
+import LoadingComponent from 'components/utils/loading_component';
+import {states} from 'utils/static_lists';
 import {
     validateCity,
     validateFirstName,
@@ -29,7 +29,7 @@ import {
     validateState,
     validateStreetAddress,
     validateStreetAddressTwo,
-} from '../../validation/user_data_validation';
+} from 'validation/user_data_validation';
 
 const ModifyUserInfo = ({onUpdate, onChange, onLoadingChange, disabled}) => {
     const auth = useAuth();

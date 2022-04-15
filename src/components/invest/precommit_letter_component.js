@@ -7,7 +7,7 @@ import {
     Typography,
     Stack,
 } from '@mui/material';
-import DefaultComponent from '../utils/default_component';
+import DefaultComponent from 'components/utils/default_component';
 
 const PrecommitLetterComponent = ({onComplete}) => {
     const [signature, setSignature] = useState(null);

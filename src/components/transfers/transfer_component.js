@@ -1,8 +1,8 @@
 import {Box, Typography, Container, Stack} from '@mui/material';
 import PropTypes from 'prop-types';
-import BankAccountIcon from '../../assets/icons/bank_account_icon.png';
-import PanelIcon from '../../assets/icons/panel_icon.png';
-import WalletIcon from '../../assets/icons/wallet_icon.png';
+import BankAccountIcon from 'assets/icons/bank_account_icon.png';
+import PanelIcon from 'assets/icons/panel_icon.png';
+import WalletIcon from 'assets/icons/wallet_icon.png';
 
 const TransferComponent = ({
     title,

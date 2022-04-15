@@ -1,14 +1,14 @@
-import { Grid, Typography, Paper } from "@mui/material";
-import TransactionComponent from "./transfer_component";
-import PropTypes from "prop-types";
+import {Grid, Typography, Paper} from '@mui/material';
+import TransactionComponent from 'components/transfers/transfer_component';
+import PropTypes from 'prop-types';
 
-const TransactionGrid = ({ transactions }) => {
-    console.log("loaded: " + transactions);
+const TransactionGrid = ({transactions}) => {
+    console.log('loaded: ' + transactions);
     return (
         <div>
             <Grid
                 container
-                sx={{ mt: 1 }}
+                sx={{mt: 1}}
                 justifyContent="center"
                 alignItems="center"
             >
@@ -17,22 +17,22 @@ const TransactionGrid = ({ transactions }) => {
                         <Grid item s={6} key={transaction.id}>
                             <TransactionComponent
                                 title={
-                                    "title" in transaction
+                                    'title' in transaction
                                         ? transaction.title +
-                                          " : " +
+                                          ' : ' +
                                           transaction.status
                                         : transaction.status
                                 }
                                 amount={parseFloat(transaction.amount)}
                                 source={
-                                    "sourceName" in transaction
+                                    'sourceName' in transaction
                                         ? transaction.sourceName
-                                        : "unknown"
+                                        : 'unknown'
                                 }
                                 destination={
-                                    "destinationName" in transaction
+                                    'destinationName' in transaction
                                         ? transaction.destinationName
-                                        : "wallet"
+                                        : 'wallet'
                                 }
                                 date={transaction.created}
                             ></TransactionComponent>
@@ -56,7 +56,7 @@ TransactionGrid.propTypes = {
             // source: PropTypes.string.isRequired,
             // destination: PropTypes.string.isRequired,
             created: PropTypes.string.isRequired,
-        })
+        }),
     ),
 };
 

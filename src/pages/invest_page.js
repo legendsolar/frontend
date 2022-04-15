@@ -1,16 +1,16 @@
 import {useReducer, useRef} from 'react';
-import InvestContent from '../content/invest_content';
+import InvestContent from 'content/invest_content';
 import {Box, Typography, Paper, Stack, Button, Grid} from '@mui/material';
-import SideBarView from '../views/side_bar_view';
-import OfferingComponent from '../components/invest/offering';
-import DefaultComponent from '../components/utils/default_component';
-import SolarPicture from '../assets/solar_frame.png';
-import PanelsSvg from '../components/icons/panels_svg';
+import SideBarView from 'views/side_bar_view';
+import OfferingComponent from 'components/invest/offering';
+import DefaultComponent from 'components/utils/default_component';
+import SolarPicture from 'assets/solar_frame.png';
+import PanelsSvg from 'components/icons/panels_svg';
 import {useTheme} from '@mui/material';
-import MetricList from '../components/summary/metric_list';
-import PrecommitLetterComponent from '../components/invest/precommit_letter_component';
+import MetricList from 'components/summary/metric_list';
+import PrecommitLetterComponent from 'components/invest/precommit_letter_component';
 import {useParams} from 'react-router-dom';
-import investmentOpportunities from '../utils/asset_data';
+import investmentOpportunities from 'utils/asset_data';
 
 const InvestPage = () => {
     const theme = useTheme();

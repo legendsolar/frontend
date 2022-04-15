@@ -1,6 +1,6 @@
 import {Stack, Button, Grid, Box, Typography} from '@mui/material';
-import MetricList from '../summary/metric_list';
-import DocumentIcon from '../icons/document_icon';
+import MetricList from 'components/summary/metric_list';
+import DocumentIcon from 'components/icons/document_icon';
 
 const offering = {
     title: 'Barnyard Solar',

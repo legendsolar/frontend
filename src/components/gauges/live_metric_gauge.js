@@ -1,4 +1,4 @@
-import MetricGauge from './metric_gauge';
+import MetricGauge from 'components/gauges/metric_gauge';
 import React from 'react';
 import {ref} from 'firebase/database';
 import {differenceInMinutes} from 'date-fns';
@@ -6,7 +6,7 @@ import {useDatabase} from 'reactfire';
 import {useDatabaseObjectData} from 'reactfire';
 import PropTypes from 'prop-types';
 
-import LoadingComponent from '../utils/loading_component';
+import LoadingComponent from 'components/utils/loading_component';
 
 const ErrorGauge = ({unitOpts}) => {
     unitOpts.liveMessage = `Could not load data`;

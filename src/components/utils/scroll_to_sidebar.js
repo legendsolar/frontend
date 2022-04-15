@@ -1,7 +1,7 @@
 import {Paper, List, ListItemButton, Typography} from '@mui/material/';
-import scrollToEl from '../../utils/scroll_to_el';
-import SideBar from './sidebar_component';
-import Divider from '../basics/divider.js';
+import scrollToEl from 'utils/scroll_to_el';
+import SideBar from 'components/utils/sidebar_component';
+import Divider from 'components/basics/divider.js';
 
 const ScrollToSidebar = ({header, contentTitles, refs, additionalButtons}) => {
     const getAdditionalButtons = () => {

@@ -7,7 +7,7 @@ import {
     validatePhoneNumber,
     validateLastName,
     validateFirstName,
-} from '../../validation/user_data_validation';
+} from 'validation/user_data_validation';
 
 import {useFormik} from 'formik';
 import * as yup from 'yup';

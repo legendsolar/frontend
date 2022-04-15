@@ -1,14 +1,14 @@
-import { Paper, Box } from "@mui/material";
-import * as d3 from "d3";
-import { useChartDimensions } from "../../hooks/use_chart_dimensions";
-import { useMemo, useRef, useState } from "react";
-import WormAxis from "./worm_axis";
-import fakeData from "./fake_data";
-import { format, subDays } from "date-fns";
-import { Typography } from "@mui/material";
-import { Stack } from "@mui/material";
+import {Paper, Box} from '@mui/material';
+import * as d3 from 'd3';
+import {useChartDimensions} from 'hooks/use_chart_dimensions';
+import {useMemo, useRef, useState} from 'react';
+import WormAxis from 'components/worm/worm_axis';
+import fakeData from 'components/worm/fake_data';
+import {format, subDays} from 'date-fns';
+import {Typography} from '@mui/material';
+import {Stack} from '@mui/material';
 
-var tinycolor = require("tinycolor2");
+var tinycolor = require('tinycolor2');
 
 const defaultChartDisplayParams = {
     timeAxisLabels: true,
@@ -18,20 +18,20 @@ const defaultChartDisplayParams = {
     maxDaysDisplayed: 7,
 
     background: {
-        dayRegionColor: tinycolor("rgb(255,255,255)"),
-        nightRegionColor: tinycolor("rgb(243,243,243)"),
+        dayRegionColor: tinycolor('rgb(255,255,255)'),
+        nightRegionColor: tinycolor('rgb(243,243,243)'),
     },
 
     wormSunIcon: {
-        dayColor: tinycolor("rgb(250,223,79)"),
-        nightColor: tinycolor("rgb(33,30,32)"),
+        dayColor: tinycolor('rgb(250,223,79)'),
+        nightColor: tinycolor('rgb(33,30,32)'),
         gradientSteps: [0.5, 1],
         radius: 20,
     },
 
     worm: {
-        dayColor: tinycolor("#30A462"),
-        nightColor: tinycolor("rgb(33,30,32)"),
+        dayColor: tinycolor('#30A462'),
+        nightColor: tinycolor('rgb(33,30,32)'),
         nightThreshold_W: 500,
         width: 4.3,
     },
@@ -39,8 +39,8 @@ const defaultChartDisplayParams = {
     dayNightIcons: {
         rightMargin: 20,
         iconSpacing: 8 + 8.5,
-        dayIconColor: tinycolor("rgb(243,243,243)"),
-        nightIconColor: tinycolor("rgb(243,243,243)"),
+        dayIconColor: tinycolor('rgb(243,243,243)'),
+        nightIconColor: tinycolor('rgb(243,243,243)'),
         dayIconRadius: 8.5,
         nightIconRadius: 8.5,
     },
@@ -50,7 +50,7 @@ const defaultChartDisplayParams = {
     },
 };
 
-function Worm({ rawData, loading, error }) {
+function Worm({rawData, loading, error}) {
     const styleOptions = defaultChartDisplayParams;
 
     const chartSettings = {
@@ -61,8 +61,8 @@ function Worm({ rawData, loading, error }) {
     };
 
     const parseDate = (date) => new Date(date);
-    const yAccessor = (d) => d["wattage"];
-    const xAccessor = (d) => parseDate(d["time"]);
+    const yAccessor = (d) => d['wattage'];
+    const xAccessor = (d) => parseDate(d['time']);
 
     const [ref, dms] = useChartDimensions(chartSettings);
 
@@ -80,16 +80,16 @@ function Worm({ rawData, loading, error }) {
                     (dms.boundedWidth -
                         chartSettings.marginLeft -
                         chartSettings.marginRight) /
-                        styleOptions.minPixelsPerDay
+                        styleOptions.minPixelsPerDay,
                 ),
-                styleOptions.minDaysDisplayed
+                styleOptions.minDaysDisplayed,
             ),
-            styleOptions.maxDaysDisplayed
+            styleOptions.maxDaysDisplayed,
         );
 
         const minDate = subDays(
             xAccessor(rawData[rawData.length - 1]),
-            daysAllowed
+            daysAllowed,
         );
 
         const filteredData = rawData.filter((d) => {
@@ -106,7 +106,7 @@ function Worm({ rawData, loading, error }) {
                 .scaleLinear()
                 .domain(d3.extent(data, yAccessor))
                 .range([dms.boundedHeight, 0]),
-        [dms.boundedHeight, data]
+        [dms.boundedHeight, data],
     );
 
     const xScale = useMemo(
@@ -115,7 +115,7 @@ function Worm({ rawData, loading, error }) {
                 .scaleTime()
                 .domain(d3.extent(data, xAccessor))
                 .range([0, dms.boundedWidth]),
-        [dms.boundedWidth, data]
+        [dms.boundedWidth, data],
     );
 
     const dayNightThreshold = styleOptions.worm.nightThreshold_W;
@@ -157,18 +157,14 @@ function Worm({ rawData, loading, error }) {
     const SunXPos = xScale(xAccessor(data[data.length - 1]));
 
     return (
-        <Box sx={{ p: 0, width: "100%" }} style={{ overflow: "hidden" }}>
-            <Stack sx={{ p: 2 }} direction="row" justifyContent="space-between">
-                <Typography variant={"smallHeadline"}>Productivity</Typography>
-                <Typography variant={"subtitle2"}>
-                    {format(new Date(), "p")}
+        <Box sx={{p: 0, width: '100%'}} style={{overflow: 'hidden'}}>
+            <Stack sx={{p: 2}} direction="row" justifyContent="space-between">
+                <Typography variant={'smallHeadline'}>Productivity</Typography>
+                <Typography variant={'subtitle2'}>
+                    {format(new Date(), 'p')}
                 </Typography>
             </Stack>
-            <div
-                className="Chart__wrapper"
-                ref={ref}
-                style={{ height: "200px" }}
-            >
+            <div className="Chart__wrapper" ref={ref} style={{height: '200px'}}>
                 <svg width={dms.width} height={dms.height}>
                     <linearGradient
                         id="wormGradient"
@@ -218,13 +214,13 @@ function Worm({ rawData, loading, error }) {
                         transform={`translate(${[
                             dms.marginLeft,
                             dms.marginTop,
-                        ].join(",")})`}
+                        ].join(',')})`}
                     >
                         <path
                             d={lineGen(data)}
                             style={{
-                                fill: "none",
-                                stroke: "url(#wormGradient)",
+                                fill: 'none',
+                                stroke: 'url(#wormGradient)',
                                 strokeWidth: styleOptions.worm.width,
                             }}
                         ></path>
@@ -238,7 +234,7 @@ function Worm({ rawData, loading, error }) {
 
                         <g
                             transform={`translate(${[0, dms.boundedHeight].join(
-                                ","
+                                ',',
                             )})`}
                         >
                             <WormAxis

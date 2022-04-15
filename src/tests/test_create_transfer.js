@@ -1,5 +1,5 @@
-import CreateTransferComponent from '../components/transfers/create_transfer_component';
-import {accounts} from './test_data';
+import CreateTransferComponent from 'components/transfers/create_transfer_component';
+import {accounts} from 'tests/test_data';
 
 const TestCreateTransfer = () => {
     return (

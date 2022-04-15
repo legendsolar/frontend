@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { Box, Checkbox, Stack, Typography } from "@mui/material";
-import Divider from "../basics/divider";
-import PropTypes from "prop-types";
-function CheckboxList({ options, precheckedList, onInputChange, disabled }) {
+import {useEffect, useState} from 'react';
+import {Box, Checkbox, Stack, Typography} from '@mui/material';
+import Divider from 'components/basics/divider';
+import PropTypes from 'prop-types';
+function CheckboxList({options, precheckedList, onInputChange, disabled}) {
     const [checkedList, setCheckedList] = useState(
         Object.fromEntries(
-            Object.entries(options).map(([key, option]) => [key, false])
-        )
+            Object.entries(options).map(([key, option]) => [key, false]),
+        ),
     );
 
     useEffect(() => {
@@ -21,7 +21,7 @@ function CheckboxList({ options, precheckedList, onInputChange, disabled }) {
         if (checkedList[key] != value) {
             setExclusive(undefined);
 
-            const list = { ...checkedList };
+            const list = {...checkedList};
             if (options[key].exclusive && value) {
                 Object.keys(list).forEach((key) => {
                     list[key] = false;
@@ -40,17 +40,17 @@ function CheckboxList({ options, precheckedList, onInputChange, disabled }) {
         <Stack spacing={2}>
             {Object.entries(options).map(([key, option], index, list) => {
                 return (
-                    <div style={{ margin: "0px" }}>
+                    <div style={{margin: '0px'}}>
                         <Box
                             sx={{
-                                height: "88px",
-                                display: "flex",
+                                height: '88px',
+                                display: 'flex',
                                 ml: -4,
                                 mr: -4,
                                 pr: 4,
                                 pl: 4,
-                                "&:hover": {
-                                    backgroundColor: "whiteFog.main",
+                                '&:hover': {
+                                    backgroundColor: 'whiteFog.main',
                                 },
                             }}
                             alignItems="center"
@@ -71,9 +71,9 @@ function CheckboxList({ options, precheckedList, onInputChange, disabled }) {
                             >
                                 <Checkbox
                                     sx={{
-                                        fontSize: "22px",
-                                        mt: "auto",
-                                        mb: "auto",
+                                        fontSize: '22px',
+                                        mt: 'auto',
+                                        mb: 'auto',
                                     }}
                                     checked={checkedList[key]}
                                     disabled={
@@ -84,13 +84,13 @@ function CheckboxList({ options, precheckedList, onInputChange, disabled }) {
                                     onChange={(event) => {
                                         setCheckedItem(
                                             key,
-                                            event.target.checked
+                                            event.target.checked,
                                         );
                                     }}
                                 ></Checkbox>
                                 <Stack spacing={0}>
                                     <Typography
-                                        sx={{ mt: 1, mb: 1 }}
+                                        sx={{mt: 1, mb: 1}}
                                         variant="subtitle1"
                                     >
                                         {option.title}

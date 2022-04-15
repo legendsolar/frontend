@@ -1,18 +1,18 @@
-import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { dwollaCallWrapper } from "../hooks/use_cloud_functions";
+import {createSlice, createAsyncThunk, nanoid} from '@reduxjs/toolkit';
+import {dwollaCallWrapper} from 'hooks/use_cloud_functions';
 
 const initialState = {
     loadedTransactions: [],
-    status: "idle",
+    status: 'idle',
     error: null,
 };
 
-const userDwollaId = "f92da569-41ec-4aa9-ba36-2329b4d26b4b";
-const userWalletId = "da85e28e-2dfb-4690-bfe7-b53818214da3";
-const userCheckingId = "8aa7d0a0-d563-45a1-9c8d-7fb441230636";
+const userDwollaId = 'f92da569-41ec-4aa9-ba36-2329b4d26b4b';
+const userWalletId = 'da85e28e-2dfb-4690-bfe7-b53818214da3';
+const userCheckingId = '8aa7d0a0-d563-45a1-9c8d-7fb441230636';
 
 export const fetchTransactions = createAsyncThunk(
-    "dwolla/fetchTransactions",
+    'dwolla/fetchTransactions',
     async (cloudFunctions) => {
         const transactions = (
             await cloudFunctions.getRecentTransfers({
@@ -20,17 +20,17 @@ export const fetchTransactions = createAsyncThunk(
             })
         ).data.transfers;
 
-        console.log("transactions");
+        console.log('transactions');
         console.log(transactions);
 
         const transformedTransactionList = transactions.map((transaction) => {
-            var title = "Unkown";
-            if (transaction.sourceAccountMetaData.type === "wallet") {
-                title = "Wallet to Bank Transfer";
+            var title = 'Unkown';
+            if (transaction.sourceAccountMetaData.type === 'wallet') {
+                title = 'Wallet to Bank Transfer';
             }
 
-            if (transaction.destinationAccountMetaData.type === "wallet") {
-                title = "Solar Dividend Payout";
+            if (transaction.destinationAccountMetaData.type === 'wallet') {
+                title = 'Solar Dividend Payout';
             }
 
             return {
@@ -53,11 +53,11 @@ export const fetchTransactions = createAsyncThunk(
         console.log(transformedTransactionList);
 
         return transformedTransactionList;
-    }
+    },
 );
 
 export const createTransaction = createAsyncThunk(
-    "dwolla/createTransaction",
+    'dwolla/createTransaction',
     async (initialTransaction) => {
         // const dwolla = dwollaInterface(
         //     dwollaSandboxConfig.url,
@@ -74,11 +74,11 @@ export const createTransaction = createAsyncThunk(
         // const transactionId = getIdFromHeader(resp);
         // const verificationResp = await dwolla.getTransferById(transactionId);
         // return verificationResp;
-    }
+    },
 );
 
 const transactionSlice = createSlice({
-    name: "transactions",
+    name: 'transactions',
     initialState,
     reducers: {
         clearTransactionState(state) {
@@ -88,15 +88,15 @@ const transactionSlice = createSlice({
     extraReducers(builder) {
         builder
             .addCase(fetchTransactions.pending, (state, action) => {
-                state.status = "loading";
+                state.status = 'loading';
             })
             .addCase(fetchTransactions.fulfilled, (state, action) => {
-                state.status = "succeeded";
+                state.status = 'succeeded';
                 // actually add the retrieved transactions
                 state.loadedTransactions.push(...action.payload);
             })
             .addCase(fetchTransactions.rejected, (state, action) => {
-                state.status = "failed";
+                state.status = 'failed';
                 state.error = action.error.message;
             })
             .addCase(createTransaction.fulfilled, (state, action) => {
@@ -108,5 +108,5 @@ const transactionSlice = createSlice({
 export const selectTransactions = (state) =>
     state.transactions.loadedTransactions;
 
-export const { clearTransactionState } = transactionSlice.actions;
+export const {clearTransactionState} = transactionSlice.actions;
 export default transactionSlice.reducer;

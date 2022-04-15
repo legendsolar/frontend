@@ -1,7 +1,7 @@
 import {Box, Stack, Paper, Grid, Container} from '@mui/material';
-import NavBar from '../components/utils/nav_bar';
-import {useAuth} from '../hooks/use_auth';
-import Footer from '../components/utils/footer';
+import NavBar from 'components/utils/nav_bar';
+import {useAuth} from 'hooks/use_auth';
+import Footer from 'components/utils/footer';
 
 const DefaultView = (props) => {
     const auth = useAuth();

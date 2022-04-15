@@ -1,22 +1,22 @@
-import { Stack, Typography, Tooltip } from "@mui/material";
-import Divider from "../basics/divider";
+import {Stack, Typography, Tooltip} from '@mui/material';
+import Divider from 'components/basics/divider';
 
-const MetricList = ({ valuePairs, dividers = false }) => {
+const MetricList = ({valuePairs, dividers = false}) => {
     if (!valuePairs) {
         return <></>;
     }
 
     return (
-        <Stack spacing={2} sx={{ width: "100%", height: "100%" }}>
-            {valuePairs.map(({ metric, value }, index, list) => (
+        <Stack spacing={2} sx={{width: '100%', height: '100%'}}>
+            {valuePairs.map(({metric, value}, index, list) => (
                 <div>
                     <Stack
                         direction="row"
-                        justifyContent={"space-between"}
+                        justifyContent={'space-between'}
                         alignItems="center"
                         key={metric + value}
                         sx={{
-                            height: "53px",
+                            height: '53px',
                         }}
                     >
                         <Typography variant="subtitle3" color="blackDawn.main">

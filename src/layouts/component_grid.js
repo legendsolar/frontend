@@ -1,20 +1,20 @@
 import {useState} from 'react';
 import {Grid, Paper, Button, Select, MenuItem, Typography} from '@mui/material';
-import WormLive from '../components/worm/worm_live';
+import WormLive from 'components/worm/worm_live';
 import {
     CarbonGauge,
     EarningsGauge,
     GenerationGauge,
     ErrorGauge,
-} from '../components/gauges/live_metric_gauge';
+} from 'components/gauges/live_metric_gauge';
 
 import {
     EarningsCumulativeImpact,
     GenerationCumulativeImpact,
     CarbonCumulativeImpact,
-} from '../components/gauges/live_cumulative_impact';
-import WeatherLive from '../components/weather/weather_live';
-import DefaultComponent from '../components/utils/default_component';
+} from 'components/gauges/live_cumulative_impact';
+import WeatherLive from 'components/weather/weather_live';
+import DefaultComponent from 'components/utils/default_component';
 
 function ComponentGrid(props) {
     const [assetDisplayId, setAssetDisplayId] = useState({

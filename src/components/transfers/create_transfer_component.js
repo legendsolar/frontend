@@ -10,12 +10,12 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import {useState, useReducer, useEffect} from 'react';
-import ErrorComponent from '../errors/error_component';
+import ErrorComponent from 'components/errors/error_component';
 
-import {validateTransferAmount} from '../../validation/transaction_validation';
-import TransferComponent from './transfer_component';
-import LoadingComponent from '../utils/loading_component';
-import MultiSelect from '../utils/multiselect';
+import {validateTransferAmount} from 'validation/transaction_validation';
+import TransferComponent from 'components/transfers/transfer_component';
+import LoadingComponent from 'components/utils/loading_component';
+import MultiSelect from 'components/utils/multiselect';
 
 const CreateTransferComponent = ({accounts, loading, onComplete}) => {
     const initialState = {

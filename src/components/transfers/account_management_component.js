@@ -1,14 +1,14 @@
 import {useEffect} from 'react';
 import {ListItemButton, Typography, List, Stack, Button} from '@mui/material';
-import {useCloudFunctions} from '../../hooks/use_cloud_functions';
+import {useCloudFunctions} from 'hooks/use_cloud_functions';
 import {useDispatch, useSelector} from 'react-redux';
 import {
     selectAllAccounts,
     fetchAccounts,
     selectWalletId,
-} from '../../slices/wallet_slice';
-import LoadingComponent from '../utils/loading_component';
-import PlaidLink from '../plaid/plaid_link';
+} from 'slices/wallet_slice';
+import LoadingComponent from 'components/utils/loading_component';
+import PlaidLink from 'components/plaid/plaid_link';
 
 const AccountManagementComponent = ({onSelected, includeWallet}) => {
     const cloudFunctions = useCloudFunctions();

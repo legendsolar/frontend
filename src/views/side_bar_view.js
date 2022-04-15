@@ -1,7 +1,7 @@
-import { Container, Grid, Box } from "@mui/material";
-import DefaultView from "./default_view";
-import { ErrorBoundary } from "@sentry/react";
-import DefaultErrorBoundary from "../components/errors/default_error_boundary";
+import {Container, Grid, Box} from '@mui/material';
+import DefaultView from 'views/default_view';
+import {ErrorBoundary} from '@sentry/react';
+import DefaultErrorBoundary from 'components/errors/default_error_boundary';
 
 const SideBarView = ({
     drawer,
@@ -13,7 +13,7 @@ const SideBarView = ({
     const wrappedDrawer = (
         <Container
             sx={{
-                width: "100%",
+                width: '100%',
                 pl: 0,
                 pr: 0,
                 mb: {
@@ -21,8 +21,8 @@ const SideBarView = ({
                     md: 0,
                 },
                 display: {
-                    sm: "block",
-                    md: "none",
+                    sm: 'block',
+                    md: 'none',
                 },
             }}
         >
@@ -35,7 +35,7 @@ const SideBarView = ({
             return (
                 <Box
                     sx={{
-                        width: "100%",
+                        width: '100%',
                         pl: 0,
                         pr: 0,
                         mb: {
@@ -43,8 +43,8 @@ const SideBarView = ({
                             md: 0,
                         },
                         display: {
-                            sm: "block",
-                            md: "none",
+                            sm: 'block',
+                            md: 'none',
                         },
                     }}
                 >
@@ -60,7 +60,7 @@ const SideBarView = ({
             return (
                 <Box
                     sx={{
-                        width: "100%",
+                        width: '100%',
                         pl: 0,
                         pr: 0,
                         mt: {
@@ -68,8 +68,8 @@ const SideBarView = ({
                             md: 0,
                         },
                         display: {
-                            sm: "block",
-                            md: "none",
+                            sm: 'block',
+                            md: 'none',
                         },
                     }}
                 >
@@ -94,7 +94,7 @@ const SideBarView = ({
                     md={4}
                     sx={{
                         // Remove sidebar on mobile
-                        display: { xs: "none", sm: "none", md: "block" },
+                        display: {xs: 'none', sm: 'none', md: 'block'},
                     }}
                 >
                     <Box
@@ -104,9 +104,9 @@ const SideBarView = ({
                             paddingRight: 40,
                         }}
                         sx={{
-                            height: "max-content",
-                            top: "16px",
-                            position: "sticky",
+                            height: 'max-content',
+                            top: '16px',
+                            position: 'sticky',
                         }}
                     >
                         <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
@@ -116,14 +116,12 @@ const SideBarView = ({
                     <Box
                         sx={{
                             zIndex: 3,
-                            width: "100%",
+                            width: '100%',
                         }}
                     >
                         {getDrawerTop()}
                         <DefaultErrorBoundary>
-                            <Box sx={{ mt: { xs: 4, md: 0 } }}>
-                                {mainContent}
-                            </Box>
+                            <Box sx={{mt: {xs: 4, md: 0}}}>{mainContent}</Box>
                         </DefaultErrorBoundary>
 
                         {getDrawerBottom()}
@@ -131,7 +129,7 @@ const SideBarView = ({
                         {/** 
                         Bit of padding below the content to ensure the sidebar can scroll all the way down
                         */}
-                        <Box sx={{ height: "200px" }}></Box>
+                        <Box sx={{height: '200px'}}></Box>
                     </Box>
                 </Grid>
             </Grid>

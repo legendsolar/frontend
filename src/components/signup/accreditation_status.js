@@ -8,11 +8,11 @@ import {
     CircularProgress,
 } from '@mui/material';
 import {useEffect, useState} from 'react';
-import CheckboxList from '../inputs/checkbox_list';
+import CheckboxList from 'components/inputs/checkbox_list';
 import {useDatabaseObjectData, useDatabase} from 'reactfire';
 import {set, ref} from 'firebase/database';
-import {useAuth} from '../../hooks/use_auth';
-import Divider from '../basics/divider';
+import {useAuth} from 'hooks/use_auth';
+import Divider from 'components/basics/divider';
 
 const AccreditationStatus = ({
     onComplete,

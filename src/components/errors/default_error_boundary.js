@@ -1,7 +1,7 @@
-import ErrorComponent from "./error_component";
-import { ErrorBoundary } from "@sentry/react";
+import ErrorComponent from 'components/errors/error_component';
+import {ErrorBoundary} from '@sentry/react';
 
-const DefaultErrorBoundary = ({ children }) => {
+const DefaultErrorBoundary = ({children}) => {
     return (
         <ErrorBoundary fallback={<ErrorComponent></ErrorComponent>}>
             {children}

@@ -1,12 +1,12 @@
 import {useRef} from 'react';
-import SideBarNavView from '../views/side_bar_view';
+import SideBarNavView from 'views/side_bar_view';
 import {Stack, Paper, Typography} from '@mui/material';
-import ScrollToSidebar from '../components/utils/scroll_to_sidebar';
-import {useAuth} from '../hooks/use_auth';
-import MemberHeader from '../components/user/member_header';
-import RecentTransfers from '../components/transfers/recent_transfers';
-import DefaultComponent from '../components/utils/default_component';
-import TransferDataGrid from '../components/transfers/transfer_data_grid';
+import ScrollToSidebar from 'components/utils/scroll_to_sidebar';
+import {useAuth} from 'hooks/use_auth';
+import MemberHeader from 'components/user/member_header';
+import RecentTransfers from 'components/transfers/recent_transfers';
+import DefaultComponent from 'components/utils/default_component';
+import TransferDataGrid from 'components/transfers/transfer_data_grid';
 
 const TransactionPage = (props) => {
     const auth = useAuth();

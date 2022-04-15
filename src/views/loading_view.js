@@ -6,7 +6,7 @@ import {
     Container,
     CircularProgress,
 } from '@mui/material';
-import DefaultView from './default_view';
+import DefaultView from 'views/default_view';
 
 const LoadingView = () => {
     return (

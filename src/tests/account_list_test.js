@@ -1,5 +1,5 @@
-import AccountListComponent from '../components/transfers/account_list_component';
-import {accounts} from './test_data';
+import AccountListComponent from 'components/transfers/account_list_component';
+import {accounts} from 'tests/test_data';
 
 const TestAccountList = () => (
     <AccountList

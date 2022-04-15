@@ -1,7 +1,7 @@
 import {ref} from 'firebase/database';
 import PropTypes from 'prop-types';
-import CumulativeImpact from './cumulative_impact';
-import LoadingComponent from '../utils/loading_component';
+import CumulativeImpact from 'components/gauges/cumulative_impact';
+import LoadingComponent from 'components/utils/loading_component';
 import {useDatabase, useDatabaseObjectData} from 'reactfire';
 
 const LiveCumulativeImpact = ({assetId, unitConversionFactor_kW, unitOpts}) => {

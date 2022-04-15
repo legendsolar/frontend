@@ -1,23 +1,20 @@
 import {useEffect} from 'react';
 import {Typography, Stack, Button} from '@mui/material';
-import {useAuth} from '../hooks/use_auth';
+import {useAuth} from 'hooks/use_auth';
 import {useNavigate} from 'react-router-dom';
-import AccreditationStatus from '../components/signup/accreditation_status';
-import CreateDwollaAccount from '../components/signup/create_dwolla_account';
-import LoadingView from '../views/loading_view';
+import AccreditationStatus from 'components/signup/accreditation_status';
+import CreateDwollaAccount from 'components/signup/create_dwolla_account';
+import LoadingView from 'views/loading_view';
 import {useSelector, useDispatch} from 'react-redux';
-import {
-    fetchUserSignUpState,
-    selectUserSignUpState,
-} from '../slices/user_slice';
-import IdentityVerificationKBA from '../components/signup/identity_verification_kba';
-import {useCloudFunctions} from '../hooks/use_cloud_functions';
+import {fetchUserSignUpState, selectUserSignUpState} from 'slices/user_slice';
+import IdentityVerificationKBA from 'components/signup/identity_verification_kba';
+import {useCloudFunctions} from 'hooks/use_cloud_functions';
 import {useParams} from 'react-router-dom';
-import LinearPageinatedView from '../views/linear_paginated_view';
-import {signUpOrder, userSignUpOrder} from '../utils/user_sign_up_state';
-import SignUpComponent from '../components/user/sign_up_component';
-import PolicyAcceptanceComponent from '../components/signup/policy_acceptance_component';
-import scrollToPosition from '../utils/scroll_to_position';
+import LinearPageinatedView from 'views/linear_paginated_view';
+import {signUpOrder, userSignUpOrder} from 'utils/user_sign_up_state';
+import SignUpComponent from 'components/user/sign_up_component';
+import PolicyAcceptanceComponent from 'components/signup/policy_acceptance_component';
+import scrollToPosition from 'utils/scroll_to_position';
 
 const CompleteAccountPage = () => {
     const {step} = useParams();

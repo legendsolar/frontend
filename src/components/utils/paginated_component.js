@@ -1,5 +1,5 @@
 import {Typography, Stack, Button} from '@mui/material';
-import DefaultComponent from './default_component';
+import DefaultComponent from 'components/utils/default_component';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const PageinatedComponent = ({children, title, onBack, backDisabled}) => {

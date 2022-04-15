@@ -1,7 +1,7 @@
 import {Stack, Typography} from '@mui/material';
 import {useDatabase, useDatabaseObjectData} from 'reactfire';
 import {ref} from 'firebase/database';
-import {useAuth} from '../../hooks/use_auth';
+import {useAuth} from 'hooks/use_auth';
 
 const MemberHeader = ({sx}) => {
     const auth = useAuth();

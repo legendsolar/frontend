@@ -1,7 +1,7 @@
 import {Grid, Typography, Box, Stack, Button} from '@mui/material';
-import DefaultComponent from './default_component';
-import LassorImg from '../../assets/Lassor.png';
-import NeraImg from '../../assets/Nera.png';
+import DefaultComponent from 'components/utils/default_component';
+import LassorImg from 'assets/Lassor.png';
+import NeraImg from 'assets/Nera.png';
 
 const Footer = () => {
     return (

@@ -1,7 +1,7 @@
-import { useAuth } from "../hooks/use_auth";
-import { Navigate } from "react-router-dom";
+import {useAuth} from 'hooks/use_auth';
+import {Navigate} from 'react-router-dom';
 
-function UnprotectedRoute({ children }) {
+function UnprotectedRoute({children}) {
     const auth = useAuth();
 
     console.log(auth.user);

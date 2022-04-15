@@ -1,11 +1,11 @@
 import React from 'react';
 import {useTheme} from '@mui/material';
 import {Paper, Stack, Divider, Box} from '@mui/material';
-import MetricList from '../summary/metric_list';
+import MetricList from 'components/summary/metric_list';
 import {Typography} from '@mui/material';
 import {useUser} from 'reactfire';
-import PanelsSvg from '../icons/panels_svg';
-import DefaultComponent from '../utils/default_component';
+import PanelsSvg from 'components/icons/panels_svg';
+import DefaultComponent from 'components/utils/default_component';
 
 const QuickAccountSummary = (props) => {
     const user = useUser();

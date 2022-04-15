@@ -1,4 +1,4 @@
-import MultiSelect from '../components/utils/multiselect';
+import MultiSelect from 'components/utils/multiselect';
 import {useState} from 'react';
 
 const TestMultiselect = () => {

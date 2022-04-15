@@ -1,58 +1,55 @@
-import { useState } from "react";
+import {useState} from 'react';
 
-import { Box, Button, TextField, Typography, Stack } from "@mui/material";
-import { useAuth } from "../hooks/use_auth";
-import { useNavigate, useLocation } from "react-router-dom";
-import CenteredComponentView from "../views/centered_component_view";
-import IconButton from "../components/buttons/google_icon_button";
-import ContentDivider from "../components/basics/content_divider";
-import { authErrorTranslator } from "../utils/auth_error_translator";
-import GoogleIcon from "@mui/icons-material/Google";
-import GoogleLogo from "../components/icons/google_logo";
-import {
-    validateEmail,
-    validatePassword,
-} from "../validation/user_data_validation";
-import { UpdateOutlined } from "@mui/icons-material";
+import {Box, Button, TextField, Typography, Stack} from '@mui/material';
+import {useAuth} from 'hooks/use_auth';
+import {useNavigate, useLocation} from 'react-router-dom';
+import CenteredComponentView from 'views/centered_component_view';
+import IconButton from 'components/buttons/google_icon_button';
+import ContentDivider from 'components/basics/content_divider';
+import {authErrorTranslator} from 'utils/auth_error_translator';
+import GoogleIcon from '@mui/icons-material/Google';
+import GoogleLogo from 'components/icons/google_logo';
+import {validateEmail, validatePassword} from 'validation/user_data_validation';
+import {UpdateOutlined} from '@mui/icons-material';
 
 function SignInView() {
     const authHook = useAuth();
     const navigate = useNavigate();
-    const { state } = useLocation();
+    const {state} = useLocation();
 
     const onSuccessfulSignIn = () => {
-        navigate(state?.path || "/");
+        navigate(state?.path || '/');
     };
 
     const initValues = {
         email: {
-            value: "",
+            value: '',
             error: false,
-            errMsg: "",
+            errMsg: '',
         },
         password: {
-            value: "",
+            value: '',
             error: false,
-            errMsg: "",
+            errMsg: '',
         },
     };
 
     const [formValues, setFormValues] = useState(initValues);
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
+        const {name, value} = event.target;
 
-        const updatedObject = { ...formValues };
+        const updatedObject = {...formValues};
 
         switch (name) {
-            case "email":
+            case 'email':
                 updatedObject[name] = {
                     ...validateEmail(value),
                     value: value,
                 };
                 break;
 
-            case "password":
+            case 'password':
                 updatedObject[name] = {
                     ...validatePassword(value),
                     value: value,
@@ -64,13 +61,13 @@ function SignInView() {
     };
 
     const onSuccessfulSignUp = () => {
-        navigate("/complete-account/create");
+        navigate('/complete-account/create');
     };
 
     const handleFirebaseError = (error) => {
         const translatedError = authErrorTranslator(error);
 
-        const newFormValues = { ...formValues };
+        const newFormValues = {...formValues};
         newFormValues[translatedError.type].error = true;
         newFormValues[translatedError.type].errMsg = translatedError.message;
 
@@ -78,7 +75,7 @@ function SignInView() {
     };
 
     const handleSubmit = (event) => {
-        console.log("submit");
+        console.log('submit');
         event.preventDefault();
 
         authHook
@@ -88,7 +85,7 @@ function SignInView() {
             })
             .catch((error) => {
                 handleFirebaseError(error);
-                console.log("error");
+                console.log('error');
                 console.log(error);
                 console.log(error.message);
                 console.log(error.code);
@@ -114,7 +111,7 @@ function SignInView() {
                     <IconButton
                         label="Sign in with Google"
                         color="whiteHaze"
-                        icon={<GoogleLogo height={"64px"}></GoogleLogo>}
+                        icon={<GoogleLogo height={'64px'}></GoogleLogo>}
                         onClick={() => {
                             authHook
                                 .signInWithGoogle()
@@ -159,22 +156,22 @@ function SignInView() {
                         variant="primary"
                         onClick={handleSubmit}
                         disabled={isDisabled()}
-                        sx={{ width: "100%" }}
+                        sx={{width: '100%'}}
                     >
                         Login
                     </Button>
 
-                    <Stack direction="row" justifyContent={"flex-end"}>
-                        <Stack spacing={2} alignItems={"flex-end"}>
+                    <Stack direction="row" justifyContent={'flex-end'}>
+                        <Stack spacing={2} alignItems={'flex-end'}>
                             <Typography variant="smallLabel">
                                 Don't have an account
                             </Typography>
                             <Button
                                 variant="medium"
                                 onClick={() => {
-                                    navigate("/signUp");
+                                    navigate('/signUp');
                                 }}
-                                sx={{ width: "120px" }}
+                                sx={{width: '120px'}}
                             >
                                 Sign Up
                             </Button>

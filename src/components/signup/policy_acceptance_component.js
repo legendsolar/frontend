@@ -1,15 +1,15 @@
 import {Stack, Typography} from '@mui/material';
-import ScrollBottomToComplete from '../utils/scroll_bottom_complete.js';
-import PrivacyPolicy from '../../assets/legal/privacy.js';
-import TermsAndConditions from '../../assets/legal/termsAndConditions.js';
+import ScrollBottomToComplete from 'components/utils/scroll_bottom_complete.js';
+import PrivacyPolicy from 'assets/legal/privacy.js';
+import TermsAndConditions from 'assets/legal/termsAndConditions.js';
 import {ref} from 'firebase/database';
-import {useCloudFunctions} from '../../hooks/use_cloud_functions';
+import {useCloudFunctions} from 'hooks/use_cloud_functions';
 import {useState, useEffect} from 'react';
-import {useAuth} from '../../hooks/use_auth';
+import {useAuth} from 'hooks/use_auth';
 import {useDatabase} from 'reactfire';
 import {useDatabaseObjectData} from 'reactfire';
-import scrollToPosition from '../../utils/scroll_to_position';
-import LoadingComponent from '../utils/loading_component';
+import scrollToPosition from 'utils/scroll_to_position';
+import LoadingComponent from 'components/utils/loading_component';
 
 const PolicyAcceptanceComponent = ({onComplete}) => {
     const cloudFunctions = useCloudFunctions();

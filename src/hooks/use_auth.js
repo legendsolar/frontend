@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
-import { useDatabase, useFirebaseApp } from "reactfire";
+import React, {useState, useEffect, useContext, createContext} from 'react';
+import {useDatabase, useFirebaseApp} from 'reactfire';
 import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
@@ -7,18 +7,18 @@ import {
     signOut,
     getAuth,
     signInWithPopup,
-} from "firebase/auth";
+} from 'firebase/auth';
 
-import { GoogleAuthProvider } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { clearUserState } from "../slices/user_slice";
-import { clearTransactionState } from "../slices/transfer_slice";
-import { clearWalletState } from "../slices/wallet_slice";
+import {GoogleAuthProvider} from 'firebase/auth';
+import {useDispatch} from 'react-redux';
+import {clearUserState} from 'slices/user_slice';
+import {clearTransactionState} from 'slices/transfer_slice';
+import {clearWalletState} from 'slices/wallet_slice';
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...
 // ... available to any child component that calls useAuth().
-export function ProvideAuth({ children }) {
+export function ProvideAuth({children}) {
     const auth = useProvideAuth();
     return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
@@ -97,20 +97,20 @@ function useProvideAuth() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (!user) {
-                console.log("use auth: user auth state changed");
+                console.log('use auth: user auth state changed');
                 console.log(user);
-                console.log("clearing user state");
+                console.log('clearing user state');
 
-                console.log("dispatch clear user state: line 104, use auth");
+                console.log('dispatch clear user state: line 104, use auth');
                 console.log(
-                    "dispatch clear transaction state: line 104, use auth"
+                    'dispatch clear transaction state: line 104, use auth',
                 );
-                console.log("dispatch clear wallet state: line 104, use auth");
+                console.log('dispatch clear wallet state: line 104, use auth');
                 dispatch(clearUserState());
                 dispatch(clearTransactionState());
                 dispatch(clearWalletState());
 
-                console.log("dispatch should have finished");
+                console.log('dispatch should have finished');
             }
             setUser(user);
             setIsAuthenticating(false);

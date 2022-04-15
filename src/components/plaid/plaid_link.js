@@ -1,16 +1,16 @@
 import {Paper, Stack, Button, Typography} from '@mui/material';
 import {usePlaidLink} from 'react-plaid-link';
-import {useAuth} from '../../hooks/use_auth';
+import {useAuth} from 'hooks/use_auth';
 
 import {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {fetchAccounts} from '../../slices/wallet_slice';
+import {fetchAccounts} from 'slices/wallet_slice';
 
 import {
     createPlaidLinkToken,
     exchangePublicTokenForAccessToken,
     useCloudFunctions,
-} from '../../hooks/use_cloud_functions';
+} from 'hooks/use_cloud_functions';
 
 const PlaidLink = ({onSuccess}) => {
     const auth = useAuth();

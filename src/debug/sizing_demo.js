@@ -1,14 +1,14 @@
-import { Stack, Typography, Paper, Box, Grid } from "@mui/material";
-import { useState } from "react";
-import { useTheme } from "@mui/material";
-import DefaultView from "../views/default_view";
-import { useChartDimensions } from "../hooks/use_chart_dimensions";
+import {Stack, Typography, Paper, Box, Grid} from '@mui/material';
+import {useState} from 'react';
+import {useTheme} from '@mui/material';
+import DefaultView from 'views/default_view';
+import {useChartDimensions} from 'hooks/use_chart_dimensions';
 
 const SizingDemo = ({}) => {
     const theme = useTheme();
 
-    const [color, setColor] = useState(theme.palette["legendaryGreen"].main);
-    console.log("hex color: " + color);
+    const [color, setColor] = useState(theme.palette['legendaryGreen'].main);
+    console.log('hex color: ' + color);
 
     const chartSettings = {
         marginLeft: 0,
@@ -26,9 +26,9 @@ const SizingDemo = ({}) => {
                 <Box
                     ref={refBox}
                     sx={{
-                        backgroundColor: "legendaryGreen.main",
-                        width: "100%",
-                        height: "300px",
+                        backgroundColor: 'legendaryGreen.main',
+                        width: '100%',
+                        height: '300px',
                     }}
                     display="flex"
                     alignItems="center"
@@ -38,7 +38,7 @@ const SizingDemo = ({}) => {
                         variant="headline1"
                         color="legendaryGreen.contrastText"
                     >
-                        {dms.width + "px width"}
+                        {dms.width + 'px width'}
                     </Typography>
                 </Box>
 
@@ -47,9 +47,9 @@ const SizingDemo = ({}) => {
                         <Grid item xs={12} md={4}>
                             <Box
                                 sx={{
-                                    backgroundColor: "legendaryGreen.main",
-                                    width: "100%",
-                                    height: "300px",
+                                    backgroundColor: 'legendaryGreen.main',
+                                    width: '100%',
+                                    height: '300px',
                                 }}
                                 display="flex"
                                 alignItems="center"
@@ -67,9 +67,9 @@ const SizingDemo = ({}) => {
                         <Grid item xs={12} md={8}>
                             <Box
                                 sx={{
-                                    backgroundColor: "legendaryGreen.main",
-                                    width: "100%",
-                                    height: "300px",
+                                    backgroundColor: 'legendaryGreen.main',
+                                    width: '100%',
+                                    height: '300px',
                                 }}
                                 display="flex"
                                 alignItems="center"
@@ -87,9 +87,9 @@ const SizingDemo = ({}) => {
                         <Grid item xs={12} md={8}>
                             <Box
                                 sx={{
-                                    backgroundColor: "legendaryGreen.main",
-                                    width: "100%",
-                                    height: "300px",
+                                    backgroundColor: 'legendaryGreen.main',
+                                    width: '100%',
+                                    height: '300px',
                                 }}
                                 display="flex"
                                 alignItems="center"
@@ -107,9 +107,9 @@ const SizingDemo = ({}) => {
                         <Grid item xs={12} md={4}>
                             <Box
                                 sx={{
-                                    backgroundColor: "legendaryGreen.main",
-                                    width: "100%",
-                                    height: "300px",
+                                    backgroundColor: 'legendaryGreen.main',
+                                    width: '100%',
+                                    height: '300px',
                                 }}
                                 display="flex"
                                 alignItems="center"
@@ -131,9 +131,9 @@ const SizingDemo = ({}) => {
                                         <Box
                                             sx={{
                                                 backgroundColor:
-                                                    "legendaryGreen.main",
-                                                width: "100%",
-                                                height: "300px",
+                                                    'legendaryGreen.main',
+                                                width: '100%',
+                                                height: '300px',
                                             }}
                                             display="flex"
                                             alignItems="center"
@@ -152,9 +152,9 @@ const SizingDemo = ({}) => {
                                         <Box
                                             sx={{
                                                 backgroundColor:
-                                                    "legendaryGreen.main",
-                                                width: "100%",
-                                                height: "300px",
+                                                    'legendaryGreen.main',
+                                                width: '100%',
+                                                height: '300px',
                                             }}
                                             display="flex"
                                             alignItems="center"
@@ -175,9 +175,9 @@ const SizingDemo = ({}) => {
                         <Grid item xs={12} md={4}>
                             <Box
                                 sx={{
-                                    backgroundColor: "legendaryGreen.main",
-                                    width: "100%",
-                                    height: "300px",
+                                    backgroundColor: 'legendaryGreen.main',
+                                    width: '100%',
+                                    height: '300px',
                                 }}
                                 display="flex"
                                 alignItems="center"

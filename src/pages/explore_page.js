@@ -1,16 +1,16 @@
 import {useRef} from 'react';
 import {Typography, Paper, Box, Stack, Button, Grid} from '@mui/material';
-import SideBarNavView from '../views/side_bar_view';
-import OfferingComponent from '../components/invest/offering';
-import MetricList from '../components/summary/metric_list';
-import ScrollToSidebar from '../components/utils/scroll_to_sidebar';
-import DefaultComponent from '../components/utils/default_component';
+import SideBarNavView from 'views/side_bar_view';
+import OfferingComponent from 'components/invest/offering';
+import MetricList from 'components/summary/metric_list';
+import ScrollToSidebar from 'components/utils/scroll_to_sidebar';
+import DefaultComponent from 'components/utils/default_component';
 import {InvestmentAccountSubtype} from 'plaid';
 import {useTheme} from '@mui/material';
-import PanelsSvg from '../components/icons/panels_svg';
+import PanelsSvg from 'components/icons/panels_svg';
 import {useNavigate} from 'react-router-dom';
 
-import investmentOpportunities from '../utils/asset_data';
+import investmentOpportunities from 'utils/asset_data';
 
 const ExplorePage = () => {
     const theme = useTheme();

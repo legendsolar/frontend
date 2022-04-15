@@ -6,16 +6,16 @@ import {
     InputLabel,
     Select,
     MenuItem,
-} from "@mui/material";
-import { useState } from "react";
-import { months } from "../../utils/static_lists";
-import { format } from "date-fns";
+} from '@mui/material';
+import {useState} from 'react';
+import {months} from 'utils/static_lists';
+import {format} from 'date-fns';
 import {
     validateMonth,
     validateDay,
     validateYear,
     validateSSN,
-} from "../../validation/user_data_validation";
+} from 'validation/user_data_validation';
 
 const ProtectedUserInfo = ({
     onChange,
@@ -26,19 +26,19 @@ const ProtectedUserInfo = ({
 }) => {
     const startingValues = {
         day: {
-            value: "",
+            value: '',
             error: false,
         },
         month: {
-            value: "",
+            value: '',
             error: false,
         },
         year: {
-            value: "",
+            value: '',
             error: false,
         },
         ssn: {
-            value: "",
+            value: '',
             error: false,
         },
     };
@@ -46,29 +46,29 @@ const ProtectedUserInfo = ({
     const [formValues, setFormValues] = useState(startingValues);
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        const updatedObject = { ...formValues };
+        const {name, value} = event.target;
+        const updatedObject = {...formValues};
 
         switch (name) {
-            case "day":
+            case 'day':
                 updatedObject[name] = {
                     ...validateDay(value),
                 };
                 break;
 
-            case "month":
+            case 'month':
                 updatedObject[name] = {
                     ...validateMonth(value),
                 };
                 break;
 
-            case "year":
+            case 'year':
                 updatedObject[name] = {
                     ...validateYear(value),
                 };
                 break;
 
-            case "ssn":
+            case 'ssn':
                 updatedObject[name] = {
                     ...validateSSN(value),
                 };
@@ -92,9 +92,9 @@ const ProtectedUserInfo = ({
                 // Need to ignore time of day to ensure no strange time zone issues
                 value: format(
                     new Date(
-                        `${updatedObject.month.value} ${updatedObject.day.value}, ${updatedObject.year.value}`
+                        `${updatedObject.month.value} ${updatedObject.day.value}, ${updatedObject.year.value}`,
                     ),
-                    "yyyy-MM-dd"
+                    'yyyy-MM-dd',
                 ),
             };
         }
@@ -105,9 +105,9 @@ const ProtectedUserInfo = ({
 
     return (
         <div>
-            <Grid container spacing={2} sx={{ width: "100%" }}>
+            <Grid container spacing={2} sx={{width: '100%'}}>
                 <Grid item xs={12} md={12} lg={4}>
-                    <Typography variant="subtitle3">{"SSN "}</Typography>
+                    <Typography variant="subtitle3">{'SSN '}</Typography>
                     <TextField
                         data-private
                         error={!!formValues.ssn.error}
@@ -116,11 +116,11 @@ const ProtectedUserInfo = ({
                         name="ssn"
                         label={
                             fullSSNRequired
-                                ? "Complete SSN"
-                                : "Last four digits"
+                                ? 'Complete SSN'
+                                : 'Last four digits'
                         }
                         variant="filled"
-                        value={completed ? "•••••••••" : formValues.ssn.value}
+                        value={completed ? '•••••••••' : formValues.ssn.value}
                         onChange={handleInputChange}
                         fullWidth
                         type="password"
@@ -130,7 +130,7 @@ const ProtectedUserInfo = ({
                 <Grid item xs={12} md={12} lg={8}>
                     <Typography variant="subtitle3">Birthday</Typography>
 
-                    <Grid container spacing={2} sx={{ width: "100%" }}>
+                    <Grid container spacing={2} sx={{width: '100%'}}>
                         <Grid item xs={4} md={4}>
                             <FormControl
                                 variant="filled"
@@ -143,7 +143,7 @@ const ProtectedUserInfo = ({
                                     name="month"
                                     value={
                                         completed
-                                            ? "••••"
+                                            ? '••••'
                                             : formValues.month.value
                                     }
                                     onChange={handleInputChange}
@@ -153,10 +153,10 @@ const ProtectedUserInfo = ({
                                             <MenuItem
                                                 key={month}
                                                 value={
-                                                    completed ? "••••" : month
+                                                    completed ? '••••' : month
                                                 }
                                             >
-                                                {completed ? "••••" : month}
+                                                {completed ? '••••' : month}
                                             </MenuItem>
                                         );
                                     })}
@@ -173,8 +173,8 @@ const ProtectedUserInfo = ({
                                 name="day"
                                 label="Day"
                                 variant="filled"
-                                type={completed ? "string" : "number"}
-                                value={completed ? "••" : formValues.day.value}
+                                type={completed ? 'string' : 'number'}
+                                value={completed ? '••' : formValues.day.value}
                                 onChange={handleInputChange}
                                 fullWidth
                             ></TextField>
@@ -190,7 +190,7 @@ const ProtectedUserInfo = ({
                                 label="Year"
                                 variant="filled"
                                 value={
-                                    completed ? "••••" : formValues.year.value
+                                    completed ? '••••' : formValues.year.value
                                 }
                                 onChange={handleInputChange}
                                 fullWidth

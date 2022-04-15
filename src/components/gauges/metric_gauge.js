@@ -4,9 +4,9 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import {Typography, useTheme} from '@mui/material';
-import styles from './metric_gauge.module.css';
-import LivePill from '../pills/live_pill';
-import {useChartDimensions} from '../../hooks/use_chart_dimensions';
+import styles from 'components/gauges/metric_gauge.module.css';
+import LivePill from 'components/pills/live_pill';
+import {useChartDimensions} from 'hooks/use_chart_dimensions';
 
 const tinycolor = require('tinycolor2');
 

@@ -1,18 +1,15 @@
-import { useAuth } from "../hooks/use_auth";
-import { useEffect, useLayoutEffect, useMemo } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import LoadingView from "../views/loading_view";
-import { useDispatch, useSelector } from "react-redux";
-import { useCloudFunctions } from "../hooks/use_cloud_functions";
-import {
-    selectUserSignUpState,
-    fetchUserSignUpState,
-} from "../slices/user_slice";
-import PropTypes from "prop-types";
-import ErrorPage from "../pages/error_page";
-import AppSettings from "../app_settings";
-import store from "../store";
+import {useAuth} from 'hooks/use_auth';
+import {useEffect, useLayoutEffect, useMemo} from 'react';
+import {Navigate, useNavigate} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
+import LoadingView from 'views/loading_view';
+import {useDispatch, useSelector} from 'react-redux';
+import {useCloudFunctions} from 'hooks/use_cloud_functions';
+import {selectUserSignUpState, fetchUserSignUpState} from 'slices/user_slice';
+import PropTypes from 'prop-types';
+import ErrorPage from 'pages/error_page';
+import AppSettings from 'app_settings';
+import store from 'store';
 
 const ProtectedRoute = ({
     children,
@@ -29,7 +26,7 @@ const ProtectedRoute = ({
     const cloudFunctions = useCloudFunctions();
 
     const userSignUpStateStatus = useSelector(
-        (state) => state.user.signUpState.status
+        (state) => state.user.signUpState.status,
     );
 
     const userSignUpState = useSelector(selectUserSignUpState);
@@ -38,23 +35,23 @@ const ProtectedRoute = ({
 
     useEffect(() => {
         console.log(
-            "protected route user sign up status: ",
+            'protected route user sign up status: ',
             userSignUpStateStatus,
-            !!auth.user
+            !!auth.user,
         );
 
-        if (store.getState().user.signUpState.status === "idle" && auth.user) {
+        if (store.getState().user.signUpState.status === 'idle' && auth.user) {
             console.log(
-                "dispatch user sign up state: line 39, protected route"
+                'dispatch user sign up state: line 39, protected route',
             );
 
-            console.log("getState status:" + status);
-            console.log("useSelector status:" + userSignUpStateStatus);
+            console.log('getState status:' + status);
+            console.log('useSelector status:' + userSignUpStateStatus);
             dispatch(fetchUserSignUpState(cloudFunctions));
 
-            console.log("dispatch complete ");
+            console.log('dispatch complete ');
             console.log(
-                "post dispatch sign up status: " + userSignUpStateStatus
+                'post dispatch sign up status: ' + userSignUpStateStatus,
             );
         }
     }, [dispatch, store.getState().user.signUpState.status, auth.user]);
@@ -70,7 +67,7 @@ const ProtectedRoute = ({
 
     if (
         userSignUpState &&
-        userSignUpState !== "NO_ACCOUNT" &&
+        userSignUpState !== 'NO_ACCOUNT' &&
         disallowedUserStates &&
         disallowedUserStates.indexOf(userSignUpState) > -1
     ) {
@@ -87,7 +84,7 @@ const ProtectedRoute = ({
 
     if (
         userSignUpState &&
-        userSignUpState !== "NO_ACCOUNT" &&
+        userSignUpState !== 'NO_ACCOUNT' &&
         requiredUserStates &&
         requiredUserStates.indexOf(userSignUpState) === -1
     ) {
@@ -102,11 +99,11 @@ const ProtectedRoute = ({
         );
     }
 
-    if (auth.isAuthenticating || userSignUpStateStatus === "loading") {
+    if (auth.isAuthenticating || userSignUpStateStatus === 'loading') {
         return <LoadingView></LoadingView>;
     }
 
-    if (userSignUpStateStatus === "rejected") {
+    if (userSignUpStateStatus === 'rejected') {
         return <ErrorPage></ErrorPage>;
     }
 
@@ -132,9 +129,9 @@ ProtectedRoute.propTypes = {
 
 ProtectedRoute.defaultProps = {
     disallowedUserStates: null,
-    disallowedPath: "/",
+    disallowedPath: '/',
     requiredUserStates: null,
-    requiredPath: "/",
+    requiredPath: '/',
 };
 
 export default ProtectedRoute;

@@ -1,7 +1,7 @@
 import {forwardRef} from 'react';
 import {Paper, Stack} from '@mui/material';
 import {useState} from 'react';
-import DefaultErrorBoundary from '../errors/default_error_boundary';
+import DefaultErrorBoundary from 'components/errors/default_error_boundary';
 
 const DefaultComponent = forwardRef(
     ({inactive, disabled, children, sx}, ref) => {

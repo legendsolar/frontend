@@ -1,7 +1,7 @@
 import {Button, Typography, Alert} from '@mui/material';
 import {useRef, useState} from 'react';
 import {Fragment} from 'react';
-import {useCloudFunctions} from '../../hooks/use_cloud_functions';
+import {useCloudFunctions} from 'hooks/use_cloud_functions';
 
 const ImageUpload = ({onComplete}) => {
     const uploadInputRef = useRef(null);

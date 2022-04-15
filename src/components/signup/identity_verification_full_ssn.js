@@ -1,6 +1,6 @@
 import {Typography, Stack, Button, TextField} from '@mui/material';
 import {useState} from 'react';
-import {useCloudFunctions} from '../../hooks/use_cloud_functions';
+import {useCloudFunctions} from 'hooks/use_cloud_functions';
 
 const IdentityVerificationFullSSN = ({onComplete}) => {
     const updateDwollaUser = useCloudFunctions().updateDwollaUser;

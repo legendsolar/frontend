@@ -1,13 +1,13 @@
 import {useRef} from 'react';
-import {useAuth} from '../hooks/use_auth';
+import {useAuth} from 'hooks/use_auth';
 
 import {Paper, Stack, Button, Typography, ListItemButton} from '@mui/material';
-import Divider from '../components/basics/divider';
-import SideBarNavView from '../views/side_bar_view';
+import Divider from 'components/basics/divider';
+import SideBarNavView from 'views/side_bar_view';
 
-import DefaultComponent from '../components/utils/default_component';
-import UpdateUserInfo from '../components/user/update_user_info';
-import AccountManagementComponent from '../components/transfers/account_management_component';
+import DefaultComponent from 'components/utils/default_component';
+import UpdateUserInfo from 'components/user/update_user_info';
+import AccountManagementComponent from 'components/transfers/account_management_component';
 
 const AccountPage = () => {
     const auth = useAuth();
