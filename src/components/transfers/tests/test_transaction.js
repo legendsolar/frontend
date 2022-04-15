@@ -1,4 +1,4 @@
-import TransferComponent from 'components/transfers/transfer_component';
+import TransferComponent from '../transfer_component';
 
 const TestTransactionComponent = () => (
     <TransferComponent

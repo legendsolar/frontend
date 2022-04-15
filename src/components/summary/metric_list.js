@@ -1,5 +1,6 @@
 import {Stack, Typography, Tooltip} from '@mui/material';
 import Divider from 'components/basics/divider';
+import {nanoid} from 'nanoid';
 
 const MetricList = ({valuePairs, dividers = false}) => {
     if (!valuePairs) {
@@ -9,7 +10,7 @@ const MetricList = ({valuePairs, dividers = false}) => {
     return (
         <Stack spacing={2} sx={{width: '100%', height: '100%'}}>
             {valuePairs.map(({metric, value}, index, list) => (
-                <div>
+                <div key={nanoid()}>
                     <Stack
                         direction="row"
                         justifyContent={'space-between'}

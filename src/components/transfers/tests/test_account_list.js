@@ -1,13 +1,13 @@
-import AccountListComponent from 'components/transfers/account_list_component';
-import {accounts} from 'tests/test_data';
+import AccountListComponent from '../account_list_component';
+import {accounts} from './defaults';
 
 const TestAccountList = () => (
-    <AccountList
+    <AccountListComponent
         accounts={accounts}
         onSelected={(account) => {
             alert(`account selected: ${JSON.stringify(account)}`);
         }}
-    ></AccountList>
+    ></AccountListComponent>
 );
 
 export default TestAccountList;

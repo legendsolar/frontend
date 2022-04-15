@@ -96,6 +96,38 @@ const basePaths = [
         ],
     },
 
+    {
+        name: 'pills',
+        tests: [
+            {
+                name: 'test_live_pill',
+            },
+        ],
+    },
+
+    {
+        name: 'plaid',
+        tests: [
+            {
+                name: 'test_plaid_link',
+            },
+        ],
+    },
+
+    {
+        name: 'transfers',
+        tests: [
+            {
+                name: 'test_account_list',
+            },
+            {
+                name: 'test_create_transfer',
+            },
+            {
+                name: 'test_transaction',
+            },
+        ],
+    },
     // {
     //     path: './components/errors',
     //     name: 'errors',
