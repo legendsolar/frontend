@@ -14,6 +14,9 @@ const basePaths = [
             {
                 name: 'test_divider',
             },
+            {
+                name: 'test',
+            },
         ],
     },
     {
@@ -105,10 +108,6 @@ const ComponentView = () => {
                     )[0];
                     if (test) {
                         const path = `./components/${base.name}/tests/${test.name}`;
-                        console.log(path);
-                        console.log(test);
-                        console.log(selectedComponent);
-
                         const Component = await importComponent(path);
                         return <Component key={nanoid()} />;
                     }

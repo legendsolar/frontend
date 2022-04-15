@@ -4,7 +4,7 @@ import {Box, Button, TextField, Typography, Stack} from '@mui/material';
 import {useAuth} from 'hooks/use_auth';
 import {useNavigate, useLocation} from 'react-router-dom';
 import CenteredComponentView from 'views/centered_component_view';
-import IconButton from 'components/buttons/google_icon_button';
+import IconButton from 'components/buttons/icon_button';
 import ContentDivider from 'components/basics/content_divider';
 import {authErrorTranslator} from 'utils/auth_error_translator';
 import GoogleIcon from '@mui/icons-material/Google';

@@ -1,6 +1,6 @@
 import {Typography, Box, Stack, Button} from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
-import IconButton from 'components/buttons/google_icon_button';
+import IconButton from 'components/buttons/icon_button';
 import ContentDivider from 'components/basics/content_divider';
 import GoogleLogo from 'components/icons/google_logo';
 import PropTypes from 'prop-types';

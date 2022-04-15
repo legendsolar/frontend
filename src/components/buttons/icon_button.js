@@ -1,5 +1,4 @@
 import {Stack, Button, Typography} from '@mui/material/';
-import GoogleLogo from 'components/icons/google_logo';
 
 const IconButton = ({label, onClick, icon, color}) => {
     return (
