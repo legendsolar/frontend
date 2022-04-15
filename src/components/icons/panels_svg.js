@@ -1,4 +1,4 @@
-const PanelsSvg = ({ color, width, height }) => (
+const PanelsSvg = ({color}) => (
     <svg viewBox="0 0 417 209" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#a)">
             <g filter="url(#b)">

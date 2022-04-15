@@ -3,7 +3,7 @@ import {useAuth} from 'hooks/use_auth';
 import {Button, Stack, Typography, Toolbar, Box, AppBar} from '@mui/material';
 import {useNavigate, useLocation} from 'react-router-dom';
 import {redirectToHomePage} from 'webflow/webflowLinking';
-import {LegendsSolarLogo} from 'components/icons/legends_solar_logo';
+import LegendsSolarLogo from 'components/icons/legends_solar_logo';
 import {useCloudFunctions} from 'hooks/use_cloud_functions';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchUserSignUpState} from 'slices/user_slice';

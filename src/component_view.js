@@ -54,6 +54,26 @@ const basePaths = [
             },
         ],
     },
+
+    {
+        // path: './components/basics',
+        name: 'icons',
+        tests: [
+            {
+                name: 'test_document_icon',
+            },
+            {
+                name: 'test_google_icon',
+            },
+            {
+                name: 'test_legends_solar_logo',
+            },
+            {
+                name: 'test_panels_svg',
+            },
+        ],
+    },
+
     // {
     //     path: './components/errors',
     //     name: 'errors',
@@ -187,15 +207,16 @@ const ComponentView = () => {
     );
 
     const hiddenView = (
-        <div key={nanoid()}>
-            style=
-            {{
+        <div
+            key={nanoid()}
+            style={{
                 position: 'absolute',
                 top: '0px',
                 right: '0px',
                 zIndex: 1000,
             }}
-            ><button onClick={() => setExpanded(true)}>show header</button>
+        >
+            <button onClick={() => setExpanded(true)}>show header</button>
         </div>
     );
 
