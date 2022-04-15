@@ -28,6 +28,7 @@ const basePaths = [
             },
         ],
     },
+
     {
         // path: './components/basics',
         name: 'errors',
@@ -37,6 +38,19 @@ const basePaths = [
             },
             {
                 name: 'test_error_component',
+            },
+        ],
+    },
+
+    {
+        // path: './components/basics',
+        name: 'gauges',
+        tests: [
+            {
+                name: 'test_cumulative_impact',
+            },
+            {
+                name: 'test_metric_gauge',
             },
         ],
     },
