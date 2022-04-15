@@ -1,35 +1,20 @@
-import { useState } from "react";
-import { TextField, useTheme } from "@mui/material";
-import { Paper, Button, Stack, Typography, Box, Divider } from "@mui/material";
-
-import MetricGauge from "../components/gauges/metric_gauge";
-import CumulativeImpact from "../components/gauges/cumulative_impact";
-import MetricList from "../components/summary/metric_list";
-import MetricSummary from "../components/summary/metric_summary";
-import Worm from "../components/worm/worm";
-import data from "../components/worm/fake_data";
-import TransactionComponent from "../components/transactions/transfer_component";
-import Weather from "../components/weather/weather";
-import CheckboxList from "../components/inputs/checkbox_list";
-import UserStatus from "../components/user_status";
-import DefaultComponent from "../components/default_component";
-import ScrollToSidebar from "../components/scroll_to_sidebar";
-import MultiSelect from "../components/multiselect";
-import AccountList from "../components/transactions/account_list_component";
+import {useState} from 'react';
+import {useTheme} from '@mui/material';
+import {Paper, Button, Stack, Typography, Box, Divider} from '@mui/material';
 
 const DesignSysDemo = (props) => {
     const theme = useTheme();
 
-    const [color, setColor] = useState(theme.palette["legendaryGreen"].main);
-    console.log("hex color: " + color);
+    const [color, setColor] = useState(theme.palette['legendaryGreen'].main);
+    console.log('hex color: ' + color);
 
     return (
-        <Stack spacing={2} sx={{ m: 2 }}>
+        <Stack spacing={2} sx={{m: 2}}>
             <Typography variant="headline1">Theme</Typography>
             <Paper variant="container">
                 <Stack>
-                    <Typography variant="subtitle2">{"Typography"}</Typography>
-                    <Typography variant="headline1">{"Headline 1"}</Typography>
+                    <Typography variant="subtitle2">{'Typography'}</Typography>
+                    <Typography variant="headline1">{'Headline 1'}</Typography>
                     <Typography variant="subtitle1">Subtitle 1</Typography>
                     <Typography variant="body1">Body 1</Typography>
                     <Typography variant="headline2">Headline 2</Typography>
@@ -46,18 +31,18 @@ const DesignSysDemo = (props) => {
 
             <Paper variant="container">
                 <Typography variant="subtitle2">
-                    {"Color Matrix (main, light, dark, contrast text color)"}
+                    {'Color Matrix (main, light, dark, contrast text color)'}
                 </Typography>
                 {[
-                    "legendaryGreen",
-                    "whiteHaze",
-                    "whiteFog",
-                    "blackDusk",
-                    "blackDawn",
-                    "skyBlue",
-                    "grassGreen",
-                    "pencilYellow",
-                    "eraserRed",
+                    'legendaryGreen',
+                    'whiteHaze',
+                    'whiteFog',
+                    'blackDusk',
+                    'blackDawn',
+                    'skyBlue',
+                    'grassGreen',
+                    'pencilYellow',
+                    'eraserRed',
                 ].map((name) => {
                     return (
                         <Stack direction="row" alignItems="center">
@@ -67,9 +52,9 @@ const DesignSysDemo = (props) => {
                                 }
                                 sx={{
                                     bgcolor: `${name}.main`,
-                                    width: "50px",
-                                    height: "50px",
-                                    alignItems: "center",
+                                    width: '50px',
+                                    height: '50px',
+                                    alignItems: 'center',
                                 }}
                             ></Box>
                             <Box
@@ -78,9 +63,9 @@ const DesignSysDemo = (props) => {
                                 }
                                 sx={{
                                     bgcolor: `${name}.light`,
-                                    width: "50px",
-                                    height: "50px",
-                                    alignItems: "center",
+                                    width: '50px',
+                                    height: '50px',
+                                    alignItems: 'center',
                                 }}
                             ></Box>
                             <Box
@@ -89,29 +74,29 @@ const DesignSysDemo = (props) => {
                                 }
                                 sx={{
                                     bgcolor: `${name}.dark`,
-                                    width: "50px",
-                                    height: "50px",
-                                    alignItems: "center",
+                                    width: '50px',
+                                    height: '50px',
+                                    alignItems: 'center',
                                 }}
                             ></Box>
                             <Box
                                 onClick={() =>
                                     setColor(
-                                        theme.palette[`${name}`].contrastText
+                                        theme.palette[`${name}`].contrastText,
                                     )
                                 }
                                 sx={{
                                     bgcolor: `${name}.main`,
-                                    width: "50px",
-                                    height: "50px",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    display: "flex",
+                                    width: '50px',
+                                    height: '50px',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    display: 'flex',
                                 }}
                             >
                                 <Typography
                                     sx={{
-                                        fontSize: "24px",
+                                        fontSize: '24px',
                                         color: `${name}.contrastText`,
                                     }}
                                 >
@@ -131,10 +116,10 @@ const DesignSysDemo = (props) => {
                     );
                 })}
 
-                <Typography variant="body1" sx={{ mt: 2 }}>
+                <Typography variant="body1" sx={{mt: 2}}>
                     Selected Color:
                 </Typography>
-                <Box sx={{ height: "50px", bgcolor: color }}></Box>
+                <Box sx={{height: '50px', bgcolor: color}}></Box>
             </Paper>
 
             <Typography variant="headline1">Inputs</Typography>
@@ -163,220 +148,13 @@ const DesignSysDemo = (props) => {
 
                     <Button variant="bubble">Bubble Regular</Button>
 
-                    <Button variant="bubble" sx={{ color: "eraserRed.main" }}>
+                    <Button variant="bubble" sx={{color: 'eraserRed.main'}}>
                         Bubble Color
                     </Button>
 
                     <Button variant="header">Header Button</Button>
                 </Stack>
             </Paper>
-
-            <Paper variant="container">
-                <Stack>
-                    <Typography variant="subtitle2">Check Box Lists</Typography>
-                    <CheckboxList
-                        options={[
-                            {
-                                description: "First Checkbox Item",
-                                title: "Title",
-                            },
-                            {
-                                description: "Second Checkbox Item",
-                                title: "Title",
-                            },
-                            {
-                                description: "Third Checkbox Item",
-                                title: "Other Title",
-                            },
-                        ]}
-                    ></CheckboxList>
-                </Stack>
-            </Paper>
-
-            <ScrollToSidebar
-                header={
-                    <Typography variant="smallHeadline">
-                        Scroll To Sidebar
-                    </Typography>
-                }
-                contentTitles={["Title 1", "Title 2", "Title 3", "Title 4"]}
-            ></ScrollToSidebar>
-
-            <Paper variant="container">
-                <Stack>
-                    <Typography variant="subtitle2">Text Inputs</Typography>
-                    <Typography variant="subtitle3">Filled Text Box</Typography>
-
-                    <TextField
-                        name="firstName"
-                        label="Hint Text"
-                        variant="filled"
-                        value={""}
-                        // InputProps={{ disableUnderline: true }}
-                    ></TextField>
-
-                    <MultiSelect
-                        name="MultiselectName"
-                        text="Multiselect"
-                        value="a"
-                        fields={[
-                            {
-                                id: 1,
-                                text: "Field 1",
-                            },
-                            {
-                                id: 2,
-                                text: "Field 2",
-                            },
-                            {
-                                id: 3,
-                                text: "Field 3",
-                            },
-                        ]}
-                        onChangeListener={({ value, name }) => {
-                            console.log("selected: ", {
-                                value: value,
-                                name: name,
-                            });
-                        }}
-                    ></MultiSelect>
-                </Stack>
-            </Paper>
-
-            <Typography variant="headline1">Components</Typography>
-            <Typography variant="body1">
-                Select Color Matrix to change default color
-            </Typography>
-
-            <Divider sx={{ m: 2 }} />
-
-            <Typography variant="subtitle1">Default Component</Typography>
-
-            <DefaultComponent>
-                <Stack>
-                    <Typography variant="smallHeadline">
-                        Default Component
-                    </Typography>
-                    <Typography variant="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Nulla facilisi cras fermentum odio eu
-                        feugiat pretium nibh.
-                    </Typography>
-
-                    <Button variant="primary">Button</Button>
-                </Stack>
-            </DefaultComponent>
-
-            <DefaultComponent inactive={true}>
-                <Stack>
-                    <Typography variant="smallHeadline">
-                        Inactive Default Component
-                    </Typography>
-                    <Typography variant="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Nulla facilisi cras fermentum odio eu
-                        feugiat pretium nibh.
-                    </Typography>
-
-                    <Button variant="primary">Button</Button>
-                </Stack>
-            </DefaultComponent>
-
-            <DefaultComponent disabled={true} inactive={true}>
-                <Stack>
-                    <Typography variant="smallHeadline">
-                        Inactive and Disabled Default Component
-                    </Typography>
-                    <Typography variant="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Nulla facilisi cras fermentum odio eu
-                        feugiat pretium nibh.
-                    </Typography>
-
-                    <Button variant="primary">Button</Button>
-                </Stack>
-            </DefaultComponent>
-
-            <Paper variant="container">
-                <UserStatus></UserStatus>
-            </Paper>
-
-            <Typography variant="subtitle1">MetricGauge</Typography>
-
-            <MetricGauge
-                min={0}
-                max={100}
-                currentValue={40}
-                unitOpts={{
-                    title: "Metric Gauge Live",
-                    liveMessage: "live message",
-                    unit: "unit",
-                    unitDescription: "unit description",
-                    strokeColor: color,
-                }}
-            ></MetricGauge>
-
-            <Divider sx={{ m: 2 }} />
-            <Typography variant="subtitle1">CumulativeImpact</Typography>
-
-            <CumulativeImpact
-                cumulativeData={{
-                    day: 1,
-                    week: 10,
-                    month: 1000,
-                    year: 10000,
-                }}
-                unitOpts={{
-                    title: "Cumulative Impact",
-                    unit: "unit",
-                    unitDescription: "unit description",
-                    strokeColor: color,
-                }}
-            ></CumulativeImpact>
-
-            <Divider sx={{ m: 2 }} />
-            <Typography variant="subtitle1">
-                {"Worm (default options, fake data)"}
-            </Typography>
-            <Worm rawData={data} loading={false} error={false}></Worm>
-
-            <Divider sx={{ m: 2 }} />
-            <Typography variant="subtitle1">{"Metric List"}</Typography>
-            <MetricList
-                valuePairs={[
-                    {
-                        metric: "LIST METRIC 1",
-                        value: "LIST METRIC VALUE 1",
-                    },
-                    { metric: "KWH GENERATED", value: "10,725" },
-                    { metric: "UPTIME", value: "99%" },
-                ]}
-            ></MetricList>
-
-            <Divider sx={{ m: 2 }} />
-
-            <Typography variant="subtitle1">{"Transfer Component"}</Typography>
-
-            <TransactionComponent
-                title={"Transfer Name"}
-                amount={99.99}
-                source={"Source"}
-                destination={"Destination"}
-                date={new Date()}
-            ></TransactionComponent>
-
-            <Divider sx={{ m: 2 }} />
-
-            <Typography variant="subtitle1">{"Weather Component"}</Typography>
-            <Weather temp={"0"} state={"clear"} code={800}></Weather>
-            <Weather temp={"10"} state={"cloudy"} code={801}></Weather>
-            <Weather temp={"50"} state={"Fog"} code={701}></Weather>
-            <Weather temp={"32"} state={"Snow"} code={600}></Weather>
-            <Weather temp={"80"} state={"Rain"} code={400}></Weather>
-            <Weather temp={"100"} state={"Thunderstorm"} code={201}></Weather>
         </Stack>
     );
 };

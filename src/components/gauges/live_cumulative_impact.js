@@ -1,14 +1,10 @@
-import { ref } from "firebase/database";
-import PropTypes from "prop-types";
-import CumulativeImpact from "./cumulative_impact";
-import LoadingComponent from "../loading_component";
-import { useDatabase, useDatabaseObjectData } from "reactfire";
+import {ref} from 'firebase/database';
+import PropTypes from 'prop-types';
+import CumulativeImpact from './cumulative_impact';
+import LoadingComponent from '../utils/loading_component';
+import {useDatabase, useDatabaseObjectData} from 'reactfire';
 
-const LiveCumulativeImpact = ({
-    assetId,
-    unitConversionFactor_kW,
-    unitOpts,
-}) => {
+const LiveCumulativeImpact = ({assetId, unitConversionFactor_kW, unitOpts}) => {
     const database = useDatabase();
 
     var convertedCumulativeData = {
@@ -18,12 +14,12 @@ const LiveCumulativeImpact = ({
         year: 0,
     };
 
-    const { productionSummaryState, data: productionSummary } =
+    const {productionSummaryState, data: productionSummary} =
         useDatabaseObjectData(
-            ref(database, "production/" + assetId + "/summary")
+            ref(database, 'production/' + assetId + '/summary'),
         );
 
-    if (productionSummaryState === "loading") {
+    if (productionSummaryState === 'loading') {
         return <LoadingComponent></LoadingComponent>;
     }
 
@@ -54,12 +50,12 @@ LiveCumulativeImpact.propTypes = {
     }).isRequired,
 };
 
-const EarningsCumulativeImpact = ({ assetId }) => {
+const EarningsCumulativeImpact = ({assetId}) => {
     const unitOpts = {
-        unit: "DOLLARS",
-        unitDescription: "Dollars",
-        title: "Cash Earned",
-        strokeColor: "#30A462",
+        unit: 'DOLLARS',
+        unitDescription: 'Dollars',
+        title: 'Cash Earned',
+        strokeColor: '#30A462',
     };
 
     const unitConversionFactor_kW = 0.15;
@@ -77,12 +73,12 @@ EarningsCumulativeImpact.propTypes = {
     assetId: PropTypes.string.isRequired,
 };
 
-const CarbonCumulativeImpact = ({ assetId }) => {
+const CarbonCumulativeImpact = ({assetId}) => {
     const unitOpts = {
-        unit: "LBS",
-        unitDescription: "Pounds ",
-        title: "Carbon Aversion",
-        strokeColor: "#477FB2",
+        unit: 'LBS',
+        unitDescription: 'Pounds ',
+        title: 'Carbon Aversion',
+        strokeColor: '#477FB2',
     };
 
     const unitConversionFactor_kW = 0.12;
@@ -100,12 +96,12 @@ CarbonCumulativeImpact.propTypes = {
     assetId: PropTypes.string.isRequired,
 };
 
-const GenerationCumulativeImpact = ({ assetId }) => {
+const GenerationCumulativeImpact = ({assetId}) => {
     const unitOpts = {
-        unit: "KWH",
-        unitDescription: "KILOWATTS",
-        title: "Generation",
-        strokeColor: "#EAB31E",
+        unit: 'KWH',
+        unitDescription: 'KILOWATTS',
+        title: 'Generation',
+        strokeColor: '#EAB31E',
     };
 
     const unitConversionFactor_kW = 1;

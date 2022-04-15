@@ -1,16 +1,14 @@
-import { Box, Typography, Paper, Stack, Button, Grid } from "@mui/material";
-import DefaultComponent from "../components/default_component";
-import SolarPicture from "../assets/solar_frame.png";
-import PanelsSvg from "../components/icons/panels_svg";
-import { useTheme } from "@mui/material";
-import MetricList from "../components/summary/metric_list";
-import DocumentIcon from "../components/icons/document_icon";
-import investmentOpportunities from "../utils/asset_data";
-import ErrorComponent from "../components/errors/error_component";
-import DocumentComponent from "../components/document_component";
-import DownloadIcon from "@mui/icons-material/Download";
+import {Box, Typography, Paper, Stack, Button, Grid} from '@mui/material';
+import DefaultComponent from '../components/utils/default_component';
+import SolarPicture from '../assets/solar_frame.png';
+import PanelsSvg from '../components/icons/panels_svg';
+import {useTheme} from '@mui/material';
+import MetricList from '../components/summary/metric_list';
+import investmentOpportunities from '../utils/asset_data';
+import ErrorComponent from '../components/errors/error_component';
+import DocumentIcon from '../components/icons/document_icon';
 
-const InvestContent = ({ assetId }) => {
+const InvestContent = ({assetId}) => {
     const theme = useTheme();
     const asset = investmentOpportunities[assetId];
 
@@ -84,16 +82,16 @@ const InvestContent = ({ assetId }) => {
 
             <Grid
                 container
-                columnSpacing={{ xs: 0, lg: 4 }}
-                rowSpacing={{ xs: 4, lg: 0 }}
+                columnSpacing={{xs: 0, lg: 4}}
+                rowSpacing={{xs: 4, lg: 0}}
             >
                 <Grid
                     item
                     xs={12}
                     lg={6}
                     sx={{
-                        ml: { lg: -4 },
-                        mt: { xs: -4, lg: 0 },
+                        ml: {lg: -4},
+                        mt: {xs: -4, lg: 0},
                     }}
                 >
                     <DefaultComponent>
@@ -105,18 +103,18 @@ const InvestContent = ({ assetId }) => {
                             <MetricList
                                 valuePairs={[
                                     {
-                                        metric: "Investor Funds",
-                                        value: "$131,000",
+                                        metric: 'Investor Funds',
+                                        value: '$131,000',
                                     },
 
                                     {
-                                        metric: "Hold Term",
-                                        value: "7 years",
+                                        metric: 'Hold Term',
+                                        value: '7 years',
                                     },
 
                                     {
-                                        metric: "Estimated ROI",
-                                        value: "10.0%",
+                                        metric: 'Estimated ROI',
+                                        value: '10.0%',
                                     },
                                 ]}
                                 dividers={true}
@@ -135,18 +133,18 @@ const InvestContent = ({ assetId }) => {
                             <MetricList
                                 valuePairs={[
                                     {
-                                        metric: "Number of Panels",
-                                        value: "114",
+                                        metric: 'Number of Panels',
+                                        value: '114',
                                     },
 
                                     {
-                                        metric: "Make & Model",
-                                        value: "Phono Solar 400W",
+                                        metric: 'Make & Model',
+                                        value: 'Phono Solar 400W',
                                     },
 
                                     {
-                                        metric: "Watts Installed",
-                                        value: "46,600",
+                                        metric: 'Watts Installed',
+                                        value: '46,600',
                                     },
                                 ]}
                                 dividers={true}
@@ -173,7 +171,7 @@ const InvestContent = ({ assetId }) => {
             </DefaultComponent>
 
             <DefaultComponent>
-                <Stack direction={"row"}>
+                <Stack direction={'row'}>
                     <DocumentIcon
                         color={theme.palette.skyBlue.main}
                         darkColor={theme.palette.skyBlue.dark}
@@ -183,7 +181,7 @@ const InvestContent = ({ assetId }) => {
                             Legends Santa Rosa Solar Pro Forma PDF
                         </Typography>
 
-                        <Stack direction={"row"}>
+                        <Stack direction={'row'}>
                             <DownloadIcon></DownloadIcon>
                             <Typography variant="label">
                                 Click to download
@@ -200,16 +198,16 @@ const InvestContent = ({ assetId }) => {
                     <DocumentComponent
                         documents={[
                             {
-                                title: "Pro Forma",
-                                color: "skyBlue",
+                                title: 'Pro Forma',
+                                color: 'skyBlue',
                             },
                             {
-                                title: "Purchase Agreement",
-                                color: "pencilYellow",
+                                title: 'Purchase Agreement',
+                                color: 'pencilYellow',
                             },
                             {
-                                title: "Billing Agreement",
-                                color: "eraserRed",
+                                title: 'Billing Agreement',
+                                color: 'eraserRed',
                             },
                         ]}
                     ></DocumentComponent>

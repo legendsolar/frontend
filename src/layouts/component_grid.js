@@ -1,63 +1,51 @@
-import { useState } from "react";
-import {
-    Grid,
-    Paper,
-    Button,
-    Select,
-    MenuItem,
-    Typography,
-} from "@mui/material";
-import UserDebugPaper from "../components/user_debug_paper";
-import AssetLiveViewDebug from "../components/asset_live_view_debug";
-import MetricSummary from "../components/summary/metric_summary";
-import useTheme from "@mui/material/styles/useTheme";
-import WormLive from "../components/worm/worm_live";
-import QuickAccountSummary from "../components/quick_account_summary";
+import {useState} from 'react';
+import {Grid, Paper, Button, Select, MenuItem, Typography} from '@mui/material';
+import WormLive from '../components/worm/worm_live';
 import {
     CarbonGauge,
     EarningsGauge,
     GenerationGauge,
     ErrorGauge,
-} from "../components/gauges/live_metric_gauge";
+} from '../components/gauges/live_metric_gauge';
 
 import {
     EarningsCumulativeImpact,
     GenerationCumulativeImpact,
     CarbonCumulativeImpact,
-} from "../components/gauges/live_cumulative_impact";
-import WeatherLive from "../components/weather/weather_live";
-import DefaultComponent from "../components/default_component";
+} from '../components/gauges/live_cumulative_impact';
+import WeatherLive from '../components/weather/weather_live';
+import DefaultComponent from '../components/utils/default_component';
 
 function ComponentGrid(props) {
     const [assetDisplayId, setAssetDisplayId] = useState({
-        id: "-MtUbBNCnoz0VdTQ_m-O",
-        name: "Barnyard Solar",
+        id: '-MtUbBNCnoz0VdTQ_m-O',
+        name: 'Barnyard Solar',
     });
 
     const assetList = [
         {
-            id: "-MtUbBNCnoz0VdTQ_m-O",
-            name: "Barnyard Solar",
+            id: '-MtUbBNCnoz0VdTQ_m-O',
+            name: 'Barnyard Solar',
         },
 
         {
-            id: "-MuCmzKbnofQ9TY_sIp9",
-            name: "Hawaii Solar",
+            id: '-MuCmzKbnofQ9TY_sIp9',
+            name: 'Hawaii Solar',
         },
 
         {
-            id: "-MuCq8nkhE8gqGrdG9Ta",
-            name: "Big Sur Solar",
+            id: '-MuCq8nkhE8gqGrdG9Ta',
+            name: 'Big Sur Solar',
         },
 
         {
-            id: "-MuCqDzSoaF0yXWZbouB",
-            name: "Sinusoidal Test",
+            id: '-MuCqDzSoaF0yXWZbouB',
+            name: 'Sinusoidal Test',
         },
 
         {
-            id: "-MuDYXAdGcdAzeGJmzj3",
-            name: "Constant Output Test",
+            id: '-MuDYXAdGcdAzeGJmzj3',
+            name: 'Constant Output Test',
         },
     ];
 
@@ -72,9 +60,9 @@ function ComponentGrid(props) {
     };
 
     return (
-        <Grid container spacing={4} sx={{ width: "100%" }}>
+        <Grid container spacing={4} sx={{width: '100%'}}>
             <Grid item xs={12}>
-                <DefaultComponent sx={{ m: 0, p: 0 }}>
+                <DefaultComponent sx={{m: 0, p: 0}}>
                     <WormLive assetId={assetDisplayId.id}></WormLive>
                 </DefaultComponent>
             </Grid>
@@ -126,29 +114,16 @@ function ComponentGrid(props) {
                     <WeatherLive></WeatherLive>
                 </DefaultComponent>
             </Grid>
-            <Grid item xs={12}>
-                <DefaultComponent>
-                    <UserDebugPaper></UserDebugPaper>
-                </DefaultComponent>
-            </Grid>
 
             <Grid item xs={12}>
-                <DefaultComponent>
-                    <AssetLiveViewDebug
-                        assetId={assetDisplayId.id}
-                    ></AssetLiveViewDebug>
-                </DefaultComponent>
-            </Grid>
-            <Grid item xs={12}>
                 <Paper variant="container">
-                    <Typography variant="label">[DEBUG ONLY]</Typography>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={assetDisplayId.name}
                         label="Test Facility"
                         onChange={onSelectChange}
-                        sx={{ width: "200px" }}
+                        sx={{width: '200px'}}
                     >
                         {assetList.map((asset) => {
                             return (

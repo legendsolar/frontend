@@ -9,18 +9,18 @@ import {
     Select,
     MenuItem,
     FormHelperText,
-} from "@mui/material";
-import useTheme from "@mui/material/styles/useTheme";
-import { get, ref, set } from "firebase/database";
-import { useAuth } from "../../hooks/use_auth";
-import { Button, Typography } from "@mui/material";
-import { TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+} from '@mui/material';
+import useTheme from '@mui/material/styles/useTheme';
+import {get, ref, set} from 'firebase/database';
+import {useAuth} from '../../hooks/use_auth';
+import {Button, Typography} from '@mui/material';
+import {TextField} from '@mui/material';
+import {useEffect, useState} from 'react';
 
-import { useDatabaseObjectData, useDatabase } from "reactfire";
-import { useCloudFunctions } from "../../hooks/use_cloud_functions";
-import LoadingComponent from "../loading_component";
-import { states } from "../../utils/static_lists";
+import {useDatabaseObjectData, useDatabase} from 'reactfire';
+import {useCloudFunctions} from '../../hooks/use_cloud_functions';
+import LoadingComponent from '../utils/loading_component';
+import {states} from '../../utils/static_lists';
 import {
     validateCity,
     validateFirstName,
@@ -29,40 +29,40 @@ import {
     validateState,
     validateStreetAddress,
     validateStreetAddressTwo,
-} from "../../validation/user_data_validation";
+} from '../../validation/user_data_validation';
 
-const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
+const ModifyUserInfo = ({onUpdate, onChange, onLoadingChange, disabled}) => {
     const auth = useAuth();
     const user = auth.user;
 
     const database = useDatabase();
-    const { status, data: userInfo } = useDatabaseObjectData(
-        ref(database, "users/" + user.uid)
+    const {status, data: userInfo} = useDatabaseObjectData(
+        ref(database, 'users/' + user.uid),
     );
 
     const [loading, setLoading] = useState(false);
 
     const startingValues = {
         firstName: {
-            value: "",
+            value: '',
         },
         lastName: {
-            value: "",
+            value: '',
         },
         streetAddress: {
-            value: "",
+            value: '',
         },
         streetAddress2: {
-            value: "",
+            value: '',
         },
         city: {
-            value: "",
+            value: '',
         },
         state: {
-            value: "",
+            value: '',
         },
         postalCode: {
-            value: "",
+            value: '',
         },
     };
 
@@ -70,7 +70,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
     const [submitErrorMessage, setSubmitErrorMessage] = useState(undefined);
 
     useEffect(() => {
-        if (status == "success") {
+        if (status == 'success') {
             if (
                 userInfo &&
                 userInfo.info &&
@@ -78,7 +78,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
                 userInfo.info.name
             ) {
                 const info = userInfo.info;
-                const loadedUserData = { ...formValues };
+                const loadedUserData = {...formValues};
 
                 loadedUserData.firstName.value = info.name.first;
                 loadedUserData.lastName.value = info.name.last;
@@ -95,48 +95,48 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
     }, [status]);
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
+        const {name, value} = event.target;
 
-        const updatedObject = { ...formValues };
+        const updatedObject = {...formValues};
 
         switch (name) {
-            case "firstName":
+            case 'firstName':
                 updatedObject[name] = {
                     ...validateFirstName(value),
                 };
                 break;
 
-            case "lastName":
+            case 'lastName':
                 updatedObject[name] = {
                     ...validateLastName(value),
                 };
                 break;
 
-            case "streetAddress":
+            case 'streetAddress':
                 updatedObject[name] = {
                     ...validateStreetAddress(value),
                 };
                 break;
 
-            case "streetAddress2":
+            case 'streetAddress2':
                 updatedObject[name] = {
                     ...validateStreetAddressTwo(value),
                 };
                 break;
 
-            case "city":
+            case 'city':
                 updatedObject[name] = {
                     ...validateCity(value),
                 };
                 break;
 
-            case "state":
+            case 'state':
                 updatedObject[name] = {
                     ...validateState(value),
                 };
                 break;
 
-            case "postalCode":
+            case 'postalCode':
                 updatedObject[name] = {
                     ...validatePostalCode(value),
                 };
@@ -154,7 +154,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
 
     return (
         <div>
-            <Grid container spacing={2} sx={{ width: "100%" }}>
+            <Grid container spacing={2} sx={{width: '100%'}}>
                 <Grid item xs={12} md={6}>
                     <TextField
                         error={!!formValues.firstName.error}
@@ -225,7 +225,7 @@ const ModifyUserInfo = ({ onUpdate, onChange, onLoadingChange, disabled }) => {
                     <FormControl variant="filled" fullWidth>
                         <InputLabel>State</InputLabel>
                         <Select
-                            helperText={"state"}
+                            helperText={'state'}
                             name="state"
                             value={formValues.state.value}
                             disabled={disabled?.state}

@@ -1,22 +1,19 @@
-import { useRef, useEffect } from "react";
-import { useAuth } from "../hooks/use_auth";
+import {useRef, useEffect} from 'react';
+import {useAuth} from '../hooks/use_auth';
 
-import { Paper, Stack, Button, Typography } from "@mui/material";
-import ModifyUserInfo from "../components/user/modify_user_info";
-import SideBarNavView from "../views/side_bar_view";
-import ScrollToSidebar from "../components/scroll_to_sidebar";
-import MemberHeader from "../components/member_header";
-import AccountLinkComponent from "../components/transactions/account_link_component";
-import CreateTransactionComponent from "../components/transactions/create_transaction_component";
-import AccountListComponent from "../components/transactions/account_management_component";
-import { useDispatch, useSelector } from "react-redux";
-import { selectWalletBalance } from "../slices/wallet_slice";
-import { fetchWalletBalance } from "../slices/wallet_slice";
-import { useCloudFunctions } from "../hooks/use_cloud_functions";
-import RecentTransfers from "../components/transactions/recent_transfers";
-import AllTransfersDataGrid from "../components/all_transfers_data_grid";
-import DefaultComponent from "../components/default_component";
-import SideBar from "../components/sidebar_component";
+import {Paper, Stack, Button, Typography} from '@mui/material';
+import SideBarNavView from '../views/side_bar_view';
+
+import AccountListComponent from '../components/transfers/account_list_component';
+import CreateTransferComponent from '../components/transfers/create_transfer_component';
+
+import {useDispatch, useSelector} from 'react-redux';
+import {selectWalletBalance} from '../slices/wallet_slice';
+import {fetchWalletBalance} from '../slices/wallet_slice';
+import {useCloudFunctions} from '../hooks/use_cloud_functions';
+import RecentTransfers from '../components/transfers/recent_transfers';
+import DefaultComponent from '../components/utils/default_component';
+import SideBar from '../components/utils/sidebar_component';
 
 const TransferPage = () => {
     const auth = useAuth();
@@ -27,11 +24,11 @@ const TransferPage = () => {
     const balanceStatus = useSelector((state) => state.wallet.balance.status);
     const walletBalance = useSelector(selectWalletBalance);
 
-    const balance = walletBalance ? walletBalance : "0.00";
+    const balance = walletBalance ? walletBalance : '0.00';
 
     useEffect(() => {
-        if (balanceStatus === "idle") {
-            console.log("dispatch wallet: line 36, transfer page");
+        if (balanceStatus === 'idle') {
+            console.log('dispatch wallet: line 36, transfer page');
             dispatch(fetchWalletBalance(cloudFunctions));
         }
     }, [balanceStatus, dispatch]);
@@ -39,16 +36,16 @@ const TransferPage = () => {
     const contentRefs = useRef([]);
 
     const drawerTitles = [
-        "Transfer Cash",
-        "Connected Bank Accounts",
-        "Recent Transactions",
+        'Transfer Cash',
+        'Connected Bank Accounts',
+        'Recent Transactions',
     ];
 
     return (
         <SideBarNavView
             drawer={
                 <SideBar>
-                    <CreateTransactionComponent></CreateTransactionComponent>
+                    <CreateTransferComponent></CreateTransferComponent>
                 </SideBar>
             }
             mainContent={

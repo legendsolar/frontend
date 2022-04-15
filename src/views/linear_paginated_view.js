@@ -1,24 +1,24 @@
-import { Typography, List, ListItemButton } from "@mui/material";
-import PropTypes from "prop-types";
-import SideBarView from "./side_bar_view";
-import SideBar from "../components/sidebar_component";
-import { useReducer } from "react";
-import DefaultComponent from "../components/default_component";
-import PageinatedComponent from "../components/paginated_component";
+import {Typography, List, ListItemButton} from '@mui/material';
+import PropTypes from 'prop-types';
+import SideBarView from './side_bar_view';
+import SideBar from '../components/utils/sidebar_component';
+import {useReducer} from 'react';
+import DefaultComponent from '../components/utils/default_component';
+import PageinatedComponent from '../components/utils/paginated_component';
 
-const LinearPageinatedView = ({ pageContent, header, pageIndex }) => {
+const LinearPageinatedView = ({pageContent, header, pageIndex}) => {
     const initState = {
         pageIndex: pageIndex,
     };
 
     const reducer = (state, action) => {
         switch (action.type) {
-            case "CHANGE_PAGE":
+            case 'CHANGE_PAGE':
                 return {
                     ...state,
                     pageIndex: action.pageIndex,
                 };
-            case "BACK_PAGE":
+            case 'BACK_PAGE':
                 // Todo this logic breaks my functional paradigm
                 var newIndex = state.pageIndex <= 0 ? 0 : state.pageIndex - 1;
 
@@ -43,18 +43,18 @@ const LinearPageinatedView = ({ pageContent, header, pageIndex }) => {
         if (content.sidebar !== false) {
             return (
                 <ListItemButton
-                    sx={{ ml: -4, mr: -4, height: "88px" }}
+                    sx={{ml: -4, mr: -4, height: '88px'}}
                     key={index}
                     selected={index == state.pageIndex}
                     onClick={() => {
                         dispatch({
-                            type: "CHANGE_PAGE",
+                            type: 'CHANGE_PAGE',
                             pageIndex: index,
                         });
                     }}
                     disabled={content.disabled}
                 >
-                    <Typography variant="subtitle1" sx={{ ml: 1 }}>
+                    <Typography variant="subtitle1" sx={{ml: 1}}>
                         {content.title}
                     </Typography>
                 </ListItemButton>
@@ -69,7 +69,7 @@ const LinearPageinatedView = ({ pageContent, header, pageIndex }) => {
             title={content.title}
             onBack={() => {
                 dispatch({
-                    type: "BACK_PAGE",
+                    type: 'BACK_PAGE',
                 });
             }}
             backDisabled={index <= 0 || pageContent[index - 1].disabled}

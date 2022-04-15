@@ -1,15 +1,16 @@
-import MetricGauge from "./metric_gauge";
-import React from "react";
-import { ref } from "firebase/database";
-import { differenceInMinutes } from "date-fns";
-import { useDatabase } from "reactfire";
-import { useDatabaseObjectData } from "reactfire";
-import PropTypes from "prop-types";
-import LoadingComponent from "../loading_component";
+import MetricGauge from './metric_gauge';
+import React from 'react';
+import {ref} from 'firebase/database';
+import {differenceInMinutes} from 'date-fns';
+import {useDatabase} from 'reactfire';
+import {useDatabaseObjectData} from 'reactfire';
+import PropTypes from 'prop-types';
 
-const ErrorGauge = ({ unitOpts }) => {
+import LoadingComponent from '../utils/loading_component';
+
+const ErrorGauge = ({unitOpts}) => {
     unitOpts.liveMessage = `Could not load data`;
-    unitOpts.strokeColor = "#636E72";
+    unitOpts.strokeColor = '#636E72';
 
     return (
         <MetricGauge
@@ -33,30 +34,30 @@ ErrorGauge.propTypes = {
 
 ErrorGauge.defaultProps = {
     unitOpts: {
-        title: "Error",
-        unit: "-",
-        unitDescription: "-",
-        strokeColor: "#636E72",
+        title: 'Error',
+        unit: '-',
+        unitDescription: '-',
+        strokeColor: '#636E72',
     },
 };
 
-const LiveMetricGauge = ({ assetId, unitConversionFactor_kW, unitOpts }) => {
+const LiveMetricGauge = ({assetId, unitConversionFactor_kW, unitOpts}) => {
     const database = useDatabase();
 
-    const { metaDataStatus, data: metaData } = useDatabaseObjectData(
-        ref(database, "assets/" + assetId)
+    const {metaDataStatus, data: metaData} = useDatabaseObjectData(
+        ref(database, 'assets/' + assetId),
     );
 
-    const { productionSummaryState, data: productionSummary } =
+    const {productionSummaryState, data: productionSummary} =
         useDatabaseObjectData(
-            ref(database, "production/" + assetId + "/summary")
+            ref(database, 'production/' + assetId + '/summary'),
         );
 
-    if (metaDataStatus === "loading" || productionSummaryState === "loading") {
+    if (metaDataStatus === 'loading' || productionSummaryState === 'loading') {
         return <LoadingComponent></LoadingComponent>;
     } else if (
-        metaDataStatus === "error" ||
-        productionSummaryState === "error"
+        metaDataStatus === 'error' ||
+        productionSummaryState === 'error'
     ) {
         return <ErrorGauge unitOpts={unitOpts}></ErrorGauge>;
     }
@@ -71,7 +72,7 @@ const LiveMetricGauge = ({ assetId, unitConversionFactor_kW, unitOpts }) => {
 
     const lastUpdateMinAgo = differenceInMinutes(
         new Date(),
-        new Date(productionSummary.recent.time)
+        new Date(productionSummary.recent.time),
     );
 
     const max =
@@ -103,13 +104,13 @@ LiveMetricGauge.defaultProps = {
     errorExt: false,
 };
 
-const CarbonGauge = ({ assetId }) => {
+const CarbonGauge = ({assetId}) => {
     const factor = 0.1;
     const unitOpts = {
-        unit: "LBS",
-        unitDescription: "Pounds per hour",
-        title: "Carbon Aversion",
-        strokeColor: "#477FB2",
+        unit: 'LBS',
+        unitDescription: 'Pounds per hour',
+        title: 'Carbon Aversion',
+        strokeColor: '#477FB2',
     };
 
     return (
@@ -125,13 +126,13 @@ CarbonGauge.propTypes = {
     assetId: PropTypes.string.isRequired,
 };
 
-const GenerationGauge = ({ assetId }) => {
+const GenerationGauge = ({assetId}) => {
     const factor = 0.1;
     const unitOpts = {
-        unit: "KW",
-        unitDescription: "KILOWATTS",
-        title: "Generation",
-        strokeColor: "#EAB31E",
+        unit: 'KW',
+        unitDescription: 'KILOWATTS',
+        title: 'Generation',
+        strokeColor: '#EAB31E',
     };
 
     return (
@@ -147,13 +148,13 @@ GenerationGauge.propTypes = {
     assetId: PropTypes.string.isRequired,
 };
 
-const EarningsGauge = ({ assetId }) => {
+const EarningsGauge = ({assetId}) => {
     const factor = 0.1;
     const unitOpts = {
-        unit: "USD",
-        unitDescription: "Dollars per hour",
-        title: "Earnings",
-        strokeColor: "#30A462",
+        unit: 'USD',
+        unitDescription: 'Dollars per hour',
+        title: 'Earnings',
+        strokeColor: '#30A462',
     };
 
     return (

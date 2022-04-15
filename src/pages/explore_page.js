@@ -1,26 +1,26 @@
-import { useRef } from "react";
-import { Typography, Paper, Box, Stack, Button, Grid } from "@mui/material";
-import SideBarNavView from "../views/side_bar_view";
-import OfferingComponent from "../components/offering";
-import MetricList from "../components/summary/metric_list";
-import ScrollToSidebar from "../components/scroll_to_sidebar";
-import DefaultComponent from "../components/default_component";
-import { InvestmentAccountSubtype } from "plaid";
-import { useTheme } from "@mui/material";
-import PanelsSvg from "../components/icons/panels_svg";
-import { useNavigate } from "react-router-dom";
+import {useRef} from 'react';
+import {Typography, Paper, Box, Stack, Button, Grid} from '@mui/material';
+import SideBarNavView from '../views/side_bar_view';
+import OfferingComponent from '../components/invest/offering';
+import MetricList from '../components/summary/metric_list';
+import ScrollToSidebar from '../components/utils/scroll_to_sidebar';
+import DefaultComponent from '../components/utils/default_component';
+import {InvestmentAccountSubtype} from 'plaid';
+import {useTheme} from '@mui/material';
+import PanelsSvg from '../components/icons/panels_svg';
+import {useNavigate} from 'react-router-dom';
 
-import investmentOpportunities from "../utils/asset_data";
+import investmentOpportunities from '../utils/asset_data';
 
 const ExplorePage = () => {
     const theme = useTheme();
     const navigate = useNavigate();
     const contentRefs = useRef([]);
     const drawerTitles = [
-        "Santa Rosa Solar",
-        "Glassboro Solar",
-        "Lake Elsinore Solar",
-        "Lindenwold Solar",
+        'Santa Rosa Solar',
+        'Glassboro Solar',
+        'Lake Elsinore Solar',
+        'Lindenwold Solar',
     ];
 
     return (
@@ -48,7 +48,7 @@ const ExplorePage = () => {
                                     <Stack
                                         direction="row"
                                         alignItems="center"
-                                        justifyContent={"space-between"}
+                                        justifyContent={'space-between'}
                                     >
                                         <Typography variant="headline2">
                                             {investment.title}
@@ -61,10 +61,10 @@ const ExplorePage = () => {
                                         <Grid item xs={12} lg={6}>
                                             <Box
                                                 sx={{
-                                                    height: "100%",
+                                                    height: '100%',
                                                 }}
                                                 display="flex"
-                                                justifyContent={"center"}
+                                                justifyContent={'center'}
                                                 alignItems="center"
                                             >
                                                 <PanelsSvg
@@ -81,14 +81,14 @@ const ExplorePage = () => {
                                             item
                                             xs={12}
                                             lg={6}
-                                            sx={{ height: "100%" }}
+                                            sx={{height: '100%'}}
                                         >
                                             <Box
                                                 sx={{
-                                                    height: "240px",
-                                                    borderRadius: "15px",
+                                                    height: '240px',
+                                                    borderRadius: '15px',
                                                     backgroundColor:
-                                                        "whiteHaze.main",
+                                                        'whiteHaze.main',
                                                     mr: {
                                                         xs: 0,
                                                         lg: 4,
@@ -100,25 +100,25 @@ const ExplorePage = () => {
                                                     p: 4,
                                                 }}
                                                 display="flex"
-                                                justifyContent={"center"}
+                                                justifyContent={'center'}
                                                 alignItems="center"
                                             >
                                                 <Stack
                                                     justifyContent={
-                                                        "space-between"
+                                                        'space-between'
                                                     }
-                                                    sx={{ height: "100%" }}
+                                                    sx={{height: '100%'}}
                                                     spacing={4}
                                                 >
                                                     <Typography variant="smallHeadline">
                                                         Specifications
                                                     </Typography>
                                                     {investment.specifications.map(
-                                                        ({ metric, value }) => (
+                                                        ({metric, value}) => (
                                                             <Stack
                                                                 direction="row"
                                                                 justifyContent={
-                                                                    "space-between"
+                                                                    'space-between'
                                                                 }
                                                                 alignItems="center"
                                                                 key={
@@ -133,7 +133,7 @@ const ExplorePage = () => {
                                                                     {value}
                                                                 </Typography>
                                                             </Stack>
-                                                        )
+                                                        ),
                                                     )}
                                                 </Stack>
                                             </Box>
@@ -143,14 +143,14 @@ const ExplorePage = () => {
                                     <Button
                                         variant="primary"
                                         onClick={() => {
-                                            navigate("/invest/" + key);
+                                            navigate('/invest/' + key);
                                         }}
                                     >
                                         Executive summary
                                     </Button>
                                 </Stack>
                             </DefaultComponent>
-                        )
+                        ),
                     )}
                 </Stack>
             }

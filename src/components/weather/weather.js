@@ -1,18 +1,18 @@
-import { Box, Paper, Typography, Stack } from "@mui/material";
-import { Player } from "@lottiefiles/react-lottie-player";
-import PropTypes from "prop-types";
-import CloudyLottieJson from "../../assets/weather_icons/cloudy/data.json";
-import SunnyLottieJson from "../../assets/weather_icons/sunny/data.json";
-import RainLottieJson from "../../assets/weather_icons/rain/data.json";
-import RainShowerLottieJson from "../../assets/weather_icons/rain_shower/data.json";
-import SnowLottieJson from "../../assets/weather_icons/snowfall/data.json";
-import StarryNightJson from "../../assets/weather_icons/starry_night/data.json";
-import FogJson from "../../assets/weather_icons/foggy/data.json";
-import DefaultComponent from "../default_component";
+import {Box, Paper, Typography, Stack} from '@mui/material';
+import {Player} from '@lottiefiles/react-lottie-player';
+import PropTypes from 'prop-types';
+import CloudyLottieJson from '../../assets/weather_icons/cloudy/data.json';
+import SunnyLottieJson from '../../assets/weather_icons/sunny/data.json';
+import RainLottieJson from '../../assets/weather_icons/rain/data.json';
+import RainShowerLottieJson from '../../assets/weather_icons/rain_shower/data.json';
+import SnowLottieJson from '../../assets/weather_icons/snowfall/data.json';
+import StarryNightJson from '../../assets/weather_icons/starry_night/data.json';
+import FogJson from '../../assets/weather_icons/foggy/data.json';
+import DefaultComponent from '../utils/default_component';
 
 const codeConverter = (code) => {
     const regex = {
-        thunderstorm: { test: code < 233, data: RainLottieJson },
+        thunderstorm: {test: code < 233, data: RainLottieJson},
         rain: {
             test: code < 532,
             data: RainShowerLottieJson,
@@ -44,7 +44,7 @@ const codeConverter = (code) => {
     return StarryNightJson;
 };
 
-const Weather = ({ temp, state, code }) => {
+const Weather = ({temp, state, code}) => {
     const lottieJson = codeConverter(code);
 
     return (
@@ -59,13 +59,13 @@ const Weather = ({ temp, state, code }) => {
                 loop
                 speed={0.45}
                 src={lottieJson}
-                style={{ height: "200px", width: "200px" }}
+                style={{height: '200px', width: '200px'}}
             ></Player>
 
             <Typography
                 variant="body1"
                 align="right"
-                style={{ textTransform: "capitalize" }}
+                style={{textTransform: 'capitalize'}}
             >
                 {state}
             </Typography>

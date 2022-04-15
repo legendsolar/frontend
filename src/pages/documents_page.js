@@ -1,19 +1,16 @@
-import { useRef } from "react";
-import { Paper, Typography, Stack } from "@mui/material";
-import ConstructionIcon from "@mui/icons-material/Construction";
-import DefaultView from "../views/default_view";
-import SideBarView from "../views/side_bar_view";
-import ScrollToSidebar from "../components/scroll_to_sidebar";
-import DefaultComponent from "../components/default_component";
-import DocumentComponent from "../components/document_component";
+import {useRef} from 'react';
+import {Paper, Typography, Stack} from '@mui/material';
+import SideBarView from '../views/side_bar_view';
+import ScrollToSidebar from '../components/utils/scroll_to_sidebar';
+import DefaultComponent from '../components/utils/default_component';
 
 const DocumentPage = () => {
     const contentRefs = useRef([]);
 
     const drawerTitles = [
-        "Financial Documents",
-        "Tax Documents",
-        "Purchase Agreements",
+        'Financial Documents',
+        'Tax Documents',
+        'Purchase Agreements',
     ];
 
     return (
@@ -40,13 +37,13 @@ const DocumentPage = () => {
                         <DocumentComponent
                             documents={[
                                 {
-                                    title: "All Transactions",
+                                    title: 'All Transactions',
                                 },
                                 {
-                                    title: "Purchase Agreement",
+                                    title: 'Purchase Agreement',
                                 },
                                 {
-                                    title: "Billing Agreement",
+                                    title: 'Billing Agreement',
                                 },
                             ]}
                         ></DocumentComponent>
@@ -61,13 +58,13 @@ const DocumentPage = () => {
                         <DocumentComponent
                             documents={[
                                 {
-                                    title: "All Transactions",
+                                    title: 'All Transactions',
                                 },
                                 {
-                                    title: "Purchase Agreement",
+                                    title: 'Purchase Agreement',
                                 },
                                 {
-                                    title: "Billing Agreement",
+                                    title: 'Billing Agreement',
                                 },
                             ]}
                         ></DocumentComponent>
@@ -82,13 +79,13 @@ const DocumentPage = () => {
                         <DocumentComponent
                             documents={[
                                 {
-                                    title: "All Transactions",
+                                    title: 'All Transactions',
                                 },
                                 {
-                                    title: "Purchase Agreement",
+                                    title: 'Purchase Agreement',
                                 },
                                 {
-                                    title: "Billing Agreement",
+                                    title: 'Billing Agreement',
                                 },
                             ]}
                         ></DocumentComponent>

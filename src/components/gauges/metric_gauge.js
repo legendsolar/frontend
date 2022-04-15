@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import { Typography , useTheme } from "@mui/material";
-import styles from "./metric_gauge.module.css";
-import LivePill from "../pills/live_pill";
-import { useChartDimensions } from "../../hooks/use_chart_dimensions";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import {Typography, useTheme} from '@mui/material';
+import styles from './metric_gauge.module.css';
+import LivePill from '../pills/live_pill';
+import {useChartDimensions} from '../../hooks/use_chart_dimensions';
 
-const tinycolor = require("tinycolor2");
+const tinycolor = require('tinycolor2');
 
 function MetricGauge({
     min,
@@ -32,7 +32,9 @@ function MetricGauge({
         marginBottom: 0,
     });
 
-    const normalizedCurrentValue = error ? 0.5 : (currentValue-min) / (max - min);
+    const normalizedCurrentValue = error
+        ? 0.5
+        : (currentValue - min) / (max - min);
 
     const currentAngle = error
         ? 270
@@ -41,16 +43,14 @@ function MetricGauge({
     const strokeCurrentLength =
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
 
-    
-
     return (
-        <Box sx={{ minWidth: "300px" }}>
-            <Stack alignItems={"center"}>
+        <Box sx={{minWidth: '300px'}}>
+            <Stack alignItems={'center'}>
                 <Stack
                     direction="row"
-                    justifyContent={"space-between"}
-                    alignItems={"center"}
-                    sx={{ width: "100%", mb: 3 }}
+                    justifyContent={'space-between'}
+                    alignItems={'center'}
+                    sx={{width: '100%', mb: 3}}
                 >
                     <Typography variant="smallHeadline">
                         {unitOpts.title}
@@ -60,8 +60,8 @@ function MetricGauge({
                 <div
                     className={styles.gauge}
                     style={{
-                        maxWidth: "400px",
-                        width: "100%",
+                        maxWidth: '400px',
+                        width: '100%',
                         height: 184,
                     }}
                     ref={ref}
@@ -79,7 +79,9 @@ function MetricGauge({
                                     r={circleRadius}
                                 />
                                 <circle
-                                    stroke={theme.palette[unitOpts.strokeColor].main}
+                                    stroke={
+                                        theme.palette[unitOpts.strokeColor].main
+                                    }
                                     r={circleRadius}
                                     stroke-dasharray={`${strokeCurrentLength} ${strokeTotalLength}`}
                                 />
@@ -95,8 +97,8 @@ function MetricGauge({
                         </g>
                     </svg>
                     <div className={styles.center}>
-                        <Typography variant="headline1" sx={{ mt: "auto" }}>
-                            {error ? "--" : currentValue.toFixed(1)}
+                        <Typography variant="headline1" sx={{mt: 'auto'}}>
+                            {error ? '--' : currentValue.toFixed(1)}
                         </Typography>
                     </div>
                 </div>
@@ -105,14 +107,14 @@ function MetricGauge({
                     justifyContent="space-between"
                     sx={{
                         mt: 1,
-                        width: "100%",
-                        maxWidth: "400px",
+                        width: '100%',
+                        maxWidth: '400px',
                     }}
                 >
                     <Typography variant="label">
                         {error
-                            ? `${unitOpts.unit  }-`
-                            : `${min  } ${  unitOpts.unit}`}
+                            ? `${unitOpts.unit}-`
+                            : `${min} ${unitOpts.unit}`}
                     </Typography>
 
                     <Typography variant="body1">
@@ -121,8 +123,8 @@ function MetricGauge({
 
                     <Typography variant="label">
                         {error
-                            ? `${unitOpts.unit  }-`
-                            : `${max  } ${  unitOpts.unit}`}
+                            ? `${unitOpts.unit}-`
+                            : `${max} ${unitOpts.unit}`}
                     </Typography>
                 </Stack>
 
@@ -131,10 +133,10 @@ function MetricGauge({
                     justifyContent="end"
                     sx={{
                         mt: 3,
-                        width: "100%",
+                        width: '100%',
                     }}
                 >
-                    <Typography variant="label" sx={{ ml: "auto" }}>
+                    <Typography variant="label" sx={{ml: 'auto'}}>
                         {unitOpts.liveMessage}
                     </Typography>
                 </Stack>

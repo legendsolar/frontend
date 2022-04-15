@@ -1,33 +1,26 @@
-import { useEffect } from "react";
-import { Typography, Stack, Button } from "@mui/material";
-import { useAuth } from "../hooks/use_auth";
-import { useNavigate } from "react-router-dom";
-import AccreditationStatus from "../components/accreditation_status";
-import CreateDwollaAccount from "../components/identity/create_dwolla_account";
-import AccountLinkComponent from "../components/transactions/account_link_component";
-import { useDatabaseObjectData, useDatabase } from "reactfire";
-import LoadingView from "../views/loading_view";
-import IdentityVerificationKBA from "../components/identity/identity_verification_kba";
-import DefaultComponent from "../components/default_component";
-import { useSelector, useDispatch } from "react-redux";
+import {useEffect} from 'react';
+import {Typography, Stack, Button} from '@mui/material';
+import {useAuth} from '../hooks/use_auth';
+import {useNavigate} from 'react-router-dom';
+import AccreditationStatus from '../components/signup/accreditation_status';
+import CreateDwollaAccount from '../components/signup/create_dwolla_account';
+import LoadingView from '../views/loading_view';
+import {useSelector, useDispatch} from 'react-redux';
 import {
     fetchUserSignUpState,
     selectUserSignUpState,
-} from "../slices/user_slice";
-import IdentityVerificationDocument from "../components/identity/identity_verification_document";
-import DefaultView from "../views/default_view";
-import { useCloudFunctions } from "../hooks/use_cloud_functions";
-import { useParams } from "react-router-dom";
-import scrollToEl from "../utils/scroll_to_el";
-
-import LinearPageinatedView from "../views/linear_paginated_view";
-import { signUpOrder, userSignUpOrder } from "../utils/user_sign_up_state";
-import SignUpComponent from "../components/user/sign_up_component";
-import PolicyAcceptanceComponent from "../components/policy_acceptance_component";
-import scrollToPosition from "../utils/scroll_to_position";
+} from '../slices/user_slice';
+import IdentityVerificationKBA from '../components/signup/identity_verification_kba';
+import {useCloudFunctions} from '../hooks/use_cloud_functions';
+import {useParams} from 'react-router-dom';
+import LinearPageinatedView from '../views/linear_paginated_view';
+import {signUpOrder, userSignUpOrder} from '../utils/user_sign_up_state';
+import SignUpComponent from '../components/user/sign_up_component';
+import PolicyAcceptanceComponent from '../components/signup/policy_acceptance_component';
+import scrollToPosition from '../utils/scroll_to_position';
 
 const CompleteAccountPage = () => {
-    const { step } = useParams();
+    const {step} = useParams();
     console.log(step);
 
     const dispatch = useDispatch();
@@ -37,20 +30,20 @@ const CompleteAccountPage = () => {
     const user = auth.user;
 
     const userSignUpStateStatus = useSelector(
-        (state) => state.user.signUpState.status
+        (state) => state.user.signUpState.status,
     );
 
     const userSignUpState = useSelector(selectUserSignUpState);
 
-    console.log("user state: " + userSignUpState);
+    console.log('user state: ' + userSignUpState);
 
     const requestUpdateState = () => {
         if (
-            userSignUpStateStatus === "idle" ||
-            userSignUpStateStatus === "succeeded" ||
-            userSignUpStateStatus === "rejected"
+            userSignUpStateStatus === 'idle' ||
+            userSignUpStateStatus === 'succeeded' ||
+            userSignUpStateStatus === 'rejected'
         ) {
-            console.log("dispatch user state: line 56, complete account page");
+            console.log('dispatch user state: line 56, complete account page');
             dispatch(fetchUserSignUpState(cloudFunctions));
         }
     };
@@ -59,7 +52,7 @@ const CompleteAccountPage = () => {
         if (
             auth.user &&
             !auth.isAuthenticating &&
-            userSignUpStateStatus === "idle"
+            userSignUpStateStatus === 'idle'
         ) {
             requestUpdateState();
 
@@ -71,7 +64,7 @@ const CompleteAccountPage = () => {
         requestUpdateState();
     };
 
-    if (userSignUpStateStatus === "loading") {
+    if (userSignUpStateStatus === 'loading') {
         return <LoadingView></LoadingView>;
     }
 
@@ -92,16 +85,16 @@ const CompleteAccountPage = () => {
     window.history.replaceState(
         null,
         null,
-        "/complete-account/" + userSignUpState
+        '/complete-account/' + userSignUpState,
     );
 
     const pageIndex = userStatePageIndexMap[userSignUpState];
 
-    console.log("page index", pageIndex);
+    console.log('page index', pageIndex);
 
     const pageContent = [
         {
-            title: "Create Account",
+            title: 'Create Account',
             content: (
                 <SignUpComponent onComplete={onComplete}></SignUpComponent>
             ),
@@ -110,7 +103,7 @@ const CompleteAccountPage = () => {
         },
 
         {
-            title: "Terms and Privacy",
+            title: 'Terms and Privacy',
             content: (
                 <PolicyAcceptanceComponent
                     onComplete={onComplete}
@@ -122,7 +115,7 @@ const CompleteAccountPage = () => {
         },
 
         {
-            title: "Accreditation",
+            title: 'Accreditation',
             content: (
                 <Stack spacing={4}>
                     <Typography variant="subtitle1">
@@ -131,7 +124,7 @@ const CompleteAccountPage = () => {
                         in order to participate in Legends Solar offerings.
                     </Typography>
 
-                    <Typography variant="subtitle2" sx={{ mt: 7 }}>
+                    <Typography variant="subtitle2" sx={{mt: 7}}>
                         Check all that apply
                     </Typography>
 
@@ -145,7 +138,7 @@ const CompleteAccountPage = () => {
                 signUpOrder.ACCEPTANCE_COMPLETE,
         },
         {
-            title: "Create Wallet",
+            title: 'Create Wallet',
             content: (
                 <CreateDwollaAccount
                     onComplete={onComplete}
@@ -156,27 +149,27 @@ const CompleteAccountPage = () => {
                 signUpOrder.ACCREDATION_VERIF_COMPLETE,
         },
         {
-            title: "KBA Validation",
+            title: 'KBA Validation',
             content: (
                 <IdentityVerificationKBA
                     onComplete={onComplete}
                 ></IdentityVerificationKBA>
             ),
-            disabled: userSignUpState !== "DWOLLA_ACCOUNT_KBA_REQ",
+            disabled: userSignUpState !== 'DWOLLA_ACCOUNT_KBA_REQ',
             sidebar: false,
         },
         {
-            title: "Document Validation",
+            title: 'Document Validation',
             content: (
                 <IdentityVerificationDocument
                     onComplete={onComplete}
                 ></IdentityVerificationDocument>
             ),
-            disabled: userSignUpState !== "DWOLLA_ACCOUNT_DOCUMENT_REQ",
+            disabled: userSignUpState !== 'DWOLLA_ACCOUNT_DOCUMENT_REQ',
             sidebar: false,
         },
         {
-            title: "Complete Sign Up",
+            title: 'Complete Sign Up',
             content: (
                 <Stack spacing={6}>
                     <Typography variant="headline1">
@@ -190,9 +183,9 @@ const CompleteAccountPage = () => {
 
                     <Button
                         variant="primary"
-                        disabled={userSignUpState !== "DWOLLA_ACCOUNT_VERIFIED"}
+                        disabled={userSignUpState !== 'DWOLLA_ACCOUNT_VERIFIED'}
                         onClick={() => {
-                            navigate("/explore");
+                            navigate('/explore');
                         }}
                     >
                         Continue
@@ -206,7 +199,7 @@ const CompleteAccountPage = () => {
         },
 
         {
-            title: "Not Accredited",
+            title: 'Not Accredited',
             content: (
                 <Stack spacing={6}>
                     <Typography variant="headline2">
@@ -226,7 +219,7 @@ const CompleteAccountPage = () => {
                     </Button>
                 </Stack>
             ),
-            disabled: userSignUpState !== "NOT_ACCREDITED",
+            disabled: userSignUpState !== 'NOT_ACCREDITED',
             sidebar: false,
         },
     ];

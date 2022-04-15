@@ -1,25 +1,13 @@
-import { useRef } from "react";
-import { useAuth } from "../hooks/use_auth";
+import {useRef} from 'react';
+import {useAuth} from '../hooks/use_auth';
 
-import {
-    Paper,
-    Stack,
-    Button,
-    Typography,
-    ListItemButton,
-} from "@mui/material";
-import Divider from "../components/basics/divider";
-import ModifyUserInfo from "../components/user/modify_user_info";
-import SideBarNavView from "../views/side_bar_view";
-import ScrollToSidebar from "../components/scroll_to_sidebar";
-import MemberHeader from "../components/member_header";
-import AccountLinkComponent from "../components/transactions/account_link_component";
-import DefaultComponent from "../components/default_component";
-import AccreditationStatus from "../components/accreditation_status";
-import AccountManagementComponent from "../components/transactions/account_management_component";
-import UpdateUserInfo from "../components/identity/update_user_info";
-import ProtectedUserInfo from "../components/user/protected_user_info";
-import RecentTransfers from "../components/transactions/recent_transfers";
+import {Paper, Stack, Button, Typography, ListItemButton} from '@mui/material';
+import Divider from '../components/basics/divider';
+import SideBarNavView from '../views/side_bar_view';
+
+import DefaultComponent from '../components/utils/default_component';
+import UpdateUserInfo from '../components/user/update_user_info';
+import AccountManagementComponent from '../components/transfers/account_management_component';
 
 const AccountPage = () => {
     const auth = useAuth();
@@ -28,9 +16,9 @@ const AccountPage = () => {
     const contentRefs = useRef([]);
 
     const drawerTitles = [
-        "Personal Information",
-        "Connected Accounts",
-        "Investment History",
+        'Personal Information',
+        'Connected Accounts',
+        'Investment History',
     ];
 
     return (
@@ -42,15 +30,15 @@ const AccountPage = () => {
                     refs={contentRefs}
                     additionalButtons={
                         <ListItemButton
-                            sx={{ ml: -4, mr: -4, height: "88px" }}
-                            key={"logout"}
+                            sx={{ml: -4, mr: -4, height: '88px'}}
+                            key={'logout'}
                             onClick={() => {
                                 auth.signout();
                             }}
                         >
                             <Typography
                                 variant="subtitle1"
-                                sx={{ fontWeight: "800" }}
+                                sx={{fontWeight: '800'}}
                             >
                                 Log Out
                             </Typography>
