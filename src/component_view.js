@@ -1,48 +1,91 @@
 import {ErrorBoundary} from '@sentry/react';
 import React, {useState, useEffect, lazy} from 'react';
+import nanoid from 'nanoid';
+import {select} from 'd3';
 
-const components = [
+const basePaths = [
     {
-        path: './components/basics/test',
-        name: 'BasicTest',
+        // path: './components/basics',
+        name: 'basics',
+        tests: [
+            {
+                name: 'test_content_divider',
+            },
+            {
+                name: 'test_divider',
+            },
+        ],
     },
     {
-        path: './tests/transaction_test',
-        name: 'TransferComponent',
+        // path: './components/basics',
+        name: 'buttons',
+        tests: [
+            {
+                name: 'test_google_icon_button',
+            },
+        ],
     },
-    {
-        path: './tests/metric_gauge_test',
-        name: 'MetricGauge',
-    },
-    {
-        path: './tests/account_list_test',
-        name: 'AccountList',
-    },
-    {
-        path: './tests/test_create_transaction',
-        name: 'CreateTransaction',
-    },
-    {
-        path: './tests/test_multiselect',
-        name: 'Multiselect',
-    },
-    {
-        path: './tests/test_sign_up_option',
-        name: 'SignUpOption',
-    },
-    {
-        path: './tests/test_sign_up',
-        name: 'SignUp',
-    },
-    {
-        path: './tests/test_checkbox_list',
-        name: 'CheckboxList',
-    },
+    // {
+    //     path: './components/buttons',
+    //     name: 'buttons',
+    // },
+    // {
+    //     path: './components/buttons',
+    //     name: 'buttons',
+    // },
+    // {
+    //     path: './components/errors',
+    //     name: 'errors',
+    // },
+    // {
+    //     path: './components/gauges',
+    //     name: 'gauges',
+    // },
+    // {
+    //     path: './components/icons',
+    //     name: 'icons',
+    // },
+    // {
+    //     path: './components/invest',
+    //     name: 'invest',
+    // },
+    // {
+    //     path: './components/pills',
+    //     name: 'plaid',
+    // },
+    // {
+    //     path: './components/signup',
+    //     name: 'signup',
+    // },
+    // {
+    //     path: './components/summary',
+    //     name: 'summary',
+    // },
+    // {
+    //     path: './components/transfers',
+    //     name: 'transfers',
+    // },
+    // {
+    //     path: './components/user',
+    //     name: 'user',
+    // },
+    // {
+    //     path: './components/utils',
+    //     name: 'utils',
+    // },
+    // {
+    //     path: './components/weather',
+    //     name: 'weather',
+    // },
+    // {
+    //     path: './components/worm',
+    //     name: 'worm',
+    // },
 ];
 
-const importView = (subreddit) =>
+const importComponent = (path) =>
     lazy(() =>
-        import(`${subreddit}`).catch((e) => {
+        import(`${path}`).catch((e) => {
             console.log(e);
             return import(`./views/error`);
         }),
@@ -50,37 +93,43 @@ const importView = (subreddit) =>
 
 const ComponentView = () => {
     const [views, setViews] = useState([]);
-    const [selectedComponent, setSelectedComponent] = useState(
-        components[0].name,
-    );
+    const [selectedComponent, setSelectedComponent] = useState(null);
 
-    useEffect(() => {
-        async function loadViews() {
-            const componentPromises = components
-                .filter((component) => component.name === selectedComponent)
-                .map(async (component, idx) => {
-                    const Component = await importView(component.path);
-                    return <Component key={component.name} />;
-                });
+    // useEffect(() => {
+    //     async function loadViews() {
+    //         const componentPromises = components
+    //             .filter((component) => component.name === selectedComponent)
+    //             .map(async (component, idx) => {
+    //                 const Component = await importComponent(component.path);
+    //                 return <Component key={nanoid()} />;
+    //             });
 
-            Promise.all(componentPromises).then(setViews);
-        }
+    //         Promise.all(componentPromises).then(setViews);
+    //     }
 
-        loadViews();
-    }, [components, selectedComponent]);
+    //     loadViews();
+    // }, [components, selectedComponent]);
 
-    const renderedComponents = components.map((component) => (
-        <option>{component.name}</option>
+    const renderedComponentOptionList = basePaths.map((base) => (
+        <div>
+            <p>{base.name}</p>
+            <select
+                name={base.name}
+                key={base.name}
+                value={selectedComponent}
+                onChange={(event) => setSelectedComponent(event.target.value)}
+                onSelect={(event) => setSelectedComponent(event.target.value)}
+            >
+                {base.tests &&
+                    base.tests.map((test) => <option>{test.name}</option>)}
+                <option>{null}</option>
+            </select>
+        </div>
     ));
 
     return (
         <div>
-            <select
-                value={selectedComponent}
-                onChange={(event) => setSelectedComponent(event.target.value)}
-            >
-                {renderedComponents}
-            </select>
+            {renderedComponentOptionList}
             <p>selected component: {selectedComponent}</p>
             <hr></hr>
             <React.Suspense fallback="Loading component... (components with images may take a few seconds)">

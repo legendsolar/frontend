@@ -15,6 +15,5 @@ module.exports = {
     rules: {
         'react/react-in-jsx-scope': 'off',
         'no-irregular-whitespace': 'off',
-        'absolute-imports/only-absolute-imports': ['error'],
     },
 };

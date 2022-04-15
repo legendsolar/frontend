@@ -1,0 +1,18 @@
+{
+  "Test Component": {
+    "prefix": "TestComp",
+    "body": [
+    "import ${1:name} from \"../${2:path}\"",
+    "",
+    "const Test${1:name} = () => {",
+    "  return (",
+    "   <${1:name}></${1:name}>",
+    "  )",
+    "};",
+    "",
+    "export default Test${1:name};",
+    ""
+    ],
+    "description": "Test Component"
+    }
+}
