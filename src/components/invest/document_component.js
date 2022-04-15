@@ -1,34 +1,11 @@
 import {Stack, List, ListItemButton, Typography} from '@mui/material/';
-import DownloadIcon from '@mui/icons-material/Download';
 import DocumentIcon from 'components/icons/document_icon';
 import {useStorage} from 'reactfire';
 import {ref, getDownloadURL} from 'firebase/storage';
 import {useTheme} from '@mui/material';
 
-const DocumentComponent = ({documents}) => {
+const DocumentComponent = ({documents, onDownloadAttempt}) => {
     const theme = useTheme();
-    const storage = useStorage();
-    const documentRef = ref(
-        storage,
-        'gs://legends-alpha.appspot.com/TestDoc.pdf',
-    );
-
-    const downloadDocument = () => {
-        getDownloadURL(documentRef).then((url) => {
-            // `url` is the download URL for 'images/stars.jpg'
-            console.log(url);
-
-            var link = document.createElement('a');
-            if (link.download !== undefined) {
-                link.setAttribute('href', url);
-                link.setAttribute('target', '_blank');
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        });
-    };
 
     const colorName = (documentObject) => {
         return 'color' in documentObject ? documentObject.color : 'skyBlue';
@@ -40,9 +17,7 @@ const DocumentComponent = ({documents}) => {
                 <ListItemButton
                     sx={{ml: -4, mr: -4, height: '62px'}}
                     key={index}
-                    onClick={() => {
-                        downloadDocument();
-                    }}
+                    onClick={() => onDownloadAttempt(documentItem)}
                 >
                     <Stack
                         sx={{

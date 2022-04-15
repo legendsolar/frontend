@@ -80,6 +80,22 @@ const basePaths = [
             },
         ],
     },
+
+    {
+        name: 'invest',
+        tests: [
+            {
+                name: 'test_document_component',
+            },
+            {
+                name: 'test_offering',
+            },
+            {
+                name: 'test_precommit_letter_component',
+            },
+        ],
+    },
+
     // {
     //     path: './components/errors',
     //     name: 'errors',
