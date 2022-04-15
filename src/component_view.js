@@ -1,6 +1,6 @@
 import {ErrorBoundary} from '@sentry/react';
 import React, {useState, useEffect, lazy} from 'react';
-import nanoid from 'nanoid';
+import {nanoid} from 'nanoid';
 import {select} from 'd3';
 
 const basePaths = [
@@ -95,20 +95,32 @@ const ComponentView = () => {
     const [views, setViews] = useState([]);
     const [selectedComponent, setSelectedComponent] = useState(null);
 
-    // useEffect(() => {
-    //     async function loadViews() {
-    //         const componentPromises = components
-    //             .filter((component) => component.name === selectedComponent)
-    //             .map(async (component, idx) => {
-    //                 const Component = await importComponent(component.path);
-    //                 return <Component key={nanoid()} />;
-    //             });
+    useEffect(() => {
+        async function loadViews() {
+            const componentPromises = basePaths
+                .filter((base) => base.name === selectedComponent.base)
+                .map(async (base, idx) => {
+                    const test = base.tests.filter(
+                        (test) => test.name === selectedComponent.name,
+                    )[0];
+                    if (test) {
+                        const path = `./components/${base.name}/tests/${test.name}`;
+                        console.log(path);
+                        console.log(test);
+                        console.log(selectedComponent);
 
-    //         Promise.all(componentPromises).then(setViews);
-    //     }
+                        const Component = await importComponent(path);
+                        return <Component key={nanoid()} />;
+                    }
 
-    //     loadViews();
-    // }, [components, selectedComponent]);
+                    return null;
+                });
+
+            Promise.all(componentPromises).then(setViews);
+        }
+
+        loadViews();
+    }, [basePaths, selectedComponent]);
 
     const renderedComponentOptionList = basePaths.map((base) => (
         <div>
