@@ -190,6 +190,7 @@ const ComponentView = () => {
     const [views, setViews] = useState([]);
     const [expanded, setExpanded] = useState(true);
     const [selectedComponent, setSelectedComponent] = useState(null);
+    const [selectedBase, setSelectedBase] = useState(basePaths[0]);
 
     useEffect(() => {
         async function loadViews() {
@@ -214,34 +215,55 @@ const ComponentView = () => {
         loadViews();
     }, [basePaths, selectedComponent]);
 
-    const renderedComponentOptionList = basePaths.map((base) => (
+    const baseSelection = (
         <div>
-            <p>{base.name}</p>
+            <p>type</p>
             <select
-                name={base.name}
+                name={'baseSelection'}
+                value={selectedBase.name}
+                onChange={(event) => {
+                    const newBase = basePaths.filter(
+                        (base) => base.name === event.target.value,
+                    )[0];
+                    setSelectedBase(newBase);
+                    setSelectedComponent({
+                        base: newBase.name,
+                        name: newBase.tests[0].name,
+                    });
+                }}
+            >
+                {basePaths.map((base) => (
+                    <option key={nanoid()} value={base.name}>
+                        {base.name}
+                    </option>
+                ))}
+            </select>
+        </div>
+    );
+
+    const testSelection = (
+        <div>
+            <div>test component</div>
+            <select
+                name={selectedBase.name}
                 key={nanoid()}
-                value={
-                    base.name === selectedComponent?.base
-                        ? selectedComponent?.name
-                        : ''
-                }
+                value={selectedComponent?.name ? selectedComponent.name : ''}
                 onChange={(event) =>
                     setSelectedComponent({
-                        base: base.name,
+                        base: selectedBase.name,
                         name: event.target.value,
                     })
                 }
             >
-                {base.tests &&
-                    base.tests.map((test) => (
+                {selectedBase.tests &&
+                    selectedBase.tests.map((test) => (
                         <option key={nanoid()} value={test.name}>
                             {test.name}
                         </option>
                     ))}
-                <option key={nanoid()}>{null}</option>
             </select>
         </div>
-    ));
+    );
 
     const expandedView = (
         <div key={nanoid()}>
@@ -249,7 +271,8 @@ const ComponentView = () => {
             <a href="https://github.com/legendsolar/frontend/blob/main/tools.md">
                 info
             </a>
-            {renderedComponentOptionList}
+            {baseSelection}
+            {testSelection}
             <p>
                 {selectedComponent
                     ? `selected component:${selectedComponent.base}/${selectedComponent.name}`
