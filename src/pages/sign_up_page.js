@@ -3,7 +3,7 @@ import {useAuth} from 'hooks/use_auth';
 import {useNavigate} from 'react-router-dom';
 import CenteredComponentView from 'views/centered_component_view';
 import {authErrorTranslator} from 'utils/auth_error_translator';
-import SignUpOptionComponent from 'components/user/sign_up_option_component';
+import SignUpOptionComponent from 'components/signup/sign_up_option_component';
 
 export default function SignUpView() {
     const authHook = useAuth();

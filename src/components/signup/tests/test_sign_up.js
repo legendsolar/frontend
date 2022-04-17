@@ -1,4 +1,4 @@
-import SignUpComponent from 'components/user/sign_up_component';
+import SignUpComponent from '../sign_up_component';
 
 const TestSignUp = () => {
     return (

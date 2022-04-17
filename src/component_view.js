@@ -128,54 +128,18 @@ const basePaths = [
             },
         ],
     },
-    // {
-    //     path: './components/errors',
-    //     name: 'errors',
-    // },
-    // {
-    //     path: './components/gauges',
-    //     name: 'gauges',
-    // },
-    // {
-    //     path: './components/icons',
-    //     name: 'icons',
-    // },
-    // {
-    //     path: './components/invest',
-    //     name: 'invest',
-    // },
-    // {
-    //     path: './components/pills',
-    //     name: 'plaid',
-    // },
-    // {
-    //     path: './components/signup',
-    //     name: 'signup',
-    // },
-    // {
-    //     path: './components/summary',
-    //     name: 'summary',
-    // },
-    // {
-    //     path: './components/transfers',
-    //     name: 'transfers',
-    // },
-    // {
-    //     path: './components/user',
-    //     name: 'user',
-    // },
-    // {
-    //     path: './components/utils',
-    //     name: 'utils',
-    // },
-    // {
-    //     path: './components/weather',
-    //     name: 'weather',
-    // },
-    // {
-    //     path: './components/worm',
-    //     name: 'worm',
-    // },
+
+    {
+        name: 'signup',
+        tests: [
+            {
+                name: 'test_sign_up_option',
+            },
+            {
+                name: 'test_sign_up',
+            },
+        ],
+    },
 ];
 
 const importComponent = (path) =>
@@ -216,8 +180,8 @@ const ComponentView = () => {
     }, [basePaths, selectedComponent]);
 
     const baseSelection = (
-        <div>
-            <p>type</p>
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+            <div>component type: </div>
             <select
                 name={'baseSelection'}
                 value={selectedBase.name}
@@ -242,8 +206,8 @@ const ComponentView = () => {
     );
 
     const testSelection = (
-        <div>
-            <div>test component</div>
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+            <div>test component: </div>
             <select
                 name={selectedBase.name}
                 key={nanoid()}

@@ -12,7 +12,7 @@ import {useCloudFunctions} from 'hooks/use_cloud_functions';
 import {useParams} from 'react-router-dom';
 import LinearPageinatedView from 'views/linear_paginated_view';
 import {signUpOrder, userSignUpOrder} from 'utils/user_sign_up_state';
-import SignUpComponent from 'components/user/sign_up_component';
+import SignUpComponent from 'components/signup/sign_up_component';
 import PolicyAcceptanceComponent from 'components/signup/policy_acceptance_component';
 import scrollToPosition from 'utils/scroll_to_position';
 
