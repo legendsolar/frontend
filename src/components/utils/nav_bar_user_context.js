@@ -11,7 +11,7 @@ const NavBarUserContext = () => {
     const {loading, error, data} = useGetUserStatus();
 
     const userSignUpStatus = error ? null : data?.user?.status;
-    const walletBalance = 'not real';
+    const walletBalance = '0.00';
 
     return (
         <NavBar
