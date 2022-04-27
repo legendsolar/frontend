@@ -10,9 +10,43 @@ import appSettings from 'app_settings';
 
 import smoothscroll from 'smoothscroll-polyfill';
 
+import {
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    useQuery,
+    gql,
+} from '@apollo/client';
+
+import {createHttpLink} from '@apollo/client';
+import {setContext} from '@apollo/client/link/context';
+import {getAuth} from 'firebase/auth';
+
 smoothscroll.polyfill();
 
-console.log('loading: ' + process.env.REACT_APP_BUILD_TARGET);
+const httpLink = createHttpLink({
+    uri: process.env.REACT_APP_GRAPH_QL_SERVER_URL,
+});
+
+const authLink = setContext(async (_, {headers}) => {
+    // get the authentication token from local storage if it exists
+
+    const token = await getAuth().currentUser.getIdToken();
+
+    console.log('token: ' + token);
+    // return the headers to the context so httpLink can read them
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : '',
+        },
+    };
+});
+
+const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+});
 
 function importBuildTarget() {
     if (process.env.REACT_APP_BUILD_TARGET === 'APP') {
@@ -52,7 +86,9 @@ if (appSettings.logRocket.enabled) {
 importBuildTarget().then(({default: Environment}) =>
     ReactDOM.render(
         <React.StrictMode>
-            <Environment />
+            <ApolloProvider client={client}>
+                <Environment />
+            </ApolloProvider>
         </React.StrictMode>,
         document.getElementById('root'),
     ),

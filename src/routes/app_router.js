@@ -17,6 +17,8 @@ import {getDatabase, connectDatabaseEmulator} from 'firebase/database';
 import {getAuth, connectAuthEmulator} from 'firebase/auth';
 import {getFunctions, connectFunctionsEmulator} from 'firebase/functions';
 
+import {userStatus as USER_STATUS} from 'utils/user_sign_up_state';
+
 import InvestPage from 'pages/invest_page';
 import ErrorPage from 'pages/error_page';
 import NotFoundPage from 'pages/not_found_page';
@@ -62,7 +64,7 @@ function AppRouter() {
                     />
 
                     <Route
-                        path="/complete-account/:status"
+                        path="/complete-account"
                         element={<SignUpProcessPage />}
                     />
 
@@ -72,18 +74,20 @@ function AppRouter() {
                         path="/"
                         element={
                             <ProtectedRoute
-                                requiredUserStates={['DWOLLA_ACCOUNT_VERIFIED']}
+                                requiredUserStates={[
+                                    USER_STATUS.IDENTITY_VERIFIED,
+                                ]}
                                 requiredPath="/complete-account/create"
-                            >
-                                <PortfolioPage />
-                            </ProtectedRoute>
+                            ></ProtectedRoute>
                         }
                     />
                     <Route
                         path="/account"
                         element={
                             <ProtectedRoute
-                                requiredUserStates={['DWOLLA_ACCOUNT_VERIFIED']}
+                                requiredUserStates={[
+                                    USER_STATUS.IDENTITY_VERIFIED,
+                                ]}
                                 requiredPath="/complete-account/create"
                             >
                                 <AccountPage />
@@ -95,7 +99,9 @@ function AppRouter() {
                         path="/transfer"
                         element={
                             <ProtectedRoute
-                                requiredUserStates={['DWOLLA_ACCOUNT_VERIFIED']}
+                                requiredUserStates={[
+                                    USER_STATUS.IDENTITY_VERIFIED,
+                                ]}
                                 requiredPath="/complete-account/create"
                             >
                                 <TransferPage />
@@ -107,7 +113,9 @@ function AppRouter() {
                         path="/wallet"
                         element={
                             <ProtectedRoute
-                                requiredUserStates={['DWOLLA_ACCOUNT_VERIFIED']}
+                                requiredUserStates={[
+                                    USER_STATUS.IDENTITY_VERIFIED,
+                                ]}
                                 requiredPath="/complete-account/create"
                             >
                                 <TransferPage />
@@ -119,7 +127,9 @@ function AppRouter() {
                         path="/documents"
                         element={
                             <ProtectedRoute
-                                requiredUserStates={['DWOLLA_ACCOUNT_VERIFIED']}
+                                requiredUserStates={[
+                                    USER_STATUS.IDENTITY_VERIFIED,
+                                ]}
                                 requiredPath="/complete-account/create"
                             >
                                 <DocumentPage />
@@ -131,8 +141,9 @@ function AppRouter() {
                         path="/transactions"
                         element={
                             <ProtectedRoute
-                                requiredUserStates={['DWOLLA_ACCOUNT_VERIFIED']}
-                                requiredPath="/complete-account/create"
+                                requiredUserStates={[
+                                    USER_STATUS.IDENTITY_VERIFIED,
+                                ]}
                             >
                                 <TransactionView />
                             </ProtectedRoute>

@@ -1,7 +1,7 @@
 import {ErrorBoundary} from '@sentry/react';
-import React, {useState, useEffect, lazy} from 'react';
+import React, {useState, useEffect, lazy, useCallback} from 'react';
 import {nanoid} from 'nanoid';
-import {select} from 'd3';
+import qs from 'query-string';
 
 const basePaths = [
     {
@@ -138,6 +138,51 @@ const basePaths = [
             {
                 name: 'test_sign_up',
             },
+            {
+                name: 'test_create_dwolla_account',
+            },
+            {
+                name: 'test_identity_verification_kba',
+            },
+            {
+                name: 'test_identity_verification_document',
+            },
+            {
+                name: 'test_complete_sign_up',
+            },
+        ],
+    },
+
+    {
+        name: 'tests',
+        tests: [
+            {
+                name: 'test_graph_ql_test',
+            },
+        ],
+    },
+
+    {
+        name: 'user',
+        tests: [
+            {
+                name: 'test_sign_in_component',
+            },
+            {
+                name: 'test_modify_user_info',
+            },
+            {
+                name: 'test_protected_user_info',
+            },
+        ],
+    },
+
+    {
+        name: 'utils',
+        tests: [
+            {
+                name: 'test_nav_bar',
+            },
         ],
     },
 ];
@@ -150,11 +195,73 @@ const importComponent = (path) =>
         }),
     );
 
+const setQueryStringWithoutPageReload = (qsValue) => {
+    const newurl =
+        window.location.protocol +
+        '//' +
+        window.location.host +
+        window.location.pathname +
+        qsValue;
+
+    window.history.pushState({path: newurl}, '', newurl);
+};
+
+const setQueryStringValue = (
+    key,
+    value,
+    queryString = window.location.search,
+) => {
+    const values = qs.parse(queryString);
+    const newQsValue = qs.stringify({...values, [key]: value});
+    setQueryStringWithoutPageReload(`?${newQsValue}`);
+};
+
+export const getQueryStringValue = (
+    key,
+    queryString = window.location.search,
+) => {
+    const values = qs.parse(queryString);
+    return values[key];
+};
+
+function useQueryString(key, initialValue) {
+    const [value, setValue] = useState(
+        getQueryStringValue(key) || initialValue,
+    );
+    const onSetValue = useCallback(
+        (newValue) => {
+            setValue(newValue);
+            setQueryStringValue(key, newValue);
+        },
+        [key],
+    );
+
+    return [value, onSetValue];
+}
+
 const ComponentView = () => {
     const [views, setViews] = useState([]);
     const [expanded, setExpanded] = useState(true);
-    const [selectedComponent, setSelectedComponent] = useState(null);
-    const [selectedBase, setSelectedBase] = useState(basePaths[0]);
+
+    const [baseName, setBaseName] = useQueryString('base');
+    const [componentName, setComponentName] = useQueryString('component');
+
+    const selectedBase = basePaths.filter((base) => base.name === baseName)[0];
+
+    useEffect(() => {
+        if (!baseName) {
+            setBaseName(basePaths[0].name);
+        }
+
+        if (!componentName) {
+            setComponentName(basePaths[0].tests[0].name);
+        }
+    }, []);
+
+    const selectedComponent = {
+        base: baseName,
+        name: componentName,
+    };
 
     useEffect(() => {
         async function loadViews() {
@@ -177,23 +284,24 @@ const ComponentView = () => {
         }
 
         loadViews();
-    }, [basePaths, selectedComponent]);
+    }, [basePaths, baseName, componentName]);
+
+    if (!baseName || !componentName) {
+        return <></>;
+    }
 
     const baseSelection = (
         <div style={{display: 'flex', flexDirection: 'row'}}>
             <div>component type: </div>
             <select
                 name={'baseSelection'}
-                value={selectedBase.name}
+                value={baseName}
                 onChange={(event) => {
                     const newBase = basePaths.filter(
                         (base) => base.name === event.target.value,
                     )[0];
-                    setSelectedBase(newBase);
-                    setSelectedComponent({
-                        base: newBase.name,
-                        name: newBase.tests[0].name,
-                    });
+                    setComponentName(newBase.tests[0].name);
+                    setBaseName(newBase.name);
                 }}
             >
                 {basePaths.map((base) => (
@@ -209,15 +317,13 @@ const ComponentView = () => {
         <div style={{display: 'flex', flexDirection: 'row'}}>
             <div>test component: </div>
             <select
-                name={selectedBase.name}
+                name={baseName}
                 key={nanoid()}
                 value={selectedComponent?.name ? selectedComponent.name : ''}
-                onChange={(event) =>
-                    setSelectedComponent({
-                        base: selectedBase.name,
-                        name: event.target.value,
-                    })
-                }
+                onChange={(event) => {
+                    setComponentName(event.target.value);
+                    setBaseName(selectedBase.name);
+                }}
             >
                 {selectedBase.tests &&
                     selectedBase.tests.map((test) => (

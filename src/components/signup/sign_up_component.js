@@ -9,10 +9,12 @@ import {
     validateFirstName,
 } from 'validation/user_data_validation';
 
+import {ErrorTypes} from 'utils/errors';
+
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 
-const SignUpComponent = ({initialValues, customValidateData, onSubmit}) => {
+const SignUpComponent = ({initialValues, onSubmit}) => {
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: yup.object().shape({
@@ -22,11 +24,14 @@ const SignUpComponent = ({initialValues, customValidateData, onSubmit}) => {
             lastName: validateLastName(),
             phoneNumber: validatePhoneNumber(),
         }),
-        onSubmit: async (values) => {
-            const valid = await customValidateData(values);
-            if (valid) {
-                onSubmit(values);
-            }
+        onSubmit: async (values, {setErrors}) => {
+            onSubmit(values).catch((error) => {
+                if (error.type === ErrorTypes.ValidationError) {
+                    setErrors({
+                        [error.source]: error.message,
+                    });
+                }
+            });
         },
     });
 
@@ -166,7 +171,6 @@ SignUpComponent.propTypes = {
         lastName: PropTypes.string,
         phoneNumber: PropTypes.string,
     }),
-    customValidateData: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
 };
 
@@ -178,7 +182,6 @@ SignUpComponent.defaultProps = {
         lastName: '',
         phoneNumber: '',
     },
-    customValidateData: () => {},
 };
 
 export default SignUpComponent;

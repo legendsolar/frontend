@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import ErrorPage from 'pages/error_page';
 import AppSettings from 'app_settings';
 import store from 'store';
+import {useUser} from 'hooks/use_user';
 
 const ProtectedRoute = ({
     children,
@@ -21,6 +22,10 @@ const ProtectedRoute = ({
     const auth = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
+
+    const {useGetUserStatus} = useUser();
+
+    const {loading, error, data} = useGetUserStatus();
 
     const dispatch = useDispatch();
     const cloudFunctions = useCloudFunctions();

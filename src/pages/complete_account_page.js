@@ -5,98 +5,162 @@ import {useNavigate} from 'react-router-dom';
 import AccreditationStatus from 'components/signup/accreditation_status';
 import CreateDwollaAccount from 'components/signup/create_dwolla_account';
 import LoadingView from 'views/loading_view';
-import {useSelector, useDispatch} from 'react-redux';
-import {fetchUserSignUpState, selectUserSignUpState} from 'slices/user_slice';
-import IdentityVerificationKBA from 'components/signup/identity_verification_kba';
-import {useCloudFunctions} from 'hooks/use_cloud_functions';
-import {useParams} from 'react-router-dom';
 import LinearPageinatedView from 'views/linear_paginated_view';
 import {signUpOrder, userSignUpOrder} from 'utils/user_sign_up_state';
 import SignUpComponent from 'components/signup/sign_up_component';
 import PolicyAcceptanceComponent from 'components/signup/policy_acceptance_component';
 import scrollToPosition from 'utils/scroll_to_position';
+import {useUser} from 'hooks/use_user';
+import useSignIn from 'hooks/use_sign_in';
+import {useState} from 'react';
+import {format} from 'date-fns';
+import CompleteSignUp from 'components/signup/complete_sign_up';
+import {userStatus as USER_STATUS} from 'utils/user_sign_up_state';
 
 const CompleteAccountPage = () => {
-    const {step} = useParams();
-    console.log(step);
+    // const {step} = useParams();
+    // console.log(step);
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const navigate = useNavigate();
-    const cloudFunctions = useCloudFunctions();
+    // const cloudFunctions = useCloudFunctions();
     const auth = useAuth();
-    const user = auth.user;
+    // const user = auth.user;
 
-    const userSignUpStateStatus = useSelector(
-        (state) => state.user.signUpState.status,
-    );
+    // const userSignUpStateStatus = useSelector(
+    //     (state) => state.user.signUpState.status,
+    // );
 
-    const userSignUpState = useSelector(selectUserSignUpState);
+    // const userSignUpState = useSelector(selectUserSignUpState);
 
-    console.log('user state: ' + userSignUpState);
+    // console.log('user state: ' + userSignUpState);
 
-    const requestUpdateState = () => {
-        if (
-            userSignUpStateStatus === 'idle' ||
-            userSignUpStateStatus === 'succeeded' ||
-            userSignUpStateStatus === 'rejected'
-        ) {
-            console.log('dispatch user state: line 56, complete account page');
-            dispatch(fetchUserSignUpState(cloudFunctions));
+    // const requestUpdateState = () => {
+    //     if (
+    //         userSignUpStateStatus === 'idle' ||
+    //         userSignUpStateStatus === 'succeeded' ||
+    //         userSignUpStateStatus === 'rejected'
+    //     ) {
+    //         console.log('dispatch user state: line 56, complete account page');
+    //         dispatch(fetchUserSignUpState(cloudFunctions));
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     if (
+    //         auth.user &&
+    //         !auth.isAuthenticating &&
+    //         userSignUpStateStatus === 'idle'
+    //     ) {
+    //         requestUpdateState();
+
+    //         scrollToPosition(0);
+    //     }
+    // }, [dispatch, auth.user, auth.isAuthenticating, userSignUpStateStatus]);
+
+    const onComplete = (values) => {
+        //shouldn't be needed
+        console.log('on complete');
+    };
+
+    // if (userSignUpStateStatus === 'loading') {
+    //     return <LoadingView></LoadingView>;
+    // }
+
+    const {useGetUserStatus, useSetUser, useCreateDwollaAccount} = useUser();
+
+    const {loading, error, data} = useGetUserStatus();
+    const [setUser] = useSetUser();
+    const [createDwollaAccount] = useCreateDwollaAccount();
+
+    const {onCreateAccountSubmit} = useSignIn();
+
+    const [pageIndex, setPageIndex] = useState(0);
+
+    const userSignUpStatus = data?.user?.status;
+
+    const userStatePageIndexMap = (status) => {
+        if (!auth.user) {
+            return 0;
         }
+
+        if (auth.user && (!status || status === 'CREATED')) {
+            return 1;
+        }
+
+        const map = {
+            NO_ACCOUNT: 0,
+            ACCOUNT_CREATED: 1,
+            ACCEPTANCE_COMPLETE: 2,
+            // Keep user in complete account flow for retry state
+            ACCREDITATION_VERIFIED: 3,
+            DWOLLA_ACCOUNT_RETRY_REQ: 3,
+            DWOLLA_ACCOUNT_KBA_REQ: 4,
+            DWOLLA_ACCOUNT_DOCUMENT_REQ: 5,
+            IDENTITY_VERIFIED: 6,
+
+            NOT_ACCREDITED: 7,
+        };
+
+        return map[status];
     };
 
     useEffect(() => {
-        if (
-            auth.user &&
-            !auth.isAuthenticating &&
-            userSignUpStateStatus === 'idle'
-        ) {
-            requestUpdateState();
+        const newPage = userStatePageIndexMap(userSignUpStatus);
+        setPageIndex(newPage);
+    }, [userSignUpStatus, loading, error, auth.user]);
 
-            scrollToPosition(0);
-        }
-    }, [dispatch, auth.user, auth.isAuthenticating, userSignUpStateStatus]);
-
-    const onComplete = () => {
-        requestUpdateState();
-    };
-
-    if (userSignUpStateStatus === 'loading') {
-        return <LoadingView></LoadingView>;
+    if (loading || auth.isAuthenticating) {
+        return <></>;
     }
 
-    const userStatePageIndexMap = {
-        NO_ACCOUNT: 0,
-        ACCOUNT_CREATED: 1,
-        ACCEPTANCE_COMPLETE: 2,
-        // Keep user in complete account flow for retry state
-        ACCREDATION_VERIF_COMPLETE: 3,
-        DWOLLA_ACCOUNT_RETRY_REQ: 3,
-        DWOLLA_ACCOUNT_KBA_REQ: 4,
-        DWOLLA_ACCOUNT_DOCUMENT_REQ: 5,
-        DWOLLA_ACCOUNT_VERIFIED: 6,
+    console.log(loading);
+    console.log('user data:');
+    console.log(data?.user);
+    console.log('page:' + pageIndex);
 
-        NOT_ACCREDITED: 7,
+    const transformFormValuesToUserDwollaAccountData = (values) => {
+        const dob = new Date(`${values.month} ${values.day} ${values.year}`);
+
+        return {
+            address: {
+                streetAddress: values.streetAddress,
+                streetAddress2: values.streetAddress2,
+                city: values.city,
+                state: values.state,
+                postalCode: values.postalCode,
+            },
+            firstName: values.firstName,
+            lastName: values.lastName,
+            ssn: values.ssn,
+            dateOfBirth: format(dob, 'P'),
+        };
     };
 
-    window.history.replaceState(
-        null,
-        null,
-        '/complete-account/' + userSignUpState,
-    );
+    const onCompleteDwollaAccountSubmit = (values) => {
+        console.log(values);
+        const variables = {
+            input: {
+                ...transformFormValuesToUserDwollaAccountData(values),
+            },
+        };
 
-    const pageIndex = userStatePageIndexMap[userSignUpState];
+        console.log(variables);
 
-    console.log('page index', pageIndex);
+        createDwollaAccount({
+            variables,
+        });
+    };
 
     const pageContent = [
         {
             title: 'Create Account',
             content: (
-                <SignUpComponent onComplete={onComplete}></SignUpComponent>
+                <SignUpComponent
+                    onSubmit={onCreateAccountSubmit}
+                ></SignUpComponent>
             ),
-            disabled:
-                userSignUpOrder(userSignUpState) !== signUpOrder.NO_ACCOUNT,
+            disabled: !!userSignUpStatus,
         },
 
         {
@@ -106,9 +170,7 @@ const CompleteAccountPage = () => {
                     onComplete={onComplete}
                 ></PolicyAcceptanceComponent>
             ),
-            disabled:
-                userSignUpOrder(userSignUpState) !==
-                signUpOrder.ACCOUNT_CREATED,
+            disabled: !(userSignUpStatus === USER_STATUS.CREATED),
         },
 
         {
@@ -130,95 +192,82 @@ const CompleteAccountPage = () => {
                     ></AccreditationStatus>
                 </Stack>
             ),
-            disabled:
-                userSignUpOrder(userSignUpState) !=
-                signUpOrder.ACCEPTANCE_COMPLETE,
+            disabled: !(userSignUpStatus === USER_STATUS.ACCEPTANCE_COMPLETE),
         },
         {
             title: 'Create Wallet',
             content: (
                 <CreateDwollaAccount
+                    userStatus={userSignUpStatus}
                     onComplete={onComplete}
+                    onSubmit={onCompleteDwollaAccountSubmit}
                 ></CreateDwollaAccount>
             ),
-            disabled:
-                userSignUpOrder(userSignUpState) !==
-                signUpOrder.ACCREDATION_VERIF_COMPLETE,
+            disabled: !(
+                userSignUpStatus === USER_STATUS.ACCREDITATION_VERIFIED
+            ),
         },
         {
             title: 'KBA Validation',
             content: (
-                <IdentityVerificationKBA
-                    onComplete={onComplete}
-                ></IdentityVerificationKBA>
+                <></>
+                // <IdentityVerificationKBA
+                //     onComplete={onComplete}
+                // ></IdentityVerificationKBA>
             ),
-            disabled: userSignUpState !== 'DWOLLA_ACCOUNT_KBA_REQ',
+            disabled: !(
+                userSignUpStatus === USER_STATUS.DWOLLA_ACCOUNT_KBA_REQ
+            ),
             sidebar: false,
         },
         {
             title: 'Document Validation',
             content: (
-                <IdentityVerificationDocument
-                    onComplete={onComplete}
-                ></IdentityVerificationDocument>
+                <></>
+                // <IdentityVerificationDocument
+                //     onComplete={onComplete}
+                // ></IdentityVerificationDocument>
             ),
-            disabled: userSignUpState !== 'DWOLLA_ACCOUNT_DOCUMENT_REQ',
+            disabled: !(
+                userSignUpStatus === USER_STATUS.DWOLLA_ACCOUNT_DOCUMENT_REQ
+            ),
             sidebar: false,
         },
         {
             title: 'Complete Sign Up',
             content: (
-                <Stack spacing={6}>
-                    <Typography variant="headline1">
-                        {`Now it's time to explore solar investments.`}
-                    </Typography>
-
-                    <Typography variant="smallHeadline">
-                        Your account has been created and you are now able to
-                        invest in panels on Legends Solar.
-                    </Typography>
-
-                    <Button
-                        variant="primary"
-                        disabled={userSignUpState !== 'DWOLLA_ACCOUNT_VERIFIED'}
-                        onClick={() => {
-                            navigate('/explore');
-                        }}
-                    >
-                        Continue
-                    </Button>
-                </Stack>
+                <CompleteSignUp
+                    onComplete={() => navigate('/explore')}
+                ></CompleteSignUp>
             ),
-            disabled:
-                userSignUpOrder(userSignUpState) !==
-                signUpOrder.DWOLLA_ACCOUNT_VERIFIED,
+            disabled: !(userSignUpStatus === USER_STATUS.IDENTITY_VERIFIED),
             sidebar: true,
         },
 
-        {
-            title: 'Not Accredited',
-            content: (
-                <Stack spacing={6}>
-                    <Typography variant="headline2">
-                        Sorry, only accredited investors can sign up
-                    </Typography>
+        //     {
+        //         title: 'Not Accredited',
+        //         content: (
+        //             <Stack spacing={6}>
+        //                 <Typography variant="headline2">
+        //                     Sorry, only accredited investors can sign up
+        //                 </Typography>
 
-                    <Typography variant="body2">
-                        {`Reserve panels instead, and we'll be in touch if/when 
-                        we are able to sell panels to non-accredited investors`}
-                    </Typography>
+        //                 <Typography variant="body2">
+        //                     {`Reserve panels instead, and we'll be in touch if/when
+        //                     we are able to sell panels to non-accredited investors`}
+        //                 </Typography>
 
-                    <Button
-                        variant="primary"
-                        href="https://www.legends.solar/reserve-panels"
-                    >
-                        Reserve Panels
-                    </Button>
-                </Stack>
-            ),
-            disabled: userSignUpState !== 'NOT_ACCREDITED',
-            sidebar: false,
-        },
+        //                 <Button
+        //                     variant="primary"
+        //                     href="https://www.legends.solar/reserve-panels"
+        //                 >
+        //                     Reserve Panels
+        //                 </Button>
+        //             </Stack>
+        //         ),
+        //         disabled: userSignUpState !== 'NOT_ACCREDITED',
+        //         sidebar: false,
+        //     },
     ];
 
     return (

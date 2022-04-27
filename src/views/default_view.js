@@ -1,7 +1,7 @@
-import {Box, Stack, Paper, Grid, Container} from '@mui/material';
-import NavBar from 'components/utils/nav_bar';
+import {Box} from '@mui/material';
 import {useAuth} from 'hooks/use_auth';
 import Footer from 'components/utils/footer';
+import NavBarUserContext from 'components/utils/nav_bar_user_context';
 
 const DefaultView = (props) => {
     const auth = useAuth();
@@ -43,7 +43,7 @@ const DefaultView = (props) => {
                     transform: 'translate3d(0, 0, -10px)',
                 }}
             ></Box>
-            <NavBar></NavBar>
+            <NavBarUserContext></NavBarUserContext>
             <Box
                 sx={{
                     maxWidth: '1275px',

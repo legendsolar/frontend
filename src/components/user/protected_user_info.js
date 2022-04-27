@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
     Grid,
     TextField,
@@ -7,7 +8,7 @@ import {
     Select,
     MenuItem,
 } from '@mui/material';
-import {useState} from 'react';
+import {useEffect} from 'react';
 import {months} from 'utils/static_lists';
 import {format} from 'date-fns';
 import {
@@ -17,91 +18,58 @@ import {
     validateSSN,
 } from 'validation/user_data_validation';
 
+import {ErrorTypes} from 'utils/errors';
+
+import {useFormik} from 'formik';
+import * as yup from 'yup';
+
 const ProtectedUserInfo = ({
-    onChange,
-    onUpdate,
-    disabled,
+    initialValues,
     fullSSNRequired,
     completed,
+    onSubmit,
+    isValid,
+    handleChange,
 }) => {
-    const startingValues = {
-        day: {
-            value: '',
-            error: false,
+    const formik = useFormik({
+        initialValues: initialValues,
+        validationSchema: yup.object().shape({
+            ssn: validateSSN(),
+            day: validateDay(),
+            month: validateMonth(),
+            year: validateYear(),
+        }),
+
+        onSubmit: async (values, {setErrors}) => {
+            onSubmit(values).catch((error) => {
+                if (error.type === ErrorTypes.ValidationError) {
+                    setErrors({
+                        [error.source]: error.message,
+                    });
+                }
+            });
         },
-        month: {
-            value: '',
-            error: false,
-        },
-        year: {
-            value: '',
-            error: false,
-        },
-        ssn: {
-            value: '',
-            error: false,
-        },
-    };
+    });
 
-    const [formValues, setFormValues] = useState(startingValues);
+    useEffect(() => {
+        handleChange(formik.values);
+    }, [formik.values]);
 
-    const handleInputChange = (event) => {
-        const {name, value} = event.target;
-        const updatedObject = {...formValues};
-
-        switch (name) {
-            case 'day':
-                updatedObject[name] = {
-                    ...validateDay(value),
-                };
-                break;
-
-            case 'month':
-                updatedObject[name] = {
-                    ...validateMonth(value),
-                };
-                break;
-
-            case 'year':
-                updatedObject[name] = {
-                    ...validateYear(value),
-                };
-                break;
-
-            case 'ssn':
-                updatedObject[name] = {
-                    ...validateSSN(value),
-                };
-                break;
-        }
-        updatedObject[name].value = value;
-
-        const error = Object.keys(updatedObject)
-            .map((key) => {
-                return updatedObject[key].error;
-            })
-            .some((el) => el);
-
-        if (
-            !error &&
-            updatedObject.month.value &&
-            updatedObject.day.value &&
-            updatedObject.year.value
-        ) {
-            updatedObject.dateOfBirth = {
-                // Need to ignore time of day to ensure no strange time zone issues
-                value: format(
-                    new Date(
-                        `${updatedObject.month.value} ${updatedObject.day.value}, ${updatedObject.year.value}`,
-                    ),
-                    'yyyy-MM-dd',
-                ),
-            };
-        }
-
-        setFormValues(updatedObject);
-        onUpdate(updatedObject);
-    };
+    useEffect(() => {
+        isValid(
+            !(
+                formik.isValidating ||
+                formik.isSubmitting ||
+                !formik.dirty ||
+                !formik.isValid
+            ),
+        );
+    }, [
+        formik.isValidating,
+        formik.isSubmitting,
+        formik.dirty,
+        formik.isValid,
+    ]);
 
     return (
         <div>
@@ -110,8 +78,6 @@ const ProtectedUserInfo = ({
                     <Typography variant="subtitle3">{'SSN '}</Typography>
                     <TextField
                         data-private
-                        error={!!formValues.ssn.error}
-                        helperText={formValues.ssn.errMsg}
                         disabled={completed}
                         name="ssn"
                         label={
@@ -119,11 +85,13 @@ const ProtectedUserInfo = ({
                                 ? 'Complete SSN'
                                 : 'Last four digits'
                         }
-                        variant="filled"
-                        value={completed ? '•••••••••' : formValues.ssn.value}
-                        onChange={handleInputChange}
-                        fullWidth
                         type="password"
+                        error={formik.touched.ssn && Boolean(formik.errors.ssn)}
+                        helperText={formik.touched.ssn && formik.errors.ssn}
+                        value={formik.values.ssn}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        id="ssn"
                     ></TextField>
                 </Grid>
 
@@ -141,12 +109,9 @@ const ProtectedUserInfo = ({
                                 <InputLabel>Month</InputLabel>
                                 <Select
                                     name="month"
-                                    value={
-                                        completed
-                                            ? '••••'
-                                            : formValues.month.value
-                                    }
-                                    onChange={handleInputChange}
+                                    value={formik.values.month}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
                                 >
                                     {months.map((month) => {
                                         return (
@@ -167,33 +132,42 @@ const ProtectedUserInfo = ({
                         <Grid item xs={4} md={4}>
                             <TextField
                                 data-private
-                                error={!!formValues.day.error}
-                                helperText={formValues.day.errMsg}
                                 disabled={completed}
                                 name="day"
                                 label="Day"
                                 variant="filled"
                                 type={completed ? 'string' : 'number'}
-                                value={completed ? '••' : formValues.day.value}
-                                onChange={handleInputChange}
-                                fullWidth
+                                error={
+                                    formik.touched.day &&
+                                    Boolean(formik.errors.day)
+                                }
+                                helperText={
+                                    formik.touched.day && formik.errors.day
+                                }
+                                value={formik.values.day}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                id="ssn"
                             ></TextField>
                         </Grid>
 
                         <Grid item xs={4} md={4}>
                             <TextField
                                 data-private
-                                error={!!formValues.year.error}
-                                helperText={formValues.year.errMsg}
                                 disabled={completed}
                                 name="year"
                                 label="Year"
-                                variant="filled"
-                                value={
-                                    completed ? '••••' : formValues.year.value
+                                error={
+                                    formik.touched.year &&
+                                    Boolean(formik.errors.year)
                                 }
-                                onChange={handleInputChange}
-                                fullWidth
+                                helperText={
+                                    formik.touched.year && formik.errors.year
+                                }
+                                value={formik.values.year}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                id="year"
                             ></TextField>
                         </Grid>
                     </Grid>
@@ -201,6 +175,32 @@ const ProtectedUserInfo = ({
             </Grid>
         </div>
     );
+};
+
+ProtectedUserInfo.propTypes = {
+    initialValues: PropTypes.shape({
+        ssn: PropTypes.string,
+        day: PropTypes.string,
+        month: PropTypes.string,
+        year: PropTypes.string,
+    }),
+    fullSSNRequired: PropTypes.bool,
+    completed: PropTypes.bool,
+    onSubmit: PropTypes.func,
+    isValid: PropTypes.func,
+};
+
+ProtectedUserInfo.defaultProps = {
+    initialValues: {
+        ssn: '',
+        day: '',
+        month: '',
+        year: '',
+    },
+    fullSSNRequired: false,
+    completed: false,
+    isValid: (bool) => {},
+    onSubmit: () => {},
 };
 
 export default ProtectedUserInfo;

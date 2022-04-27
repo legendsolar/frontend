@@ -1,100 +1,57 @@
-import {Stack, Typography} from '@mui/material';
+import {Stack} from '@mui/material';
 import ScrollBottomToComplete from 'components/utils/scroll_bottom_complete.js';
 import PrivacyPolicy from 'assets/legal/privacy.js';
 import TermsAndConditions from 'assets/legal/termsAndConditions.js';
-import {ref} from 'firebase/database';
-import {useCloudFunctions} from 'hooks/use_cloud_functions';
-import {useState, useEffect} from 'react';
-import {useAuth} from 'hooks/use_auth';
-import {useDatabase} from 'reactfire';
-import {useDatabaseObjectData} from 'reactfire';
 import scrollToPosition from 'utils/scroll_to_position';
 import LoadingComponent from 'components/utils/loading_component';
+import {useUser} from 'hooks/use_user';
 
 const PolicyAcceptanceComponent = ({onComplete}) => {
-    const cloudFunctions = useCloudFunctions();
-    const auth = useAuth();
-    const user = auth.user;
-
-    const database = useDatabase();
-    const {status, data: userInfo} = useDatabaseObjectData(
-        ref(database, 'users/' + user.uid),
-    );
-
-    const [loading, setLoading] = useState(false);
-
-    const initialState = {
-        privacy: false,
-        privacyVersion: null,
-        termsAndConditions: false,
-        termsAndConditionsVersion: null,
-    };
-
-    const [policyAcceptance, setPolicyAcceptance] = useState(initialState);
-
-    useEffect(() => {
-        if (status == 'success') {
-            if (
-                userInfo &&
-                userInfo.acceptance &&
-                userInfo?.acceptance?.privacy &&
-                userInfo?.acceptance?.termsAndConditions
-            ) {
-                setPolicyAcceptance({
-                    privacy: !!userInfo.acceptance.privacy.accepted,
-                    privacyVersion: null,
-                    termsAndConditions:
-                        !!userInfo.acceptance.termsAndConditions.accepted,
-                    termsAndConditionsVersion: null,
-                });
-            }
-        }
-
-        console.log(userInfo);
-    }, [status]);
-
-    const onCompleteItem = (event, item) => {
-        const newPolicyAcceptance = {...policyAcceptance};
-        newPolicyAcceptance[item] = true;
-
-        setPolicyAcceptance(newPolicyAcceptance);
-
-        if (
-            newPolicyAcceptance.privacy ||
-            newPolicyAcceptance.termsAndConditions
-        ) {
-            setLoading(true);
-
-            scrollToPosition(0);
-
-            cloudFunctions
-                .updateUserAcceptanceState({
-                    privacy: {
-                        accepted: newPolicyAcceptance.privacy,
-                        version: null,
-                    },
-                    termsAndConditions: {
-                        accepted: newPolicyAcceptance.termsAndConditions,
-                        version: null,
-                    },
-                })
-                .then(() => {
-                    onComplete();
-                    setLoading(false);
-                });
-        }
-    };
+    const {useGetUserAcceptance, useSetUser} = useUser();
+    const {loading, error, data} = useGetUserAcceptance();
+    const [setUser] = useSetUser();
 
     if (loading) {
         return <LoadingComponent></LoadingComponent>;
     }
+
+    const acceptanceList = data?.user?.acceptance;
+
+    const policyAcceptance = {
+        privacy: acceptanceList ? acceptanceList.includes('PRIVACY') : false,
+        termsAndConditions: acceptanceList
+            ? acceptanceList.includes('TERMS_CONDITIONS')
+            : false,
+    };
+
+    const onCompleteItem = (event, item) => {
+        const acceptanceToStore = [item];
+
+        if (acceptanceList) {
+            acceptanceToStore.push(...acceptanceList);
+        }
+
+        setUser({
+            variables: {
+                input: {
+                    acceptance: acceptanceToStore,
+                },
+            },
+        });
+
+        if (policyAcceptance.privacy || policyAcceptance.termsAndConditions) {
+            onComplete();
+        } else {
+            scrollToPosition(0);
+        }
+    };
 
     return (
         <Stack spacing={6}>
             {!policyAcceptance.privacy && (
                 <ScrollBottomToComplete
                     onComplete={(event) => {
-                        onCompleteItem(event, 'privacy');
+                        onCompleteItem(event, 'PRIVACY');
                     }}
                     completed={policyAcceptance.privacy}
                 >
@@ -107,7 +64,7 @@ const PolicyAcceptanceComponent = ({onComplete}) => {
             {policyAcceptance.privacy && (
                 <ScrollBottomToComplete
                     onComplete={(event) => {
-                        onCompleteItem(event, 'termsAndConditions');
+                        onCompleteItem(event, 'TERMS_CONDITIONS');
                     }}
                     completed={policyAcceptance.termsAndConditions}
                 >

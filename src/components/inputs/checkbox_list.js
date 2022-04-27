@@ -40,7 +40,7 @@ function CheckboxList({options, precheckedList, onInputChange, disabled}) {
         <Stack spacing={2}>
             {Object.entries(options).map(([key, option], index, list) => {
                 return (
-                    <div style={{margin: '0px'}}>
+                    <div style={{margin: '0px'}} key={index}>
                         <Box
                             sx={{
                                 height: '88px',

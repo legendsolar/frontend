@@ -11,47 +11,61 @@ import {selectUserSignUpState} from 'slices/user_slice';
 import {selectWalletBalance} from 'slices/wallet_slice';
 import {fetchWalletBalance} from 'slices/wallet_slice';
 import store from 'store';
+import PropTypes from 'prop-types';
+import {userStatus as USER_STATUS} from 'utils/user_sign_up_state';
 
-const NavBar = ({}) => {
-    const auth = useAuth();
-    const user = auth.user;
+const NavBar = ({
+    loading,
+    userIsAuthenticated,
+    userStatus,
+    walletBalance,
+    onToHomepage,
+    onYourRooftop,
+    onTransaction,
+    onDocuments,
+    onAvailablePanels,
+    onAccount,
+    onWallet,
+}) => {
+    // const auth = useAuth();
+    // const user = auth.user;
 
-    const navigate = useNavigate();
-    const cloudFunctions = useCloudFunctions();
-    const dispatch = useDispatch();
+    // const navigate = useNavigate();
+    // const cloudFunctions = useCloudFunctions();
+    // const dispatch = useDispatch();
 
-    const userSignUpStateStatus = useSelector(
-        (state) => state.user.signUpState.status,
-    );
-    const userSignUpState = useSelector(selectUserSignUpState);
-    const balanceStatus = useSelector((state) => state.wallet.balance.status);
+    // const userSignUpStateStatus = useSelector(
+    //     (state) => state.user.signUpState.status,
+    // );
+    // const userSignUpState = useSelector(selectUserSignUpState);
+    // const balanceStatus = useSelector((state) => state.wallet.balance.status);
 
-    useEffect(() => {
-        console.log(
-            'nav bar user sign up status: ',
-            userSignUpStateStatus,
-            !!auth.user,
-        );
+    // useEffect(() => {
+    //     console.log(
+    //         'nav bar user sign up status: ',
+    //         userSignUpStateStatus,
+    //         !!auth.user,
+    //     );
 
-        if (store.getState().user.signUpState.status === 'idle' && auth.user) {
-            console.log('dispatch user state, line 30 nav bar');
-            dispatch(fetchUserSignUpState(cloudFunctions));
+    //     if (store.getState().user.signUpState.status === 'idle' && auth.user) {
+    //         console.log('dispatch user state, line 30 nav bar');
+    //         dispatch(fetchUserSignUpState(cloudFunctions));
 
-            console.log('dispatch complete ');
-            console.log(
-                'post dispatch sign up status: ' + userSignUpStateStatus,
-            );
-        }
-    }, [dispatch, store.getState().user.signUpState.status, auth.user]);
+    //         console.log('dispatch complete ');
+    //         console.log(
+    //             'post dispatch sign up status: ' + userSignUpStateStatus,
+    //         );
+    //     }
+    // }, [dispatch, store.getState().user.signUpState.status, auth.user]);
 
-    useEffect(() => {
-        if (balanceStatus === 'idle' && user) {
-            console.log('fetch wallet, line 37 nav bar');
-            dispatch(fetchWalletBalance(cloudFunctions));
-        }
-    }, [user, dispatch, balanceStatus]);
+    // useEffect(() => {
+    //     if (balanceStatus === 'idle' && user) {
+    //         console.log('fetch wallet, line 37 nav bar');
+    //         dispatch(fetchWalletBalance(cloudFunctions));
+    //     }
+    // }, [user, dispatch, balanceStatus]);
 
-    const walletBalance = useSelector(selectWalletBalance);
+    // const walletBalance = useSelector(selectWalletBalance);
 
     return (
         <Toolbar
@@ -95,8 +109,8 @@ const NavBar = ({}) => {
                             <LegendsSolarLogo></LegendsSolarLogo>
                         </Box>
 
-                        {auth.user &&
-                            userSignUpState === 'DWOLLA_ACCOUNT_VERIFIED' && (
+                        {userIsAuthenticated &&
+                            userStatus === USER_STATUS.IDENTITY_VERIFIED && (
                                 <Stack
                                     direction="row"
                                     alignItems={'flex-end'}
@@ -108,9 +122,7 @@ const NavBar = ({}) => {
                                 >
                                     <Button
                                         variant="header"
-                                        onClick={() => {
-                                            navigate('/');
-                                        }}
+                                        onClick={onYourRooftop}
                                     >
                                         <Typography variant="appBarHeader">
                                             Your Rooftop
@@ -119,9 +131,7 @@ const NavBar = ({}) => {
 
                                     <Button
                                         variant="header"
-                                        onClick={() => {
-                                            navigate('/transactions');
-                                        }}
+                                        onClick={onTransaction}
                                     >
                                         <Typography variant="appBarHeader">
                                             Transactions
@@ -130,9 +140,7 @@ const NavBar = ({}) => {
 
                                     <Button
                                         variant="header"
-                                        onClick={() => {
-                                            navigate('/documents');
-                                        }}
+                                        onClick={onDocuments}
                                     >
                                         <Typography variant="appBarHeader">
                                             Documents
@@ -141,9 +149,7 @@ const NavBar = ({}) => {
 
                                     <Button
                                         variant="header"
-                                        onClick={() => {
-                                            navigate('/explore');
-                                        }}
+                                        onClick={onAvailablePanels}
                                     >
                                         <Typography variant="appBarHeader">
                                             Available Panels
@@ -152,9 +158,7 @@ const NavBar = ({}) => {
 
                                     <Button
                                         variant="header-outlined"
-                                        onClick={() => {
-                                            navigate('/account');
-                                        }}
+                                        onClick={onAccount}
                                     >
                                         <Typography variant="appBarHeader">
                                             Account
@@ -174,9 +178,7 @@ const NavBar = ({}) => {
                                         <Button
                                             variant="header-filled"
                                             sx={{mt: 0}}
-                                            onClick={() => {
-                                                navigate('/transfer');
-                                            }}
+                                            onClick={onWallet}
                                         >
                                             {'$' +
                                                 (walletBalance
@@ -187,14 +189,12 @@ const NavBar = ({}) => {
                                 </Stack>
                             )}
 
-                        {(!auth.user ||
-                            userSignUpState !== 'DWOLLA_ACCOUNT_VERIFIED') && (
+                        {(!userIsAuthenticated ||
+                            userStatus !== USER_STATUS.IDENTITY_VERIFIED) && (
                             <Button
                                 variant="header"
                                 disabled={true}
-                                onClick={() => {
-                                    redirectToHomePage();
-                                }}
+                                onClick={onToHomepage}
                             >
                                 Back to homepage
                             </Button>
@@ -206,6 +206,32 @@ const NavBar = ({}) => {
     );
 };
 
-NavBar.propTypes = {};
+NavBar.propTypes = {
+    loading: PropTypes.bool,
+    userIsAuthenticated: PropTypes.bool,
+    userStatus: PropTypes.string,
+    walletBalance: PropTypes.string,
+    onToHomepage: PropTypes.func,
+    onYourRooftop: PropTypes.func,
+    onTransaction: PropTypes.func,
+    onDocuments: PropTypes.func,
+    onAvailablePanels: PropTypes.func,
+    onAccount: PropTypes.func,
+    onWallet: PropTypes.func,
+};
+
+NavBar.defaultProps = {
+    loading: false,
+    userIsAuthenticated: false,
+    userStatus: null,
+    walletBalance: null,
+    onToHomepage: () => {},
+    onYourRooftop: () => {},
+    onTransaction: () => {},
+    onDocuments: () => {},
+    onAvailablePanels: () => {},
+    onAccount: () => {},
+    onWallet: () => {},
+};
 
 export default NavBar;

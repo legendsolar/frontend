@@ -8,13 +8,10 @@ const ImageUpload = ({onComplete}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [alertMessage, setAlertMessage] = useState(null);
 
-    const receiveIdVerificationDocument =
-        useCloudFunctions().receiveIdVerificationDocument;
-
     const onChange = (event) => {
-        console.log('uploaded?');
-        console.log(event.target.value);
-        console.log(event.target.files[0]);
+        // console.log('uploaded?');
+        // console.log(event.target.value);
+        // console.log(event.target.files[0]);
         setSelectedFile(event.target.files[0]);
     };
 
@@ -27,29 +24,25 @@ const ImageUpload = ({onComplete}) => {
     };
 
     const submitImage = () => {
-        const reader = new FileReader();
-        reader.onloadend = function () {
-            receiveIdVerificationDocument({
-                image: reader.result,
-            })
-                .then((resp) => {
-                    console.log('dwolla resp:');
-                    console.log(resp);
-
-                    onComplete();
-                })
-                .catch((error) => {
-                    console.log('dwolla error resp:');
-                    console.log(error);
-
-                    const errorJson = JSON.parse(JSON.stringify(error));
-                    console.log(errorJson);
-
-                    setAlertMessage(errorJson.details.message);
-                });
-        };
-
-        reader.readAsDataURL(selectedFile);
+        // const reader = new FileReader();
+        // reader.onloadend = function () {
+        //     receiveIdVerificationDocument({
+        //         image: reader.result,
+        //     })
+        //         .then((resp) => {
+        //             console.log('dwolla resp:');
+        //             console.log(resp);
+        //             onComplete();
+        //         })
+        //         .catch((error) => {
+        //             console.log('dwolla error resp:');
+        //             console.log(error);
+        //             const errorJson = JSON.parse(JSON.stringify(error));
+        //             console.log(errorJson);
+        //             setAlertMessage(errorJson.details.message);
+        //         });
+        // };
+        // reader.readAsDataURL(selectedFile);
     };
 
     return (
@@ -61,9 +54,6 @@ const ImageUpload = ({onComplete}) => {
                     src={imgSrc()}
                 />
             )}
-            <Typography variant="description">
-                {'[DEBUG] this can be buggy on chrome with macs'}
-            </Typography>
             <input
                 ref={uploadInputRef}
                 type="file"

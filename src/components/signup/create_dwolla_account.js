@@ -5,89 +5,94 @@ import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
 import Divider from 'components/basics/divider';
-import {useCloudFunctions} from 'hooks/use_cloud_functions';
 import ModifyUserInfo from 'components/user/modify_user_info';
 import ProtectedUserInfo from 'components/user/protected_user_info';
-import {fetchUserSignUpState, selectUserSignUpState} from 'slices/user_slice';
-import {transformUserDataToDwollaObject} from 'components/signup/utils';
+import {ErrorTypes} from 'utils/errors';
 
-const CreateDwollaAccount = ({onComplete}) => {
-    const auth = useAuth();
-    const dispatch = useDispatch();
-    const cloudFunctions = useCloudFunctions();
+const CreateDwollaAccount = ({userStatus, onSubmit}) => {
+    // const auth = useAuth();
+    // const dispatch = useDispatch();
+    // const cloudFunctions = useCloudFunctions();
 
-    const userSignUpStateStatus = useSelector(
-        (state) => state.user.signUpState.status,
-    );
+    // const userSignUpStateStatus = useSelector(
+    //     (state) => state.user.signUpState.status,
+    // );
 
-    useEffect(() => {
-        if (userSignUpStateStatus === 'idle' && auth.user) {
-            console.log(
-                'dispatch fetch user state: line 46, create dwolla account',
-            );
-            dispatch(fetchUserSignUpState(cloudFunctions));
-        }
-    }, [dispatch, userSignUpStateStatus, auth.user]);
+    // useEffect(() => {
+    //     if (userSignUpStateStatus === 'idle' && auth.user) {
+    //         console.log(
+    //             'dispatch fetch user state: line 46, create dwolla account',
+    //         );
+    //         dispatch(fetchUserSignUpState(cloudFunctions));
+    //     }
+    // }, [dispatch, userSignUpStateStatus, auth.user]);
 
-    const userSignUpState = useSelector(selectUserSignUpState);
+    // const userSignUpState = useSelector(selectUserSignUpState);
 
-    const dwollaUpdateOrCreateFunction =
-        userSignUpState === 'ACCREDATION_VERIF_COMPLETE'
-            ? cloudFunctions.attemptCreateNewDwollaVerifiedUser
-            : cloudFunctions.updateDwollaUser;
+    // const dwollaUpdateOrCreateFunction =
+    //     userSignUpState === 'ACCREDATION_VERIF_COMPLETE'
+    //         ? cloudFunctions.attemptCreateNewDwollaVerifiedUser
+    //         : cloudFunctions.updateDwollaUser;
 
-    const fullSSNRequired = userSignUpState === 'DWOLLA_ACCOUNT_RETRY_REQ';
+    // const [loading, setLoading] = useState(false);
+    // const [inputValid, setInputValid] = useState([false, false]);
+    // const [userInfo, setUserInfo] = useState(false);
 
+    // const [submitErrorMessage, setSubmitErrorMessage] = useState(undefined);
+
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+
+    //     const dwollaObject = transformUserDataToDwollaObject(userInfo);
+
+    //     setLoading(true);
+
+    //     dwollaUpdateOrCreateFunction(dwollaObject)
+    //         .then((resp) => {
+    //             console.log(resp);
+    //             onComplete();
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //             const errorJson = JSON.parse(JSON.stringify(error));
+    //             console.log(errorJson);
+    //             setSubmitErrorMessage(errorJson.details.message);
+    //         })
+    //         .finally(() => {
+    //             setLoading(false);
+    //         });
+    // };
+
+    // const onUpdate = (newInfo, formId) => {
+    //     const error = Object.keys(newInfo)
+    //         .map((key) => {
+    //             return newInfo[key].error;
+    //         })
+    //         .some((el) => el);
+
+    //     const newInputValid = [...inputValid];
+
+    //     if (!newInfo || error) {
+    //         newInputValid[formId] = false;
+    //     } else {
+    //         newInputValid[formId] = true;
+    //         setUserInfo({
+    //             ...userInfo,
+    //             ...newInfo,
+    //         });
+    //     }
+
+    //     setInputValid(newInputValid);
+    // };
+
+    const fullSSNRequired = userStatus === 'DWOLLA_ACCOUNT_RETRY_REQ';
+
+    const [userInfoValid, setUserInfoValid] = useState(false);
+    const [protectedUserInfoValid, setProtectedUserInfoValid] = useState(false);
+    const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [inputValid, setInputValid] = useState([false, false]);
-    const [userInfo, setUserInfo] = useState(false);
 
-    const [submitErrorMessage, setSubmitErrorMessage] = useState(undefined);
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        const dwollaObject = transformUserDataToDwollaObject(userInfo);
-
-        setLoading(true);
-
-        dwollaUpdateOrCreateFunction(dwollaObject)
-            .then((resp) => {
-                console.log(resp);
-                onComplete();
-            })
-            .catch((error) => {
-                console.log(error);
-                const errorJson = JSON.parse(JSON.stringify(error));
-                console.log(errorJson);
-                setSubmitErrorMessage(errorJson.details.message);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    };
-
-    const onUpdate = (newInfo, formId) => {
-        const error = Object.keys(newInfo)
-            .map((key) => {
-                return newInfo[key].error;
-            })
-            .some((el) => el);
-
-        const newInputValid = [...inputValid];
-
-        if (!newInfo || error) {
-            newInputValid[formId] = false;
-        } else {
-            newInputValid[formId] = true;
-            setUserInfo({
-                ...userInfo,
-                ...newInfo,
-            });
-        }
-
-        setInputValid(newInputValid);
-    };
+    const [values, setValues] = useState({});
 
     return (
         <Stack spacing={4}>
@@ -108,9 +113,13 @@ const CreateDwollaAccount = ({onComplete}) => {
             <Typography variant="subtitle2">Mailing Address</Typography>
 
             <ModifyUserInfo
-                onUpdate={(unprotectedUserInfo) => {
-                    onUpdate(unprotectedUserInfo, 0);
-                }}
+                isValid={(valid) => setUserInfoValid(valid)}
+                handleChange={(childValues) =>
+                    setValues({
+                        ...values,
+                        ...childValues,
+                    })
+                }
             ></ModifyUserInfo>
 
             <Divider></Divider>
@@ -123,33 +132,47 @@ const CreateDwollaAccount = ({onComplete}) => {
                 <Typography variant="subtitle2">
                     Personal Information
                 </Typography>
-                {/* <Chip variant="selected" label="Why do we need this?"></Chip> */}
             </Stack>
 
             <ProtectedUserInfo
                 fullSSNRequired={fullSSNRequired}
-                onUpdate={(protectedUserInfo) => {
-                    onUpdate(protectedUserInfo, 1);
-                }}
-                completed={userSignUpState == 'DWOLLA_ACCOUNT_VERIFIED'}
+                isValid={(valid) => setProtectedUserInfoValid(valid)}
+                handleChange={(childValues) =>
+                    setValues({
+                        ...values,
+                        ...childValues,
+                    })
+                }
+                completed={userStatus == 'IDENTITY_VERIFIED'}
             ></ProtectedUserInfo>
 
-            {submitErrorMessage && (
+            {error && (
                 <Alert severity="error">
-                    {'Sorry, retry! ' + submitErrorMessage}
+                    {'Sorry, retry! ' + error.message}
                 </Alert>
             )}
+
             <Collapse in={fullSSNRequired}>
                 <Alert severity="error">
                     Additional verification is required. Double check that your
                     information is correct and enter your complete 9 digit SSN
                 </Alert>
             </Collapse>
+
             <Button
                 variant="primary"
-                disabled={!inputValid.every((valid) => valid)}
+                disabled={!(userInfoValid && protectedUserInfoValid)}
                 color="legendaryGreen"
-                onClick={handleSubmit}
+                onClick={(event) => {
+                    setLoading(true);
+
+                    Promise.resolve(onSubmit(values))
+                        .catch((error) => {
+                            if (error.type === ErrorTypes.DwollaError)
+                                setError(error);
+                        })
+                        .finally(() => setLoading(false));
+                }}
             >
                 {loading ? (
                     <CircularProgress color="light" size={30} />

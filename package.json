@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@fullstory/browser": "^1.5.0",
@@ -29,6 +30,7 @@
     "firebase": "^9.6.7",
     "firebaseui": "^0.600.0",
     "formik": "^2.2.9",
+    "graphql": "^16.3.0",
     "js-easing-functions": "^1.0.3",
     "logrocket": "^2.2.0",
     "lottie-web": "^5.8.1",
@@ -95,6 +97,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "query-string": "^7.1.1"
   }
 }

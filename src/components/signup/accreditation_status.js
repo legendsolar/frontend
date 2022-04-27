@@ -1,17 +1,8 @@
-import {
-    Stack,
-    Button,
-    Box,
-    Chip,
-    Typography,
-    Link,
-    CircularProgress,
-} from '@mui/material';
-import {useEffect, useState} from 'react';
+import {Button, CircularProgress} from '@mui/material';
+import {useState} from 'react';
 import CheckboxList from 'components/inputs/checkbox_list';
-import {useDatabaseObjectData, useDatabase} from 'reactfire';
-import {set, ref} from 'firebase/database';
 import {useAuth} from 'hooks/use_auth';
+import {useUser} from 'hooks/use_user';
 import Divider from 'components/basics/divider';
 
 const AccreditationStatus = ({
@@ -30,12 +21,12 @@ const AccreditationStatus = ({
             accredited: true,
             attribute: 'INCOME',
         },
-        PERSONAL_NET_WORTH: {
+        NET_WORTH: {
             title: 'Personal Net Worth',
             description:
                 'I have $1,000,000 in assets, excluding my primary residence',
             accredited: true,
-            attribute: 'PERSONAL_NET_WORTH',
+            attribute: 'NET_WORTH',
         },
         LICENSE_HOLDER: {
             title: 'License Holder',
@@ -61,62 +52,76 @@ const AccreditationStatus = ({
     });
 
     const [checkedList, setCheckedList] = useState(null);
-    const [loading, setLoading] = useState(false);
 
-    const database = useDatabase();
-    const {status, data: userInfo} = useDatabaseObjectData(
-        ref(database, 'users/' + user.uid),
-    );
+    const {useGetUserAccreditation, useSetUser} = useUser();
+    const {loading, error, data} = useGetUserAccreditation();
+    const [setUser] = useSetUser();
 
-    useEffect(() => {
-        if (status == 'success') {
-            if (
-                userInfo &&
-                userInfo.accreditation &&
-                userInfo.accreditation.attributes
-            ) {
-                const list = {};
-                Object.entries(userInfo.accreditation.attributes).map(
-                    ([key, val]) => {
-                        list[key] = val.status;
-                    },
-                );
-                setCheckedList(list);
-            }
-        }
-    }, [status]);
+    if (loading) {
+        return <></>;
+    }
+
+    // const database = useDatabase();
+    // const {status, data: userInfo} = useDatabaseObjectData(
+    //     ref(database, 'users/' + user.uid),
+    // );
+
+    // useEffect(() => {
+    //     if (status == 'success') {
+    //         if (
+    //             userInfo &&
+    //             userInfo.accreditation &&
+    //             userInfo.accreditation.attributes
+    //         ) {
+    //             const list = {};
+    //             Object.entries(userInfo.accreditation.attributes).map(
+    //                 ([key, val]) => {
+    //                     list[key] = val.status;
+    //                 },
+    //             );
+    //             setCheckedList(list);
+    //         }
+    //     }
+    // }, [status]);
 
     const onContinueClick = () => {
-        var accreditationStatus = 'NOT_ACCREDITED';
-        const accreditationAttributes = Object.fromEntries(
-            Object.entries(checkedList).map(([key, checked]) => {
-                if (checked && accreditationOptionsList[key].accredited) {
-                    accreditationStatus = 'ACCREDITED';
-                }
+        //     var accreditationStatus = 'NOT_ACCREDITED';
+        //     const accreditationAttributes = Object.fromEntries(
+        //         Object.entries(checkedList).map(([key, checked]) => {
+        //             if (checked && accreditationOptionsList[key].accredited) {
+        //                 accreditationStatus = 'ACCREDITED';
+        //             }
+        //             return [
+        //                 key,
+        //                 {
+        //                     status: checked,
+        //                     attribute: accreditationOptionsList[key].attribute,
+        //                 },
+        //             ];
+        //         }),
+        //     );
+        //     const databaseObject = {
+        //         status: accreditationStatus,
+        //         attributes: accreditationAttributes,
+        //     };
+        //     setLoading(true);
+        //     set(
+        //         ref(database, 'users/' + user.uid + '/accreditation/'),
+        //         databaseObject,
+        //     ).then(() => {
+        //         setLoading(false);
+        //         onComplete();
+        //     });
+        console.log(checkedList);
 
-                return [
-                    key,
-                    {
-                        status: checked,
-                        attribute: accreditationOptionsList[key].attribute,
-                    },
-                ];
-            }),
-        );
-
-        const databaseObject = {
-            status: accreditationStatus,
-            attributes: accreditationAttributes,
-        };
-
-        setLoading(true);
-
-        set(
-            ref(database, 'users/' + user.uid + '/accreditation/'),
-            databaseObject,
-        ).then(() => {
-            setLoading(false);
-            onComplete();
+        setUser({
+            variables: {
+                input: {
+                    accreditation: Object.keys(checkedList).filter(
+                        (key) => checkedList[key],
+                    ),
+                },
+            },
         });
     };
 

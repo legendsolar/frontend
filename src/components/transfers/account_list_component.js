@@ -6,51 +6,53 @@ import {
     Button,
     ListItemButton,
 } from '@mui/material';
+import Divider from 'components/basics/divider';
 import PropTypes from 'prop-types';
 
-const accountNumberString = '•••• •••• •••• ••••';
+const accountNumberString = '•••• •••• •••• ';
 
 const AccountListComponent = ({accounts, onSelected}) => (
-    <List>
+    <div>
         {accounts.map((account, index) => (
-            <ListItemButton
-                key={index}
-                sx={{ml: -4, mr: -4}}
-                onClick={() => {
-                    if (onSelected) {
-                        onSelected(account);
-                    }
-                }}
-            >
+            <div key={index}>
                 <Stack
                     direction="row"
                     justifyContent={'space-between'}
-                    sx={{width: '100%'}}
+                    sx={{m: 4}}
                 >
                     <Stack>
-                        <Typography variant="subtitle1">
+                        <Stack direction="row">
+                            <Typography variant="smallLabel">
+                                {account.type}
+                            </Typography>
+                            <Typography variant="smallLabel">
+                                {accountNumberString + account.mask}
+                            </Typography>
+                        </Stack>
+                        <Typography variant="headline2">
                             {account.name}
-                        </Typography>
-                        <Typography variant="subtitle3">
-                            {account.source}
                         </Typography>
                     </Stack>
 
-                    <Stack alignItems={'flex-end'}>
-                        <Typography variant="subtitle1">
-                            {account.institution}
-                        </Typography>
-                        <Typography variant="subtitle3">
-                            {accountNumberString}
-                        </Typography>
-                        <Button variant="button" disable={false}>
+                    <Stack alignItems={'center'} sx={{height: '100%'}}>
+                        <Button
+                            variant="bubble"
+                            sx={{color: 'legendaryGreen.main'}}
+                            onClick={() => {
+                                if (onSelected) {
+                                    onSelected(account);
+                                }
+                            }}
+                        >
                             Transfer
                         </Button>
                     </Stack>
                 </Stack>
-            </ListItemButton>
+
+                {index !== accounts.length - 1 && <Divider></Divider>}
+            </div>
         ))}
-    </List>
+    </div>
 );
 
 AccountListComponent.propTypes = {

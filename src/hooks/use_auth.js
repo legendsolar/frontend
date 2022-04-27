@@ -7,6 +7,7 @@ import {
     signOut,
     getAuth,
     signInWithPopup,
+    getIdToken,
 } from 'firebase/auth';
 
 import {GoogleAuthProvider} from 'firebase/auth';
@@ -14,6 +15,8 @@ import {useDispatch} from 'react-redux';
 import {clearUserState} from 'slices/user_slice';
 import {clearTransactionState} from 'slices/transfer_slice';
 import {clearWalletState} from 'slices/wallet_slice';
+
+import {setContext} from '@apollo/client/link/context';
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...
@@ -27,6 +30,21 @@ export function ProvideAuth({children}) {
 export const useAuth = () => {
     return useContext(authContext);
 };
+
+const setApolloContext = (user) => {
+    setContext((_, {headers, ...context}) => {
+        console.log('context ran:' + user);
+        const token = user.token;
+        return {
+            headers: {
+                ...headers,
+                ...(token ? {authorization: `Bearer ${user.token}`} : {}),
+            },
+            ...context,
+        };
+    });
+};
+
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
     const app = useFirebaseApp();
@@ -34,8 +52,9 @@ function useProvideAuth() {
     const provider = new GoogleAuthProvider();
 
     const [user, setUser] = useState(null);
-    const database = useDatabase();
-    // const [userData, setUserData] = useState(null);
+
+    const apolloContext = setApolloContext(user);
+
     const [isAuthenticating, setIsAuthenticating] = useState(true);
 
     const dispatch = useDispatch();
@@ -97,6 +116,7 @@ function useProvideAuth() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (!user) {
+                // TODO nuke apollo cache
                 console.log('use auth: user auth state changed');
                 console.log(user);
                 console.log('clearing user state');

@@ -4,8 +4,8 @@ import {
     FormControl,
     Select,
     FormHelperText,
-} from "@mui/material";
-import PropTypes from "prop-types";
+} from '@mui/material';
+import PropTypes from 'prop-types';
 
 const MultiSelect = ({
     name,
@@ -38,8 +38,7 @@ const MultiSelect = ({
             </Select>
             {!!error ? (
                 <FormHelperText error>{error.errMsg}</FormHelperText>
-            ) : null
-            }
+            ) : null}
         </FormControl>
     );
 };
@@ -51,8 +50,7 @@ MultiSelect.propTypes = {
         PropTypes.shape({
             id: PropTypes.string.isRequired,
             value: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired
-        })
+        }),
     ).isRequired,
     error: PropTypes.shape({
         error: PropTypes.bool,
@@ -63,7 +61,7 @@ MultiSelect.propTypes = {
 
 MultiSelect.defaultProps = {
     onChangeListener: () => {},
-    error: undefined
+    error: undefined,
 };
 
 export default MultiSelect;

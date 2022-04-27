@@ -3,28 +3,9 @@ import MultiSelect from 'components/inputs/multiselect';
 import {useEffect, useState} from 'react';
 import {useCloudFunctions} from 'hooks/use_cloud_functions';
 
-const IdentityVerificationKBA = ({onComplete}) => {
+const IdentityVerificationKBA = ({onSubmit, kbaQuestions}) => {
     const [selected, setSelected] = useState([]);
-    const [kbaQuestions, setKBAQuestions] = useState([]);
-    const cloudFunctions = useCloudFunctions();
-    const getKBASession = cloudFunctions.getKBASession;
-    const returnKBASessionResponse = cloudFunctions.returnKBASessionResponse;
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        setLoading(true);
-        getKBASession()
-            .then(({data}) => {
-                setKBAQuestions(data);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    }, []);
-
-    console.log({kbaQuestions: kbaQuestions});
-    console.log({selected: selected});
-
+    const [loading, setLoading] = useState(false);
     const onQuestionUpdate = (event) => {
         setSelected({...selected, [event.target.name]: event.target.value});
     };
@@ -35,16 +16,6 @@ const IdentityVerificationKBA = ({onComplete}) => {
                 if (!selected[question.id]) return true;
             })
             .some((q) => q);
-    };
-
-    const onSubmit = () => {
-        console.log('submitted kba');
-        console.log(selected);
-        setLoading(true);
-        returnKBASessionResponse(selected).then(() => {
-            setLoading(false);
-            onComplete();
-        });
     };
 
     return (
@@ -61,6 +32,7 @@ const IdentityVerificationKBA = ({onComplete}) => {
                             name={question.id}
                             text={question.text}
                             fields={question.answers}
+                            selected={{value: selected[question.id]}}
                             onChangeListener={onQuestionUpdate}
                         ></MultiSelect>
                     );
@@ -69,7 +41,7 @@ const IdentityVerificationKBA = ({onComplete}) => {
             <Button
                 variant="primary"
                 onClick={() => {
-                    onSubmit();
+                    onSubmit(selected);
                 }}
                 disabled={submitDisabled()}
             >

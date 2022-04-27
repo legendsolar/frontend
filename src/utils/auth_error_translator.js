@@ -1,52 +1,59 @@
 export const authErrorTranslator = (error) => {
     switch (error.code) {
-        case "auth/invalid-email":
+        case 'auth/invalid-email':
             return {
-                type: "email",
-                message: "Email is invalid",
+                source: 'email',
+                message: 'Email is invalid',
             };
 
-        case "auth/email-already-exists":
+        case 'auth/email-already-exists':
             return {
-                type: "email",
-                message: "Email is already in use",
+                source: 'email',
+                message: 'Email is already in use',
             };
 
-        case "auth/invalid-password":
+        case 'auth/email-already-in-use':
             return {
-                type: "password",
-                message: "Password is invalid",
+                source: 'email',
+                message: 'Email is already in use',
             };
 
-        case "auth/weak-password":
+        case 'auth/invalid-password':
             return {
-                type: "password",
-                message: "Password should be 6 or more characters long",
+                source: 'password',
+                message: 'Password is invalid',
             };
 
-        case "auth/user-not-found":
+        case 'auth/weak-password':
             return {
-                type: "email",
-                message: "Email not found",
+                source: 'password',
+                message: 'Password should be 6 or more characters long',
             };
 
-        case "auth/wrong-password":
+        case 'auth/user-not-found':
             return {
-                type: "password",
-                message: "Password is incorrect",
+                source: 'email',
+                message: 'Email not found',
+            };
+
+        case 'auth/wrong-password':
+            return {
+                source: 'password',
+                message: 'Password is incorrect',
             };
 
         // TODO this cases should not happen in normal operation
-        case "auth/invernal-error":
+        case 'auth/invernal-error':
             return {
-                type: "password",
-                message: "An unexpected error has occured. ",
+                source: 'password',
+                message: 'An unexpected error has occured. ',
             };
 
         default:
+            console.log(error);
             return {
-                type: "password",
-                message: "An unexpected error has occured. ",
+                source: 'password',
+                message: 'An unexpected error has occured. ',
             };
     }
 };

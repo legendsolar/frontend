@@ -2,55 +2,26 @@ import {getYear} from 'date-fns';
 import * as yup from 'yup';
 
 export const validateSSN = (input, fullSSNRequired = false) => {
-    if (!input) {
-        return {
-            error: true,
-            errMsg: 'SSN cannot be left blank',
-        };
+    if (fullSSNRequired) {
+        return yup
+            .string()
+            .min(9, 'SSN is invalid')
+            .max(9, 'SSN is invalid')
+            .required('SSN is required');
+    } else {
+        return yup
+            .string()
+            .min(4, 'SSN is invalid')
+            .max(4, 'SSN is invalid')
+            .required('Last four digits of SSN are required');
     }
-
-    if (!input || !input.match(/\d+/g)) {
-        return {
-            error: true,
-            errMsg: `SSN must contain only numbers, no "-" or spaces`,
-        };
-    }
-
-    if (fullSSNRequired && input.length != 9) {
-        return {
-            error: true,
-            errMsg: 'SSN must be all 9 digits',
-        };
-    } else if (!fullSSNRequired && input.length != 4) {
-        return {
-            error: true,
-            errMsg: 'The last 4 digits are required',
-        };
-    }
-
-    return {
-        error: false,
-        errMsg: undefined,
-    };
 };
 
-export const validatePostalCode = (input) => {
-    if (!input) {
-        return {
-            error: true,
-            errMsg: 'Zip code required',
-        };
-    } else if (!input.length || input.length !== 5 || !input.match(/\d+/g)) {
-        return {
-            error: true,
-            errMsg: 'Zip code invalid',
-        };
-    } else {
-        return {
-            error: false,
-            errMsg: undefined,
-        };
-    }
+export const validatePostalCode = () => {
+    return yup
+        .string()
+        .min(5, 'Postal code is invalid')
+        .required('Postal code is required');
 };
 
 export const validatePassword = (input) => {
@@ -73,59 +44,22 @@ export const validateLastName = () => {
 };
 
 export const validateStreetAddress = (input) => {
-    if (!input) {
-        return {
-            error: true,
-            errMsg: 'Street address required',
-        };
-    } else {
-        return {
-            error: false,
-            errMsg: undefined,
-        };
-    }
+    return yup.string().required('Street address is required');
 };
 
 export const validateStreetAddressTwo = (input) => {
-    // if (!input) {
-    //     return {
-    //         error: true,
-    //         errMsg: "Last name required",
-    //     };
-    // } else {
-    return {
-        error: false,
-        errMsg: undefined,
-    };
-    // }
+    return yup.string();
 };
 
 export const validateCity = (input) => {
-    if (!input) {
-        return {
-            error: true,
-            errMsg: 'City required',
-        };
-    } else {
-        return {
-            error: false,
-            errMsg: undefined,
-        };
-    }
+    return yup.string().required('City is required');
 };
 
 export const validateState = (input) => {
-    if (!input) {
-        return {
-            error: true,
-            errMsg: 'State required',
-        };
-    } else {
-        return {
-            error: false,
-            errMsg: undefined,
-        };
-    }
+    return yup
+        .string()
+        .max(2, 'State code is invalid')
+        .required('State code required');
 };
 
 export const validatePhoneNumber = () => {
@@ -133,58 +67,13 @@ export const validatePhoneNumber = () => {
 };
 
 export const validateDay = (input) => {
-    if (!input) {
-        return {
-            error: true,
-            errMsg: 'Day required',
-        };
-    } else if (parseInt(input) > 31) {
-        return {
-            error: true,
-            errMsg: 'Day invalid',
-        };
-    } else {
-        return {
-            error: false,
-            errMsg: undefined,
-        };
-    }
+    return yup.number().max(31, 'Day invalid').required('Day required');
 };
 
 export const validateMonth = (input) => {
-    if (!input) {
-        return {
-            error: true,
-            errMsg: 'Month required',
-        };
-    } else {
-        return {
-            error: false,
-            errMsg: undefined,
-        };
-    }
+    return yup.string().required('Month required');
 };
 
 export const validateYear = (input) => {
-    if (!input) {
-        return {
-            error: true,
-            errMsg: 'Year required',
-        };
-    } else if (parseInt(input) > getYear(new Date()) - 17) {
-        return {
-            error: true,
-            errMsg: 'You must be 18 or older to register on legends',
-        };
-    } else if (parseInt(input) < getYear(new Date()) - 130) {
-        return {
-            error: true,
-            errMsg: 'Year invalid',
-        };
-    } else {
-        return {
-            error: false,
-            errMsg: undefined,
-        };
-    }
+    return yup.number().min(1900, 'Year invalid').required('Year required');
 };
