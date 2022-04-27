@@ -4,34 +4,19 @@ import {useAuth} from 'hooks/use_auth';
 import {Paper, Stack, Button, Typography} from '@mui/material';
 import SideBarNavView from 'views/side_bar_view';
 
-import AccountListComponent from 'components/transfers/account_list_component';
 import CreateTransferComponent from 'components/transfers/create_transfer_component';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {selectWalletBalance} from 'slices/wallet_slice';
 import {fetchWalletBalance} from 'slices/wallet_slice';
 import {useCloudFunctions} from 'hooks/use_cloud_functions';
-import RecentTransfers from 'components/transfers/recent_transfers';
 import DefaultComponent from 'components/utils/default_component';
 import SideBar from 'components/utils/sidebar_component';
+import TransferGrid from 'components/transfers/transfer_grid';
+import AccountListComponent from 'components/transfers/account_list_component';
 
-const TransferPage = () => {
+const WalletPage = () => {
     const auth = useAuth();
-    const cloudFunctions = useCloudFunctions();
-    const dispatch = useDispatch();
-    const user = auth.user;
-
-    const balanceStatus = useSelector((state) => state.wallet.balance.status);
-    const walletBalance = useSelector(selectWalletBalance);
-
-    const balance = walletBalance ? walletBalance : '0.00';
-
-    useEffect(() => {
-        if (balanceStatus === 'idle') {
-            console.log('dispatch wallet: line 36, transfer page');
-            dispatch(fetchWalletBalance(cloudFunctions));
-        }
-    }, [balanceStatus, dispatch]);
 
     const contentRefs = useRef([]);
 
@@ -41,11 +26,81 @@ const TransferPage = () => {
         'Recent Transactions',
     ];
 
+    const userAccounts = [
+        {
+            id: '1',
+            name: 'Account Nickname',
+            source: 'Bank of America',
+            institution: 'Legends',
+            mask: '1234',
+            type: 'Checking',
+        },
+        {
+            id: '2',
+            name: 'Emergency Checking',
+            source: 'Chase',
+            institution: 'Legends',
+            mask: '1234',
+            type: 'Checking',
+        },
+        {
+            id: '3',
+            name: 'Money Pile Savings',
+            source: 'Union Credit',
+            institution: 'Legends',
+            mask: '1234',
+            type: 'Savings',
+        },
+    ];
+
+    const recentTransfers = [
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'Complete',
+            color: 'legendaryGreen',
+        },
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'In Progress',
+            color: 'pencilYellow',
+        },
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'Failed',
+            color: 'eraserRed',
+        },
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'Status',
+            color: 'legendaryGreen',
+        },
+    ];
+
     return (
         <SideBarNavView
             drawer={
                 <SideBar>
-                    <CreateTransferComponent></CreateTransferComponent>
+                    <CreateTransferComponent
+                        accounts={userAccounts}
+                        loading={false}
+                        onComplete={() => {}}
+                    ></CreateTransferComponent>
                 </SideBar>
             }
             mainContent={
@@ -57,7 +112,10 @@ const TransferPage = () => {
                         <Typography variant="smallHeadline">
                             Recent Transfers
                         </Typography>
-                        <RecentTransfers></RecentTransfers>
+
+                        <TransferGrid
+                            transfers={recentTransfers}
+                        ></TransferGrid>
                     </DefaultComponent>
 
                     <DefaultComponent
@@ -67,7 +125,9 @@ const TransferPage = () => {
                         <Typography variant="smallHeadline">
                             Connected Accounts
                         </Typography>
-                        <AccountListComponent></AccountListComponent>
+                        <AccountListComponent
+                            accounts={userAccounts}
+                        ></AccountListComponent>
                     </DefaultComponent>
                 </Stack>
             }
@@ -75,6 +135,6 @@ const TransferPage = () => {
     );
 };
 
-TransferPage.propTypes = {};
+WalletPage.propTypes = {};
 
-export default TransferPage;
+export default WalletPage;

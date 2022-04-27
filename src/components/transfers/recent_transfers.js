@@ -6,7 +6,7 @@ import {selectTransactions, fetchTransactions} from 'slices/transfer_slice';
 import {useSelector, useDispatch} from 'react-redux';
 import {useCloudFunctions} from 'hooks/use_cloud_functions';
 import {useEffect} from 'react';
-import TransactionGrid from 'components/transfers/transfer_grid';
+import TransferGrid from 'components/transfers/transfer_grid';
 
 const RecentTransfers = (transferType) => {
     const dispatch = useDispatch();
@@ -28,10 +28,10 @@ const RecentTransfers = (transferType) => {
         return <Typography>loading</Typography>;
     } else if (transactionStatus === 'succeeded' && transactions.length > 0) {
         return (
-            <TransactionGrid
+            <TransferGrid
                 title={'Recent Transactions'}
                 transactions={transactions}
-            ></TransactionGrid>
+            ></TransferGrid>
         );
     } else if (transactionStatus === 'succeeded' && transactions.length == 0) {
         return <Typography>No transactions found </Typography>;

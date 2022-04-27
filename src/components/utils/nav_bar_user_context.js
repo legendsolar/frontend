@@ -25,6 +25,7 @@ const NavBarUserContext = () => {
             onDocuments={() => navigate('/documents')}
             onAvailablePanels={() => navigate('/explore')}
             onAccount={() => navigate('/account')}
+            onWallet={() => navigate('/wallet')}
         ></NavBar>
     );
 };
