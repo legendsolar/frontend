@@ -21,10 +21,10 @@ const NavBarUserContext = () => {
             walletBalance={walletBalance}
             onToHomepage={redirectToHomePage}
             onYourRooftop={() => navigate('/')}
-            onTransaction={() => navigate('/')}
-            onDocuments={() => navigate('/')}
-            onAvailablePanels={() => navigate('/')}
-            onAccount={() => navigate('/')}
+            onTransaction={() => navigate('/transactions')}
+            onDocuments={() => navigate('/documents')}
+            onAvailablePanels={() => navigate('/explore')}
+            onAccount={() => navigate('/account')}
         ></NavBar>
     );
 };

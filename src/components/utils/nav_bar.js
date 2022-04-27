@@ -27,46 +27,6 @@ const NavBar = ({
     onAccount,
     onWallet,
 }) => {
-    // const auth = useAuth();
-    // const user = auth.user;
-
-    // const navigate = useNavigate();
-    // const cloudFunctions = useCloudFunctions();
-    // const dispatch = useDispatch();
-
-    // const userSignUpStateStatus = useSelector(
-    //     (state) => state.user.signUpState.status,
-    // );
-    // const userSignUpState = useSelector(selectUserSignUpState);
-    // const balanceStatus = useSelector((state) => state.wallet.balance.status);
-
-    // useEffect(() => {
-    //     console.log(
-    //         'nav bar user sign up status: ',
-    //         userSignUpStateStatus,
-    //         !!auth.user,
-    //     );
-
-    //     if (store.getState().user.signUpState.status === 'idle' && auth.user) {
-    //         console.log('dispatch user state, line 30 nav bar');
-    //         dispatch(fetchUserSignUpState(cloudFunctions));
-
-    //         console.log('dispatch complete ');
-    //         console.log(
-    //             'post dispatch sign up status: ' + userSignUpStateStatus,
-    //         );
-    //     }
-    // }, [dispatch, store.getState().user.signUpState.status, auth.user]);
-
-    // useEffect(() => {
-    //     if (balanceStatus === 'idle' && user) {
-    //         console.log('fetch wallet, line 37 nav bar');
-    //         dispatch(fetchWalletBalance(cloudFunctions));
-    //     }
-    // }, [user, dispatch, balanceStatus]);
-
-    // const walletBalance = useSelector(selectWalletBalance);
-
     return (
         <Toolbar
             style={{

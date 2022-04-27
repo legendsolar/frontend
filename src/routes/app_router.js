@@ -78,7 +78,9 @@ function AppRouter() {
                                     USER_STATUS.IDENTITY_VERIFIED,
                                 ]}
                                 requiredPath="/complete-account/create"
-                            ></ProtectedRoute>
+                            >
+                                <PortfolioPage></PortfolioPage>
+                            </ProtectedRoute>
                         }
                     />
                     <Route

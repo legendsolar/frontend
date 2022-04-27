@@ -4,14 +4,18 @@ import {useAuth} from 'hooks/use_auth';
 import {Paper, Stack, Button, Typography, ListItemButton} from '@mui/material';
 import Divider from 'components/basics/divider';
 import SideBarNavView from 'views/side_bar_view';
-
+import ScrollToSidebar from 'components/utils/scroll_to_sidebar';
+import MemberHeader from 'components/user/member_header';
+import ProtectedUserInfo from 'components/user/protected_user_info';
+import RecentTransfers from 'components/transfers/recent_transfers';
+import {useUser} from 'hooks/use_user';
 import DefaultComponent from 'components/utils/default_component';
 import UpdateUserInfo from 'components/user/update_user_info';
 import AccountManagementComponent from 'components/transfers/account_management_component';
 
 const AccountPage = () => {
     const auth = useAuth();
-    const user = auth.user;
+    const {useUserMetaData} = useUser();
 
     const contentRefs = useRef([]);
 
@@ -21,11 +25,21 @@ const AccountPage = () => {
         'Investment History',
     ];
 
+    const {firstName, lastName, info} = useUserMetaData();
+
+    const userName = firstName + ' ' + lastName;
+    const userInfo = info;
+
     return (
         <SideBarNavView
             drawer={
                 <ScrollToSidebar
-                    header={<MemberHeader></MemberHeader>}
+                    header={
+                        <MemberHeader
+                            name={userName}
+                            memberInfo={userInfo}
+                        ></MemberHeader>
+                    }
                     contentTitles={drawerTitles}
                     refs={contentRefs}
                     additionalButtons={

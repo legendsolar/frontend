@@ -87,6 +87,15 @@ export const useUser = () => {
         }
     `;
 
+    const USER_NAME_QUERY = gql`
+        query User {
+            user {
+                firstName
+                lastName
+            }
+        }
+    `;
+
     const useGetUserStatus = () => {
         return useQuery(USER_STATUS_QUERY);
     };
@@ -107,12 +116,29 @@ export const useUser = () => {
         return useMutation(CREATE_DWOLLA_ACCOUNT);
     };
 
+    const useUserMetaData = () => {
+        const {loading, error, data} = useQuery(USER_NAME_QUERY);
+
+        const firstName = data?.user?.firstName;
+        const lastName = data?.user?.lastName;
+        const info = 'Member since 2022';
+
+        return {
+            loading,
+            error,
+            firstName,
+            lastName,
+            info,
+        };
+    };
+
     return {
         useGetUserStatus,
         useSetUser,
         useCreateDwollaAccount,
         useGetUserAcceptance,
         useGetUserAccreditation,
+        useUserMetaData,
         // createUserTransfer: createUserTransfer,
     };
 };
