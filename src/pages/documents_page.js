@@ -3,6 +3,7 @@ import {Paper, Typography, Stack} from '@mui/material';
 import SideBarView from 'views/side_bar_view';
 import ScrollToSidebar from 'components/utils/scroll_to_sidebar';
 import DefaultComponent from 'components/utils/default_component';
+import DocumentComponent from 'components/invest/document_component';
 
 const DocumentPage = () => {
     const contentRefs = useRef([]);
