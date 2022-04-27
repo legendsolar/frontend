@@ -227,6 +227,7 @@ ModifyUserInfo.propTypes = {
     }),
     onSubmit: PropTypes.func,
     isValid: PropTypes.func,
+    handleChange: PropTypes.func,
 };
 
 ModifyUserInfo.defaultProps = {
@@ -241,6 +242,7 @@ ModifyUserInfo.defaultProps = {
     },
     isValid: (bool) => {},
     onSubmit: () => {},
+    handleChange: () => {},
 };
 
 export default ModifyUserInfo;

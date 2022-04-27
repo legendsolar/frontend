@@ -12,6 +12,8 @@ import {useUser} from 'hooks/use_user';
 import DefaultComponent from 'components/utils/default_component';
 import UpdateUserInfo from 'components/user/update_user_info';
 import AccountManagementComponent from 'components/transfers/account_management_component';
+import ModifyUserInfo from 'components/user/modify_user_info';
+import LoadingComponent from 'components/utils/loading_component';
 
 const AccountPage = () => {
     const auth = useAuth();
@@ -25,10 +27,25 @@ const AccountPage = () => {
         'Investment History',
     ];
 
-    const {firstName, lastName, info} = useUserMetaData();
+    const {
+        loading: userMetaDataLoading,
+        firstName,
+        lastName,
+        info,
+    } = useUserMetaData();
 
     const userName = firstName + ' ' + lastName;
     const userInfo = info;
+
+    const userInfoInitial = {
+        firstName: firstName,
+        lastName: lastName,
+        streetAddress: ' bla bla ',
+        streetAddress2: 'bla bla',
+        city: 'bla',
+        state: 'WI',
+        postalCode: '53536',
+    };
 
     return (
         <SideBarNavView
@@ -75,15 +92,15 @@ const AccountPage = () => {
                             Mailing Address
                         </Typography>
 
-                        <UpdateUserInfo></UpdateUserInfo>
-
-                        <Divider></Divider>
-
-                        <Typography variant="subtitle2">
-                            Personal Information
-                        </Typography>
-
-                        <ProtectedUserInfo completed={true}></ProtectedUserInfo>
+                        {userMetaDataLoading ? (
+                            <LoadingComponent></LoadingComponent>
+                        ) : (
+                            <ModifyUserInfo
+                                initialValues={userInfoInitial}
+                                onSubmit={() => {}}
+                                isValid={() => {}}
+                            ></ModifyUserInfo>
+                        )}
                     </DefaultComponent>
 
                     <DefaultComponent
