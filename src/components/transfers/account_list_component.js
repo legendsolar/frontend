@@ -57,7 +57,11 @@ const AccountListComponent = ({accounts, onSelected}) => (
 
 AccountListComponent.propTypes = {
     accounts: PropTypes.array.isRequired,
+    onSelected: PropTypes.func,
 };
 
-AccountListComponent.defaultProps = {};
+AccountListComponent.defaultProps = {
+    onSelected: () => {},
+};
+
 export default AccountListComponent;

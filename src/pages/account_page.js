@@ -6,14 +6,12 @@ import Divider from 'components/basics/divider';
 import SideBarNavView from 'views/side_bar_view';
 import ScrollToSidebar from 'components/utils/scroll_to_sidebar';
 import MemberHeader from 'components/user/member_header';
-import ProtectedUserInfo from 'components/user/protected_user_info';
-import RecentTransfers from 'components/transfers/recent_transfers';
+import TransferGrid from 'components/transfers/transfer_grid';
 import {useUser} from 'hooks/use_user';
 import DefaultComponent from 'components/utils/default_component';
-import UpdateUserInfo from 'components/user/update_user_info';
-import AccountManagementComponent from 'components/transfers/account_management_component';
 import ModifyUserInfo from 'components/user/modify_user_info';
 import LoadingComponent from 'components/utils/loading_component';
+import AccountListComponent from 'components/transfers/account_list_component';
 
 const AccountPage = () => {
     const auth = useAuth();
@@ -46,6 +44,72 @@ const AccountPage = () => {
         state: 'WI',
         postalCode: '53536',
     };
+
+    const userAccounts = [
+        {
+            id: '1',
+            name: 'Account Nickname',
+            source: 'Bank of America',
+            institution: 'Legends',
+            mask: '1234',
+            type: 'Checking',
+        },
+        {
+            id: '2',
+            name: 'Emergency Checking',
+            source: 'Chase',
+            institution: 'Legends',
+            mask: '1234',
+            type: 'Checking',
+        },
+        {
+            id: '3',
+            name: 'Money Pile Savings',
+            source: 'Union Credit',
+            institution: 'Legends',
+            mask: '1234',
+            type: 'Savings',
+        },
+    ];
+
+    const recentTransfers = [
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'Complete',
+            color: 'legendaryGreen',
+        },
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'In Progress',
+            color: 'pencilYellow',
+        },
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'Failed',
+            color: 'eraserRed',
+        },
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'Status',
+            color: 'legendaryGreen',
+        },
+    ];
 
     return (
         <SideBarNavView
@@ -110,9 +174,9 @@ const AccountPage = () => {
                         <Typography variant="smallHeadline">
                             Connected Accounts
                         </Typography>
-                        <AccountManagementComponent
-                            includeWallet={false}
-                        ></AccountManagementComponent>
+                        <AccountListComponent
+                            accounts={userAccounts}
+                        ></AccountListComponent>
                     </DefaultComponent>
 
                     <DefaultComponent
@@ -121,7 +185,9 @@ const AccountPage = () => {
                         <Typography variant="smallHeadline">
                             Investment History
                         </Typography>
-                        <RecentTransfers></RecentTransfers>
+                        <TransferGrid
+                            transfers={recentTransfers}
+                        ></TransferGrid>
                     </DefaultComponent>
                 </Stack>
             }

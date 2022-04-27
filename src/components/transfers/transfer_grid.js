@@ -1,9 +1,8 @@
 import {Grid, Typography, Paper} from '@mui/material';
-import TransactionComponent from 'components/transfers/transfer_component';
+import TransferComponent from 'components/transfers/transfer_component';
 import PropTypes from 'prop-types';
 
-const TransactionGrid = ({transactions}) => {
-    console.log('loaded: ' + transactions);
+const TransferGrid = ({transfers}) => {
     return (
         <div>
             <Grid
@@ -12,30 +11,28 @@ const TransactionGrid = ({transactions}) => {
                 justifyContent="center"
                 alignItems="center"
             >
-                {transactions.map((transaction) => {
+                {transfers.map((transfer) => {
                     return (
-                        <Grid item s={6} key={transaction.id}>
-                            <TransactionComponent
+                        <Grid item s={6} key={transfer.id}>
+                            <TransferComponent
                                 title={
-                                    'title' in transaction
-                                        ? transaction.title +
-                                          ' : ' +
-                                          transaction.status
-                                        : transaction.status
+                                    'title' in transfer ? transfer.title : ''
                                 }
-                                amount={parseFloat(transaction.amount)}
+                                amount={parseFloat(transfer.amount)}
                                 source={
-                                    'sourceName' in transaction
-                                        ? transaction.sourceName
+                                    'source' in transfer
+                                        ? transfer.source
                                         : 'unknown'
                                 }
                                 destination={
-                                    'destinationName' in transaction
-                                        ? transaction.destinationName
+                                    'destination' in transfer
+                                        ? transfer.destination
                                         : 'wallet'
                                 }
-                                date={transaction.created}
-                            ></TransactionComponent>
+                                date={transfer.created}
+                                color={transfer.color}
+                                status={transfer.status}
+                            ></TransferComponent>
                         </Grid>
                     );
                 })}
@@ -44,9 +41,9 @@ const TransactionGrid = ({transactions}) => {
     );
 };
 
-TransactionGrid.propTypes = {
+TransferGrid.propTypes = {
     title: PropTypes.string.isRequired,
-    transactions: PropTypes.arrayOf(
+    transfers: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.string.isRequired,
             amount: PropTypes.shape({
@@ -60,4 +57,4 @@ TransactionGrid.propTypes = {
     ),
 };
 
-export default TransactionGrid;
+export default TransferGrid;

@@ -6,7 +6,7 @@ import {selectTransactions, fetchTransactions} from 'slices/transfer_slice';
 import {useSelector, useDispatch} from 'react-redux';
 import {useCloudFunctions} from 'hooks/use_cloud_functions';
 import {useEffect} from 'react';
-import TransactionGrid from 'components/transfers/transaction_grid';
+import TransactionGrid from 'components/transfers/transfer_grid';
 
 const RecentTransfers = (transferType) => {
     const dispatch = useDispatch();
