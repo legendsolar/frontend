@@ -6,62 +6,156 @@ import {
     Button,
     ListItemButton,
 } from '@mui/material';
+import {useState} from 'react';
 import Divider from 'components/basics/divider';
 import PropTypes from 'prop-types';
 
 const accountNumberString = '•••• •••• •••• ';
 
-const AccountListComponent = ({accounts, onSelected}) => (
-    <div>
-        {accounts.map((account, index) => (
-            <div key={index}>
-                <Stack
-                    direction="row"
-                    justifyContent={'space-between'}
-                    sx={{m: 4}}
-                >
-                    <Stack>
-                        <Stack direction="row">
-                            <Typography variant="smallLabel">
-                                {account.type}
-                            </Typography>
-                            <Typography variant="smallLabel">
-                                {accountNumberString + account.mask}
-                            </Typography>
-                        </Stack>
-                        <Typography variant="headline2">
-                            {account.name}
-                        </Typography>
-                    </Stack>
+const AccountListComponent = ({
+    accounts,
+    onSelected,
+    onCreateTransfer,
+    onUnlinkAccount,
+    onAddAccount,
+}) => {
+    const [mode, setMode] = useState('normal');
+    const [selectedUnlinkAccount, setSelectedUnlinkAccount] = useState(null);
 
-                    <Stack alignItems={'center'} sx={{height: '100%'}}>
-                        <Button
-                            variant="bubble"
-                            sx={{color: 'legendaryGreen.main'}}
-                            onClick={() => {
-                                if (onSelected) {
-                                    onSelected(account);
-                                }
-                            }}
-                        >
-                            Transfer
-                        </Button>
-                    </Stack>
+    const onEditButton = () => {
+        console.log('edit' + mode);
+        if (mode === 'normal') {
+            setMode('edit');
+        } else {
+            setMode('normal');
+        }
+    };
+
+    const onTransferUnlinkButton = (account) => {
+        if (mode === 'normal') {
+            onCreateTransfer(account);
+        } else {
+            setSelectedUnlinkAccount(account);
+            setMode('confirm');
+        }
+    };
+
+    const onUnlinkButton = () => {
+        onUnlinkAccount(selectedUnlinkAccount);
+        // TODO loading
+        setMode('normal');
+    };
+
+    const onCancelUnlink = () => {
+        setMode('normal');
+    };
+
+    const content =
+        mode === 'confirm' ? (
+            <Stack sx={{mt: 4}}>
+                <Typography variant="headline2">{`Are you sure you want to unlink your ${selectedUnlinkAccount.type} account ending in ${selectedUnlinkAccount.mask}?`}</Typography>
+
+                <Stack direction={'row'} sx={{width: '100%'}}>
+                    <Button variant="primary" onClick={onUnlinkButton}>
+                        Unlink
+                    </Button>
+                    <Button
+                        variant="primary"
+                        color="whiteFog"
+                        onClick={onCancelUnlink}
+                    >
+                        Cancel
+                    </Button>
                 </Stack>
+            </Stack>
+        ) : (
+            <div>
+                {accounts.map((account, index) => (
+                    <div key={index}>
+                        <Stack
+                            direction="row"
+                            justifyContent={'space-between'}
+                            sx={{m: 4}}
+                        >
+                            <Stack>
+                                <Stack direction="row">
+                                    <Typography variant="smallLabel">
+                                        {account.type}
+                                    </Typography>
+                                    <Typography variant="smallLabel">
+                                        {accountNumberString + account.mask}
+                                    </Typography>
+                                </Stack>
+                                <Typography variant="headline2">
+                                    {account.name}
+                                </Typography>
+                            </Stack>
 
-                {index !== accounts.length - 1 && <Divider></Divider>}
+                            <Stack justifyContent={'center'}>
+                                <Button
+                                    variant="bubble"
+                                    sx={{
+                                        color:
+                                            mode === 'normal'
+                                                ? 'legendaryGreen.main'
+                                                : 'eraserRed.main',
+                                    }}
+                                    onClick={() =>
+                                        onTransferUnlinkButton(account)
+                                    }
+                                >
+                                    {mode === 'normal' ? 'Transfer' : 'Unlink'}
+                                </Button>
+                            </Stack>
+                        </Stack>
+
+                        <Divider></Divider>
+                    </div>
+                ))}
+
+                <Stack
+                    direction={'row'}
+                    justifyContent={'flex-end'}
+                    sx={{mt: 4}}
+                >
+                    <Button
+                        variant={'mono'}
+                        sx={{color: 'grassGreen.main'}}
+                        onClick={onAddAccount}
+                    >
+                        Add new account
+                    </Button>
+                </Stack>
             </div>
-        ))}
-    </div>
-);
+        );
+
+    return (
+        <div>
+            <Stack direction={'row'} justifyContent={'space-between'}>
+                <Typography>Connected Accounts</Typography>
+                <Button onClick={onEditButton}>edit</Button>
+            </Stack>
+
+            <Divider sx={{mt: 4}}></Divider>
+
+            {content}
+        </div>
+    );
+};
 
 AccountListComponent.propTypes = {
     accounts: PropTypes.array.isRequired,
     onSelected: PropTypes.func,
+    onAddAccount: PropTypes.func,
+    onCreateTransfer: PropTypes.func,
+    onUnlinkAccount: PropTypes.func,
 };
 
 AccountListComponent.defaultProps = {
     onSelected: () => {},
+    onAddAccount: () => {},
+    onCreateTransfer: () => {},
+    onUnlinkAccount: () => {},
 };
 
 export default AccountListComponent;

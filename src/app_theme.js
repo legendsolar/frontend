@@ -1,188 +1,188 @@
-import { createTheme } from "@mui/material/styles";
-import { deepmerge } from "@mui/utils";
+import {createTheme} from '@mui/material/styles';
+import {deepmerge} from '@mui/utils';
 
 /**
  * Named Colors
  */
 
-const legendaryGreen = "#345D34";
-const whiteHaze = "#F4F5F5";
-const whiteFog = "#EBEBEB";
-const blackDusk = "#2D3436";
-const blackDawn = "#636E72";
-const skyBlue = "#477FB2";
-const grassGreen = "#30A462";
-const pencilYellow = "#EAB31E";
-const eraserRed = "#B4615F";
+const legendaryGreen = '#345D34';
+const whiteHaze = '#F4F5F5';
+const whiteFog = '#EBEBEB';
+const blackDusk = '#2D3436';
+const blackDawn = '#636E72';
+const skyBlue = '#477FB2';
+const grassGreen = '#30A462';
+const pencilYellow = '#EAB31E';
+const eraserRed = '#B4615F';
 
 const spacing = (s) => `${s * 5}px`;
 
 const paletteOptions = {
     palette: {
         dark: {
-            main: "#000",
-            contrastText: "#FFF",
+            main: '#000',
+            contrastText: '#FFF',
         },
         light: {
-            main: "#FFF",
+            main: '#FFF',
             contrastText: blackDawn,
         },
         white: {
-            main: "#FFF",
+            main: '#FFF',
             contrastText: blackDawn,
         },
         legendaryGreen: {
             main: legendaryGreen,
-            light: "#708d70",
-            dark: "#244124",
-            contrastText: "#fff",
+            light: '#708d70',
+            dark: '#244124',
+            contrastText: '#fff',
         },
         whiteHaze: {
             main: whiteHaze,
             contrastText: blackDawn,
-            dark: "#d3d3d3",
-            light: "#ededed",
+            dark: '#d3d3d3',
+            light: '#ededed',
         },
         whiteFog: {
             main: whiteFog,
             contrastText: blackDawn,
-            dark: "#bcbcbc",
-            light: "#efefef",
+            dark: '#bcbcbc',
+            light: '#efefef',
         },
         blackDusk: {
             main: blackDusk,
-            contrastText: "#FFF",
+            contrastText: '#FFF',
         },
         blackDawn: {
             main: blackDawn,
-            contrastText: "#FFF",
+            contrastText: '#FFF',
         },
         skyBlue: {
             main: skyBlue,
-            contrastText: "#FFF",
-            dark: "#38658e",
-            light: "#6b98c1",
+            contrastText: '#FFF',
+            dark: '#38658e',
+            light: '#6b98c1',
         },
         grassGreen: {
             main: grassGreen,
-            contrastText: "#FFF",
-            dark: "#26834e",
-            light: "#59b681",
+            contrastText: '#FFF',
+            dark: '#26834e',
+            light: '#59b681',
         },
         pencilYellow: {
             main: pencilYellow,
-            contrastText: "#FFF",
-            dark: "#bb8f18",
-            light: "#eec24a",
+            contrastText: '#FFF',
+            dark: '#bb8f18',
+            light: '#eec24a',
         },
         eraserRed: {
             main: eraserRed,
-            contrastText: "#FFF",
-            dark: "#904d4c",
-            light: "#c3807e",
+            contrastText: '#FFF',
+            dark: '#904d4c',
+            light: '#c3807e',
         },
         inactive: {
-            main: "#636E72",
+            main: '#636E72',
         },
 
         // Override MUI defaults
         error: {
             main: eraserRed,
-            contrastText: "#FFF",
-            dark: "#904d4c",
-            light: "#c3807e",
+            contrastText: '#FFF',
+            dark: '#904d4c',
+            light: '#c3807e',
         },
         primary: {
             main: blackDawn,
             light: blackDusk,
             dark: whiteFog,
-            contrastText: "#fff",
+            contrastText: '#fff',
         },
     },
 };
 
 const typographyOptions = {
     typography: {
-        fontFamily: "Be Vietnam Pro",
-        fontSize: "12px",
-        lineHeight: "12px",
+        fontFamily: 'Be Vietnam Pro',
+        fontSize: '12px',
+        lineHeight: '12px',
         color: paletteOptions.palette.blackDusk.main,
         headline1: {
-            fontFamily: "Be Vietnam Pro",
+            fontFamily: 'Be Vietnam Pro',
             fontWeight: 600,
-            fontSize: "60px",
-            lineHeight: "76px",
+            fontSize: '60px',
+            lineHeight: '76px',
             color: paletteOptions.palette.blackDusk.main,
         },
         subtitle1: {
-            fontFamily: "Be Vietnam Pro",
+            fontFamily: 'Be Vietnam Pro',
             fontWeight: 600,
-            fontSize: "20px",
-            lineHeight: "25.3px",
+            fontSize: '20px',
+            lineHeight: '25.3px',
             color: paletteOptions.palette.blackDusk.main,
         },
         body1: {
-            fontFamily: "Be Vietnam Pro",
-            fontSize: "20px",
-            lineHeight: "20px",
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '20px',
+            lineHeight: '20px',
             color: paletteOptions.palette.blackDusk.main,
         },
         headline2: {
-            fontWeight: "bold",
-            fontFamily: "Be Vietnam Pro",
-            fontSize: "36px",
-            lineHeight: "45.54px",
+            fontWeight: 'bold',
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '36px',
+            lineHeight: '45.54px',
             color: paletteOptions.palette.blackDusk.main,
         },
         subtitle2: {
-            fontFamily: "Be Vietnam Pro",
+            fontFamily: 'Be Vietnam Pro',
             fontWeight: 600,
-            fontSize: "18px",
-            lineHeight: "22.77px",
+            fontSize: '18px',
+            lineHeight: '22.77px',
             color: paletteOptions.palette.blackDusk.main,
         },
         body2: {
-            fontFamily: "Be Vietnam Pro",
-            fontWeight: "normal",
-            fontSize: "18px",
+            fontFamily: 'Be Vietnam Pro',
+            fontWeight: 'normal',
+            fontSize: '18px',
             color: paletteOptions.palette.blackDusk.main,
-            lineHeight: "22.77px",
+            lineHeight: '22.77px',
         },
         description: {
-            fontFamily: "Be Vietnam Pro",
-            fontSize: "14px",
-            lineHeight: "17.71px",
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '14px',
+            lineHeight: '17.71px',
             color: paletteOptions.palette.blackDusk.main,
         },
         smallHeadline: {
-            fontFamily: "Be Vietnam Pro",
-            fontSize: "24px",
-            fontWeight: "bold",
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '24px',
+            fontWeight: 'bold',
             fontWeight: 700,
             color: paletteOptions.palette.blackDusk.main,
-            lineHeight: "30.36px",
+            lineHeight: '30.36px',
         },
         subtitle3: {
-            fontFamily: "Be Vietnam Pro",
-            fontSize: "14px",
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '14px',
             fontWeight: 600,
             color: paletteOptions.palette.blackDusk.main,
-            lineHeight: "17.71px",
+            lineHeight: '17.71px',
         },
         label: {
-            fontFamily: "Be Vietnam Pro",
-            fontSize: "12px",
-            lineHeight: "15.18px",
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '12px',
+            lineHeight: '15.18px',
             color: paletteOptions.palette.blackDusk.main,
             fontWeight: 400,
         },
         smallLabel: {
-            fontFamily: "Azeret Mono",
-            fontSize: "12px",
-            lineHeight: "14px",
+            fontFamily: 'Azeret Mono',
+            fontSize: '12px',
+            lineHeight: '14px',
             fontWeight: 600,
             color: paletteOptions.palette.blackDusk.main,
-            textTransform: "uppercase",
+            textTransform: 'uppercase',
         },
     },
 };
@@ -217,12 +217,12 @@ const themeOptions = {
         MuiPaper: {
             variants: [
                 {
-                    props: { variant: "container" },
+                    props: {variant: 'container'},
                     style: {
                         padding: spacing(4),
-                        borderRadius: "15px",
-                        boxShadow: "0 0 15px 0 rgb(99 110 114 / 35%)",
-                        overflow: "hidden",
+                        borderRadius: '15px',
+                        boxShadow: '0 0 15px 0 rgb(99 110 114 / 35%)',
+                        overflow: 'hidden',
                     },
                 },
             ],
@@ -230,37 +230,37 @@ const themeOptions = {
         MuiAppBar: {
             styleOverrides: {
                 root: {
-                    borderRadius: "0px",
+                    borderRadius: '0px',
                 },
             },
         },
         MuiChip: {
             styleOverrides: {
                 root: {
-                    borderRadius: "5px",
-                    textTransform: "uppercase",
-                    fontSize: "10px",
-                    fontFamily: "Azeret Mono",
+                    borderRadius: '5px',
+                    textTransform: 'uppercase',
+                    fontSize: '10px',
+                    fontFamily: 'Azeret Mono',
                     fontWeight: 600,
                 },
             },
             variants: [
                 {
-                    props: { variant: "light" },
+                    props: {variant: 'light'},
                     style: {
                         backgroundColor: paletteOptions.palette.light.main,
                         color: paletteOptions.palette.light.contrastText,
-                        textTransform: "uppercase",
-                        fontSize: "10px",
+                        textTransform: 'uppercase',
+                        fontSize: '10px',
                     },
                 },
                 {
-                    props: { variant: "selected" },
+                    props: {variant: 'selected'},
                     style: {
                         backgroundColor: paletteOptions.palette.blackDawn.main,
-                        color: "#FFF",
-                        textTransform: "uppercase",
-                        fontSize: "10px",
+                        color: '#FFF',
+                        textTransform: 'uppercase',
+                        fontSize: '10px',
                     },
                 },
             ],
@@ -289,7 +289,7 @@ const themeOptions = {
         MuiButton: {
             variants: [
                 {
-                    props: { color: "light" },
+                    props: {color: 'light'},
                     style: {
                         border: `1px solid ${paletteOptions.palette.light.contrastText}`,
                         color: paletteOptions.palette.light.contrastText,
@@ -297,17 +297,17 @@ const themeOptions = {
                 },
                 // Enabled "Green" button
                 {
-                    props: { variant: "primary" },
+                    props: {variant: 'primary'},
                     style: {
                         backgroundColor:
                             paletteOptions.palette.legendaryGreen.main,
                         color: paletteOptions.palette.legendaryGreen
                             .contrastText,
                         fontWeight: 400,
-                        height: "74px",
-                        boxShadow: "0px 0px 25px rgba(99, 110, 114, 0.25)",
+                        height: '74px',
+                        boxShadow: '0px 0px 25px rgba(99, 110, 114, 0.25)',
 
-                        "&:hover": {
+                        '&:hover': {
                             backgroundColor:
                                 paletteOptions.palette.legendaryGreen.main,
                         },
@@ -315,14 +315,28 @@ const themeOptions = {
                 },
                 // Disabled "Green Button"
                 {
-                    props: { variant: "primary", disabled: true },
+                    props: {variant: 'primary', disabled: true},
                     style: {
-                        boxShadow: "none",
+                        boxShadow: 'none',
                         backgroundColor: paletteOptions.palette.whiteFog.main,
                         color: paletteOptions.palette.blackDawn.main,
                         opacity: 1,
 
-                        "&:hover": {
+                        '&:hover': {
+                            backgroundColor:
+                                paletteOptions.palette.whiteFog.main,
+                        },
+                    },
+                },
+                {
+                    props: {variant: 'primary', color: 'whiteFog'},
+                    style: {
+                        boxShadow: 'none',
+                        backgroundColor: paletteOptions.palette.whiteFog.main,
+                        color: paletteOptions.palette.blackDawn.main,
+                        opacity: 1,
+
+                        '&:hover': {
                             backgroundColor:
                                 paletteOptions.palette.whiteFog.main,
                         },
@@ -330,25 +344,25 @@ const themeOptions = {
                 },
                 // "Medium Button"
                 {
-                    props: { variant: "secondary" },
+                    props: {variant: 'secondary'},
                     style: {
-                        height: "44px",
+                        height: '44px',
                         backgroundColor: paletteOptions.palette.blackDawn.main,
                         color: paletteOptions.palette.blackDawn.contrastText,
 
-                        "&:hover": {
+                        '&:hover': {
                             backgroundColor:
                                 paletteOptions.palette.blackDawn.main,
                         },
                     },
                 },
                 {
-                    props: { variant: "secondary", disabled: true },
+                    props: {variant: 'secondary', disabled: true},
                     style: {
                         backgroundColor: paletteOptions.palette.whiteFog.main,
                         color: paletteOptions.palette.blackDawn.main,
 
-                        "&:hover": {
+                        '&:hover': {
                             backgroundColor:
                                 paletteOptions.palette.whiteFog.main,
                         },
@@ -356,17 +370,17 @@ const themeOptions = {
                 },
 
                 {
-                    props: { variant: "mini" },
+                    props: {variant: 'mini'},
                     style: {
-                        fontFamily: "Azeret Mono",
+                        fontFamily: 'Azeret Mono',
                         fontWeight: 600,
-                        fontSize: "12px",
-                        lineHeight: "14px",
-                        textTransform: "uppercase",
+                        fontSize: '12px',
+                        lineHeight: '14px',
+                        textTransform: 'uppercase',
 
                         backgroundColor: paletteOptions.palette.whiteFog.main,
 
-                        "&:hover": {
+                        '&:hover': {
                             backgroundColor:
                                 paletteOptions.palette.whiteFog.main,
                         },
@@ -374,100 +388,100 @@ const themeOptions = {
                 },
 
                 {
-                    props: { variant: "bubble" },
+                    props: {variant: 'bubble'},
                     style: {
                         ...typographyOptions.body2,
-                        height: "43px",
-                        width: "fit-content",
-                        paddingLeft: "20px",
-                        paddingRight: "20px",
-                        borderRadius: "40px",
-                        border: "1.5px solid",
-                        backgroundColor: "transparent",
-                        "&:hover": {
-                            backgroundColor: "transparent",
+                        height: '43px',
+                        width: 'fit-content',
+                        paddingLeft: '20px',
+                        paddingRight: '20px',
+                        borderRadius: '40px',
+                        border: '1.5px solid',
+                        backgroundColor: 'transparent',
+                        '&:hover': {
+                            backgroundColor: 'transparent',
                         },
                     },
                 },
 
                 {
-                    props: { variant: "header" },
+                    props: {variant: 'header'},
                     style: {
-                        fontFamily: "Azeret Mono",
+                        fontFamily: 'Azeret Mono',
                         fontWeight: 600,
-                        fontSize: "12px",
-                        lineHeight: "14px",
-                        height: "50px",
-                        textTransform: "uppercase",
-                        color: "#FFF",
-                        "&:hover": {
-                            opacity: "0.75",
-                            backgroundColor: "transparent",
+                        fontSize: '12px',
+                        lineHeight: '14px',
+                        height: '50px',
+                        textTransform: 'uppercase',
+                        color: '#FFF',
+                        '&:hover': {
+                            opacity: '0.75',
+                            backgroundColor: 'transparent',
                         },
 
-                        "&:disabled": {
-                            color: "#FFF",
-                            opacity: "0.75",
-                            backgroundColor: "transparent",
+                        '&:disabled': {
+                            color: '#FFF',
+                            opacity: '0.75',
+                            backgroundColor: 'transparent',
                         },
                     },
                 },
 
                 {
-                    props: { variant: "text" },
+                    props: {variant: 'text'},
                     style: {
-                        backgroundColor: "transparent",
-                        alignItems: "start",
-                        justifyContent: "start",
-                        whiteSpace: "normal",
-                        borderRadius: "none",
-                        padding: "0px",
-                        color: "none",
-                        "&:hover": {
-                            opacity: "0.75",
-                            backgroundColor: "transparent",
+                        backgroundColor: 'transparent',
+                        alignItems: 'start',
+                        justifyContent: 'start',
+                        whiteSpace: 'normal',
+                        borderRadius: 'none',
+                        padding: '0px',
+                        color: 'none',
+                        '&:hover': {
+                            opacity: '0.75',
+                            backgroundColor: 'transparent',
                             // color: "rgba(255, 255, 255, 0.5)",
                         },
                     },
                 },
 
                 {
-                    props: { variant: "header-outlined" },
+                    props: {variant: 'header-outlined'},
                     style: {
                         ...typographyOptions.typography.smallLabel,
-                        height: "50px",
+                        height: '50px',
                         color: paletteOptions.palette.white.main,
                         border: `1px solid ${paletteOptions.palette.white.main}`,
-                        "&:hover": {
-                            opacity: "0.75",
-                            backgroundColor: "none",
+                        '&:hover': {
+                            opacity: '0.75',
+                            backgroundColor: 'none',
                         },
                     },
                 },
 
                 {
-                    props: { variant: "header-filled" },
+                    props: {variant: 'header-filled'},
                     style: {
                         ...typographyOptions.typography.subtitle1,
-                        height: "50px",
+                        height: '50px',
                         backgroundColor: paletteOptions.palette.white.main,
                         color: paletteOptions.palette.blackDusk.main,
-                        "&:hover": {
-                            opacity: "0.75",
+                        '&:hover': {
+                            opacity: '0.75',
                             backgroundColor: paletteOptions.palette.white.main,
                         },
                     },
                 },
 
                 {
-                    props: { variant: "medium" },
+                    props: {variant: 'medium'},
                     style: {
                         ...typographyOptions.typography.smallLabel,
                         color: paletteOptions.palette.blackDawn.main,
                         backgroundColor: paletteOptions.palette.whiteFog.main,
-                        height: "44px",
-                        "&:hover": {
-                            opacity: "0.75",
+                        height: '44px',
+                        '&:hover': {
+                            opacity: '0.75',
                             backgroundColor:
                                 paletteOptions.palette.whiteFog.main,
                         },
@@ -475,49 +489,49 @@ const themeOptions = {
                 },
 
                 {
-                    props: { variant: "small" },
+                    props: {variant: 'small'},
                     style: {
-                        fontFamily: "Azeret Mono",
+                        fontFamily: 'Azeret Mono',
                         fontWeight: 600,
-                        fontSize: "12px",
-                        lineHeight: "14px",
-                        textTransform: "uppercase",
+                        fontSize: '12px',
+                        lineHeight: '14px',
+                        textTransform: 'uppercase',
                         color: paletteOptions.palette.blackDawn.main,
                         backgroundColor: paletteOptions.palette.whiteFog.main,
-                        height: "44px",
-                        "&:hover": {
-                            opacity: "0.75",
-                            backgroundColor: "none",
+                        height: '44px',
+                        '&:hover': {
+                            opacity: '0.75',
+                            backgroundColor: 'none',
                         },
                     },
                 },
 
                 {
-                    props: { variant: "mono" },
+                    props: {variant: 'mono'},
                     style: {
-                        fontFamily: "Azeret Mono",
+                        fontFamily: 'Azeret Mono',
                         fontWeight: 600,
-                        fontSize: "12px",
-                        lineHeight: "14px",
-                        textTransform: "uppercase",
+                        fontSize: '12px',
+                        lineHeight: '14px',
+                        textTransform: 'uppercase',
                         color: paletteOptions.palette.blackDawn.main,
-                        backgroundColor: "none",
-                        "&:hover": {
-                            opacity: "0.75",
-                            backgroundColor: "none",
+                        backgroundColor: 'none',
+                        '&:hover': {
+                            opacity: '0.75',
+                            backgroundColor: 'none',
                         },
                     },
                 },
 
                 {
-                    props: { color: "dark", variant: "filled" },
+                    props: {color: 'dark', variant: 'filled'},
                     style: {
                         backgroundColor: paletteOptions.palette.dark.main,
                         color: paletteOptions.palette.dark.contrastText,
                     },
                 },
                 {
-                    props: { color: "dark", variant: "outlined" },
+                    props: {color: 'dark', variant: 'outlined'},
                     style: {
                         color: paletteOptions.palette.dark.contrastText,
                         border: `1px solid ${paletteOptions.palette.dark.contrastText}`,
@@ -527,16 +541,16 @@ const themeOptions = {
             styleOverrides: {
                 root: {
                     fontWeight: 400,
-                    fontSize: "22px",
-                    lineHeight: "20px",
-                    textTransform: "none",
-                    borderRadius: "5px",
-                    whiteSpace: "nowrap",
-                    minWidth: "auto",
-                    "&:hover": {
-                        backgroundColor: "transparent",
+                    fontSize: '22px',
+                    lineHeight: '20px',
+                    textTransform: 'none',
+                    borderRadius: '5px',
+                    whiteSpace: 'nowrap',
+                    minWidth: 'auto',
+                    '&:hover': {
+                        backgroundColor: 'transparent',
                     },
-                    backgroundColor: "transparent",
+                    backgroundColor: 'transparent',
                 },
             },
         },
@@ -544,7 +558,7 @@ const themeOptions = {
         // Higher class of text fields
         MuiTextField: {
             defaultProps: {
-                variant: "filled",
+                variant: 'filled',
                 fullWidth: true,
             },
         },
@@ -554,16 +568,16 @@ const themeOptions = {
             styleOverrides: {
                 root: {
                     ...typographyOptions.typography.subtitle2,
-                    borderRadius: "10px",
+                    borderRadius: '10px',
                     backgroundColor: paletteOptions.palette.whiteHaze.main,
                     color: paletteOptions.palette.blackDusk.main,
 
-                    borderBottom: "none",
-                    "&&&:before": {
-                        borderBottom: "none",
+                    borderBottom: 'none',
+                    '&&&:before': {
+                        borderBottom: 'none',
                     },
-                    "&&:after": {
-                        borderBottom: "none",
+                    '&&:after': {
+                        borderBottom: 'none',
                     },
                 },
             },
@@ -605,8 +619,8 @@ const themeOptions = {
         MuiCheckbox: {
             styleOverrides: {
                 root: {
-                    width: "40px",
-                    height: "40px",
+                    width: '40px',
+                    height: '40px',
                 },
             },
             defaultProps: {
@@ -617,7 +631,7 @@ const themeOptions = {
 };
 
 const appTheme = createTheme(
-    deepmerge(themeOptions, deepmerge(paletteOptions, typographyOptions))
+    deepmerge(themeOptions, deepmerge(paletteOptions, typographyOptions)),
 );
 
-export { appTheme };
+export {appTheme};
