@@ -4,9 +4,13 @@ import {accounts} from './defaults';
 const TestAccountList = () => (
     <AccountListComponent
         accounts={accounts}
-        onSelected={(account) => {
-            alert(`account selected: ${JSON.stringify(account)}`);
-        }}
+        onAddAccount={() => alert('onAddAccount')}
+        onCreateTransfer={(account) =>
+            alert('onCreateTransfer= ' + JSON.stringify(account))
+        }
+        onUnlinkAccount={(account) =>
+            alert('onUnlinkAccount= ' + JSON.stringify(account))
+        }
     ></AccountListComponent>
 );
 

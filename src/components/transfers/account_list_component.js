@@ -9,12 +9,14 @@ import {
 import {useState} from 'react';
 import Divider from 'components/basics/divider';
 import PropTypes from 'prop-types';
+import EditIcon from '@mui/icons-material/Edit';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 
 const accountNumberString = '•••• •••• •••• ';
 
 const AccountListComponent = ({
     accounts,
-    onSelected,
     onCreateTransfer,
     onUnlinkAccount,
     onAddAccount,
@@ -131,9 +133,23 @@ const AccountListComponent = ({
 
     return (
         <div>
-            <Stack direction={'row'} justifyContent={'space-between'}>
-                <Typography>Connected Accounts</Typography>
-                <Button onClick={onEditButton}>edit</Button>
+            <Stack
+                direction={'row'}
+                justifyContent={'space-between'}
+                alignItems={'center'}
+            >
+                <Typography variant="smallHeadline">
+                    {mode === 'confirm'
+                        ? 'Confirm unlink'
+                        : 'Connected Accounts'}
+                </Typography>
+                <IconButton onClick={onEditButton} sx={{fontSize: '18px'}}>
+                    {mode === 'normal' ? (
+                        <EditIcon></EditIcon>
+                    ) : (
+                        <CloseIcon></CloseIcon>
+                    )}
+                </IconButton>
             </Stack>
 
             <Divider sx={{mt: 4}}></Divider>
@@ -145,14 +161,12 @@ const AccountListComponent = ({
 
 AccountListComponent.propTypes = {
     accounts: PropTypes.array.isRequired,
-    onSelected: PropTypes.func,
     onAddAccount: PropTypes.func,
     onCreateTransfer: PropTypes.func,
     onUnlinkAccount: PropTypes.func,
 };
 
 AccountListComponent.defaultProps = {
-    onSelected: () => {},
     onAddAccount: () => {},
     onCreateTransfer: () => {},
     onUnlinkAccount: () => {},
