@@ -8,7 +8,7 @@ import TransactionView from 'pages/transactions_page';
 import SignUpProcessPage from 'pages/complete_account_page';
 import ExplorePage from 'pages/explore_page';
 import DocumentPage from 'pages/documents_page';
-import WalletPage from 'pages/transfer_page';
+import WalletPage from 'pages/wallet_page';
 import AccountPage from 'pages/account_page';
 
 import {useFirebaseApp, useFunctions} from 'reactfire';

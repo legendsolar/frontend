@@ -143,7 +143,7 @@ const TransferDataGrid = (props) => {
 
             <Box sx={{width: '100%', height: '850px', ml: -2, mr: -2, mt: 2}}>
                 <DataGrid
-                    rows={newTransactions}
+                    rows={rows}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}

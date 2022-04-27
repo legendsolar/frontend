@@ -4,12 +4,14 @@ import {Stack, Paper, Typography} from '@mui/material';
 import ScrollToSidebar from 'components/utils/scroll_to_sidebar';
 import {useAuth} from 'hooks/use_auth';
 import MemberHeader from 'components/user/member_header';
-import RecentTransfers from 'components/transfers/recent_transfers';
+import TransferGrid from 'components/transfers/transfer_grid';
 import DefaultComponent from 'components/utils/default_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
+import {useUser} from 'hooks/use_user';
 
 const TransactionPage = (props) => {
     const auth = useAuth();
+    const {useUserMetaData} = useUser();
     const user = auth.user;
 
     const drawerTitles = [
@@ -21,14 +23,65 @@ const TransactionPage = (props) => {
 
     const contentRefs = useRef([]);
 
-    var name = '';
-    var memberInfo = 'Member since 2022';
+    const {
+        loading: userMetaDataLoading,
+        firstName,
+        lastName,
+        info,
+    } = useUserMetaData();
+
+    const userName = firstName + ' ' + lastName;
+    const userInfo = info;
+
+    const recentTransfers = [
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'Complete',
+            color: 'legendaryGreen',
+        },
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'In Progress',
+            color: 'pencilYellow',
+        },
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'Failed',
+            color: 'eraserRed',
+        },
+        {
+            title: 'Test Title',
+            amount: '50.00',
+            source: 'Source Account',
+            destination: 'Destination Account',
+            date: new Date(),
+            status: 'Status',
+            color: 'legendaryGreen',
+        },
+    ];
 
     return (
         <SideBarNavView
             drawer={
                 <ScrollToSidebar
-                    header={<MemberHeader sx={{p: 2}}></MemberHeader>}
+                    header={
+                        <MemberHeader
+                            name={userName}
+                            memberInfo={userInfo}
+                        ></MemberHeader>
+                    }
                     contentTitles={drawerTitles}
                     refs={contentRefs}
                 ></ScrollToSidebar>
@@ -41,7 +94,9 @@ const TransactionPage = (props) => {
                         <Typography variant="smallHeadline">
                             Dividend Earnings
                         </Typography>
-                        <RecentTransfers></RecentTransfers>
+                        <TransferGrid
+                            transfers={recentTransfers}
+                        ></TransferGrid>
                     </DefaultComponent>
 
                     <DefaultComponent
@@ -50,7 +105,9 @@ const TransactionPage = (props) => {
                         <Typography variant="smallHeadline">
                             Bank Transfers
                         </Typography>
-                        <RecentTransfers></RecentTransfers>
+                        <TransferGrid
+                            transfers={recentTransfers}
+                        ></TransferGrid>
                     </DefaultComponent>
 
                     <DefaultComponent
@@ -59,7 +116,9 @@ const TransactionPage = (props) => {
                         <Typography variant="smallHeadline">
                             Investments
                         </Typography>
-                        <RecentTransfers></RecentTransfers>
+                        <TransferGrid
+                            transfers={recentTransfers}
+                        ></TransferGrid>
                     </DefaultComponent>
 
                     <DefaultComponent
