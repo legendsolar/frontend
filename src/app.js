@@ -1,4 +1,5 @@
 import {ProvideAuth} from 'hooks/use_auth';
+import {ProvideUser} from 'hooks/use_user';
 import AppRouter from 'routes/app_router';
 import {ThemeProvider} from '@mui/material/styles';
 import {appTheme} from 'app_theme';
@@ -28,7 +29,9 @@ const App = () => {
                     <Provider store={store}>
                         <ThemeProvider theme={appTheme}>
                             <ProvideAuth>
-                                <AppRouter></AppRouter>
+                                <ProvideUser>
+                                    <AppRouter></AppRouter>
+                                </ProvideUser>
                             </ProvideAuth>
                         </ThemeProvider>
                     </Provider>

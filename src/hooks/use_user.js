@@ -1,31 +1,20 @@
-// import React, {useState, useEffect, useContext, createContext} from 'react';
-// import {useAuth} from './use_auth';
+import React, {useState, useEffect, useContext, createContext} from 'react';
+import {useAuth} from './use_auth';
 
 import {useQuery, gql, useMutation} from '@apollo/client';
 
-// const userContext = createContext();
+const userContext = createContext();
 
-// export const ProvideUser = ({children}) => {
-//     const user = useProvideUser();
-//     return <userContext.Provider value={user}>{children}</userContext.Provider>;
-// };
-
-// export const useUser = () => {
-//     return useContext(userContext);
-// };
-
-// const useProvideUser = () => {
-//     const auth = useAuth();
-//     const [user, setUser] = useState(null);
-//     const [loading, setLoading] = useState(true);
-
-//     return {
-//         user: user,
-//         loading: loading,
-//     };
-// };
+export const ProvideUser = ({children}) => {
+    const user = useProvideUser();
+    return <userContext.Provider value={user}>{children}</userContext.Provider>;
+};
 
 export const useUser = () => {
+    return useContext(userContext);
+};
+
+export const useProvideUser = () => {
     const USER_STATUS_QUERY = gql`
         query User {
             user {
@@ -119,8 +108,8 @@ export const useUser = () => {
     const useUserMetaData = () => {
         const {loading, error, data} = useQuery(USER_NAME_QUERY);
 
-        const firstName = data?.user?.firstName;
-        const lastName = data?.user?.lastName;
+        const firstName = data?.user?.firstName ? data.user.firstName : '';
+        const lastName = data?.user?.lastName ? data.user.lastName : '';
         const info = 'Member since 2022';
 
         return {
