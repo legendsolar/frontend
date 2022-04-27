@@ -171,9 +171,6 @@ const AccountPage = () => {
                         disabled={false}
                         ref={(el) => (contentRefs.current[1] = el)}
                     >
-                        <Typography variant="smallHeadline">
-                            Connected Accounts
-                        </Typography>
                         <AccountListComponent
                             accounts={userAccounts}
                         ></AccountListComponent>

@@ -122,9 +122,6 @@ const WalletPage = () => {
                         variant="container"
                         ref={(el) => (contentRefs.current[1] = el)}
                     >
-                        <Typography variant="smallHeadline">
-                            Connected Accounts
-                        </Typography>
                         <AccountListComponent
                             accounts={userAccounts}
                         ></AccountListComponent>
