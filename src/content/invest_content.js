@@ -7,6 +7,7 @@ import MetricList from 'components/summary/metric_list';
 import investmentOpportunities from 'utils/asset_data';
 import ErrorComponent from 'components/errors/error_component';
 import DocumentIcon from 'components/icons/document_icon';
+import DocumentComponent from 'components/invest/document_component';
 
 const InvestContent = ({assetId}) => {
     const theme = useTheme();
@@ -182,7 +183,7 @@ const InvestContent = ({assetId}) => {
                         </Typography>
 
                         <Stack direction={'row'}>
-                            <DownloadIcon></DownloadIcon>
+                            {/* <DownloadIcon></DownloadIcon> */}
                             <Typography variant="label">
                                 Click to download
                             </Typography>
