@@ -15,15 +15,19 @@ const TransferGrid = ({transfers}) => {
                 justifyContent="center"
                 alignItems="center"
             >
-                {transfers.map((transfer) => {
-                    return (
-                        <Grid item s={6} key={transfer.id}>
-                            <TransferComponent
-                                transfer={transfer}
-                            ></TransferComponent>
-                        </Grid>
-                    );
-                })}
+                {transfers ? (
+                    transfers.map((transfer) => {
+                        return (
+                            <Grid item s={6} key={transfer.id}>
+                                <TransferComponent
+                                    transfer={transfer}
+                                ></TransferComponent>
+                            </Grid>
+                        );
+                    })
+                ) : (
+                    <Typography>No transfers</Typography>
+                )}
             </Grid>
         </div>
     );

@@ -9,6 +9,8 @@ const transferTypeTransformer = (type) => {
             return 'Dividend Payment';
         case 'INVESTMENT':
             return 'Investment';
+        case 'TRANSFER':
+            return 'Bank Transfer';
         default:
             return 'Unknown';
     }
@@ -42,42 +44,52 @@ const transferTransformer = (transfer) => {
 };
 
 export const useTransfer = () => {
-    // const useTransfersByStatus = () => {
-    //     const TRANSFERS_BY_TYPE_QUER = gql`
-    //         query Query($status: TransferStatus!, $limit: Int!, $offset: Int) {
-    //             userTransfersByStatus(type: $status) {
-    //                 id
-    //                 status
-    //                 type
-    //                 sourceAccount {
-    //                     id
-    //                     name
-    //                     type
-    //                     mask
-    //                 }
-    //                 destinationAccount {
-    //                     id
-    //                     name
-    //                     type
-    //                     mask
-    //                 }
-    //                 amount
-    //                 created
-    //             }
-    //         }
-    //     `;
+    const useTransfersByStatus = (status, limit = 10, offset = 0) => {
+        const TRANSFERS_BY_TYPE_QUERY = gql`
+            query Query($status: TransferStatus!, $limit: Int!, $offset: Int) {
+                userTransfersByType(
+                    type: $type
+                    limit: $limit
+                    offset: $offset
+                ) {
+                    id
+                    status
+                    type
+                    sourceAccount {
+                        id
+                        name
+                        type
+                        mask
+                    }
+                    destinationAccount {
+                        id
+                        name
+                        type
+                        mask
+                    }
+                    amount
+                    created
+                }
+            }
+        `;
 
-    //     const {loading, error, data} = useQuery(TRANSFERS_BY_TYPE_QUER);
+        const {loading, error, data} = useQuery(TRANSFERS_BY_TYPE_QUERY, {
+            variables: {
+                type: status,
+                limit: limit,
+                offset: offset,
+            },
+        });
 
-    //     return {
-    //         loading,
-    //         error,
-    //         transfers: data?.userTransfersByType,
-    //     };
-    // };
+        return {
+            loading,
+            error,
+            transfers: data?.userTransfersByType.map(transferTransformer),
+        };
+    };
 
     const useTransfersByType = (type, limit = 10, offset = 0) => {
-        const TRANSFERS_BY_TYPE_QUER = gql`
+        const TRANSFERS_BY_TYPE_QUERY = gql`
             query Query($type: TransferType!, $limit: Int!, $offset: Int) {
                 userTransfersByType(
                     type: $type
@@ -105,16 +117,13 @@ export const useTransfer = () => {
             }
         `;
 
-        const {loading, error, data} = useQuery(TRANSFERS_BY_TYPE_QUER, {
+        const {loading, error, data} = useQuery(TRANSFERS_BY_TYPE_QUERY, {
             variables: {
                 type: type,
                 limit: limit,
                 offset: offset,
             },
         });
-
-        if (!loading && data) {
-        }
 
         return {
             loading,
@@ -125,5 +134,6 @@ export const useTransfer = () => {
 
     return {
         useTransfersByType,
+        useTransfersByStatus,
     };
 };

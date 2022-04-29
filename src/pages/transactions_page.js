@@ -37,54 +37,21 @@ const TransactionPage = (props) => {
 
     const {
         loading: dividendTransferLoading,
-        error,
+        error: dividendError,
         transfers: dividendTransfers,
     } = useTransfersByType('DIVIDEND', 4);
 
-    const recentTransfers = [
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'Complete',
-            color: 'legendaryGreen',
-        },
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'In Progress',
-            color: 'pencilYellow',
-        },
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'Failed',
-            color: 'eraserRed',
-        },
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'Status',
-            color: 'legendaryGreen',
-        },
-    ];
+    const {
+        loading: investmentTransferLoading,
+        error: investmentError,
+        transfers: investmentTransfers,
+    } = useTransfersByType('INVESTMENT', 4);
 
-    console.log({
-        dividendTransfers,
-        dividendTransferLoading,
-        error,
-    });
+    const {
+        loading: transferTransferLoading,
+        error: transferError,
+        transfers: transferTransfers,
+    } = useTransfersByType('TRANSFER', 4);
 
     return (
         <SideBarNavView
@@ -121,9 +88,11 @@ const TransactionPage = (props) => {
                         <Typography variant="smallHeadline">
                             Bank Transfers
                         </Typography>
-                        {/* <TransferGrid
-                            transfers={recentTransfers}
-                        ></TransferGrid> */}
+                        {!transferTransferLoading && (
+                            <TransferGrid
+                                transfers={transferTransfers}
+                            ></TransferGrid>
+                        )}
                     </DefaultComponent>
 
                     <DefaultComponent
@@ -132,9 +101,11 @@ const TransactionPage = (props) => {
                         <Typography variant="smallHeadline">
                             Investments
                         </Typography>
-                        {/* <TransferGrid
-                            transfers={recentTransfers}
-                        ></TransferGrid> */}
+                        {!investmentTransferLoading && (
+                            <TransferGrid
+                                transfers={investmentTransfers}
+                            ></TransferGrid>
+                        )}
                     </DefaultComponent>
 
                     <DefaultComponent
