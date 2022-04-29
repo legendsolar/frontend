@@ -151,12 +151,18 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                 </Stack>
 
                 <TransferComponent
-                    title={'May 25th, 2022'}
-                    amount={transferAmount}
-                    source={sourceAccount?.name}
-                    destination={destinationAccount?.name}
-                    status={'In Review'}
-                    color={'legendaryGreen'}
+                    transfer={{
+                        title: 'New Transfer',
+                        amount: transferAmount,
+                        sourceName: sourceAccount?.name,
+                        sourceAccount,
+                        destinationName: destinationAccount?.name,
+                        destinationAccount,
+                        destinationName: destinationAccount?.name,
+                        color: 'pencilYellow',
+                        status: 'IN REVIEW',
+                        type: 'TRANSFER',
+                    }}
                 ></TransferComponent>
 
                 <Typography>{`$${transferAmount} will be deducted from your Legends Wallet within the next several days. It may take up to 5 days to transfer.`}</Typography>
@@ -181,16 +187,21 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     Transfer Pending
                 </Typography>
 
-                <TransactionComponent
-                    title={'May 25th, 2022'}
-                    amount={transferAmount}
-                    source={sourceAccount?.name}
-                    destination={destinationAccount?.name}
-                    color={'pencilYellow'}
-                    status={'Pending'}
-                ></TransactionComponent>
+                <TransferComponent
+                    transfer={{
+                        title: 'New Transfer',
+                        amount: transferAmount,
+                        sourceName: sourceAccount?.name,
+                        sourceAccount,
+                        destinationName: destinationAccount?.name,
+                        destinationAccount,
+                        color: 'pencilYellow',
+                        status: 'PENDING',
+                        type: 'TRANSFER',
+                    }}
+                ></TransferComponent>
 
-                <Typography>{`$${transferAmount} will be deducted from your Legends Wallet within the next several days. It may take up to 5 days to transfer.`}</Typography>
+                <Typography>{`$${transferAmount} will be deducted from your ${sourceAccount.name} within the next several days. It may take up to 5 days to transfer.`}</Typography>
 
                 <Button
                     variant="primary"
