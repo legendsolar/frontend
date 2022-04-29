@@ -3,6 +3,10 @@ import TransferComponent from 'components/transfers/transfer_component';
 import PropTypes from 'prop-types';
 
 const TransferGrid = ({transfers}) => {
+    console.log({
+        gridTransfers: transfers,
+    });
+
     return (
         <div>
             <Grid
@@ -15,23 +19,7 @@ const TransferGrid = ({transfers}) => {
                     return (
                         <Grid item s={6} key={transfer.id}>
                             <TransferComponent
-                                title={
-                                    'title' in transfer ? transfer.title : ''
-                                }
-                                amount={parseFloat(transfer.amount)}
-                                source={
-                                    'source' in transfer
-                                        ? transfer.source
-                                        : 'unknown'
-                                }
-                                destination={
-                                    'destination' in transfer
-                                        ? transfer.destination
-                                        : 'wallet'
-                                }
-                                date={transfer.created}
-                                color={transfer.color}
-                                status={transfer.status}
+                                transfer={transfer}
                             ></TransferComponent>
                         </Grid>
                     );
@@ -42,7 +30,6 @@ const TransferGrid = ({transfers}) => {
 };
 
 TransferGrid.propTypes = {
-    title: PropTypes.string.isRequired,
     transfers: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.string.isRequired,

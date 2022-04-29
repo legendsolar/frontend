@@ -8,10 +8,12 @@ import TransferGrid from 'components/transfers/transfer_grid';
 import DefaultComponent from 'components/utils/default_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
 import {useUser} from 'hooks/use_user';
+import {useTransfer} from 'hooks/use_transfer';
 
 const TransactionPage = (props) => {
     const auth = useAuth();
     const {useUserMetaData} = useUser();
+    const {useTransfersByType} = useTransfer();
     const user = auth.user;
 
     const drawerTitles = [
@@ -32,6 +34,12 @@ const TransactionPage = (props) => {
 
     const userName = firstName + ' ' + lastName;
     const userInfo = info;
+
+    const {
+        loading: dividendTransferLoading,
+        error,
+        transfers: dividendTransfers,
+    } = useTransfersByType('DIVIDEND', 4);
 
     const recentTransfers = [
         {
@@ -72,6 +80,12 @@ const TransactionPage = (props) => {
         },
     ];
 
+    console.log({
+        dividendTransfers,
+        dividendTransferLoading,
+        error,
+    });
+
     return (
         <SideBarNavView
             drawer={
@@ -94,9 +108,11 @@ const TransactionPage = (props) => {
                         <Typography variant="smallHeadline">
                             Dividend Earnings
                         </Typography>
-                        <TransferGrid
-                            transfers={recentTransfers}
-                        ></TransferGrid>
+                        {!dividendTransferLoading && (
+                            <TransferGrid
+                                transfers={dividendTransfers}
+                            ></TransferGrid>
+                        )}
                     </DefaultComponent>
 
                     <DefaultComponent
@@ -105,9 +121,9 @@ const TransactionPage = (props) => {
                         <Typography variant="smallHeadline">
                             Bank Transfers
                         </Typography>
-                        <TransferGrid
+                        {/* <TransferGrid
                             transfers={recentTransfers}
-                        ></TransferGrid>
+                        ></TransferGrid> */}
                     </DefaultComponent>
 
                     <DefaultComponent
@@ -116,9 +132,9 @@ const TransactionPage = (props) => {
                         <Typography variant="smallHeadline">
                             Investments
                         </Typography>
-                        <TransferGrid
+                        {/* <TransferGrid
                             transfers={recentTransfers}
-                        ></TransferGrid>
+                        ></TransferGrid> */}
                     </DefaultComponent>
 
                     <DefaultComponent

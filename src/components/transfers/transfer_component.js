@@ -4,15 +4,47 @@ import BankAccountIcon from 'assets/icons/bank_account_icon.png';
 import PanelIcon from 'assets/icons/panel_icon.png';
 import WalletIcon from 'assets/icons/wallet_icon.png';
 
-const TransferComponent = ({
-    title,
-    amount,
-    source,
-    destination,
-    date,
-    status,
-    color,
-}) => {
+const accountToIcon = (account) => {
+    switch (account.type) {
+        case 'WALLET':
+            return WalletIcon;
+        case 'SAVINGS':
+            return BankAccountIcon;
+        case 'CHECKINGS':
+            return BankAccountIcon;
+        default:
+            return BankAccountIcon;
+    }
+};
+
+const transferToIconTypes = (transfer) => {
+    if (transfer.type === 'DIVIDEND') {
+        return {
+            left: PanelIcon,
+            right: WalletIcon,
+        };
+    }
+
+    if (transfer.type === 'INVESTMENT') {
+        return {
+            left: BankAccountIcon,
+            right: PanelIcon,
+        };
+    }
+
+    const left = accountToIcon(transfer.sourceAccount);
+    const right = accountToIcon(transfer.destinationAccount);
+
+    return {
+        left,
+        right,
+    };
+};
+
+const TransferComponent = ({transfer}) => {
+    const {title, color, status, destinationName, sourceName, amount} =
+        transfer;
+
     const amountString = () => {
         try {
             return amount.toFixed(2);
@@ -21,22 +53,14 @@ const TransferComponent = ({
         }
     };
 
-    const bankAccountIcon = (
-        <img style={{width: '87px'}} src={BankAccountIcon}></img>
-    );
-
-    const solarAccountIcon = (
-        <img style={{width: '87px'}} src={PanelIcon}></img>
-    );
-
-    const walletIcon = <img style={{width: '87px'}} src={WalletIcon}></img>;
+    const {left, right} = transferToIconTypes(transfer);
 
     return (
         <Container sx={{width: '100%', minWidth: '320px'}}>
             <Stack direction="row" justifyContent="space-between" sx={{m: 1}}>
                 <Typography variant="label">{title}</Typography>
 
-                <Typography variant="label">{'$' + amountString()}</Typography>
+                <Typography variant="label">{amountString()}</Typography>
             </Stack>
 
             <Container
@@ -77,7 +101,7 @@ const TransferComponent = ({
                         alignItems="center"
                         sx={{width: '50%'}}
                     >
-                        {bankAccountIcon}
+                        <img style={{width: '87px'}} src={left}></img>
                     </Box>
 
                     <Box
@@ -86,7 +110,7 @@ const TransferComponent = ({
                         alignItems="center"
                         sx={{width: '50%'}}
                     >
-                        {solarAccountIcon}
+                        <img style={{width: '87px'}} src={right}></img>
                     </Box>
                 </Stack>
 
@@ -124,9 +148,9 @@ const TransferComponent = ({
             </Container>
 
             <Stack direction="row" justifyContent="space-between" sx={{m: 1}}>
-                <Typography variant="label">{source}</Typography>
+                <Typography variant="label">{sourceName}</Typography>
 
-                <Typography variant="label">{destination}</Typography>
+                <Typography variant="label">{destinationName}</Typography>
             </Stack>
         </Container>
     );
