@@ -59,6 +59,8 @@ const TransactionPage = (props) => {
         transfers: recentTransfers,
     } = useRecentTransfers(15);
 
+    console.log({recentTransfers});
+
     return (
         <SideBarNavView
             drawer={

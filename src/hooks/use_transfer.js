@@ -137,6 +137,22 @@ export const useTransfer = () => {
             query UserTransfers($limit: Int!, $offset: Int!) {
                 userTransfers(limit: $limit, offset: $offset) {
                     id
+                    status
+                    type
+                    sourceAccount {
+                        id
+                        name
+                        type
+                        mask
+                    }
+                    destinationAccount {
+                        id
+                        name
+                        type
+                        mask
+                    }
+                    amount
+                    created
                 }
             }
         `;
@@ -151,7 +167,7 @@ export const useTransfer = () => {
         return {
             loading,
             error,
-            transfers: data?.userTransfersByType.map(transferTransformer),
+            transfers: data?.userTransfers.map(transferTransformer),
         };
     };
 

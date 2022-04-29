@@ -16,7 +16,6 @@ const columns = [
         valueFormatter: (params) => {
             const dateInt = parseInt(params.value);
             const formatted = format(new Date(dateInt), 'P');
-            console.log(formatted);
             return formatted;
         },
     },

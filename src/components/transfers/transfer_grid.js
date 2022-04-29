@@ -3,10 +3,6 @@ import TransferComponent from 'components/transfers/transfer_component';
 import PropTypes from 'prop-types';
 
 const TransferGrid = ({transfers}) => {
-    console.log({
-        gridTransfers: transfers,
-    });
-
     return (
         <div>
             <Grid
