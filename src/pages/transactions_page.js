@@ -13,7 +13,7 @@ import {useTransfer} from 'hooks/use_transfer';
 const TransactionPage = (props) => {
     const auth = useAuth();
     const {useUserMetaData} = useUser();
-    const {useTransfersByType} = useTransfer();
+    const {useTransfersByType, useRecentTransfers} = useTransfer();
     const user = auth.user;
 
     const drawerTitles = [
@@ -52,6 +52,12 @@ const TransactionPage = (props) => {
         error: transferError,
         transfers: transferTransfers,
     } = useTransfersByType('TRANSFER', 4);
+
+    const {
+        loading: recentTransfersLoading,
+        error: recentError,
+        transfers: recentTransfers,
+    } = useRecentTransfers(15);
 
     return (
         <SideBarNavView
@@ -111,7 +117,11 @@ const TransactionPage = (props) => {
                     <DefaultComponent
                         ref={(el) => (contentRefs.current[3] = el)}
                     >
-                        <TransferDataGrid></TransferDataGrid>
+                        {!recentTransfersLoading && (
+                            <TransferDataGrid
+                                transfers={recentTransfers}
+                            ></TransferDataGrid>
+                        )}
                     </DefaultComponent>
                 </Stack>
             }

@@ -132,8 +132,32 @@ export const useTransfer = () => {
         };
     };
 
+    const useRecentTransfers = (limit = 10, offset = 0) => {
+        const TRANSFERS_RECENT_QUERY = gql`
+            query UserTransfers($limit: Int!, $offset: Int!) {
+                userTransfers(limit: $limit, offset: $offset) {
+                    id
+                }
+            }
+        `;
+
+        const {loading, error, data} = useQuery(TRANSFERS_RECENT_QUERY, {
+            variables: {
+                limit: limit,
+                offset: offset,
+            },
+        });
+
+        return {
+            loading,
+            error,
+            transfers: data?.userTransfersByType.map(transferTransformer),
+        };
+    };
+
     return {
         useTransfersByType,
         useTransfersByStatus,
+        useRecentTransfers,
     };
 };

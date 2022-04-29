@@ -126,6 +126,9 @@ const basePaths = [
             {
                 name: 'test_transaction',
             },
+            {
+                name: 'test_transfer_data_grid',
+            },
         ],
     },
 

@@ -5,6 +5,7 @@ import {selectTransactions, fetchTransactions} from 'slices/transfer_slice';
 import {useSelector, useDispatch} from 'react-redux';
 import {useCloudFunctions} from 'hooks/use_cloud_functions';
 import {useEffect} from 'react';
+import {format} from 'date-fns';
 
 const columns = [
     {
@@ -12,23 +13,35 @@ const columns = [
         headerName: 'Date',
         width: 150,
         editable: false,
+        valueFormatter: (params) => {
+            const dateInt = parseInt(params.value);
+            const formatted = format(new Date(dateInt), 'P');
+            console.log(formatted);
+            return formatted;
+        },
+    },
+    {
+        field: 'type',
+        headerName: 'Type',
+        width: 110,
+        editable: false,
     },
     {
         field: 'status',
         headerName: 'Status',
-        width: 80,
+        width: 140,
         editable: false,
     },
     {
         field: 'sourceName',
         headerName: 'From',
-        width: 180,
+        width: 200,
         editable: false,
     },
     {
         field: 'destinationName',
         headerName: 'To',
-        width: 180,
+        width: 200,
         editable: false,
     },
     {
@@ -87,25 +100,7 @@ const rows = [
     },
 ];
 
-const TransferDataGrid = (props) => {
-    const dispatch = useDispatch();
-    const cloudFunctions = useCloudFunctions();
-
-    const transactionStatus = useSelector((state) => state.transactions.status);
-    const transactions = useSelector(selectTransactions);
-
-    const newTransactions = transactions.map((t, i) => ({
-        ...t,
-        id: i,
-    }));
-
-    useEffect(() => {
-        if (transactionStatus === 'idle') {
-            console.log('fetch transactions, line 108 all transactions');
-            dispatch(fetchTransactions(cloudFunctions));
-        }
-    }, [transactionStatus, dispatch]);
-
+const TransferDataGrid = ({transfers}) => {
     function download(filename, textInput) {
         var element = document.createElement('a');
         element.setAttribute(
@@ -141,14 +136,12 @@ const TransferDataGrid = (props) => {
                 </Button>
             </Stack>
 
-            <Box sx={{width: '100%', height: '850px', ml: -2, mr: -2, mt: 2}}>
+            <Box sx={{width: '100%', height: '850px', mt: 2}}>
                 <DataGrid
-                    rows={rows}
+                    rows={transfers}
                     columns={columns}
-                    pageSize={5}
+                    pageSize={25}
                     rowsPerPageOptions={[5]}
-                    checkboxSelection
-                    disableSelectionOnClick
                 />
             </Box>
         </Box>
