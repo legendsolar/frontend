@@ -1,5 +1,7 @@
 import {useRef} from 'react';
 import {useAuth} from 'hooks/use_auth';
+import {useAccount} from 'hooks/use_accounts';
+import {useTransfer} from 'hooks/use_transfer';
 
 import {Paper, Stack, Button, Typography, ListItemButton} from '@mui/material';
 import Divider from 'components/basics/divider';
@@ -16,6 +18,8 @@ import AccountListComponent from 'components/transfers/account_list_component';
 const AccountPage = () => {
     const auth = useAuth();
     const {useUserMetaData} = useUser();
+    const {useAccounts} = useAccount();
+    const {useTransfersByType} = useTransfer();
 
     const contentRefs = useRef([]);
 
@@ -30,86 +34,37 @@ const AccountPage = () => {
         firstName,
         lastName,
         info,
+        streetAddress,
+        streetAddress2,
+        city,
+        postalCode,
+        state,
     } = useUserMetaData();
 
     const userName = firstName + ' ' + lastName;
     const userInfo = info;
 
     const userInfoInitial = {
-        firstName: firstName,
-        lastName: lastName,
-        streetAddress: ' bla bla ',
-        streetAddress2: 'bla bla',
-        city: 'bla',
-        state: 'WI',
-        postalCode: '53536',
+        firstName,
+        lastName,
+        streetAddress,
+        streetAddress2,
+        city,
+        state,
+        postalCode,
     };
 
-    const userAccounts = [
-        {
-            id: '1',
-            name: 'Account Nickname',
-            source: 'Bank of America',
-            institution: 'Legends',
-            mask: '1234',
-            type: 'Checking',
-        },
-        {
-            id: '2',
-            name: 'Emergency Checking',
-            source: 'Chase',
-            institution: 'Legends',
-            mask: '1234',
-            type: 'Checking',
-        },
-        {
-            id: '3',
-            name: 'Money Pile Savings',
-            source: 'Union Credit',
-            institution: 'Legends',
-            mask: '1234',
-            type: 'Savings',
-        },
-    ];
+    const {
+        loading: accountsLoading,
+        error: accountsError,
+        accounts,
+    } = useAccounts();
 
-    const recentTransfers = [
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'Complete',
-            color: 'legendaryGreen',
-        },
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'In Progress',
-            color: 'pencilYellow',
-        },
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'Failed',
-            color: 'eraserRed',
-        },
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'Status',
-            color: 'legendaryGreen',
-        },
-    ];
+    const {
+        loading: investmentTransferLoading,
+        error: investmentError,
+        transfers: investmentTransfers,
+    } = useTransfersByType('INVESTMENT', 4);
 
     return (
         <SideBarNavView
@@ -171,9 +126,11 @@ const AccountPage = () => {
                         disabled={false}
                         ref={(el) => (contentRefs.current[1] = el)}
                     >
-                        <AccountListComponent
-                            accounts={userAccounts}
-                        ></AccountListComponent>
+                        {!accountsLoading && (
+                            <AccountListComponent
+                                accounts={accounts}
+                            ></AccountListComponent>
+                        )}
                     </DefaultComponent>
 
                     <DefaultComponent
@@ -182,9 +139,11 @@ const AccountPage = () => {
                         <Typography variant="smallHeadline">
                             Investment History
                         </Typography>
-                        <TransferGrid
-                            transfers={recentTransfers}
-                        ></TransferGrid>
+                        {!investmentTransferLoading && (
+                            <TransferGrid
+                                transfers={investmentTransfers}
+                            ></TransferGrid>
+                        )}
                     </DefaultComponent>
                 </Stack>
             }

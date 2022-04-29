@@ -51,54 +51,6 @@ const columns = [
     },
 ];
 
-const rows = [
-    {
-        id: 0,
-        date: 'June 10, 2022',
-        type: 'Dividend',
-        status: 'Pending',
-        from: 'Legends SPV',
-        to: 'Legends Wallet',
-        amount: '$145.76',
-    },
-    {
-        id: 1,
-        date: 'May 10, 2022',
-        type: 'Dividend',
-        status: 'Complete',
-        from: 'Legends SPV',
-        to: 'Legends Wallet',
-        amount: '$195.76',
-    },
-    {
-        id: 2,
-        date: 'April 10, 2022',
-        type: 'Dividend',
-        status: 'Complete',
-        from: 'Legends SPV',
-        to: 'Legends Wallet',
-        amount: '$125.76',
-    },
-    {
-        id: 3,
-        date: 'March 10, 2022',
-        type: 'Dividend',
-        status: 'Complete',
-        from: 'Legends SPV',
-        to: 'Legends Wallet',
-        amount: '$165.76',
-    },
-    {
-        id: 4,
-        date: 'March 5, 2022',
-        type: 'Investment',
-        status: 'Complete',
-        from: 'Bank of America',
-        to: 'Legends SPV',
-        amount: '$25,000',
-    },
-];
-
 const TransferDataGrid = ({transfers}) => {
     function download(filename, textInput) {
         var element = document.createElement('a');

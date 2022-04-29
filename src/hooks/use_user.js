@@ -76,11 +76,20 @@ export const useProvideUser = () => {
         }
     `;
 
-    const USER_NAME_QUERY = gql`
+    const USER_META_QUERY = gql`
         query User {
             user {
                 firstName
                 lastName
+                address {
+                    streetAddress
+                    streetAddress2
+                    city
+                    state
+                    postalCode
+                }
+                phone
+                email
             }
         }
     `;
@@ -106,7 +115,7 @@ export const useProvideUser = () => {
     };
 
     const useUserMetaData = () => {
-        const {loading, error, data} = useQuery(USER_NAME_QUERY);
+        const {loading, error, data} = useQuery(USER_META_QUERY);
 
         const firstName = data?.user?.firstName ? data.user.firstName : '';
         const lastName = data?.user?.lastName ? data.user.lastName : '';
@@ -118,6 +127,12 @@ export const useProvideUser = () => {
             firstName,
             lastName,
             info,
+            streetAddress: data?.user?.address?.streetAddress,
+            streetAddress2: data?.user?.address?.streetAddress2,
+            city: data?.user?.address?.city,
+            postalCode: data?.user?.address?.postalCode,
+            phone: data?.user?.phone,
+            email: data?.user?.email,
         };
     };
 
