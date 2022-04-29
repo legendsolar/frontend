@@ -15,92 +15,37 @@ import SideBar from 'components/utils/sidebar_component';
 import TransferGrid from 'components/transfers/transfer_grid';
 import AccountListComponent from 'components/transfers/account_list_component';
 
-const WalletPage = () => {
-    const auth = useAuth();
+import {useTransfer} from 'hooks/use_transfer';
+import {useAccount} from 'hooks/use_accounts';
 
+const WalletPage = () => {
+    const {useAccounts} = useAccount();
+    const {useRecentTransfers} = useTransfer();
     const contentRefs = useRef([]);
 
-    const drawerTitles = [
-        'Transfer Cash',
-        'Connected Bank Accounts',
-        'Recent Transactions',
-    ];
+    const {
+        loading: accountsLoading,
+        error: accountsError,
+        accounts,
+    } = useAccounts();
 
-    const userAccounts = [
-        {
-            id: '1',
-            name: 'Account Nickname',
-            source: 'Bank of America',
-            institution: 'Legends',
-            mask: '1234',
-            type: 'Checking',
-        },
-        {
-            id: '2',
-            name: 'Emergency Checking',
-            source: 'Chase',
-            institution: 'Legends',
-            mask: '1234',
-            type: 'Checking',
-        },
-        {
-            id: '3',
-            name: 'Money Pile Savings',
-            source: 'Union Credit',
-            institution: 'Legends',
-            mask: '1234',
-            type: 'Savings',
-        },
-    ];
-
-    const recentTransfers = [
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'Complete',
-            color: 'legendaryGreen',
-        },
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'In Progress',
-            color: 'pencilYellow',
-        },
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'Failed',
-            color: 'eraserRed',
-        },
-        {
-            title: 'Test Title',
-            amount: '50.00',
-            source: 'Source Account',
-            destination: 'Destination Account',
-            date: new Date(),
-            status: 'Status',
-            color: 'legendaryGreen',
-        },
-    ];
+    const {
+        loading: recentTransfersLoading,
+        error: recentError,
+        transfers: recentTransfers,
+    } = useRecentTransfers(5);
 
     return (
         <SideBarNavView
             drawer={
                 <SideBar>
-                    <CreateTransferComponent
-                        accounts={userAccounts}
-                        loading={false}
-                        onComplete={() => {}}
-                    ></CreateTransferComponent>
+                    {!accountsLoading && (
+                        <CreateTransferComponent
+                            accounts={accounts}
+                            loading={false}
+                            onComplete={() => {}}
+                        ></CreateTransferComponent>
+                    )}
                 </SideBar>
             }
             mainContent={
@@ -113,18 +58,22 @@ const WalletPage = () => {
                             Recent Transfers
                         </Typography>
 
-                        <TransferGrid
-                            transfers={recentTransfers}
-                        ></TransferGrid>
+                        {!recentTransfersLoading && (
+                            <TransferGrid
+                                transfers={recentTransfers}
+                            ></TransferGrid>
+                        )}
                     </DefaultComponent>
 
                     <DefaultComponent
                         variant="container"
                         ref={(el) => (contentRefs.current[1] = el)}
                     >
-                        <AccountListComponent
-                            accounts={userAccounts}
-                        ></AccountListComponent>
+                        {!accountsLoading && (
+                            <AccountListComponent
+                                accounts={accounts}
+                            ></AccountListComponent>
+                        )}
                     </DefaultComponent>
                 </Stack>
             }
