@@ -39,6 +39,7 @@ export const useAccount = () => {
                     name
                     type
                     mask
+                    amount
                 }
             }
         `;
@@ -48,7 +49,9 @@ export const useAccount = () => {
         return {
             loading,
             error,
-            wallet: data?.userWallet.map(accountTransformer),
+            wallet: data?.userWallet
+                ? accountTransformer(data.userWallet)
+                : null,
         };
     };
 
