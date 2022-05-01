@@ -6,22 +6,14 @@ import {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {fetchAccounts} from 'slices/wallet_slice';
 
-import {
-    createPlaidLinkToken,
-    exchangePublicTokenForAccessToken,
-    useCloudFunctions,
-} from 'hooks/use_cloud_functions';
+import {useAccount} from 'hooks/use_accounts';
 
 const PlaidLink = ({onSuccess}) => {
     const auth = useAuth();
-    const cloudFunctions = useCloudFunctions();
-    const createPlaidLinkToken = cloudFunctions.createPlaidLinkToken;
-    const exchangePublicTokenForAccessToken =
-        cloudFunctions.exchangePublicTokenForAccessToken;
+    const {useCreateLinkToken} = useAccount();
 
-    const dispatch = useDispatch();
+    const {createLinkToken, loading, error, token} = useCreateLinkToken();
 
-    const [token, setToken] = useState('');
     const [publicToken, setPublicToken] = useState('-');
     const [accessToken, setAccessToken] = useState('-');
     const [processorToken, setProcessorToken] = useState('-');

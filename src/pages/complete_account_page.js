@@ -18,54 +18,13 @@ import CompleteSignUp from 'components/signup/complete_sign_up';
 import {userStatus as USER_STATUS} from 'utils/user_sign_up_state';
 
 const CompleteAccountPage = () => {
-    // const {step} = useParams();
-    // console.log(step);
-
-    // const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const cloudFunctions = useCloudFunctions();
     const auth = useAuth();
-    // const user = auth.user;
-
-    // const userSignUpStateStatus = useSelector(
-    //     (state) => state.user.signUpState.status,
-    // );
-
-    // const userSignUpState = useSelector(selectUserSignUpState);
-
-    // console.log('user state: ' + userSignUpState);
-
-    // const requestUpdateState = () => {
-    //     if (
-    //         userSignUpStateStatus === 'idle' ||
-    //         userSignUpStateStatus === 'succeeded' ||
-    //         userSignUpStateStatus === 'rejected'
-    //     ) {
-    //         console.log('dispatch user state: line 56, complete account page');
-    //         dispatch(fetchUserSignUpState(cloudFunctions));
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     if (
-    //         auth.user &&
-    //         !auth.isAuthenticating &&
-    //         userSignUpStateStatus === 'idle'
-    //     ) {
-    //         requestUpdateState();
-
-    //         scrollToPosition(0);
-    //     }
-    // }, [dispatch, auth.user, auth.isAuthenticating, userSignUpStateStatus]);
 
     const onComplete = (values) => {
         //shouldn't be needed
         console.log('on complete');
     };
-
-    // if (userSignUpStateStatus === 'loading') {
-    //     return <LoadingView></LoadingView>;
-    // }
 
     const {useGetUserStatus, useSetUser, useCreateDwollaAccount} = useUser();
 

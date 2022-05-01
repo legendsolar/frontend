@@ -20,6 +20,7 @@ const AccountListComponent = ({
     onCreateTransfer,
     onUnlinkAccount,
     onAddAccount,
+    addAccountDisabled,
 }) => {
     const [mode, setMode] = useState('normal');
     const [selectedUnlinkAccount, setSelectedUnlinkAccount] = useState(null);
@@ -124,6 +125,7 @@ const AccountListComponent = ({
                         variant={'mono'}
                         sx={{color: 'grassGreen.main'}}
                         onClick={onAddAccount}
+                        disabled={addAccountDisabled}
                     >
                         Add new account
                     </Button>
@@ -164,12 +166,14 @@ AccountListComponent.propTypes = {
     onAddAccount: PropTypes.func,
     onCreateTransfer: PropTypes.func,
     onUnlinkAccount: PropTypes.func,
+    addAccountDisabled: PropTypes.bool,
 };
 
 AccountListComponent.defaultProps = {
     onAddAccount: () => {},
     onCreateTransfer: () => {},
     onUnlinkAccount: () => {},
+    addAccountDisabled: false,
 };
 
 export default AccountListComponent;
