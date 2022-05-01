@@ -17,7 +17,7 @@ const NavBarUserContext = () => {
 
     console.log(wallet);
     const userSignUpStatus = error ? null : data?.user?.status;
-    const walletBalance = walletLoading || walletError ? '-' : wallet.amount;
+    const walletBalance = walletLoading || walletError ? '-' : wallet?.amount;
 
     return (
         <NavBar

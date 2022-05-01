@@ -53,6 +53,51 @@ const AccountListComponent = ({
         setMode('normal');
     };
 
+    const accountContent = accounts ? (
+        accounts.map((account, index) => (
+            <div key={index}>
+                <Stack
+                    direction="row"
+                    justifyContent={'space-between'}
+                    sx={{m: 4}}
+                >
+                    <Stack>
+                        <Stack direction="row">
+                            <Typography variant="smallLabel">
+                                {account.type}
+                            </Typography>
+                            <Typography variant="smallLabel">
+                                {accountNumberString + account.mask}
+                            </Typography>
+                        </Stack>
+                        <Typography variant="headline2">
+                            {account.name}
+                        </Typography>
+                    </Stack>
+
+                    <Stack justifyContent={'center'}>
+                        <Button
+                            variant="bubble"
+                            sx={{
+                                color:
+                                    mode === 'normal'
+                                        ? 'legendaryGreen.main'
+                                        : 'eraserRed.main',
+                            }}
+                            onClick={() => onTransferUnlinkButton(account)}
+                        >
+                            {mode === 'normal' ? 'Transfer' : 'Unlink'}
+                        </Button>
+                    </Stack>
+                </Stack>
+
+                <Divider></Divider>
+            </div>
+        ))
+    ) : (
+        <Typography>No accounts</Typography>
+    );
+
     const content =
         mode === 'confirm' ? (
             <Stack sx={{mt: 4}}>
@@ -73,49 +118,7 @@ const AccountListComponent = ({
             </Stack>
         ) : (
             <div>
-                {accounts.map((account, index) => (
-                    <div key={index}>
-                        <Stack
-                            direction="row"
-                            justifyContent={'space-between'}
-                            sx={{m: 4}}
-                        >
-                            <Stack>
-                                <Stack direction="row">
-                                    <Typography variant="smallLabel">
-                                        {account.type}
-                                    </Typography>
-                                    <Typography variant="smallLabel">
-                                        {accountNumberString + account.mask}
-                                    </Typography>
-                                </Stack>
-                                <Typography variant="headline2">
-                                    {account.name}
-                                </Typography>
-                            </Stack>
-
-                            <Stack justifyContent={'center'}>
-                                <Button
-                                    variant="bubble"
-                                    sx={{
-                                        color:
-                                            mode === 'normal'
-                                                ? 'legendaryGreen.main'
-                                                : 'eraserRed.main',
-                                    }}
-                                    onClick={() =>
-                                        onTransferUnlinkButton(account)
-                                    }
-                                >
-                                    {mode === 'normal' ? 'Transfer' : 'Unlink'}
-                                </Button>
-                            </Stack>
-                        </Stack>
-
-                        <Divider></Divider>
-                    </div>
-                ))}
-
+                {accountContent}
                 <Stack
                     direction={'row'}
                     justifyContent={'flex-end'}
