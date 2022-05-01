@@ -18,6 +18,10 @@ import LoadingComponent from 'components/utils/loading_component';
 import MultiSelect from 'components/inputs/multiselect';
 
 const CreateTransferComponent = ({accounts, loading, onComplete}) => {
+    const [sourceAccount, setSourceAccount] = useState(null);
+    const [destinationAccount, setDestinationAccount] = useState(null);
+    const [transferAmount, setTransferAmount] = useState(undefined);
+
     const initialState = {
         page: 'setup',
     };
@@ -25,6 +29,12 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
     const reducer = (state, action) => {
         switch (action.type) {
             case 'CHANGE_VIEW':
+                if (action.page === 'setup') {
+                    setSourceAccount(null);
+                    setDestinationAccount(null);
+                    setTransferAmount(null);
+                }
+
                 return {
                     ...state,
                     page: action.page,
@@ -36,9 +46,6 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
     };
 
     const [state, dispatch] = useReducer(reducer, initialState);
-    const [sourceAccount, setSourceAccount] = useState(null);
-    const [destinationAccount, setDestinationAccount] = useState(null);
-    const [transferAmount, setTransferAmount] = useState(undefined);
 
     const goBack = () => {
         dispatch({
@@ -84,7 +91,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
         destinationAccount,
         destinationName: destinationAccount?.name,
         color: 'pencilYellow',
-        status: 'IN REVIEW',
+        status: state.page === 'review' ? 'IN REVIEW' : 'PENDING',
         type: 'TRANSFER',
     };
 
@@ -175,6 +182,11 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     variant="primary"
                     onClick={() => {
                         onComplete(transferObject);
+
+                        dispatch({
+                            type: 'CHANGE_VIEW',
+                            page: 'confirmed',
+                        });
                     }}
                     disabled={loading}
                 >
@@ -204,7 +216,12 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     sx={{
                         backgroundColor: 'pencilYellow.main',
                     }}
-                    onClick={() => {}}
+                    onClick={() => {
+                        dispatch({
+                            type: 'CHANGE_VIEW',
+                            page: 'setup',
+                        });
+                    }}
                     disabled={loading}
                 >
                     {loading ? (
