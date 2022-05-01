@@ -171,9 +171,35 @@ export const useTransfer = () => {
         };
     };
 
+    const useCreateTransfer = () => {
+        const TRANSFER_CREATE_MUTATION = gql`
+            mutation Mutation($input: CreateTransferInput!) {
+                createTransfer(input: $input) {
+                    id
+                    status
+                    type
+                    amount
+                    created
+                }
+            }
+        `;
+
+        const [createTransfer, {data, loading, error}] = useMutation(
+            TRANSFER_CREATE_MUTATION,
+        );
+
+        return {
+            createTransfer,
+            loading,
+            error,
+            transfer: data?.createTransfer,
+        };
+    };
+
     return {
         useTransfersByType,
         useTransfersByStatus,
         useRecentTransfers,
+        useCreateTransfer,
     };
 };

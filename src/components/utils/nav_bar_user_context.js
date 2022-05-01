@@ -4,7 +4,6 @@ import {useUser} from 'hooks/use_user';
 import {useNavigate} from 'react-router-dom';
 import {redirectToHomePage} from 'webflow/webflowLinking';
 import {useAccount} from 'hooks/use_accounts';
-import {ContentPasteSearchOutlined} from '@mui/icons-material';
 
 const NavBarUserContext = () => {
     const auth = useAuth();
@@ -15,7 +14,6 @@ const NavBarUserContext = () => {
 
     const {loading: walletLoading, error: walletError, wallet} = useWallet();
 
-    console.log(wallet);
     const userSignUpStatus = error ? null : data?.user?.status;
     const walletBalance = walletLoading || walletError ? '-' : wallet?.amount;
 

@@ -73,11 +73,6 @@ const CompleteAccountPage = () => {
         return <></>;
     }
 
-    console.log(loading);
-    console.log('user data:');
-    console.log(data?.user);
-    console.log('page:' + pageIndex);
-
     const transformFormValuesToUserDwollaAccountData = (values) => {
         const dob = new Date(`${values.month} ${values.day} ${values.year}`);
 

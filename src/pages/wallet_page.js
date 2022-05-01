@@ -20,7 +20,7 @@ import {useAccount} from 'hooks/use_accounts';
 
 const WalletPage = () => {
     const {useAccounts, useWallet} = useAccount();
-    const {useRecentTransfers} = useTransfer();
+    const {useRecentTransfers, useCreateTransfer} = useTransfer();
     const contentRefs = useRef([]);
 
     const {
@@ -37,6 +37,28 @@ const WalletPage = () => {
         transfers: recentTransfers,
     } = useRecentTransfers(5);
 
+    const {
+        loading: newTransferLoading,
+        error: newTransferError,
+        transfer: newTransfer,
+        createTransfer,
+    } = useCreateTransfer();
+
+    const onCreateNewTransfer = (transfer) => {
+        console.log(transfer);
+        const variables = {
+            input: {
+                amount: transfer.amount,
+                sourceAccountId: transfer.sourceAccount.id,
+                destinationAccountId: transfer.destinationAccount.id,
+            },
+        };
+
+        createTransfer({
+            variables,
+        });
+    };
+
     const accountsWithWallet = accounts && wallet ? [...accounts, wallet] : [];
 
     return (
@@ -46,8 +68,8 @@ const WalletPage = () => {
                     {!accountsLoading && !walletLoading && (
                         <CreateTransferComponent
                             accounts={accountsWithWallet}
-                            loading={false}
-                            onComplete={() => {}}
+                            loading={newTransferLoading}
+                            onComplete={onCreateNewTransfer}
                         ></CreateTransferComponent>
                     )}
                 </SideBar>

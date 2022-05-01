@@ -173,7 +173,9 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
 
                 <Button
                     variant="primary"
-                    onClick={() => onComplete(transferObject)}
+                    onClick={() => {
+                        onComplete(transferObject);
+                    }}
                     disabled={loading}
                 >
                     {loading ? (
