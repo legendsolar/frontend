@@ -47,9 +47,11 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
         });
     };
 
-    const displayAccounts = accounts.map((account) => {
-        return {...account, text: account.name, value: account.id};
-    });
+    const displayAccounts = accounts
+        ? accounts.map((account) => {
+              return {...account, text: account.name, value: account.id};
+          })
+        : [];
 
     const onAccountSelected = (event) => {
         const {name, value} = event.target;
@@ -72,6 +74,19 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
     if (loading) {
         return <LoadingComponent></LoadingComponent>;
     }
+
+    const transferObject = {
+        title: 'New Transfer',
+        amount: transferAmount,
+        sourceName: sourceAccount?.name,
+        sourceAccount,
+        destinationName: destinationAccount?.name,
+        destinationAccount,
+        destinationName: destinationAccount?.name,
+        color: 'pencilYellow',
+        status: 'IN REVIEW',
+        type: 'TRANSFER',
+    };
 
     if (state.page === 'setup') {
         return (
@@ -151,25 +166,14 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                 </Stack>
 
                 <TransferComponent
-                    transfer={{
-                        title: 'New Transfer',
-                        amount: transferAmount,
-                        sourceName: sourceAccount?.name,
-                        sourceAccount,
-                        destinationName: destinationAccount?.name,
-                        destinationAccount,
-                        destinationName: destinationAccount?.name,
-                        color: 'pencilYellow',
-                        status: 'IN REVIEW',
-                        type: 'TRANSFER',
-                    }}
+                    transfer={transferObject}
                 ></TransferComponent>
 
                 <Typography>{`$${transferAmount} will be deducted from your Legends Wallet within the next several days. It may take up to 5 days to transfer.`}</Typography>
 
                 <Button
                     variant="primary"
-                    onClick={onComplete}
+                    onClick={() => onComplete(transferObject)}
                     disabled={loading}
                 >
                     {loading ? (
@@ -188,17 +192,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                 </Typography>
 
                 <TransferComponent
-                    transfer={{
-                        title: 'New Transfer',
-                        amount: transferAmount,
-                        sourceName: sourceAccount?.name,
-                        sourceAccount,
-                        destinationName: destinationAccount?.name,
-                        destinationAccount,
-                        color: 'pencilYellow',
-                        status: 'PENDING',
-                        type: 'TRANSFER',
-                    }}
+                    transfer={transferObject}
                 ></TransferComponent>
 
                 <Typography>{`$${transferAmount} will be deducted from your ${sourceAccount.name} within the next several days. It may take up to 5 days to transfer.`}</Typography>
@@ -208,7 +202,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     sx={{
                         backgroundColor: 'pencilYellow.main',
                     }}
-                    onClick={onComplete}
+                    onClick={() => {}}
                     disabled={loading}
                 >
                     {loading ? (

@@ -19,7 +19,7 @@ import {useTransfer} from 'hooks/use_transfer';
 import {useAccount} from 'hooks/use_accounts';
 
 const WalletPage = () => {
-    const {useAccounts} = useAccount();
+    const {useAccounts, useWallet} = useAccount();
     const {useRecentTransfers} = useTransfer();
     const contentRefs = useRef([]);
 
@@ -29,19 +29,23 @@ const WalletPage = () => {
         accounts,
     } = useAccounts();
 
+    const {loading: walletLoading, error: walletError, wallet} = useWallet();
+
     const {
         loading: recentTransfersLoading,
         error: recentError,
         transfers: recentTransfers,
     } = useRecentTransfers(5);
 
+    const accountsWithWallet = accounts && wallet ? [...accounts, wallet] : [];
+
     return (
         <SideBarNavView
             drawer={
                 <SideBar>
-                    {!accountsLoading && (
+                    {!accountsLoading && !walletLoading && (
                         <CreateTransferComponent
-                            accounts={accounts}
+                            accounts={accountsWithWallet}
                             loading={false}
                             onComplete={() => {}}
                         ></CreateTransferComponent>

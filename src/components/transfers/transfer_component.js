@@ -157,16 +157,16 @@ const TransferComponent = ({transfer}) => {
 };
 
 TransferComponent.propTypes = {
-    title: PropTypes.string.isRequired,
-    amount: PropTypes.number.isRequired,
-    source: PropTypes.string.isRequired,
-    destination: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date),
+    transfer: PropTypes.shape({
+        title: PropTypes.string,
+        color: PropTypes.string,
+        status: PropTypes.string,
+        destinationName: PropTypes.string,
+        sourceName: PropTypes.string,
+        amount: PropTypes.string,
+    }).isRequired,
 };
 
-TransferComponent.defaultProps = {
-    status: 'Unknown',
-    color: 'legendaryGreen',
-};
+TransferComponent.defaultProps = {};
 
 export default TransferComponent;
