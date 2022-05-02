@@ -214,7 +214,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                 <Button
                     variant="primary"
                     sx={{
-                        backgroundColor: 'pencilYellow.main',
+                        backgroundColor: 'legendaryGreen.main',
                     }}
                     onClick={() => {
                         dispatch({
@@ -227,7 +227,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     {loading ? (
                         <CircularProgress color="dark" size={30} />
                     ) : (
-                        'Transfer Pending'
+                        'New transfer'
                     )}
                 </Button>
             </Stack>
