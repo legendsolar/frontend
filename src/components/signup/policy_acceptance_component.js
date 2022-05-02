@@ -43,7 +43,11 @@ const PolicyAcceptanceComponent = ({onComplete}) => {
             },
         });
 
-        if (policyAcceptance.privacy || policyAcceptance.termsAndConditions) {
+        if (
+            policyAcceptance.privacy ||
+            policyAcceptance.termsAndConditions ||
+            policyAcceptance.dwolla
+        ) {
             onComplete();
         } else {
             scrollToPosition(0);
@@ -121,9 +125,7 @@ const PolicyAcceptanceComponent = ({onComplete}) => {
                     <Button
                         variant="primary"
                         disabled={!dwollaCheckbox}
-                        onClick={() =>
-                            onCompleteItem(event, 'TERMS_CONDITIONS')
-                        }
+                        onClick={() => onCompleteItem(event, 'DWOLLA')}
                     >
                         Accept
                     </Button>
