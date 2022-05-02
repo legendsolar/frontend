@@ -2,6 +2,10 @@ import React, {useState, useEffect, useContext, createContext} from 'react';
 import {useAuth} from './use_auth';
 import {usePlaidLink} from 'react-plaid-link';
 import {useQuery, gql, useMutation} from '@apollo/client';
+import {
+    constructQueryCacheKey,
+    deconstructQueryCacheKey,
+} from './query_cache_utils';
 
 const accountContext = createContext();
 
@@ -25,6 +29,8 @@ const accountTransformer = (account) => {
 };
 
 export const useProvideAccount = () => {
+    const cachedQueries = {};
+
     const useAccounts = () => {
         const ACCOUNTS_QUERY = gql`
             query AccountsQuery {
@@ -38,6 +44,10 @@ export const useProvideAccount = () => {
         `;
 
         const {loading, error, data} = useQuery(ACCOUNTS_QUERY, {});
+
+        const key = constructQueryCacheKey(ACCOUNTS_QUERY, {}, 'userAccounts');
+
+        cachedQueries[key] = true;
 
         return {
             loading,
@@ -102,8 +112,17 @@ export const useProvideAccount = () => {
             }
         `;
 
-        const [createAccount, {data, loading, error}] =
+        const [internalCreateAccount, {data, loading, error}] =
             useMutation(CREATE_ACCOUNT);
+
+        const createAccount = ({variables}) => {
+            internalCreateAccount({
+                variables,
+                update: (cache, {data}) => {
+                    forceUpdateCache(cache, data.createAccount);
+                },
+            });
+        };
 
         return {
             createAccount,
@@ -124,6 +143,36 @@ export const useProvideAccount = () => {
             open,
             ready,
         };
+    };
+
+    const forceUpdateCache = (cache, newData) => {
+        // Update all cached queries
+        Object.keys(cachedQueries).map((key) => {
+            const {query, inputs, queryName} = deconstructQueryCacheKey(key);
+
+            console.log({query, inputs, queryName});
+
+            const cacheData = cache.readQuery({
+                query: query,
+                variables: {...inputs},
+            });
+
+            console.log({cacheData});
+
+            const accountList = cacheData[queryName];
+            const updatedAccountList = [];
+
+            updatedAccountList.push(newData, ...accountList);
+
+            const updatedCacheData = {};
+            updatedCacheData[queryName] = updatedAccountList;
+
+            cache.writeQuery({
+                query: query,
+                variables: {...inputs},
+                data: updatedCacheData,
+            });
+        });
     };
 
     return {

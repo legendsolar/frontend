@@ -1,4 +1,8 @@
 import React, {useState, useEffect, useContext, createContext} from 'react';
+import {
+    constructQueryCacheKey,
+    deconstructQueryCacheKey,
+} from './query_cache_utils';
 import {useAuth} from './use_auth';
 
 import {useQuery, gql, useMutation} from '@apollo/client';
@@ -56,14 +60,6 @@ const transferTransformer = (transfer) => {
         sourceName: transfer.sourceAccount.name,
         color: transferColorTransformer(transfer.status),
     };
-};
-
-const constructQueryCacheKey = (query, inputs, queryName) => {
-    return JSON.stringify({query, inputs, queryName});
-};
-
-const deconstructQueryCacheKey = (key) => {
-    return JSON.parse(key);
 };
 
 export const useProvideTransfer = () => {
@@ -279,11 +275,11 @@ export const useProvideTransfer = () => {
         Object.keys(cachedQueries).map((key) => {
             const {query, inputs, queryName} = deconstructQueryCacheKey(key);
 
-            console.log({query, inputs});
+            console.log({query, inputs, queryName});
 
             const cacheData = cache.readQuery({
                 query: query,
-                variables: {...inputs}, // TODO what if there's other queries in the cache?
+                variables: {...inputs},
             });
 
             console.log({cacheData});
