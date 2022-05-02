@@ -95,7 +95,13 @@ export const useProvideUser = () => {
     `;
 
     const useGetUserStatus = () => {
-        return useQuery(USER_STATUS_QUERY);
+        const {loading, error, data} = useQuery(USER_STATUS_QUERY);
+
+        return {
+            loading,
+            error,
+            status: data?.user?.status,
+        };
     };
 
     const useGetUserAcceptance = () => {

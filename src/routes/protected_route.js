@@ -25,56 +25,13 @@ const ProtectedRoute = ({
 
     const {useGetUserStatus} = useUser();
 
-    const {loading, error, data} = useGetUserStatus();
-
-    const dispatch = useDispatch();
-    const cloudFunctions = useCloudFunctions();
-
-    const userSignUpStateStatus = useSelector(
-        (state) => state.user.signUpState.status,
-    );
-
-    const userSignUpState = useSelector(selectUserSignUpState);
-
-    const status = store.getState().user.signUpState.status;
-
-    useEffect(() => {
-        console.log(
-            'protected route user sign up status: ',
-            userSignUpStateStatus,
-            !!auth.user,
-        );
-
-        if (store.getState().user.signUpState.status === 'idle' && auth.user) {
-            console.log(
-                'dispatch user sign up state: line 39, protected route',
-            );
-
-            console.log('getState status:' + status);
-            console.log('useSelector status:' + userSignUpStateStatus);
-            dispatch(fetchUserSignUpState(cloudFunctions));
-
-            console.log('dispatch complete ');
-            console.log(
-                'post dispatch sign up status: ' + userSignUpStateStatus,
-            );
-        }
-    }, [dispatch, store.getState().user.signUpState.status, auth.user]);
-
-    // useEffect(() => {
-    //     if (auth.isAuthenticating) {
-    //         setTimeout(() => {
-    //             console.error("timed out");
-    //             navigate("/error");
-    //         }, AppSettings.timeout_ms);
-    //     }
-    // }, [auth.isAuthenticating]);
+    const {loading, error, status} = useGetUserStatus();
 
     if (
-        userSignUpState &&
-        userSignUpState !== 'NO_ACCOUNT' &&
+        status &&
+        status !== 'NO_ACCOUNT' &&
         disallowedUserStates &&
-        disallowedUserStates.indexOf(userSignUpState) > -1
+        disallowedUserStates.indexOf(status) > -1
     ) {
         return (
             <Navigate
@@ -88,10 +45,10 @@ const ProtectedRoute = ({
     }
 
     if (
-        userSignUpState &&
-        userSignUpState !== 'NO_ACCOUNT' &&
+        status &&
+        status !== 'NO_ACCOUNT' &&
         requiredUserStates &&
-        requiredUserStates.indexOf(userSignUpState) === -1
+        requiredUserStates.indexOf(status) === -1
     ) {
         return (
             <Navigate
@@ -104,11 +61,11 @@ const ProtectedRoute = ({
         );
     }
 
-    if (auth.isAuthenticating || userSignUpStateStatus === 'loading') {
+    if (auth.isAuthenticating || loading) {
         return <LoadingView></LoadingView>;
     }
 
-    if (userSignUpStateStatus === 'rejected') {
+    if (error) {
         return <ErrorPage></ErrorPage>;
     }
 

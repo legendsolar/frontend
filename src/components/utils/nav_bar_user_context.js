@@ -9,12 +9,12 @@ const NavBarUserContext = () => {
     const auth = useAuth();
     const navigate = useNavigate();
     const {useGetUserStatus} = useUser();
-    const {loading, error, data} = useGetUserStatus();
+    const {loading, error, status} = useGetUserStatus();
     const {useWallet} = useAccount();
 
     const {loading: walletLoading, error: walletError, wallet} = useWallet();
 
-    const userSignUpStatus = error ? null : data?.user?.status;
+    const userSignUpStatus = error || loading ? null : status;
     const walletBalance = walletLoading || walletError ? '-' : wallet?.amount;
 
     return (

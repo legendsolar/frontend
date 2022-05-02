@@ -28,7 +28,7 @@ const CompleteAccountPage = () => {
 
     const {useGetUserStatus, useSetUser, useCreateDwollaAccount} = useUser();
 
-    const {loading, error, data} = useGetUserStatus();
+    const {loading, error, status} = useGetUserStatus();
     const [setUser] = useSetUser();
     const [createDwollaAccount] = useCreateDwollaAccount();
 
@@ -36,7 +36,7 @@ const CompleteAccountPage = () => {
 
     const [pageIndex, setPageIndex] = useState(0);
 
-    const userSignUpStatus = data?.user?.status;
+    const userSignUpStatus = status;
 
     const userStatePageIndexMap = (status) => {
         if (!auth.user) {
