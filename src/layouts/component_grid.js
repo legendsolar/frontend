@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import {Grid, Paper, Button, Select, MenuItem, Typography} from '@mui/material';
-import WormLive from 'components/worm/worm_live';
 import {
     CarbonGauge,
     EarningsGauge,
@@ -15,59 +14,25 @@ import {
 } from 'components/gauges/live_cumulative_impact';
 import WeatherLive from 'components/weather/weather_live';
 import DefaultComponent from 'components/utils/default_component';
+import PlaceholderWorm from 'components/worm/placeholder_worm';
+import PortfolioPlaceholder from 'components/placeholders/portfolio_placeholder';
 
 function ComponentGrid(props) {
-    const [assetDisplayId, setAssetDisplayId] = useState({
-        id: '-MtUbBNCnoz0VdTQ_m-O',
-        name: 'Barnyard Solar',
-    });
-
-    const assetList = [
-        {
-            id: '-MtUbBNCnoz0VdTQ_m-O',
-            name: 'Barnyard Solar',
-        },
-
-        {
-            id: '-MuCmzKbnofQ9TY_sIp9',
-            name: 'Hawaii Solar',
-        },
-
-        {
-            id: '-MuCq8nkhE8gqGrdG9Ta',
-            name: 'Big Sur Solar',
-        },
-
-        {
-            id: '-MuCqDzSoaF0yXWZbouB',
-            name: 'Sinusoidal Test',
-        },
-
-        {
-            id: '-MuDYXAdGcdAzeGJmzj3',
-            name: 'Constant Output Test',
-        },
-    ];
-
-    const onSelectChange = (event) => {
-        console.log(event);
-
-        assetList.map((asset) => {
-            if (asset.name === event.target.value) {
-                setAssetDisplayId(asset);
-            }
-        });
-    };
-
     return (
         <Grid container spacing={4} sx={{width: '100%'}}>
             <Grid item xs={12}>
                 <DefaultComponent sx={{m: 0, p: 0}}>
-                    <WormLive assetId={assetDisplayId.id}></WormLive>
+                    <PortfolioPlaceholder></PortfolioPlaceholder>
                 </DefaultComponent>
             </Grid>
 
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={12}>
+                <DefaultComponent sx={{m: 0, p: 0}} disabled={true}>
+                    <PlaceholderWorm></PlaceholderWorm>
+                </DefaultComponent>
+            </Grid>
+
+            {/* <Grid item xs={12} lg={6}>
                 <DefaultComponent>
                     <EarningsGauge assetId={assetDisplayId.id}></EarningsGauge>
                 </DefaultComponent>
@@ -138,7 +103,7 @@ function ComponentGrid(props) {
                         })}
                     </Select>
                 </Paper>
-            </Grid>
+            </Grid> */}
         </Grid>
     );
 }
