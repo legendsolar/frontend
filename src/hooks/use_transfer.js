@@ -58,6 +58,14 @@ const transferTransformer = (transfer) => {
     };
 };
 
+const constructQueryCacheKey = (query, inputs, queryName) => {
+    return JSON.stringify({query, inputs, queryName});
+};
+
+const deconstructQueryCacheKey = (key) => {
+    return JSON.parse(key);
+};
+
 export const useProvideTransfer = () => {
     const TRANSFERS_BY_TYPE_QUERY = gql`
         query Query($status: TransferStatus!, $limit: Int!, $offset: Int) {
@@ -159,14 +167,29 @@ export const useProvideTransfer = () => {
         }
     `;
 
+    // Keeps track of queries in cache we need to update
+    const cachedQueries = {};
+
     const useTransfersByStatus = (status, limit = 10, offset = 0) => {
         const {loading, error, data} = useQuery(TRANSFERS_BY_STATUS_QUERY, {
             variables: {
-                type: status,
+                status: status,
                 limit: limit,
                 offset: offset,
             },
         });
+
+        const key = constructQueryCacheKey(
+            TRANSFERS_BY_STATUS_QUERY,
+            {
+                status,
+                limit,
+                offset,
+            },
+            'userTransfersByType',
+        );
+
+        cachedQueries[key] = true;
 
         return {
             loading,
@@ -184,6 +207,18 @@ export const useProvideTransfer = () => {
             },
         });
 
+        const key = constructQueryCacheKey(
+            TRANSFERS_BY_TYPE_QUERY,
+            {
+                type,
+                limit,
+                offset,
+            },
+            'userTransfersByStatus',
+        );
+
+        cachedQueries[key] = true;
+
         return {
             loading,
             error,
@@ -198,6 +233,17 @@ export const useProvideTransfer = () => {
                 offset: offset,
             },
         });
+
+        const key = constructQueryCacheKey(
+            TRANSFERS_RECENT_QUERY,
+            {
+                limit,
+                offset,
+            },
+            'userTransfers',
+        );
+
+        cachedQueries[key] = true;
 
         return {
             loading,
@@ -229,26 +275,42 @@ export const useProvideTransfer = () => {
     };
 
     const forceUpdateCache = (cache, newData) => {
-        console.log('forceUpdateCache');
-        const cacheData = cache.readQuery({
-            query: TRANSFERS_RECENT_QUERY,
-            variables: {limit: 5, offset: 0}, // TODO what if there's other queries in the cache?
-        });
-        console.log({cacheData});
+        // Update all cached queries
+        Object.keys(cachedQueries).map((key) => {
+            const {query, inputs, queryName} = deconstructQueryCacheKey(key);
 
-        const updatedCacheData = {};
-        updatedCacheData.userTransfers = [
-            newData,
-            ...cacheData.userTransfers.slice(0, 4),
-        ];
+            console.log({query, inputs});
 
-        console.log({updatedCacheData});
-        console.log({newData});
+            const cacheData = cache.readQuery({
+                query: query,
+                variables: {...inputs}, // TODO what if there's other queries in the cache?
+            });
 
-        cache.writeQuery({
-            query: TRANSFERS_RECENT_QUERY,
-            variables: {limit: 5, offset: 0},
-            data: updatedCacheData,
+            console.log({cacheData});
+
+            const transferList = cacheData[queryName];
+            const updatedTransferList = [];
+
+            if (inputs.type) {
+            } else if (inputs.status) {
+            } else {
+                updatedTransferList.push(newData, ...transferList);
+            }
+
+            if (inputs.limit) {
+                updatedTransferList.splice(inputs.limit);
+            }
+
+            // Offset not handled yet as it is a pain
+
+            const updatedCacheData = {};
+            updatedCacheData[queryName] = updatedTransferList;
+
+            cache.writeQuery({
+                query: query,
+                variables: {...inputs},
+                data: updatedCacheData,
+            });
         });
     };
 
