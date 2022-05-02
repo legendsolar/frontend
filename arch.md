@@ -6,7 +6,8 @@ React based, heavily utilizes context and Apollo's client library.
 #### Caching
 - Caching is complex on the frontend
 - Queries are cached indefinitely 
-- Edit mutations, when they return, update queries based on `id` and `type`
+  - Update to minutes or hours
+- Edit mutations, when they successfully return, update queries based on `id` and `type`
   - ie. a mutation that returns a type of `Transfer` with an `id` of `1234` would update queries with this type and id 
 - Create mutations have a custom `forceCacheUpdate` that adds the returned, created object to caches where appropraite. This is perhaps the crux of the problem and where issues could arise.
 - Delete mutations are currently not supported, but they would function similar to create mutations
@@ -29,21 +30,28 @@ I could potentially add more REST-like endpoints as I see fit, and asset time se
 #### Caching
 - Currently using a very simple in-memory cache
   - Want to mitigate any potential security vulnerabilities 
+  - Don't think something like Redis makes sense yet
 - Only Dwolla transfers and accounts are cached with a 100s TTL
+  - Could likely increase TTL to ~minutes range
 - Closely spaced queries (ie page load) should be able to utilize cache 
-- Cloud likely increase TTL to ~minutes range
 - Current issues:
   - Accessing cached resource with different or lower permissions (?)
     - Should cache keys always include user UID or similar field to prevent this?
+    - Explore middleware for this as much as possible
+    - Add user id ect to cache key
+    - No finer grained 
+  - Reporting cache hit rate
+    - Custom roll metric in open telem
 
 #### Database
 - Currently the RT database is still be used
 - Have completely locked down permissions, only `admin` allowed to `r/w` anything
-- User data
-  - Metadata, such as address ect
-  - Status if user is a `verfied` dwolla user
-  - Linked accounts (bank accounts ect)
-  - Dwolla wallet information, but not amount
+- Stored items
+    - User data
+    - Metadata, such as address ect
+    - Status if user is a `verfied` dwolla user
+    - Linked accounts (bank accounts ect)
+    - Dwolla wallet information, but not amount
 - To think about:
   - Limited permissions for the server:
     - Limit access to specific user? ect?
@@ -65,3 +73,14 @@ I could potentially add more REST-like endpoints as I see fit, and asset time se
 #### Deployment
 - Currently deployment is entirely manual, but I'm going to work on changing this soon
 - Would like to utilize Cloud build to remote build and update new image version
+- 
+
+#### Additional Questions / Actions 
+- What is `axios` doing
+  - Creating new HTTP clients?
+- Set timeouts based on incoming timeout
+  - What's the timeouts(s)
+- Move secrets to var and secret
+- Move bigger env variables to env variables 
+- Add revision URLs
+- Where is Apollo cache
