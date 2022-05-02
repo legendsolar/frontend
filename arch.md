@@ -5,7 +5,7 @@ React based, heavily utilizes context and Apollo's client library.
 
 #### Caching
 - Caching is complex on the frontend
-- Queries are cached infinitely
+- Queries are cached indefinitely 
 - Edit mutations, when they return, update queries based on `id` and `type`
   - ie. a mutation that returns a type of `Transfer` with an `id` of `1234` would update queries with this type and id 
 - Create mutations have a custom `forceCacheUpdate` that adds the returned, created object to caches where appropraite. This is perhaps the crux of the problem and where issues could arise.
