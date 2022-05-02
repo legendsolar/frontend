@@ -59,36 +59,108 @@ const transferTransformer = (transfer) => {
 };
 
 export const useProvideTransfer = () => {
-    const useTransfersByStatus = (status, limit = 10, offset = 0) => {
-        const TRANSFERS_BY_TYPE_QUERY = gql`
-            query Query($status: TransferStatus!, $limit: Int!, $offset: Int) {
-                userTransfersByType(
-                    type: $type
-                    limit: $limit
-                    offset: $offset
-                ) {
+    const TRANSFERS_BY_TYPE_QUERY = gql`
+        query Query($status: TransferStatus!, $limit: Int!, $offset: Int) {
+            userTransfersByType(type: $type, limit: $limit, offset: $offset) {
+                id
+                status
+                type
+                sourceAccount {
                     id
-                    status
+                    name
                     type
-                    sourceAccount {
-                        id
-                        name
-                        type
-                        mask
-                    }
-                    destinationAccount {
-                        id
-                        name
-                        type
-                        mask
-                    }
-                    amount
-                    created
+                    mask
                 }
+                destinationAccount {
+                    id
+                    name
+                    type
+                    mask
+                }
+                amount
+                created
             }
-        `;
+        }
+    `;
 
-        const {loading, error, data} = useQuery(TRANSFERS_BY_TYPE_QUERY, {
+    const TRANSFERS_BY_STATUS_QUERY = gql`
+        query Query($status: TransferStatus!, $limit: Int!, $offset: Int) {
+            userTransfersByStatus(
+                status: $status
+                limit: $limit
+                offset: $offset
+            ) {
+                id
+                status
+                type
+                sourceAccount {
+                    id
+                    name
+                    type
+                    mask
+                }
+                destinationAccount {
+                    id
+                    name
+                    type
+                    mask
+                }
+                amount
+                created
+            }
+        }
+    `;
+
+    const TRANSFERS_RECENT_QUERY = gql`
+        query UserTransfers($limit: Int!, $offset: Int!) {
+            userTransfers(limit: $limit, offset: $offset) {
+                id
+                status
+                type
+                sourceAccount {
+                    id
+                    name
+                    type
+                    mask
+                }
+                destinationAccount {
+                    id
+                    name
+                    type
+                    mask
+                }
+                amount
+                created
+            }
+        }
+    `;
+
+    const TRANSFER_CREATE_MUTATION = gql`
+        mutation Mutation($input: CreateTransferInput!) {
+            createTransfer(input: $input) {
+                id
+                status
+                type
+                sourceAccount {
+                    id
+                    name
+                    type
+                    mask
+                }
+                destinationAccount {
+                    id
+                    name
+                    type
+                    mask
+                }
+                amount
+                created
+            }
+        }
+    `;
+
+    const useTransfersByStatus = (status, limit = 10, offset = 0) => {
+        const {loading, error, data} = useQuery(TRANSFERS_BY_STATUS_QUERY, {
             variables: {
                 type: status,
                 limit: limit,
@@ -104,34 +176,6 @@ export const useProvideTransfer = () => {
     };
 
     const useTransfersByType = (type, limit = 10, offset = 0) => {
-        const TRANSFERS_BY_TYPE_QUERY = gql`
-            query Query($type: TransferType!, $limit: Int!, $offset: Int) {
-                userTransfersByType(
-                    type: $type
-                    limit: $limit
-                    offset: $offset
-                ) {
-                    id
-                    status
-                    type
-                    sourceAccount {
-                        id
-                        name
-                        type
-                        mask
-                    }
-                    destinationAccount {
-                        id
-                        name
-                        type
-                        mask
-                    }
-                    amount
-                    created
-                }
-            }
-        `;
-
         const {loading, error, data} = useQuery(TRANSFERS_BY_TYPE_QUERY, {
             variables: {
                 type: type,
@@ -148,30 +192,6 @@ export const useProvideTransfer = () => {
     };
 
     const useRecentTransfers = (limit = 10, offset = 0) => {
-        const TRANSFERS_RECENT_QUERY = gql`
-            query UserTransfers($limit: Int!, $offset: Int!) {
-                userTransfers(limit: $limit, offset: $offset) {
-                    id
-                    status
-                    type
-                    sourceAccount {
-                        id
-                        name
-                        type
-                        mask
-                    }
-                    destinationAccount {
-                        id
-                        name
-                        type
-                        mask
-                    }
-                    amount
-                    created
-                }
-            }
-        `;
-
         const {loading, error, data} = useQuery(TRANSFERS_RECENT_QUERY, {
             variables: {
                 limit: limit,
@@ -187,21 +207,18 @@ export const useProvideTransfer = () => {
     };
 
     const useCreateTransfer = () => {
-        const TRANSFER_CREATE_MUTATION = gql`
-            mutation Mutation($input: CreateTransferInput!) {
-                createTransfer(input: $input) {
-                    id
-                    status
-                    type
-                    amount
-                    created
-                }
-            }
-        `;
-
-        const [createTransfer, {data, loading, error}] = useMutation(
+        const [internalCreateTransfer, {data, loading, error}] = useMutation(
             TRANSFER_CREATE_MUTATION,
         );
+
+        const createTransfer = ({variables}) => {
+            internalCreateTransfer({
+                variables,
+                update: (cache, {data}) => {
+                    forceUpdateCache(cache, data.createTransfer);
+                },
+            });
+        };
 
         return {
             createTransfer,
@@ -209,6 +226,30 @@ export const useProvideTransfer = () => {
             error,
             transfer: data?.createTransfer,
         };
+    };
+
+    const forceUpdateCache = (cache, newData) => {
+        console.log('forceUpdateCache');
+        const cacheData = cache.readQuery({
+            query: TRANSFERS_RECENT_QUERY,
+            variables: {limit: 5, offset: 0}, // TODO what if there's other queries in the cache?
+        });
+        console.log({cacheData});
+
+        const updatedCacheData = {};
+        updatedCacheData.userTransfers = [
+            newData,
+            ...cacheData.userTransfers.slice(0, 4),
+        ];
+
+        console.log({updatedCacheData});
+        console.log({newData});
+
+        cache.writeQuery({
+            query: TRANSFERS_RECENT_QUERY,
+            variables: {limit: 5, offset: 0},
+            data: updatedCacheData,
+        });
     };
 
     return {
