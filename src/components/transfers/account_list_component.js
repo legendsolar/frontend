@@ -67,7 +67,7 @@ const AccountListComponent = ({
                                 {account.type}
                             </Typography>
                             <Typography variant="smallLabel">
-                                {accountNumberString + account.mask}
+                                {accountNumberString + account?.mask}
                             </Typography>
                         </Stack>
                         <Typography variant="headline2">

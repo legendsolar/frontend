@@ -4,6 +4,8 @@ import BankAccountIcon from 'assets/icons/bank_account_icon.png';
 import PanelIcon from 'assets/icons/panel_icon.png';
 import WalletIcon from 'assets/icons/wallet_icon.png';
 
+import {format} from 'date-fns';
+
 const accountToIcon = (account) => {
     switch (account.type) {
         case 'WALLET':
@@ -49,10 +51,19 @@ const transferToIconTypes = (transfer) => {
 };
 
 const TransferComponent = ({transfer}) => {
-    const {title, color, status, destinationName, sourceName, amount} =
+    const {title, color, status, destinationName, sourceName, amount, created} =
         transfer;
 
-    const amountString = () => {
+    const createdDate = (created) => {
+        try {
+            return format(created, 'PP');
+        } catch {
+            const date = new Date(created);
+            return format(date, 'PP');
+        }
+    };
+
+    const amountString = (amount) => {
         try {
             return '$' + amount.toFixed(2);
         } catch {
@@ -68,9 +79,11 @@ const TransferComponent = ({transfer}) => {
     return (
         <Container sx={{width: '100%', minWidth: '320px'}}>
             <Stack direction="row" justifyContent="space-between" sx={{m: 1}}>
-                <Typography variant="label">{title}</Typography>
+                <Typography variant="label">{createdDate(created)}</Typography>
 
-                <Typography variant="label">{amountString()}</Typography>
+                <Typography variant="subtitle2">
+                    {amountString(amount)}
+                </Typography>
             </Stack>
 
             <Container

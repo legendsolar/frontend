@@ -14,7 +14,13 @@ import {useTransfer} from 'hooks/use_transfer';
 import {useAccount} from 'hooks/use_accounts';
 
 const WalletPage = () => {
-    const {useAccounts, useWallet} = useAccount();
+    const {
+        useAccounts,
+        useWallet,
+        usePlaidLinkModal,
+        useCreateLinkToken,
+        useCreateAccount,
+    } = useAccount();
     const {useRecentTransfers, useCreateTransfer} = useTransfer();
     const contentRefs = useRef([]);
 
@@ -53,6 +59,44 @@ const WalletPage = () => {
             variables,
         });
     };
+
+    const {
+        createLinkToken,
+        loading: createLinkTokenLoading,
+        error: createLinkTokenError,
+        token,
+    } = useCreateLinkToken();
+
+    const {
+        createAccount,
+        loading: createAccountLoading,
+        error: createAccoutError,
+        account,
+    } = useCreateAccount();
+
+    const onPlaidLinkComplete = ({publicToken, metadata}) => {
+        console.log({publicToken, metadata});
+        const account = metadata.account;
+        // create account
+        createAccount({
+            variables: {
+                input: {
+                    publicToken: publicToken,
+                    plaidId: account.id,
+                    institution: metadata.institution.name,
+                    name: account.name,
+                    type: account.subtype.toUpperCase(),
+                    mask: account.mask,
+                },
+            },
+        });
+    };
+
+    useEffect(() => {
+        if (!createLinkTokenLoading && !token) createLinkToken();
+    }, [createLinkTokenLoading, token]);
+
+    const {open, ready} = usePlaidLinkModal(token, onPlaidLinkComplete);
 
     const accountsWithWallet = accounts && wallet ? [...accounts, wallet] : [];
 
@@ -93,6 +137,14 @@ const WalletPage = () => {
                         {!accountsLoading && (
                             <AccountListComponent
                                 accounts={accounts}
+                                onCreateTransfer={(account) => {}}
+                                onAddAccount={ready ? open : () => {}}
+                                onUnlinkAccount={() => {}}
+                                addAccountDisabled={
+                                    accountsLoading ||
+                                    createLinkTokenLoading ||
+                                    createAccountLoading
+                                }
                             ></AccountListComponent>
                         )}
                     </DefaultComponent>

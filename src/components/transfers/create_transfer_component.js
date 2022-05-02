@@ -86,9 +86,10 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
         destinationName: destinationAccount?.name,
         destinationAccount,
         destinationName: destinationAccount?.name,
-        color: 'pencilYellow',
+        color: state.page === 'review' ? 'legendaryGreen' : 'pencilYellow',
         status: state.page === 'review' ? 'IN REVIEW' : 'PENDING',
         type: 'TRANSFER',
+        created: new Date(),
     };
 
     const accountsEmpty = !accounts || accounts.length === 0;
@@ -183,7 +184,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     transfer={transferObject}
                 ></TransferComponent>
 
-                <Typography>{`$${transferAmount} will be deducted from your Legends Wallet within the next several days. It may take up to 5 days to transfer.`}</Typography>
+                <Typography>{`$${transferAmount} will be deducted from your ${sourceAccount.name} within the next several days. It may take up to 5 days to transfer.`}</Typography>
 
                 <Button
                     variant="primary"

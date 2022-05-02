@@ -55,17 +55,12 @@ const AccountPage = () => {
                     mask: account.mask,
                 },
             },
-        }).then((account) => {
-            // new account
-            console.log({account});
         });
     };
 
     useEffect(() => {
         if (!createLinkTokenLoading && !token) createLinkToken();
     }, [createLinkTokenLoading, token]);
-
-    console.log({linkToken: token});
 
     const {open, ready} = usePlaidLinkModal(token, onPlaidLinkComplete);
 
