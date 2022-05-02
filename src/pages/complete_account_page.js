@@ -70,7 +70,7 @@ const CompleteAccountPage = () => {
     }, [userSignUpStatus, loading, error, auth.user]);
 
     if (loading || auth.isAuthenticating) {
-        return <></>;
+        return <LoadingView></LoadingView>;
     }
 
     const transformFormValuesToUserDwollaAccountData = (values) => {
