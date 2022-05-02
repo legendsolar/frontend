@@ -284,7 +284,7 @@ export const useProvideTransfer = () => {
 
             console.log({cacheData});
 
-            const transferList = cacheData[queryName];
+            const transferList = cacheData ? cacheData[queryName] : [];
             const updatedTransferList = [];
 
             if (inputs.type && newData.type === inputs.type) {

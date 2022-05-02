@@ -164,7 +164,7 @@ export const useProvideAccount = () => {
 
             console.log({cacheData});
 
-            const accountList = cacheData[queryName];
+            const accountList = cacheData ? cacheData[queryName] : [];
             const updatedAccountList = [];
 
             updatedAccountList.push(newData, ...accountList);
