@@ -78,10 +78,6 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
         }
     };
 
-    if (loading) {
-        return <LoadingComponent></LoadingComponent>;
-    }
-
     const transferObject = {
         title: 'New Transfer',
         amount: transferAmount,

@@ -3,6 +3,8 @@ import TransferComponent from 'components/transfers/transfer_component';
 import PropTypes from 'prop-types';
 
 const TransferGrid = ({transfers}) => {
+    const emptyTransfers = !transfers || transfers.length === 0;
+
     return (
         <div>
             <Grid
@@ -11,7 +13,7 @@ const TransferGrid = ({transfers}) => {
                 justifyContent="center"
                 alignItems="center"
             >
-                {transfers ? (
+                {!emptyTransfers ? (
                     transfers.map((transfer) => {
                         return (
                             <Grid item s={6} key={transfer.id}>

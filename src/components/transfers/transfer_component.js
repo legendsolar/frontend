@@ -32,6 +32,13 @@ const transferToIconTypes = (transfer) => {
         };
     }
 
+    if (transfer.type === 'TRANSFER') {
+        return {
+            left: WalletIcon,
+            right: BankAccountIcon,
+        };
+    }
+
     const left = accountToIcon(transfer.sourceAccount);
     const right = accountToIcon(transfer.destinationAccount);
 

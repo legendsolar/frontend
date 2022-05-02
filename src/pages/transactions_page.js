@@ -53,13 +53,13 @@ const TransactionPage = (props) => {
         transfers: transferTransfers,
     } = useTransfersByType('TRANSFER', 4);
 
-    const {
-        loading: recentTransfersLoading,
-        error: recentError,
-        transfers: recentTransfers,
-    } = useRecentTransfers(15);
+    // const {
+    //     loading: recentTransfersLoading,
+    //     error: recentError,
+    //     transfers: recentTransfers,
+    // } = useRecentTransfers(15);
 
-    console.log({recentTransfers});
+    // console.log(dividendTransfers);
 
     return (
         <SideBarNavView
@@ -119,11 +119,11 @@ const TransactionPage = (props) => {
                     <DefaultComponent
                         ref={(el) => (contentRefs.current[3] = el)}
                     >
-                        {!recentTransfersLoading && (
+                        {/* {!recentTransfersLoading && (
                             <TransferDataGrid
                                 transfers={recentTransfers}
                             ></TransferDataGrid>
-                        )}
+                        )} */}
                     </DefaultComponent>
                 </Stack>
             }

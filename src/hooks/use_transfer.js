@@ -64,7 +64,7 @@ const transferTransformer = (transfer) => {
 
 export const useProvideTransfer = () => {
     const TRANSFERS_BY_TYPE_QUERY = gql`
-        query Query($status: TransferStatus!, $limit: Int!, $offset: Int) {
+        query Query($type: TransferType!, $limit: Int!, $offset: Int) {
             userTransfersByType(type: $type, limit: $limit, offset: $offset) {
                 id
                 status
@@ -182,7 +182,7 @@ export const useProvideTransfer = () => {
                 limit,
                 offset,
             },
-            'userTransfersByType',
+            'userTransfersByStatus',
         );
 
         cachedQueries[key] = true;
@@ -210,7 +210,7 @@ export const useProvideTransfer = () => {
                 limit,
                 offset,
             },
-            'userTransfersByStatus',
+            'userTransfersByType',
         );
 
         cachedQueries[key] = true;
@@ -287,26 +287,43 @@ export const useProvideTransfer = () => {
             const transferList = cacheData[queryName];
             const updatedTransferList = [];
 
-            if (inputs.type) {
-            } else if (inputs.status) {
-            } else {
+            if (inputs.type && newData.type === inputs.type) {
                 updatedTransferList.push(newData, ...transferList);
+
+                if (inputs.limit) {
+                    updatedTransferList.splice(inputs.limit);
+                }
+
+                // Offset not handled yet as it is a pain
+
+                const updatedCacheData = {};
+                updatedCacheData[queryName] = updatedTransferList;
+
+                cache.writeQuery({
+                    query: query,
+                    variables: {...inputs},
+                    data: updatedCacheData,
+                });
+            } else if (inputs.status) {
+                // TODO unimplemented
+            } else if (!inputs.type && !inputs.status) {
+                updatedTransferList.push(newData, ...transferList);
+
+                if (inputs.limit) {
+                    updatedTransferList.splice(inputs.limit);
+                }
+
+                // Offset not handled yet as it is a pain
+
+                const updatedCacheData = {};
+                updatedCacheData[queryName] = updatedTransferList;
+
+                cache.writeQuery({
+                    query: query,
+                    variables: {...inputs},
+                    data: updatedCacheData,
+                });
             }
-
-            if (inputs.limit) {
-                updatedTransferList.splice(inputs.limit);
-            }
-
-            // Offset not handled yet as it is a pain
-
-            const updatedCacheData = {};
-            updatedCacheData[queryName] = updatedTransferList;
-
-            cache.writeQuery({
-                query: query,
-                variables: {...inputs},
-                data: updatedCacheData,
-            });
         });
     };
 
