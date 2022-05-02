@@ -22,6 +22,8 @@ const ProtectedRoute = ({
 
     const {loading, error, status} = useGetUserStatus();
 
+    console.log({user: auth.user, status});
+
     if (
         status &&
         status !== 'NO_ACCOUNT' &&
@@ -58,10 +60,6 @@ const ProtectedRoute = ({
 
     if (auth.isAuthenticating || loading) {
         return <LoadingView></LoadingView>;
-    }
-
-    if (error) {
-        return <ErrorPage></ErrorPage>;
     }
 
     return auth.user ? (
