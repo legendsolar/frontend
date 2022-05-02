@@ -3,13 +3,28 @@ import {useAuth} from './use_auth';
 import {usePlaidLink} from 'react-plaid-link';
 import {useQuery, gql, useMutation} from '@apollo/client';
 
+const accountContext = createContext();
+
+export const ProvideAccount = ({children}) => {
+    const account = useProvideAccount();
+    return (
+        <accountContext.Provider value={account}>
+            {children}
+        </accountContext.Provider>
+    );
+};
+
+export const useAccount = () => {
+    return useContext(accountContext);
+};
+
 const accountTransformer = (account) => {
     return {
         ...account,
     };
 };
 
-export const useAccount = () => {
+export const useProvideAccount = () => {
     const useAccounts = () => {
         const ACCOUNTS_QUERY = gql`
             query AccountsQuery {

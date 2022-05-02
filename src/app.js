@@ -10,6 +10,7 @@ import FirebaseInit from 'firebase_init';
 import {FirebaseAppProvider} from 'reactfire';
 import UnexpectedErrorPage from 'pages/unexpected_error_page';
 import {ProvideTransfer} from 'hooks/use_transfer';
+import {ProvideAccount} from 'hooks/use_accounts';
 
 const App = () => {
     const firebaseConfig = {
@@ -32,7 +33,9 @@ const App = () => {
                             <ProvideAuth>
                                 <ProvideUser>
                                     <ProvideTransfer>
-                                        <AppRouter></AppRouter>
+                                        <ProvideAccount>
+                                            <AppRouter></AppRouter>
+                                        </ProvideAccount>
                                     </ProvideTransfer>
                                 </ProvideUser>
                             </ProvideAuth>
