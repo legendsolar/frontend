@@ -13,6 +13,7 @@ const MultiSelect = ({
     fields,
     selected,
     error,
+    disabled,
     onChangeListener,
 }) => {
     const handleChange = (event) => {
@@ -20,7 +21,7 @@ const MultiSelect = ({
     };
 
     return (
-        <FormControl variant="filled" fullWidth>
+        <FormControl variant="filled" fullWidth disabled={disabled}>
             <InputLabel>{text}</InputLabel>
             <Select
                 helperText={text}
@@ -56,11 +57,13 @@ MultiSelect.propTypes = {
         error: PropTypes.bool,
         errMsg: PropTypes.string,
     }),
+    disabled: PropTypes.bool,
     onChangeListener: PropTypes.func,
 };
 
 MultiSelect.defaultProps = {
     onChangeListener: () => {},
+    disabled: false,
     error: undefined,
 };
 

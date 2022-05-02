@@ -91,6 +91,8 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
         type: 'TRANSFER',
     };
 
+    const accountsEmpty = !accounts || accounts.length === 0;
+
     if (state.page === 'setup') {
         return (
             <Stack spacing={2}>
@@ -116,6 +118,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
 
                         setTransferAmount(validatedAmount.value);
                     }}
+                    disabled={accountsEmpty}
                 ></TextField>
 
                 <MultiSelect
@@ -124,6 +127,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     selected={sourceAccount}
                     fields={displayAccounts}
                     onChangeListener={onAccountSelected}
+                    disabled={accountsEmpty}
                 ></MultiSelect>
 
                 <MultiSelect
@@ -132,6 +136,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     selected={destinationAccount}
                     fields={displayAccounts}
                     onChangeListener={onAccountSelected}
+                    disabled={accountsEmpty}
                 ></MultiSelect>
 
                 <Button
@@ -149,6 +154,12 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     {' '}
                     Review Transfer
                 </Button>
+
+                {accountsEmpty && (
+                    <Typography variant="smallLabel">
+                        Link an account to transfer
+                    </Typography>
+                )}
             </Stack>
         );
     } else if (state.page === 'review') {
