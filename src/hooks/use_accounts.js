@@ -31,18 +31,46 @@ const accountTransformer = (account) => {
 export const useProvideAccount = () => {
     const cachedQueries = {};
 
-    const useAccounts = () => {
-        const ACCOUNTS_QUERY = gql`
-            query AccountsQuery {
-                userAccounts {
-                    id
-                    name
-                    type
-                    mask
-                }
+    const ACCOUNTS_QUERY = gql`
+        query AccountsQuery {
+            userAccounts {
+                id
+                name
+                type
+                mask
             }
-        `;
+        }
+    `;
 
+    const WALLET_QUERY = gql`
+        query WalletQuery {
+            userWallet {
+                id
+                name
+                type
+                mask
+                amount
+            }
+        }
+    `;
+
+    /**
+     * These requested fields must match the accounts query for
+     * the client side cache manipulation to work
+     * */
+
+    const CREATE_ACCOUNT = gql`
+        mutation Mutation($input: CreateAccountInput) {
+            createAccount(input: $input) {
+                id
+                name
+                type
+                mask
+            }
+        }
+    `;
+
+    const useAccounts = () => {
         const {loading, error, data} = useQuery(ACCOUNTS_QUERY, {});
 
         const key = constructQueryCacheKey(ACCOUNTS_QUERY, {}, 'userAccounts');
@@ -57,18 +85,6 @@ export const useProvideAccount = () => {
     };
 
     const useWallet = () => {
-        const WALLET_QUERY = gql`
-            query WalletQuery {
-                userWallet {
-                    id
-                    name
-                    type
-                    mask
-                    amount
-                }
-            }
-        `;
-
         const {loading, error, data} = useQuery(WALLET_QUERY, {});
 
         return {
@@ -101,17 +117,6 @@ export const useProvideAccount = () => {
     };
 
     const useCreateAccount = () => {
-        const CREATE_ACCOUNT = gql`
-            mutation Mutation($input: CreateAccountInput) {
-                createAccount(input: $input) {
-                    id
-                    name
-                    type
-                    mask
-                }
-            }
-        `;
-
         const [internalCreateAccount, {data, loading, error}] =
             useMutation(CREATE_ACCOUNT);
 

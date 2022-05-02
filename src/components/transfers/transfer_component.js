@@ -47,8 +47,11 @@ const TransferComponent = ({transfer}) => {
 
     const amountString = () => {
         try {
-            return amount.toFixed(2);
+            return '$' + amount.toFixed(2);
         } catch {
+            if (!amount.startsWith('$')) {
+                return '$' + amount;
+            }
             return amount;
         }
     };

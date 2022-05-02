@@ -35,7 +35,7 @@ const WalletPage = () => {
         loading: recentTransfersLoading,
         error: recentError,
         transfers: recentTransfers,
-    } = useRecentTransfers(5);
+    } = useRecentTransfers(4);
 
     const {
         loading: newTransferLoading,
