@@ -1,7 +1,6 @@
 import {Typography, Stack, Button, CircularProgress} from '@mui/material';
 import MultiSelect from 'components/inputs/multiselect';
 import {useEffect, useState} from 'react';
-import {useCloudFunctions} from 'hooks/use_cloud_functions';
 
 const IdentityVerificationKBA = ({onSubmit, kbaQuestions}) => {
     const [selected, setSelected] = useState([]);

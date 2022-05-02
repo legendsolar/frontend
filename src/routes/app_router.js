@@ -77,7 +77,7 @@ function AppRouter() {
                                 requiredUserStates={[
                                     USER_STATUS.IDENTITY_VERIFIED,
                                 ]}
-                                requiredPath="/complete-account/create"
+                                requiredPath="/complete-account"
                             >
                                 <PortfolioPage></PortfolioPage>
                             </ProtectedRoute>
@@ -90,7 +90,7 @@ function AppRouter() {
                                 requiredUserStates={[
                                     USER_STATUS.IDENTITY_VERIFIED,
                                 ]}
-                                requiredPath="/complete-account/create"
+                                requiredPath="/complete-account"
                             >
                                 <AccountPage />
                             </ProtectedRoute>
@@ -104,7 +104,7 @@ function AppRouter() {
                                 requiredUserStates={[
                                     USER_STATUS.IDENTITY_VERIFIED,
                                 ]}
-                                requiredPath="/complete-account/create"
+                                requiredPath="/complete-account"
                             >
                                 <WalletPage />
                             </ProtectedRoute>
@@ -118,7 +118,7 @@ function AppRouter() {
                                 requiredUserStates={[
                                     USER_STATUS.IDENTITY_VERIFIED,
                                 ]}
-                                requiredPath="/complete-account/create"
+                                requiredPath="/complete-account"
                             >
                                 <WalletPage />
                             </ProtectedRoute>
@@ -132,7 +132,7 @@ function AppRouter() {
                                 requiredUserStates={[
                                     USER_STATUS.IDENTITY_VERIFIED,
                                 ]}
-                                requiredPath="/complete-account/create"
+                                requiredPath="/complete-account"
                             >
                                 <DocumentPage />
                             </ProtectedRoute>

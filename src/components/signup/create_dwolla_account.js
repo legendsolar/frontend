@@ -2,7 +2,6 @@ import {Alert, Collapse, Stack, CircularProgress} from '@mui/material';
 import {useAuth} from 'hooks/use_auth';
 import {Button, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
 
 import Divider from 'components/basics/divider';
 import ModifyUserInfo from 'components/user/modify_user_info';
