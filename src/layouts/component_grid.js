@@ -16,6 +16,7 @@ import WeatherLive from 'components/weather/weather_live';
 import DefaultComponent from 'components/utils/default_component';
 import PlaceholderWorm from 'components/worm/placeholder_worm';
 import PortfolioPlaceholder from 'components/placeholders/portfolio_placeholder';
+import Weather from 'components/weather/weather';
 
 function ComponentGrid(props) {
     return (
@@ -32,11 +33,42 @@ function ComponentGrid(props) {
                 </DefaultComponent>
             </Grid>
 
+            <Grid item xs={12} lg={6}>
+                <DefaultComponent disabled={true}>
+                    <Weather temp={72} code={800} state={'Sunny'}></Weather>
+                </DefaultComponent>
+            </Grid>
+
+            <Grid item xs={12} lg={6}>
+                <DefaultComponent disabled={true}>
+                    <CarbonGauge max={100} currentValue_unit={10}></CarbonGauge>
+                </DefaultComponent>
+            </Grid>
+
+            <Grid item xs={12} lg={6}>
+                <DefaultComponent disabled={true}>
+                    <EarningsGauge
+                        max={100}
+                        currentValue_unit={10}
+                    ></EarningsGauge>
+                </DefaultComponent>
+            </Grid>
+
+            <Grid item xs={12} lg={6}>
+                <DefaultComponent disabled={true}>
+                    <GenerationGauge
+                        max={100}
+                        currentValue_unit={10}
+                    ></GenerationGauge>
+                </DefaultComponent>
+            </Grid>
+
             {/* <Grid item xs={12} lg={6}>
                 <DefaultComponent>
                     <EarningsGauge assetId={assetDisplayId.id}></EarningsGauge>
                 </DefaultComponent>
             </Grid>
+
 
             <Grid item md={12} lg={6}>
                 <DefaultComponent>

@@ -104,43 +104,46 @@ LiveMetricGauge.defaultProps = {
     errorExt: false,
 };
 
-const CarbonGauge = ({assetId}) => {
+const CarbonGauge = ({max, currentValue_unit}) => {
     const factor = 0.1;
     const unitOpts = {
         unit: 'LBS',
         unitDescription: 'Pounds per hour',
         title: 'Carbon Aversion',
-        strokeColor: '#477FB2',
+        strokeColor: 'skyBlue',
     };
 
     return (
-        <LiveMetricGauge
-            unitConversionFactor_kW={factor}
-            assetId={assetId}
+        <MetricGauge
             unitOpts={unitOpts}
-        ></LiveMetricGauge>
+            min={0}
+            max={max}
+            currentValue={currentValue_unit}
+        ></MetricGauge>
     );
 };
 
 CarbonGauge.propTypes = {
-    assetId: PropTypes.string.isRequired,
+    max: PropTypes.number,
+    currentValue_unit: PropTypes.number,
 };
 
-const GenerationGauge = ({assetId}) => {
+const GenerationGauge = ({max, currentValue_unit}) => {
     const factor = 0.1;
     const unitOpts = {
         unit: 'KW',
         unitDescription: 'KILOWATTS',
         title: 'Generation',
-        strokeColor: '#EAB31E',
+        strokeColor: 'pencilYellow',
     };
 
     return (
-        <LiveMetricGauge
-            unitConversionFactor_kW={factor}
-            assetId={assetId}
+        <MetricGauge
             unitOpts={unitOpts}
-        ></LiveMetricGauge>
+            min={0}
+            max={max}
+            currentValue={currentValue_unit}
+        ></MetricGauge>
     );
 };
 
@@ -148,21 +151,22 @@ GenerationGauge.propTypes = {
     assetId: PropTypes.string.isRequired,
 };
 
-const EarningsGauge = ({assetId}) => {
+const EarningsGauge = ({max, currentValue_unit}) => {
     const factor = 0.1;
     const unitOpts = {
         unit: 'USD',
         unitDescription: 'Dollars per hour',
         title: 'Earnings',
-        strokeColor: '#30A462',
+        strokeColor: 'grassGreen',
     };
 
     return (
-        <LiveMetricGauge
-            unitConversionFactor_kW={factor}
-            assetId={assetId}
+        <MetricGauge
             unitOpts={unitOpts}
-        ></LiveMetricGauge>
+            min={0}
+            max={max}
+            currentValue={currentValue_unit}
+        ></MetricGauge>
     );
 };
 
