@@ -3,13 +3,8 @@ import {useEffect, useLayoutEffect, useMemo} from 'react';
 import {Navigate, useNavigate} from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
 import LoadingView from 'views/loading_view';
-import {useDispatch, useSelector} from 'react-redux';
-import {useCloudFunctions} from 'hooks/use_cloud_functions';
-import {selectUserSignUpState, fetchUserSignUpState} from 'slices/user_slice';
 import PropTypes from 'prop-types';
 import ErrorPage from 'pages/error_page';
-import AppSettings from 'app_settings';
-import store from 'store';
 import {useUser} from 'hooks/use_user';
 
 const ProtectedRoute = ({

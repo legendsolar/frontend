@@ -11,7 +11,6 @@ import {
     useFunctions,
     StorageProvider,
 } from 'reactfire';
-import {ProvideCloudFunctions} from 'hooks/use_cloud_functions';
 
 const FirebaseInit = ({children}) => {
     const app = useFirebaseApp();
@@ -32,15 +31,11 @@ const FirebaseInit = ({children}) => {
     }
 
     return (
-        <ProvideCloudFunctions functions={functions}>
-            <StorageProvider sdk={storage}>
-                <AuthProvider sdk={auth}>
-                    <DatabaseProvider sdk={database}>
-                        {children}
-                    </DatabaseProvider>
-                </AuthProvider>
-            </StorageProvider>
-        </ProvideCloudFunctions>
+        <StorageProvider sdk={storage}>
+            <AuthProvider sdk={auth}>
+                <DatabaseProvider sdk={database}>{children}</DatabaseProvider>
+            </AuthProvider>
+        </StorageProvider>
     );
 };
 

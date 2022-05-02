@@ -5,11 +5,6 @@ import {Paper, Stack, Button, Typography} from '@mui/material';
 import SideBarNavView from 'views/side_bar_view';
 
 import CreateTransferComponent from 'components/transfers/create_transfer_component';
-
-import {useDispatch, useSelector} from 'react-redux';
-import {selectWalletBalance} from 'slices/wallet_slice';
-import {fetchWalletBalance} from 'slices/wallet_slice';
-import {useCloudFunctions} from 'hooks/use_cloud_functions';
 import DefaultComponent from 'components/utils/default_component';
 import SideBar from 'components/utils/sidebar_component';
 import TransferGrid from 'components/transfers/transfer_grid';

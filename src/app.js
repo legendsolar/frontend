@@ -4,8 +4,6 @@ import AppRouter from 'routes/app_router';
 import {ThemeProvider} from '@mui/material/styles';
 import {appTheme} from 'app_theme';
 import {ErrorBoundary} from '@sentry/react';
-import {Provider} from 'react-redux';
-import store from 'store';
 import FirebaseInit from 'firebase_init';
 import {FirebaseAppProvider} from 'reactfire';
 import UnexpectedErrorPage from 'pages/unexpected_error_page';
@@ -28,19 +26,17 @@ const App = () => {
         <ErrorBoundary fallback={<UnexpectedErrorPage />}>
             <FirebaseAppProvider firebaseConfig={firebaseConfig}>
                 <FirebaseInit>
-                    <Provider store={store}>
-                        <ThemeProvider theme={appTheme}>
-                            <ProvideAuth>
-                                <ProvideUser>
-                                    <ProvideTransfer>
-                                        <ProvideAccount>
-                                            <AppRouter></AppRouter>
-                                        </ProvideAccount>
-                                    </ProvideTransfer>
-                                </ProvideUser>
-                            </ProvideAuth>
-                        </ThemeProvider>
-                    </Provider>
+                    <ThemeProvider theme={appTheme}>
+                        <ProvideAuth>
+                            <ProvideUser>
+                                <ProvideTransfer>
+                                    <ProvideAccount>
+                                        <AppRouter></AppRouter>
+                                    </ProvideAccount>
+                                </ProvideTransfer>
+                            </ProvideUser>
+                        </ProvideAuth>
+                    </ThemeProvider>
                 </FirebaseInit>
             </FirebaseAppProvider>
         </ErrorBoundary>

@@ -7,14 +7,9 @@ import {
     signOut,
     getAuth,
     signInWithPopup,
-    getIdToken,
 } from 'firebase/auth';
 
 import {GoogleAuthProvider} from 'firebase/auth';
-import {useDispatch} from 'react-redux';
-import {clearUserState} from 'slices/user_slice';
-import {clearTransactionState} from 'slices/transfer_slice';
-import {clearWalletState} from 'slices/wallet_slice';
 
 import {setContext} from '@apollo/client/link/context';
 
@@ -33,7 +28,6 @@ export const useAuth = () => {
 
 const setApolloContext = (user) => {
     setContext((_, {headers, ...context}) => {
-        console.log('context ran:' + user);
         const token = user.token;
         return {
             headers: {
@@ -56,8 +50,6 @@ function useProvideAuth() {
     const apolloContext = setApolloContext(user);
 
     const [isAuthenticating, setIsAuthenticating] = useState(true);
-
-    const dispatch = useDispatch();
 
     // Wrap any Firebase methods we want to use making sure ...
     // ... to save the user to state.
@@ -117,20 +109,6 @@ function useProvideAuth() {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (!user) {
                 // TODO nuke apollo cache
-                console.log('use auth: user auth state changed');
-                console.log(user);
-                console.log('clearing user state');
-
-                console.log('dispatch clear user state: line 104, use auth');
-                console.log(
-                    'dispatch clear transaction state: line 104, use auth',
-                );
-                console.log('dispatch clear wallet state: line 104, use auth');
-                dispatch(clearUserState());
-                dispatch(clearTransactionState());
-                dispatch(clearWalletState());
-
-                console.log('dispatch should have finished');
             }
             setUser(user);
             setIsAuthenticating(false);
@@ -148,6 +126,5 @@ function useProvideAuth() {
         signout,
 
         signInWithGoogle,
-        // userDataSnap,
     };
 }
