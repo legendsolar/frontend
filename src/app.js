@@ -9,6 +9,7 @@ import store from 'store';
 import FirebaseInit from 'firebase_init';
 import {FirebaseAppProvider} from 'reactfire';
 import UnexpectedErrorPage from 'pages/unexpected_error_page';
+import {ProvideTransfer} from 'hooks/use_transfer';
 
 const App = () => {
     const firebaseConfig = {
@@ -30,7 +31,9 @@ const App = () => {
                         <ThemeProvider theme={appTheme}>
                             <ProvideAuth>
                                 <ProvideUser>
-                                    <AppRouter></AppRouter>
+                                    <ProvideTransfer>
+                                        <AppRouter></AppRouter>
+                                    </ProvideTransfer>
                                 </ProvideUser>
                             </ProvideAuth>
                         </ThemeProvider>

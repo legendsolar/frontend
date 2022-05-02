@@ -3,6 +3,21 @@ import {useAuth} from './use_auth';
 
 import {useQuery, gql, useMutation} from '@apollo/client';
 
+const transferContext = createContext();
+
+export const ProvideTransfer = ({children}) => {
+    const transfer = useProvideTransfer();
+    return (
+        <transferContext.Provider value={transfer}>
+            {children}
+        </transferContext.Provider>
+    );
+};
+
+export const useTransfer = () => {
+    return useContext(transferContext);
+};
+
 const transferTypeTransformer = (type) => {
     switch (type) {
         case 'DIVIDEND':
@@ -43,7 +58,7 @@ const transferTransformer = (transfer) => {
     };
 };
 
-export const useTransfer = () => {
+export const useProvideTransfer = () => {
     const useTransfersByStatus = (status, limit = 10, offset = 0) => {
         const TRANSFERS_BY_TYPE_QUERY = gql`
             query Query($status: TransferStatus!, $limit: Int!, $offset: Int) {
