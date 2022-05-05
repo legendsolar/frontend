@@ -4,53 +4,7 @@ import CumulativeImpact from 'components/gauges/cumulative_impact';
 import LoadingComponent from 'components/utils/loading_component';
 import {useDatabase, useDatabaseObjectData} from 'reactfire';
 
-const LiveCumulativeImpact = ({assetId, unitConversionFactor_kW, unitOpts}) => {
-    const database = useDatabase();
-
-    var convertedCumulativeData = {
-        day: 0,
-        week: 0,
-        month: 0,
-        year: 0,
-    };
-
-    const {productionSummaryState, data: productionSummary} =
-        useDatabaseObjectData(
-            ref(database, 'production/' + assetId + '/summary'),
-        );
-
-    if (productionSummaryState === 'loading') {
-        return <LoadingComponent></LoadingComponent>;
-    }
-
-    if (!productionSummary?.last) {
-        return <></>;
-    }
-
-    Object.entries(productionSummary.last).forEach(([key, value]) => {
-        convertedCumulativeData[key] = value * unitConversionFactor_kW;
-    });
-
-    return (
-        <CumulativeImpact
-            cumulativeData={convertedCumulativeData}
-            unitOpts={unitOpts}
-        ></CumulativeImpact>
-    );
-};
-
-LiveCumulativeImpact.propTypes = {
-    assetId: PropTypes.string.isRequired,
-    unitConversionFactor_kW: PropTypes.number.isRequired,
-    unitOpts: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        unit: PropTypes.string.isRequired,
-        unitDescription: PropTypes.string.isRequired,
-        strokeColor: PropTypes.string.isRequired,
-    }).isRequired,
-};
-
-const EarningsCumulativeImpact = ({assetId}) => {
+const EarningsCumulativeImpact = ({cumulativeData, live}) => {
     const unitOpts = {
         unit: 'DOLLARS',
         unitDescription: 'Dollars',
@@ -58,14 +12,12 @@ const EarningsCumulativeImpact = ({assetId}) => {
         strokeColor: '#30A462',
     };
 
-    const unitConversionFactor_kW = 0.15;
-
     return (
-        <LiveCumulativeImpact
-            assetId={assetId}
-            unitConversionFactor_kW={unitConversionFactor_kW}
+        <CumulativeImpact
+            cumulativeData={cumulativeData}
             unitOpts={unitOpts}
-        ></LiveCumulativeImpact>
+            live={live}
+        ></CumulativeImpact>
     );
 };
 
@@ -73,7 +25,7 @@ EarningsCumulativeImpact.propTypes = {
     assetId: PropTypes.string.isRequired,
 };
 
-const CarbonCumulativeImpact = ({assetId}) => {
+const CarbonCumulativeImpact = ({cumulativeData, live}) => {
     const unitOpts = {
         unit: 'LBS',
         unitDescription: 'Pounds ',
@@ -81,14 +33,12 @@ const CarbonCumulativeImpact = ({assetId}) => {
         strokeColor: '#477FB2',
     };
 
-    const unitConversionFactor_kW = 0.12;
-
     return (
-        <LiveCumulativeImpact
-            assetId={assetId}
-            unitConversionFactor_kW={unitConversionFactor_kW}
+        <CumulativeImpact
+            cumulativeData={cumulativeData}
             unitOpts={unitOpts}
-        ></LiveCumulativeImpact>
+            live={live}
+        ></CumulativeImpact>
     );
 };
 
@@ -96,7 +46,7 @@ CarbonCumulativeImpact.propTypes = {
     assetId: PropTypes.string.isRequired,
 };
 
-const GenerationCumulativeImpact = ({assetId}) => {
+const GenerationCumulativeImpact = ({cumulativeData, live}) => {
     const unitOpts = {
         unit: 'KWH',
         unitDescription: 'KILOWATTS',
@@ -104,14 +54,12 @@ const GenerationCumulativeImpact = ({assetId}) => {
         strokeColor: '#EAB31E',
     };
 
-    const unitConversionFactor_kW = 1;
-
     return (
-        <LiveCumulativeImpact
-            assetId={assetId}
-            unitConversionFactor_kW={unitConversionFactor_kW}
+        <CumulativeImpact
+            cumulativeData={cumulativeData}
             unitOpts={unitOpts}
-        ></LiveCumulativeImpact>
+            live={live}
+        ></CumulativeImpact>
     );
 };
 
@@ -120,7 +68,6 @@ GenerationCumulativeImpact.propTypes = {
 };
 
 export {
-    LiveCumulativeImpact,
     CarbonCumulativeImpact,
     GenerationCumulativeImpact,
     EarningsCumulativeImpact,

@@ -106,10 +106,18 @@ const basePaths = [
     },
 
     {
-        name: 'plaid',
+        name: 'placeholders',
         tests: [
             {
-                name: 'test_plaid_link',
+                name: 'test_document_placeholder',
+            },
+
+            {
+                name: 'test_portfolio_placeholder',
+            },
+
+            {
+                name: 'test_transfer_placeholder',
             },
         ],
     },

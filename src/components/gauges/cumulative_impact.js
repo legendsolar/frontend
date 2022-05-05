@@ -1,18 +1,32 @@
-import { Typography, Box, Paper, Chip, Stack } from "@mui/material";
-import PropTypes from "prop-types";
+import {Typography, Box, Paper, Chip, Stack} from '@mui/material';
+import PropTypes from 'prop-types';
 
-import { useState } from "react";
-const CumulativeImpact = ({ cumulativeData, unitOpts }) => {
-    const [historyState, setHistoryState] = useState("week");
+import {useState} from 'react';
+const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
+    const [historyState, setHistoryState] = useState('week');
+
+    const parsedCumulativeData = live
+        ? {
+              day: cumulativeData.day.toFixed(2),
+              week: cumulativeData.week.toFixed(2),
+              month: cumulativeData.month.toFixed(2),
+              year: cumulativeData.year.toFixed(2),
+          }
+        : {
+              day: '-',
+              week: '-',
+              month: '-',
+              year: '-',
+          };
 
     return (
-        <Box sx={{ minWidth: 300, minHeight: 288, height: "100%" }}>
+        <Box sx={{minWidth: 300, minHeight: 288}}>
             <Stack
                 justifyContent="space-between"
                 spacing={1}
-                sx={{ height: "100%" }}
+                sx={{height: '100%'}}
             >
-                <Stack direction="row" justifyContent={"space-between"}>
+                <Stack direction="row" justifyContent={'space-between'}>
                     <Typography variant="smallHeadline">
                         {unitOpts.title}
                     </Typography>
@@ -36,7 +50,7 @@ const CumulativeImpact = ({ cumulativeData, unitOpts }) => {
                             }}
                             align="center"
                         >
-                            {`${cumulativeData[historyState].toFixed(0)}`}
+                            {`${parsedCumulativeData[historyState]}`}
                         </Typography>
 
                         <Typography variant="body1" align="center">
@@ -60,31 +74,31 @@ const CumulativeImpact = ({ cumulativeData, unitOpts }) => {
                     justifyContent="space-evenly"
                 >
                     <Chip
-                        label={"Y2D"}
-                        onClick={() => setHistoryState("year")}
+                        label={'Y2D'}
+                        onClick={() => setHistoryState('year')}
                         clickable={true}
-                        variant={historyState == "year" ? "selected" : "light"}
+                        variant={historyState == 'year' ? 'selected' : 'light'}
                     ></Chip>
 
                     <Chip
-                        label={"Month to Date"}
-                        onClick={() => setHistoryState("month")}
+                        label={'Month to Date'}
+                        onClick={() => setHistoryState('month')}
                         clickable={true}
-                        variant={historyState == "month" ? "selected" : "light"}
+                        variant={historyState == 'month' ? 'selected' : 'light'}
                     ></Chip>
 
                     <Chip
-                        label={"W2D"}
-                        onClick={() => setHistoryState("week")}
+                        label={'W2D'}
+                        onClick={() => setHistoryState('week')}
                         clickable={true}
-                        variant={historyState == "week" ? "selected" : "light"}
+                        variant={historyState == 'week' ? 'selected' : 'light'}
                     ></Chip>
 
                     <Chip
-                        label={"24H"}
-                        onClick={() => setHistoryState("day")}
+                        label={'24H'}
+                        onClick={() => setHistoryState('day')}
                         clickable={true}
-                        variant={historyState == "day" ? "selected" : "light"}
+                        variant={historyState == 'day' ? 'selected' : 'light'}
                     ></Chip>
                 </Stack>
             </Stack>
@@ -98,13 +112,14 @@ CumulativeImpact.propTypes = {
         week: PropTypes.number.isRequired,
         month: PropTypes.number.isRequired,
         year: PropTypes.number.isRequired,
-    }).isRequired,
+    }),
     unitOpts: PropTypes.shape({
         title: PropTypes.string.isRequired,
         unit: PropTypes.string.isRequired,
         unitDescription: PropTypes.string.isRequired,
         strokeColor: PropTypes.string.isRequired,
-    }).isRequired,
+    }),
+    live: PropTypes.bool,
 };
 
 export default CumulativeImpact;
