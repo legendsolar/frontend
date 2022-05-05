@@ -23,6 +23,7 @@ const WalletPage = () => {
     } = useAccount();
     const {useRecentTransfers, useCreateTransfer} = useTransfer();
     const contentRefs = useRef([]);
+    const [tokenRequested, setTokenRequested] = useState(false);
 
     const {
         loading: accountsLoading,
@@ -93,7 +94,10 @@ const WalletPage = () => {
     };
 
     useEffect(() => {
-        if (!createLinkTokenLoading && !token) createLinkToken();
+        if (!createLinkTokenLoading && !token && !tokenRequested) {
+            setTokenRequested(true);
+            createLinkToken();
+        }
     }, [createLinkTokenLoading, token]);
 
     const {open, ready} = usePlaidLinkModal(token, onPlaidLinkComplete);

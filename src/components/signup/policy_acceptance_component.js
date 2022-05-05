@@ -43,11 +43,7 @@ const PolicyAcceptanceComponent = ({onComplete}) => {
             },
         });
 
-        if (
-            policyAcceptance.privacy ||
-            policyAcceptance.termsAndConditions ||
-            policyAcceptance.dwolla
-        ) {
+        if (policyAcceptance.dwolla) {
             onComplete();
         } else {
             scrollToPosition(0);

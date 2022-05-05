@@ -4,6 +4,7 @@ import SideBarView from 'views/side_bar_view';
 import ScrollToSidebar from 'components/utils/scroll_to_sidebar';
 import DefaultComponent from 'components/utils/default_component';
 import DocumentComponent from 'components/invest/document_component';
+import DocumentPlaceholder from 'components/placeholders/document_placeholder';
 import {placeholderDocumentPageDocuments} from 'static_data/placeholder_documents';
 
 const DocumentPage = () => {

@@ -7,6 +7,7 @@ import MemberHeader from 'components/user/member_header';
 import TransferGrid from 'components/transfers/transfer_grid';
 import DefaultComponent from 'components/utils/default_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
+import TransferPlaceholder from 'components/placeholders/transfer_placeholder';
 import {useUser} from 'hooks/use_user';
 import {useTransfer} from 'hooks/use_transfer';
 

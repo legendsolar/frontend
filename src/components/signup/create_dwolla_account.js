@@ -8,89 +8,12 @@ import ModifyUserInfo from 'components/user/modify_user_info';
 import ProtectedUserInfo from 'components/user/protected_user_info';
 import {ErrorTypes} from 'utils/errors';
 
-const CreateDwollaAccount = ({userStatus, onSubmit}) => {
-    // const auth = useAuth();
-    // const dispatch = useDispatch();
-    // const cloudFunctions = useCloudFunctions();
-
-    // const userSignUpStateStatus = useSelector(
-    //     (state) => state.user.signUpState.status,
-    // );
-
-    // useEffect(() => {
-    //     if (userSignUpStateStatus === 'idle' && auth.user) {
-    //         console.log(
-    //             'dispatch fetch user state: line 46, create dwolla account',
-    //         );
-    //         dispatch(fetchUserSignUpState(cloudFunctions));
-    //     }
-    // }, [dispatch, userSignUpStateStatus, auth.user]);
-
-    // const userSignUpState = useSelector(selectUserSignUpState);
-
-    // const dwollaUpdateOrCreateFunction =
-    //     userSignUpState === 'ACCREDATION_VERIF_COMPLETE'
-    //         ? cloudFunctions.attemptCreateNewDwollaVerifiedUser
-    //         : cloudFunctions.updateDwollaUser;
-
-    // const [loading, setLoading] = useState(false);
-    // const [inputValid, setInputValid] = useState([false, false]);
-    // const [userInfo, setUserInfo] = useState(false);
-
-    // const [submitErrorMessage, setSubmitErrorMessage] = useState(undefined);
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-
-    //     const dwollaObject = transformUserDataToDwollaObject(userInfo);
-
-    //     setLoading(true);
-
-    //     dwollaUpdateOrCreateFunction(dwollaObject)
-    //         .then((resp) => {
-    //             console.log(resp);
-    //             onComplete();
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //             const errorJson = JSON.parse(JSON.stringify(error));
-    //             console.log(errorJson);
-    //             setSubmitErrorMessage(errorJson.details.message);
-    //         })
-    //         .finally(() => {
-    //             setLoading(false);
-    //         });
-    // };
-
-    // const onUpdate = (newInfo, formId) => {
-    //     const error = Object.keys(newInfo)
-    //         .map((key) => {
-    //             return newInfo[key].error;
-    //         })
-    //         .some((el) => el);
-
-    //     const newInputValid = [...inputValid];
-
-    //     if (!newInfo || error) {
-    //         newInputValid[formId] = false;
-    //     } else {
-    //         newInputValid[formId] = true;
-    //         setUserInfo({
-    //             ...userInfo,
-    //             ...newInfo,
-    //         });
-    //     }
-
-    //     setInputValid(newInputValid);
-    // };
-
+const CreateDwollaAccount = ({userStatus, onSubmit, loading}) => {
     const fullSSNRequired = userStatus === 'DWOLLA_ACCOUNT_RETRY_REQ';
 
     const [userInfoValid, setUserInfoValid] = useState(false);
     const [protectedUserInfoValid, setProtectedUserInfoValid] = useState(false);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
-
     const [values, setValues] = useState({});
 
     return (
@@ -163,14 +86,7 @@ const CreateDwollaAccount = ({userStatus, onSubmit}) => {
                 disabled={!(userInfoValid && protectedUserInfoValid)}
                 color="legendaryGreen"
                 onClick={(event) => {
-                    setLoading(true);
-
-                    Promise.resolve(onSubmit(values))
-                        .catch((error) => {
-                            if (error.type === ErrorTypes.DwollaError)
-                                setError(error);
-                        })
-                        .finally(() => setLoading(false));
+                    onSubmit(values);
                 }}
             >
                 {loading ? (

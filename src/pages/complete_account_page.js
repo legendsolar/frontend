@@ -30,7 +30,8 @@ const CompleteAccountPage = () => {
 
     const {loading, error, status} = useGetUserStatus();
     const [setUser] = useSetUser();
-    const [createDwollaAccount] = useCreateDwollaAccount();
+    const {createDwollaAccount, loading: createDwollaAccountLoading} =
+        useCreateDwollaAccount();
 
     const {onCreateAccountSubmit} = useSignIn();
 
@@ -101,7 +102,7 @@ const CompleteAccountPage = () => {
 
         console.log(variables);
 
-        createDwollaAccount({
+        return createDwollaAccount({
             variables,
         });
     };
@@ -155,6 +156,7 @@ const CompleteAccountPage = () => {
                     userStatus={userSignUpStatus}
                     onComplete={onComplete}
                     onSubmit={onCompleteDwollaAccountSubmit}
+                    loading={createDwollaAccountLoading}
                 ></CreateDwollaAccount>
             ),
             disabled: !(

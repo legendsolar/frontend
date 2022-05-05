@@ -117,7 +117,16 @@ export const useProvideUser = () => {
     };
 
     const useCreateDwollaAccount = () => {
-        return useMutation(CREATE_DWOLLA_ACCOUNT);
+        const [createDwollaAccount, {data, loading, error}] = useMutation(
+            CREATE_DWOLLA_ACCOUNT,
+        );
+
+        return {
+            createDwollaAccount,
+            data,
+            loading,
+            error,
+        };
     };
 
     const useUserMetaData = () => {

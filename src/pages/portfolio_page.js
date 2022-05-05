@@ -9,7 +9,7 @@ const PortfolioPage = () => {
             drawer={<AccountSummarySidebar></AccountSummarySidebar>}
             mainContent={
                 <div>
-                    <ComponentGrid></ComponentGrid>
+                    <PortfolioPlaceholder></PortfolioPlaceholder>
                 </div>
             }
         ></SideBarNavView>

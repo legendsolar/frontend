@@ -16,10 +16,6 @@ const useSignIn = (auth = null) => {
         navigate('/');
     };
 
-    const onForgotPassword = () => {
-        console.log('onForgotPassword');
-    };
-
     const handleFirebaseError = (error) => {
         const translatedError = authErrorTranslator(error);
 
@@ -69,18 +65,25 @@ const useSignIn = (auth = null) => {
         navigate('/signin');
     };
 
+    const onForgotPassword = (values) => {
+        return auth.resetPassword(values.email).catch((error) => {
+            const translatedError = handleFirebaseError(error);
+            throwValidationError(translatedError);
+        });
+    };
+
     const onSignUpWithGoogle = onSignInWithGoogle;
 
     return {
-        onForgotPassword: onForgotPassword,
-        onSignInSubmit: onSignInSubmit,
-        onSignInWithGoogle: onSignInWithGoogle,
-        onCreateNewAccount: onCreateNewAccount,
-        onSignUpWithEmail: onSignUpWithEmail,
-        onNavigateToSignIn: onNavigateToSignIn,
-        onSignUpWithGoogle: onSignUpWithGoogle,
-
-        onCreateAccountSubmit: onCreateAccountSubmit,
+        onForgotPassword,
+        onSignInSubmit,
+        onSignInWithGoogle,
+        onCreateNewAccount,
+        onSignUpWithEmail,
+        onNavigateToSignIn,
+        onSignUpWithGoogle,
+        onCreateAccountSubmit,
+        onForgotPassword,
     };
 };
 

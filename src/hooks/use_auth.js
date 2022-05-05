@@ -7,6 +7,7 @@ import {
     signOut,
     getAuth,
     signInWithPopup,
+    sendPasswordResetEmail,
 } from 'firebase/auth';
 
 import {GoogleAuthProvider} from 'firebase/auth';
@@ -101,6 +102,10 @@ function useProvideAuth() {
             });
     };
 
+    const resetPassword = (email) => {
+        return sendPasswordResetEmail(auth, email);
+    };
+
     // Subscribe to user on mount
     // Because this sets state in the callback it will cause any ...
     // ... component that utilizes this hook to re-render with the ...
@@ -124,7 +129,7 @@ function useProvideAuth() {
         signin,
         signup,
         signout,
-
+        resetPassword,
         signInWithGoogle,
     };
 }
