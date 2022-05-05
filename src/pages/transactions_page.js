@@ -1,4 +1,4 @@
-import {useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import SideBarNavView from 'views/side_bar_view';
 import {Stack, Paper, Typography} from '@mui/material';
 import ScrollToSidebar from 'components/utils/scroll_to_sidebar';
@@ -14,6 +14,7 @@ const TransactionPage = (props) => {
     const auth = useAuth();
     const {useUserMetaData} = useUser();
     const {useTransfersByType, useRecentTransfers} = useTransfer();
+    const [emptyTransfers, setEmptyTransfers] = useState(false);
     const user = auth.user;
 
     const drawerTitles = [
@@ -59,6 +60,17 @@ const TransactionPage = (props) => {
         transfers: recentTransfers,
     } = useRecentTransfers(15);
 
+    useEffect(() => {
+        if (
+            !dividendTransferLoading &&
+            !investmentTransferLoading &&
+            !transferTransferLoading &&
+            !recentTransfersLoading
+        ) {
+            setEmptyTransfers(true);
+        }
+    });
+
     return (
         <SideBarNavView
             drawer={
@@ -75,6 +87,10 @@ const TransactionPage = (props) => {
             }
             mainContent={
                 <Stack spacing={4}>
+                    {emptyTransfers && (
+                        <TransferPlaceholder></TransferPlaceholder>
+                    )}
+
                     <DefaultComponent
                         ref={(el) => (contentRefs.current[0] = el)}
                     >

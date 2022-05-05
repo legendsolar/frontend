@@ -14,6 +14,7 @@ import {
     GenerationCumulativeImpact,
 } from 'components/gauges/live_cumulative_impact';
 import TransferGrid from 'components/transfers/transfer_grid';
+import {portfolioPageTransfers} from 'static_data/placeholder_transfers';
 
 const PortfolioPlaceholder = () => {
     return (
@@ -57,58 +58,7 @@ const PortfolioPlaceholder = () => {
                             Dividends
                         </Typography>
                         <TransferGrid
-                            transfers={[
-                                {
-                                    __typename: 'Transfer',
-                                    id: '4718e0f4-a966-474d-a843-a254bc33bebb',
-                                    status: 'COMPLETE',
-                                    type: 'DIVIDEND',
-                                    sourceAccount: {
-                                        __typename: 'Wallet',
-                                        id: 'da3b0d9a-c4d5-4e2e-adf4-434a0307c6f9',
-                                        name: 'Solar Holdings',
-                                        type: 'SAVINGS',
-                                        mask: 4389,
-                                    },
-                                    destinationAccount: {
-                                        __typename: 'Wallet',
-                                        id: 'e76df244-c0af-4de0-a312-6667e33e4004',
-                                        name: 'Legends Wallet',
-                                        type: 'WALLET',
-                                        mask: null,
-                                    },
-                                    amount: '$59.15',
-                                    created: 1646497478000,
-                                    title: 'Dividend Payment',
-                                    destinationName: 'Legends Wallet',
-                                    sourceName: 'Solar Holdings',
-                                    color: 'legendaryGreen',
-                                },
-                                {
-                                    __typename: 'Transfer',
-                                    id: '4718e0f4-a966-474d-a843-a254bc33bebb',
-                                    status: 'COMPLETE',
-                                    type: 'DIVIDEND',
-                                    sourceAccount: {
-                                        id: 'da3b0d9a-c4d5-4e2e-adf4-434a0307c6f9',
-                                        name: 'Solar Holdings',
-                                        type: 'SAVINGS',
-                                        mask: 4389,
-                                    },
-                                    destinationAccount: {
-                                        id: 'e76df244-c0af-4de0-a312-6667e33e4004',
-                                        name: 'Legends Wallet',
-                                        type: 'WALLET',
-                                        mask: null,
-                                    },
-                                    amount: '$89.19',
-                                    created: 1649262278000,
-                                    title: 'Dividend Payment',
-                                    destinationName: 'Legends Wallet',
-                                    sourceName: 'Solar Holdings',
-                                    color: 'legendaryGreen',
-                                },
-                            ]}
+                            transfers={portfolioPageTransfers}
                         ></TransferGrid>
                     </DefaultComponent>
                 </Grid>
