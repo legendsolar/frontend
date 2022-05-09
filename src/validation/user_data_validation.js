@@ -77,3 +77,7 @@ export const validateMonth = (input) => {
 export const validateYear = (input) => {
     return yup.number().min(1900, 'Year invalid').required('Year required');
 };
+
+export const validateEmailVerifyCode = () => {
+    return yup.string().required('Verification code required');
+};

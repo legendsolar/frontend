@@ -3,10 +3,12 @@ import {useAuth} from './use_auth';
 import {useLocation} from 'react-router-dom';
 import {authErrorTranslator} from 'utils/auth_error_translator';
 import {throwValidationError} from 'utils/errors';
+import {useUser} from './use_user';
 
 const useSignIn = (auth = null) => {
     const navigate = useNavigate();
     const {state} = useLocation();
+    const {useSetUser} = useUser();
 
     if (!auth) {
         auth = useAuth();
@@ -35,10 +37,21 @@ const useSignIn = (auth = null) => {
     };
 
     const onCreateAccountSubmit = (values) => {
-        return auth.signup(values.email, values.password).catch((error) => {
-            const translatedError = handleFirebaseError(error);
-            throwValidationError(translatedError);
-        });
+        return auth
+            .signup(values.email, values.password)
+            .catch((error) => {
+                const translatedError = handleFirebaseError(error);
+                throwValidationError(translatedError);
+            })
+            .then(() => {
+                // update user data with values
+
+                useSetUser({
+                    variables: {
+                        input: {},
+                    },
+                });
+            });
     };
 
     const onCreateNewAccount = () => {

@@ -10,4 +10,6 @@ export default {
         enabled: false,
     },
     timeout_ms: 5000,
+    emailVerificationRedirectUrl:
+        process.env.REACT_APP_BASE_URL + '/complete-account',
 };

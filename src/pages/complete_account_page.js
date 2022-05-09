@@ -16,10 +16,13 @@ import {useState} from 'react';
 import {format} from 'date-fns';
 import CompleteSignUp from 'components/signup/complete_sign_up';
 import {userStatus as USER_STATUS} from 'utils/user_sign_up_state';
+import EmailVerificationComponent from 'components/signup/email_verification_component';
+import MfaCreationComponent from 'components/signup/mfa_creation_component';
+import {transformFormValuesToUserDwollaAccountData} from 'components/utils/transformers';
 
 const CompleteAccountPage = () => {
     const navigate = useNavigate();
-    const auth = useAuth();
+    const {sendEmailVerify, user, isAuthenticating} = useAuth();
 
     const onComplete = (values) => {
         //shouldn't be needed
@@ -40,11 +43,11 @@ const CompleteAccountPage = () => {
     const userSignUpStatus = status;
 
     const userStatePageIndexMap = (status) => {
-        if (!auth.user) {
+        if (!user) {
             return 0;
         }
 
-        if (auth.user && (!status || status === 'CREATED')) {
+        if (user && (!status || status === 'CREATED')) {
             return 1;
         }
 
@@ -68,29 +71,11 @@ const CompleteAccountPage = () => {
     useEffect(() => {
         const newPage = userStatePageIndexMap(userSignUpStatus);
         setPageIndex(newPage);
-    }, [userSignUpStatus, loading, error, auth.user]);
+    }, [userSignUpStatus, loading, error, user]);
 
-    if (loading || auth.isAuthenticating) {
+    if (loading || isAuthenticating) {
         return <LoadingView></LoadingView>;
     }
-
-    const transformFormValuesToUserDwollaAccountData = (values) => {
-        const dob = new Date(`${values.month} ${values.day} ${values.year}`);
-
-        return {
-            address: {
-                streetAddress: values.streetAddress,
-                streetAddress2: values.streetAddress2,
-                city: values.city,
-                state: values.state,
-                postalCode: values.postalCode,
-            },
-            firstName: values.firstName,
-            lastName: values.lastName,
-            ssn: values.ssn,
-            dateOfBirth: format(dob, 'P'),
-        };
-    };
 
     const onCompleteDwollaAccountSubmit = (values) => {
         console.log(values);
@@ -119,13 +104,36 @@ const CompleteAccountPage = () => {
         },
 
         {
+            title: 'Verify Email',
+            content: (
+                <EmailVerificationComponent
+                    onSubmit={() => {}}
+                    onSendVerifyEmail={sendEmailVerify}
+                    emailSent={false}
+                    loading={false}
+                ></EmailVerificationComponent>
+            ),
+            disabled: !(userSignUpStatus === USER_STATUS.CREATED),
+        },
+
+        {
+            title: 'Add MFA',
+            content: (
+                <MfaCreationComponent
+                    onSubmit={() => {}}
+                ></MfaCreationComponent>
+            ),
+            disabled: !(userSignUpStatus === USER_STATUS.EMAIL_VERIFIED),
+        },
+
+        {
             title: 'Terms and Privacy',
             content: (
                 <PolicyAcceptanceComponent
                     onComplete={onComplete}
                 ></PolicyAcceptanceComponent>
             ),
-            disabled: !(userSignUpStatus === USER_STATUS.CREATED),
+            disabled: !(userSignUpStatus === USER_STATUS.MFA_VERIFIED),
         },
 
         {

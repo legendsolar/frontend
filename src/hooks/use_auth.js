@@ -8,11 +8,13 @@ import {
     getAuth,
     signInWithPopup,
     sendPasswordResetEmail,
+    sendEmailVerification,
 } from 'firebase/auth';
 
 import {GoogleAuthProvider} from 'firebase/auth';
 
 import {setContext} from '@apollo/client/link/context';
+import settings from 'app_settings';
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...
@@ -106,6 +108,24 @@ function useProvideAuth() {
         return sendPasswordResetEmail(auth, email);
     };
 
+    const sendEmailVerify = () => {
+        console.log(settings.emailVerificationRedirectUrl);
+        const actionCodeSettings = {
+            url: settings.emailVerificationRedirectUrl,
+            iOS: {
+                bundleId: 'com.example.ios',
+            },
+            android: {
+                packageName: 'com.example.android',
+                installApp: true,
+                minimumVersion: '12',
+            },
+            handleCodeInApp: false,
+        };
+
+        return sendEmailVerification(user, actionCodeSettings);
+    };
+
     // Subscribe to user on mount
     // Because this sets state in the callback it will cause any ...
     // ... component that utilizes this hook to re-render with the ...
@@ -131,5 +151,6 @@ function useProvideAuth() {
         signout,
         resetPassword,
         signInWithGoogle,
+        sendEmailVerify,
     };
 }
