@@ -134,16 +134,11 @@ function useProvideAuth() {
             currentRef,
             {
                 size: 'invisible',
-                callback: (response) =>
-                    console.log('captcha solved!', response),
+                callback,
             },
 
             auth,
         );
-
-        captcha.render();
-
-        console.log(captcha);
 
         return captcha;
     };

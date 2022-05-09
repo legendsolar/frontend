@@ -9,17 +9,20 @@ const RecaptchaVerifier = (captchaComplete) => {
     const captchaCompleteCallback = (resp) => {
         console.log('complete');
         console.log(resp);
-        captchaComplete(resp);
+        captchaComplete(recaptchaVerifier);
     };
 
     useEffect(() => {
         console.log('get recaptcha');
-        setRecaptchaVerifier(
-            getRecaptchaVerifier(captchaRef.current, captchaCompleteCallback),
+        const recaptcha = getRecaptchaVerifier(
+            captchaRef.current,
+            captchaCompleteCallback,
         );
-    }, []);
 
-    console.log(recaptchaVerifier);
+        recaptcha.verify();
+
+        setRecaptchaVerifier(recaptcha);
+    }, []);
 
     return <div id="2fa-captcha" ref={captchaRef}></div>;
 };
