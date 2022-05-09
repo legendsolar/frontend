@@ -103,10 +103,13 @@ const CompleteAccountPage = () => {
         });
     };
 
-    const onSendMfaCode = (values) => {
-        return enrollUserMfa(values.phone, captcha).then((id) => {
-            console.log(id);
-        });
+    const onSendMfaCode = async (values) => {
+        console.log({values, captcha});
+        return enrollUserMfa(values.phone, captcha)
+            .then((id) => {
+                console.log(id);
+            })
+            .then((resp) => console.log(resp));
     };
 
     const onSubmitMfaCode = (values) => {
@@ -149,7 +152,7 @@ const CompleteAccountPage = () => {
                         onSendCode={onSendMfaCode}
                     ></MfaCreationComponent>
                     <RecaptchaVerifier
-                        captchaComplete={() => {}}
+                        captchaComplete={setCaptcha}
                     ></RecaptchaVerifier>
                 </div>
             ),

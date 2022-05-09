@@ -1,15 +1,14 @@
 import {useEffect, useRef, useState} from 'react';
 import {useAuth} from 'hooks/use_auth';
 
-const RecaptchaVerifier = (captchaComplete) => {
+const RecaptchaVerifier = ({captchaComplete}) => {
     const {getRecaptchaVerifier} = useAuth();
     const captchaRef = useRef(null);
     const [recaptchaVerifier, setRecaptchaVerifier] = useState(null);
+    const [captchaVerified, setCaptchaVerified] = useState(false);
 
     const captchaCompleteCallback = (resp) => {
-        console.log('complete');
-        console.log(resp);
-        captchaComplete(recaptchaVerifier);
+        setCaptchaVerified(true);
     };
 
     useEffect(() => {
@@ -19,10 +18,16 @@ const RecaptchaVerifier = (captchaComplete) => {
             captchaCompleteCallback,
         );
 
-        recaptcha.verify();
-
         setRecaptchaVerifier(recaptcha);
+
+        recaptcha.verify();
     }, []);
+
+    useEffect(() => {
+        if (captchaVerified && recaptchaVerifier) {
+            captchaComplete(recaptchaVerifier);
+        }
+    }, [captchaVerified, recaptchaVerifier]);
 
     return <div id="2fa-captcha" ref={captchaRef}></div>;
 };

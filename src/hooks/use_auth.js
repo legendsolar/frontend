@@ -148,7 +148,7 @@ function useProvideAuth() {
         multiFactorUser.getSession().then((multiFactorSession) => {
             const phoneAuthProvider = new PhoneAuthProvider(auth);
             const phoneInfoOptions = {
-                phoneNumber: phone,
+                phoneNumber,
                 session: multiFactorSession,
             };
 

@@ -33,6 +33,7 @@ const MfaCreationComponent = ({
             phone: validatePhoneNumber(),
         }),
         onSubmit: async (values, {setErrors}) => {
+            values.phone = '+1' + values.phone;
             onSendCode(values).catch((error) => {
                 if (error.type === ErrorTypes.ValidationError) {
                     setErrors({
@@ -71,7 +72,7 @@ const MfaCreationComponent = ({
                         helperText={
                             phoneForm.touched.phone && phoneForm.errors.phone
                         }
-                        value={phoneForm.values.code}
+                        value={phoneForm.values.phone}
                         onChange={phoneForm.handleChange}
                         onBlur={phoneForm.handleBlur}
                         id="phone"
