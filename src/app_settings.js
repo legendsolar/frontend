@@ -4,7 +4,7 @@ export default {
         sampleRate: 1.0, // adjust in production
     },
     logRocket: {
-        enabled: false,
+        enabled: true,
     },
     fullStory: {
         enabled: false,

@@ -9,6 +9,9 @@ import {
     signInWithPopup,
     sendPasswordResetEmail,
     sendEmailVerification,
+    RecaptchaVerifier,
+    multiFactor,
+    PhoneAuthProvider,
 } from 'firebase/auth';
 
 import {GoogleAuthProvider} from 'firebase/auth';
@@ -126,6 +129,53 @@ function useProvideAuth() {
         return sendEmailVerification(user, actionCodeSettings);
     };
 
+    const getRecaptchaVerifier = (currentRef, callback) => {
+        const captcha = new RecaptchaVerifier(
+            currentRef,
+            {
+                size: 'invisible',
+                callback: (response) =>
+                    console.log('captcha solved!', response),
+            },
+
+            auth,
+        );
+
+        captcha.render();
+
+        console.log(captcha);
+
+        return captcha;
+    };
+
+    const enrollUserMfa = (phoneNumber, recaptchaVerifier) => {
+        const multiFactorUser = multiFactor(user);
+        multiFactorUser.getSession().then((multiFactorSession) => {
+            const phoneAuthProvider = new PhoneAuthProvider(auth);
+            const phoneInfoOptions = {
+                phoneNumber: phone,
+                session: multiFactorSession,
+            };
+
+            return phoneAuthProvider.verifyPhoneNumber(
+                phoneInfoOptions,
+                recaptchaVerifier,
+            );
+        });
+    };
+
+    const submitMfaCode = (verificationId, code) => {
+        const cred = PhoneAuthProvider.credential(verificationId, code);
+
+        const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
+
+        const multiFactorUser = multiFactor(user);
+
+        multiFactorUser.enroll(multiFactorAssertion, 'phone number');
+
+        console.log('mfa enrolled');
+    };
+
     // Subscribe to user on mount
     // Because this sets state in the callback it will cause any ...
     // ... component that utilizes this hook to re-render with the ...
@@ -152,5 +202,8 @@ function useProvideAuth() {
         resetPassword,
         signInWithGoogle,
         sendEmailVerify,
+        getRecaptchaVerifier,
+        enrollUserMfa,
+        submitMfaCode,
     };
 }

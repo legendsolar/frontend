@@ -19,10 +19,17 @@ import {userStatus as USER_STATUS} from 'utils/user_sign_up_state';
 import EmailVerificationComponent from 'components/signup/email_verification_component';
 import MfaCreationComponent from 'components/signup/mfa_creation_component';
 import {transformFormValuesToUserDwollaAccountData} from 'components/utils/transformers';
+import RecaptchaVerifier from 'components/invisible/recaptcha_verifier';
 
 const CompleteAccountPage = () => {
     const navigate = useNavigate();
-    const {sendEmailVerify, user, isAuthenticating} = useAuth();
+    const {
+        sendEmailVerify,
+        enrollUserMfa,
+        submitMfaCode,
+        user,
+        isAuthenticating,
+    } = useAuth();
 
     const onComplete = (values) => {
         //shouldn't be needed
@@ -39,6 +46,7 @@ const CompleteAccountPage = () => {
     const {onCreateAccountSubmit} = useSignIn();
 
     const [pageIndex, setPageIndex] = useState(0);
+    const [captcha, setCaptcha] = useState(null);
 
     const userSignUpStatus = status;
 
@@ -54,15 +62,18 @@ const CompleteAccountPage = () => {
         const map = {
             NO_ACCOUNT: 0,
             ACCOUNT_CREATED: 1,
-            ACCEPTANCE_COMPLETE: 2,
+            EMAIL_VERIFIED: 2,
+            MFA_VERIFIED: 3,
+            ACCOUNT_CREATED: 4,
+            ACCEPTANCE_COMPLETE: 5,
             // Keep user in complete account flow for retry state
-            ACCREDITATION_VERIFIED: 3,
-            DWOLLA_ACCOUNT_RETRY_REQ: 3,
-            DWOLLA_ACCOUNT_KBA_REQ: 4,
-            DWOLLA_ACCOUNT_DOCUMENT_REQ: 5,
-            IDENTITY_VERIFIED: 6,
+            ACCREDITATION_VERIFIED: 6,
+            DWOLLA_ACCOUNT_RETRY_REQ: 6,
+            DWOLLA_ACCOUNT_KBA_REQ: 7,
+            DWOLLA_ACCOUNT_DOCUMENT_REQ: 8,
+            IDENTITY_VERIFIED: 9,
 
-            NOT_ACCREDITED: 7,
+            NOT_ACCREDITED: 10,
         };
 
         return map[status];
@@ -92,6 +103,19 @@ const CompleteAccountPage = () => {
         });
     };
 
+    const onSendMfaCode = (values) => {
+        return enrollUserMfa(values.phone, captcha).then((id) => {
+            console.log(id);
+        });
+    };
+
+    const onSubmitMfaCode = (values) => {
+        return submitMfaCode(null, values.code);
+    };
+
+    console.log(userSignUpStatus);
+    console.log(USER_STATUS.EMAIL_VERIFIED);
+
     const pageContent = [
         {
             title: 'Create Account',
@@ -113,17 +137,23 @@ const CompleteAccountPage = () => {
                     loading={false}
                 ></EmailVerificationComponent>
             ),
-            disabled: !(userSignUpStatus === USER_STATUS.CREATED),
+            disabled: userSignUpStatus !== USER_STATUS.CREATED,
         },
 
         {
             title: 'Add MFA',
             content: (
-                <MfaCreationComponent
-                    onSubmit={() => {}}
-                ></MfaCreationComponent>
+                <div>
+                    <MfaCreationComponent
+                        onSubmit={() => {}}
+                        onSendCode={onSendMfaCode}
+                    ></MfaCreationComponent>
+                    <RecaptchaVerifier
+                        captchaComplete={() => {}}
+                    ></RecaptchaVerifier>
+                </div>
             ),
-            disabled: !(userSignUpStatus === USER_STATUS.EMAIL_VERIFIED),
+            disabled: userSignUpStatus !== USER_STATUS.EMAIL_VERIFIED,
         },
 
         {
