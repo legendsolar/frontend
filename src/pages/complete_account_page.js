@@ -70,8 +70,8 @@ const CompleteAccountPage = () => {
             ACCREDITATION_VERIFIED: 6,
             DWOLLA_ACCOUNT_RETRY_REQ: 6,
             DWOLLA_ACCOUNT_KBA_REQ: 7,
-            DWOLLA_ACCOUNT_DOCUMENT_REQ: 8,
-            IDENTITY_VERIFIED: 9,
+            DWOLLA_ACCOUNT_DOCUMENT_REQ: 7,
+            IDENTITY_VERIFIED: 8,
 
             NOT_ACCREDITED: 10,
         };
@@ -105,15 +105,12 @@ const CompleteAccountPage = () => {
 
     const onSendMfaCode = async (values) => {
         console.log({values, captcha});
-        return enrollUserMfa(values.phone, captcha)
-            .then((id) => {
-                console.log(id);
-            })
-            .then((resp) => console.log(resp));
+        return enrollUserMfa(values.phone, captcha);
     };
 
     const onSubmitMfaCode = (values) => {
-        return submitMfaCode(null, values.code);
+        console.log(values.code);
+        return submitMfaCode(values.code);
     };
 
     console.log(userSignUpStatus);
@@ -148,7 +145,7 @@ const CompleteAccountPage = () => {
             content: (
                 <div>
                     <MfaCreationComponent
-                        onSubmit={() => {}}
+                        onSubmit={onSubmitMfaCode}
                         onSendCode={onSendMfaCode}
                     ></MfaCreationComponent>
                     <RecaptchaVerifier

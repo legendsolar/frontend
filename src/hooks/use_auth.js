@@ -12,6 +12,7 @@ import {
     RecaptchaVerifier,
     multiFactor,
     PhoneAuthProvider,
+    PhoneMultiFactorGenerator,
 } from 'firebase/auth';
 
 import {GoogleAuthProvider} from 'firebase/auth';
@@ -52,6 +53,7 @@ function useProvideAuth() {
     const provider = new GoogleAuthProvider();
 
     const [user, setUser] = useState(null);
+    const [captchaVerificationId, setCaptchaVerificationId] = useState(null);
 
     const apolloContext = setApolloContext(user);
 
@@ -152,15 +154,20 @@ function useProvideAuth() {
                 session: multiFactorSession,
             };
 
-            return phoneAuthProvider.verifyPhoneNumber(
-                phoneInfoOptions,
-                recaptchaVerifier,
-            );
+            return phoneAuthProvider
+                .verifyPhoneNumber(phoneInfoOptions, recaptchaVerifier)
+                .then((id) => setCaptchaVerificationId(id));
         });
     };
 
-    const submitMfaCode = (verificationId, code) => {
-        const cred = PhoneAuthProvider.credential(verificationId, code);
+    const submitMfaCode = (code) => {
+        if (!captchaVerificationId) {
+            throw 'enrollUserMfa must be called';
+        }
+
+        console.log({captchaVerificationId, code});
+
+        const cred = PhoneAuthProvider.credential(captchaVerificationId, code);
 
         const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
 

@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {
     TextField,
@@ -27,6 +28,8 @@ const MfaCreationComponent = ({
     onSendCode,
     onSubmit,
 }) => {
+    const [codeSent, setCodeSent] = useState(false);
+
     const phoneForm = useFormik({
         initialValues: initialPhoneNumberValues,
         validationSchema: yup.object().shape({
@@ -34,13 +37,15 @@ const MfaCreationComponent = ({
         }),
         onSubmit: async (values, {setErrors}) => {
             values.phone = '+1' + values.phone;
-            onSendCode(values).catch((error) => {
-                if (error.type === ErrorTypes.ValidationError) {
-                    setErrors({
-                        [error.source]: error.message,
-                    });
-                }
-            });
+            onSendCode(values)
+                .catch((error) => {
+                    if (error.type === ErrorTypes.ValidationError) {
+                        setErrors({
+                            [error.source]: error.message,
+                        });
+                    }
+                })
+                .then(() => setCodeSent(true));
         },
     });
 
@@ -102,6 +107,7 @@ const MfaCreationComponent = ({
 
                 <Grid item xs={12} lg={6}>
                     <TextField
+                        disabled={!codeSent}
                         error={
                             codeForm.touched.code &&
                             Boolean(codeForm.errors.code)
@@ -125,7 +131,8 @@ const MfaCreationComponent = ({
                         codeForm.isValidating ||
                         codeForm.isSubmitting ||
                         !codeForm.dirty ||
-                        !codeForm.isValid
+                        !codeForm.isValid ||
+                        !codeSent
                     }
                     color="legendaryGreen"
                     sx={{width: '100%', mt: 4}}
