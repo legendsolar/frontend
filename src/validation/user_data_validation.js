@@ -27,7 +27,11 @@ export const validatePostalCode = () => {
 export const validatePassword = (input) => {
     return yup
         .string()
-        .min(8, 'Password is a min of 8 characters')
+        .min(12, 'Password must be a min of 12 characters')
+        .matches(
+            /(?=.*[\d\W])(?=.*[a-zA-Z])/,
+            'Password must contain one letter and one symbol or digit',
+        )
         .required('Password is required');
 };
 

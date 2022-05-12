@@ -22,6 +22,27 @@ import {createHttpLink} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
 import {getAuth} from 'firebase/auth';
 
+if (appSettings.sentry.enabled)
+    Sentry.init({
+        dsn: 'https://befcf88557b54a7c939b8fdacec0cc62@o1127533.ingest.sentry.io/6169541',
+        integrations: [new Integrations.BrowserTracing()],
+
+        // Set tracesSampleRate to 1.0 to capture 100%
+        // of transactions for performance monitoring.
+        // We recommend adjusting this value in production
+        tracesSampleRate: appSettings.sentry.sampleRate,
+    });
+
+if (appSettings.fullStory.enabled) {
+    FullStory.init({
+        orgId: '18J59K',
+    });
+}
+
+if (appSettings.logRocket.enabled) {
+    LogRocket.init('d6ndfk/legends-alpha');
+}
+
 smoothscroll.polyfill();
 
 const httpLink = createHttpLink({
@@ -33,12 +54,21 @@ const authLink = setContext(async (_, {headers}) => {
 
     const token = await getAuth().currentUser.getIdToken();
 
+    const sessionUrl = LogRocket.sessionURL;
+
+    const sessionId = sessionUrl
+        ? new URL(sessionUrl).pathname.split('/').pop()
+        : null;
+
+    console.log({sessionId});
+
     console.log('token: ' + token);
     // return the headers to the context so httpLink can read them
     return {
         headers: {
             ...headers,
             authorization: token ? `Bearer ${token}` : '',
+            sessionId: sessionId,
         },
     };
 });
@@ -60,27 +90,6 @@ function importBuildTarget() {
             ),
         );
     }
-}
-
-if (appSettings.sentry.enabled)
-    Sentry.init({
-        dsn: 'https://befcf88557b54a7c939b8fdacec0cc62@o1127533.ingest.sentry.io/6169541',
-        integrations: [new Integrations.BrowserTracing()],
-
-        // Set tracesSampleRate to 1.0 to capture 100%
-        // of transactions for performance monitoring.
-        // We recommend adjusting this value in production
-        tracesSampleRate: appSettings.sentry.sampleRate,
-    });
-
-if (appSettings.fullStory.enabled) {
-    FullStory.init({
-        orgId: '18J59K',
-    });
-}
-
-if (appSettings.logRocket.enabled) {
-    LogRocket.init('d6ndfk/legends-alpha');
 }
 
 importBuildTarget().then(({default: Environment}) =>

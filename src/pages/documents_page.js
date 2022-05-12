@@ -37,6 +37,7 @@ const DocumentPage = () => {
 
                     <DefaultComponent
                         ref={(el) => (contentRefs.current[0] = el)}
+                        disabled={true}
                     >
                         <Typography variant="smallHeadline">
                             Solar Investment Documents
