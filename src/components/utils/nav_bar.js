@@ -142,7 +142,7 @@ const NavBar = ({
                             userStatus !== USER_STATUS.IDENTITY_VERIFIED) && (
                             <Button
                                 variant="header"
-                                disabled={true}
+                                disabled={false}
                                 onClick={onToHomepage}
                             >
                                 Back to homepage
