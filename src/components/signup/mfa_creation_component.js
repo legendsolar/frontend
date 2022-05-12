@@ -107,7 +107,7 @@ const MfaCreationComponent = ({
 
                 <Grid item xs={12} lg={6}>
                     <Collapse in={codeSent}>
-                        <Alert severity="info">Check your email!</Alert>
+                        <Alert severity="info">Code sent!</Alert>
                     </Collapse>
                 </Grid>
 
