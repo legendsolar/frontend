@@ -1,7 +1,8 @@
 import {getYear} from 'date-fns';
 import * as yup from 'yup';
+import settings from 'app_settings';
 
-export const validateSSN = (input, fullSSNRequired = false) => {
+export const validateSSN = (fullSSNRequired = false) => {
     if (fullSSNRequired) {
         return yup
             .string()
@@ -47,19 +48,19 @@ export const validateLastName = () => {
     return yup.string().required('Last name is required');
 };
 
-export const validateStreetAddress = (input) => {
+export const validateStreetAddress = () => {
     return yup.string().required('Street address is required');
 };
 
-export const validateStreetAddressTwo = (input) => {
+export const validateStreetAddressTwo = () => {
     return yup.string();
 };
 
-export const validateCity = (input) => {
+export const validateCity = () => {
     return yup.string().required('City is required');
 };
 
-export const validateState = (input) => {
+export const validateState = () => {
     return yup
         .string()
         .max(2, 'State code is invalid')
@@ -76,16 +77,27 @@ export const validatePhoneNumber = () => {
         .required('Phone number required');
 };
 
-export const validateDay = (input) => {
-    return yup.number().max(31, 'Day invalid').required('Day required');
+export const validateDay = () => {
+    return yup
+        .number()
+        .min(1, 'Day invalid')
+        .max(31, 'Day invalid')
+        .required('Day required');
 };
 
-export const validateMonth = (input) => {
+export const validateMonth = () => {
     return yup.string().required('Month required');
 };
 
-export const validateYear = (input) => {
-    return yup.number().min(1900, 'Year invalid').required('Year required');
+export const validateYear = () => {
+    return yup
+        .number()
+        .min(1900, 'Year invalid')
+        .max(
+            getYear(new Date()) - settings.minPlatformAge,
+            `You must be ${settings.minPlatformAge} or older to register`,
+        )
+        .required('Year required');
 };
 
 export const validateMfaVerifyCode = () => {
