@@ -85,7 +85,7 @@ export const useProvideAccount = () => {
     };
 
     const useWallet = () => {
-        const {loading, error, data} = useQuery(WALLET_QUERY, {});
+        const {loading, error, data, refetch} = useQuery(WALLET_QUERY, {});
 
         return {
             loading,
@@ -93,6 +93,7 @@ export const useProvideAccount = () => {
             wallet: data?.userWallet
                 ? accountTransformer(data.userWallet)
                 : null,
+            refetch,
         };
     };
 

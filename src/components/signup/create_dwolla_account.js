@@ -16,6 +16,17 @@ const CreateDwollaAccount = ({userStatus, onSubmit, loading}) => {
     const [error, setError] = useState(null);
     const [values, setValues] = useState({});
 
+    const submit = () => {
+        onSubmit(values).catch((error) => {
+            if (
+                error.type === ErrorTypes.SystemError ||
+                error.type === ErrorTypes.DwollaError
+            ) {
+                setError(error.message);
+            }
+        });
+    };
+
     return (
         <Stack spacing={4}>
             <Typography variant="subtitle1">
@@ -85,9 +96,7 @@ const CreateDwollaAccount = ({userStatus, onSubmit, loading}) => {
                 variant="primary"
                 disabled={!(userInfoValid && protectedUserInfoValid)}
                 color="legendaryGreen"
-                onClick={(event) => {
-                    onSubmit(values);
-                }}
+                onClick={submit}
             >
                 {loading ? (
                     <CircularProgress color="light" size={30} />

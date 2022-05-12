@@ -105,7 +105,7 @@ const CompleteAccountPage = () => {
 
         return createDwollaAccount({
             variables,
-        });
+        }).then(() => {});
     };
 
     const onSendMfaCode = async (values) => {
