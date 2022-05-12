@@ -48,6 +48,12 @@ export const authErrorTranslator = (error) => {
                 message: "You've made too many attempts",
             };
 
+        case 'auth/invalid-verification-code':
+            return {
+                source: 'code',
+                message: 'Verification code is incorrect',
+            };
+
         /** THESE CASES BELOW SHOULD NOT HAPPEN IN NORMAL OPERATION */
 
         case 'auth/invernal-error':

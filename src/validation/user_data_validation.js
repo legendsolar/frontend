@@ -67,7 +67,13 @@ export const validateState = (input) => {
 };
 
 export const validatePhoneNumber = () => {
-    return yup.string().required('Phone number required');
+    return yup
+        .string()
+        .matches(
+            /^(\+0?1\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+            'Phone number is invalid',
+        )
+        .required('Phone number required');
 };
 
 export const validateDay = (input) => {

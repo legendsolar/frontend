@@ -19,6 +19,8 @@ import {GoogleAuthProvider} from 'firebase/auth';
 
 import {setContext} from '@apollo/client/link/context';
 import settings from 'app_settings';
+import {authErrorTranslator} from 'utils/auth_error_translator';
+import {throwValidationError} from 'utils/errors';
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...
@@ -128,10 +130,11 @@ function useProvideAuth() {
             handleCodeInApp: false,
         };
 
-        return sendEmailVerification(user, actionCodeSettings).then((resp) => {
-            console.log(resp);
-            console.log('Email sent');
-        });
+        return sendEmailVerification(user, actionCodeSettings).catch(
+            (error) => {
+                throwValidationError(authErrorTranslator(error));
+            },
+        );
     };
 
     const getRecaptchaVerifier = (currentRef, callback) => {
@@ -163,7 +166,7 @@ function useProvideAuth() {
         });
     };
 
-    const submitMfaCode = (code) => {
+    const submitMfaCode = async (code) => {
         if (!captchaVerificationId) {
             throw 'enrollUserMfa must be called';
         }
@@ -176,9 +179,11 @@ function useProvideAuth() {
 
         const multiFactorUser = multiFactor(user);
 
-        multiFactorUser.enroll(multiFactorAssertion, 'phone number');
-
-        console.log('mfa enrolled');
+        return multiFactorUser
+            .enroll(multiFactorAssertion, 'phone number')
+            .catch((error) => {
+                throwValidationError(authErrorTranslator(error));
+            });
     };
 
     // Subscribe to user on mount

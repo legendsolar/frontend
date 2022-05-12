@@ -95,12 +95,13 @@ export const useProvideUser = () => {
     `;
 
     const useGetUserStatus = () => {
-        const {loading, error, data} = useQuery(USER_STATUS_QUERY);
+        const {loading, error, data, refetch} = useQuery(USER_STATUS_QUERY);
 
         return {
             loading,
             error,
             status: data?.user?.status,
+            refetch,
         };
     };
 

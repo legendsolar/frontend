@@ -38,7 +38,12 @@ const CompleteAccountPage = () => {
 
     const {useGetUserStatus, useSetUser, useCreateDwollaAccount} = useUser();
 
-    const {loading, error, status} = useGetUserStatus();
+    const {
+        loading,
+        error,
+        status,
+        refetch: forceRefreshUserStatus,
+    } = useGetUserStatus();
     const [setUser] = useSetUser();
     const {createDwollaAccount, loading: createDwollaAccountLoading} =
         useCreateDwollaAccount();
@@ -108,9 +113,10 @@ const CompleteAccountPage = () => {
         return enrollUserMfa(values.phone, captcha);
     };
 
-    const onSubmitMfaCode = (values) => {
-        console.log(values.code);
-        return submitMfaCode(values.code);
+    const onSubmitMfaCode = async (values) => {
+        return submitMfaCode(values.code).then(() => {
+            forceRefreshUserStatus();
+        });
     };
 
     console.log(userSignUpStatus);

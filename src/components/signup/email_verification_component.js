@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import {useState} from 'react';
 import {authErrorTranslator} from 'utils/auth_error_translator';
+import {ErrorTypes} from 'utils/errors';
 
 const EmailVerificationComponent = ({onSendVerifyEmail, loading}) => {
     const [error, setError] = useState(null);
@@ -19,10 +20,10 @@ const EmailVerificationComponent = ({onSendVerifyEmail, loading}) => {
     const sendVerifyEmail = () => {
         onSendVerifyEmail()
             .then(() => setEmailSent(true))
-            .catch((err) => {
-                const translatedError = authErrorTranslator(err.code);
-                console.error({err});
-                setError(translatedError.message);
+            .catch((error) => {
+                if (error.type === ErrorTypes.SystemError) {
+                    setError(error.message);
+                }
             });
     };
 

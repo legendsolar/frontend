@@ -2,14 +2,12 @@ import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {
     TextField,
-    Grid,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
     Button,
-    FormHelperText,
     CircularProgress,
+    Collapse,
+    Alert,
+    Stack,
+    Typography,
 } from '@mui/material';
 import {states} from 'utils/static_lists';
 import {
@@ -21,6 +19,7 @@ import {ErrorTypes} from 'utils/errors';
 import {useEffect} from 'react';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
+import {transformPhoneNumber} from 'transformers/user_input_transformers';
 
 const MfaCreationComponent = ({
     initialPhoneNumberValues,
@@ -36,8 +35,10 @@ const MfaCreationComponent = ({
             phone: validatePhoneNumber(),
         }),
         onSubmit: async (values, {setErrors}) => {
-            values.phone = '+1' + values.phone;
-            onSendCode(values)
+            const transformedValues = {...values};
+
+            transformedValues.phone = transformPhoneNumber(values.phone);
+            onSendCode(transformedValues)
                 .catch((error) => {
                     if (error.type === ErrorTypes.ValidationError) {
                         setErrors({
@@ -56,6 +57,7 @@ const MfaCreationComponent = ({
         }),
         onSubmit: async (values, {setErrors}) => {
             onSubmit(values).catch((error) => {
+                console.log({error});
                 if (error.type === ErrorTypes.ValidationError) {
                     setErrors({
                         [error.source]: error.message,
@@ -67,24 +69,28 @@ const MfaCreationComponent = ({
 
     return (
         <div>
-            <Grid container spacing={2} sx={{width: '100%'}}>
-                <Grid item xs={12} lg={6}>
-                    <TextField
-                        error={
-                            phoneForm.touched.phone &&
-                            Boolean(phoneForm.errors.phone)
-                        }
-                        helperText={
-                            phoneForm.touched.phone && phoneForm.errors.phone
-                        }
-                        value={phoneForm.values.phone}
-                        onChange={phoneForm.handleChange}
-                        onBlur={phoneForm.handleBlur}
-                        id="phone"
-                        label="Phone Number"
-                        name="phone"
-                    />
-                </Grid>
+            <Stack>
+                <Typography variant="label">
+                    To further secure your account, we require a phone to be
+                    verified before you connect any bank accounts or create your
+                    wallet.
+                </Typography>
+
+                <TextField
+                    error={
+                        phoneForm.touched.phone &&
+                        Boolean(phoneForm.errors.phone)
+                    }
+                    helperText={
+                        phoneForm.touched.phone && phoneForm.errors.phone
+                    }
+                    value={phoneForm.values.phone}
+                    onChange={phoneForm.handleChange}
+                    onBlur={phoneForm.handleBlur}
+                    id="phone"
+                    label="Phone Number (US only)"
+                    name="phone"
+                />
 
                 <Button
                     variant="primary"
@@ -93,7 +99,8 @@ const MfaCreationComponent = ({
                         phoneForm.isValidating ||
                         phoneForm.isSubmitting ||
                         !phoneForm.dirty ||
-                        !phoneForm.isValid
+                        !phoneForm.isValid ||
+                        codeSent
                     }
                     color="legendaryGreen"
                     sx={{width: '100%', mt: 4}}
@@ -105,30 +112,21 @@ const MfaCreationComponent = ({
                     )}
                 </Button>
 
-                <Grid item xs={12} lg={6}>
-                    <Collapse in={codeSent}>
-                        <Alert severity="info">Code sent!</Alert>
-                    </Collapse>
-                </Grid>
+                {codeSent && <Alert severity="info">Code sent!</Alert>}
 
-                <Grid item xs={12} lg={6}>
-                    <TextField
-                        disabled={!codeSent}
-                        error={
-                            codeForm.touched.code &&
-                            Boolean(codeForm.errors.code)
-                        }
-                        helperText={
-                            codeForm.touched.code && codeForm.errors.code
-                        }
-                        value={codeForm.values.code}
-                        onChange={codeForm.handleChange}
-                        onBlur={codeForm.handleBlur}
-                        id="code"
-                        label="Code"
-                        name="code"
-                    />
-                </Grid>
+                <TextField
+                    disabled={!codeSent}
+                    error={
+                        codeForm.touched.code && Boolean(codeForm.errors.code)
+                    }
+                    helperText={codeForm.touched.code && codeForm.errors.code}
+                    value={codeForm.values.code}
+                    onChange={codeForm.handleChange}
+                    onBlur={codeForm.handleBlur}
+                    id="code"
+                    label="Code"
+                    name="code"
+                />
 
                 <Button
                     variant="primary"
@@ -149,7 +147,7 @@ const MfaCreationComponent = ({
                         'Submit Code'
                     )}
                 </Button>
-            </Grid>
+            </Stack>
         </div>
     );
 };
