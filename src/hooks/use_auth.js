@@ -128,7 +128,10 @@ function useProvideAuth() {
             handleCodeInApp: false,
         };
 
-        return sendEmailVerification(user, actionCodeSettings);
+        return sendEmailVerification(user, actionCodeSettings).then((resp) => {
+            console.log(resp);
+            console.log('Email sent');
+        });
     };
 
     const getRecaptchaVerifier = (currentRef, callback) => {

@@ -42,10 +42,23 @@ export const authErrorTranslator = (error) => {
                 message: 'Password is incorrect',
             };
 
-        // TODO this cases should not happen in normal operation
+        case 'auth/too-many-requests':
+            return {
+                source: 'email',
+                message: "You've made too many attempts",
+            };
+
+        /** THESE CASES BELOW SHOULD NOT HAPPEN IN NORMAL OPERATION */
+
         case 'auth/invernal-error':
             return {
                 source: 'password',
+                message: 'An unexpected error has occured. ',
+            };
+
+        case 'auth/invalid-continue-uri':
+            return {
+                source: 'email',
                 message: 'An unexpected error has occured. ',
             };
 
