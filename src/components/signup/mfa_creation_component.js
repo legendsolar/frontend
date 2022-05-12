@@ -106,6 +106,12 @@ const MfaCreationComponent = ({
                 </Button>
 
                 <Grid item xs={12} lg={6}>
+                    <Collapse in={codeSent}>
+                        <Alert severity="info">Check your email!</Alert>
+                    </Collapse>
+                </Grid>
+
+                <Grid item xs={12} lg={6}>
                     <TextField
                         disabled={!codeSent}
                         error={
