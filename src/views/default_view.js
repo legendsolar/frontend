@@ -64,7 +64,7 @@ const DefaultView = (props) => {
                     mt: 16,
                 }}
             >
-                {props.children}
+                <Box sx={{minHeight: '100vh'}}>{props.children}</Box>
 
                 <Footer></Footer>
             </Box>
