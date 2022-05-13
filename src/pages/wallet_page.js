@@ -98,7 +98,7 @@ const WalletPage = () => {
             setTokenRequested(true);
             createLinkToken();
         }
-    }, [createLinkTokenLoading, token]);
+    }, [createLinkTokenLoading, token, tokenRequested]);
 
     const {open, ready} = usePlaidLinkModal(token, onPlaidLinkComplete);
 

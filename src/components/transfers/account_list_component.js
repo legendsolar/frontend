@@ -165,7 +165,7 @@ const AccountListComponent = ({
 };
 
 AccountListComponent.propTypes = {
-    accounts: PropTypes.array.isRequired,
+    accounts: PropTypes.array,
     onAddAccount: PropTypes.func,
     onCreateTransfer: PropTypes.func,
     onUnlinkAccount: PropTypes.func,
@@ -173,6 +173,7 @@ AccountListComponent.propTypes = {
 };
 
 AccountListComponent.defaultProps = {
+    accounts: [],
     onAddAccount: () => {},
     onCreateTransfer: () => {},
     onUnlinkAccount: () => {},
