@@ -93,6 +93,9 @@ const basePaths = [
             {
                 name: 'test_precommit_letter_component',
             },
+            {
+                name: 'test_offering_list_component',
+            },
         ],
     },
 
