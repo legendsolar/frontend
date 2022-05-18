@@ -21,6 +21,7 @@ import {setContext} from '@apollo/client/link/context';
 import settings from 'app_settings';
 import {authErrorTranslator} from 'utils/auth_error_translator';
 import {throwValidationError} from 'utils/errors';
+import {useApolloClient} from '@apollo/client';
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...
@@ -52,6 +53,7 @@ const setApolloContext = (user) => {
 function useProvideAuth() {
     const app = useFirebaseApp();
     const auth = getAuth(app);
+    const client = useApolloClient();
     const provider = new GoogleAuthProvider();
 
     const [user, setUser] = useState(null);
@@ -193,7 +195,8 @@ function useProvideAuth() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (!user) {
-                // TODO nuke apollo cache
+                console.log('nuke cache');
+                client.resetStore();
             }
             setUser(user);
             setIsAuthenticating(false);
