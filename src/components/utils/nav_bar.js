@@ -50,7 +50,7 @@ const NavBar = ({
                     >
                         <Box
                             sx={{
-                                width: '120px',
+                                minWidth: '120px',
                                 height: '45px',
                             }}
                             alt="logo"
