@@ -20,16 +20,6 @@ const DefaultView = (props) => {
             }}
         >
             <Box
-                position="absolute"
-                sx={{
-                    height: headerHeight,
-                    width: '100%',
-                    backgroundColor: backgroundColor,
-                    zIndex: -1,
-                    transform: 'translate3d(0, 0, -5px)',
-                }}
-            ></Box>
-            <Box
                 position="fixed"
                 top={0}
                 bottom={0}

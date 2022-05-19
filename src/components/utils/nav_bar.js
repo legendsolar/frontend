@@ -21,71 +21,95 @@ const NavBar = ({
     onAccount,
     onWallet,
 }) => {
+    const backgroundColor = userIsAuthenticated ? 'blackDusk.main' : 'none';
+    const headerHeight = '300px';
     return (
-        <Toolbar
-            style={{
-                padding: 0,
-                width: '100%',
-            }}
-        >
+        <div>
             <Box
+                position="absolute"
                 sx={{
+                    height: headerHeight,
+                    width: '100%',
+                    backgroundColor: backgroundColor,
+                    zIndex: -1,
+                    transform: 'translate3d(0, 0, -5px)',
+                }}
+            ></Box>
+            <Toolbar
+                style={{
+                    padding: 0,
                     width: '100%',
                 }}
-                display="flex"
-                justifyContent={'center'}
             >
                 <Box
                     sx={{
                         width: '100%',
-                        ml: 10,
-                        mr: 10,
-                        mt: 6,
                     }}
+                    display="flex"
+                    justifyContent={'center'}
                 >
-                    <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        alignItems={'flex-end'}
+                    <Box
                         sx={{
                             width: '100%',
-                            zIndex: 1,
-                            transform: 'translate3d(0, 0, 0px)',
+                            ml: 10,
+                            mr: 10,
+                            mt: 6,
                         }}
                     >
-                        <Box
+                        <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems={'flex-end'}
                             sx={{
-                                minWidth: '120px',
-                                height: '45px',
+                                width: '100%',
+                                zIndex: 1,
+                                transform: 'translate3d(0, 0, 0px)',
                             }}
-                            alt="logo"
                         >
-                            {userIsAuthenticated ? (
-                                <LegendsLogoLight></LegendsLogoLight>
-                            ) : (
-                                <LegendsLogoDark></LegendsLogoDark>
-                            )}
-                        </Box>
+                            <Box
+                                sx={{
+                                    minWidth: '120px',
+                                    height: '45px',
+                                }}
+                                alt="logo"
+                            >
+                                {userIsAuthenticated ? (
+                                    <LegendsLogoLight></LegendsLogoLight>
+                                ) : (
+                                    <LegendsLogoDark></LegendsLogoDark>
+                                )}
+                            </Box>
 
-                        {userIsAuthenticated &&
-                            userStatus === USER_STATUS.IDENTITY_VERIFIED && (
-                                <LoggedInToolbar></LoggedInToolbar>
-                            )}
+                            {userIsAuthenticated &&
+                                userStatus ===
+                                    USER_STATUS.IDENTITY_VERIFIED && (
+                                    <LoggedInToolbar
+                                        walletBalance={walletBalance}
+                                        onYourRooftop={onYourRooftop}
+                                        onTransaction={onTransaction}
+                                        onDocuments={onDocuments}
+                                        onAvailablePanels={onAvailablePanels}
+                                        onAccount={onAccount}
+                                        onWallet={onWallet}
+                                    ></LoggedInToolbar>
+                                )}
 
-                        {userIsAuthenticated &&
-                            userStatus !== USER_STATUS.IDENTITY_VERIFIED && (
-                                <CreateAccountToolbar
-                                    onToHomepage={onToHomepage}
-                                ></CreateAccountToolbar>
-                            )}
+                            {userIsAuthenticated &&
+                                userStatus !==
+                                    USER_STATUS.IDENTITY_VERIFIED && (
+                                    <CreateAccountToolbar
+                                        onToHomepage={onToHomepage}
+                                    ></CreateAccountToolbar>
+                                )}
 
-                        {!userIsAuthenticated && (
-                            <LoggedOutToolbar></LoggedOutToolbar>
-                        )}
-                    </Stack>
+                            {!userIsAuthenticated && (
+                                <LoggedOutToolbar></LoggedOutToolbar>
+                            )}
+                        </Stack>
+                    </Box>
                 </Box>
-            </Box>
-        </Toolbar>
+            </Toolbar>
+        </div>
     );
 };
 

@@ -1,13 +1,14 @@
 import NavBar from 'components/utils/nav_bar';
 import {useAuth} from 'hooks/use_auth';
 import {useUser} from 'hooks/use_user';
-import {useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {redirectToHomePage} from 'webflow/webflowLinking';
 import {useAccount} from 'hooks/use_accounts';
 
 const NavBarUserContext = () => {
     const auth = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const {useGetUserStatus} = useUser();
     const {loading, error, status} = useGetUserStatus();
     const {useWallet} = useAccount();
@@ -17,10 +18,14 @@ const NavBarUserContext = () => {
     const userSignUpStatus = error || loading ? null : status;
     const walletBalance = walletLoading || walletError ? '-' : wallet?.amount;
 
+    const userIsAuthenticated =
+        location.pathname == '/complete-account' || !!auth.user;
+
+    console.log(location.pathname);
     return (
         <NavBar
             loading={loading}
-            userIsAuthenticated={!!auth.user}
+            userIsAuthenticated={userIsAuthenticated}
             userStatus={userSignUpStatus}
             walletBalance={walletBalance}
             onToHomepage={redirectToHomePage}
