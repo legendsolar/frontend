@@ -95,7 +95,7 @@ const SideBarView = ({
                         style={{
                             // should not be needed
                             paddingLeft: 0,
-                            paddingRight: 20,
+                            paddingRight: 40,
                         }}
                         sx={{
                             height: 'max-content',
@@ -116,9 +116,11 @@ const SideBarView = ({
                     >
                         {getDrawerTop()}
 
-                        <DefaultErrorBoundary>
-                            <Box sx={{mb: 4}}>{!!header && header}</Box>
-                        </DefaultErrorBoundary>
+                        {!!header && (
+                            <DefaultErrorBoundary>
+                                <Box sx={{mb: 4}}> {header}</Box>
+                            </DefaultErrorBoundary>
+                        )}
 
                         <DefaultErrorBoundary>
                             <Box sx={{mt: {xs: 4, md: 0}}}>{mainContent}</Box>

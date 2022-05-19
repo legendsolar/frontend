@@ -116,9 +116,15 @@ const InvestPage = () => {
                 <Typography variant="headline1">
                     Pre-commitment confirmed
                 </Typography>
-                <Button sx={{width: '200px'}} variant="medium" disabled={true}>
-                    Review Commitment
-                </Button>
+                <Stack justifyContent={'end'} direction={'row'}>
+                    <Button
+                        sx={{width: '200px'}}
+                        variant="mono"
+                        disabled={true}
+                    >
+                        Review Commitment
+                    </Button>
+                </Stack>
             </Stack>
         </DefaultComponent>
     );
