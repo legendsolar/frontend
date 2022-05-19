@@ -83,12 +83,6 @@ const SideBarView = ({
     return (
         <DefaultView>
             <Grid container columnSpacing={4}>
-                {!!header && (
-                    <Grid item xs={12} sx={{mb: {md: 4}}}>
-                        {header}
-                    </Grid>
-                )}
-
                 <Grid
                     item
                     md={4}
@@ -101,7 +95,7 @@ const SideBarView = ({
                         style={{
                             // should not be needed
                             paddingLeft: 0,
-                            paddingRight: 40,
+                            paddingRight: 20,
                         }}
                         sx={{
                             height: 'max-content',
@@ -112,6 +106,7 @@ const SideBarView = ({
                         <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
                     </Box>
                 </Grid>
+
                 <Grid item xs={12} md={8}>
                     <Box
                         sx={{
@@ -120,6 +115,11 @@ const SideBarView = ({
                         }}
                     >
                         {getDrawerTop()}
+
+                        <DefaultErrorBoundary>
+                            <Box sx={{mb: 4}}>{!!header && header}</Box>
+                        </DefaultErrorBoundary>
+
                         <DefaultErrorBoundary>
                             <Box sx={{mt: {xs: 4, md: 0}}}>{mainContent}</Box>
                         </DefaultErrorBoundary>
