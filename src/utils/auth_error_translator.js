@@ -1,78 +1,81 @@
-export const authErrorTranslator = (error) => {
+import {throwSystemError, throwValidationError} from './errors';
+
+export const authErrorHandler = (error) => {
     switch (error.code) {
         case 'auth/invalid-email':
-            return {
+            throwValidationError({
                 source: 'email',
                 message: 'Email is invalid',
-            };
+            });
 
         case 'auth/email-already-exists':
-            return {
+            throwValidationError({
                 source: 'email',
                 message: 'Email is already in use',
-            };
+            });
 
         case 'auth/email-already-in-use':
-            return {
+            throwValidationError({
                 source: 'email',
                 message: 'Email is already in use',
-            };
+            });
 
         case 'auth/invalid-password':
-            return {
+            throwValidationError({
                 source: 'password',
                 message: 'Password is invalid',
-            };
+            });
 
         case 'auth/weak-password':
-            return {
+            throwValidationError({
                 source: 'password',
-                message: 'Password should be 6 or more characters long',
-            };
+                message:
+                    'Password is too weak. Try using special characters or a longer one.',
+            });
 
         case 'auth/user-not-found':
-            return {
+            throwValidationError({
                 source: 'email',
                 message: 'Email not found',
-            };
+            });
 
         case 'auth/wrong-password':
-            return {
+            throwValidationError({
                 source: 'password',
                 message: 'Password is incorrect',
-            };
+            });
 
         case 'auth/too-many-requests':
-            return {
-                source: 'email',
+            throwSystemError({
                 message: "You've made too many attempts",
-            };
+            });
 
         case 'auth/invalid-verification-code':
-            return {
+            throwValidationError({
                 source: 'code',
-                message: 'Verification code is incorrect',
-            };
+                message: 'Code is incorrect',
+            });
 
         /** THESE CASES BELOW SHOULD NOT HAPPEN IN NORMAL OPERATION */
 
         case 'auth/invernal-error':
-            return {
-                source: 'password',
-                message: 'An unexpected error has occured. ',
-            };
+            throwSystemError({
+                message: 'An unexpected error occured',
+            });
+
+        case 'auth/network-request-failed':
+            throwSystemError({
+                message: 'Not connected to the internet',
+            });
 
         case 'auth/invalid-continue-uri':
-            return {
-                source: 'email',
-                message: 'An unexpected error has occured. ',
-            };
+            throwSystemError({
+                message: 'An unexpected error occured',
+            });
 
         default:
-            console.log(error);
-            return {
-                source: 'password',
-                message: 'An unexpected error has occured. ',
-            };
+            throwSystemError({
+                message: 'An unexpected error occured',
+            });
     }
 };

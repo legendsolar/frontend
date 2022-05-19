@@ -72,12 +72,11 @@ const CompleteAccountPage = () => {
             ACCOUNT_CREATED: 1,
             EMAIL_VERIFIED: 2,
             MFA_VERIFIED: 3,
-            ACCOUNT_CREATED: 4,
-            ACCEPTANCE_COMPLETE: 5,
+            ACCEPTANCE_COMPLETE: 4,
             // Keep user in complete account flow for retry state
-            ACCREDITATION_VERIFIED: 6,
-            DWOLLA_ACCOUNT_RETRY_REQ: 6,
-            DWOLLA_ACCOUNT_KBA_REQ: 7,
+            ACCREDITATION_VERIFIED: 5,
+            DWOLLA_ACCOUNT_RETRY_REQ: 5,
+            DWOLLA_ACCOUNT_KBA_REQ: 6,
             DWOLLA_ACCOUNT_DOCUMENT_REQ: 7,
             IDENTITY_VERIFIED: 8,
 
@@ -126,6 +125,7 @@ const CompleteAccountPage = () => {
     console.log(USER_STATUS.EMAIL_VERIFIED);
 
     const pageContent = [
+        // 0
         {
             title: 'Create Account',
             content: (
@@ -136,6 +136,7 @@ const CompleteAccountPage = () => {
             disabled: !!userSignUpStatus,
         },
 
+        // 1
         {
             title: 'Verify Email',
             content: (
@@ -149,6 +150,7 @@ const CompleteAccountPage = () => {
             disabled: userSignUpStatus !== USER_STATUS.CREATED,
         },
 
+        // 2
         {
             title: 'Add MFA',
             content: (
@@ -165,6 +167,7 @@ const CompleteAccountPage = () => {
             disabled: userSignUpStatus !== USER_STATUS.EMAIL_VERIFIED,
         },
 
+        // 3
         {
             title: 'Terms and Privacy',
             content: (
@@ -175,6 +178,7 @@ const CompleteAccountPage = () => {
             disabled: !(userSignUpStatus === USER_STATUS.MFA_VERIFIED),
         },
 
+        // 4
         {
             title: 'Accreditation',
             content: (
@@ -196,6 +200,8 @@ const CompleteAccountPage = () => {
             ),
             disabled: !(userSignUpStatus === USER_STATUS.ACCEPTANCE_COMPLETE),
         },
+
+        // 5
         {
             title: 'Create Wallet',
             content: (
@@ -210,6 +216,8 @@ const CompleteAccountPage = () => {
                 userSignUpStatus === USER_STATUS.ACCREDITATION_VERIFIED
             ),
         },
+
+        // 6
         {
             title: 'KBA Validation',
             content: (
@@ -223,6 +231,8 @@ const CompleteAccountPage = () => {
             ),
             sidebar: false,
         },
+
+        // 7
         {
             title: 'Document Validation',
             content: (
@@ -235,6 +245,8 @@ const CompleteAccountPage = () => {
             ),
             sidebar: false,
         },
+
+        // 8
         {
             title: 'Complete Sign Up',
             content: (

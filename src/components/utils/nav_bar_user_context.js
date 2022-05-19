@@ -20,8 +20,6 @@ const NavBarUserContext = () => {
 
     const userIsAuthenticated =
         location.pathname == '/complete-account' || !!auth.user;
-
-    console.log(location.pathname);
     return (
         <NavBar
             loading={loading}

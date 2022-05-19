@@ -19,7 +19,7 @@ import {GoogleAuthProvider} from 'firebase/auth';
 
 import {setContext} from '@apollo/client/link/context';
 import settings from 'app_settings';
-import {authErrorTranslator} from 'utils/auth_error_translator';
+import {authErrorHandler} from 'utils/auth_error_translator';
 import {throwValidationError} from 'utils/errors';
 import {useApolloClient} from '@apollo/client';
 
@@ -134,7 +134,7 @@ function useProvideAuth() {
 
         return sendEmailVerification(user, actionCodeSettings).catch(
             (error) => {
-                throwValidationError(authErrorTranslator(error));
+                throwValidationError(authErrorHandler(error));
             },
         );
     };
@@ -184,7 +184,7 @@ function useProvideAuth() {
         return multiFactorUser
             .enroll(multiFactorAssertion, 'phone number')
             .catch((error) => {
-                throwValidationError(authErrorTranslator(error));
+                throwValidationError(authErrorHandler(error));
             });
     };
 

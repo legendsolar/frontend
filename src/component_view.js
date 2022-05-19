@@ -204,7 +204,6 @@ const basePaths = [
 const importComponent = (path) =>
     lazy(() =>
         import(`${path}`).catch((e) => {
-            console.log(e);
             return import(`./views/error`);
         }),
     );

@@ -112,7 +112,6 @@ const AccreditationStatus = ({
         //         setLoading(false);
         //         onComplete();
         //     });
-        console.log(checkedList);
 
         setUser({
             variables: {

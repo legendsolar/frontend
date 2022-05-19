@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from './use_auth';
 import {useLocation} from 'react-router-dom';
-import {authErrorTranslator} from 'utils/auth_error_translator';
+import {authErrorHandler} from 'utils/auth_error_translator';
 import {throwValidationError} from 'utils/errors';
 import {useUser} from './use_user';
 
@@ -18,32 +18,21 @@ const useSignIn = (auth = null) => {
         navigate('/');
     };
 
-    const handleFirebaseError = (error) => {
-        const translatedError = authErrorTranslator(error);
-
-        return translatedError;
-    };
-
     const onSignInSubmit = (values) => {
         return auth
             .signin(values.email, values.password)
             .then(() => {
                 onSuccesfulSignIn();
             })
-            .catch((error) => {
-                const translatedError = handleFirebaseError(error);
-                throwValidationError(translatedError);
-            });
+            .catch((error) => authErrorHandler(error));
     };
 
     const onCreateAccountSubmit = (values) => {
         return auth
             .signup(values.email, values.password)
-            .catch((error) => {
-                const translatedError = handleFirebaseError(error);
-                throwValidationError(translatedError);
-            })
+            .catch((error) => authErrorHandler(error))
             .then(() => {
+                console.log('then ran');
                 // update user data with values
 
                 useSetUser({
@@ -64,10 +53,7 @@ const useSignIn = (auth = null) => {
             .then(() => {
                 onSuccesfulSignIn();
             })
-            .catch((error) => {
-                const translatedError = handleFirebaseError(error);
-                throwValidationError(translatedError);
-            });
+            .catch((error) => authErrorHandler(error));
     };
 
     const onSignUpWithEmail = () => {
@@ -79,10 +65,9 @@ const useSignIn = (auth = null) => {
     };
 
     const onForgotPassword = (values) => {
-        return auth.resetPassword(values.email).catch((error) => {
-            const translatedError = handleFirebaseError(error);
-            throwValidationError(translatedError);
-        });
+        return auth
+            .resetPassword(values.email)
+            .catch((error) => authErrorHandler(error));
     };
 
     const onSignUpWithGoogle = onSignInWithGoogle;

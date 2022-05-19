@@ -1,19 +1,14 @@
 import PropTypes from 'prop-types';
 import {Grid, Box, TextField, Button, CircularProgress} from '@mui/material';
-import {
-    validateEmail,
-    validatePassword,
-    validatePhoneNumber,
-    validateLastName,
-    validateFirstName,
-} from 'validation/user_data_validation';
-
+import {validateEmail, validatePassword} from 'validation/user_data_validation';
 import {ErrorTypes} from 'utils/errors';
-
 import {useFormik} from 'formik';
 import * as yup from 'yup';
+import {useState} from 'react';
 
 const SignUpComponent = ({initialValues, onSubmit}) => {
+    const [error, setError] = useState(null);
+
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: yup.object().shape({
@@ -26,6 +21,10 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
                     setErrors({
                         [error.source]: error.message,
                     });
+                }
+
+                if (error.type === ErrorTypes.SystemError) {
+                    setError(error.message);
                 }
             });
         },
@@ -94,6 +93,8 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
                         'Continue'
                     )}
                 </Button>
+
+                {error && <Alert severity="error">{error}</Alert>}
             </form>
         </Box>
     );

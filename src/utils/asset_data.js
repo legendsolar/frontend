@@ -1,37 +1,37 @@
 const investmentOpportunities = {
     santa_rosa: {
-        title: "Santa Rosa Solar",
-        minInvestment: "$131,000",
+        title: 'Santa Rosa Solar',
+        minInvestment: '$131,000',
         metrics: [
             {
-                metric: "Location",
-                value: "2868 Dutton Meadow Santa Rosa, CA 95407",
+                metric: 'Location',
+                value: '2868 Dutton Meadow Santa Rosa, CA 95407',
             },
             {
-                metric: "Panels",
-                value: "114",
+                metric: 'Panels',
+                value: '114',
             },
             {
-                metric: "Watts Installed",
-                value: "46,600",
+                metric: 'Watts Installed',
+                value: '46,600',
             },
             {
-                metric: "Total Investment",
-                value: "$131,000",
+                metric: 'Total Investment',
+                value: '$131,000',
             },
         ],
         specifications: [
             {
-                metric: "Number of panels",
-                value: "114",
+                metric: 'Number of panels',
+                value: '114',
             },
             {
-                metric: "Make & model",
-                value: "Phono Solar 400W",
+                metric: 'Make & model',
+                value: 'Phono Solar 400W',
             },
             {
-                metric: "Watts Installed",
-                value: "45,600 W",
+                metric: 'Watts Installed',
+                value: '45,600 W',
             },
         ],
         content: [
@@ -88,115 +88,115 @@ const investmentOpportunities = {
             },
         ],
 
-        color: "skyBlue",
+        color: 'blue',
     },
 
     glassboro: {
-        title: "Glassboro Solar",
-        minInvestment: "$131,000",
+        title: 'Glassboro Solar',
+        minInvestment: '$131,000',
         metrics: [
             {
-                metric: "Number of panels",
-                value: "114",
+                metric: 'Number of panels',
+                value: '114',
             },
             {
-                metric: "Make & model",
-                value: "Phono Solar 400W",
+                metric: 'Make & model',
+                value: 'Phono Solar 400W',
             },
             {
-                metric: "Watts Installed",
-                value: "45,600 W",
+                metric: 'Watts Installed',
+                value: '45,600 W',
             },
         ],
 
         specifications: [
             {
-                metric: "Number of panels",
-                value: "114",
+                metric: 'Number of panels',
+                value: '114',
             },
             {
-                metric: "Make & model",
-                value: "Phono Solar 400W",
+                metric: 'Make & model',
+                value: 'Phono Solar 400W',
             },
             {
-                metric: "Watts Installed",
-                value: "45,600 W",
+                metric: 'Watts Installed',
+                value: '45,600 W',
             },
         ],
-        color: "pencilYellow",
+        color: 'yellow',
     },
 
     lake_elsinore: {
-        title: "Lake Elsinore Solar",
-        minInvestment: "$131,000",
+        title: 'Lake Elsinore Solar',
+        minInvestment: '$131,000',
 
         metrics: [
             {
-                metric: "Number of panels",
-                value: "114",
+                metric: 'Number of panels',
+                value: '114',
             },
             {
-                metric: "Make & model",
-                value: "Phono Solar 400W",
+                metric: 'Make & model',
+                value: 'Phono Solar 400W',
             },
             {
-                metric: "Watts Installed",
-                value: "45,600 W",
+                metric: 'Watts Installed',
+                value: '45,600 W',
             },
         ],
 
         specifications: [
             {
-                metric: "Number of panels",
-                value: "114",
+                metric: 'Number of panels',
+                value: '114',
             },
             {
-                metric: "Make & model",
-                value: "Phono Solar 400W",
+                metric: 'Make & model',
+                value: 'Phono Solar 400W',
             },
             {
-                metric: "Watts Installed",
-                value: "45,600 W",
+                metric: 'Watts Installed',
+                value: '45,600 W',
             },
         ],
-        color: "grassGreen",
+        color: 'green',
     },
 
     lindenwold: {
-        title: "Lindenwold Solar",
+        title: 'Lindenwold Solar',
 
-        minInvestment: "$131,000",
+        minInvestment: '$131,000',
 
         metrics: [
             {
-                metric: "Number of panels",
-                value: "114",
+                metric: 'Number of panels',
+                value: '114',
             },
             {
-                metric: "Make & model",
-                value: "Phono Solar 400W",
+                metric: 'Make & model',
+                value: 'Phono Solar 400W',
             },
             {
-                metric: "Watts Installed",
-                value: "45,600 W",
+                metric: 'Watts Installed',
+                value: '45,600 W',
             },
         ],
 
         specifications: [
             {
-                metric: "Number of panels",
-                value: "114",
+                metric: 'Number of panels',
+                value: '114',
             },
             {
-                metric: "Make & model",
-                value: "Phono Solar 400W",
+                metric: 'Make & model',
+                value: 'Phono Solar 400W',
             },
             {
-                metric: "Watts Installed",
-                value: "45,600 W",
+                metric: 'Watts Installed',
+                value: '45,600 W',
             },
         ],
-        color: "eraserRed",
+        color: 'red',
     },
 };
 

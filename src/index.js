@@ -60,9 +60,6 @@ const authLink = setContext(async (_, {headers}) => {
         ? new URL(sessionUrl).pathname.split('/').pop()
         : null;
 
-    console.log({sessionId});
-
-    console.log('token: ' + token);
     // return the headers to the context so httpLink can read them
     return {
         headers: {

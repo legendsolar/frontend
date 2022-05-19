@@ -6,20 +6,6 @@ const PageinatedComponent = ({children, title, onBack, backDisabled}) => {
     return (
         <DefaultComponent>
             <Stack direction="row" alignItems="center">
-                {!backDisabled && (
-                    <Button
-                        onClick={onBack}
-                        disabled={backDisabled}
-                        variant="mono"
-                    >
-                        <ArrowBackIcon
-                            sx={{
-                                fontSize: '22px',
-                            }}
-                        ></ArrowBackIcon>
-                    </Button>
-                )}
-
                 <Typography variant="smallHeadline">{title}</Typography>
             </Stack>
 

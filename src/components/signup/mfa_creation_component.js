@@ -57,7 +57,6 @@ const MfaCreationComponent = ({
         }),
         onSubmit: async (values, {setErrors}) => {
             onSubmit(values).catch((error) => {
-                console.log({error});
                 if (error.type === ErrorTypes.ValidationError) {
                     setErrors({
                         [error.source]: error.message,

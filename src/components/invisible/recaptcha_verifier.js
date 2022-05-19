@@ -12,7 +12,6 @@ const RecaptchaVerifier = ({captchaComplete}) => {
     };
 
     useEffect(() => {
-        console.log('get recaptcha');
         const recaptcha = getRecaptchaVerifier(
             captchaRef.current,
             captchaCompleteCallback,
