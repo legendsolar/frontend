@@ -21,6 +21,9 @@ import MfaCreationComponent from 'components/signup/mfa_creation_component';
 import {transformFormValuesToUserDwollaAccountData} from 'components/utils/transformers';
 import RecaptchaVerifier from 'components/invisible/recaptcha_verifier';
 
+import IdentityVerificationDocument from 'components/signup/identity_verification_document';
+import IdentityVerificationKBA from 'components/signup/identity_verification_kba';
+
 const CompleteAccountPage = () => {
     const navigate = useNavigate();
     const {
@@ -210,10 +213,10 @@ const CompleteAccountPage = () => {
         {
             title: 'KBA Validation',
             content: (
-                <></>
-                // <IdentityVerificationKBA
-                //     onComplete={onComplete}
-                // ></IdentityVerificationKBA>
+                <IdentityVerificationKBA
+                    onSubmit={() => {}}
+                    kbaQuestions={() => {}}
+                ></IdentityVerificationKBA>
             ),
             disabled: !(
                 userSignUpStatus === USER_STATUS.DWOLLA_ACCOUNT_KBA_REQ
@@ -223,10 +226,9 @@ const CompleteAccountPage = () => {
         {
             title: 'Document Validation',
             content: (
-                <></>
-                // <IdentityVerificationDocument
-                //     onComplete={onComplete}
-                // ></IdentityVerificationDocument>
+                <IdentityVerificationDocument
+                    onSubmit={() => {}}
+                ></IdentityVerificationDocument>
             ),
             disabled: !(
                 userSignUpStatus === USER_STATUS.DWOLLA_ACCOUNT_DOCUMENT_REQ
