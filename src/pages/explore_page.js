@@ -23,6 +23,10 @@ const ExplorePage = () => {
         'Lindenwold Solar',
     ];
 
+    const onOfferingClick = (key) => {
+        navigate('/invest/' + key);
+    };
+
     return (
         <SideBarNavView
             drawer={
@@ -40,6 +44,7 @@ const ExplorePage = () => {
                 <OfferingListComponent
                     offerings={investmentOpportunities}
                     refs={contentRefs}
+                    onOfferingClick={onOfferingClick}
                 ></OfferingListComponent>
             }
         ></SideBarNavView>

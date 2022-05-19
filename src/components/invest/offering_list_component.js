@@ -7,7 +7,7 @@ import PanelRed from 'assets/solar/panel_red.png';
 import PanelYellow from 'assets/solar/panel_yellow.png';
 import PanelGreen from 'assets/solar/panel_green.png';
 
-const OfferingListComponent = ({offerings, refs}) => {
+const OfferingListComponent = ({offerings, refs, onOfferingClick}) => {
     const mapColorToSrc = (color) => {
         switch (color) {
             case 'blue':
@@ -113,7 +113,7 @@ const OfferingListComponent = ({offerings, refs}) => {
                         <Button
                             variant="primary"
                             onClick={() => {
-                                navigate('/invest/' + key);
+                                onOfferingClick(key);
                             }}
                         >
                             Executive summary

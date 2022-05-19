@@ -12,6 +12,11 @@ import PrecommitLetterComponent from 'components/invest/precommit_letter_compone
 import {useParams} from 'react-router-dom';
 import investmentOpportunities from 'utils/asset_data';
 
+import PanelBlue from 'assets/solar/panel_blue.png';
+import PanelRed from 'assets/solar/panel_red.png';
+import PanelYellow from 'assets/solar/panel_yellow.png';
+import PanelGreen from 'assets/solar/panel_green.png';
+
 const InvestPage = () => {
     const theme = useTheme();
     const {assetName} = useParams();
@@ -39,12 +44,29 @@ const InvestPage = () => {
         }
     };
 
+    const mapColorToSrc = (color) => {
+        switch (color) {
+            case 'blue':
+                return PanelBlue;
+
+            case 'red':
+                return PanelRed;
+
+            case 'yellow':
+                return PanelYellow;
+
+            case 'green':
+                return PanelGreen;
+        }
+    };
+
     const [state, dispatch] = useReducer(reducer, initState);
 
     const sidebarEditState = (
         <Stack spacing={4}>
             <Typography variant="smallHeadline">Pre-commit</Typography>
-            <PanelsSvg color={theme.palette[asset.color].main}></PanelsSvg>
+
+            <img src={mapColorToSrc(asset.color)}></img>
             <MetricList valuePairs={asset.metrics} dividers={true}></MetricList>
             <Button
                 variant="primary"
