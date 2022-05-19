@@ -84,7 +84,7 @@ const SideBarView = ({
         <DefaultView>
             <Grid container columnSpacing={4}>
                 {!!header && (
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sx={{mb: {md: 4}}}>
                         {header}
                     </Grid>
                 )}
