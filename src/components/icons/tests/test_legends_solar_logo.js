@@ -1,4 +1,4 @@
-import LegendsSolarLogo from '../legends_solar_logo';
+import LegendsSolarLogo from '../legends_logo_light';
 
 const TestLegendsSolarLogo = () => {
     return (

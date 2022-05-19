@@ -5,8 +5,8 @@ import NavBarUserContext from 'components/utils/nav_bar_user_context';
 
 const DefaultView = (props) => {
     const auth = useAuth();
-    // const backgroundColor = !!auth?.user ? "blackDusk.main" : "blackDawn.main";
-    const backgroundColor = 'blackDusk.main';
+    const backgroundColor = !!auth?.user ? 'blackDusk.main' : 'none';
+    // const backgroundColor = 'blackDusk.main';
     const headerHeight = '300px';
 
     return (

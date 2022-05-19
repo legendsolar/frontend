@@ -10,7 +10,6 @@ import {
     Collapse,
 } from '@mui/material';
 import {useState} from 'react';
-import {authErrorTranslator} from 'utils/auth_error_translator';
 import {ErrorTypes} from 'utils/errors';
 
 const EmailVerificationComponent = ({onSendVerifyEmail, loading}) => {

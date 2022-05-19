@@ -1,6 +1,5 @@
-const LegendsSolarLogo = () => {
-    const color = '#fcc531';
-    const legendsColor = '#FFF';
+const BaseLogo = ({solarColor, legendsColor}) => {
+    const color = solarColor;
     return (
         <svg
             id="Layer_1"
@@ -41,4 +40,4 @@ const LegendsSolarLogo = () => {
     );
 };
 
-export default LegendsSolarLogo;
+export default BaseLogo;

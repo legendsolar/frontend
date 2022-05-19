@@ -1,7 +1,12 @@
 import {Button, Stack, Typography, Toolbar, Box, AppBar} from '@mui/material';
-import LegendsSolarLogo from 'components/icons/legends_solar_logo';
+import LegendsLogoLight from 'components/icons/legends_logo_light';
+import LegendsLogoDark from 'components/icons/legends_logo_dark';
+import LegendsSolarLogo from 'components/icons/legends_logo_light';
 import PropTypes from 'prop-types';
 import {userStatus as USER_STATUS} from 'utils/user_sign_up_state';
+import CreateAccountToolbar from './create_account_toolbar';
+import LoggedOutToolbar from './logged_out_toolbar';
+import LoggedInToolbar from './logged_in_toolbar';
 
 const NavBar = ({
     loading,
@@ -55,98 +60,27 @@ const NavBar = ({
                             }}
                             alt="logo"
                         >
-                            <LegendsSolarLogo></LegendsSolarLogo>
+                            {userIsAuthenticated ? (
+                                <LegendsLogoLight></LegendsLogoLight>
+                            ) : (
+                                <LegendsLogoDark></LegendsLogoDark>
+                            )}
                         </Box>
 
                         {userIsAuthenticated &&
                             userStatus === USER_STATUS.IDENTITY_VERIFIED && (
-                                <Stack
-                                    direction="row"
-                                    alignItems={'flex-end'}
-                                    sx={
-                                        {
-                                            // display: { xs: "none", sm: "block" },
-                                        }
-                                    }
-                                >
-                                    <Button
-                                        variant="header"
-                                        onClick={onYourRooftop}
-                                    >
-                                        <Typography variant="appBarHeader">
-                                            Your Rooftop
-                                        </Typography>
-                                    </Button>
-
-                                    <Button
-                                        variant="header"
-                                        onClick={onTransaction}
-                                    >
-                                        <Typography variant="appBarHeader">
-                                            Transactions
-                                        </Typography>
-                                    </Button>
-
-                                    <Button
-                                        variant="header"
-                                        onClick={onDocuments}
-                                    >
-                                        <Typography variant="appBarHeader">
-                                            Documents
-                                        </Typography>
-                                    </Button>
-
-                                    <Button
-                                        variant="header"
-                                        onClick={onAvailablePanels}
-                                    >
-                                        <Typography variant="appBarHeader">
-                                            Available Panels
-                                        </Typography>
-                                    </Button>
-
-                                    <Button
-                                        variant="header-outlined"
-                                        onClick={onAccount}
-                                    >
-                                        <Typography variant="appBarHeader">
-                                            Account
-                                        </Typography>
-                                    </Button>
-
-                                    <Stack sx={{maxWidth: '174px'}} spacing={1}>
-                                        <Typography
-                                            variant="smallLabel"
-                                            sx={{
-                                                color: 'white.main',
-                                                lineHeight: '12px',
-                                            }}
-                                        >
-                                            Legends Wallet
-                                        </Typography>
-                                        <Button
-                                            variant="header-filled"
-                                            sx={{mt: 0}}
-                                            onClick={onWallet}
-                                        >
-                                            {'$' +
-                                                (walletBalance
-                                                    ? walletBalance
-                                                    : '-')}
-                                        </Button>
-                                    </Stack>
-                                </Stack>
+                                <LoggedInToolbar></LoggedInToolbar>
                             )}
 
-                        {(!userIsAuthenticated ||
-                            userStatus !== USER_STATUS.IDENTITY_VERIFIED) && (
-                            <Button
-                                variant="header"
-                                disabled={false}
-                                onClick={onToHomepage}
-                            >
-                                Back to homepage
-                            </Button>
+                        {userIsAuthenticated &&
+                            userStatus !== USER_STATUS.IDENTITY_VERIFIED && (
+                                <CreateAccountToolbar
+                                    onToHomepage={onToHomepage}
+                                ></CreateAccountToolbar>
+                            )}
+
+                        {!userIsAuthenticated && (
+                            <LoggedOutToolbar></LoggedOutToolbar>
                         )}
                     </Stack>
                 </Box>

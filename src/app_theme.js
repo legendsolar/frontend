@@ -428,6 +428,29 @@ const themeOptions = {
                 },
 
                 {
+                    props: {variant: 'header', color: 'dark'},
+                    style: {
+                        fontFamily: 'Azeret Mono',
+                        fontWeight: 600,
+                        fontSize: '12px',
+                        lineHeight: '14px',
+                        height: '50px',
+                        textTransform: 'uppercase',
+                        color: '#000',
+                        '&:hover': {
+                            opacity: '0.75',
+                            backgroundColor: 'transparent',
+                        },
+
+                        '&:disabled': {
+                            color: '#000',
+                            opacity: '0.75',
+                            backgroundColor: 'transparent',
+                        },
+                    },
+                },
+
+                {
                     props: {variant: 'text'},
                     style: {
                         backgroundColor: 'transparent',
@@ -469,6 +492,21 @@ const themeOptions = {
                         '&:hover': {
                             opacity: '0.75',
                             backgroundColor: paletteOptions.palette.white.main,
+                        },
+                    },
+                },
+
+                {
+                    props: {variant: 'header-filled', color: 'dark'},
+                    style: {
+                        ...typographyOptions.typography.smallLabel,
+                        height: '50px',
+                        backgroundColor: paletteOptions.palette.blackDusk.main,
+                        color: paletteOptions.palette.white.main,
+                        '&:hover': {
+                            opacity: '0.75',
+                            backgroundColor:
+                                paletteOptions.palette.blackDusk.main,
                         },
                     },
                 },
