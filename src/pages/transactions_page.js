@@ -62,15 +62,12 @@ const TransactionPage = (props) => {
     } = useRecentTransfers(15);
 
     useEffect(() => {
-        if (
-            !dividendTransferLoading &&
-            !investmentTransferLoading &&
-            !transferTransferLoading &&
-            !recentTransfersLoading
-        ) {
+        if (!recentTransfersLoading && !recentTransfers.length) {
             setEmptyTransfers(true);
+        } else {
+            setEmptyTransfers(false);
         }
-    });
+    }, [recentTransfers, recentTransfersLoading]);
 
     return (
         <SideBarNavView
