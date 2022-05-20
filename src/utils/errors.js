@@ -1,6 +1,7 @@
 export const ErrorTypes = {
     ValidationError: 'ValidationError',
     SystemError: 'SystemError',
+    MfaRequiredError: 'MfaRequiredError',
     DwollaError: 'DwollaError',
 };
 
@@ -17,6 +18,16 @@ export const throwSystemError = (error) => {
         type: ErrorTypes.SystemError,
         source: 'system',
         message: error.message,
+    };
+};
+
+// We want this to be a separate type to ensure MFA verify is handled properly
+export const throwMfaRequiredError = (error, resolver) => {
+    throw {
+        type: ErrorTypes.MfaRequiredError,
+        source: 'mfa',
+        message: error.message,
+        resolver,
     };
 };
 

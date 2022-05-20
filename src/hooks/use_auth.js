@@ -13,6 +13,7 @@ import {
     multiFactor,
     PhoneAuthProvider,
     PhoneMultiFactorGenerator,
+    getMultiFactorResolver,
 } from 'firebase/auth';
 
 import {GoogleAuthProvider} from 'firebase/auth';
@@ -66,27 +67,37 @@ function useProvideAuth() {
     // Wrap any Firebase methods we want to use making sure ...
     // ... to save the user to state.
     const signin = (email, password) => {
-        setIsAuthenticating(true);
+        // Removed to stop sign in components from unmounting
+        // setIsAuthenticating(true);
         return signInWithEmailAndPassword(auth, email, password)
             .then((response) => {
                 setUser(response.user);
             })
-            .finally(() => {
-                setIsAuthenticating(false);
+            .catch((error) => {
+                if (error.code === 'auth/multi-factor-auth-required') {
+                    const resolver = getMultiFactorResolver(auth, error);
+                    error.resolver = resolver;
+                }
+
+                throw error;
             });
+        // .finally(() => {
+        //     // setIsAuthenticating(false);
+        // });
     };
 
     const signup = (email, password) => {
-        setIsAuthenticating(true);
-        return createUserWithEmailAndPassword(auth, email, password)
-            .then((response) => {
+        // setIsAuthenticating(true);
+        return createUserWithEmailAndPassword(auth, email, password).then(
+            (response) => {
                 if (response) {
                     setUser(response.user);
                 }
-            })
-            .finally(() => {
-                setIsAuthenticating(false);
-            });
+            },
+        );
+        // .finally(() => {
+        //     setIsAuthenticating(false);
+        // });
     };
 
     const signout = () => {
@@ -168,7 +179,24 @@ function useProvideAuth() {
         });
     };
 
-    const submitMfaCode = async (code) => {
+    const sendMfaVerification = async (resolver, recaptchaVerifier) => {
+        console.log({resolver});
+
+        const phoneInfoOptions = {
+            multiFactorHint: resolver.hints[0],
+            session: resolver.session,
+        };
+
+        var phoneAuthProvider = new PhoneAuthProvider(auth);
+        // Send SMS verification code.
+        // TODO errors in this are silent
+        return phoneAuthProvider.verifyPhoneNumber(
+            phoneInfoOptions,
+            recaptchaVerifier,
+        );
+    };
+
+    const enrollWithMfaCode = async (code) => {
         if (!captchaVerificationId) {
             throw 'enrollUserMfa must be called';
         }
@@ -186,6 +214,18 @@ function useProvideAuth() {
             .catch((error) => {
                 throwValidationError(authErrorHandler(error));
             });
+    };
+
+    const validateMfaCode = async (verificationId, code, resolver) => {
+        const phoneAuthCredential = PhoneAuthProvider.credential(
+            verificationId,
+            code,
+        );
+        const multiFactorAssertion =
+            PhoneMultiFactorGenerator.assertion(phoneAuthCredential);
+        return resolver.resolveSignIn(multiFactorAssertion).then(() => {
+            onSuccesfulSignIn();
+        });
     };
 
     // Subscribe to user on mount
@@ -217,6 +257,8 @@ function useProvideAuth() {
         sendEmailVerify,
         getRecaptchaVerifier,
         enrollUserMfa,
-        submitMfaCode,
+        sendMfaVerification,
+        enrollWithMfaCode,
+        validateMfaCode,
     };
 }

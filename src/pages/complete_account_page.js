@@ -29,7 +29,7 @@ const CompleteAccountPage = () => {
     const {
         sendEmailVerify,
         enrollUserMfa,
-        submitMfaCode,
+        enrollWithMfaCode,
         user,
         isAuthenticating,
     } = useAuth();
@@ -116,7 +116,7 @@ const CompleteAccountPage = () => {
     };
 
     const onSubmitMfaCode = async (values) => {
-        return submitMfaCode(values.code).then(() => {
+        return enrollWithMfaCode(values.code).then(() => {
             forceRefreshUserStatus();
         });
     };

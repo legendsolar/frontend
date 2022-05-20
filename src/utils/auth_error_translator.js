@@ -1,4 +1,8 @@
-import {throwSystemError, throwValidationError} from './errors';
+import {
+    throwMfaRequiredError,
+    throwSystemError,
+    throwValidationError,
+} from './errors';
 
 export const authErrorHandler = (error) => {
     switch (error.code) {
@@ -54,6 +58,12 @@ export const authErrorHandler = (error) => {
             throwValidationError({
                 source: 'code',
                 message: 'Code is incorrect',
+            });
+
+        case 'auth/multi-factor-auth-required':
+            throwMfaRequiredError({
+                message: 'Multi factor authentication required',
+                resolver: error.resolver,
             });
 
         /** THESE CASES BELOW SHOULD NOT HAPPEN IN NORMAL OPERATION */
