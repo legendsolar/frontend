@@ -9,7 +9,7 @@ import {
     Typography,
     Collapse,
 } from '@mui/material';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {ErrorTypes} from 'utils/errors';
 
 const EmailVerificationComponent = ({onSendVerifyEmail, loading}) => {
@@ -26,6 +26,10 @@ const EmailVerificationComponent = ({onSendVerifyEmail, loading}) => {
             });
     };
 
+    useEffect(() => {
+        sendVerifyEmail();
+    }, []);
+
     return (
         <Box>
             <Stack>
@@ -33,25 +37,16 @@ const EmailVerificationComponent = ({onSendVerifyEmail, loading}) => {
                     We'll need to verify your email address before we can
                     continue.
                 </Typography>
-                <Button
-                    variant="primary"
-                    onClick={sendVerifyEmail}
-                    disabled={emailSent}
-                    color="legendaryGreen"
-                    sx={{width: '100%', mt: 4}}
-                >
-                    {loading ? (
-                        <CircularProgress color="light"></CircularProgress>
-                    ) : (
-                        'Send verification email'
-                    )}
-                </Button>
+                <Typography varient={'smallLabel'}>
+                    Check your email for a message from us to confirm your
+                    account.
+                </Typography>
                 <Collapse in={!!error}>
                     <Alert severity="error">{error}</Alert>
                 </Collapse>
 
                 <Collapse in={emailSent}>
-                    <Alert severity="info">Check your email!</Alert>
+                    <Alert severity="info">Email sent!</Alert>
                 </Collapse>
             </Stack>
         </Box>

@@ -51,7 +51,13 @@ const CompleteAccountPage = () => {
     const {createDwollaAccount, loading: createDwollaAccountLoading} =
         useCreateDwollaAccount();
 
-    const {onCreateAccountSubmit} = useSignIn();
+    const {onCreateAccountSubmit: onCreateAccount} = useSignIn();
+
+    const onCreateAccountSubmit = (values) => {
+        onCreateAccount(values).then(() => {
+            forceRefreshUserStatus();
+        });
+    };
 
     const [pageIndex, setPageIndex] = useState(0);
     const [captcha, setCaptcha] = useState(null);
@@ -133,7 +139,7 @@ const CompleteAccountPage = () => {
                     onSubmit={onCreateAccountSubmit}
                 ></SignUpComponent>
             ),
-            disabled: !!userSignUpStatus,
+            disabled: !!user,
         },
 
         // 1

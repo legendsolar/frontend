@@ -53,15 +53,9 @@ const useSignIn = () => {
     };
 
     const onCreateAccountSubmit = async (values) => {
-        return signup(values.email, values.password)
-            .catch((error) => authErrorHandler(error))
-            .then(() => {
-                useSetUser({
-                    variables: {
-                        input: {},
-                    },
-                });
-            });
+        return signup(values.email, values.password).catch((error) =>
+            authErrorHandler(error),
+        );
     };
 
     const onCreateNewAccount = () => {
