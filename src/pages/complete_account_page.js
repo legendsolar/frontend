@@ -158,7 +158,7 @@ const CompleteAccountPage = () => {
 
         // 2
         {
-            title: 'Add MFA',
+            title: 'Verify Phone',
             content: (
                 <div>
                     <MfaCreationComponent
