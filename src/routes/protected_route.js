@@ -20,7 +20,16 @@ const ProtectedRoute = ({
 
     const {useGetUserStatus} = useUser();
 
-    const {loading, error, status} = useGetUserStatus();
+    // TODO would be ideal to only fetch this if user is auth
+    const {loading, error, status, refetch} = useGetUserStatus();
+
+    if (auth.isAuthenticating) {
+        return <LoadingView></LoadingView>;
+    }
+
+    if (loading) {
+        return <LoadingView></LoadingView>;
+    }
 
     console.log({user: auth.user, status});
 
@@ -56,10 +65,6 @@ const ProtectedRoute = ({
                 }}
             />
         );
-    }
-
-    if (auth.isAuthenticating || loading) {
-        return <LoadingView></LoadingView>;
     }
 
     return auth.user ? (

@@ -21,6 +21,7 @@ import {
 import {createHttpLink} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
 import {getAuth} from 'firebase/auth';
+import {throwAuthenticationError, throwSystemError} from 'utils/errors.js';
 
 if (appSettings.sentry.enabled)
     Sentry.init({
@@ -49,23 +50,42 @@ const httpLink = createHttpLink({
     uri: process.env.REACT_APP_GRAPH_QL_SERVER_URL,
 });
 
+const getUserSessionId = () => {
+    try {
+        const sessionUrl = LogRocket.sessionURL;
+
+        const sessionId = sessionUrl
+            ? new URL(sessionUrl).pathname.split('/').pop()
+            : null;
+
+        return sessionId;
+    } catch (error) {
+        console.warn({
+            message: 'Cannot obtain user session id, session id will be null',
+        });
+        return null;
+    }
+};
+
 const authLink = setContext(async (_, {headers}) => {
     // get the authentication token from local storage if it exists
 
-    const token = await getAuth().currentUser.getIdToken();
+    const user = getAuth().currentUser;
 
-    const sessionUrl = LogRocket.sessionURL;
+    if (!user) {
+        throwAuthenticationError({
+            message: 'Cannot make GraphQL request, user not authentication',
+        });
+    }
 
-    const sessionId = sessionUrl
-        ? new URL(sessionUrl).pathname.split('/').pop()
-        : null;
+    const token = await user.getIdToken();
 
     // return the headers to the context so httpLink can read them
     return {
         headers: {
             ...headers,
             authorization: token ? `Bearer ${token}` : '',
-            sessionId: sessionId,
+            sessionId: getUserSessionId(),
         },
     };
 });

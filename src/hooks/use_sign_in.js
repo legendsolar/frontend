@@ -85,7 +85,9 @@ const useSignIn = () => {
     };
 
     const onSubmitCode = async (values) => {
-        return validateMfaCode(verificationId, values.code, resolver);
+        return validateMfaCode(verificationId, values.code, resolver).catch(
+            (error) => authErrorHandler(error),
+        );
     };
 
     const onSignUpWithGoogle = onSignInWithGoogle;

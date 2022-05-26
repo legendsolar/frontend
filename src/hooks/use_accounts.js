@@ -70,6 +70,17 @@ export const useProvideAccount = () => {
         }
     `;
 
+    const DELETE_ACCOUNT = gql`
+        mutation Mutation($input: RemoveAccountInput) {
+            removeAccount(input: $input) {
+                id
+                name
+                type
+                mask
+            }
+        }
+    `;
+
     const useAccounts = () => {
         const {loading, error, data} = useQuery(ACCOUNTS_QUERY, {});
 
@@ -125,7 +136,7 @@ export const useProvideAccount = () => {
             internalCreateAccount({
                 variables,
                 update: (cache, {data}) => {
-                    forceUpdateCache(cache, data.createAccount);
+                    forceAddDataToCache(cache, data.createAccount);
                 },
             });
         };
@@ -137,6 +148,27 @@ export const useProvideAccount = () => {
             account: data?.createAccount,
         };
     };
+
+    // const useDeleteAccount = () => {
+    //     const [internalDeleteAccount, {data, loading, error}] =
+    //         useMutation(DELETE_ACCOUNT);
+
+    //     const deleteAccount = ({variables}) => {
+    //         internalDeleteAccount({
+    //             variables,
+    //             update: (cache, {data}) => {
+    //                 forceRemoveDataFromCache(cache, data.removeAccount);
+    //             },
+    //         });
+    //     };
+
+    //     return {
+    //         deleteAccount,
+    //         loading,
+    //         error,
+    //         account: data?.deleteAccount,
+    //     };
+    // };
 
     const usePlaidLinkModal = (token, onComplete) => {
         const {open, ready} = usePlaidLink({
@@ -151,7 +183,7 @@ export const useProvideAccount = () => {
         };
     };
 
-    const forceUpdateCache = (cache, newData) => {
+    const forceAddDataToCache = (cache, newData) => {
         // Update all cached queries
         Object.keys(cachedQueries).map((key) => {
             const {query, inputs, queryName} = deconstructQueryCacheKey(key);
@@ -181,11 +213,41 @@ export const useProvideAccount = () => {
         });
     };
 
+    // const forceRemoveDataFromCache = (cache, removeId) => {
+    //     Object.keys(cachedQueries).map((key) => {
+    //         const {query, inputs, queryName} = deconstructQueryCacheKey(key);
+
+    //         console.log({query, inputs, queryName});
+
+    //         const cacheData = cache.readQuery({
+    //             query: query,
+    //             variables: {...inputs},
+    //         });
+
+    //         console.log({cacheData});
+
+    //         const accountList = cacheData ? cacheData[queryName] : [];
+    //         const updatedAccountList = [];
+
+    //         updatedAccountList.push(newData, ...accountList);
+
+    //         const updatedCacheData = {};
+    //         updatedCacheData[queryName] = updatedAccountList;
+
+    //         cache.writeQuery({
+    //             query: query,
+    //             variables: {...inputs},
+    //             data: updatedCacheData,
+    //         });
+    //     });
+    // };
+
     return {
         useAccounts,
         useWallet,
         useCreateLinkToken,
         useCreateAccount,
+        // useDeleteAccount,
         usePlaidLinkModal,
     };
 };

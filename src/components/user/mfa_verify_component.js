@@ -27,6 +27,8 @@ const MfaVerifyComponent = ({
     onSubmit,
     codeSent,
 }) => {
+    const [error, setError] = useState(null);
+
     const codeForm = useFormik({
         initialValues: initialCodeValues,
         validationSchema: yup.object().shape({
@@ -38,6 +40,10 @@ const MfaVerifyComponent = ({
                     setErrors({
                         [error.source]: error.message,
                     });
+                }
+
+                if (error.type == ErrorTypes.SystemError) {
+                    setError(error.message);
                 }
             });
         },
@@ -84,6 +90,8 @@ const MfaVerifyComponent = ({
                         'Submit Code'
                     )}
                 </Button>
+
+                {error && <Alert severity="error">{error}</Alert>}
             </Stack>
         </div>
     );
