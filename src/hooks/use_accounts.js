@@ -149,26 +149,27 @@ export const useProvideAccount = () => {
         };
     };
 
-    // const useDeleteAccount = () => {
-    //     const [internalDeleteAccount, {data, loading, error}] =
-    //         useMutation(DELETE_ACCOUNT);
+    const useDeleteAccount = () => {
+        const [internalDeleteAccount, {data, loading, error}] =
+            useMutation(DELETE_ACCOUNT);
 
-    //     const deleteAccount = ({variables}) => {
-    //         internalDeleteAccount({
-    //             variables,
-    //             update: (cache, {data}) => {
-    //                 forceRemoveDataFromCache(cache, data.removeAccount);
-    //             },
-    //         });
-    //     };
+        const deleteAccount = ({variables}) => {
+            internalDeleteAccount({
+                variables,
+                update: (cache, {data}) => {
+                    console.log(data);
+                    forceRemoveDataFromCache(cache, data.removeAccount.id);
+                },
+            });
+        };
 
-    //     return {
-    //         deleteAccount,
-    //         loading,
-    //         error,
-    //         account: data?.deleteAccount,
-    //     };
-    // };
+        return {
+            deleteAccount,
+            loading,
+            error,
+            account: data?.deleteAccount,
+        };
+    };
 
     const usePlaidLinkModal = (token, onComplete) => {
         const {open, ready} = usePlaidLink({
@@ -213,41 +214,42 @@ export const useProvideAccount = () => {
         });
     };
 
-    // const forceRemoveDataFromCache = (cache, removeId) => {
-    //     Object.keys(cachedQueries).map((key) => {
-    //         const {query, inputs, queryName} = deconstructQueryCacheKey(key);
+    const forceRemoveDataFromCache = (cache, removeId) => {
+        Object.keys(cachedQueries).map((key) => {
+            const {query, inputs, queryName} = deconstructQueryCacheKey(key);
 
-    //         console.log({query, inputs, queryName});
+            console.log({query, inputs, queryName});
 
-    //         const cacheData = cache.readQuery({
-    //             query: query,
-    //             variables: {...inputs},
-    //         });
+            const cacheData = cache.readQuery({
+                query: query,
+                variables: {...inputs},
+            });
 
-    //         console.log({cacheData});
+            const accountList = cacheData ? cacheData[queryName] : [];
 
-    //         const accountList = cacheData ? cacheData[queryName] : [];
-    //         const updatedAccountList = [];
+            const updatedAccountList = accountList.filter(
+                (account) => account.id !== removeId,
+            );
 
-    //         updatedAccountList.push(newData, ...accountList);
+            console.log({updated: updatedAccountList});
 
-    //         const updatedCacheData = {};
-    //         updatedCacheData[queryName] = updatedAccountList;
+            const updatedCacheData = {};
+            updatedCacheData[queryName] = updatedAccountList;
 
-    //         cache.writeQuery({
-    //             query: query,
-    //             variables: {...inputs},
-    //             data: updatedCacheData,
-    //         });
-    //     });
-    // };
+            cache.writeQuery({
+                query: query,
+                variables: {...inputs},
+                data: updatedCacheData,
+            });
+        });
+    };
 
     return {
         useAccounts,
         useWallet,
         useCreateLinkToken,
         useCreateAccount,
-        // useDeleteAccount,
+        useDeleteAccount,
         usePlaidLinkModal,
     };
 };

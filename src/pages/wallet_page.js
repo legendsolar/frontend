@@ -20,6 +20,7 @@ const WalletPage = () => {
         usePlaidLinkModal,
         useCreateLinkToken,
         useCreateAccount,
+        useDeleteAccount,
     } = useAccount();
     const {useRecentTransfers, useCreateTransfer} = useTransfer();
     const contentRefs = useRef([]);
@@ -30,6 +31,8 @@ const WalletPage = () => {
         error: accountsError,
         accounts,
     } = useAccounts();
+
+    const {deleteAccount} = useDeleteAccount();
 
     const {loading: walletLoading, error: walletError, wallet} = useWallet();
 
@@ -58,6 +61,16 @@ const WalletPage = () => {
 
         createTransfer({
             variables,
+        });
+    };
+
+    const onDeleteAccount = (account) => {
+        return deleteAccount({
+            variables: {
+                input: {
+                    accountId: account.id,
+                },
+            },
         });
     };
 
@@ -143,7 +156,7 @@ const WalletPage = () => {
                                 accounts={accounts}
                                 onCreateTransfer={(account) => {}}
                                 onAddAccount={ready ? open : () => {}}
-                                onUnlinkAccount={() => {}}
+                                onUnlinkAccount={onDeleteAccount}
                                 addAccountDisabled={
                                     accountsLoading ||
                                     createLinkTokenLoading ||
