@@ -22,6 +22,7 @@ const WalletPage = () => {
         useCreateAccount,
         useDeleteAccount,
     } = useAccount();
+
     const {useRecentTransfers, useCreateTransfer} = useTransfer();
     const contentRefs = useRef([]);
     const [tokenRequested, setTokenRequested] = useState(false);

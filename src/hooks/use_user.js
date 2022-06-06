@@ -42,6 +42,20 @@ export const useProvideUser = () => {
         }
     `;
 
+    const USER_FACILITIES_QUERY = gql`
+        query UserFacilities {
+            userFacilities {
+                id
+                name
+                address {
+                    streetAddress
+                    city
+                    state
+                }
+            }
+        }
+    `;
+
     const MUTATE_USER = gql`
         mutation Mutation($input: UpdateUserInput!) {
             updateUser(input: $input) {
@@ -152,6 +166,16 @@ export const useProvideUser = () => {
         };
     };
 
+    const useGetUserFacilities = () => {
+        const {loading, error, data} = useQuery(USER_FACILITIES_QUERY);
+
+        return {
+            facilities: data?.userFacilities,
+            loading,
+            error,
+        };
+    };
+
     return {
         useGetUserStatus,
         useSetUser,
@@ -159,6 +183,6 @@ export const useProvideUser = () => {
         useGetUserAcceptance,
         useGetUserAccreditation,
         useUserMetaData,
-        // createUserTransfer: createUserTransfer,
+        useGetUserFacilities,
     };
 };
