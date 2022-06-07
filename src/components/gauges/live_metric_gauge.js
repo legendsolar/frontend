@@ -132,7 +132,7 @@ const GenerationGauge = ({max, currentValue_unit}) => {
     const factor = 0.1;
     const unitOpts = {
         unit: 'KW',
-        unitDescription: 'KILOWATTS',
+        unitDescription: 'Kilowatts',
         title: 'Generation',
         strokeColor: 'pencilYellow',
     };
