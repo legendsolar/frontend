@@ -1,19 +1,20 @@
 import {createTheme} from '@mui/material/styles';
 import {deepmerge} from '@mui/utils';
+import {
+    legendaryGreen,
+    whiteHaze,
+    whiteFog,
+    blackDawn,
+    blackDusk,
+    skyBlue,
+    grassGreen,
+    pencilYellow,
+    eraserRed,
+} from 'static_data/colors';
 
 /**
  * Named Colors
  */
-
-const legendaryGreen = '#345D34';
-const whiteHaze = '#F4F5F5';
-const whiteFog = '#EBEBEB';
-const blackDusk = '#2D3436';
-const blackDawn = '#636E72';
-const skyBlue = '#477FB2';
-const grassGreen = '#30A462';
-const pencilYellow = '#EAB31E';
-const eraserRed = '#B4615F';
 
 const spacing = (s) => `${s * 5}px`;
 
