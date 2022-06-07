@@ -27,7 +27,7 @@ const AccountSummarySidebar = ({
                         {panelCount} Panels
                     </Typography>
 
-                    <Typography variant="subtitle1">{kwTotal} Kw</Typography>
+                    <Typography variant="subtitle1">⚡{kwTotal} Kw</Typography>
                 </Stack>
 
                 <PanelsSvg color={panelColor}></PanelsSvg>
@@ -35,7 +35,7 @@ const AccountSummarySidebar = ({
                 <Stack direction="row" justifyContent="space-between">
                     <Stack>
                         <Typography variant="body1">${costPerPanel}</Typography>
-                        <Typography variant="label">per panel</Typography>
+                        <Typography variant="label">Cost per panel</Typography>
                     </Stack>
 
                     <Stack>
@@ -43,7 +43,7 @@ const AccountSummarySidebar = ({
                             ${totalInvestment}
                         </Typography>
                         <Typography variant="label">
-                            total investment
+                            Total investment
                         </Typography>
                     </Stack>
                 </Stack>

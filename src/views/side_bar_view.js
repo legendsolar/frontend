@@ -95,7 +95,7 @@ const SideBarView = ({
                         style={{
                             // should not be needed
                             paddingLeft: 0,
-                            paddingRight: 40,
+                            // paddingRight: 40,
                         }}
                         sx={{
                             height: 'max-content',
