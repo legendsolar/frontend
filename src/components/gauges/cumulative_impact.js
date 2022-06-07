@@ -20,12 +20,14 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
           };
 
     return (
-        <Box sx={{minWidth: 300, minHeight: 288}}>
-            <Stack
-                justifyContent="space-between"
-                spacing={1}
-                sx={{height: '100%'}}
-            >
+        <Box
+            sx={{
+                minWidth: 300,
+                minHeight: 288,
+                display: 'flex',
+            }}
+        >
+            <Stack justifyContent="space-between" spacing={1} width={'100%'}>
                 <Stack direction="row" justifyContent={'space-between'}>
                     <Typography variant="smallHeadline">
                         {unitOpts.title}

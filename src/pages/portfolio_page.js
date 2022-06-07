@@ -44,7 +44,7 @@ const PortfolioPage = () => {
         error: dataError,
     } = useGetFacilityDataByDate({
         facilityId: 'umUfn1aQ6JYFJktF6wSMk',
-        startDate: subDays(loadDate, 4),
+        startDate: subDays(loadDate, 6),
         endDate: loadDate,
     });
 
