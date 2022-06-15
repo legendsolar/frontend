@@ -62,7 +62,7 @@ const PortfolioPage = () => {
         return (
             <SideBarNavView
                 drawer={<AccountSummarySidebar></AccountSummarySidebar>}
-                mainContent={<PortfolioPage></PortfolioPage>}
+                mainContent={<div></div>}
             ></SideBarNavView>
         );
     }
@@ -74,7 +74,7 @@ const PortfolioPage = () => {
                     panelCount={'10'}
                     costPerPanel={'750'}
                     totalInvestment={'7500'}
-                    kwTotal={'10'}
+                    kwTotal={'3.7'}
                 ></AccountSummarySidebar>
             }
             mainContent={

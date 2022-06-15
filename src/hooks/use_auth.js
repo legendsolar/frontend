@@ -21,7 +21,7 @@ import {GoogleAuthProvider} from 'firebase/auth';
 import {setContext} from '@apollo/client/link/context';
 import settings from 'app_settings';
 import {authErrorHandler} from 'utils/auth_error_translator';
-import {throwValidationError} from 'utils/errors';
+import {ErrorTypes, throwValidationError} from 'utils/errors';
 import {useApolloClient} from '@apollo/client';
 
 const authContext = createContext();
@@ -212,7 +212,17 @@ function useProvideAuth() {
         return multiFactorUser
             .enroll(multiFactorAssertion, 'phone number')
             .catch((error) => {
-                throwValidationError(authErrorHandler(error));
+                try {
+                    authErrorHandler(error);
+                } catch (error) {
+                    if (error.type === ErrorTypes.NewLogInRequired) {
+                        // Sign the user out in 5s
+                        setTimeout(() => signout(), 5000);
+                        throw error;
+                    } else {
+                        throw error;
+                    }
+                }
             });
     };
 
@@ -223,9 +233,25 @@ function useProvideAuth() {
         );
         const multiFactorAssertion =
             PhoneMultiFactorGenerator.assertion(phoneAuthCredential);
-        return resolver.resolveSignIn(multiFactorAssertion).then(() => {
-            onSuccesfulSignIn();
-        });
+        return resolver
+            .resolveSignIn(multiFactorAssertion)
+            .then(() => {
+                onSuccesfulSignIn();
+            })
+            .catch((error) => {
+                try {
+                    authErrorHandler(error);
+                } catch (error) {
+                    if (error.type === ErrorTypes.NewLogInRequired) {
+                        // Sign the user out in 5s
+                        setTimeout(() => signout(), 5000);
+
+                        throw error;
+                    } else {
+                        throw error;
+                    }
+                }
+            });
     };
 
     // Subscribe to user on mount

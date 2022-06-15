@@ -2,6 +2,7 @@ export const ErrorTypes = {
     ValidationError: 'ValidationError',
     SystemError: 'SystemError',
     MfaRequiredError: 'MfaRequiredError',
+    NewLogInRequired: 'NewLogInRequired',
     DwollaError: 'DwollaError',
     AuthenticationError: 'AuthenticationError',
 };
@@ -33,6 +34,14 @@ export const throwMfaRequiredError = (error, resolver) => {
         source: 'mfa',
         message: error.message,
         resolver,
+    };
+};
+
+export const throwNewLogInRequired = (error) => {
+    throw {
+        type: ErrorTypes.NewLogInRequired,
+        source: error.source,
+        message: error.message,
     };
 };
 

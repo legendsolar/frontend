@@ -26,12 +26,18 @@ import {throwAuthenticationError, throwSystemError} from 'utils/errors.js';
 if (appSettings.sentry.enabled)
     Sentry.init({
         dsn: 'https://befcf88557b54a7c939b8fdacec0cc62@o1127533.ingest.sentry.io/6169541',
-        integrations: [new Integrations.BrowserTracing()],
-
+        integrations: [
+            new Integrations.BrowserTracing(),
+            new Sentry.Integrations.UserAgent(),
+            new Sentry.Integrations.TryCatch(),
+        ],
         // Set tracesSampleRate to 1.0 to capture 100%
         // of transactions for performance monitoring.
         // We recommend adjusting this value in production
         tracesSampleRate: appSettings.sentry.sampleRate,
+        debug: true,
+        attachStacktrace: true,
+        autoSessionTracking: true,
     });
 
 if (appSettings.fullStory.enabled) {

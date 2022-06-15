@@ -30,6 +30,10 @@ const useFacilities = () => {
             },
         );
 
+        if (data) {
+            console.log({data});
+        }
+
         return {
             data: data?.facilityGenerationByDate,
             loading,

@@ -1,5 +1,6 @@
 import {
     throwMfaRequiredError,
+    throwNewLogInRequired,
     throwSystemError,
     throwValidationError,
 } from './errors';
@@ -64,6 +65,13 @@ export const authErrorHandler = (error) => {
             throwMfaRequiredError({
                 message: 'Multi factor authentication required',
                 resolver: error.resolver,
+            });
+
+        case 'auth/requires-recent-login':
+            throwNewLogInRequired({
+                source: 'code',
+                message:
+                    "You're required to log out to complete this operation",
             });
 
         /** THESE CASES BELOW SHOULD NOT HAPPEN IN NORMAL OPERATION */
