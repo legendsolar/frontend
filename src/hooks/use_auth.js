@@ -164,6 +164,20 @@ function useProvideAuth() {
         return captcha;
     };
 
+    const handleMfaError = (error) => {
+        try {
+            authErrorHandler(error);
+        } catch (error) {
+            if (error.type === ErrorTypes.NewLogInRequired) {
+                // Sign the user out in 5s
+                setTimeout(() => signout(), 5000);
+                throw error;
+            } else {
+                throw error;
+            }
+        }
+    };
+
     const enrollUserMfa = (phoneNumber, recaptchaVerifier) => {
         const multiFactorUser = multiFactor(user);
         multiFactorUser.getSession().then((multiFactorSession) => {
@@ -175,7 +189,10 @@ function useProvideAuth() {
 
             return phoneAuthProvider
                 .verifyPhoneNumber(phoneInfoOptions, recaptchaVerifier)
-                .then((id) => setCaptchaVerificationId(id));
+                .then((id) => setCaptchaVerificationId(id))
+                .catch((error) => {
+                    handleMfaError(error);
+                });
         });
     };
 
@@ -193,17 +210,7 @@ function useProvideAuth() {
         return phoneAuthProvider
             .verifyPhoneNumber(phoneInfoOptions, recaptchaVerifier)
             .catch((error) => {
-                try {
-                    authErrorHandler(error);
-                } catch (error) {
-                    if (error.type === ErrorTypes.NewLogInRequired) {
-                        // Sign the user out in 5s
-                        setTimeout(() => signout(), 5000);
-                        throw error;
-                    } else {
-                        throw error;
-                    }
-                }
+                handleMfaError(error);
             });
     };
 
@@ -223,17 +230,7 @@ function useProvideAuth() {
         return multiFactorUser
             .enroll(multiFactorAssertion, 'phone number')
             .catch((error) => {
-                try {
-                    authErrorHandler(error);
-                } catch (error) {
-                    if (error.type === ErrorTypes.NewLogInRequired) {
-                        // Sign the user out in 5s
-                        setTimeout(() => signout(), 5000);
-                        throw error;
-                    } else {
-                        throw error;
-                    }
-                }
+                handleMfaError(error);
             });
     };
 
@@ -250,18 +247,7 @@ function useProvideAuth() {
                 onSuccesfulSignIn();
             })
             .catch((error) => {
-                try {
-                    authErrorHandler(error);
-                } catch (error) {
-                    if (error.type === ErrorTypes.NewLogInRequired) {
-                        // Sign the user out in 5s
-                        setTimeout(() => signout(), 5000);
-
-                        throw error;
-                    } else {
-                        throw error;
-                    }
-                }
+                handleMfaError(error);
             });
     };
 
