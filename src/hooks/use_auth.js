@@ -190,10 +190,21 @@ function useProvideAuth() {
         var phoneAuthProvider = new PhoneAuthProvider(auth);
         // Send SMS verification code.
         // TODO errors in this are silent
-        return phoneAuthProvider.verifyPhoneNumber(
-            phoneInfoOptions,
-            recaptchaVerifier,
-        );
+        return phoneAuthProvider
+            .verifyPhoneNumber(phoneInfoOptions, recaptchaVerifier)
+            .catch((error) => {
+                try {
+                    authErrorHandler(error);
+                } catch (error) {
+                    if (error.type === ErrorTypes.NewLogInRequired) {
+                        // Sign the user out in 5s
+                        setTimeout(() => signout(), 5000);
+                        throw error;
+                    } else {
+                        throw error;
+                    }
+                }
+            });
     };
 
     const enrollWithMfaCode = async (code) => {
