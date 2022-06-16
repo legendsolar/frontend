@@ -40,7 +40,10 @@ const MfaCreationComponent = ({
             transformedValues.phone = transformPhoneNumber(values.phone);
             onSendCode(transformedValues)
                 .catch((error) => {
-                    if (error.type === ErrorTypes.ValidationError) {
+                    if (
+                        error.type === ErrorTypes.ValidationError ||
+                        error.type === ErrorTypes.NewLogInRequired
+                    ) {
                         setErrors({
                             [error.source]: error.message,
                         });
@@ -57,7 +60,10 @@ const MfaCreationComponent = ({
         }),
         onSubmit: async (values, {setErrors}) => {
             onSubmit(values).catch((error) => {
-                if (error.type === ErrorTypes.ValidationError) {
+                if (
+                    error.type === ErrorTypes.ValidationError ||
+                    error.type === ErrorTypes.NewLogInRequired
+                ) {
                     setErrors({
                         [error.source]: error.message,
                     });
