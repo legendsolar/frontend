@@ -82,6 +82,17 @@ export const useProvideUser = () => {
         }
     `;
 
+    const CREATE_NEW_USER = gql`
+        mutation Mutation {
+            createUser {
+                user {
+                    id
+                    status
+                }
+            }
+        }
+    `;
+
     const CREATE_USER_TRANSFER = gql`
         mutation CreateTransfer($input: CreateTransferInput!) {
             createTransfer(input: $input) {
@@ -131,6 +142,18 @@ export const useProvideUser = () => {
         return useMutation(MUTATE_USER);
     };
 
+    const useCreateNewUser = () => {
+        const [createNewUser, {data, loading, error}] =
+            useMutation(CREATE_NEW_USER);
+
+        return {
+            createNewUser,
+            data,
+            loading,
+            error,
+        };
+    };
+
     const useCreateDwollaAccount = () => {
         const [createDwollaAccount, {data, loading, error}] = useMutation(
             CREATE_DWOLLA_ACCOUNT,
@@ -177,6 +200,7 @@ export const useProvideUser = () => {
     };
 
     return {
+        useCreateNewUser,
         useGetUserStatus,
         useSetUser,
         useCreateDwollaAccount,

@@ -26,6 +26,14 @@ const useSignIn = () => {
         validateMfaCode,
     } = useAuth();
 
+    const {useCreateNewUser} = useUser();
+
+    const {createNewUser} = useCreateNewUser();
+
+    const onNewUserCreated = () => {
+        createNewUser();
+    };
+
     const onSuccesfulSignIn = () => {
         navigate('/');
     };
@@ -53,9 +61,11 @@ const useSignIn = () => {
     };
 
     const onCreateAccountSubmit = async (values) => {
-        return signup(values.email, values.password).catch((error) =>
-            authErrorHandler(error),
-        );
+        return signup(values.email, values.password)
+            .catch((error) => authErrorHandler(error))
+            .then(() => {
+                onNewUserCreated();
+            });
     };
 
     const onCreateNewAccount = () => {
@@ -90,7 +100,11 @@ const useSignIn = () => {
         );
     };
 
-    const onSignUpWithGoogle = onSignInWithGoogle;
+    const onSignUpWithGoogle = async () => {
+        onSignInWithGoogle().then(() => {
+            onNewUserCreated();
+        });
+    };
 
     return {
         state,

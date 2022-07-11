@@ -22,6 +22,7 @@ import {createHttpLink} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
 import {getAuth} from 'firebase/auth';
 import {throwAuthenticationError, throwSystemError} from 'utils/errors.js';
+import {v4} from 'uuid';
 
 if (appSettings.sentry.enabled)
     Sentry.init({
@@ -56,21 +57,10 @@ const httpLink = createHttpLink({
     uri: process.env.REACT_APP_GRAPH_QL_SERVER_URL,
 });
 
+const sessionId = v4();
+
 const getUserSessionId = () => {
-    try {
-        const sessionUrl = LogRocket.sessionURL;
-
-        const sessionId = sessionUrl
-            ? new URL(sessionUrl).pathname.split('/').pop()
-            : null;
-
-        return sessionId;
-    } catch (error) {
-        console.warn({
-            message: 'Cannot obtain user session id, session id will be null',
-        });
-        return null;
-    }
+    return sessionId;
 };
 
 const authLink = setContext(async (_, {headers}) => {
@@ -91,7 +81,7 @@ const authLink = setContext(async (_, {headers}) => {
         headers: {
             ...headers,
             authorization: token ? `Bearer ${token}` : '',
-            sessionId: getUserSessionId(),
+            ['session-id']: getUserSessionId(),
         },
     };
 });

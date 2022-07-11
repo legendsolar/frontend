@@ -2,16 +2,8 @@ import {useQuery, gql, useMutation} from '@apollo/client';
 
 const useFacilities = () => {
     const GET_FACILITY_DATA_BY_DATE = gql`
-        query UserFacilities(
-            $id: String!
-            $start_ms: String!
-            $end_ms: String!
-        ) {
-            facilityGenerationByDate(
-                id: $id
-                start_ms: $start_ms
-                end_ms: $end_ms
-            ) {
+        query UserFacilities($id: String!, $start: String!, $end: String!) {
+            facilityGenerationByDate(id: $id, start: $start, end: $end) {
                 time
                 wattage
             }
@@ -24,8 +16,8 @@ const useFacilities = () => {
             {
                 variables: {
                     id: facilityId,
-                    start_ms: startDate.toISOString(),
-                    end_ms: endDate.toISOString(),
+                    start: startDate.toISOString(),
+                    end: endDate.toISOString(),
                 },
             },
         );
