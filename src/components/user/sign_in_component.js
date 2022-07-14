@@ -45,6 +45,13 @@ const SignInComponent = ({
             <form onSubmit={formik.handleSubmit}>
                 <Stack spacing={4}>
                     <Typography variant="subtitle1">Login</Typography>
+                    <Typography variant="label">
+                        Legends Solar is currently in closed beta. Please{' '}
+                        <a href={'https://www.legends.solar/get-early-access'}>
+                            join our waitlist
+                        </a>{' '}
+                        to reserve your place when we launch.
+                    </Typography>
                     <IconButton
                         label="Sign in with Google"
                         color="whiteHaze"
