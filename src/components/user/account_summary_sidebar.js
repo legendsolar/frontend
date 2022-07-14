@@ -7,6 +7,8 @@ import DefaultComponent from 'components/utils/default_component';
 import PropTypes from 'prop-types';
 
 const AccountSummarySidebar = ({
+    name,
+    subtitle,
     panelCount,
     costPerPanel,
     totalInvestment,
@@ -16,12 +18,14 @@ const AccountSummarySidebar = ({
 
     const panelColor = theme.palette.skyBlue.main;
 
-    const panels = Math.floor(Math.random() * 10 + 10);
-    const kw_panel = 0.5;
-
     return (
         <DefaultComponent>
             <Stack sx={{p: 2}}>
+                <Stack spacing={0}>
+                    <Typography variant="headline2">{name}</Typography>
+                    <Typography variant="label">{subtitle}</Typography>
+                </Stack>
+
                 <Stack direction="row" justifyContent="space-between">
                     <Typography variant="subtitle1">
                         {panelCount} Panels
@@ -57,6 +61,8 @@ AccountSummarySidebar.propTypes = {
     costPerPanel: PropTypes.number,
     totalInvestment: PropTypes.number,
     kwTotal: PropTypes.number,
+    name: PropTypes.string,
+    subtitle: PropTypes.string,
 };
 
 AccountSummarySidebar.defaultProps = {
@@ -64,6 +70,8 @@ AccountSummarySidebar.defaultProps = {
     costPerPanel: '-',
     totalInvestment: '-',
     kwTotal: '-',
+    name: 'Solar Investment',
+    subtitle: null,
 };
 
 export default AccountSummarySidebar;

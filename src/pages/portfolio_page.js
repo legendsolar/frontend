@@ -61,6 +61,9 @@ const PortfolioPage = () => {
     const co2_per_kW = facility.generationMetaData.co2_per_kW;
     const current_kW = mostRecentDatum.wattage / 1000;
 
+    const name = facility.name;
+    const subtitle = `${facility.address.city}, ${facility.address.state}`;
+
     if (!userHasFacilities) {
         return (
             <SideBarNavView
@@ -74,10 +77,12 @@ const PortfolioPage = () => {
         <SideBarNavView
             drawer={
                 <AccountSummarySidebar
-                    panelCount={'10'}
-                    costPerPanel={'750'}
-                    totalInvestment={'7500'}
-                    kwTotal={'3.7'}
+                    name={name}
+                    subtitle={subtitle}
+                    panelCount={'25'}
+                    costPerPanel={'800'}
+                    totalInvestment={'20,000'}
+                    kwTotal={facilityMax_kW.toFixed(1)}
                 ></AccountSummarySidebar>
             }
             mainContent={
