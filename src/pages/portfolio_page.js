@@ -27,6 +27,7 @@ import {
 } from 'components/gauges/live_cumulative_impact';
 import MetricList from 'components/summary/metric_list';
 import MetricListComponent from 'components/summary/metric_list_component';
+import {multiplyObject} from 'utils/object_utils';
 
 const PortfolioPage = () => {
     const {useGetUserFacilities} = useUser();
@@ -63,6 +64,13 @@ const PortfolioPage = () => {
 
     const name = facility.name;
     const subtitle = `${facility.address.city}, ${facility.address.state}`;
+
+    const cumulativeData = {
+        day: facility?.summary.day,
+        week: facility?.summary.weekToDate,
+        month: facility?.summary.monthToDate,
+        year: facility?.summary.yearToDate,
+    };
 
     if (!userHasFacilities) {
         return (
@@ -110,12 +118,10 @@ const PortfolioPage = () => {
                                     <DefaultComponent>
                                         <EarningsCumulativeImpact
                                             live={true}
-                                            cumulativeData={{
-                                                day: 0.37,
-                                                week: 1.85,
-                                                month: 55.5,
-                                                year: 670,
-                                            }}
+                                            cumulativeData={multiplyObject(
+                                                cumulativeData,
+                                                dollar_per_kW,
+                                            )}
                                         ></EarningsCumulativeImpact>
                                     </DefaultComponent>
 
@@ -130,12 +136,17 @@ const PortfolioPage = () => {
 
                                                 {
                                                     metric: 'Make & Model',
-                                                    value: 'Panasonic Evervolt',
+                                                    value: facility
+                                                        ?.generationMetaData
+                                                        ?.make,
                                                 },
 
                                                 {
                                                     metric: 'Installed Capacity',
-                                                    value: '3.7kW',
+                                                    value:
+                                                        facilityMax_kW.toFixed(
+                                                            1,
+                                                        ) + 'kW',
                                                 },
                                             ]}
                                         ></MetricListComponent>
@@ -153,12 +164,7 @@ const PortfolioPage = () => {
                                     <DefaultComponent>
                                         <GenerationCumulativeImpact
                                             live={true}
-                                            cumulativeData={{
-                                                day: 20,
-                                                week: 20 * 7,
-                                                month: 560,
-                                                year: 7890,
-                                            }}
+                                            cumulativeData={cumulativeData}
                                         ></GenerationCumulativeImpact>
                                     </DefaultComponent>
 
@@ -168,17 +174,22 @@ const PortfolioPage = () => {
                                             valuePairs={[
                                                 {
                                                     metric: 'PPA Offtaker Rate',
-                                                    value: '0.10 / kWh',
+                                                    value:
+                                                        dollar_per_kW.toFixed(
+                                                            2,
+                                                        ) + ' / kWh',
                                                 },
 
                                                 {
                                                     metric: 'PPA Duration',
-                                                    value: '7 years',
+                                                    value: facility?.economics
+                                                        .ppaDuration,
                                                 },
 
                                                 {
                                                     metric: 'Lease Remaining',
-                                                    value: '7 years',
+                                                    value: facility.economics
+                                                        .leaseRemaining,
                                                 },
                                             ]}
                                         ></MetricListComponent>
@@ -209,12 +220,10 @@ const PortfolioPage = () => {
                                     <DefaultComponent>
                                         <CarbonCumulativeImpact
                                             live={true}
-                                            cumulativeData={{
-                                                day: 15.43,
-                                                week: 15.76 * 7,
-                                                month: 471.66,
-                                                year: 5663.9,
-                                            }}
+                                            cumulativeData={multiplyObject(
+                                                cumulativeData,
+                                                co2_per_kW,
+                                            )}
                                         ></CarbonCumulativeImpact>
                                     </DefaultComponent>
 
@@ -233,17 +242,22 @@ const PortfolioPage = () => {
                                             valuePairs={[
                                                 {
                                                     metric: 'Uptime',
-                                                    value: '99%',
+                                                    value: facility?.summary
+                                                        .uptime_percentage,
                                                 },
 
                                                 {
                                                     metric: 'Performance Ratio',
-                                                    value: '14.3',
+                                                    value: facility?.summary
+                                                        .performance_ratio,
                                                 },
 
                                                 {
                                                     metric: 'Total Generation To Date',
-                                                    value: '5024 kWh',
+                                                    value:
+                                                        facility?.summary.totalGeneration_kW.toFixed(
+                                                            0,
+                                                        ) + ' kW',
                                                 },
                                             ]}
                                         ></MetricListComponent>

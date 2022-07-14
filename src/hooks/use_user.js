@@ -57,6 +57,23 @@ export const useProvideUser = () => {
                     max_kW
                     dollar_per_kW
                     co2_per_kW
+                    make
+                }
+                summary {
+                    totalGeneration_kW
+                    pastYearGeneration_kW
+                    pastMonthGeneration_kW
+                    twentyFourHourGeneration_kW
+                    yearToDate
+                    monthToDate
+                    weekToDate
+                    day
+                    uptime_percentage
+                    performance_ratio
+                }
+                economics {
+                    ppaDuration
+                    leaseRemaining
                 }
             }
         }
