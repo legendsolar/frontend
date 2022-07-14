@@ -102,6 +102,7 @@ function useProvideAuth() {
 
     const signout = () => {
         setIsAuthenticating(true);
+
         return signOut(auth)
             .then(() => {
                 setUser(null);
@@ -170,7 +171,13 @@ function useProvideAuth() {
         } catch (error) {
             if (error.type === ErrorTypes.NewLogInRequired) {
                 // Sign the user out in 5s
-                setTimeout(() => signout(), 5000);
+                setTimeout(
+                    () => {
+                        signout();
+                    },
+
+                    5000,
+                );
                 throw error;
             } else {
                 throw error;

@@ -18,8 +18,8 @@ import {
 import {ErrorTypes} from 'utils/errors';
 import {useEffect} from 'react';
 import {useFormik} from 'formik';
+import {useNavigate} from 'react-router-dom';
 import * as yup from 'yup';
-import {transformPhoneNumber} from 'transformers/user_input_transformers';
 
 const MfaVerifyComponent = ({
     initialCodeValues,
@@ -28,6 +28,8 @@ const MfaVerifyComponent = ({
     codeSent,
 }) => {
     const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
 
     const codeForm = useFormik({
         initialValues: initialCodeValues,
@@ -44,6 +46,10 @@ const MfaVerifyComponent = ({
 
                 if (error.type == ErrorTypes.SystemError) {
                     setError(error.message);
+                }
+
+                if (error.type === ErrorTypes.NewLogInRequired) {
+                    navigate('/signIn');
                 }
             });
         },

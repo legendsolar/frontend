@@ -114,7 +114,7 @@ function MetricGauge({
                     <Typography variant="label">
                         {error
                             ? `${unitOpts.unit}-`
-                            : `${min} ${unitOpts.unit}`}
+                            : `${min.toFixed(2)} ${unitOpts.unit}`}
                     </Typography>
 
                     <Typography variant="body1">
@@ -124,7 +124,7 @@ function MetricGauge({
                     <Typography variant="label">
                         {error
                             ? `${unitOpts.unit}-`
-                            : `${max} ${unitOpts.unit}`}
+                            : `${max.toFixed(2)} ${unitOpts.unit}`}
                     </Typography>
                 </Stack>
 

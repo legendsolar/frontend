@@ -47,10 +47,16 @@ export const useProvideUser = () => {
             userFacilities {
                 id
                 name
+                created
                 address {
                     streetAddress
                     city
                     state
+                }
+                generationMetaData {
+                    max_kW
+                    dollar_per_kW
+                    co2_per_kW
                 }
             }
         }

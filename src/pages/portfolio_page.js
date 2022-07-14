@@ -36,14 +36,14 @@ const PortfolioPage = () => {
 
     const {facilities, loading, error} = useGetUserFacilities();
 
-    console.log(loadDate);
+    const facility = facilities ? facilities[0] : null;
 
     const {
         data,
         loading: dataLoading,
         error: dataError,
     } = useGetFacilityDataByDate({
-        facilityId: 'umUfn1aQ6JYFJktF6wSMk',
+        facilityId: 'qqWHzumNkaVmZEvGfZRnq3',
         startDate: subDays(loadDate, 6),
         endDate: loadDate,
     });
@@ -56,7 +56,10 @@ const PortfolioPage = () => {
 
     const mostRecentDatum = data ? data[data.length - 1] : undefined;
 
-    console.log({mostRecentDatum});
+    const facilityMax_kW = facility.generationMetaData.max_kW;
+    const dollar_per_kW = facility.generationMetaData.dollar_per_kW;
+    const co2_per_kW = facility.generationMetaData.co2_per_kW;
+    const current_kW = mostRecentDatum.wattage / 1000;
 
     if (!userHasFacilities) {
         return (
@@ -135,8 +138,10 @@ const PortfolioPage = () => {
 
                                     <DefaultComponent>
                                         <EarningsGauge
-                                            max={0.5}
-                                            currentValue_unit={0.21}
+                                            max={facilityMax_kW * dollar_per_kW}
+                                            currentValue_unit={
+                                                current_kW * dollar_per_kW
+                                            }
                                         ></EarningsGauge>
                                     </DefaultComponent>
 
@@ -180,8 +185,10 @@ const PortfolioPage = () => {
                                 <Stack spacing={4}>
                                     <DefaultComponent>
                                         <CarbonGauge
-                                            max={5}
-                                            currentValue_unit={2.15}
+                                            max={facilityMax_kW * co2_per_kW}
+                                            currentValue_unit={
+                                                current_kW * co2_per_kW
+                                            }
                                         ></CarbonGauge>
                                     </DefaultComponent>
 
@@ -208,8 +215,10 @@ const PortfolioPage = () => {
 
                                     <DefaultComponent>
                                         <GenerationGauge
-                                            max={4}
-                                            currentValue_unit={1.7}
+                                            max={facilityMax_kW}
+                                            currentValue_unit={
+                                                mostRecentDatum.wattage / 1000
+                                            }
                                         ></GenerationGauge>
                                     </DefaultComponent>
 
