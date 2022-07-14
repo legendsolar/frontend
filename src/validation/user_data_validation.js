@@ -103,3 +103,7 @@ export const validateYear = () => {
 export const validateMfaVerifyCode = () => {
     return yup.string().required('Verification code required');
 };
+
+export const validateAccessPhrase = () => {
+    return yup.string().required('Access phrase required');
+};
