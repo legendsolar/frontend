@@ -9,7 +9,7 @@ const LoggedOutToolbar = ({}) => {
             <Button
                 variant="header"
                 color="dark"
-                onClick={() => navigateTo('')}
+                href={'https://www.legends.solar/how-it-works'}
             >
                 <Typography variant="appBarHeader">How it works</Typography>
             </Button>
@@ -17,7 +17,8 @@ const LoggedOutToolbar = ({}) => {
             <Button
                 variant="header"
                 color="dark"
-                onClick={() => navigateTo('')}
+                href={'https://www.legends.solar/legal/privacy-policy'}
+                disabled={true}
             >
                 <Typography variant="appBarHeader">Availability</Typography>
             </Button>
@@ -25,7 +26,7 @@ const LoggedOutToolbar = ({}) => {
             <Button
                 variant="header"
                 color="dark"
-                onClick={() => navigateTo('')}
+                href={'https://www.legends.solar/about-us'}
             >
                 <Typography variant="appBarHeader">About Us</Typography>
             </Button>
@@ -33,7 +34,7 @@ const LoggedOutToolbar = ({}) => {
             <Button
                 variant="header"
                 color="dark"
-                onClick={() => navigateTo('')}
+                href={'https://www.legends.solar/faqs'}
             >
                 <Typography variant="appBarHeader">FAQS</Typography>
             </Button>
@@ -44,7 +45,7 @@ const LoggedOutToolbar = ({}) => {
                     color: 'legendaryGreen.main',
                     border: '1px solid ' + theme.palette['legendaryGreen'].main,
                 }}
-                onClick={() => navigateTo('')}
+                onClick={() => navigateTo('/signin')}
             >
                 <Typography variant="appBarHeader">Login</Typography>
             </Button>
@@ -52,7 +53,7 @@ const LoggedOutToolbar = ({}) => {
             <Button
                 variant="header-filled"
                 color="dark"
-                onClick={() => navigateTo('')}
+                onClick={() => navigateTo('/signin')}
             >
                 <Typography variant="appBarHeader">Get Started</Typography>
             </Button>
