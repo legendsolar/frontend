@@ -209,9 +209,16 @@ const PortfolioPage = () => {
                                     </DefaultComponent>
 
                                     <DefaultComponent>
-                                        <Typography variant="smallHeadline">
-                                            Dividends
-                                        </Typography>
+                                        <Stack spacing={1}>
+                                            <Typography variant="smallHeadline">
+                                                Dividend Summary
+                                            </Typography>
+                                            <Typography variant="label">
+                                                Dividends will be transfered to
+                                                your wallet on the first of
+                                                every month.
+                                            </Typography>
+                                        </Stack>
                                         <TransferGrid
                                             transfers={portfolioPageTransfers}
                                         ></TransferGrid>

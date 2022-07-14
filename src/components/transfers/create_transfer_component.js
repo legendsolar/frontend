@@ -97,7 +97,12 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
     if (state.page === 'setup') {
         return (
             <Stack spacing={2}>
-                <Typography variant="smallHeadline">Transfer Cash</Typography>
+                <Stack spacing={0}>
+                    <Typography variant="smallHeadline">
+                        Transfer Cash
+                    </Typography>
+                    <Typography variant="label">$2,000 maximum</Typography>
+                </Stack>
 
                 <TextField
                     name="amount"
