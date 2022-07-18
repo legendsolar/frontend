@@ -55,19 +55,19 @@ export const useProvideUser = () => {
                 }
                 generationMetaData {
                     max_kW
-                    dollar_per_kW
-                    co2_per_kW
+                    dollar_per_kWh
+                    co2_per_kWh
                     make
                 }
                 summary {
-                    totalGeneration_kW
-                    pastYearGeneration_kW
-                    pastMonthGeneration_kW
-                    twentyFourHourGeneration_kW
-                    yearToDate
-                    monthToDate
-                    weekToDate
-                    day
+                    totalGeneration_kWh
+                    pastYearGeneration_kWh
+                    pastMonthGeneration_kWh
+                    twentyFourHourGeneration_kWh
+                    yearToDate_kWh
+                    monthToDate_kWh
+                    pastWeek_kWh
+                    day_kWh
                     uptime_percentage
                     performance_ratio
                 }

@@ -57,19 +57,19 @@ const PortfolioPage = () => {
 
     const mostRecentDatum = data ? data[data.length - 1] : undefined;
 
-    const facilityMax_kW = facility.generationMetaData.max_kW;
-    const dollar_per_kW = facility.generationMetaData.dollar_per_kW;
-    const co2_per_kW = facility.generationMetaData.co2_per_kW;
-    const current_kW = mostRecentDatum.wattage / 1000;
+    const facilityMax_kW = facility?.generationMetaData?.max_kW;
+    const dollar_per_kW = facility?.generationMetaData?.dollar_per_kWh;
+    const co2_per_kW = facility?.generationMetaData?.co2_per_kWh;
+    const current_kW = mostRecentDatum?.wattage / 1000;
 
-    const name = facility.name;
-    const subtitle = `${facility.address.city}, ${facility.address.state}`;
+    const name = facility?.name;
+    const subtitle = `${facility?.address.city}, ${facility?.address.state}`;
 
     const cumulativeData = {
-        day: facility?.summary.day,
-        week: facility?.summary.weekToDate,
-        month: facility?.summary.monthToDate,
-        year: facility?.summary.yearToDate,
+        day: facility?.summary.day_kWh,
+        week: facility?.summary.pastWeek_kWh,
+        month: facility?.summary.monthToDate_kWh,
+        year: facility?.summary.yearToDate_kWh,
     };
 
     if (!userHasFacilities) {
@@ -262,7 +262,7 @@ const PortfolioPage = () => {
                                                 {
                                                     metric: 'Total Generation To Date',
                                                     value:
-                                                        facility?.summary.totalGeneration_kW.toFixed(
+                                                        facility?.summary.totalGeneration_kWh.toFixed(
                                                             0,
                                                         ) + ' kW',
                                                 },
