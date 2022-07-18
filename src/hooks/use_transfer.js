@@ -22,6 +22,31 @@ export const useTransfer = () => {
     return useContext(transferContext);
 };
 
+const createdDate = (created) => {
+    try {
+        return format(created, 'PP');
+    } catch {
+        const date = new Date(created);
+        return format(date, 'PP');
+    }
+};
+
+const transferTitle = (transfer) => {
+    if (transfer.type === 'DIVIDEND') {
+        return 'Dividend for ' + transfer.month;
+    } else {
+        return createdDate(transfer.created);
+    }
+};
+
+const transferSourceName = (transfer) => {
+    if (transfer.type === 'DIVIDEND') {
+        return transfer.facility.name;
+    } else {
+        return transfer.sourceAccount.name;
+    }
+};
+
 const transferTypeTransformer = (type) => {
     switch (type) {
         case 'DIVIDEND':
@@ -55,9 +80,9 @@ const transferColorTransformer = (status) => {
 const transferTransformer = (transfer) => {
     return {
         ...transfer,
-        title: transferTypeTransformer(transfer.type),
+        title: transferTitle(transfer),
         destinationName: transfer.destinationAccount.name,
-        sourceName: transfer.sourceAccount.name,
+        sourceName: transferSourceName(transfer),
         color: transferColorTransformer(transfer.status),
     };
 };
@@ -83,6 +108,10 @@ export const useProvideTransfer = () => {
                 }
                 amount
                 created
+                month
+                facility {
+                    name
+                }
             }
         }
     `;
@@ -111,6 +140,10 @@ export const useProvideTransfer = () => {
                 }
                 amount
                 created
+                month
+                facility {
+                    name
+                }
             }
         }
     `;
@@ -135,6 +168,10 @@ export const useProvideTransfer = () => {
                 }
                 amount
                 created
+                month
+                facility {
+                    name
+                }
             }
         }
     `;

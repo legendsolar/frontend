@@ -54,15 +54,6 @@ const TransferComponent = ({transfer}) => {
     const {title, color, status, destinationName, sourceName, amount, created} =
         transfer;
 
-    const createdDate = (created) => {
-        try {
-            return format(created, 'PP');
-        } catch {
-            const date = new Date(created);
-            return format(date, 'PP');
-        }
-    };
-
     const amountString = (amount) => {
         try {
             return '$' + amount.toFixed(2);
@@ -79,7 +70,7 @@ const TransferComponent = ({transfer}) => {
     return (
         <Container sx={{width: '100%', minWidth: '320px'}}>
             <Stack direction="row" justifyContent="space-between" sx={{m: 1}}>
-                <Typography variant="label">{createdDate(created)}</Typography>
+                <Typography variant="label">{title}</Typography>
 
                 <Typography variant="subtitle2">
                     {amountString(amount)}
