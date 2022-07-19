@@ -24,7 +24,7 @@ import {getAuth} from 'firebase/auth';
 import {throwAuthenticationError, throwSystemError} from 'utils/errors.js';
 import {v4} from 'uuid';
 
-if (appSettings.sentry.enabled)
+if (process.env.REACT_APP_SENTRY_ENABLED)
     Sentry.init({
         dsn: 'https://befcf88557b54a7c939b8fdacec0cc62@o1127533.ingest.sentry.io/6169541',
         integrations: [
@@ -41,13 +41,13 @@ if (appSettings.sentry.enabled)
         autoSessionTracking: true,
     });
 
-if (appSettings.fullStory.enabled) {
+if (process.env.REACT_APP_FULLSTORY_ENALBED) {
     FullStory.init({
         orgId: '18J59K',
     });
 }
 
-if (appSettings.logRocket.enabled) {
+if (process.env.REACT_APP_LOG_ROCKET_ENALBED) {
     LogRocket.init('d6ndfk/legends-alpha');
 }
 

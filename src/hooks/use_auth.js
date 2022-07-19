@@ -60,8 +60,6 @@ function useProvideAuth() {
     const [user, setUser] = useState(null);
     const [captchaVerificationId, setCaptchaVerificationId] = useState(null);
 
-    const apolloContext = setApolloContext(user);
-
     const [isAuthenticating, setIsAuthenticating] = useState(true);
 
     // Wrap any Firebase methods we want to use making sure ...

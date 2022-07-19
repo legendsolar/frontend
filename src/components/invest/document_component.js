@@ -4,7 +4,7 @@ import {useStorage} from 'reactfire';
 import {ref, getDownloadURL} from 'firebase/storage';
 import {useTheme} from '@mui/material';
 
-const DocumentComponent = ({documents, onDownloadAttempt}) => {
+const DocumentComponent = ({documents}) => {
     const theme = useTheme();
 
     const colorName = (documentObject) => {
@@ -17,26 +17,34 @@ const DocumentComponent = ({documents, onDownloadAttempt}) => {
                 <ListItemButton
                     sx={{ml: -4, mr: -4, height: '62px'}}
                     key={index}
-                    onClick={() => onDownloadAttempt(documentItem)}
                 >
-                    <Stack
-                        sx={{
-                            width: '100%',
-                        }}
-                        direction="row"
-                        justifyContent={'flex-start'}
+                    <a
+                        href={documentItem?.link ? documentItem.link : null}
+                        target="_blank"
+                        download
+                        style={{textDecoration: 'none'}}
                     >
-                        <DocumentIcon
-                            color={theme.palette[colorName(documentItem)].main}
-                            darkColor={
-                                theme.palette[colorName(documentItem)].dark
-                            }
-                            width={25}
-                        ></DocumentIcon>
-                        <Typography variant="subtitle1">
-                            {documentItem.title}
-                        </Typography>
-                    </Stack>
+                        <Stack
+                            sx={{
+                                width: '100%',
+                            }}
+                            direction="row"
+                            justifyContent={'flex-start'}
+                        >
+                            <DocumentIcon
+                                color={
+                                    theme.palette[colorName(documentItem)].main
+                                }
+                                darkColor={
+                                    theme.palette[colorName(documentItem)].dark
+                                }
+                                width={25}
+                            ></DocumentIcon>
+                            <Typography variant="subtitle1">
+                                {documentItem.title}
+                            </Typography>
+                        </Stack>
+                    </a>
                 </ListItemButton>
             ))}
         </List>

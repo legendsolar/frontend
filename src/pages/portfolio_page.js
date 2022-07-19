@@ -55,6 +55,15 @@ const PortfolioPage = () => {
         return <LoadingView></LoadingView>;
     }
 
+    if (!facility) {
+        return (
+            <SideBarNavView
+                drawer={<AccountSummarySidebar></AccountSummarySidebar>}
+                mainContent={<PortfolioPlaceholder></PortfolioPlaceholder>}
+            ></SideBarNavView>
+        );
+    }
+
     const mostRecentDatum = data ? data[data.length - 1] : undefined;
 
     const facilityMax_kW = facility?.generationMetaData?.max_kW;

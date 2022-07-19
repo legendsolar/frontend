@@ -27,7 +27,7 @@ const FirebaseInit = ({children}) => {
         connectAuthEmulator(auth, 'http://localhost:9099');
         connectDatabaseEmulator(database, 'localhost', 9000);
         connectFunctionsEmulator(functions, 'localhost', 5004);
-        connectStorageEmulator(storage, 'localhost', null);
+        connectStorageEmulator(storage, 'localhost', 9199);
     }
 
     return (
