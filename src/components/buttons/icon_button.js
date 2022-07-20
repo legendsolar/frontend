@@ -1,9 +1,10 @@
 import {Stack, Button, Typography} from '@mui/material/';
 
-const IconButton = ({label, onClick, icon, color}) => {
+const IconButton = ({label, onClick, icon, color, disabled}) => {
     return (
         <Button
             variant="secondary"
+            disabled={disabled}
             onClick={onClick}
             sx={{
                 backgroundColor: color + '.main',

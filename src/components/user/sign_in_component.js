@@ -52,18 +52,6 @@ const SignInComponent = ({
                         </a>{' '}
                         to reserve your place when we launch.
                     </Typography>
-                    <IconButton
-                        label="Sign in with Google"
-                        color="whiteHaze"
-                        icon={<GoogleLogo height={'64px'}></GoogleLogo>}
-                        onClick={onSignInWithGoogle}
-                    ></IconButton>
-
-                    <ContentDivider>
-                        <Typography align="center" variant="smallLabel">
-                            or
-                        </Typography>
-                    </ContentDivider>
 
                     <TextField
                         error={

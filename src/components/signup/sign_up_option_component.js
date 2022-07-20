@@ -13,17 +13,14 @@ const SignUpOptionComponent = ({
     <Box>
         <Stack spacing={4}>
             <Typography variant="subtitle1">Create Account</Typography>
-            <IconButton
-                label="Sign up with Google"
-                color="whiteHaze"
-                icon={<GoogleLogo height={'64px'}></GoogleLogo>}
-                onClick={onSignUpWithGoogle}
-            ></IconButton>
-            <ContentDivider>
-                <Typography align="center" variant="smallLabel">
-                    or
-                </Typography>
-            </ContentDivider>
+
+            <Typography variant="label">
+                Legends Solar is currently in closed beta. Please{' '}
+                <a href={'https://www.legends.solar/get-early-access'}>
+                    join our waitlist
+                </a>{' '}
+                to reserve your place when we launch.
+            </Typography>
 
             <IconButton
                 label="Sign up with email"
