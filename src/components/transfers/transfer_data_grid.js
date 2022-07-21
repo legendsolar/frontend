@@ -9,9 +9,7 @@ const columns = [
         width: 150,
         editable: false,
         valueFormatter: (params) => {
-            const dateInt = parseInt(params.value);
-            const formatted = format(new Date(dateInt), 'P');
-            return formatted;
+            return format(new Date(params.value), 'P');
         },
     },
     {
