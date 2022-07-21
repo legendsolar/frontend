@@ -1,8 +1,8 @@
-import {Grid, Typography, Paper} from '@mui/material';
+import {Grid, Typography, Paper, CircularProgress} from '@mui/material';
 import TransferComponent from 'components/transfers/transfer_component';
 import PropTypes from 'prop-types';
 
-const TransferGrid = ({transfers}) => {
+const TransferGrid = ({transfers, loading}) => {
     const emptyTransfers = !transfers || transfers.length === 0;
 
     return (
@@ -13,19 +13,23 @@ const TransferGrid = ({transfers}) => {
                 justifyContent="center"
                 alignItems="center"
             >
-                {!emptyTransfers ? (
-                    transfers.map((transfer) => {
-                        return (
-                            <Grid item s={6} key={transfer.id}>
-                                <TransferComponent
-                                    transfer={transfer}
-                                ></TransferComponent>
-                            </Grid>
-                        );
-                    })
-                ) : (
-                    <Typography>No transfers</Typography>
+                {loading && (
+                    <Grid item s={12}>
+                        <CircularProgress></CircularProgress>
+                    </Grid>
                 )}
+
+                {!emptyTransfers
+                    ? transfers.map((transfer) => {
+                          return (
+                              <Grid item s={6} key={transfer.id}>
+                                  <TransferComponent
+                                      transfer={transfer}
+                                  ></TransferComponent>
+                              </Grid>
+                          );
+                      })
+                    : !loading && <Typography>No transfers</Typography>}
             </Grid>
         </div>
     );
@@ -44,6 +48,7 @@ TransferGrid.propTypes = {
             created: PropTypes.string.isRequired,
         }),
     ),
+    loading: PropTypes.bool,
 };
 
 export default TransferGrid;

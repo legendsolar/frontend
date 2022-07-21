@@ -95,11 +95,10 @@ const TransactionPage = (props) => {
                         <Typography variant="smallHeadline">
                             Dividend Earnings
                         </Typography>
-                        {!dividendTransferLoading && (
-                            <TransferGrid
-                                transfers={dividendTransfers}
-                            ></TransferGrid>
-                        )}
+                        <TransferGrid
+                            transfers={dividendTransfers}
+                            loading={dividendTransferLoading}
+                        ></TransferGrid>
                     </DefaultComponent>
 
                     <DefaultComponent
@@ -108,11 +107,10 @@ const TransactionPage = (props) => {
                         <Typography variant="smallHeadline">
                             Bank Transfers
                         </Typography>
-                        {!transferTransferLoading && (
-                            <TransferGrid
-                                transfers={transferTransfers}
-                            ></TransferGrid>
-                        )}
+                        <TransferGrid
+                            transfers={transferTransfers}
+                            loading={transferTransferLoading}
+                        ></TransferGrid>
                     </DefaultComponent>
 
                     <DefaultComponent
@@ -121,11 +119,10 @@ const TransactionPage = (props) => {
                         <Typography variant="smallHeadline">
                             Investments
                         </Typography>
-                        {!investmentTransferLoading && (
-                            <TransferGrid
-                                transfers={investmentTransfers}
-                            ></TransferGrid>
-                        )}
+                        <TransferGrid
+                            transfers={investmentTransfers}
+                            loading={investmentTransferLoading}
+                        ></TransferGrid>
                     </DefaultComponent>
 
                     <DefaultComponent
@@ -134,6 +131,7 @@ const TransactionPage = (props) => {
                         {!recentTransfersLoading && (
                             <TransferDataGrid
                                 transfers={recentTransfers}
+                                loading={recentTransfersLoading}
                             ></TransferDataGrid>
                         )}
                     </DefaultComponent>

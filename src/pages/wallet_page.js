@@ -141,11 +141,10 @@ const WalletPage = () => {
                             Recent Transfers
                         </Typography>
 
-                        {!recentTransfersLoading && (
-                            <TransferGrid
-                                transfers={recentTransfers}
-                            ></TransferGrid>
-                        )}
+                        <TransferGrid
+                            transfers={recentTransfers}
+                            loading={recentTransfersLoading}
+                        ></TransferGrid>
                     </DefaultComponent>
 
                     <DefaultComponent
