@@ -6,6 +6,12 @@ import {
 } from './errors';
 
 export const authErrorHandler = (error) => {
+    if (error.code.includes('auth/blocking-function-error-response')) {
+        throwSystemError({
+            message: 'You are not allowed to create an account',
+        });
+    }
+
     switch (error.code) {
         case 'auth/invalid-email':
             throwValidationError({

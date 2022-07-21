@@ -69,7 +69,7 @@ const WalletPage = () => {
         return deleteAccount({
             variables: {
                 input: {
-                    accountId: account.id,
+                    accountId: account?.id,
                 },
             },
         });

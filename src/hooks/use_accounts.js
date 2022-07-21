@@ -91,7 +91,7 @@ export const useProvideAccount = () => {
         return {
             loading,
             error,
-            accounts: data?.userAccounts.map(accountTransformer),
+            accounts: data?.userAccounts?.map(accountTransformer),
         };
     };
 
@@ -198,7 +198,10 @@ export const useProvideAccount = () => {
 
             console.log({cacheData});
 
-            const accountList = cacheData ? cacheData[queryName] : [];
+            const accountList = cacheData[queryName]
+                ? cacheData[queryName]
+                : [];
+
             const updatedAccountList = [];
 
             updatedAccountList.push(newData, ...accountList);
@@ -225,7 +228,9 @@ export const useProvideAccount = () => {
                 variables: {...inputs},
             });
 
-            const accountList = cacheData ? cacheData[queryName] : [];
+            const accountList = cacheData[queryName]
+                ? cacheData[queryName]
+                : [];
 
             const updatedAccountList = accountList.filter(
                 (account) => account.id !== removeId,

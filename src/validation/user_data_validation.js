@@ -8,12 +8,14 @@ export const validateSSN = (fullSSNRequired = false) => {
             .string()
             .min(9, 'SSN is invalid')
             .max(9, 'SSN is invalid')
+            .matches(/^\d+$/, 'SSN is invalid')
             .required('SSN is required');
     } else {
         return yup
             .string()
             .min(4, 'SSN is invalid')
             .max(4, 'SSN is invalid')
+            .matches(/^\d+$/, 'SSN is invalid')
             .required('Last four digits of SSN are required');
     }
 };
@@ -21,8 +23,9 @@ export const validateSSN = (fullSSNRequired = false) => {
 export const validatePostalCode = () => {
     return yup
         .string()
-        .min(5, 'Postal code is invalid')
-        .required('Postal code is required');
+        .matches(/^\d+$/, 'Zip code invalid')
+        .min(5, 'Zip code invalid')
+        .required('Zip code is required');
 };
 
 export const validatePassword = (input) => {

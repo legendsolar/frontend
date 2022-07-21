@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import {
+    Alert,
     Grid,
     Box,
     TextField,
@@ -20,6 +21,7 @@ import {useState} from 'react';
 
 const SignUpComponent = ({initialValues, onSubmit}) => {
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const formik = useFormik({
         initialValues: initialValues,
@@ -29,17 +31,27 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
             accessPhrase: validateAccessPhrase(),
         }),
         onSubmit: async (values, {setErrors}) => {
-            onSubmit(values).catch((error) => {
-                if (error.type === ErrorTypes.ValidationError) {
-                    setErrors({
-                        [error.source]: error.message,
-                    });
-                }
+            setLoading(true);
+            onSubmit(values)
+                .catch((error) => {
+                    if (error.type === ErrorTypes.ValidationError) {
+                        setErrors({
+                            [error.source]: error.message,
+                        });
+                    }
 
-                if (error.type === ErrorTypes.SystemError) {
-                    setError(error.message);
-                }
-            });
+                    if (error.type === ErrorTypes.SystemError) {
+                        setError(error.message);
+                    }
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        },
+        onChange: () => {
+            if (error) {
+                setError(false);
+            }
         },
     });
 
@@ -128,26 +140,30 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
                     </Grid>
                 </Grid>
 
-                <Button
-                    variant="primary"
-                    onClick={formik.handleSubmit}
-                    disabled={
-                        formik.isValidating ||
+                <Stack>
+                    <Button
+                        variant="primary"
+                        onClick={formik.handleSubmit}
+                        disabled={
+                            formik.isValidating ||
+                            formik.isSubmitting ||
+                            !formik.dirty ||
+                            !formik.isValid
+                        }
+                        color="legendaryGreen"
+                        sx={{width: '100%', mt: 4}}
+                    >
+                        {formik.isValidating ||
                         formik.isSubmitting ||
-                        !formik.dirty ||
-                        !formik.isValid
-                    }
-                    color="legendaryGreen"
-                    sx={{width: '100%', mt: 4}}
-                >
-                    {formik.isValidating || formik.isSubmitting ? (
-                        <CircularProgress color="light"></CircularProgress>
-                    ) : (
-                        'Continue'
-                    )}
-                </Button>
+                        loading ? (
+                            <CircularProgress color="light"></CircularProgress>
+                        ) : (
+                            'Continue'
+                        )}
+                    </Button>
 
-                {error && <Alert severity="error">{error}</Alert>}
+                    {error && <Alert severity="error">{error}</Alert>}
+                </Stack>
             </form>
         </Box>
     );

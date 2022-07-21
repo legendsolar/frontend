@@ -53,8 +53,8 @@ const CompleteAccountPage = () => {
 
     const {onCreateAccountSubmit: onCreateAccount} = useSignIn();
 
-    const onCreateAccountSubmit = (values) => {
-        onCreateAccount(values).then(() => {
+    const onCreateAccountSubmit = async (values) => {
+        return onCreateAccount(values).then(() => {
             forceRefreshUserStatus();
         });
     };

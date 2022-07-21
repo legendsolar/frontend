@@ -3,7 +3,7 @@ import {
     constructQueryCacheKey,
     deconstructQueryCacheKey,
 } from './query_cache_utils';
-import {useAuth} from './use_auth';
+import {format} from 'date-fns';
 
 import {useQuery, gql, useMutation} from '@apollo/client';
 

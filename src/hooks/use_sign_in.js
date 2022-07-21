@@ -28,12 +28,6 @@ const useSignIn = () => {
 
     const {useCreateNewUser} = useUser();
 
-    const {createNewUser} = useCreateNewUser();
-
-    const onNewUserCreated = () => {
-        createNewUser();
-    };
-
     const onSuccesfulSignIn = () => {
         navigate('/');
     };
@@ -61,11 +55,9 @@ const useSignIn = () => {
     };
 
     const onCreateAccountSubmit = async (values) => {
-        return signup(values.email, values.password)
-            .catch((error) => authErrorHandler(error))
-            .then(() => {
-                onNewUserCreated();
-            });
+        return signup(values.email, values.password).catch((error) =>
+            authErrorHandler(error),
+        );
     };
 
     const onCreateNewAccount = () => {
