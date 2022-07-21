@@ -42,13 +42,6 @@ const AccreditationStatus = ({
             accredited: true,
             attribute: 'ENTITY_OWNER',
         },
-        NONE: {
-            title: 'None of the above',
-            description: 'I am not an accredited investor',
-            exclusive: true,
-            accredited: false,
-            attribute: 'NONE',
-        },
     });
 
     const [checkedList, setCheckedList] = useState(null);
