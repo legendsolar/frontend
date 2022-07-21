@@ -1,14 +1,14 @@
 export const placeholderDocumentPageDocuments = [
     {
-        title: 'Test Document 1',
+        title: 'Purchase Agreement',
         color: 'legendaryGreen',
     },
     {
-        title: 'Test Document 2',
+        title: 'Income Statement',
         color: 'skyBlue',
     },
     {
-        title: 'Test Document 3',
+        title: 'Platform Agreement',
         color: 'pencilYellow',
     },
 ];
