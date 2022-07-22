@@ -18,11 +18,15 @@ import {
     gql,
 } from '@apollo/client';
 
+import {signOut} from 'firebase/auth';
+
 import {createHttpLink} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
 import {getAuth} from 'firebase/auth';
 import {throwAuthenticationError, throwSystemError} from 'utils/errors.js';
 import {v4} from 'uuid';
+import {onError} from '@apollo/client/link/error';
+import FirebaseErrorCodes from 'utils/firebase_error_codes.js';
 
 if (process.env.REACT_APP_SENTRY_ENABLED)
     Sentry.init({
@@ -74,16 +78,32 @@ const authLink = setContext(async (_, {headers}) => {
         });
     }
 
-    const token = await user.getIdToken();
+    try {
+        const token = await user.getIdToken();
 
-    // return the headers to the context so httpLink can read them
-    return {
-        headers: {
-            ...headers,
-            authorization: token ? `Bearer ${token}` : '',
-            ['session-id']: getUserSessionId(),
-        },
-    };
+        // return the headers to the context so httpLink can read them
+        return {
+            headers: {
+                ...headers,
+                authorization: token ? `Bearer ${token}` : '',
+                ['session-id']: getUserSessionId(),
+            },
+        };
+    } catch (e) {
+        signOut(getAuth());
+
+        throw e;
+    }
+});
+
+const errorHandler = onError(({networkError, graphQLErrors}) => {
+    if (graphQLErrors)
+        graphQLErrors.forEach(({message, locations, path}) =>
+            console.log(
+                `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+            ),
+        );
+    if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
 const client = new ApolloClient({
