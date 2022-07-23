@@ -246,14 +246,9 @@ function useProvideAuth() {
         );
         const multiFactorAssertion =
             PhoneMultiFactorGenerator.assertion(phoneAuthCredential);
-        return resolver
-            .resolveSignIn(multiFactorAssertion)
-            .then(() => {
-                onSuccesfulSignIn();
-            })
-            .catch((error) => {
-                handleMfaError(error);
-            });
+        return resolver.resolveSignIn(multiFactorAssertion).catch((error) => {
+            handleMfaError(error);
+        });
     };
 
     // Subscribe to user on mount
@@ -263,7 +258,6 @@ function useProvideAuth() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (!user) {
-                console.log('nuke cache');
                 client.resetStore();
             }
             setUser(user);

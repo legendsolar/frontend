@@ -1,6 +1,8 @@
 import {DataGrid} from '@mui/x-data-grid';
 import {Button, Box, Stack, Typography} from '@mui/material';
 import {format} from 'date-fns';
+import {useCloudFunctions} from 'hooks/use_cloud_functions';
+import {useState} from 'react';
 
 const columns = [
     {
@@ -45,27 +47,19 @@ const columns = [
 ];
 
 const TransferDataGrid = ({transfers}) => {
-    function download(filename, textInput) {
-        var element = document.createElement('a');
-        element.setAttribute(
-            'href',
-            'data:text/plain;charset=utf-8, ' + encodeURIComponent(textInput),
-        );
-        element.setAttribute('download', filename);
-        document.body.appendChild(element);
-        element.click();
-        //document.body.removeChild(element);
-    }
+    const {downloadAllTransfers} = useCloudFunctions();
+    const [downloadLinkLoading, setDownloadLinkLoading] = useState(false);
 
     const onDownloadCsv = () => {
-        cloudFunctions.generateTransferSummary().then(({data}) => {
-            console.log(data);
-            const csv = data.csv;
-            console.log(csv);
-
-            var filename = 'output.csv';
-            download(filename, csv);
-        });
+        setDownloadLinkLoading(true);
+        downloadAllTransfers()
+            .then(({data}) => {
+                console.log(data.downloadLink);
+                window.open(data.downloadLink);
+            })
+            .finally(() => {
+                setDownloadLinkLoading(false);
+            });
     };
 
     return (
@@ -75,8 +69,12 @@ const TransferDataGrid = ({transfers}) => {
                     All Transactions
                 </Typography>
 
-                <Button variant="mini" onClick={onDownloadCsv}>
-                    Download CSV
+                <Button
+                    variant="mini"
+                    disabled={downloadLinkLoading}
+                    onClick={onDownloadCsv}
+                >
+                    {downloadLinkLoading ? 'Loading...' : 'Download CSV'}
                 </Button>
             </Stack>
 

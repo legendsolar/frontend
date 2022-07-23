@@ -91,11 +91,11 @@ const authLink = setContext(async (_, {headers}) => {
         };
     } catch (e) {
         signOut(getAuth());
-
         throw e;
     }
 });
 
+// TODO is this causing capcha errors?
 const errorHandler = onError(({networkError, graphQLErrors}) => {
     if (graphQLErrors)
         graphQLErrors.forEach(({message, locations, path}) =>
