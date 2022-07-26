@@ -28,7 +28,7 @@ import {v4} from 'uuid';
 import {onError} from '@apollo/client/link/error';
 import FirebaseErrorCodes from 'utils/firebase_error_codes.js';
 
-if (process.env.REACT_APP_SENTRY_ENABLED)
+if (process.env.REACT_APP_SENTRY_ENABLED === 'true')
     Sentry.init({
         dsn: 'https://befcf88557b54a7c939b8fdacec0cc62@o1127533.ingest.sentry.io/6169541',
         integrations: [
@@ -45,14 +45,14 @@ if (process.env.REACT_APP_SENTRY_ENABLED)
         autoSessionTracking: true,
     });
 
-if (process.env.REACT_APP_FULLSTORY_ENALBED) {
+if (process.env.REACT_APP_FULLSTORY_ENALBED === 'true') {
     FullStory.init({
         orgId: '18J59K',
     });
 }
 
-if (process.env.REACT_APP_LOG_ROCKET_ENALBED) {
-    LogRocket.init('d6ndfk/legends-alpha');
+if (process.env.REACT_APP_LOG_ROCKET_ENALBED === 'true') {
+    LogRocket.init('d6ndfk/legends-app');
 }
 
 smoothscroll.polyfill();

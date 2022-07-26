@@ -14,8 +14,10 @@ import {
     PhoneAuthProvider,
     PhoneMultiFactorGenerator,
     getMultiFactorResolver,
+    signInWithEmailLink,
 } from 'firebase/auth';
 
+import getParameterByName from 'utils/get_parameter_by_name';
 import {GoogleAuthProvider} from 'firebase/auth';
 
 import {setContext} from '@apollo/client/link/context';
@@ -267,6 +269,38 @@ function useProvideAuth() {
         // Cleanup subscription on unmount
         return () => unsubscribe();
     }, []);
+
+    /**
+     * This is kinda an anti-pattern, but I need to handle linked sign ins
+     * https://firebase.google.com/docs/auth/custom-email-handler
+     */
+    document.addEventListener(
+        'DOMContentLoaded',
+        () => {
+            // TODO: Implement getParameterByName()
+
+            // Get the action to complete.
+            const mode = getParameterByName('mode');
+            // Get the one-time code from the query parameter.
+            const actionCode = getParameterByName('oobCode');
+
+            if (mode && actionCode) {
+                // Handle the user management action.
+                switch (mode) {
+                    case 'signIn':
+                        // Can use a constant email here because there will only be one account
+                        signInWithEmailLink(
+                            auth,
+                            'demo@legends.solar',
+                            actionCode,
+                        );
+                        break;
+                }
+            }
+        },
+        false,
+    );
+
     // Return the user object and auth methods
     return {
         isAuthenticating,
