@@ -9,7 +9,7 @@ const TransferGrid = ({transfers, loading}) => {
         <div>
             <Grid
                 container
-                sx={{mt: 1}}
+                rowSpacing={4}
                 justifyContent="center"
                 alignItems="center"
             >

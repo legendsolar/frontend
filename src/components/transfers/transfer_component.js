@@ -69,7 +69,12 @@ const TransferComponent = ({transfer}) => {
 
     return (
         <Container sx={{width: '100%', minWidth: '320px'}}>
-            <Stack direction="row" justifyContent="space-between" sx={{m: 1}}>
+            <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems={'flex-end'}
+                sx={{m: 1}}
+            >
                 <Typography variant="label">{title}</Typography>
 
                 <Typography variant="subtitle2">
@@ -80,7 +85,7 @@ const TransferComponent = ({transfer}) => {
             <Container
                 sx={{
                     height: '90px',
-                    borderRadius: 3,
+                    borderRadius: '5px',
                     position: 'relative',
                     backgroundColor: '#F4F5F5',
                 }}
@@ -90,6 +95,7 @@ const TransferComponent = ({transfer}) => {
                     style={{
                         position: 'absolute',
                         transform: 'translate(-50%,-50%) rotate(45deg) ',
+                        borderRadius: '5px',
                         top: '50%',
                         left: '0%',
                         width: '75%',
@@ -115,7 +121,7 @@ const TransferComponent = ({transfer}) => {
                         alignItems="center"
                         sx={{width: '50%'}}
                     >
-                        <img style={{width: '87px'}} src={left}></img>
+                        <img style={{width: '90px'}} src={left}></img>
                     </Box>
 
                     <Box
@@ -124,7 +130,7 @@ const TransferComponent = ({transfer}) => {
                         alignItems="center"
                         sx={{width: '50%'}}
                     >
-                        <img style={{width: '87px'}} src={right}></img>
+                        <img style={{width: '62px'}} src={right}></img>
                     </Box>
                 </Stack>
 
@@ -148,7 +154,7 @@ const TransferComponent = ({transfer}) => {
                             transform:
                                 'translateX(-50%) translateY(-50%) rotate(90deg);',
                             fontFamily: 'Azeret Mono',
-                            fontSize: '10px',
+                            fontSize: '12px',
                             verticalAlign: 'middle',
                             textAlign: 'center',
                             whiteSpace: 'nowrap',

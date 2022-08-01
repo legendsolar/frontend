@@ -8,8 +8,6 @@ const DefaultComponent = forwardRef(
         const opacity = inactive || disabled ? 0.5 : 1;
         const pointerEvents = disabled ? 'none' : 'all';
 
-        const [loading, setLoading] = useState(false);
-
         return (
             <Paper
                 variant="container"
@@ -24,7 +22,7 @@ const DefaultComponent = forwardRef(
                         sx={{
                             opacity: opacity,
                         }}
-                        spacing={6}
+                        spacing={4}
                     >
                         {children}
                     </Stack>
