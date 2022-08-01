@@ -23,7 +23,7 @@ export const transferPageTransfers = [
         title: 'Dividend Payment',
         destinationName: 'Legends Wallet',
         sourceName: 'Solar Holdings',
-        color: 'legendaryGreen',
+        color: 'blackDusk',
     },
     {
         __typename: 'Transfer',
@@ -47,7 +47,7 @@ export const transferPageTransfers = [
         title: 'Dividend Payment',
         destinationName: 'Legends Wallet',
         sourceName: 'Solar Holdings',
-        color: 'legendaryGreen',
+        color: 'blackDusk',
     },
 ];
 
@@ -76,7 +76,7 @@ export const portfolioPageTransfers = [
         title: 'Dividend Payment',
         destinationName: 'Legends Wallet',
         sourceName: 'Solar Holdings',
-        color: 'legendaryGreen',
+        color: 'blackDusk',
     },
     {
         __typename: 'Transfer',
@@ -100,6 +100,6 @@ export const portfolioPageTransfers = [
         title: 'Dividend Payment',
         destinationName: 'Legends Wallet',
         sourceName: 'Solar Holdings',
-        color: 'legendaryGreen',
+        color: 'blackDusk',
     },
 ];

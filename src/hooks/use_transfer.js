@@ -67,7 +67,7 @@ const transferColorTransformer = (status) => {
         case 'PENDING':
             return 'pencilYellow';
         case 'PROCESSED':
-            return 'legendaryGreen';
+            return 'blackDusk';
         case 'CANCELLED':
             return 'eraserRed';
         case 'UNKNOWN':

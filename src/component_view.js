@@ -2,6 +2,8 @@ import {ErrorBoundary} from '@sentry/react';
 import React, {useState, useEffect, lazy, useCallback} from 'react';
 import {nanoid} from 'nanoid';
 import qs from 'query-string';
+import DefaultComponent from 'components/utils/default_component';
+import {Typography} from '@mui/material';
 
 const basePaths = [
     {
@@ -135,7 +137,10 @@ const basePaths = [
                 name: 'test_create_transfer',
             },
             {
-                name: 'test_transaction',
+                name: 'test_transfer_component',
+            },
+            {
+                name: 'test_transfer_grid',
             },
             {
                 name: 'test_transfer_data_grid',
@@ -255,6 +260,7 @@ function useQueryString(key, initialValue) {
 const ComponentView = () => {
     const [views, setViews] = useState([]);
     const [expanded, setExpanded] = useState(true);
+    const [widget, setWidget] = useState(true);
 
     const [baseName, setBaseName] = useQueryString('base');
     const [componentName, setComponentName] = useQueryString('component');
@@ -362,6 +368,7 @@ const ComponentView = () => {
                     : 'none selected'}
             </p>
             <button onClick={() => setExpanded(false)}>hide header</button>
+            <button onClick={() => setWidget(!widget)}>toggle widget</button>
             <hr></hr>
         </div>
     );
@@ -385,7 +392,18 @@ const ComponentView = () => {
             {expanded ? expandedView : hiddenView}
             <React.Suspense fallback="Loading component... (components with images may take a few seconds)">
                 <ErrorBoundary>
-                    <div className="container">{views}</div>
+                    <div className="container">
+                        {widget && (
+                            <DefaultComponent>
+                                <Typography variant="smallHeadline">
+                                    Test Widget Title
+                                </Typography>
+
+                                {views}
+                            </DefaultComponent>
+                        )}
+                        {!widget && views}
+                    </div>
                 </ErrorBoundary>
             </React.Suspense>
         </div>

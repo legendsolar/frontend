@@ -121,7 +121,7 @@ const TransferComponent = ({transfer}) => {
                         alignItems="center"
                         sx={{width: '50%'}}
                     >
-                        <img style={{width: '90px'}} src={left}></img>
+                        <img src={left}></img>
                     </Box>
 
                     <Box
@@ -130,7 +130,7 @@ const TransferComponent = ({transfer}) => {
                         alignItems="center"
                         sx={{width: '50%'}}
                     >
-                        <img style={{width: '62px'}} src={right}></img>
+                        <img src={right}></img>
                     </Box>
                 </Stack>
 
