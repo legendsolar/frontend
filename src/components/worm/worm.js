@@ -60,7 +60,7 @@ function Worm({rawData, loading, error, nightThreshold_W}) {
     const chartSettings = {
         marginLeft: 0,
         marginRight: 60,
-        marginTop: 20,
+        marginTop: 30,
         marginBottom: 60,
     };
 
@@ -168,7 +168,7 @@ function Worm({rawData, loading, error, nightThreshold_W}) {
                     {format(new Date(), 'p')}
                 </Typography>
             </Stack>
-            <div className="Chart__wrapper" ref={ref} style={{height: '200px'}}>
+            <div className="Chart__wrapper" ref={ref} style={{height: '180px'}}>
                 <svg width={dms.width} height={dms.height}>
                     <linearGradient
                         id="wormGradient"
