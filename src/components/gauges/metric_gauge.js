@@ -7,6 +7,7 @@ import {Typography, useTheme} from '@mui/material';
 import styles from 'components/gauges/metric_gauge.module.css';
 import LivePill from 'components/pills/live_pill';
 import {useChartDimensions} from 'hooks/use_chart_dimensions';
+import {numberFormatter} from 'utils/number_formatter';
 
 const tinycolor = require('tinycolor2');
 
@@ -44,13 +45,13 @@ function MetricGauge({
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
 
     return (
-        <Box sx={{minWidth: '300px'}}>
+        <Box sx={{minWidth: '400px'}}>
             <Stack alignItems={'center'}>
                 <Stack
                     direction="row"
                     justifyContent={'space-between'}
                     alignItems={'center'}
-                    sx={{width: '100%', mb: 3}}
+                    sx={{width: '360px', mb: 3}}
                 >
                     <Typography variant="smallHeadline">
                         {unitOpts.title}
@@ -98,7 +99,7 @@ function MetricGauge({
                     </svg>
                     <div className={styles.center}>
                         <Typography variant="headline1" sx={{mt: 'auto'}}>
-                            {error ? '--' : currentValue.toFixed(1)}
+                            {error ? '--' : numberFormatter(currentValue)}
                         </Typography>
                     </div>
                 </div>
@@ -107,14 +108,14 @@ function MetricGauge({
                     justifyContent="space-between"
                     sx={{
                         mt: 1,
-                        width: '100%',
+                        width: '360px',
                         maxWidth: '400px',
                     }}
                 >
                     <Typography variant="label">
                         {error
                             ? `${unitOpts.unit}-`
-                            : `${min.toFixed(2)} ${unitOpts.unit}`}
+                            : `${numberFormatter(min)} ${unitOpts.unit}`}
                     </Typography>
 
                     <Typography variant="body1">
@@ -124,7 +125,7 @@ function MetricGauge({
                     <Typography variant="label">
                         {error
                             ? `${unitOpts.unit}-`
-                            : `${max.toFixed(2)} ${unitOpts.unit}`}
+                            : `${numberFormatter(max)} ${unitOpts.unit}`}
                     </Typography>
                 </Stack>
 
@@ -133,7 +134,7 @@ function MetricGauge({
                     justifyContent="end"
                     sx={{
                         mt: 3,
-                        width: '100%',
+                        width: '360px',
                     }}
                 >
                     <Typography variant="label" sx={{ml: 'auto'}}>

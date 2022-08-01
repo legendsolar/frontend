@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Chip } from "@mui/material";
-import CircleIcon from "@mui/icons-material/Circle";
-function LivePill({ error }) {
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Chip} from '@mui/material';
+import CircleIcon from '@mui/icons-material/Circle';
+function LivePill({error}) {
     return (
         <Chip
             size="small"
@@ -12,18 +12,19 @@ function LivePill({ error }) {
                     fontSize="small"
                     color="action"
                     style={{
-                        color: error ? "red" : "green",
-                        width: "10px",
-                        height: "10px",
+                        color: error ? 'red' : 'green',
+                        width: '10px',
+                        height: '10px',
                     }}
                 />
             }
-            label={error ? "error" : "live"}
+            label={error ? 'error' : 'live'}
             sx={{
-                textTransform: "uppercase",
-                fontSize: "22px",
-                fontWeight: 400,
-                color: "blackDawn.main",
+                fontFamily: 'Be Vietnam Pro',
+                textTransform: 'uppercase',
+                fontSize: '18px',
+                fontWeight: 300,
+                color: 'blackDawn.main',
             }}
         ></Chip>
     );

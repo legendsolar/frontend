@@ -5,8 +5,8 @@ const TestMetricGauge = () => {
     return (
         <MetricGauge
             min={0}
-            max={100}
-            currentValue={50}
+            max={10}
+            currentValue={5}
             unitOpts={unitOpts}
         ></MetricGauge>
     );

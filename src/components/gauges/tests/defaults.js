@@ -1,7 +1,7 @@
 export const unitOpts = {
     title: 'Title',
     unit: 'unit',
-    liveMessage: 'LIVE',
+    liveMessage: 'Live Message',
     unitDescription: 'unit description',
     strokeColor: 'legendaryGreen',
 };
