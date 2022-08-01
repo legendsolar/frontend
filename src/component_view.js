@@ -204,6 +204,14 @@ const basePaths = [
             },
         ],
     },
+    {
+        name: 'worm',
+        tests: [
+            {
+                name: 'test_prod_worm',
+            },
+        ],
+    },
 ];
 
 const importComponent = (path) =>

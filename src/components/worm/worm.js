@@ -26,14 +26,14 @@ const defaultChartDisplayParams = {
         dayColor: tinycolor('rgb(250,223,79)'),
         nightColor: tinycolor('rgb(33,30,32)'),
         gradientSteps: [0.5, 1],
-        radius: 20,
+        radius: 30,
     },
 
     worm: {
         dayColor: tinycolor('#30A462'),
         nightColor: tinycolor('rgb(33,30,32)'),
         nightThreshold_W: 500,
-        width: 4.3,
+        width: 6.3,
     },
 
     dayNightIcons: {
@@ -50,14 +50,18 @@ const defaultChartDisplayParams = {
     },
 };
 
-function Worm({rawData, loading, error}) {
+function Worm({rawData, loading, error, nightThreshold_W}) {
     const styleOptions = defaultChartDisplayParams;
+
+    if (nightThreshold_W) {
+        styleOptions.worm.nightThreshold_W = nightThreshold_W;
+    }
 
     const chartSettings = {
         marginLeft: 0,
         marginRight: 60,
-        marginTop: 10,
-        marginBottom: 30,
+        marginTop: 20,
+        marginBottom: 60,
     };
 
     const parseDate = (date) => new Date(date);

@@ -1,6 +1,6 @@
-import { useMemo } from "react";
-import * as d3 from "d3";
-import { format } from "date-fns";
+import {useMemo} from 'react';
+import * as d3 from 'd3';
+import {isToday, format} from 'date-fns';
 
 const WormAxis = ({
     domain = [0, 100],
@@ -20,7 +20,7 @@ const WormAxis = ({
 
         // find daily max
         data.forEach((d) => {
-            const date = format(new Date(xAccessor(d)), "P");
+            const date = format(new Date(xAccessor(d)), 'P');
             if (ticks[date]) {
                 if (yAccessor(d) > ticks[date].yValue) {
                     ticks[date].yValue = yAccessor(d);
@@ -44,11 +44,21 @@ const WormAxis = ({
         });
 
         return leftEdgeRemovedTicks;
-    }, [domain.join("-"), range.join("-"), data]);
+    }, [domain.join('-'), range.join('-'), data]);
+
+    const tickArray = Object.entries(ticks);
+
+    const getTickString = (date, index) => {
+        if (isToday(date) && index === tickArray.length - 1) {
+            return 'Today';
+        }
+
+        return format(date, 'EEEE');
+    };
 
     return (
         <svg>
-            {Object.entries(ticks).map(([key, tick]) => (
+            {tickArray.map(([key, tick], index) => (
                 <g
                     key={tick.value.getTime()}
                     transform={`translate(${tick.xOffset}, 0)`}
@@ -56,13 +66,17 @@ const WormAxis = ({
                     <text
                         key={tick.value.getTime()}
                         style={{
-                            fontSize: "10px",
-                            fontFamily: "Be Vietnam Pro",
-                            textAnchor: "middle",
-                            transform: "translateY(20px)",
+                            fontSize: '12px',
+                            fontFamily: 'Be Vietnam Pro',
+                            textAnchor: 'middle',
+                            transform: 'translateY(40px)',
+                            fontWeight:
+                                index === tickArray.length - 1
+                                    ? 'bold'
+                                    : 'normal',
                         }}
                     >
-                        {format(tick.value, "EEEE")}
+                        {getTickString(tick.value, index)}
                     </text>
                 </g>
             ))}
