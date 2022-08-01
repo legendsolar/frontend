@@ -238,11 +238,7 @@ const themeOptions = {
         MuiChip: {
             styleOverrides: {
                 root: {
-                    borderRadius: '5px',
-                    textTransform: 'uppercase',
-                    fontSize: '10px',
-                    fontFamily: 'Azeret Mono',
-                    fontWeight: 600,
+                    ...typographyOptions.label,
                 },
             },
             variants: [
@@ -251,16 +247,14 @@ const themeOptions = {
                     style: {
                         backgroundColor: paletteOptions.palette.light.main,
                         color: paletteOptions.palette.light.contrastText,
-                        textTransform: 'uppercase',
                         fontSize: '10px',
                     },
                 },
                 {
                     props: {variant: 'selected'},
                     style: {
-                        backgroundColor: paletteOptions.palette.blackDawn.main,
-                        color: '#FFF',
-                        textTransform: 'uppercase',
+                        backgroundColor: paletteOptions.palette.whiteFog.main,
+                        color: paletteOptions.palette.light.contrastText,
                         fontSize: '10px',
                     },
                 },

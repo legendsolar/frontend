@@ -1,4 +1,5 @@
 import {Typography, Box, Paper, Chip, Stack} from '@mui/material';
+import VertDivider from 'components/basics/vert_divider';
 import PropTypes from 'prop-types';
 
 import {useState} from 'react';
@@ -28,14 +29,18 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
             }}
         >
             <Stack justifyContent="space-between" spacing={1} width={'100%'}>
-                <Stack direction="row" justifyContent={'space-between'}>
+                <Stack
+                    direction="row"
+                    justifyContent={'space-between'}
+                    sx={{ml: 4}}
+                >
                     <Typography variant="smallHeadline">
                         {unitOpts.title}
                     </Typography>
                 </Stack>
 
                 <Stack direction="row" justifyContent="space-evenly">
-                    <Stack>
+                    <Stack justifyContent={'center'}>
                         <Typography variant="label" align="center">
                             AVG
                         </Typography>
@@ -44,7 +49,8 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
                             -
                         </Typography>
                     </Stack>
-                    <Stack>
+                    <VertDivider></VertDivider>
+                    <Stack justifyContent={'center'}>
                         <Typography
                             variant="headline1"
                             sx={{
@@ -59,7 +65,9 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
                             {unitOpts.unit}
                         </Typography>
                     </Stack>
-                    <Stack>
+                    <VertDivider></VertDivider>
+
+                    <Stack justifyContent={'center'}>
                         <Typography align="center" variant="label">
                             BEST
                         </Typography>
@@ -76,28 +84,30 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
                     justifyContent="space-evenly"
                 >
                     <Chip
-                        label={'Y2D'}
+                        label={historyState == 'year' ? 'Year to Date' : 'Y2D'}
                         onClick={() => setHistoryState('year')}
                         clickable={true}
                         variant={historyState == 'year' ? 'selected' : 'light'}
                     ></Chip>
 
                     <Chip
-                        label={'Month to Date'}
+                        label={
+                            historyState == 'month' ? 'Month to Date' : 'M2D'
+                        }
                         onClick={() => setHistoryState('month')}
                         clickable={true}
                         variant={historyState == 'month' ? 'selected' : 'light'}
                     ></Chip>
 
                     <Chip
-                        label={'W2D'}
+                        label={historyState == 'week' ? 'Week to Date' : 'W2D'}
                         onClick={() => setHistoryState('week')}
                         clickable={true}
                         variant={historyState == 'week' ? 'selected' : 'light'}
                     ></Chip>
 
                     <Chip
-                        label={'24H'}
+                        label={historyState == 'day' ? 'Past 24 Hours' : '24H'}
                         onClick={() => setHistoryState('day')}
                         clickable={true}
                         variant={historyState == 'day' ? 'selected' : 'light'}
