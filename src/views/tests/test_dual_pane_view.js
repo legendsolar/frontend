@@ -1,6 +1,8 @@
 import DefaultComponent from 'components/utils/default_component';
 import DualPaneView from 'views/dual_pane_view';
-import WomanPanels from 'assets/images/women_panel.png';
+import WomanPanelsSVG from 'assets/images/women_panel.svg';
+import LegendsTypemark from 'assets/logos/typemark_dark.png';
+import LegendsTypemarkSVG from 'assets/logos/typemark_dark.svg';
 import {Typography} from '@mui/material';
 
 const TestDualPaneView = () => {
@@ -28,13 +30,11 @@ const TestDualPaneView = () => {
                     </Typography>
                 </div>
             }
-            rightPane={<img src={WomanPanels} width="375px"></img>}
+            rightPane={<img src={WomanPanelsSVG} width="375px"></img>}
             upperLeftCorner={
                 <Typography variant="label">Test Upper Left</Typography>
             }
-            lowerRightCorner={
-                <Typography variant="label">Test Lower Right</Typography>
-            }
+            lowerRightCorner={<img src={LegendsTypemarkSVG}></img>}
         ></DualPaneView>
     );
 };
