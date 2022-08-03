@@ -5,10 +5,10 @@ name: Deploy to Dev Firebase Hosting on merge
 'on':
   push:
     branches:
-      - main
+      - dev 
   pull_request:
     branches:
-      - main
+      - dev 
 
 jobs:
   build_and_deploy:
@@ -33,7 +33,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_LEGENDS_ALPHA }}'
           channelId: live
           projectId: legends-alpha
-          target: app
+          target: dev
       - run: npm ci && npm run build:test
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -41,5 +41,6 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_LEGENDS_ALPHA }}'
           channelId: live
           projectId: legends-alpha 
-          target: components
+          target: dev-components
+
 

@@ -8,6 +8,7 @@ import {Typography} from '@mui/material';
 const basePaths = [
     {
         name: 'basics',
+        type: 'components',
         tests: [
             {
                 name: 'test_content_divider',
@@ -22,6 +23,7 @@ const basePaths = [
     },
     {
         name: 'buttons',
+        type: 'components',
         tests: [
             {
                 name: 'test_google_icon_button',
@@ -31,6 +33,7 @@ const basePaths = [
 
     {
         name: 'errors',
+        type: 'components',
         tests: [
             {
                 name: 'test_default_error_boundary',
@@ -43,6 +46,7 @@ const basePaths = [
 
     {
         name: 'gauges',
+        type: 'components',
         tests: [
             {
                 name: 'test_cumulative_impact',
@@ -55,6 +59,7 @@ const basePaths = [
 
     {
         name: 'icons',
+        type: 'components',
         tests: [
             {
                 name: 'test_document_icon',
@@ -73,6 +78,7 @@ const basePaths = [
 
     {
         name: 'inputs',
+        type: 'components',
         tests: [
             {
                 name: 'test_multiselect',
@@ -85,6 +91,7 @@ const basePaths = [
 
     {
         name: 'invest',
+        type: 'components',
         tests: [
             {
                 name: 'test_document_component',
@@ -103,6 +110,7 @@ const basePaths = [
 
     {
         name: 'pills',
+        type: 'components',
         tests: [
             {
                 name: 'test_live_pill',
@@ -112,6 +120,7 @@ const basePaths = [
 
     {
         name: 'placeholders',
+        type: 'components',
         tests: [
             {
                 name: 'test_document_placeholder',
@@ -129,6 +138,7 @@ const basePaths = [
 
     {
         name: 'transfers',
+        type: 'components',
         tests: [
             {
                 name: 'test_account_list',
@@ -150,6 +160,7 @@ const basePaths = [
 
     {
         name: 'signup',
+        type: 'components',
         tests: [
             {
                 name: 'test_sign_up_option',
@@ -174,6 +185,7 @@ const basePaths = [
 
     {
         name: 'tests',
+        type: 'components',
         tests: [
             {
                 name: 'test_graph_ql_test',
@@ -183,6 +195,7 @@ const basePaths = [
 
     {
         name: 'user',
+        type: 'components',
         tests: [
             {
                 name: 'test_sign_in_component',
@@ -198,6 +211,7 @@ const basePaths = [
 
     {
         name: 'utils',
+        type: 'components',
         tests: [
             {
                 name: 'test_nav_bar',
@@ -205,7 +219,17 @@ const basePaths = [
         ],
     },
     {
+        name: 'views',
+        type: 'views',
+        tests: [
+            {
+                name: 'test_dual_pane_view',
+            },
+        ],
+    },
+    {
         name: 'worm',
+        type: 'components',
         tests: [
             {
                 name: 'test_prod_worm',
@@ -268,7 +292,7 @@ function useQueryString(key, initialValue) {
 const ComponentView = () => {
     const [views, setViews] = useState([]);
     const [expanded, setExpanded] = useState(true);
-    const [widget, setWidget] = useState(true);
+    const [widget, setWidget] = useState(false);
 
     const [baseName, setBaseName] = useQueryString('base');
     const [componentName, setComponentName] = useQueryString('component');
@@ -299,7 +323,11 @@ const ComponentView = () => {
                         (test) => test.name === selectedComponent?.name,
                     )[0];
                     if (test) {
-                        const path = `./components/${base.name}/tests/${test.name}`;
+                        const path =
+                            base.type === 'component'
+                                ? `./${base.type}/${base.name}/tests/${test.name}`
+                                : `./${base.type}/tests/${test.name}`;
+                        console.log(path);
                         const Component = await importComponent(path);
                         return <Component key={nanoid()} />;
                     }
@@ -372,7 +400,7 @@ const ComponentView = () => {
             {testSelection}
             <p>
                 {selectedComponent
-                    ? `selected component:${selectedComponent.base}/${selectedComponent.name}`
+                    ? `selected ${selectedComponent.type}:${selectedComponent.base}/${selectedComponent.name}`
                     : 'none selected'}
             </p>
             <button onClick={() => setExpanded(false)}>hide header</button>
@@ -391,7 +419,7 @@ const ComponentView = () => {
                 zIndex: 1000,
             }}
         >
-            <button onClick={() => setExpanded(true)}>show header</button>
+            <button onClick={() => setExpanded(true)}>show tool</button>
         </div>
     );
 

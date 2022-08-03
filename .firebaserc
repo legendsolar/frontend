@@ -1,7 +1,5 @@
 {
   "projects": {
-    "dev": "legends-alpha",
-    "prod": "legends-alpha-prod",
     "default": "legends-alpha"
   },
   "targets": {
@@ -10,7 +8,13 @@
         "app": [
           "legends-alpha"
         ],
-        "component-staging": [
+        "dev": [
+          "legends-alpha-dev"
+        ],
+        "dev-components": [
+          "legends-alpha-dev-components"
+        ],
+        "components": [
           "legends-component-staging"
         ]
       }
