@@ -12,7 +12,10 @@ import {
 import {
     validateAccessPhrase,
     validateEmail,
+    validateFirstName,
+    validateLastName,
     validatePassword,
+    validatePhoneNumber,
 } from 'validation/user_data_validation';
 import {ErrorTypes} from 'utils/errors';
 import {useFormik} from 'formik';
@@ -27,6 +30,9 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
         initialValues: initialValues,
         validationSchema: yup.object().shape({
             email: validateEmail(),
+            firstName: validateFirstName(),
+            lastName: validateLastName(),
+            phone: validatePhoneNumber(),
             password: validatePassword(),
             accessPhrase: validateAccessPhrase(),
         }),
@@ -59,21 +65,51 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
         <Box>
             <form onSubmit={formik.handleSubmit}>
                 <Grid container spacing={4}>
-                    <Grid item xs={12} lg={12}>
-                        <Typography variant="label">
-                            Legends Solar is currently in closed beta. Please{' '}
-                            <a
-                                href={
-                                    'https://www.legends.solar/get-early-access'
-                                }
-                            >
-                                join our waitlist
-                            </a>{' '}
-                            to reserve your place when we launch.
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12} lg={12}>
+                    <Grid item xs={12} lg={6}>
                         <TextField
+                            color="light"
+                            error={
+                                formik.touched.firstName &&
+                                Boolean(formik.errors.firstName)
+                            }
+                            helperText={
+                                formik.touched.firstName &&
+                                formik.errors.firstName
+                            }
+                            value={formik.values.firstName}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            name="firstName"
+                            label="First Name"
+                            id="firstName"
+                            autoComplete="given-name"
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} lg={6}>
+                        <TextField
+                            color="light"
+                            error={
+                                formik.touched.lastName &&
+                                Boolean(formik.errors.lastName)
+                            }
+                            helperText={
+                                formik.touched.lastName &&
+                                formik.errors.lastName
+                            }
+                            value={formik.values.lastName}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            name="lastName"
+                            label="Last Name"
+                            id="lastName"
+                            autoComplete="family-name"
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} lg={6}>
+                        <TextField
+                            color="light"
                             error={
                                 formik.touched.email &&
                                 Boolean(formik.errors.email)
@@ -91,8 +127,29 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
                         />
                     </Grid>
 
+                    <Grid item xs={12} lg={6}>
+                        <TextField
+                            color="light"
+                            error={
+                                formik.touched.phone &&
+                                Boolean(formik.errors.phone)
+                            }
+                            helperText={
+                                formik.touched.phone && formik.errors.phone
+                            }
+                            value={formik.values.phone}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            id="phone"
+                            label="Phone Number"
+                            name="phone"
+                            autoComplete="tel-national"
+                        />
+                    </Grid>
+
                     <Grid item xs={12} lg={12}>
                         <TextField
+                            color="light"
                             error={
                                 formik.touched.password &&
                                 Boolean(formik.errors.password)
@@ -120,6 +177,7 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
                                 it was sent to.
                             </Typography>
                             <TextField
+                                color="light"
                                 error={
                                     formik.touched.accessPhrase &&
                                     Boolean(formik.errors.accessPhrase)

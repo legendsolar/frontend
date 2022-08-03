@@ -593,10 +593,19 @@ const themeOptions = {
 
         // MuiTextBoxes base class
         MuiFilledInput: {
+            variants: [
+                {
+                    props: {color: 'light'},
+                    style: {
+                        backgroundColor: paletteOptions.palette.white.main,
+                        color: paletteOptions.palette.blackDusk.main,
+                    },
+                },
+            ],
             styleOverrides: {
                 root: {
                     ...typographyOptions.typography.subtitle2,
-                    borderRadius: '10px',
+                    borderRadius: '5px',
                     backgroundColor: paletteOptions.palette.whiteHaze.main,
                     color: paletteOptions.palette.blackDusk.main,
 
@@ -617,7 +626,7 @@ const themeOptions = {
                 root: {
                     ...typographyOptions.typography.subtitle2,
                     zIndex: 1,
-                    color: paletteOptions.palette.blackDawn.main,
+                    color: paletteOptions.palette.blackDusk.main,
                 },
             },
         },

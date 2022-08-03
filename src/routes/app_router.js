@@ -93,7 +93,7 @@ function AppRouter() {
                     />
 
                     <Route
-                        path={routes.CREATE_ACCOUNT}
+                        path={routes.CREATE_ACCOUNT + '/*'}
                         element={
                             <UnprotectedRoute>
                                 <CreateAccountPage></CreateAccountPage>

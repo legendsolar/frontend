@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {Typography, Stack, Button} from '@mui/material';
 import {useAuth} from 'hooks/use_auth';
-import {useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import AccreditationStatus from 'components/signup/accreditation_status';
 import CreateDwollaAccount from 'components/signup/create_dwolla_account';
 import LoadingView from 'views/loading_view';
@@ -23,16 +23,21 @@ import RecaptchaVerifier from 'components/invisible/recaptcha_verifier';
 
 import DualPaneView from 'views/dual_pane_view';
 import WomanPanelsSVG from 'assets/images/women_panel.svg';
+import PanelInfinitySVG from 'assets/images/panel_infinity.svg';
 import useLinearFlow from 'hooks/use_linear_flow';
 import SignUpOptionComponent from 'components/signup/sign_up_option_component';
 import CreateAccountContent from 'content/create_account_content';
+import AccountCreateInfoContent from 'content/account_create_info_content';
+import {routes} from 'routes/app_router';
 
 const CompleteAccountPage = () => {
     const stateIndexes = {
-        SIGN_IN: 'SIGN_IN',
-        BASIC_INFO: 'BASIC_INFO',
-        COMPLETE_ACCOUNT: 'COMPLETE_ACCOUNT',
+        SIGN_IN: 'sign_in',
+        BASIC_INFO: 'basic_info',
+        COMPLETE_ACCOUNT: 'complete_account',
     };
+
+    const navigate = useNavigate();
 
     const [stateName, setStateName] = useState(stateIndexes.SIGN_IN);
 
@@ -45,18 +50,42 @@ const CompleteAccountPage = () => {
     useEffect(() => {
         const newStateName = statusToStateMap(userSignUpStatus);
         setStateName(newStateName);
+        navigate(routes.CREATE_ACCOUNT + '/' + newStateName);
     }, [userSignUpStatus]);
 
     const states = {
-        [stateIndexes.SIGN_IN]: <CreateAccountContent></CreateAccountContent>,
-        [stateIndexes.BASIC_INFO]: <div>2</div>,
+        [stateIndexes.SIGN_IN]: (
+            <CreateAccountContent
+                onSignUpWithEmail={() => setStateName(stateIndexes.BASIC_INFO)}
+            ></CreateAccountContent>
+        ),
+        [stateIndexes.BASIC_INFO]: (
+            <AccountCreateInfoContent></AccountCreateInfoContent>
+        ),
         [stateIndexes.COMPLETE_ACCOUNT]: <div>3</div>,
+    };
+
+    const rightPaneStates = {
+        [stateIndexes.SIGN_IN]: <img src={WomanPanelsSVG} width="375px"></img>,
+        [stateIndexes.BASIC_INFO]: <img src={PanelInfinitySVG}></img>,
+        [stateIndexes.COMPLETE_ACCOUNT]: <div>3</div>,
+    };
+
+    const rightPaneJustify = {
+        [stateIndexes.SIGN_IN]: 'center',
+        [stateIndexes.BASIC_INFO]: 'flex-end',
+        [stateIndexes.COMPLETE_ACCOUNT]: 'flex-end',
     };
 
     return (
         <DualPaneView
             leftPane={states[stateName]}
-            rightPane={<img src={WomanPanelsSVG} width="375px"></img>}
+            rightPane={rightPaneStates[stateName]}
+            options={{
+                rightPane: {
+                    justifyContent: rightPaneJustify[stateName],
+                },
+            }}
         ></DualPaneView>
     );
 };
