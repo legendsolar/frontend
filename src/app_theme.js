@@ -577,9 +577,8 @@ const themeOptions = {
                     whiteSpace: 'nowrap',
                     minWidth: 'auto',
                     '&:hover': {
-                        backgroundColor: 'transparent',
+                        opacity: '0.75',
                     },
-                    backgroundColor: 'transparent',
                 },
             },
         },

@@ -10,6 +10,9 @@ const IconButton = ({label, onClick, icon, color, disabled, variant}) => {
                 backgroundColor: color + '.main',
                 color: color + '.contrastText',
                 justifyContent: 'flex-start',
+                ':hover': {
+                    backgroundColor: color + '.main',
+                },
             }}
         >
             {icon}
