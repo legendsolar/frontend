@@ -61,6 +61,19 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
         },
     });
 
+    const [passwordHelperMouseover, setPasswordHelperMouseover] =
+        useState(false);
+    const passwordHelper = (
+        <div
+            onMouseEnter={() => setPasswordHelperMouseover(true)}
+            onMouseLeave={() => setPasswordHelperMouseover(false)}
+        >
+            {passwordHelperMouseover
+                ? '12 characters, 1 uppercase & 1 special'
+                : 'Password Requirements'}
+        </div>
+    );
+
     return (
         <Box>
             <form onSubmit={formik.handleSubmit}>
@@ -157,6 +170,8 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
                             helperText={
                                 formik.touched.password &&
                                 formik.errors.password
+                                    ? formik.errors.password
+                                    : passwordHelper
                             }
                             value={formik.values.password}
                             onChange={formik.handleChange}

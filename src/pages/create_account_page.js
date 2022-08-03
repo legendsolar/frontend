@@ -50,8 +50,11 @@ const CompleteAccountPage = () => {
     useEffect(() => {
         const newStateName = statusToStateMap(userSignUpStatus);
         setStateName(newStateName);
-        navigate(routes.CREATE_ACCOUNT + '/' + newStateName);
     }, [userSignUpStatus]);
+
+    useEffect(() => {
+        navigate(routes.CREATE_ACCOUNT + '/' + stateName);
+    }, [stateName]);
 
     const states = {
         [stateIndexes.SIGN_IN]: (
