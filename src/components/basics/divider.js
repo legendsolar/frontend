@@ -6,8 +6,8 @@ const Divider = ({sx}) => {
                 sx={{
                     height: '2px',
                     backgroundColor: 'whiteFog.main',
-                    ml: -4,
-                    mr: -4,
+                    ml: 0,
+                    mr: 0,
                     ...sx,
                 }}
             ></Box>

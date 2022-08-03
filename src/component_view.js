@@ -3,7 +3,7 @@ import React, {useState, useEffect, lazy, useCallback} from 'react';
 import {nanoid} from 'nanoid';
 import qs from 'query-string';
 import DefaultComponent from 'components/utils/default_component';
-import {Typography} from '@mui/material';
+import {Stack, Typography} from '@mui/material';
 
 const basePaths = [
     {
@@ -292,7 +292,7 @@ function useQueryString(key, initialValue) {
 const ComponentView = () => {
     const [views, setViews] = useState([]);
     const [expanded, setExpanded] = useState(true);
-    const [widget, setWidget] = useState(false);
+    const [stack, setStack] = useState(true);
 
     const [baseName, setBaseName] = useQueryString('base');
     const [componentName, setComponentName] = useQueryString('component');
@@ -324,7 +324,7 @@ const ComponentView = () => {
                     )[0];
                     if (test) {
                         const path =
-                            base.type === 'component'
+                            base.type === 'components'
                                 ? `./${base.type}/${base.name}/tests/${test.name}`
                                 : `./${base.type}/tests/${test.name}`;
                         console.log(path);
@@ -404,7 +404,9 @@ const ComponentView = () => {
                     : 'none selected'}
             </p>
             <button onClick={() => setExpanded(false)}>hide header</button>
-            <button onClick={() => setWidget(!widget)}>toggle widget</button>
+            <button onClick={() => setStack(!stack)}>
+                toggle stack surround
+            </button>
             <hr></hr>
         </div>
     );
@@ -429,16 +431,8 @@ const ComponentView = () => {
             <React.Suspense fallback="Loading component... (components with images may take a few seconds)">
                 <ErrorBoundary>
                     <div className="container">
-                        {widget && (
-                            <DefaultComponent>
-                                <Typography variant="smallHeadline">
-                                    Test Widget Title
-                                </Typography>
-
-                                {views}
-                            </DefaultComponent>
-                        )}
-                        {!widget && views}
+                        {stack && <Stack>{views}</Stack>}
+                        {!stack && views}
                     </div>
                 </ErrorBoundary>
             </React.Suspense>

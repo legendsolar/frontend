@@ -178,11 +178,28 @@ const typographyOptions = {
             fontWeight: 400,
         },
         smallLabel: {
-            fontFamily: 'Azeret Mono',
+            fontFamily: 'Be Vietnam Pro',
             fontSize: '12px',
             lineHeight: '14px',
             fontWeight: 600,
             color: paletteOptions.palette.blackDusk.main,
+            textTransform: 'uppercase',
+        },
+        monoButton: {
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '12px',
+            lineHeight: '14px',
+            fontWeight: 600,
+            color: paletteOptions.palette.blackDusk.main,
+            textTransform: 'uppercase',
+        },
+
+        link: {
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '14px',
+            lineHeight: '14px',
+            fontWeight: 600,
+            color: paletteOptions.palette.legendaryGreen.main,
             textTransform: 'uppercase',
         },
     },
@@ -367,11 +384,7 @@ const themeOptions = {
                 {
                     props: {variant: 'mini'},
                     style: {
-                        fontFamily: 'Azeret Mono',
-                        fontWeight: 600,
-                        fontSize: '12px',
-                        lineHeight: '14px',
-                        textTransform: 'uppercase',
+                        ...typographyOptions.typography.monoButton,
 
                         backgroundColor: paletteOptions.palette.whiteFog.main,
 
@@ -379,6 +392,13 @@ const themeOptions = {
                             backgroundColor:
                                 paletteOptions.palette.whiteFog.main,
                         },
+                    },
+                },
+
+                {
+                    props: {variant: 'mono'},
+                    style: {
+                        ...typographyOptions.typography.monoButton,
                     },
                 },
 
@@ -524,34 +544,10 @@ const themeOptions = {
                 {
                     props: {variant: 'small'},
                     style: {
-                        fontFamily: 'Azeret Mono',
-                        fontWeight: 600,
-                        fontSize: '12px',
-                        lineHeight: '14px',
-                        textTransform: 'uppercase',
-                        color: paletteOptions.palette.blackDawn.main,
-                        backgroundColor: paletteOptions.palette.whiteFog.main,
-                        height: '44px',
+                        ...typographyOptions.typography.monoButton,
+                        height: '64px',
                         '&:hover': {
                             opacity: '0.75',
-                            backgroundColor: 'none',
-                        },
-                    },
-                },
-
-                {
-                    props: {variant: 'mono'},
-                    style: {
-                        fontFamily: 'Azeret Mono',
-                        fontWeight: 600,
-                        fontSize: '12px',
-                        lineHeight: '14px',
-                        textTransform: 'uppercase',
-                        color: paletteOptions.palette.blackDawn.main,
-                        backgroundColor: 'none',
-                        '&:hover': {
-                            opacity: '0.75',
-                            backgroundColor: 'none',
                         },
                     },
                 },

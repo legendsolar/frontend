@@ -4,47 +4,58 @@ import IconButton from 'components/buttons/icon_button';
 import ContentDivider from 'components/basics/content_divider';
 import GoogleLogo from 'components/icons/google_logo';
 import PropTypes from 'prop-types';
+import DefaultComponent from 'components/utils/default_component';
+import Divider from 'components/basics/divider';
 
 const SignUpOptionComponent = ({
     onSignUpWithGoogle,
     onSignUpWithEmail,
     onNavigateToSignIn,
 }) => (
-    <Box>
-        <Stack spacing={4}>
-            <Typography variant="subtitle1">Create Account</Typography>
+    <Stack spacing={4}>
+        <Typography variant="smallHeadline" sx={{mb: 6}}>
+            Create Account
+        </Typography>
 
-            <Typography variant="label">
-                Legends Solar is currently in closed beta. Please{' '}
-                <a href={'https://www.legends.solar/get-early-access'}>
-                    join our waitlist
-                </a>{' '}
-                to reserve your place when we launch.
+        <IconButton
+            variant="small"
+            label="Sign up with Google"
+            color="white"
+            icon={<GoogleLogo height={'64px'}></GoogleLogo>}
+            onClick={onSignUpWithEmail}
+        ></IconButton>
+
+        <ContentDivider>
+            <Typography variant="label">OR </Typography>
+        </ContentDivider>
+
+        <IconButton
+            variant="small"
+            label="Sign up with email"
+            color="legendaryGreen"
+            icon={<EmailIcon sx={{ml: 3, fontSize: '24px'}}></EmailIcon>}
+            onClick={onSignUpWithEmail}
+        ></IconButton>
+
+        <Stack
+            direction="row"
+            justifyContent={'space-between'}
+            sx={{pl: 2, pr: 2}}
+        >
+            <Typography variant="smallLabel">
+                {'Already have an account?'}
             </Typography>
-
-            <IconButton
-                label="Sign up with email"
-                color="legendaryGreen"
-                icon={<EmailIcon sx={{ml: 3, fontSize: '18px'}}></EmailIcon>}
-                onClick={onSignUpWithEmail}
-            ></IconButton>
-
-            <Stack direction="row" justifyContent={'flex-end'}>
-                <Button variant="text" onClick={onNavigateToSignIn}>
-                    <Typography variant="smallLabel">
-                        {'Have an account? '}
-                    </Typography>
-                    <Typography
-                        variant="smallLabel"
-                        color="grassGreen.main"
-                        sx={{ml: 1}}
-                    >
-                        {' Login'}
-                    </Typography>
-                </Button>
-            </Stack>
+            <Button variant="text" onClick={onNavigateToSignIn}>
+                <Typography
+                    variant="smallLabel"
+                    color="legendaryGreen.main"
+                    sx={{ml: 1}}
+                >
+                    {' Login'}
+                </Typography>
+            </Button>
         </Stack>
-    </Box>
+    </Stack>
 );
 
 SignUpOptionComponent.propTypes = {

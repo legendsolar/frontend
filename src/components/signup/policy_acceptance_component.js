@@ -1,5 +1,5 @@
 import {Stack, Typography, Checkbox, Button, Link} from '@mui/material';
-import ScrollBottomToComplete from 'components/utils/scroll_bottom_complete.js';
+import ScrollBottomToComplete from 'components/utils/scroller.js';
 import PrivacyPolicy from 'assets/legal/privacy.js';
 import TermsAndConditions from 'assets/legal/termsAndConditions.js';
 import scrollToPosition from 'utils/scroll_to_position';

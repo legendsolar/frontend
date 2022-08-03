@@ -2,13 +2,29 @@ import {Container, Grid, Box, Stack} from '@mui/material';
 import DefaultView from 'views/default_view';
 import {ErrorBoundary} from '@sentry/react';
 import DefaultErrorBoundary from 'components/errors/default_error_boundary';
+import LegendsTypemarkSVG from 'assets/logos/typemark_dark.svg';
 
 const DualPaneView = ({
     leftPane,
     rightPane,
     upperLeftCorner,
     lowerRightCorner,
+    options,
 }) => {
+    const defaultLowerRightCorner = lowerRightCorner ? (
+        lowerRightCorner
+    ) : (
+        <img src={LegendsTypemarkSVG}></img>
+    );
+
+    const leftPaneJustify = options?.leftPane?.justifyContent
+        ? options?.leftPane?.justifyContent
+        : 'center';
+
+    const rightPaneJustify = options?.rightPane?.justifyContent
+        ? options?.rightPane?.justifyContent
+        : 'center';
+
     return (
         <div>
             <div
@@ -26,11 +42,9 @@ const DualPaneView = ({
                         width: '100%',
                         height: '100%',
                         backgroundColor: 'whiteHaze.main',
-                        zIndex: -2,
-                        transform: 'translate3d(0, 0, -10px)',
                     }}
                     display="flex"
-                    justifyContent={'center'}
+                    justifyContent={leftPaneJustify}
                     alignItems="center"
                 >
                     {leftPane}
@@ -39,11 +53,9 @@ const DualPaneView = ({
                     sx={{
                         width: '100%',
                         height: '100%',
-                        zIndex: -2,
-                        transform: 'translate3d(0, 0, -10px)',
                     }}
                     display="flex"
-                    justifyContent={'center'}
+                    justifyContent={rightPaneJustify}
                     alignItems="center"
                 >
                     {rightPane}
@@ -56,7 +68,7 @@ const DualPaneView = ({
                     right: '40px',
                 }}
             >
-                {lowerRightCorner}
+                {defaultLowerRightCorner}
             </div>
         </div>
     );

@@ -1,29 +1,39 @@
-import {Stack, Button, Typography} from '@mui/material/';
+import {Stack, Button, Typography, Box} from '@mui/material/';
 
-const IconButton = ({label, onClick, icon, color, disabled}) => {
+const IconButton = ({label, onClick, icon, color, disabled, variant}) => {
     return (
         <Button
-            variant="secondary"
+            variant={variant}
             disabled={disabled}
             onClick={onClick}
             sx={{
                 backgroundColor: color + '.main',
                 color: color + '.contrastText',
+                justifyContent: 'flex-start',
             }}
         >
             {icon}
             <Stack
                 direction="row"
-                alignItems="center"
-                sx={{width: '100%', ml: 8}}
+                sx={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '100%',
+                }}
             >
-                <Typography
-                    justifyContent="center"
-                    variant="smallLabel"
-                    color={color + '.contrastText'}
+                <Box
+                    display="flex"
+                    justifyContent={'center'}
+                    alignItems="center"
                 >
-                    {label}
-                </Typography>
+                    <Typography
+                        justifyContent="center"
+                        variant="monoButton"
+                        color={color + '.contrastText'}
+                    >
+                        {label}
+                    </Typography>
+                </Box>
             </Stack>
         </Button>
     );

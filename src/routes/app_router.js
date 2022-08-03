@@ -6,10 +6,13 @@ import ProtectedRoute from 'routes/protected_route';
 import UnprotectedRoute from 'routes/unprotected_route';
 import TransactionView from 'pages/transactions_page';
 import SignUpProcessPage from 'pages/complete_account_page';
+import CreateAccountPage from 'pages/create_account_page';
 import ExplorePage from 'pages/explore_page';
 import DocumentPage from 'pages/documents_page';
 import WalletPage from 'pages/wallet_page';
 import AccountPage from 'pages/account_page';
+
+import TermsConditionsPage from 'pages/terms_conditions_page';
 
 import {useFirebaseApp, useFunctions} from 'reactfire';
 
@@ -22,6 +25,14 @@ import {userStatus as USER_STATUS} from 'utils/user_sign_up_state';
 import InvestPage from 'pages/invest_page';
 import ErrorPage from 'pages/error_page';
 import NotFoundPage from 'pages/not_found_page';
+import PrivacyPolicyPage from 'pages/privacy_policy_page';
+
+export const routes = {
+    SIGN_IN: '/sign_in',
+    CREATE_ACCOUNT: '/create',
+    TERMS_AND_CONDITIONS: '/terms_conditions',
+    PRIVACY_POLICY: '/privacy',
+};
 
 function AppRouter() {
     const app = useFirebaseApp();
@@ -47,7 +58,7 @@ function AppRouter() {
 
                     {/** No auth required */}
                     <Route
-                        path="/signin"
+                        path={routes.SIGN_IN}
                         element={
                             <UnprotectedRoute>
                                 <SignInView />
@@ -64,8 +75,30 @@ function AppRouter() {
                     />
 
                     <Route
-                        path="/complete-account"
-                        element={<SignUpProcessPage />}
+                        path={routes.TERMS_AND_CONDITIONS}
+                        element={
+                            <UnprotectedRoute>
+                                <TermsConditionsPage />
+                            </UnprotectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path={routes.PRIVACY_POLICY}
+                        element={
+                            <UnprotectedRoute>
+                                <PrivacyPolicyPage></PrivacyPolicyPage>
+                            </UnprotectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path={routes.CREATE_ACCOUNT}
+                        element={
+                            <UnprotectedRoute>
+                                <CreateAccountPage></CreateAccountPage>
+                            </UnprotectedRoute>
+                        }
                     />
 
                     {/** Auth required */}

@@ -4,11 +4,24 @@ import {useState} from 'react';
 import DefaultErrorBoundary from 'components/errors/default_error_boundary';
 
 const DefaultComponent = forwardRef(
-    ({inactive, disabled, children, sx}, ref) => {
+    ({inactive, disabled, children, sx, paper = false}, ref) => {
         const opacity = inactive || disabled ? 0.5 : 1;
         const pointerEvents = disabled ? 'none' : 'all';
 
-        return (
+        const content = (
+            <DefaultErrorBoundary>
+                <Stack
+                    sx={{
+                        opacity: opacity,
+                    }}
+                    spacing={4}
+                >
+                    {children}
+                </Stack>
+            </DefaultErrorBoundary>
+        );
+
+        const maybePaper = paper ? (
             <Paper
                 variant="container"
                 sx={{
@@ -17,18 +30,13 @@ const DefaultComponent = forwardRef(
                 }}
                 ref={ref}
             >
-                <DefaultErrorBoundary>
-                    <Stack
-                        sx={{
-                            opacity: opacity,
-                        }}
-                        spacing={4}
-                    >
-                        {children}
-                    </Stack>
-                </DefaultErrorBoundary>
+                {content}
             </Paper>
+        ) : (
+            content
         );
+
+        return <div style={{maxWidth: '400px'}}>{maybePaper}</div>;
     },
 );
 

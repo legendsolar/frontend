@@ -1,21 +1,32 @@
-import {Box, Stack} from '@mui/material';
-import Divider from 'components/basics/divider';
+import {Box} from '@mui/material';
 
-const ContentDivider = ({sx, children}) => {
+const ContentDivider = ({sx, children, color = 'whiteFog'}) => {
     return (
-        <Stack
-            direction="row"
-            sx={{
-                width: '100%',
-                ...sx,
+        <div
+            style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
             }}
-            justifyContent="center"
-            alignItems="center"
         >
-            <Divider sx={{mr: 0, width: '100%'}} />
-            {children}
-            <Divider sx={{ml: 2, width: '100%'}} />
-        </Stack>
+            <Box
+                sx={{
+                    mr: 2,
+                    flex: 1,
+                    height: '2px',
+                    backgroundColor: color + '.main',
+                }}
+            ></Box>
+            <div>{children}</div>
+            <Box
+                sx={{
+                    ml: 2,
+                    flex: 1,
+                    height: '2px',
+                    backgroundColor: color + '.main',
+                }}
+            ></Box>
+        </div>
     );
 };
 
