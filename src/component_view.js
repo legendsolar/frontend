@@ -4,6 +4,7 @@ import {nanoid} from 'nanoid';
 import qs from 'query-string';
 import DefaultComponent from 'components/utils/default_component';
 import {Stack, Typography} from '@mui/material';
+import DualPaneView from 'views/dual_pane_view';
 
 const basePaths = [
     {
@@ -180,6 +181,9 @@ const basePaths = [
             {
                 name: 'test_complete_sign_up',
             },
+            {
+                name: 'test_complete_step_component',
+            },
         ],
     },
 
@@ -228,6 +232,21 @@ const basePaths = [
         ],
     },
     {
+        name: 'content',
+        type: 'content',
+        tests: [
+            {
+                name: 'test_account_create_info_content',
+            },
+            {
+                name: 'test_create_account_content',
+            },
+            {
+                name: 'test_complete_account_content',
+            },
+        ],
+    },
+    {
         name: 'worm',
         type: 'components',
         tests: [
@@ -235,6 +254,15 @@ const basePaths = [
                 name: 'test_prod_worm',
             },
         ],
+    },
+];
+
+const viewOptions = [
+    {
+        name: 'DualPaneView',
+        render: (componentUnderTest) => (
+            <DualPaneView leftPane={componentUnderTest}></DualPaneView>
+        ),
     },
 ];
 
@@ -290,7 +318,7 @@ function useQueryString(key, initialValue) {
 }
 
 const ComponentView = () => {
-    const [views, setViews] = useState([]);
+    const [components, setComponents] = useState([]);
     const [expanded, setExpanded] = useState(true);
     const [stack, setStack] = useState(true);
 
@@ -298,6 +326,8 @@ const ComponentView = () => {
     const [componentName, setComponentName] = useQueryString('component');
 
     const selectedBase = basePaths.filter((base) => base.name === baseName)[0];
+
+    const [view, setView] = useState(viewOptions[0]);
 
     useEffect(() => {
         if (!baseName) {
@@ -315,7 +345,7 @@ const ComponentView = () => {
     };
 
     useEffect(() => {
-        async function loadViews() {
+        async function loadComponents() {
             const componentPromises = basePaths
                 .filter((base) => base.name === selectedComponent?.base)
                 .map(async (base, idx) => {
@@ -335,10 +365,10 @@ const ComponentView = () => {
                     return null;
                 });
 
-            Promise.all(componentPromises).then(setViews);
+            Promise.all(componentPromises).then(setComponents);
         }
 
-        loadViews();
+        loadComponents();
     }, [basePaths, baseName, componentName]);
 
     if (!baseName || !componentName) {
@@ -364,6 +394,34 @@ const ComponentView = () => {
                         {base.name}
                     </option>
                 ))}
+            </select>
+        </div>
+    );
+
+    const viewSelection = (
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+            <div>view type: </div>
+            <select
+                name={'viewSelection'}
+                value={view?.name ? view?.name : 'None'}
+                onChange={(event) => {
+                    if (event.target.value === 'None') {
+                        setView(null);
+                        return;
+                    }
+                    const newView = viewOptions.filter(
+                        (view) => view.name === event.target.value,
+                    )[0];
+                    setView(newView);
+                }}
+            >
+                {viewOptions.map((v) => (
+                    <option key={nanoid()} value={v.name}>
+                        {v.name}
+                    </option>
+                ))}
+
+                <option>None</option>
             </select>
         </div>
     );
@@ -398,9 +456,10 @@ const ComponentView = () => {
             </a>
             {baseSelection}
             {testSelection}
+            {viewSelection}
             <p>
                 {selectedComponent
-                    ? `selected ${selectedComponent.type}:${selectedComponent.base}/${selectedComponent.name}`
+                    ? `selected ${selectedComponent.base}/${selectedComponent.name}`
                     : 'none selected'}
             </p>
             <button onClick={() => setExpanded(false)}>hide header</button>
@@ -424,20 +483,31 @@ const ComponentView = () => {
             <button onClick={() => setExpanded(true)}>show tool</button>
         </div>
     );
+    if (!view) {
+        return (
+            <div>
+                {expanded ? expandedView : hiddenView}
+                <React.Suspense fallback="Loading component... (components with images may take a few seconds)">
+                    <ErrorBoundary>
+                        <div className="container">
+                            {stack && <Stack>{components}</Stack>}
+                            {!stack && components}
+                        </div>
+                    </ErrorBoundary>
+                </React.Suspense>
+            </div>
+        );
+    }
 
-    return (
-        <div>
-            {expanded ? expandedView : hiddenView}
-            <React.Suspense fallback="Loading component... (components with images may take a few seconds)">
-                <ErrorBoundary>
-                    <div className="container">
-                        {stack && <Stack>{views}</Stack>}
-                        {!stack && views}
-                    </div>
-                </ErrorBoundary>
-            </React.Suspense>
-        </div>
-    );
+    if (view) {
+        return (
+            <div>
+                {expanded ? expandedView : hiddenView}
+                <React.Suspense fallback="Loading component... (components with images may take a few seconds)">
+                    <ErrorBoundary>{view.render(components)}</ErrorBoundary>
+                </React.Suspense>
+            </div>
+        );
+    }
 };
-
 export default ComponentView;

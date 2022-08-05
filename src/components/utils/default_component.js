@@ -4,7 +4,10 @@ import {useState} from 'react';
 import DefaultErrorBoundary from 'components/errors/default_error_boundary';
 
 const DefaultComponent = forwardRef(
-    ({inactive, disabled, children, sx, paper = false}, ref) => {
+    (
+        {inactive, disabled, children, sx, paper = false, standardWidth = true},
+        ref,
+    ) => {
         const opacity = inactive || disabled ? 0.5 : 1;
         const pointerEvents = disabled ? 'none' : 'all';
 
@@ -36,7 +39,11 @@ const DefaultComponent = forwardRef(
             content
         );
 
-        return <div style={{maxWidth: '400px'}}>{maybePaper}</div>;
+        if (standardWidth) {
+            return <div style={{width: '400px'}}>{maybePaper}</div>;
+        } else {
+            return maybePaper;
+        }
     },
 );
 

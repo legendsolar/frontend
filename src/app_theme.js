@@ -202,6 +202,11 @@ const typographyOptions = {
             color: paletteOptions.palette.legendaryGreen.main,
             textTransform: 'uppercase',
         },
+        meduimEmoji: {
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '25px',
+            fontWeight: 600,
+        },
     },
 };
 
@@ -237,9 +242,8 @@ const themeOptions = {
                 {
                     props: {variant: 'container'},
                     style: {
-                        padding: spacing(4),
-                        borderRadius: '15px',
-                        boxShadow: '0 0 15px 0 rgb(99 110 114 / 35%)',
+                        padding: spacing(2),
+                        borderRadius: '5px',
                         overflow: 'hidden',
                     },
                 },
