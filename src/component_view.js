@@ -187,6 +187,9 @@ const basePaths = [
             {
                 name: 'test_complete_step_component',
             },
+            {
+                name: 'test_sign_up_process_bar_component',
+            },
         ],
     },
 
