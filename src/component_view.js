@@ -29,6 +29,9 @@ const basePaths = [
             {
                 name: 'test_google_icon_button',
             },
+            {
+                name: 'test_back_button',
+            },
         ],
     },
 
