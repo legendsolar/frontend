@@ -12,6 +12,7 @@ import {
     eraserRed,
 } from 'static_data/colors';
 
+import 'theme_types';
 /**
  * Named Colors
  */

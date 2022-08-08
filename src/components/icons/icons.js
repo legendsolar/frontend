@@ -6,7 +6,7 @@ export const ArrowBackIcon = ({sx}) => (
     <BaseIcon source={ArrowBackFilled} alt="Back arrow" sx={sx}></BaseIcon>
 );
 
-export const CircledIcon = ({icon, sx}) => (
+export const CircledIcon = ({icon, sx = {}}) => (
     <Box
         sx={{
             borderRadius: '50%',

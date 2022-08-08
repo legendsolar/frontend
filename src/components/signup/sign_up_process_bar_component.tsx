@@ -1,10 +1,9 @@
-import {Stack, Typography} from '@mui/material';
+import {Stack, Typography, Button} from '@mui/material';
 import {CircledIcon} from 'components/icons/icons.js';
-import { FC } from "react";
-
 interface ProcessItem {
     title: string,
-    icon: JSX.Element
+    icon: JSX.Element,
+    onClick(): any 
 }
 
 interface SignUpProcessBarComponentProps {
@@ -12,19 +11,21 @@ interface SignUpProcessBarComponentProps {
 }
 
 
-const SignUpProcessBarComponent : FC<SignUpProcessBarComponentProps> = ({processItems}) => {
-    // const processItem = ({title, icon}, idx) => (
-    //     <Stack alignItems={'center'} key={idx}>
-    //         <CircledIcon icon={icon}></CircledIcon>
-    //         <Typography variant="subtitle3">{title}</Typography>
-    //     </Stack>
-    // );
+const SignUpProcessBarComponent = ({processItems} : SignUpProcessBarComponentProps) => {
+    const processItem = ({title, icon, onClick} : ProcessItem, idx: number) => (
+        <Button onClick={onClick}>
+
+        <Stack alignItems={'center'} key={idx}>
+            <CircledIcon icon={icon}></CircledIcon>
+            <Typography variant={"subtitle3" as any}>{title}</Typography>
+        </Stack>
+        </Button>
+    );
 
     return (
-        <div></div>
-        // <Stack direction={'row'} justifyContent={'space-between'}>
-        //     {processItems.map(processItem)}
-        // </Stack>
+        <Stack direction={'row'} justifyContent={'space-between'}>
+            {processItems.map(processItem)}
+        </Stack>
     );
 };
 

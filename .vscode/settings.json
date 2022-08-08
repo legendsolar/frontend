@@ -5,5 +5,7 @@
           "editor.formatOnSave": true
         },
     "window.zoomLevel": -1.4,
+
+    // use workspace ts version
     "typescript.tsdk": "node_modules/typescript/lib"
 }
