@@ -23,13 +23,12 @@ import * as yup from 'yup';
 
 const MfaVerifyComponent = ({
     initialCodeValues,
-    onSendCode,
     onSubmit,
     codeSent,
+    onChangePhoneRequested,
+    color = 'dark',
 }) => {
     const [error, setError] = useState(null);
-
-    const navigate = useNavigate();
 
     const codeForm = useFormik({
         initialValues: initialCodeValues,
@@ -58,12 +57,8 @@ const MfaVerifyComponent = ({
     return (
         <div>
             <Stack>
-                <Typography variant="subtitle1">Verify MFA </Typography>
-                <Typography variant="label">
-                    We've sent you a code to verify your identity.
-                </Typography>
-
                 <TextField
+                    color={color}
                     disabled={!codeSent}
                     error={
                         codeForm.touched.code && Boolean(codeForm.errors.code)
@@ -87,17 +82,32 @@ const MfaVerifyComponent = ({
                         !codeForm.isValid ||
                         !codeSent
                     }
-                    color="legendaryGreen"
                     sx={{width: '100%', mt: 4}}
                 >
                     {codeForm.isValidating || codeForm.isSubmitting ? (
                         <CircularProgress color="light"></CircularProgress>
                     ) : (
-                        'Submit Code'
+                        'Submit'
                     )}
                 </Button>
 
                 {error && <Alert severity="error">{error}</Alert>}
+
+                <Stack
+                    direction="row"
+                    justifyContent={'flex-end'}
+                    sx={{pl: 2, pr: 2}}
+                >
+                    <Button variant={'text'} onClick={onChangePhoneRequested}>
+                        <Typography
+                            variant={'smallLabel'}
+                            color="legendaryGreen.main"
+                            sx={{ml: 1}}
+                        >
+                            {'Re-Enter Phone Number'}
+                        </Typography>
+                    </Button>
+                </Stack>
             </Stack>
         </div>
     );
