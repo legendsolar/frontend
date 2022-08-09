@@ -30,6 +30,7 @@ const ProtectedUserInfo = ({
     onSubmit,
     isValid,
     handleChange,
+    color = 'dark',
 }) => {
     const formik = useFormik({
         initialValues: initialValues,
@@ -77,6 +78,7 @@ const ProtectedUserInfo = ({
                 <Grid item xs={12} md={12} lg={4}>
                     <Typography variant="subtitle3">{'SSN '}</Typography>
                     <TextField
+                        color={color}
                         data-private
                         disabled={completed}
                         name="ssn"
@@ -101,6 +103,7 @@ const ProtectedUserInfo = ({
                     <Grid container spacing={2} sx={{width: '100%'}}>
                         <Grid item xs={4} md={4}>
                             <FormControl
+                                color={color}
                                 variant="filled"
                                 fullWidth
                                 disabled={completed}
@@ -131,6 +134,7 @@ const ProtectedUserInfo = ({
 
                         <Grid item xs={4} md={4}>
                             <TextField
+                                color={color}
                                 data-private
                                 disabled={completed}
                                 name="day"
@@ -153,6 +157,7 @@ const ProtectedUserInfo = ({
 
                         <Grid item xs={4} md={4}>
                             <TextField
+                                color={color}
                                 data-private
                                 disabled={completed}
                                 name="year"

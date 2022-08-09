@@ -15,4 +15,3 @@ declare module "@mui/material/styles" {
       h1Bold: true;
     }
   }
-  

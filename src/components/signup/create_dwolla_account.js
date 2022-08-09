@@ -8,7 +8,12 @@ import ModifyUserInfo from 'components/user/modify_user_info';
 import ProtectedUserInfo from 'components/user/protected_user_info';
 import {ErrorTypes} from 'utils/errors';
 
-const CreateDwollaAccount = ({userStatus, onSubmit, loading}) => {
+const CreateDwollaAccount = ({
+    userStatus,
+    onSubmit,
+    loading,
+    color = 'dark',
+}) => {
     const fullSSNRequired = userStatus === 'DWOLLA_ACCOUNT_RETRY_REQ';
 
     const [userInfoValid, setUserInfoValid] = useState(false);

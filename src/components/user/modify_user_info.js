@@ -24,7 +24,13 @@ import {useEffect} from 'react';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 
-const ModifyUserInfo = ({initialValues, onSubmit, isValid, handleChange}) => {
+const ModifyUserInfo = ({
+    initialValues,
+    onSubmit,
+    isValid,
+    handleChange,
+    color = 'dark',
+}) => {
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: yup.object().shape({
@@ -70,6 +76,7 @@ const ModifyUserInfo = ({initialValues, onSubmit, isValid, handleChange}) => {
             <Grid container spacing={2} sx={{width: '100%'}}>
                 <Grid item xs={12} lg={6}>
                     <TextField
+                        color={color}
                         error={
                             formik.touched.firstName &&
                             Boolean(formik.errors.firstName)
@@ -89,6 +96,7 @@ const ModifyUserInfo = ({initialValues, onSubmit, isValid, handleChange}) => {
 
                 <Grid item xs={12} lg={6}>
                     <TextField
+                        color={color}
                         error={
                             formik.touched.lastName &&
                             Boolean(formik.errors.lastName)
@@ -108,6 +116,7 @@ const ModifyUserInfo = ({initialValues, onSubmit, isValid, handleChange}) => {
 
                 <Grid item xs={12} md={8}>
                     <TextField
+                        color={color}
                         error={
                             formik.touched.streetAddress &&
                             Boolean(formik.errors.streetAddress)
@@ -128,6 +137,7 @@ const ModifyUserInfo = ({initialValues, onSubmit, isValid, handleChange}) => {
 
                 <Grid item xs={12} md={4}>
                     <TextField
+                        color={color}
                         error={
                             formik.touched.streetAddress2 &&
                             Boolean(formik.errors.streetAddress2)
@@ -148,6 +158,7 @@ const ModifyUserInfo = ({initialValues, onSubmit, isValid, handleChange}) => {
 
                 <Grid item xs={12} md={6}>
                     <TextField
+                        color={color}
                         name="city"
                         label="City"
                         error={
@@ -162,7 +173,7 @@ const ModifyUserInfo = ({initialValues, onSubmit, isValid, handleChange}) => {
                 </Grid>
 
                 <Grid item xs={12} md={2}>
-                    <FormControl variant="filled" fullWidth>
+                    <FormControl variant="filled" fullWidth color={color}>
                         <InputLabel>State</InputLabel>
                         <Select
                             helperText={'state'}
@@ -193,6 +204,7 @@ const ModifyUserInfo = ({initialValues, onSubmit, isValid, handleChange}) => {
 
                 <Grid item xs={12} md={4}>
                     <TextField
+                        color={color}
                         name="postalCode"
                         label="Zip Code"
                         fullWidth

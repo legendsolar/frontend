@@ -649,8 +649,9 @@ const themeOptions = {
         MuiInputLabel: {
             variants: [
                 {
-                    props: {focused: true},
+                    props: {color: 'light'},
                     style: {
+                        backgroundColor: paletteOptions.palette.white.main,
                         color: paletteOptions.palette.blackDusk.main,
                     },
                 },
@@ -658,10 +659,6 @@ const themeOptions = {
             styleOverrides: {
                 root: {
                     ...typographyOptions.typography.subtitle2,
-
-                    '& .Mui-focused': {
-                        color: 'red',
-                    },
                 },
             },
         },

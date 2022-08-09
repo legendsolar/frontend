@@ -22,7 +22,7 @@ import {useFormik} from 'formik';
 import * as yup from 'yup';
 import {useState} from 'react';
 
-const SignUpComponent = ({initialValues, onSubmit}) => {
+const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -80,7 +80,7 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
                 <Grid container spacing={4}>
                     <Grid item xs={12} lg={6}>
                         <TextField
-                            color="light"
+                            color={color}
                             error={
                                 formik.touched.firstName &&
                                 Boolean(formik.errors.firstName)
@@ -101,7 +101,7 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
 
                     <Grid item xs={12} lg={6}>
                         <TextField
-                            color="light"
+                            color={color}
                             error={
                                 formik.touched.lastName &&
                                 Boolean(formik.errors.lastName)
@@ -122,7 +122,7 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
 
                     <Grid item xs={12} lg={6}>
                         <TextField
-                            color="light"
+                            color={color}
                             error={
                                 formik.touched.email &&
                                 Boolean(formik.errors.email)
@@ -142,7 +142,7 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
 
                     <Grid item xs={12} lg={6}>
                         <TextField
-                            color="light"
+                            color={color}
                             error={
                                 formik.touched.phone &&
                                 Boolean(formik.errors.phone)
@@ -162,7 +162,7 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
 
                     <Grid item xs={12} lg={12}>
                         <TextField
-                            color="light"
+                            color={color}
                             error={
                                 formik.touched.password &&
                                 Boolean(formik.errors.password)
@@ -192,7 +192,7 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
                                 it was sent to.
                             </Typography>
                             <TextField
-                                color="light"
+                                color={color}
                                 error={
                                     formik.touched.accessPhrase &&
                                     Boolean(formik.errors.accessPhrase)
@@ -229,7 +229,7 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
                         {formik.isValidating ||
                         formik.isSubmitting ||
                         loading ? (
-                            <CircularProgress color="light"></CircularProgress>
+                            <CircularProgress color={color}></CircularProgress>
                         ) : (
                             'Continue'
                         )}
