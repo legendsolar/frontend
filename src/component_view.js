@@ -355,10 +355,11 @@ const ComponentView = () => {
 
     const [baseName, setBaseName] = useQueryString('base');
     const [componentName, setComponentName] = useQueryString('component');
+    const [viewName, setViewName] = useQueryString('view');
 
     const selectedBase = basePaths.filter((base) => base.name === baseName)[0];
 
-    const [view, setView] = useState(viewOptions[0]);
+    const view = viewOptions.filter((view) => view.name === viewName)[0];
 
     useEffect(() => {
         if (!baseName) {
@@ -367,6 +368,10 @@ const ComponentView = () => {
 
         if (!componentName) {
             setComponentName(basePaths[0].tests[0].name);
+        }
+
+        if (!viewName) {
+            setViewName(viewOptions[0].name);
         }
     }, []);
 
@@ -437,13 +442,13 @@ const ComponentView = () => {
                 value={view?.name ? view?.name : 'None'}
                 onChange={(event) => {
                     if (event.target.value === 'None') {
-                        setView(null);
+                        setViewName(null);
                         return;
                     }
                     const newView = viewOptions.filter(
                         (view) => view.name === event.target.value,
                     )[0];
-                    setView(newView);
+                    setViewName(newView.name);
                 }}
             >
                 {viewOptions.map((v) => (

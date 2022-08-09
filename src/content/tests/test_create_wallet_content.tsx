@@ -7,7 +7,6 @@ export default () => (
             console.log(input);
             return delay(1000);
         }}
-        loading={false}
         fullSSNRequired={false}
         color={'light'}
     ></CreateWalletContent>

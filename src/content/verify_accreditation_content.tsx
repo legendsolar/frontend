@@ -2,11 +2,7 @@ import DefaultComponent from 'components/utils/default_component';
 import {useState} from 'react';
 import CheckboxList, {CheckboxItem} from 'components/inputs/checkbox_list';
 import {Button, Stack, Typography} from '@mui/material';
-import {
-    AcceptanceStatus,
-    AccountResolvers,
-    AccreditationOptions,
-} from 'schema/schema_gen_types';
+import {AccreditationOptions} from 'schema/schema_gen_types';
 
 interface AccreditationOption extends CheckboxItem {
     accredited: boolean;

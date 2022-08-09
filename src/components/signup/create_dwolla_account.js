@@ -8,28 +8,28 @@ import ModifyUserInfo from 'components/user/modify_user_info';
 import ProtectedUserInfo from 'components/user/protected_user_info';
 import {ErrorTypes} from 'utils/errors';
 
-const CreateDwollaAccount = ({
-    userStatus,
-    onSubmit,
-    loading,
-    color = 'dark',
-}) => {
+const CreateDwollaAccount = ({userStatus, onSubmit, color = 'dark'}) => {
     const fullSSNRequired = userStatus === 'DWOLLA_ACCOUNT_RETRY_REQ';
-
     const [userInfoValid, setUserInfoValid] = useState(false);
     const [protectedUserInfoValid, setProtectedUserInfoValid] = useState(false);
     const [error, setError] = useState(null);
     const [values, setValues] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const submit = () => {
-        onSubmit(values).catch((error) => {
-            if (
-                error.type === ErrorTypes.SystemError ||
-                error.type === ErrorTypes.DwollaError
-            ) {
-                setError(error.message);
-            }
-        });
+        setLoading(true);
+        onSubmit(values)
+            .catch((error) => {
+                if (
+                    error.type === ErrorTypes.SystemError ||
+                    error.type === ErrorTypes.DwollaError
+                ) {
+                    setError(error.message);
+                }
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     return (

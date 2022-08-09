@@ -7,12 +7,15 @@ import {Typography, Stack, Box} from '@mui/material';
 import {routes} from 'routes/app_router';
 import SignUpComponent from 'components/signup/sign_up_component';
 
-const AccountCreateInfoContent = () => {
+const AccountCreateInfoContent = ({color, onCreateAccount}) => {
     return (
         <DefaultComponent>
             <Stack spacing={4}>
                 <Typography variant="smallHeadline">Create Account</Typography>
-                <SignUpComponent></SignUpComponent>
+                <SignUpComponent
+                    color={color}
+                    onSubmit={onCreateAccount}
+                ></SignUpComponent>
             </Stack>
         </DefaultComponent>
     );

@@ -13,14 +13,12 @@ import DefaultComponent from 'components/utils/default_component';
 
 interface CreateDwollaAccountProps {
     onSubmit(input: UserDwollaAccountData): Promise<any>;
-    loading: boolean;
     fullSSNRequired: boolean;
     color: 'dark' | 'light';
 }
 
 const CreateWalletContent = ({
     onSubmit,
-    loading,
     fullSSNRequired,
     color = 'dark',
 }: CreateDwollaAccountProps) => {
@@ -28,16 +26,22 @@ const CreateWalletContent = ({
     const [protectedUserInfoValid, setProtectedUserInfoValid] = useState(false);
     const [error, setError] = useState<Error>();
     const [values, setValues] = useState<any>({});
+    const [loading, setLoading] = useState(false);
 
     const submit = () => {
-        onSubmit(values).catch((error) => {
-            if (
-                error.type === ErrorTypes.SystemError ||
-                error.type === ErrorTypes.DwollaError
-            ) {
-                setError(error.message);
-            }
-        });
+        setLoading(true);
+        onSubmit(values)
+            .catch((error) => {
+                if (
+                    error.type === ErrorTypes.SystemError ||
+                    error.type === ErrorTypes.DwollaError
+                ) {
+                    setError(error.message);
+                }
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     return (
