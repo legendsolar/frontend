@@ -1,5 +1,3 @@
-console.log("theme types imported")
-
 declare module "@mui/material/styles" {
     interface TypographyVariants {
       h1Bold: React.CSSProperties;

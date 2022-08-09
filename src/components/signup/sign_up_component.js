@@ -134,7 +134,7 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             id="email"
-                            label="Email Address"
+                            label="Email"
                             name="email"
                             autoComplete="email"
                         />
@@ -154,7 +154,7 @@ const SignUpComponent = ({initialValues, onSubmit}) => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             id="phone"
-                            label="Phone Number"
+                            label="Phone"
                             name="phone"
                             autoComplete="tel-national"
                         />

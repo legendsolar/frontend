@@ -1,3 +1,0 @@
-[submodule "src/schema"]
-	path = src/schema
-	url = https://github.com/legendsolar/schema_interface

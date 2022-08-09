@@ -60,6 +60,14 @@ const CompleteAccountPage = () => {
         [stateIndexes.SIGN_IN]: (
             <CreateAccountContent
                 onSignUpWithEmail={() => setStateName(stateIndexes.BASIC_INFO)}
+                onSignUpWithGoogle={() => {}}
+                onNavigateToSignIn={() => {}}
+                onNavigateToPrivacyPolicy={() =>
+                    navigate(routes.PRIVACY_POLICY)
+                }
+                onNavigateToTermsOfService={() =>
+                    navigate(routes.TERMS_AND_CONDITIONS)
+                }
             ></CreateAccountContent>
         ),
         [stateIndexes.BASIC_INFO]: (

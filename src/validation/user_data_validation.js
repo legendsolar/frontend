@@ -9,14 +9,14 @@ export const validateSSN = (fullSSNRequired = false) => {
             .min(9, 'SSN is invalid')
             .max(9, 'SSN is invalid')
             .matches(/^\d+$/, 'SSN is invalid')
-            .required('SSN is required');
+            .required('Required');
     } else {
         return yup
             .string()
             .min(4, 'SSN is invalid')
             .max(4, 'SSN is invalid')
             .matches(/^\d+$/, 'SSN is invalid')
-            .required('Last four digits of SSN are required');
+            .required('Required');
     }
 };
 
@@ -25,7 +25,7 @@ export const validatePostalCode = () => {
         .string()
         .matches(/^\d+$/, 'Zip code invalid')
         .min(5, 'Zip code invalid')
-        .required('Zip code is required');
+        .required('Required');
 };
 
 export const validatePassword = (input) => {
@@ -36,23 +36,23 @@ export const validatePassword = (input) => {
             /(?=.*[\d\W])(?=.*[a-zA-Z])/,
             'Password must contain one letter and one symbol or digit',
         )
-        .required('Password is required');
+        .required('Required');
 };
 
 export const validateEmail = () => {
-    return yup.string().email('Email is invalid').required('Enter an email');
+    return yup.string().email('Email is invalid').required('Required');
 };
 
 export const validateFirstName = () => {
-    return yup.string().required('First name is required');
+    return yup.string().required('Required');
 };
 
 export const validateLastName = () => {
-    return yup.string().required('Last name is required');
+    return yup.string().required('Required');
 };
 
 export const validateStreetAddress = () => {
-    return yup.string().required('Street address is required');
+    return yup.string().required('Required');
 };
 
 export const validateStreetAddressTwo = () => {
@@ -60,14 +60,11 @@ export const validateStreetAddressTwo = () => {
 };
 
 export const validateCity = () => {
-    return yup.string().required('City is required');
+    return yup.string().required('Required');
 };
 
 export const validateState = () => {
-    return yup
-        .string()
-        .max(2, 'State code is invalid')
-        .required('State code required');
+    return yup.string().max(2, 'State code is invalid').required('Required');
 };
 
 export const validatePhoneNumber = () => {
@@ -77,7 +74,7 @@ export const validatePhoneNumber = () => {
             /^(\+0?1\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
             'Phone number is invalid',
         )
-        .required('Phone number required');
+        .required('Required');
 };
 
 export const validateDay = () => {
@@ -85,11 +82,11 @@ export const validateDay = () => {
         .number()
         .min(1, 'Day invalid')
         .max(31, 'Day invalid')
-        .required('Day required');
+        .required('Required');
 };
 
 export const validateMonth = () => {
-    return yup.string().required('Month required');
+    return yup.string().required('Required');
 };
 
 export const validateYear = () => {
@@ -100,13 +97,13 @@ export const validateYear = () => {
             getYear(new Date()) - settings.minPlatformAge,
             `You must be ${settings.minPlatformAge} or older to register`,
         )
-        .required('Year required');
+        .required('Required');
 };
 
 export const validateMfaVerifyCode = () => {
-    return yup.string().required('Verification code required');
+    return yup.string().required('Required');
 };
 
 export const validateAccessPhrase = () => {
-    return yup.string().required('Access phrase required');
+    return yup.string().required('Required');
 };

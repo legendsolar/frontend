@@ -610,7 +610,7 @@ const themeOptions = {
             styleOverrides: {
                 root: {
                     ...typographyOptions.typography.subtitle2,
-                    borderRadius: '5px',
+                    borderRadius: '0px',
                     backgroundColor: paletteOptions.palette.whiteHaze.main,
                     color: paletteOptions.palette.blackDusk.main,
 
@@ -646,16 +646,25 @@ const themeOptions = {
         },
 
         // InputLabel helper text
-        // MuiInputLabel: {
-        //     variants: [
-        //         {
-        //             // props: { variant: "filled" },
-        //             // style: {
-        //             //     transform: "translate(12px, 16px) scale(1)",
-        //             // },
-        //         },
-        //     ],
-        // },
+        MuiInputLabel: {
+            variants: [
+                {
+                    props: {focused: true},
+                    style: {
+                        color: paletteOptions.palette.blackDusk.main,
+                    },
+                },
+            ],
+            styleOverrides: {
+                root: {
+                    ...typographyOptions.typography.subtitle2,
+
+                    '& .Mui-focused': {
+                        color: 'red',
+                    },
+                },
+            },
+        },
 
         // All checkboxes
         MuiCheckbox: {
