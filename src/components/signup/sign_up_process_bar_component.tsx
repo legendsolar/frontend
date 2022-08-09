@@ -1,18 +1,19 @@
 import {Stack, Typography, Button} from '@mui/material';
 import {CircledIcon} from 'components/icons/icons.js';
-interface ProcessItem {
+export interface SignUpProcessItem {
     title: string,
     icon: JSX.Element,
-    onClick(): any 
+    onClick(): any,
 }
 
 interface SignUpProcessBarComponentProps {
-    processItems: Array<ProcessItem>;
+    processItems: Array<SignUpProcessItem>;
+    sx: any;
 }
 
 
-const SignUpProcessBarComponent = ({processItems} : SignUpProcessBarComponentProps) => {
-    const processItem = ({title, icon, onClick} : ProcessItem, idx: number) => (
+const SignUpProcessBarComponent = ({processItems, sx={}} : SignUpProcessBarComponentProps) => {
+    const processItem = ({title, icon, onClick} : SignUpProcessItem, idx: number) => (
         <Button onClick={onClick}>
 
         <Stack alignItems={'center'} key={idx}>
@@ -23,7 +24,7 @@ const SignUpProcessBarComponent = ({processItems} : SignUpProcessBarComponentPro
     );
 
     return (
-        <Stack direction={'row'} justifyContent={'space-between'}>
+        <Stack direction={'row'} justifyContent={'space-between'} sx={sx}>
             {processItems.map(processItem)}
         </Stack>
     );

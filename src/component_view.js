@@ -5,6 +5,7 @@ import qs from 'query-string';
 import DefaultComponent from 'components/utils/default_component';
 import {Stack, Typography} from '@mui/material';
 import DualPaneView from 'views/dual_pane_view';
+import PersonPanelPinkSVG from 'assets/images/panel_person_pink.svg';
 
 const basePaths = [
     {
@@ -235,6 +236,9 @@ const basePaths = [
             {
                 name: 'test_dual_pane_view',
             },
+            {
+                name: 'test_verify_process_view',
+            },
         ],
     },
     {
@@ -249,6 +253,18 @@ const basePaths = [
             },
             {
                 name: 'test_complete_account_content',
+            },
+            {
+                name: 'test_verify_email_content',
+            },
+            {
+                name: 'test_verify_mfa_content',
+            },
+            {
+                name: 'test_verify_accreditation_content',
+            },
+            {
+                name: 'test_create_wallet_content',
             },
         ],
     },
@@ -265,10 +281,19 @@ const basePaths = [
 
 const viewOptions = [
     {
+        name: 'None',
+        render: (componentUnderTest) => <div>{componentUnderTest}</div>,
+    },
+    {
         name: 'DualPaneView',
-        render: (componentUnderTest) => (
-            <DualPaneView leftPane={componentUnderTest}></DualPaneView>
-        ),
+        render: (componentUnderTest) => {
+            return (
+                <DualPaneView
+                    leftPane={componentUnderTest}
+                    rightPane={<img src={PersonPanelPinkSVG}></img>}
+                ></DualPaneView>
+            );
+        },
     },
 ];
 

@@ -1,9 +1,13 @@
 {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "[javascript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
-          "editor.formatOnSave": true
-        },
+        "editor.formatOnSave": true
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
     "window.zoomLevel": -1.4,
 
     // use workspace ts version

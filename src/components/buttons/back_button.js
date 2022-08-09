@@ -1,7 +1,7 @@
 import {Stack, Button, Typography, Box} from '@mui/material/';
 import {ArrowBackIcon} from 'components/icons/icons';
 
-const BackButton = ({label, onClick, disabled}) => {
+const BackButton = ({label, onClick, disabled = false}) => {
     return (
         <Button disabled={disabled} onClick={onClick} sx={{}}>
             <Stack

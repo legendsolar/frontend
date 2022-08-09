@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
         "allowJs": true,
-      "lib": ["es6", "dom"],
-      "noImplicitAny": true,
-      "noImplicitThis": true,
-      "strictNullChecks": true,
-      "jsx": "preserve",
-      "baseUrl": "./src"
+        "lib": ["es6", "dom"],
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
+        "jsx": "preserve",
+        "baseUrl": "./src"
     },
-    "include": ["src"]
-  }
+    "exclude": ["node_modules", "**/src/schema"],
+    "include": ["src", "src/schema/schema_gen_types.ts"]
+}

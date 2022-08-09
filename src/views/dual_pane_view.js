@@ -8,8 +8,8 @@ const DualPaneView = ({
     leftPane,
     rightPane,
     upperLeftCorner,
-    lowerRightCorner,
-    options,
+    lowerRightCorner = null,
+    options = null,
 }) => {
     const defaultLowerRightCorner = lowerRightCorner ? (
         lowerRightCorner

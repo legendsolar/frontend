@@ -1,44 +1,58 @@
 import {useEffect, useState} from 'react';
 import {Box, Checkbox, Stack, Typography} from '@mui/material';
 import Divider from 'components/basics/divider';
-import PropTypes from 'prop-types';
-function CheckboxList({options, precheckedList, onInputChange, disabled}) {
+
+export interface CheckboxItem {
+    title: string;
+    description: string;
+    key: string;
+    checked?: boolean;
+    exclusive?: boolean;
+}
+
+interface CheckboxListProps {
+    items: Array<CheckboxItem>;
+    onInputChange(items: Array<CheckboxItem>): any;
+    disabled: boolean;
+}
+
+const CheckboxList = ({items, onInputChange, disabled}: CheckboxListProps) => {
     const [checkedList, setCheckedList] = useState(
-        Object.fromEntries(
-            Object.entries(options).map(([key, option]) => [key, false]),
-        ),
+        items.map((item) => ({
+            ...item,
+            checked: item.checked ? true : false,
+            exclusive: item.exclusive ? true : false,
+        })),
     );
+    const [exclusive, setExclusive] = useState('');
 
-    useEffect(() => {
-        if (precheckedList) {
-            setCheckedList(precheckedList);
-        }
-    }, [precheckedList]);
+    const setCheckedItem = (item: CheckboxItem) => {
+        const list = [...checkedList];
 
-    const [exclusive, setExclusive] = useState(undefined);
-
-    const setCheckedItem = (key, value) => {
-        if (checkedList[key] != value) {
-            setExclusive(undefined);
-
-            const list = {...checkedList};
-            if (options[key].exclusive && value) {
-                Object.keys(list).forEach((key) => {
-                    list[key] = false;
+        if (!item.checked) {
+            if (item.exclusive) {
+                list.map((item) => {
+                    item.checked = false;
                 });
-                setExclusive(key);
+                setExclusive(item.key);
             }
 
-            list[key] = value;
-            setCheckedList(list);
+            item.checked = true;
+        } else {
+            if (item.exclusive) {
+                setExclusive('');
+            }
 
-            onInputChange(list);
+            item.checked = false;
         }
+
+        setCheckedList(list);
+        onInputChange(list);
     };
 
     return (
         <Stack spacing={2}>
-            {Object.entries(options).map(([key, option], index, list) => {
+            {checkedList.map((item, index, list) => {
                 return (
                     <div style={{margin: '0px'}} key={index}>
                         <Box
@@ -50,17 +64,17 @@ function CheckboxList({options, precheckedList, onInputChange, disabled}) {
                                 pr: 4,
                                 pl: 4,
                                 '&:hover': {
-                                    backgroundColor: 'whiteFog.main',
+                                    backgroundColor: 'white.main',
                                 },
                             }}
                             alignItems="center"
-                            key={key}
+                            key={item.key}
                             onClick={(event) => {
                                 if (
                                     !disabled &&
-                                    !(exclusive ? exclusive != key : false)
+                                    !(exclusive ? exclusive != item.key : false)
                                 ) {
-                                    setCheckedItem(key, !checkedList[key]);
+                                    setCheckedItem(item);
                                 }
                             }}
                         >
@@ -75,48 +89,33 @@ function CheckboxList({options, precheckedList, onInputChange, disabled}) {
                                         mt: 'auto',
                                         mb: 'auto',
                                     }}
-                                    checked={checkedList[key]}
+                                    checked={item.checked}
                                     disabled={
                                         exclusive
-                                            ? exclusive != key
+                                            ? exclusive != item.key
                                             : false || disabled
                                     }
-                                    onChange={(event) => {
-                                        setCheckedItem(
-                                            key,
-                                            event.target.checked,
-                                        );
-                                    }}
                                 ></Checkbox>
                                 <Stack spacing={0}>
                                     <Typography
                                         sx={{mt: 1, mb: 1}}
-                                        variant="subtitle1"
+                                        variant={'smallLabel' as any}
                                     >
-                                        {option.title}
+                                        {item.title}
                                     </Typography>
 
-                                    <Typography variant="description">
-                                        {option.description}
+                                    <Typography variant={'description' as any}>
+                                        {item.description}
                                     </Typography>
                                 </Stack>
                             </Stack>
                         </Box>
-                        {index !== list.length - 1 && <Divider></Divider>}
+                        {/* {index !== list.length - 1 && <Divider></Divider>} */}
                     </div>
                 );
             })}
         </Stack>
     );
-}
-
-CheckboxList.propTypes = {
-    options: PropTypes.object,
-    singleOption: PropTypes.bool,
-};
-
-CheckboxList.defaultProps = {
-    singleOption: true,
 };
 
 export default CheckboxList;
