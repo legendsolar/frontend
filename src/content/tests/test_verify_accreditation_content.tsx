@@ -4,7 +4,7 @@ export default () => (
     <VerifyAccreditationContent
         onAccreditationStatusSubmit={(items) => {
             console.log({items});
-            return delay(100);
+            return delay(1000);
         }}
     ></VerifyAccreditationContent>
 );

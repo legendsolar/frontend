@@ -90,7 +90,7 @@ const ChangeEmailComponent = ({initialValues, onSubmit, color = 'dark'}) => {
                         loading ? (
                             <CircularProgress color={color}></CircularProgress>
                         ) : (
-                            'Resend Email'
+                            'Resend Verification'
                         )}
                     </Button>
 

@@ -1,7 +1,7 @@
 import DefaultComponent from 'components/utils/default_component';
 import {useState} from 'react';
 import CheckboxList, {CheckboxItem} from 'components/inputs/checkbox_list';
-import {Button, Stack, Typography} from '@mui/material';
+import {Button, Typography, CircularProgress} from '@mui/material';
 import {AccreditationOptions} from 'schema/schema_gen_types';
 
 interface AccreditationOption extends CheckboxItem {
@@ -55,12 +55,17 @@ interface VerifyAccreditationContentProps {
 const VerifyAccreditationContent = ({
     onAccreditationStatusSubmit,
 }: VerifyAccreditationContentProps) => {
+    const [loading, setLoading] = useState(false);
+
     const [accreditationList, setAccreditationList] = useState<
         Array<AccreditationOption>
     >([]);
 
     const onContinue = () => {
-        onAccreditationStatusSubmit(accreditationList);
+        setLoading(true);
+        onAccreditationStatusSubmit(accreditationList).finally(() => {
+            setLoading(false);
+        });
     };
 
     return (
@@ -92,7 +97,11 @@ const VerifyAccreditationContent = ({
             ></CheckboxList>
 
             <Button variant={'primary' as any} onClick={onContinue}>
-                Continue
+                {loading ? (
+                    <CircularProgress color={'light' as any} size={30} />
+                ) : (
+                    'Continue'
+                )}
             </Button>
         </DefaultComponent>
     );

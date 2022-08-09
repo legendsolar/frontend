@@ -4,12 +4,14 @@ import DefaultComponent from 'components/utils/default_component';
 import ChangeEmailComponent from 'components/user/change_email_component';
 
 interface VerifyEmailContentProps {
+    color: string;
     email: string;
     onSendVerificationEmailAgain(): Promise<any>;
     onChangeEmailAddressRequested(newEmail: string): Promise<any>;
 }
 
 const VerifyEmailContent = ({
+    color,
     email,
     onSendVerificationEmailAgain,
     onChangeEmailAddressRequested,
@@ -25,12 +27,15 @@ const VerifyEmailContent = ({
         case states.VERIFY_EMAIL:
             return (
                 <DefaultComponent>
-                    <Stack>
+                    <Stack spacing={4}>
                         <Typography variant={'smallHeadline' as any}>
                             Verify Email
                         </Typography>
                         <Typography variant={'body1'}>
-                            We sent an email verification link to the address {}
+                            {
+                                'We sent an email verification link to the address '
+                            }
+                            <strong>{email}</strong>
                         </Typography>
                         <Typography variant={'body1'}>
                             Click the link contained in this email to verify
@@ -69,10 +74,11 @@ const VerifyEmailContent = ({
                 <DefaultComponent>
                     <Stack>
                         <Typography variant={'smallHeadline' as any}>
-                            Re-enter email
+                            Change email
                         </Typography>
 
                         <ChangeEmailComponent
+                            color={color}
                             onSubmit={onChangeEmailAddressRequested}
                         ></ChangeEmailComponent>
                     </Stack>

@@ -77,7 +77,7 @@ const ChangePhoneComponent = ({
                     {formik.isValidating || formik.isSubmitting ? (
                         <CircularProgress color="light"></CircularProgress>
                     ) : (
-                        'Resend confirmation code'
+                        'Resend confirmation'
                     )}
                 </Button>
 
