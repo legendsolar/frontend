@@ -43,8 +43,6 @@ const DefaultComponent = forwardRef(
             </DefaultErrorBoundary>
         );
 
-        console.log({sx});
-
         const maybePaper = paper ? (
             <Paper
                 variant={'container' as any}

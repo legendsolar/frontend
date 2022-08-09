@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {Button, Stack, Typography} from '@mui/material';
 import DefaultComponent from 'components/utils/default_component';
+import ChangeEmailComponent from 'components/user/change_email_component';
 
 interface VerifyEmailContentProps {
     email: string;
@@ -36,13 +37,21 @@ const VerifyEmailContent = ({
                             your account
                         </Typography>
 
-                        <Button variant={'primary' as any}>Send Again</Button>
+                        <Button
+                            variant={'primary' as any}
+                            onClick={onSendVerificationEmailAgain}
+                        >
+                            Send Again
+                        </Button>
                         <Stack
                             direction="row"
                             justifyContent={'flex-end'}
                             sx={{pl: 2, pr: 2}}
                         >
-                            <Button variant={'text' as any}>
+                            <Button
+                                variant={'text' as any}
+                                onClick={() => setState(states.CHANGE_EMAIL)}
+                            >
                                 <Typography
                                     variant={'smallLabel' as any}
                                     color="legendaryGreen.main"
@@ -60,34 +69,12 @@ const VerifyEmailContent = ({
                 <DefaultComponent>
                     <Stack>
                         <Typography variant={'smallHeadline' as any}>
-                            Verify Email
-                        </Typography>
-                        <Typography variant={'body1'}>
-                            We sent an email verification link to the address {}
-                        </Typography>
-                        <Typography variant={'body1'}>
-                            Click the link contained in this email to verify
-                            your account
+                            Re-enter email
                         </Typography>
 
-                        <Button variant={'primary' as any} disabled={true}>
-                            Send Again
-                        </Button>
-                        <Stack
-                            direction="row"
-                            justifyContent={'flex-end'}
-                            sx={{pl: 2, pr: 2}}
-                        >
-                            <Button variant={'text' as any}>
-                                <Typography
-                                    variant={'smallLabel' as any}
-                                    color="legendaryGreen.main"
-                                    sx={{ml: 1}}
-                                >
-                                    {'Re-Enter Email'}
-                                </Typography>
-                            </Button>
-                        </Stack>
+                        <ChangeEmailComponent
+                            onSubmit={onChangeEmailAddressRequested}
+                        ></ChangeEmailComponent>
                     </Stack>
                 </DefaultComponent>
             );

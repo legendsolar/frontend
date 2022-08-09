@@ -3,6 +3,7 @@ import delay from 'utils/delay';
 export default () => (
     <VerifyMfaContent
         onChangePhoneRequested={(newPhone) => {
+            console.log(newPhone);
             return delay(1000);
         }}
         onMfaCodeSubmit={(code) => {

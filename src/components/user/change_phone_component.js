@@ -89,7 +89,7 @@ const ChangePhoneComponent = ({
 
 ChangePhoneComponent.propTypes = {
     initialPhoneNumberValues: PropTypes.shape({
-        code: PropTypes.string,
+        phone: PropTypes.string,
     }),
     onSubmit: PropTypes.func,
 };
