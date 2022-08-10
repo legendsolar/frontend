@@ -127,6 +127,19 @@ const basePaths = [
     },
 
     {
+        name: 'map',
+        type: 'components',
+        tests: [
+            {
+                name: 'test_basic_map_component',
+            },
+            {
+                name: 'test_basic_globe_component',
+            },
+        ],
+    },
+
+    {
         name: 'pills',
         type: 'components',
         tests: [
