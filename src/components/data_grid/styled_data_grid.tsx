@@ -18,6 +18,7 @@ const StyledDataGrid = ({columns, rows, loading}: DataGridProps) => {
                 columns={columns}
                 autoPageSize
                 headerHeight={38}
+                disableSelectionOnClick
                 sx={{
                     color: 'blackDawn.main',
                     '& .MuiDataGrid-columnHeaders': {

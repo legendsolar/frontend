@@ -1,0 +1,90 @@
+import DocumentDataGrid, {DataGridDateRange} from '../document_data_grid';
+import {documents} from 'static_data/placeholder_documents';
+import {
+    differenceInMonths,
+    differenceInQuarters,
+    differenceInWeeks,
+} from 'date-fns';
+import delay from 'utils/delay';
+
+import {useState} from 'react';
+
+const TestTransferDataGrid = () => {
+    const [transfers, setTransfers] = useState<Array<any>>(documents);
+    const [asset, setAsset] = useState<string>('');
+    const [dateRange, setDateRange] = useState<DataGridDateRange>(
+        DataGridDateRange.NONE,
+    );
+
+    return (
+        <DocumentDataGrid
+            transfers={transfers}
+            onDownloadDocument={() => delay(1000)}
+            onChangeDateRange={(range) => {
+                console.log(`onChangeDateRange(${range})`);
+                setDateRange(range);
+                return delay(1000).then(() => {
+                    setTransfers(
+                        documents.filter((document) => {
+                            switch (range) {
+                                case DataGridDateRange.WEEK_TO_DATE:
+                                    return (
+                                        1 >
+                                        differenceInWeeks(
+                                            new Date(),
+                                            new Date(document.created),
+                                        )
+                                    );
+                                case DataGridDateRange.MONTH_TO_DATE:
+                                    return (
+                                        1 >
+                                        differenceInMonths(
+                                            new Date(),
+                                            new Date(document.created),
+                                        )
+                                    );
+                                case DataGridDateRange.LAST_SIX_MONTHS:
+                                    return (
+                                        6 >
+                                        differenceInMonths(
+                                            new Date(),
+                                            new Date(document.created),
+                                        )
+                                    );
+                                case DataGridDateRange.YEAR_TO_DATE:
+                                    return (
+                                        12 >
+                                        differenceInMonths(
+                                            new Date(),
+                                            new Date(document.created),
+                                        )
+                                    );
+                            }
+                            return true;
+                        }),
+                    );
+                });
+            }}
+            onChangeAsset={(asset) => {
+                console.log(`onChangeAsset(${asset})`);
+                setAsset(asset);
+                return delay(1000).then(() => {
+                    if (asset === 'None') {
+                        setTransfers(documents);
+                    } else {
+                        setTransfers(
+                            documents.filter(
+                                (transfer) => transfer.facility === asset,
+                            ),
+                        );
+                    }
+                });
+            }}
+            assetState={asset}
+            assetStates={['Barnyard Solar', 'California Solar', 'None']}
+            dateRange={dateRange}
+        ></DocumentDataGrid>
+    );
+};
+
+export default TestTransferDataGrid;
