@@ -20,6 +20,7 @@ const BasicGlobe = () => {
             style: 'mapbox://styles/mapbox/light-v10',
             center: [lng, lat],
             zoom: zoom,
+            interactive: false,
         });
     });
 

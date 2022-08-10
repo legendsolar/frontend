@@ -292,6 +292,9 @@ const basePaths = [
             {
                 name: 'test_create_wallet_content',
             },
+            {
+                name: 'test_portfolio_content',
+            },
         ],
     },
     {
