@@ -6,6 +6,9 @@ import DefaultComponent from 'components/utils/default_component';
 import {Stack, Typography} from '@mui/material';
 import DualPaneView from 'views/dual_pane_view';
 import PersonPanelPinkSVG from 'assets/images/panel_person_pink.svg';
+import DefaultView from 'views/default_view';
+import NavBar from 'components/utils/nav_bar';
+import {UserStatus} from 'schema/schema_gen_types';
 
 const basePaths = [
     {
@@ -295,6 +298,25 @@ const viewOptions = [
             );
         },
     },
+    {
+        name: 'DefaultView',
+        render: (componentUnderTest) => {
+            return (
+                <DefaultView
+                    authenticated={true}
+                    navBar={
+                        <NavBar
+                            userIsAuthenticated={true}
+                            userStatus={UserStatus.IdentityVerified}
+                            walletBalance={100}
+                        ></NavBar>
+                    }
+                >
+                    {componentUnderTest}
+                </DefaultView>
+            );
+        },
+    },
 ];
 
 const importComponent = (path) =>
@@ -350,7 +372,7 @@ function useQueryString(key, initialValue) {
 
 const ComponentView = () => {
     const [components, setComponents] = useState([]);
-    const [expanded, setExpanded] = useState(true);
+    const [expanded, setExpanded] = useQueryString('expanded');
     const [stack, setStack] = useState(true);
 
     const [baseName, setBaseName] = useQueryString('base');
@@ -373,6 +395,8 @@ const ComponentView = () => {
         if (!viewName) {
             setViewName(viewOptions[0].name);
         }
+
+        setExpanded(false);
     }, []);
 
     const selectedComponent = {

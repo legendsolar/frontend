@@ -494,7 +494,7 @@ const themeOptions = {
                         ...typographyOptions.typography.smallLabel,
                         height: '50px',
                         color: paletteOptions.palette.white.main,
-                        border: `1px solid ${paletteOptions.palette.white.main}`,
+                        border: `2px solid ${paletteOptions.palette.white.main}`,
                         '&:hover': {
                             opacity: '0.75',
                             backgroundColor: 'none',

@@ -7,6 +7,7 @@ import {userStatus as USER_STATUS} from 'utils/user_sign_up_state';
 import CreateAccountToolbar from './create_account_toolbar';
 import LoggedOutToolbar from './logged_out_toolbar';
 import LoggedInToolbar from './logged_in_toolbar';
+import TypemarkSolarSVG from 'assets/logos/typemark_solar_dark.svg';
 
 const NavBar = ({
     loading,
@@ -21,7 +22,7 @@ const NavBar = ({
     onAccount,
     onWallet,
 }) => {
-    const backgroundColor = userIsAuthenticated ? 'blackDusk.main' : 'none';
+    const backgroundColor = userIsAuthenticated ? 'whiteFog.main' : 'none';
     const headerHeight = '300px';
     return (
         <div>
@@ -74,9 +75,12 @@ const NavBar = ({
                                 alt="logo"
                             >
                                 {userIsAuthenticated ? (
-                                    <LegendsLogoLight></LegendsLogoLight>
+                                    <img
+                                        src={TypemarkSolarSVG}
+                                        style={{width: '175px'}}
+                                    ></img>
                                 ) : (
-                                    <LegendsLogoDark></LegendsLogoDark>
+                                    <img src={TypemarkSolarSVG}></img>
                                 )}
                             </Box>
 

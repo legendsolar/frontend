@@ -3,10 +3,7 @@ import {useAuth} from 'hooks/use_auth';
 import Footer from 'components/utils/footer';
 import NavBarUserContext from 'components/utils/nav_bar_user_context';
 
-const DefaultView = (props) => {
-    const auth = useAuth();
-    const backgroundColor = !!auth?.user ? 'blackDusk.main' : 'none';
-    // const backgroundColor = 'blackDusk.main';
+const DefaultView = ({children, authenticated, navBar}) => {
     const headerHeight = '300px';
 
     return (
@@ -28,12 +25,12 @@ const DefaultView = (props) => {
                 sx={{
                     width: '100%',
                     height: '100%',
-                    backgroundColor: 'whiteHaze.main',
+                    backgroundColor: 'white.main',
                     zIndex: -2,
                     transform: 'translate3d(0, 0, -10px)',
                 }}
             ></Box>
-            <NavBarUserContext></NavBarUserContext>
+            {navBar}
             <Box
                 sx={{
                     maxWidth: '1275px',
@@ -54,7 +51,7 @@ const DefaultView = (props) => {
                     mt: 16,
                 }}
             >
-                <Box sx={{minHeight: '100vh'}}>{props.children}</Box>
+                <Box sx={{minHeight: '100vh'}}>{children}</Box>
 
                 <Footer></Footer>
             </Box>

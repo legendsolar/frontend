@@ -12,30 +12,29 @@ const LoggedInToolbar = ({
     return (
         <Stack direction="row" alignItems={'flex-end'}>
             <Button variant="header" onClick={onYourRooftop}>
-                <Typography variant="appBarHeader">Your Rooftop</Typography>
+                <Typography variant="monoButton">Your Rooftop</Typography>
             </Button>
 
             <Button variant="header" onClick={onTransaction}>
-                <Typography variant="appBarHeader">Transactions</Typography>
+                <Typography variant="monoButton">Transactions</Typography>
             </Button>
 
             <Button variant="header" onClick={onDocuments}>
-                <Typography variant="appBarHeader">Documents</Typography>
+                <Typography variant="monoButton">Documents</Typography>
             </Button>
 
             <Button variant="header" onClick={onAvailablePanels}>
-                <Typography variant="appBarHeader">Available Panels</Typography>
+                <Typography variant="monoButton">Available Panels</Typography>
             </Button>
 
             <Button variant="header-outlined" onClick={onAccount}>
-                <Typography variant="appBarHeader">Account</Typography>
+                <Typography variant="monoButton">Account</Typography>
             </Button>
 
             <Stack sx={{maxWidth: '174px'}} spacing={1}>
                 <Typography
-                    variant="smallLabel"
+                    variant="monoButton"
                     sx={{
-                        color: 'white.main',
                         lineHeight: '12px',
                     }}
                 >
