@@ -1,4 +1,4 @@
-import {DataGrid} from '@mui/x-data-grid';
+import {DataGrid, GridColumns} from '@mui/x-data-grid';
 import {
     Button,
     Box,
@@ -14,13 +14,15 @@ import {format} from 'date-fns';
 import {useState} from 'react';
 import {transferTransformer} from 'hooks/use_transfer';
 
-const columns = [
+const columns: GridColumns = [
     {
         field: 'sourceName',
         headerName: 'From',
         minWidth: 130,
         flex: 1,
         editable: false,
+        headerClassName: 'first-column',
+        cellClassName: 'first-column-no-margin',
     },
     {
         field: 'destinationName',
@@ -55,24 +57,36 @@ const columns = [
         renderCell: (params) => {
             if (params.value === 'PENDING') {
                 return (
-                    <Chip
-                        label={'Pending'}
-                        color={'pencilYellow'}
-                        sx={{color: 'blackDawn.main'}}
-                    ></Chip>
+                    <div className="MuiDataGrid-cellContent">
+                        <Chip
+                            label={'Pending'}
+                            color={'pencilYellow' as any}
+                            sx={{color: 'blackDawn.main'}}
+                        ></Chip>
+                    </div>
                 );
             } else if (params.value === 'PROCESSED') {
                 return (
-                    <Chip
-                        label={'Complete'}
-                        color={'grassGreen'}
-                        sx={{color: 'blackDawn.main'}}
-                    ></Chip>
+                    <div className="MuiDataGrid-cellContent">
+                        <Chip
+                            label={'Complete'}
+                            color={'grassGreen' as any}
+                            sx={{color: 'blackDawn.main'}}
+                        ></Chip>
+                    </div>
                 );
             }
         },
     },
 ];
+
+interface TransferDataGridProps {
+    transfers: Array<any>;
+    assetStates: Array<string>;
+    onDownloadCsv(): Promise<any>;
+    onChangeDateRange(): Promise<any>;
+    onChangeAsset(): Promise<any>;
+}
 
 const TransferDataGrid = ({
     transfers,
@@ -80,7 +94,7 @@ const TransferDataGrid = ({
     onDownloadCsv,
     onChangeDateRange,
     onChangeAsset,
-}) => {
+}: TransferDataGridProps) => {
     const [downloadLinkLoading, setDownloadLinkLoading] = useState(false);
 
     const dateRangeStates = [
@@ -97,23 +111,24 @@ const TransferDataGrid = ({
                 direction="row"
                 justifyContent={'space-between'}
                 alignItems={'center'}
+                sx={{
+                    ml: '55px',
+                    mr: '70px',
+                }}
             >
-                <Typography variant="smallHeadline">Transactions</Typography>
+                <Typography variant={'smallHeadline' as any}>
+                    Transactions
+                </Typography>
 
                 <Stack direction="row" justifyContent={'flex-end'}>
                     <FormControl
-                        variant="filled"
+                        variant={'filled' as any}
                         fullWidth
-                        color={'light'}
+                        color={'light' as any}
                         sx={{width: '180px'}}
                     >
                         <InputLabel>Asset</InputLabel>
-                        <Select
-                            helperText={'state'}
-                            name="state"
-                            value={null}
-                            sx={{height: '55px'}}
-                        >
+                        <Select name="state" value={null} sx={{height: '55px'}}>
                             {assetStates.map((asset) => {
                                 return (
                                     <MenuItem key={asset} value={asset}>
@@ -127,16 +142,11 @@ const TransferDataGrid = ({
                     <FormControl
                         variant="filled"
                         fullWidth
-                        color={'light'}
+                        color={'light' as any}
                         sx={{width: '180px'}}
                     >
                         <InputLabel>Date Range</InputLabel>
-                        <Select
-                            helperText={'state'}
-                            name="state"
-                            value={null}
-                            sx={{height: '55px'}}
-                        >
+                        <Select name="state" value={null} sx={{height: '55px'}}>
                             {dateRangeStates.map((range) => {
                                 return (
                                     <MenuItem key={range} value={range}>
@@ -148,8 +158,8 @@ const TransferDataGrid = ({
                     </FormControl>
 
                     <Button
-                        variant="secondary"
-                        color={'light'}
+                        variant={'secondary' as any}
+                        color={'light' as any}
                         disabled={downloadLinkLoading}
                         onClick={() => {
                             setDownloadLinkLoading(true);
@@ -176,6 +186,11 @@ const TransferDataGrid = ({
                         },
                         '& .MuiDataGrid-footerContainer': {
                             border: 'none',
+                        },
+                        '& .first-column': {marginLeft: '100px'},
+
+                        '& .MuiDataGrid-cellContent': {
+                            marginLeft: '100px',
                         },
                     }}
                 />
