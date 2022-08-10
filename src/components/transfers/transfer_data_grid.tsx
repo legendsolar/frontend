@@ -22,7 +22,6 @@ const columns: GridColumns = [
         minWidth: 130,
         flex: 1,
         editable: false,
-        headerClassName: 'first-column',
     },
     {
         field: 'destinationName',
@@ -79,31 +78,34 @@ const columns: GridColumns = [
         },
     },
 ];
-
+export enum TransferDateRange {
+    WEEK_TO_DATE = 'Week to Date',
+    MONTH_TO_DATE = 'Month to date',
+    QUARTER_TO_DATE = 'Quarter to date',
+    LAST_SIX_MONTHS = 'Last six months',
+    YEAR_TO_DATE = 'Year to date',
+    NONE = 'None',
+}
 interface TransferDataGridProps {
     transfers: Array<any>;
     assetStates: Array<string>;
+    assetState: string;
+    dateRange: TransferDateRange;
     onDownloadCsv(): Promise<any>;
-    onChangeDateRange(): Promise<any>;
-    onChangeAsset(): Promise<any>;
+    onChangeDateRange(range: TransferDateRange): Promise<any>;
+    onChangeAsset(asset: string): Promise<any>;
 }
 
 const TransferDataGrid = ({
     transfers,
     assetStates,
+    assetState,
+    dateRange,
     onDownloadCsv,
     onChangeDateRange,
     onChangeAsset,
 }: TransferDataGridProps) => {
-    const [downloadLinkLoading, setDownloadLinkLoading] = useState(false);
-
-    const dateRangeStates = [
-        'Week to date',
-        'Month to date',
-        'Quarter to date',
-        'Last six month',
-        'Year to date',
-    ];
+    const [loading, setLoading] = useState(false);
 
     return (
         <Box sx={{mt: '100px'}}>
@@ -128,7 +130,17 @@ const TransferDataGrid = ({
                         sx={{width: '180px'}}
                     >
                         <InputLabel>Asset</InputLabel>
-                        <Select name="state" value={null} sx={{height: '55px'}}>
+                        <Select
+                            name="state"
+                            value={assetState}
+                            sx={{height: '55px'}}
+                            onChange={(e) => {
+                                setLoading(true);
+                                onChangeAsset(e.target.value).finally(() => {
+                                    setLoading(false);
+                                });
+                            }}
+                        >
                             {assetStates.map((asset) => {
                                 return (
                                     <MenuItem key={asset} value={asset}>
@@ -146,33 +158,51 @@ const TransferDataGrid = ({
                         sx={{width: '180px'}}
                     >
                         <InputLabel>Date Range</InputLabel>
-                        <Select name="state" value={null} sx={{height: '55px'}}>
-                            {dateRangeStates.map((range) => {
-                                return (
-                                    <MenuItem key={range} value={range}>
-                                        {range}
-                                    </MenuItem>
-                                );
-                            })}
+                        <Select
+                            name="state"
+                            value={dateRange}
+                            sx={{height: '55px'}}
+                            onChange={(e) => {
+                                setLoading(true);
+                                onChangeDateRange(
+                                    e.target.value as TransferDateRange,
+                                ).finally(() => {
+                                    setLoading(false);
+                                });
+                            }}
+                        >
+                            {Object.entries(TransferDateRange).map(
+                                ([key, value]) => {
+                                    return (
+                                        <MenuItem key={key} value={value}>
+                                            {value}
+                                        </MenuItem>
+                                    );
+                                },
+                            )}
                         </Select>
                     </FormControl>
 
                     <Button
                         variant={'secondary' as any}
                         color={'light' as any}
-                        disabled={downloadLinkLoading}
+                        disabled={loading}
                         onClick={() => {
-                            setDownloadLinkLoading(true);
+                            setLoading(true);
                             onDownloadCsv().finally(() => {
-                                setDownloadLinkLoading(false);
+                                setLoading(false);
                             });
                         }}
                     >
-                        {downloadLinkLoading ? 'Loading...' : 'Download CSV'}
+                        {loading ? 'Loading...' : 'Download CSV'}
                     </Button>
                 </Stack>
             </Stack>
-            <StyledDataGrid columns={columns} rows={transfers}></StyledDataGrid>
+            <StyledDataGrid
+                columns={columns}
+                rows={transfers}
+                loading={loading}
+            ></StyledDataGrid>
         </Box>
     );
 };
