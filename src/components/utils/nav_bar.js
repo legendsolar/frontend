@@ -67,22 +67,10 @@ const NavBar = ({
                                 transform: 'translate3d(0, 0, 0px)',
                             }}
                         >
-                            <Box
-                                sx={{
-                                    minWidth: '120px',
-                                    height: '45px',
-                                }}
-                                alt="logo"
-                            >
-                                {userIsAuthenticated ? (
-                                    <img
-                                        src={TypemarkSolarSVG}
-                                        style={{width: '175px'}}
-                                    ></img>
-                                ) : (
-                                    <img src={TypemarkSolarSVG}></img>
-                                )}
-                            </Box>
+                            <img
+                                src={TypemarkSolarSVG}
+                                style={{width: '175px'}}
+                            ></img>
 
                             {userIsAuthenticated &&
                                 userStatus ===

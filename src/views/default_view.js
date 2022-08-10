@@ -4,8 +4,6 @@ import Footer from 'components/utils/footer';
 import NavBarUserContext from 'components/utils/nav_bar_user_context';
 
 const DefaultView = ({children, authenticated, navBar}) => {
-    const headerHeight = '300px';
-
     return (
         <Box
             justifyContent="center"

@@ -260,7 +260,7 @@ const themeOptions = {
         MuiChip: {
             styleOverrides: {
                 root: {
-                    ...typographyOptions.label,
+                    ...typographyOptions.typography.label,
                 },
             },
             variants: [
@@ -283,14 +283,36 @@ const themeOptions = {
             ],
         },
 
-        // MuiGrid: {
-        //     // Default spacing for all Grid layouts
-        //     // These don't work - can't override
-        //     // defaultProps: {
-        //     //     rowSpacing: 2,
-        //     //     columnSpacing: 2,
-        //     // },
-        // },
+        MuiDataGrid: {
+            styleOverrides: {
+                root: {
+                    ...typographyOptions.typography.subtitle3,
+                    border: 'none',
+                    '& .MuiDataGrid-columnHeader:focus-within, & .MuiDataGrid-cell:focus-within':
+                        {
+                            outline: 'none',
+                        },
+
+                    '& .MuiDataGrid-columnHeader:focus, & .MuiDataGrid-cell:focus':
+                        {
+                            outline: 'none',
+                        },
+
+                    '& .MuiDataGrid-columnHeaderTitle': {
+                        ...typographyOptions.typography.subtitle3,
+                    },
+
+                    '& .MuiDataGrid-columnHeaders': {
+                        minHeight: '38px',
+                        backgroundColor: paletteOptions.palette.whiteHaze.main,
+                    },
+
+                    '& .MuiDataGrid-columnSeparator': {
+                        visibility: 'hidden',
+                    },
+                },
+            },
+        },
 
         MuiStack: {
             defaultProps: {
@@ -308,8 +330,7 @@ const themeOptions = {
                 {
                     props: {color: 'light'},
                     style: {
-                        border: `1px solid ${paletteOptions.palette.light.contrastText}`,
-                        color: paletteOptions.palette.light.contrastText,
+                        color: paletteOptions.palette.blackDusk.main,
                     },
                 },
                 // Enabled "Green" button
@@ -363,14 +384,11 @@ const themeOptions = {
                 {
                     props: {variant: 'secondary'},
                     style: {
-                        height: '44px',
+                        height: '55px',
                         backgroundColor: paletteOptions.palette.blackDawn.main,
                         color: paletteOptions.palette.blackDawn.contrastText,
 
-                        '&:hover': {
-                            backgroundColor:
-                                paletteOptions.palette.blackDawn.main,
-                        },
+                        ...typographyOptions.typography.subtitle2,
                     },
                 },
                 {
@@ -383,6 +401,13 @@ const themeOptions = {
                             backgroundColor:
                                 paletteOptions.palette.whiteFog.main,
                         },
+                    },
+                },
+                {
+                    props: {variant: 'secondary', color: 'light'},
+                    style: {
+                        backgroundColor: paletteOptions.palette.white.main,
+                        color: paletteOptions.palette.blackDawn.main,
                     },
                 },
 
@@ -578,7 +603,7 @@ const themeOptions = {
                     fontSize: '22px',
                     lineHeight: '20px',
                     textTransform: 'none',
-                    borderRadius: '5px',
+                    borderRadius: '0px',
                     whiteSpace: 'nowrap',
                     minWidth: 'auto',
                     '&:hover': {

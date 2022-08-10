@@ -31,8 +31,9 @@ const LoggedInToolbar = ({
                 <Typography variant="monoButton">Account</Typography>
             </Button>
 
-            <Stack sx={{maxWidth: '174px'}} spacing={1}>
+            <Stack sx={{width: '175px'}} spacing={1}>
                 <Typography
+                    display="inline"
                     variant="monoButton"
                     sx={{
                         lineHeight: '12px',

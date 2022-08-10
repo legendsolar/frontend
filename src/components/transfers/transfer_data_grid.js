@@ -1,89 +1,183 @@
 import {DataGrid} from '@mui/x-data-grid';
-import {Button, Box, Stack, Typography} from '@mui/material';
+import {
+    Button,
+    Box,
+    Stack,
+    Typography,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    Chip,
+} from '@mui/material';
 import {format} from 'date-fns';
-import {useCloudFunctions} from 'hooks/use_cloud_functions';
 import {useState} from 'react';
+import {transferTransformer} from 'hooks/use_transfer';
 
 const columns = [
     {
-        field: 'created',
-        headerName: 'Date',
-        width: 150,
-        editable: false,
-        valueFormatter: (params) => {
-            return format(new Date(params.value), 'P');
-        },
-    },
-    {
-        field: 'type',
-        headerName: 'Type',
-        width: 110,
-        editable: false,
-    },
-    {
-        field: 'status',
-        headerName: 'Status',
-        width: 140,
-        editable: false,
-    },
-    {
         field: 'sourceName',
         headerName: 'From',
-        width: 200,
+        minWidth: 130,
+        flex: 1,
         editable: false,
     },
     {
         field: 'destinationName',
         headerName: 'To',
-        width: 200,
+        minWidth: 90,
+        flex: 1,
         editable: false,
     },
     {
         field: 'amount',
         headerName: 'Amount',
-        width: 110,
+        minWidth: 70,
+        flex: 1,
         editable: false,
+        valueFormatter: (params) => {
+            return '$' + params.value;
+        },
+    },
+    {
+        field: 'date',
+        headerName: 'Date',
+        minWidth: 110,
+        flex: 1,
+        editable: false,
+    },
+    {
+        field: 'status',
+        headerName: 'Status',
+        minWidth: 140,
+        flex: 1,
+        editable: false,
+        renderCell: (params) => {
+            if (params.value === 'PENDING') {
+                return (
+                    <Chip
+                        label={'Pending'}
+                        color={'pencilYellow'}
+                        sx={{color: 'blackDawn.main'}}
+                    ></Chip>
+                );
+            } else if (params.value === 'PROCESSED') {
+                return (
+                    <Chip
+                        label={'Complete'}
+                        color={'grassGreen'}
+                        sx={{color: 'blackDawn.main'}}
+                    ></Chip>
+                );
+            }
+        },
     },
 ];
 
-const TransferDataGrid = ({transfers}) => {
-    const {downloadAllTransfers} = useCloudFunctions();
+const TransferDataGrid = ({
+    transfers,
+    assetStates,
+    onDownloadCsv,
+    onChangeDateRange,
+    onChangeAsset,
+}) => {
     const [downloadLinkLoading, setDownloadLinkLoading] = useState(false);
 
-    const onDownloadCsv = () => {
-        setDownloadLinkLoading(true);
-        downloadAllTransfers()
-            .then(({data}) => {
-                console.log(data.downloadLink);
-                window.open(data.downloadLink);
-            })
-            .finally(() => {
-                setDownloadLinkLoading(false);
-            });
-    };
+    const dateRangeStates = [
+        'Week to date',
+        'Month to date',
+        'Quarter to date',
+        'Last six month',
+        'Year to date',
+    ];
 
     return (
-        <Box>
-            <Stack direction="row" justifyContent={'space-between'}>
-                <Typography variant="smallHeadline">
-                    All Transactions
-                </Typography>
+        <Box sx={{mt: '100px'}}>
+            <Stack
+                direction="row"
+                justifyContent={'space-between'}
+                alignItems={'center'}
+            >
+                <Typography variant="smallHeadline">Transactions</Typography>
 
-                <Button
-                    variant="mini"
-                    disabled={downloadLinkLoading}
-                    onClick={onDownloadCsv}
-                >
-                    {downloadLinkLoading ? 'Loading...' : 'Download CSV'}
-                </Button>
+                <Stack direction="row" justifyContent={'flex-end'}>
+                    <FormControl
+                        variant="filled"
+                        fullWidth
+                        color={'light'}
+                        sx={{width: '180px'}}
+                    >
+                        <InputLabel>Asset</InputLabel>
+                        <Select
+                            helperText={'state'}
+                            name="state"
+                            value={null}
+                            sx={{height: '55px'}}
+                        >
+                            {assetStates.map((asset) => {
+                                return (
+                                    <MenuItem key={asset} value={asset}>
+                                        {asset}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+
+                    <FormControl
+                        variant="filled"
+                        fullWidth
+                        color={'light'}
+                        sx={{width: '180px'}}
+                    >
+                        <InputLabel>Date Range</InputLabel>
+                        <Select
+                            helperText={'state'}
+                            name="state"
+                            value={null}
+                            sx={{height: '55px'}}
+                        >
+                            {dateRangeStates.map((range) => {
+                                return (
+                                    <MenuItem key={range} value={range}>
+                                        {range}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+
+                    <Button
+                        variant="secondary"
+                        color={'light'}
+                        disabled={downloadLinkLoading}
+                        onClick={() => {
+                            setDownloadLinkLoading(true);
+                            onDownloadCsv().finally(() => {
+                                setDownloadLinkLoading(false);
+                            });
+                        }}
+                    >
+                        {downloadLinkLoading ? 'Loading...' : 'Download CSV'}
+                    </Button>
+                </Stack>
             </Stack>
 
             <Box sx={{width: '100%', height: '850px', mt: 2}}>
                 <DataGrid
                     rows={transfers}
                     columns={columns}
-                    pageSize={25}
-                    rowsPerPageOptions={[5]}
+                    autoPageSize
+                    headerHeight={38}
+                    sx={{
+                        color: 'blackDawn.main',
+                        '& .MuiDataGrid-columnHeaders': {
+                            minHeight: '38px',
+                        },
+                        '& .MuiDataGrid-footerContainer': {
+                            border: 'none',
+                        },
+                    }}
                 />
             </Box>
         </Box>

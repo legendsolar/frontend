@@ -1,8 +1,13 @@
 import TransferDataGrid from '../transfer_data_grid';
-import {transfers} from './defaults';
+import {testTransfers} from 'static_data/placeholder_transfers';
 
 const TestTransferDataGrid = () => {
-    return <TransferDataGrid transfers={transfers}></TransferDataGrid>;
+    return (
+        <TransferDataGrid
+            assetStates={['Barnyard Solar', 'New York Solar']}
+            transfers={testTransfers}
+        ></TransferDataGrid>
+    );
 };
 
 export default TestTransferDataGrid;

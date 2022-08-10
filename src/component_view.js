@@ -7,6 +7,7 @@ import {Stack, Typography} from '@mui/material';
 import DualPaneView from 'views/dual_pane_view';
 import PersonPanelPinkSVG from 'assets/images/panel_person_pink.svg';
 import DefaultView from 'views/default_view';
+import FullPageView from 'views/full_page_view';
 import NavBar from 'components/utils/nav_bar';
 import {UserStatus} from 'schema/schema_gen_types';
 
@@ -314,6 +315,25 @@ const viewOptions = [
                 >
                     {componentUnderTest}
                 </DefaultView>
+            );
+        },
+    },
+    {
+        name: 'FullPageView',
+        render: (componentUnderTest) => {
+            return (
+                <FullPageView
+                    authenticated={true}
+                    navBar={
+                        <NavBar
+                            userIsAuthenticated={true}
+                            userStatus={UserStatus.IdentityVerified}
+                            walletBalance={100}
+                        ></NavBar>
+                    }
+                >
+                    {componentUnderTest}
+                </FullPageView>
             );
         },
     },

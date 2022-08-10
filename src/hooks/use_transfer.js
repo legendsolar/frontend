@@ -77,13 +77,14 @@ const transferColorTransformer = (status) => {
     }
 };
 
-const transferTransformer = (transfer) => {
+export const transferTransformer = (transfer) => {
     return {
         ...transfer,
         title: transferTitle(transfer),
         destinationName: transfer.destinationAccount.name,
         sourceName: transferSourceName(transfer),
         color: transferColorTransformer(transfer.status),
+        date: createdDate(new Date(transfer.created)),
     };
 };
 
