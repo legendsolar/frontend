@@ -13,6 +13,7 @@ import {
 import {format} from 'date-fns';
 import {useState} from 'react';
 import {transferTransformer} from 'hooks/use_transfer';
+import StyledDataGrid from 'components/data_grid/styled_data_grid';
 
 const columns: GridColumns = [
     {
@@ -22,7 +23,6 @@ const columns: GridColumns = [
         flex: 1,
         editable: false,
         headerClassName: 'first-column',
-        cellClassName: 'first-column-no-margin',
     },
     {
         field: 'destinationName',
@@ -172,29 +172,7 @@ const TransferDataGrid = ({
                     </Button>
                 </Stack>
             </Stack>
-
-            <Box sx={{width: '100%', height: '850px', mt: 2}}>
-                <DataGrid
-                    rows={transfers}
-                    columns={columns}
-                    autoPageSize
-                    headerHeight={38}
-                    sx={{
-                        color: 'blackDawn.main',
-                        '& .MuiDataGrid-columnHeaders': {
-                            minHeight: '38px',
-                        },
-                        '& .MuiDataGrid-footerContainer': {
-                            border: 'none',
-                        },
-                        '& .first-column': {marginLeft: '100px'},
-
-                        '& .MuiDataGrid-cellContent': {
-                            marginLeft: '100px',
-                        },
-                    }}
-                />
-            </Box>
+            <StyledDataGrid columns={columns} rows={transfers}></StyledDataGrid>
         </Box>
     );
 };
