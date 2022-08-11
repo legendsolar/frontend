@@ -247,6 +247,11 @@ const themeOptions = {
                         borderRadius: '5px',
                         overflow: 'hidden',
                     },
+                    props: {variant: 'none'},
+                    style: {
+                        padding: 0,
+                        background: 'none',
+                    },
                 },
             ],
         },

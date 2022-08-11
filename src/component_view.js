@@ -301,6 +301,9 @@ const basePaths = [
             {
                 name: 'test_portfolio_content',
             },
+            {
+                name: 'test_discovery_content',
+            },
         ],
     },
     {

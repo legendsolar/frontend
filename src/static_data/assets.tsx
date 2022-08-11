@@ -1,5 +1,5 @@
-const assetData = {
-    santa_rosa: {
+const assetData = [
+    {
         title: 'Santa Rosa Solar',
         minInvestment: '$131,000',
         metrics: [
@@ -88,9 +88,11 @@ const assetData = {
             },
         ],
         color: 'blue',
+        lat: 38.44466,
+        lng: -122.720306,
     },
 
-    glassboro: {
+    {
         title: 'Glassboro Solar',
         minInvestment: '$131,000',
         metrics: [
@@ -123,9 +125,11 @@ const assetData = {
             },
         ],
         color: 'yellow',
+        lat: 39.702892,
+        lng: -75.111839,
     },
 
-    lake_elsinore: {
+    {
         title: 'Lake Elsinore Solar',
         minInvestment: '$131,000',
 
@@ -159,9 +163,11 @@ const assetData = {
             },
         ],
         color: 'green',
+        lat: 33.66808,
+        lng: -117.32726,
     },
 
-    lindenwold: {
+    {
         title: 'Lindenwold Solar',
 
         minInvestment: '$131,000',
@@ -196,7 +202,87 @@ const assetData = {
             },
         ],
         color: 'red',
+        lat: 39.817226,
+        lng: -74.988892,
     },
-};
+
+    {
+        title: 'Honolulu Solar',
+
+        minInvestment: '$131,000',
+
+        metrics: [
+            {
+                metric: 'Number of panels',
+                value: '114',
+            },
+            {
+                metric: 'Make & model',
+                value: 'Phono Solar 400W',
+            },
+            {
+                metric: 'Watts Installed',
+                value: '45,600 W',
+            },
+        ],
+
+        specifications: [
+            {
+                metric: 'Number of panels',
+                value: '114',
+            },
+            {
+                metric: 'Make & model',
+                value: 'Phono Solar 400W',
+            },
+            {
+                metric: 'Watts Installed',
+                value: '45,600 W',
+            },
+        ],
+        color: 'red',
+        lat: 21.315603,
+        lng: -157.858093,
+    },
+
+    {
+        title: 'Fairbanks Solar',
+
+        minInvestment: '$131,000',
+
+        metrics: [
+            {
+                metric: 'Number of panels',
+                value: '114',
+            },
+            {
+                metric: 'Make & model',
+                value: 'Phono Solar 400W',
+            },
+            {
+                metric: 'Watts Installed',
+                value: '45,600 W',
+            },
+        ],
+
+        specifications: [
+            {
+                metric: 'Number of panels',
+                value: '114',
+            },
+            {
+                metric: 'Make & model',
+                value: 'Phono Solar 400W',
+            },
+            {
+                metric: 'Watts Installed',
+                value: '45,600 W',
+            },
+        ],
+        color: 'red',
+        lat: 64.835365,
+        lng: -147.776749,
+    },
+];
 
 export default assetData;

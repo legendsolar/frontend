@@ -5,12 +5,17 @@ import mapboxgl from '!mapbox-gl';
 
 import {useRef, useState, useEffect} from 'react';
 
-const BasicGlobe = () => {
+interface BasicGlobeProps {
+    width: string;
+    height: string;
+    lat: number;
+    lng: number;
+    zoom: number;
+}
+
+const BasicGlobe = ({width, height, lat, lng, zoom}: BasicGlobeProps) => {
     const mapContainer = useRef(null);
     const map = useRef(null);
-    const [lng, setLng] = useState(-70.9);
-    const [lat, setLat] = useState(42.35);
-    const [zoom, setZoom] = useState(1);
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -27,25 +32,16 @@ const BasicGlobe = () => {
     useEffect(() => {
         if (map.current) {
             // @ts-ignore
-            map.current.easeTo({
+            map.current.flyTo({
                 center: [lng, lat],
                 duration: 1000,
-                easing(t: any) {
-                    return t;
-                },
             });
         }
     }, [lat, lng]);
 
-    useEffect(() => {
-        setTimeout(() => {
-            setLng(lng + 5);
-        }, 1000);
-    }, [lng]);
-
     return (
         <div
-            style={{height: '100vh'}}
+            style={{width, height}}
             ref={mapContainer}
             className="map-container"
         />
