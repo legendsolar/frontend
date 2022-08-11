@@ -1,4 +1,5 @@
 import {Typography, Stack} from '@mui/material';
+import TestMetricGauge from 'components/gauges/tests/test_metric_gauge';
 import BasicMap from 'components/map/basic_map_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
 import DefaultComponent from 'components/utils/default_component';
@@ -37,7 +38,19 @@ const PortfolioContent = ({title, subtitle}: PortfolioContentProps) => {
 
                 <Stack direction={'row'}></Stack>
 
-                <RooftopContent widgets={<div>test</div>}></RooftopContent>
+                <RooftopContent
+                    widgets={
+                        <Stack direction={'row'}>
+                            <Stack>
+                                <DefaultComponent paper>
+                                    <TestMetricGauge></TestMetricGauge>
+                                </DefaultComponent>
+                            </Stack>
+
+                            <Stack></Stack>
+                        </Stack>
+                    }
+                ></RooftopContent>
                 <Typography>Recent transactions</Typography>
                 <TransferDataGrid
                     transfers={testTransfers.slice(0, 5)}
