@@ -1,34 +1,41 @@
-// import 'mapbox_init';
+import {useRef, useState, useEffect, useCallback} from 'react';
+import Map from 'react-map-gl';
+import Marker from 'components/map/marker';
 
-// // @ts-ignore
-// import mapboxgl from '!mapbox-gl';
+interface BasicMapProps {
+    width: string;
+    height: string;
+    lat: number;
+    lng: number;
+    zoom: number;
+    markers?: Array<JSX.Element>;
+}
 
-// import {useRef, useState, useEffect} from 'react';
+const BasicMap = ({width, height, lat, lng, zoom, markers}: BasicMapProps) => {
+    const mapRef: any = useRef();
 
-const BasicMap = () => {
-    // const mapContainer = useRef(null);
-    // const map = useRef(null);
-    // const [lng, setLng] = useState(-70.9);
-    // const [lat, setLat] = useState(42.35);
-    // const [zoom, setZoom] = useState(9);
-
-    // useEffect(() => {
-    //     if (map.current) return; // initialize map only once
-    //     map.current = new mapboxgl.Map({
-    //         container: mapContainer.current,
-    //         style: 'mapbox://styles/mapbox/light-v10',
-    //         center: [lng, lat],
-    //         zoom: zoom,
-    //         interactive: false,
-    //     });
-    // });
+    useEffect(() => {
+        if (mapRef.current) {
+            mapRef.current.flyTo({
+                center: [lng, lat],
+                duration: 1000,
+            });
+        }
+    }, [lat, lng]);
 
     return (
-        <div
-        // style={{height: '100vh'}}
-        // ref={mapContainer}
-        // className="map-container"
-        />
+        <Map
+            initialViewState={{
+                longitude: lng,
+                latitude: lat,
+                zoom: zoom,
+            }}
+            ref={mapRef}
+            style={{width, height}}
+            mapStyle={'mapbox://styles/mapbox/light-v10'}
+        >
+            {markers?.map((marker) => marker)}
+        </Map>
     );
 };
 export default BasicMap;

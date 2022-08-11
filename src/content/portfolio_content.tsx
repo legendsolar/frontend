@@ -30,7 +30,13 @@ const PortfolioContent = ({title, subtitle}: PortfolioContentProps) => {
                 standardWidth={false}
                 sx={{height: '400px', m: 0, p: 0}}
             >
-                <BasicMap></BasicMap>
+                <BasicMap
+                    lat={0}
+                    lng={0}
+                    width={'100%'}
+                    height={'400px'}
+                    zoom={10}
+                ></BasicMap>
             </DefaultComponent>
 
             <Stack>
