@@ -290,6 +290,12 @@ const basePaths = [
                 name: 'test_verify_accreditation_content',
             },
             {
+                name: 'test_transfer_grid_content',
+            },
+            {
+                name: 'test_document_grid_content',
+            },
+            {
                 name: 'test_create_wallet_content',
             },
             {

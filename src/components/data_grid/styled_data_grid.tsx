@@ -5,13 +5,14 @@ interface DataGridProps {
     columns: GridColumns;
     rows: Array<any>;
     loading: boolean;
+    sx: any;
 }
 
-const StyledDataGrid = ({columns, rows, loading}: DataGridProps) => {
+const StyledDataGrid = ({columns, rows, loading, sx}: DataGridProps) => {
     columns[0].headerClassName = 'first-column';
 
     return (
-        <Box sx={{width: '100%', height: '850px', mt: 2}}>
+        <Box sx={sx}>
             <DataGrid
                 loading={loading}
                 rows={rows}
