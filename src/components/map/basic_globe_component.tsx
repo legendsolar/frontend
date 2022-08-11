@@ -39,7 +39,7 @@ const BasicGlobe = ({
             }}
             ref={mapRef}
             style={{width, height}}
-            mapStyle={'mapbox://styles/mapbox/light-v10'}
+            mapStyle={'mapbox://styles/john-legends/cl6p8ktei000f15sjhbydsx24'}
             projection={'globe'}
         >
             {markers?.map((marker) => marker)}
