@@ -183,34 +183,6 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
                             autoComplete="current-password"
                         />
                     </Grid>
-
-                    <Grid item xs={12} lg={12}>
-                        <Stack>
-                            <Typography variant="label">
-                                Personal access phrase sent in our offer for you
-                                to join Legends. This code must match the email
-                                it was sent to.
-                            </Typography>
-                            <TextField
-                                color={color}
-                                error={
-                                    formik.touched.accessPhrase &&
-                                    Boolean(formik.errors.accessPhrase)
-                                }
-                                helperText={
-                                    formik.touched.accessPhrase &&
-                                    formik.errors.accessPhrase
-                                }
-                                value={formik.values.accessPhrase}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                name="accessPhrase"
-                                label="Access Phrase"
-                                type="password"
-                                id="accessPhrase"
-                            />
-                        </Stack>
-                    </Grid>
                 </Grid>
 
                 <Stack>
