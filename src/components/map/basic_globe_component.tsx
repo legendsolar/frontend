@@ -1,9 +1,6 @@
-import 'mapbox_init';
-
-// @ts-ignore
-import mapboxgl from '!mapbox-gl';
-
-import {useRef, useState, useEffect} from 'react';
+import {useRef, useState, useEffect, useCallback} from 'react';
+import Map from 'react-map-gl';
+import Marker from 'components/map/marker';
 
 interface BasicGlobeProps {
     width: string;
@@ -11,28 +8,22 @@ interface BasicGlobeProps {
     lat: number;
     lng: number;
     zoom: number;
+    markers?: Array<JSX.Element>;
 }
 
-const BasicGlobe = ({width, height, lat, lng, zoom}: BasicGlobeProps) => {
-    const mapContainer = useRef(null);
-    const map = useRef(null);
+const BasicGlobe = ({
+    width,
+    height,
+    lat,
+    lng,
+    zoom,
+    markers,
+}: BasicGlobeProps) => {
+    const mapRef: any = useRef();
 
     useEffect(() => {
-        if (map.current) return; // initialize map only once
-        map.current = new mapboxgl.Map({
-            container: mapContainer.current,
-            projection: 'globe',
-            style: 'mapbox://styles/mapbox/light-v10',
-            center: [lng, lat],
-            zoom: zoom,
-            interactive: false,
-        });
-    });
-
-    useEffect(() => {
-        if (map.current) {
-            // @ts-ignore
-            map.current.flyTo({
+        if (mapRef.current) {
+            mapRef.current.flyTo({
                 center: [lng, lat],
                 duration: 1000,
             });
@@ -40,11 +31,19 @@ const BasicGlobe = ({width, height, lat, lng, zoom}: BasicGlobeProps) => {
     }, [lat, lng]);
 
     return (
-        <div
+        <Map
+            initialViewState={{
+                longitude: lng,
+                latitude: lat,
+                zoom: zoom,
+            }}
+            ref={mapRef}
             style={{width, height}}
-            ref={mapContainer}
-            className="map-container"
-        />
+            mapStyle={'mapbox://styles/mapbox/light-v10'}
+            projection={'globe'}
+        >
+            {markers?.map((marker) => marker)}
+        </Map>
     );
 };
 export default BasicGlobe;

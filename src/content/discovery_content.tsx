@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BasicGlobe from 'components/map/basic_globe_component';
 import DefaultComponent from 'components/utils/default_component';
 import {useState} from 'react';
+import Marker from 'components/map/marker';
 
 interface DiscoveryContentProps {
     assets: Array<any>;
@@ -76,14 +77,37 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
             <DefaultComponent
                 standardWidth={false}
                 paper
-                sx={{width: '100%', height: '80vh', p: 0}}
+                sx={{
+                    width: '100%',
+                    height: '80vh',
+                    p: 0,
+                    overflow: 'hidden',
+                    borderRadius: '20px',
+                }}
             >
                 <BasicGlobe
                     lat={selectedAsset.lat}
                     lng={selectedAsset.lng}
                     zoom={3}
                     width="100%"
-                    height="60vh"
+                    height="80vh"
+                    markers={assets.map((asset) => (
+                        <Marker lng={asset.lng} lat={asset.lat}>
+                            {selectedAsset === asset ? (
+                                <DefaultComponent
+                                    paper
+                                    standardWidth={false}
+                                    sx={{p: 2}}
+                                >
+                                    <Typography variant={'label' as any}>
+                                        {asset.title}
+                                    </Typography>
+                                </DefaultComponent>
+                            ) : (
+                                <div>☀️</div>
+                            )}
+                        </Marker>
+                    ))}
                 ></BasicGlobe>
             </DefaultComponent>
         </Stack>
