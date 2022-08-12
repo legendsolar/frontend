@@ -1,22 +1,29 @@
 import {useAuth} from 'hooks/use_auth';
-import {useEffect, useLayoutEffect, useMemo} from 'react';
 import {Navigate, useNavigate} from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
 import LoadingView from 'views/loading_view';
-import PropTypes from 'prop-types';
-import ErrorPage from 'pages/error_page';
 import {useUser} from 'hooks/use_user';
+import {UserStatus} from 'schema/schema_gen_types';
+import {ROUTES} from './app_router';
+import ErrorPage from 'pages/error_page';
+
+interface ProtectedRouteProps {
+    children: JSX.Element;
+    disallowedUserStates?: Array<UserStatus>;
+    disallowedRedirectPath?: ROUTES;
+    requiredUserStates?: Array<UserStatus>;
+    requiredRedirectPath?: ROUTES;
+}
 
 const ProtectedRoute = ({
     children,
     disallowedUserStates,
-    disallowedPath,
+    disallowedRedirectPath = ROUTES.USER_HOME,
     requiredUserStates,
-    requiredPath,
-}) => {
+    requiredRedirectPath = ROUTES.CREATE_ACCOUNT,
+}: ProtectedRouteProps) => {
     const auth = useAuth();
     const location = useLocation();
-    const navigate = useNavigate();
 
     const {useGetUserStatus} = useUser();
 
@@ -31,7 +38,11 @@ const ProtectedRoute = ({
         return <LoadingView></LoadingView>;
     }
 
-    console.log({user: auth.user, status});
+    console.log(auth.user);
+
+    if (error && !(error?.networkError?.type === 'AuthenticationError')) {
+        return <ErrorPage></ErrorPage>;
+    }
 
     if (
         status &&
@@ -41,7 +52,7 @@ const ProtectedRoute = ({
     ) {
         return (
             <Navigate
-                to={disallowedPath}
+                to={disallowedRedirectPath}
                 replace
                 state={{
                     path: location.pathname,
@@ -51,14 +62,15 @@ const ProtectedRoute = ({
     }
 
     if (
-        status &&
-        status !== 'NO_ACCOUNT' &&
-        requiredUserStates &&
-        requiredUserStates.indexOf(status) === -1
+        !auth.user ||
+        (status &&
+            status !== 'NO_ACCOUNT' &&
+            requiredUserStates &&
+            requiredUserStates.indexOf(status) === -1)
     ) {
         return (
             <Navigate
-                to={requiredPath}
+                to={requiredRedirectPath}
                 replace
                 state={{
                     path: location.pathname,
@@ -67,31 +79,7 @@ const ProtectedRoute = ({
         );
     }
 
-    return auth.user ? (
-        children
-    ) : (
-        <Navigate
-            to="/signin"
-            replace
-            state={{
-                path: location.pathname,
-            }}
-        />
-    );
-};
-
-ProtectedRoute.propTypes = {
-    disallowedUserStates: PropTypes.array,
-    disallowedPath: PropTypes.string,
-    requiredUserStates: PropTypes.array,
-    requiredPath: PropTypes.string,
-};
-
-ProtectedRoute.defaultProps = {
-    disallowedUserStates: null,
-    disallowedPath: '/',
-    requiredUserStates: null,
-    requiredPath: '/',
+    return children;
 };
 
 export default ProtectedRoute;

@@ -3,7 +3,11 @@ import DefaultComponent from 'components/utils/default_component';
 import DefaultView from 'views/default_view';
 
 const ErrorPage = ({}) => {
-    return <DefaultView></DefaultView>;
+    return (
+        <DefaultView>
+            <>uh oh</>
+        </DefaultView>
+    );
 };
 
 export default ErrorPage;

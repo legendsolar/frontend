@@ -20,13 +20,15 @@ import InvestPage from 'pages/invest_page';
 import ErrorPage from 'pages/error_page';
 import NotFoundPage from 'pages/not_found_page';
 import PrivacyPolicyPage from 'pages/privacy_policy_page';
+import {UserStatus} from 'schema/schema_gen_types';
 
-export const routes = {
-    SIGN_IN: '/sign_in',
-    CREATE_ACCOUNT: '/create',
-    TERMS_AND_CONDITIONS: '/terms_conditions',
-    PRIVACY_POLICY: '/privacy',
-};
+export enum ROUTES {
+    SIGN_IN = '/sign_in',
+    CREATE_ACCOUNT = '/create',
+    TERMS_AND_CONDITIONS = '/terms_conditions',
+    PRIVACY_POLICY = '/privacy',
+    USER_HOME = '/',
+}
 
 function AppRouter() {
     return (
@@ -37,7 +39,7 @@ function AppRouter() {
 
                     {/** No auth required */}
                     <Route
-                        path={routes.SIGN_IN}
+                        path={ROUTES.SIGN_IN}
                         element={
                             <UnprotectedRoute>
                                 <SignInView />
@@ -54,7 +56,7 @@ function AppRouter() {
                     />
 
                     <Route
-                        path={routes.TERMS_AND_CONDITIONS}
+                        path={ROUTES.TERMS_AND_CONDITIONS}
                         element={
                             <UnprotectedRoute>
                                 <TermsConditionsPage />
@@ -63,7 +65,7 @@ function AppRouter() {
                     />
 
                     <Route
-                        path={routes.PRIVACY_POLICY}
+                        path={ROUTES.PRIVACY_POLICY}
                         element={
                             <UnprotectedRoute>
                                 <PrivacyPolicyPage></PrivacyPolicyPage>
@@ -72,7 +74,7 @@ function AppRouter() {
                     />
 
                     <Route
-                        path={routes.CREATE_ACCOUNT + '/*'}
+                        path={ROUTES.CREATE_ACCOUNT + '/*'}
                         element={
                             <UnprotectedRoute>
                                 <CreateAccountPage></CreateAccountPage>
@@ -87,9 +89,9 @@ function AppRouter() {
                         element={
                             <ProtectedRoute
                                 requiredUserStates={[
-                                    USER_STATUS.IDENTITY_VERIFIED,
+                                    UserStatus.IdentityVerified,
                                 ]}
-                                requiredPath="/complete-account"
+                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
                             >
                                 <PortfolioPage></PortfolioPage>
                             </ProtectedRoute>
@@ -100,9 +102,9 @@ function AppRouter() {
                         element={
                             <ProtectedRoute
                                 requiredUserStates={[
-                                    USER_STATUS.IDENTITY_VERIFIED,
+                                    UserStatus.IdentityVerified,
                                 ]}
-                                requiredPath="/complete-account"
+                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
                             >
                                 <AccountPage />
                             </ProtectedRoute>
@@ -114,9 +116,9 @@ function AppRouter() {
                         element={
                             <ProtectedRoute
                                 requiredUserStates={[
-                                    USER_STATUS.IDENTITY_VERIFIED,
+                                    UserStatus.IdentityVerified,
                                 ]}
-                                requiredPath="/complete-account"
+                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
                             >
                                 <WalletPage />
                             </ProtectedRoute>
@@ -128,9 +130,9 @@ function AppRouter() {
                         element={
                             <ProtectedRoute
                                 requiredUserStates={[
-                                    USER_STATUS.IDENTITY_VERIFIED,
+                                    UserStatus.IdentityVerified,
                                 ]}
-                                requiredPath="/complete-account"
+                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
                             >
                                 <WalletPage />
                             </ProtectedRoute>
@@ -142,9 +144,9 @@ function AppRouter() {
                         element={
                             <ProtectedRoute
                                 requiredUserStates={[
-                                    USER_STATUS.IDENTITY_VERIFIED,
+                                    UserStatus.IdentityVerified,
                                 ]}
-                                requiredPath="/complete-account"
+                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
                             >
                                 <DocumentPage />
                             </ProtectedRoute>
@@ -156,8 +158,9 @@ function AppRouter() {
                         element={
                             <ProtectedRoute
                                 requiredUserStates={[
-                                    USER_STATUS.IDENTITY_VERIFIED,
+                                    UserStatus.IdentityVerified,
                                 ]}
+                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
                             >
                                 <TransactionView />
                             </ProtectedRoute>
@@ -167,7 +170,12 @@ function AppRouter() {
                     <Route
                         path="/explore"
                         element={
-                            <ProtectedRoute>
+                            <ProtectedRoute
+                                requiredUserStates={[
+                                    UserStatus.IdentityVerified,
+                                ]}
+                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
+                            >
                                 <ExplorePage />
                             </ProtectedRoute>
                         }
@@ -176,7 +184,12 @@ function AppRouter() {
                     <Route
                         path="/invest/:assetName"
                         element={
-                            <ProtectedRoute>
+                            <ProtectedRoute
+                                requiredUserStates={[
+                                    UserStatus.IdentityVerified,
+                                ]}
+                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
+                            >
                                 <InvestPage />
                             </ProtectedRoute>
                         }

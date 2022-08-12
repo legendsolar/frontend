@@ -6,7 +6,7 @@ import Scroller from 'components/utils/scroller';
 import DefaultComponent from 'components/utils/default_component';
 
 import {useLocation, useNavigate} from 'react-router-dom';
-import {routes} from 'routes/app_router';
+import {ROUTES} from 'routes/app_router';
 
 const TermsConditionsPage = () => {
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ const TermsConditionsPage = () => {
             upperLeftCorner={
                 <Button
                     variant="mono"
-                    onClick={() => navigate(routes.CREATE_ACCOUNT)}
+                    onClick={() => navigate(ROUTES.CREATE_ACCOUNT)}
                 >
                     Back to create account
                 </Button>

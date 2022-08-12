@@ -28,7 +28,7 @@ import useLinearFlow from 'hooks/use_linear_flow';
 import SignUpOptionComponent from 'components/signup/sign_up_option_component';
 import CreateAccountContent from 'content/create_account_content';
 import AccountCreateInfoContent from 'content/account_create_info_content';
-import {routes} from 'routes/app_router';
+import {ROUTES} from 'routes/app_router';
 
 const CompleteAccountPage = () => {
     const stateIndexes = {
@@ -53,7 +53,7 @@ const CompleteAccountPage = () => {
     }, [userSignUpStatus]);
 
     useEffect(() => {
-        navigate(routes.CREATE_ACCOUNT + '/' + stateName);
+        navigate(ROUTES.CREATE_ACCOUNT + '/' + stateName);
     }, [stateName]);
 
     const states = {
@@ -63,10 +63,10 @@ const CompleteAccountPage = () => {
                 onSignUpWithGoogle={() => {}}
                 onNavigateToSignIn={() => {}}
                 onNavigateToPrivacyPolicy={() =>
-                    navigate(routes.PRIVACY_POLICY)
+                    navigate(ROUTES.PRIVACY_POLICY)
                 }
                 onNavigateToTermsOfService={() =>
-                    navigate(routes.TERMS_AND_CONDITIONS)
+                    navigate(ROUTES.TERMS_AND_CONDITIONS)
                 }
             ></CreateAccountContent>
         ),
