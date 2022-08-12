@@ -5,6 +5,7 @@ import {useLocation} from 'react-router-dom';
 import {authErrorHandler} from 'utils/auth_error_translator';
 import {throwValidationError} from 'utils/errors';
 import {useUser} from './use_user';
+import {ROUTES} from 'routes/app_router';
 
 const useSignIn = () => {
     const navigate = useNavigate();
@@ -61,7 +62,7 @@ const useSignIn = () => {
     };
 
     const onCreateNewAccount = () => {
-        navigate('/signUp');
+        navigate(ROUTES.CREATE_ACCOUNT);
     };
 
     const onSignInWithGoogle = async () => {
@@ -73,11 +74,11 @@ const useSignIn = () => {
     };
 
     const onSignUpWithEmail = () => {
-        navigate('/complete-account');
+        navigate(ROUTES.CREATE_ACCOUNT);
     };
 
     const onNavigateToSignIn = () => {
-        navigate('/signin');
+        navigate(ROUTES.SIGN_IN);
     };
 
     const onForgotPassword = (values) => {

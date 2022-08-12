@@ -14,7 +14,12 @@ import {validateEmail} from 'validation/user_data_validation';
 import {ErrorTypes} from 'utils/errors';
 import {useState} from 'react';
 
-const ForgotPasswordComponent = ({initialValues, onSubmit, onBackToSignIn}) => {
+const ForgotPasswordComponent = ({
+    initialValues,
+    onSubmit,
+    onBackToSignIn,
+    color,
+}) => {
     const [resetLinkSent, setResetLinkSent] = useState(false);
 
     const formik = useFormik({
@@ -59,6 +64,7 @@ const ForgotPasswordComponent = ({initialValues, onSubmit, onBackToSignIn}) => {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
+                        color={color}
                     />
 
                     <Button
@@ -82,8 +88,14 @@ const ForgotPasswordComponent = ({initialValues, onSubmit, onBackToSignIn}) => {
                     </Button>
 
                     <Stack direction={'row'} justifyContent={'space-between'}>
-                        <Button variant="mono" onClick={onBackToSignIn}>
-                            Back to Sign In
+                        <Button variant="text" onClick={onBackToSignIn}>
+                            <Typography
+                                variant="smallLabel"
+                                color="legendaryGreen.main"
+                                sx={{ml: 1}}
+                            >
+                                {'Back to Sign In'}
+                            </Typography>
                         </Button>
                     </Stack>
                 </Stack>

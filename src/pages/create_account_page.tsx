@@ -114,7 +114,12 @@ const CreateAccountPage = () => {
     const upperLeftStates = (state: States): JSX.Element => {
         switch (state) {
             case States.CREATE_ACCOUNT:
-                return <></>;
+                return (
+                    <BackButton
+                        label="Back to Homepage"
+                        onClick={() => {}}
+                    ></BackButton>
+                );
 
             case States.BASIC_INFO:
                 return (

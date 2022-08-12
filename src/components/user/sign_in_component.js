@@ -22,6 +22,7 @@ const SignInComponent = ({
     onSignInWithGoogle,
     onForgotPassword,
     onCreateNewAccount,
+    color,
 }) => {
     const formik = useFormik({
         initialValues: initialValues,
@@ -44,7 +45,7 @@ const SignInComponent = ({
         <Box>
             <form onSubmit={formik.handleSubmit}>
                 <Stack spacing={4}>
-                    <Typography variant="subtitle1">Login</Typography>
+                    <Typography variant="smallHeadline">Login</Typography>
                     <Typography variant="label">
                         Legends Solar is currently in closed beta. Please{' '}
                         <a href={'https://www.legends.solar/get-early-access'}>
@@ -65,6 +66,7 @@ const SignInComponent = ({
                         label="Email Address"
                         name="email"
                         autoComplete="email"
+                        color={color}
                     />
 
                     <TextField
@@ -83,6 +85,7 @@ const SignInComponent = ({
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        color={color}
                     />
 
                     <Button
@@ -105,11 +108,23 @@ const SignInComponent = ({
                     </Button>
 
                     <Stack direction={'row'} justifyContent={'space-between'}>
-                        <Button variant="mono" onClick={onForgotPassword}>
-                            Forgot Password
+                        <Button variant="text" onClick={onForgotPassword}>
+                            <Typography
+                                variant="smallLabel"
+                                color="legendaryGreen.main"
+                                sx={{ml: 1}}
+                            >
+                                {'Forogt Password'}
+                            </Typography>
                         </Button>
-                        <Button variant="mono" onClick={onCreateNewAccount}>
-                            Create New Account
+                        <Button variant="text" onClick={onCreateNewAccount}>
+                            <Typography
+                                variant="smallLabel"
+                                color="legendaryGreen.main"
+                                sx={{ml: 1}}
+                            >
+                                {'Create New Account'}
+                            </Typography>
                         </Button>
                     </Stack>
                 </Stack>

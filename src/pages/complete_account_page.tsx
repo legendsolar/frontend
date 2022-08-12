@@ -39,13 +39,13 @@ import CreateAccountContent from 'content/create_account_content';
 import AccountCreateInfoContent from 'content/account_create_info_content';
 import {ROUTES} from 'routes/app_router';
 import {UserStatus} from 'schema/schema_gen_types';
-import BackButton from 'components/buttons/back_button';
 import SignInPage from './sign_in_page';
 import CompleteAccountContent from 'content/complete_account_content';
 import VerifyEmailContent from 'content/verify_email_content';
 import VerifyMfaContent from 'content/verify_mfa_content';
 import VerifyAccreditationContent from 'content/verify_accreditation_content';
 import CreateWalletContent from 'content/create_wallet_content';
+import BackButton from 'components/buttons/back_button';
 
 enum States {
     STEPS_TO_INVEST = 'steps_to_invest',
@@ -60,7 +60,7 @@ const CompleteAccountPage = () => {
 
     const navigate = useNavigate();
 
-    const {user} = useAuth();
+    const {user, signout} = useAuth();
     const {useGetUserStatus} = useUser();
 
     const {loading, error, status, refetch} = useGetUserStatus();
@@ -225,7 +225,14 @@ const CompleteAccountPage = () => {
     const upperLeftStates = (state: States): JSX.Element => {
         switch (state) {
             case States.STEPS_TO_INVEST:
-                return <></>;
+                return (
+                    <BackButton
+                        label={'Sign out'}
+                        onClick={() => {
+                            signout();
+                        }}
+                    ></BackButton>
+                );
             case States.EMAIL:
                 return (
                     <BackButton
