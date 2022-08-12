@@ -15,6 +15,7 @@ import {
     PhoneMultiFactorGenerator,
     getMultiFactorResolver,
     signInWithEmailLink,
+    updatePhoneNumber,
 } from 'firebase/auth';
 
 import getParameterByName from 'utils/get_parameter_by_name';
@@ -64,6 +65,8 @@ function useProvideAuth() {
 
     const [isAuthenticating, setIsAuthenticating] = useState(true);
 
+    const [cachedUserData, setCachedUserData] = useState(null);
+
     // Wrap any Firebase methods we want to use making sure ...
     // ... to save the user to state.
     const signin = (email, password) => {
@@ -86,15 +89,22 @@ function useProvideAuth() {
         // });
     };
 
-    const signup = (email, password) => {
+    const signup = async (email, password, firstName, lastName, phone) => {
         // setIsAuthenticating(true);
-        return createUserWithEmailAndPassword(auth, email, password).then(
-            (response) => {
-                if (response) {
-                    setUser(response.user);
-                }
-            },
+        const resp = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password,
         );
+
+        setUser(resp.user);
+
+        setCachedUserData({
+            email,
+            firstName,
+            lastName,
+            phone,
+        });
         // .finally(() => {
         //     setIsAuthenticating(false);
         // });

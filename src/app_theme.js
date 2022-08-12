@@ -417,6 +417,22 @@ const themeOptions = {
                 },
 
                 {
+                    props: {variant: 'flat'},
+                    style: {
+                        backgroundColor: paletteOptions.palette.white.main,
+                        color: paletteOptions.palette.blackDawn.main,
+                    },
+                },
+
+                {
+                    props: {variant: 'flat', disabled: true},
+                    style: {
+                        backgroundColor: paletteOptions.palette.whiteFog.main,
+                        color: paletteOptions.palette.blackDawn.main,
+                    },
+                },
+
+                {
                     props: {variant: 'mini'},
                     style: {
                         ...typographyOptions.typography.monoButton,

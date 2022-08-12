@@ -38,11 +38,11 @@ const ProtectedRoute = ({
         return <LoadingView></LoadingView>;
     }
 
-    console.log(auth.user);
-
     if (error && !(error?.networkError?.type === 'AuthenticationError')) {
         return <ErrorPage></ErrorPage>;
     }
+
+    console.log({status, error, user: auth.user});
 
     if (
         status &&
@@ -63,8 +63,8 @@ const ProtectedRoute = ({
 
     if (
         !auth.user ||
-        (status &&
-            status !== 'NO_ACCOUNT' &&
+        !status ||
+        (status !== 'NO_ACCOUNT' &&
             requiredUserStates &&
             requiredUserStates.indexOf(status) === -1)
     ) {

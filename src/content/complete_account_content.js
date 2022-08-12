@@ -20,6 +20,7 @@ const CompleteAccountContent = ({stepsTitle, steps}) => {
                     title={step.title}
                     icon={step.icon}
                     onClick={step.onClick}
+                    disabled={step.disabled}
                 ></CompleteStepComponent>
             ))}
         </DefaultComponent>

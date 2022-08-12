@@ -4,13 +4,21 @@ import {ErrorBoundary} from '@sentry/react';
 import DefaultErrorBoundary from 'components/errors/default_error_boundary';
 import LegendsTypemarkSVG from 'assets/logos/typemark_dark.svg';
 
+interface DualPaneViewProps {
+    leftPane?: JSX.Element;
+    rightPane?: JSX.Element;
+    upperLeftCorner?: JSX.Element;
+    lowerRightCorner?: JSX.Element;
+    options?: any;
+}
+
 const DualPaneView = ({
     leftPane,
     rightPane,
     upperLeftCorner,
-    lowerRightCorner = null,
-    options = null,
-}) => {
+    lowerRightCorner,
+    options,
+}: DualPaneViewProps) => {
     const defaultLowerRightCorner = lowerRightCorner ? (
         lowerRightCorner
     ) : (

@@ -34,7 +34,6 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
             lastName: validateLastName(),
             phone: validatePhoneNumber(),
             password: validatePassword(),
-            accessPhrase: validateAccessPhrase(),
         }),
         onSubmit: async (values, {setErrors}) => {
             setLoading(true);
@@ -63,6 +62,7 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
 
     const [passwordHelperMouseover, setPasswordHelperMouseover] =
         useState(false);
+
     const passwordHelper = (
         <div
             onMouseEnter={() => setPasswordHelperMouseover(true)}
@@ -184,7 +184,6 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
                         />
                     </Grid>
                 </Grid>
-
                 <Stack>
                     <Button
                         variant="primary"

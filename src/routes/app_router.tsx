@@ -21,10 +21,13 @@ import ErrorPage from 'pages/error_page';
 import NotFoundPage from 'pages/not_found_page';
 import PrivacyPolicyPage from 'pages/privacy_policy_page';
 import {UserStatus} from 'schema/schema_gen_types';
+import CompleteAccountContent from 'content/complete_account_content';
+import CompleteAccountPage from 'pages/complete_account_page';
 
 export enum ROUTES {
     SIGN_IN = '/sign_in',
     CREATE_ACCOUNT = '/create',
+    COMPLETE_ACCOUNT = '/complete_account',
     TERMS_AND_CONDITIONS = '/terms_conditions',
     PRIVACY_POLICY = '/privacy',
     USER_HOME = '/',
@@ -43,14 +46,6 @@ function AppRouter() {
                         element={
                             <UnprotectedRoute>
                                 <SignInView />
-                            </UnprotectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/signup"
-                        element={
-                            <UnprotectedRoute>
-                                <SignUpView />
                             </UnprotectedRoute>
                         }
                     />
@@ -74,7 +69,7 @@ function AppRouter() {
                     />
 
                     <Route
-                        path={ROUTES.CREATE_ACCOUNT + '/*'}
+                        path={ROUTES.CREATE_ACCOUNT}
                         element={
                             <UnprotectedRoute>
                                 <CreateAccountPage></CreateAccountPage>
@@ -85,18 +80,32 @@ function AppRouter() {
                     {/** Auth required */}
 
                     <Route
+                        path={ROUTES.COMPLETE_ACCOUNT}
+                        element={
+                            <ProtectedRoute
+                                disallowedUserStates={[
+                                    UserStatus.IdentityVerified,
+                                ]}
+                            >
+                                <CompleteAccountPage></CompleteAccountPage>
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
                         path="/"
                         element={
                             <ProtectedRoute
                                 requiredUserStates={[
                                     UserStatus.IdentityVerified,
                                 ]}
-                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
+                                requiredRedirectPath={ROUTES.COMPLETE_ACCOUNT}
                             >
                                 <PortfolioPage></PortfolioPage>
                             </ProtectedRoute>
                         }
                     />
+                    {/*
                     <Route
                         path="/account"
                         element={
@@ -193,7 +202,7 @@ function AppRouter() {
                                 <InvestPage />
                             </ProtectedRoute>
                         }
-                    />
+                    /> */}
                     <Route path="/:path" element={<NotFoundPage />} />
                 </Routes>
             </BrowserRouter>
