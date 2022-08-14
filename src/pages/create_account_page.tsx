@@ -28,7 +28,7 @@ import useLinearFlow from 'hooks/use_linear_flow';
 import SignUpOptionComponent from 'components/signup/sign_up_option_component';
 import CreateAccountContent from 'content/create_account_content';
 import AccountCreateInfoContent from 'content/account_create_info_content';
-import {ROUTES} from 'routes/app_router';
+import {ROUTES} from 'routes/routes';
 import {UserStatus} from 'schema/schema_gen_types';
 import BackButton from 'components/buttons/back_button';
 import SignInPage from './sign_in_page';
@@ -43,7 +43,9 @@ const CreateAccountPage = () => {
 
     const navigate = useNavigate();
 
-    const {signup} = useAuth();
+    const {useCreateNewUser} = useUser();
+
+    const {createNewUser} = useCreateNewUser();
 
     const states = (state: States): JSX.Element => {
         switch (state) {
@@ -75,14 +77,13 @@ const CreateAccountPage = () => {
                             password,
                             phone,
                         }: any) => {
-                            console.log({email, firstName});
-                            return signup(
-                                email,
-                                password,
+                            return createNewUser({
                                 firstName,
                                 lastName,
+                                password,
+                                email,
                                 phone,
-                            ).then(() => {
+                            }).then(() => {
                                 navigate(ROUTES.COMPLETE_ACCOUNT);
                             });
                         }}

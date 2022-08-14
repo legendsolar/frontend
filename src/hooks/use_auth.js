@@ -89,7 +89,7 @@ function useProvideAuth() {
         // });
     };
 
-    const signup = async (email, password, firstName, lastName, phone) => {
+    const signup = async (email, password) => {
         // setIsAuthenticating(true);
         const resp = await createUserWithEmailAndPassword(
             auth,
@@ -97,14 +97,7 @@ function useProvideAuth() {
             password,
         );
 
-        setUser(resp.user);
-
-        setCachedUserData({
-            email,
-            firstName,
-            lastName,
-            phone,
-        });
+        return resp;
         // .finally(() => {
         //     setIsAuthenticating(false);
         // });

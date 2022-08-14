@@ -37,7 +37,7 @@ import useLinearFlow from 'hooks/use_linear_flow';
 import SignUpOptionComponent from 'components/signup/sign_up_option_component';
 import CreateAccountContent from 'content/create_account_content';
 import AccountCreateInfoContent from 'content/account_create_info_content';
-import {ROUTES} from 'routes/app_router';
+import {ROUTES} from 'routes/routes';
 import {UserStatus} from 'schema/schema_gen_types';
 import SignInPage from './sign_in_page';
 import CompleteAccountContent from 'content/complete_account_content';
@@ -46,12 +46,13 @@ import VerifyMfaContent from 'content/verify_mfa_content';
 import VerifyAccreditationContent from 'content/verify_accreditation_content';
 import CreateWalletContent from 'content/create_wallet_content';
 import BackButton from 'components/buttons/back_button';
+import LoadingComponent from 'components/utils/loading_component';
 
 enum States {
     STEPS_TO_INVEST = 'steps_to_invest',
     EMAIL = 'email',
     PHONE = 'phone',
-    ACCREDITATION = 'phone',
+    ACCREDITATION = 'accreditation',
     WALLET = 'wallet',
 }
 
@@ -60,24 +61,87 @@ const CompleteAccountPage = () => {
 
     const navigate = useNavigate();
 
-    const {user, signout} = useAuth();
-    const {useGetUserStatus} = useUser();
+    const {user, signout, sendEmailVerify, enrollUserMfa, enrollWithMfaCode} =
+        useAuth();
+    const {
+        useGetUserStatus,
+        useUserMetaData,
+        useUpdateUserAccreditation,
+        useCreateDwollaAccount,
+    } = useUser();
 
-    const {loading, error, status, refetch} = useGetUserStatus();
+    const [captcha, setCaptcha] = useState(null);
+
+    const {
+        loading: statusLoading,
+        error: statusError,
+        status,
+        refetch: statusRefetch,
+    } = useGetUserStatus();
+
+    const {
+        loading: userDataLoading,
+        error: userDataError,
+        firstName,
+        lastName,
+        streetAddress,
+        streetAddress2,
+        city,
+        postalCode,
+        phone,
+        refetch: userDataRefetch,
+    } = useUserMetaData();
+
+    const {createDwollaAccount, loading: createDwollaAccountLoading} =
+        useCreateDwollaAccount();
+
+    const {update: updateAccreditation} = useUpdateUserAccreditation();
+
+    const loading = statusLoading || userDataLoading;
+
+    const stepsComplete = {
+        email: status?.emailVerified,
+        mfa: status?.mfaVerified,
+        accreditation: status?.accreditation?.length > 0,
+        wallet: status?.verified,
+    };
+
+    useEffect(() => {
+        if (!loading && status) {
+            if (state === States.EMAIL && !status.emailVerified) {
+                sendEmailVerify();
+            }
+        }
+    }, [loading, status, state]);
+
+    useEffect(() => {
+        if (state === States.PHONE && captcha && phone && !status.mfaVerified) {
+            enrollUserMfa(phone, captcha);
+        }
+    }, [loading, status, state, captcha]);
 
     const states = (state: States): JSX.Element => {
         switch (state) {
             case States.STEPS_TO_INVEST:
                 return (
                     <CompleteAccountContent
-                        stepsTitle={'1/4'}
+                        onContinue={() => navigate(ROUTES.DISCOVER)}
+                        stepsTitle={`${Object.entries(stepsComplete)
+                            .reduce(
+                                ([n, d], [key, value]) => [
+                                    n + (!!value ? 1 : 0),
+                                    d + 1,
+                                ],
+                                [0, 0],
+                            )
+                            .join('/')}`}
                         steps={[
                             {
-                                complete: false,
+                                complete: status.emailVerified,
                                 title: 'Verify Email',
                                 icon: (
                                     <Typography variant={'mediumEmoji' as any}>
-                                        ✉
+                                        📧
                                     </Typography>
                                 ),
                                 onClick: () => {
@@ -85,8 +149,11 @@ const CompleteAccountPage = () => {
                                 },
                             },
                             {
-                                complete: false,
+                                complete: status.mfaVerified,
+                                disabled: !stepsComplete.email,
+                                disabledMessage: 'Verify email first',
                                 title: 'Verify Phone Number',
+
                                 icon: (
                                     <Typography variant={'mediumEmoji' as any}>
                                         📞
@@ -97,7 +164,7 @@ const CompleteAccountPage = () => {
                                 },
                             },
                             {
-                                complete: false,
+                                complete: status.accreditation?.length > 0,
                                 title: 'Verify Accreditation',
                                 icon: (
                                     <Typography variant={'mediumEmoji' as any}>
@@ -109,8 +176,12 @@ const CompleteAccountPage = () => {
                                 },
                             },
                             {
-                                complete: false,
-                                disabled: true,
+                                complete: status.verified,
+                                disabled:
+                                    !stepsComplete.email ||
+                                    !stepsComplete.mfa ||
+                                    !stepsComplete.accreditation,
+                                disabledMessage: 'Complete others first',
                                 title: 'Create Wallet',
                                 icon: (
                                     <Typography variant={'mediumEmoji' as any}>
@@ -133,43 +204,75 @@ const CompleteAccountPage = () => {
                             console.log(email);
                             return delay(1000);
                         }}
-                        onSendVerificationEmailAgain={() => {
-                            console.log('onSendVerificationEmailAgain');
-                            return delay(1000);
-                        }}
+                        onSendVerificationEmailAgain={sendEmailVerify}
                     ></VerifyEmailContent>
                 );
             case States.PHONE:
                 return (
-                    <VerifyMfaContent
-                        onChangePhoneRequested={(newPhone) => {
-                            console.log(newPhone);
-                            return delay(1000);
-                        }}
-                        onMfaCodeSubmit={(code) => {
-                            console.log(code);
-                            return delay(1000);
-                        }}
-                    ></VerifyMfaContent>
+                    <div>
+                        {/** Don't render captcha until MFA verification */}
+                        <RecaptchaVerifier
+                            captchaComplete={setCaptcha}
+                        ></RecaptchaVerifier>
+                        <VerifyMfaContent
+                            onChangePhoneRequested={(newPhone) => {
+                                // if (captcha && newPhone) {
+                                //     enrollUserMfa(phone, captcha);
+                                // }
+                                console.log(newPhone);
+                                return delay(1000);
+                            }}
+                            onMfaCodeSubmit={async (code) => {
+                                await enrollWithMfaCode(code);
+                                await statusRefetch();
+                                setState(States.STEPS_TO_INVEST);
+                            }}
+                        ></VerifyMfaContent>
+                    </div>
                 );
             case States.ACCREDITATION:
                 return (
                     <VerifyAccreditationContent
-                        onAccreditationStatusSubmit={(items) => {
-                            console.log({items});
-                            return delay(1000);
+                        onAccreditationStatusSubmit={async (accreditation) => {
+                            await updateAccreditation(accreditation);
+                            setState(States.STEPS_TO_INVEST);
                         }}
                     ></VerifyAccreditationContent>
                 );
             case States.WALLET:
                 return (
                     <CreateWalletContent
-                        onSubmit={(input: UserDwollaAccountData) => {
+                        onSubmit={async (input: UserDwollaAccountData) => {
                             console.log(input);
-                            return delay(1000);
+
+                            const variables = {
+                                input: {
+                                    ...transformFormValuesToUserDwollaAccountData(
+                                        input,
+                                    ),
+                                },
+                            };
+
+                            console.log(variables);
+
+                            await createDwollaAccount({
+                                variables,
+                            });
+
+                            await statusRefetch();
+
+                            setState(States.STEPS_TO_INVEST);
                         }}
                         fullSSNRequired={false}
                         color={'light'}
+                        initialValues={{
+                            firstName,
+                            lastName,
+                            streetAddress,
+                            streetAddress2,
+                            postalCode,
+                            city,
+                        }}
                     ></CreateWalletContent>
                 );
         }
@@ -236,24 +339,28 @@ const CompleteAccountPage = () => {
             case States.EMAIL:
                 return (
                     <BackButton
+                        label={'Back'}
                         onClick={() => setState(States.STEPS_TO_INVEST)}
                     ></BackButton>
                 );
             case States.PHONE:
                 return (
                     <BackButton
+                        label={'Back'}
                         onClick={() => setState(States.STEPS_TO_INVEST)}
                     ></BackButton>
                 );
             case States.ACCREDITATION:
                 return (
                     <BackButton
+                        label={'Back'}
                         onClick={() => setState(States.STEPS_TO_INVEST)}
                     ></BackButton>
                 );
             case States.WALLET:
                 return (
                     <BackButton
+                        label={'Back'}
                         onClick={() => setState(States.STEPS_TO_INVEST)}
                     ></BackButton>
                 );
@@ -262,7 +369,9 @@ const CompleteAccountPage = () => {
 
     return (
         <DualPaneView
-            leftPane={states(state)}
+            leftPane={
+                loading ? <LoadingComponent></LoadingComponent> : states(state)
+            }
             rightPane={rightPaneStates(state)}
             upperLeftCorner={upperLeftStates(state)}
             options={{

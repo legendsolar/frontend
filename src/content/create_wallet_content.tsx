@@ -15,12 +15,14 @@ interface CreateDwollaAccountProps {
     onSubmit(input: UserDwollaAccountData): Promise<any>;
     fullSSNRequired: boolean;
     color: 'dark' | 'light';
+    initialValues?: any;
 }
 
 const CreateWalletContent = ({
     onSubmit,
     fullSSNRequired,
     color = 'dark',
+    initialValues = {},
 }: CreateDwollaAccountProps) => {
     const [userInfoValid, setUserInfoValid] = useState(false);
     const [protectedUserInfoValid, setProtectedUserInfoValid] = useState(false);
@@ -40,7 +42,7 @@ const CreateWalletContent = ({
                 }
             })
             .finally(() => {
-                setLoading(false);
+                setLoading(false); // probably causing a react error after this component is no longer rendered
             });
     };
 
@@ -57,6 +59,15 @@ const CreateWalletContent = ({
             <Typography variant="subtitle2">Mailing Address</Typography>
 
             <ModifyUserInfo
+                initialValues={{
+                    firstName: initialValues?.firstName,
+                    lastName: initialValues?.lastName,
+                    streetAddress: initialValues?.streetAddress,
+                    streetAddress2: initialValues?.streetAddress2,
+                    city: initialValues?.city,
+                    state: initialValues?.state,
+                    postalCode: initialValues?.postalCode,
+                }}
                 color={color}
                 isValid={(valid: any) => setUserInfoValid(valid)}
                 handleChange={(childValues: any) =>
@@ -78,6 +89,12 @@ const CreateWalletContent = ({
             </Stack>
 
             <ProtectedUserInfo
+                initialValues={{
+                    ssn: initialValues?.ssn,
+                    year: initialValues?.year,
+                    month: initialValues?.month,
+                    day: initialValues?.day,
+                }}
                 color={color}
                 fullSSNRequired={fullSSNRequired}
                 isValid={(valid: any) => setProtectedUserInfoValid(valid)}

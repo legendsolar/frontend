@@ -5,8 +5,8 @@ import MfaVerifyComponent from 'components/user/mfa_verify_component';
 import ChangePhoneComponent from 'components/user/change_phone_component';
 
 interface VerifyMfaContentProps {
-    onChangePhoneRequested(newPhone: string): Promise<any>;
-    onMfaCodeSubmit(code: string): Promise<any>;
+    onChangePhoneRequested(newPhone: string): Promise<void>;
+    onMfaCodeSubmit(code: string): Promise<void>;
 }
 
 const VerifyMfaContent = ({
@@ -32,7 +32,7 @@ const VerifyMfaContent = ({
                         shortly.
                     </Typography>
                     <MfaVerifyComponent
-                        onSubmit={onMfaCodeSubmit}
+                        onSubmit={({code}) => onMfaCodeSubmit(code)}
                         codeSent={true}
                         onChangePhoneRequested={() =>
                             setState(states.CHANGE_PHONE)

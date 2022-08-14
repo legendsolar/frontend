@@ -2,25 +2,37 @@ import SignUpOptionComponent from 'components/signup/sign_up_option_component';
 import {useState} from 'react';
 import DefaultComponent from 'components/utils/default_component';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {Typography, Stack, Box} from '@mui/material';
-import {ROUTES} from 'routes/app_router';
+import {Typography, Stack, Box, Button} from '@mui/material';
+import {ROUTES} from 'routes/routes';
 import CompleteStepComponent from 'components/signup/complete_step_component';
 
-const CompleteAccountContent = ({stepsTitle, steps}) => {
+const CompleteAccountContent = ({stepsTitle, steps, onContinue}) => {
+    const allComplete = steps.every((step) => step.complete);
+
     return (
         <DefaultComponent>
             <Typography variant="headline2">{stepsTitle}</Typography>
             <Typography variant="body">
-                You are almost ready to invest
+                {allComplete
+                    ? 'You are almost ready to invest'
+                    : 'You are ready to invest'}
             </Typography>
 
-            {steps.map((step) => (
+            {allComplete && (
+                <Button variant={'primary'} onClick={onContinue}>
+                    Continue to opportunities
+                </Button>
+            )}
+
+            {steps.map((step, idx) => (
                 <CompleteStepComponent
+                    key={idx}
                     complete={step.complete}
                     title={step.title}
                     icon={step.icon}
                     onClick={step.onClick}
                     disabled={step.disabled}
+                    disabledMessage={step.disabledMessage}
                 ></CompleteStepComponent>
             ))}
         </DefaultComponent>

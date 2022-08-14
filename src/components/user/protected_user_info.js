@@ -112,7 +112,11 @@ const ProtectedUserInfo = ({
                                 <InputLabel>Month</InputLabel>
                                 <Select
                                     name="month"
-                                    value={formik.values.month}
+                                    value={
+                                        formik.values.month
+                                            ? formik.values.month
+                                            : ''
+                                    }
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 >

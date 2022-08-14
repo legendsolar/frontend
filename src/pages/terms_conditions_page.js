@@ -6,7 +6,7 @@ import Scroller from 'components/utils/scroller';
 import DefaultComponent from 'components/utils/default_component';
 
 import {useLocation, useNavigate} from 'react-router-dom';
-import {ROUTES} from 'routes/app_router';
+import {ROUTES} from 'routes/routes';
 
 const TermsConditionsPage = () => {
     const navigate = useNavigate();

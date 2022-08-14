@@ -105,6 +105,10 @@ export type CreateTransferInput = {
 
 export enum DwollaUserStatus {
   Created = 'CREATED',
+  Deactivated = 'DEACTIVATED',
+  DocumentReq = 'DOCUMENT_REQ',
+  KbaReq = 'KBA_REQ',
+  RetryReq = 'RETRY_REQ',
   Unknown = 'UNKNOWN',
   Verified = 'VERIFIED'
 }
@@ -347,8 +351,6 @@ export type UpdateUserMutationResponse = MutationResponse & {
 
 export type User = {
   __typename?: 'User';
-  acceptance?: Maybe<Array<AcceptanceStatus>>;
-  accreditation?: Maybe<Array<AccreditationOptions>>;
   address?: Maybe<Address>;
   dwolla?: Maybe<UserDwollaData>;
   email?: Maybe<Scalars['String']>;
@@ -375,20 +377,16 @@ export type UserDwollaData = {
   verified?: Maybe<Scalars['Boolean']>;
 };
 
-export enum UserStatus {
-  AcceptanceComplete = 'ACCEPTANCE_COMPLETE',
-  AccreditationVerified = 'ACCREDITATION_VERIFIED',
-  Created = 'CREATED',
-  DwollaAccountCreated = 'DWOLLA_ACCOUNT_CREATED',
-  DwollaAccountDocumentReq = 'DWOLLA_ACCOUNT_DOCUMENT_REQ',
-  DwollaAccountKbaReq = 'DWOLLA_ACCOUNT_KBA_REQ',
-  DwollaAccountRetryReq = 'DWOLLA_ACCOUNT_RETRY_REQ',
-  EmailVerified = 'EMAIL_VERIFIED',
-  IdentityVerified = 'IDENTITY_VERIFIED',
-  MfaVerified = 'MFA_VERIFIED',
-  NotAccredited = 'NOT_ACCREDITED',
-  SyncError = 'SYNC_ERROR'
-}
+export type UserStatus = {
+  __typename?: 'UserStatus';
+  acceptance?: Maybe<Array<AcceptanceStatus>>;
+  accreditation?: Maybe<Array<AccreditationOptions>>;
+  dwollaStatus?: Maybe<DwollaUserStatus>;
+  dwollaSyncError?: Maybe<Scalars['Boolean']>;
+  emailVerified?: Maybe<Scalars['Boolean']>;
+  mfaVerified?: Maybe<Scalars['Boolean']>;
+  verified?: Maybe<Scalars['Boolean']>;
+};
 
 export type VerificationDocumentInput = {
   path?: InputMaybe<Scalars['String']>;

@@ -4,23 +4,25 @@ import {useLocation} from 'react-router-dom';
 import LoadingView from 'views/loading_view';
 import {useUser} from 'hooks/use_user';
 import {UserStatus} from 'schema/schema_gen_types';
-import {ROUTES} from './app_router';
+import {ROUTES} from 'routes/routes';
 import ErrorPage from 'pages/error_page';
 
 interface ProtectedRouteProps {
     children: JSX.Element;
-    disallowedUserStates?: Array<UserStatus>;
-    disallowedRedirectPath?: ROUTES;
-    requiredUserStates?: Array<UserStatus>;
-    requiredRedirectPath?: ROUTES;
+    verifiedUserRequired?: boolean;
+    unverifiedUserRedirectPath?: ROUTES;
+    unverifiedUserRequired?: boolean;
+    verifiedUserRedirectPath?: ROUTES;
+    unauthUserRedirectPath?: ROUTES;
 }
 
 const ProtectedRoute = ({
     children,
-    disallowedUserStates,
-    disallowedRedirectPath = ROUTES.USER_HOME,
-    requiredUserStates,
-    requiredRedirectPath = ROUTES.CREATE_ACCOUNT,
+    verifiedUserRequired,
+    unverifiedUserRedirectPath = ROUTES.COMPLETE_ACCOUNT,
+    unverifiedUserRequired,
+    verifiedUserRedirectPath = ROUTES.USER_HOME,
+    unauthUserRedirectPath = ROUTES.CREATE_ACCOUNT,
 }: ProtectedRouteProps) => {
     const auth = useAuth();
     const location = useLocation();
@@ -29,6 +31,8 @@ const ProtectedRoute = ({
 
     // TODO would be ideal to only fetch this if user is auth
     const {loading, error, status, refetch} = useGetUserStatus();
+
+    console.log({status});
 
     if (auth.isAuthenticating) {
         return <LoadingView></LoadingView>;
@@ -42,17 +46,10 @@ const ProtectedRoute = ({
         return <ErrorPage></ErrorPage>;
     }
 
-    console.log({status, error, user: auth.user});
-
-    if (
-        status &&
-        status !== 'NO_ACCOUNT' &&
-        disallowedUserStates &&
-        disallowedUserStates.indexOf(status) > -1
-    ) {
+    if (!auth.user) {
         return (
             <Navigate
-                to={disallowedRedirectPath}
+                to={unauthUserRedirectPath}
                 replace
                 state={{
                     path: location.pathname,
@@ -61,16 +58,22 @@ const ProtectedRoute = ({
         );
     }
 
-    if (
-        !auth.user ||
-        !status ||
-        (status !== 'NO_ACCOUNT' &&
-            requiredUserStates &&
-            requiredUserStates.indexOf(status) === -1)
-    ) {
+    if (verifiedUserRequired && !status?.verified) {
         return (
             <Navigate
-                to={requiredRedirectPath}
+                to={unverifiedUserRedirectPath}
+                replace
+                state={{
+                    path: location.pathname,
+                }}
+            />
+        );
+    }
+
+    if (unverifiedUserRequired && status?.verified) {
+        return (
+            <Navigate
+                to={verifiedUserRedirectPath}
                 replace
                 state={{
                     path: location.pathname,

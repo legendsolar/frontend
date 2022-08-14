@@ -5,7 +5,7 @@ import {useLocation} from 'react-router-dom';
 import {authErrorHandler} from 'utils/auth_error_translator';
 import {throwValidationError} from 'utils/errors';
 import {useUser} from './use_user';
-import {ROUTES} from 'routes/app_router';
+import {ROUTES} from 'routes/routes';
 
 const useSignIn = () => {
     const navigate = useNavigate();

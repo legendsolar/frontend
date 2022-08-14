@@ -23,15 +23,8 @@ import PrivacyPolicyPage from 'pages/privacy_policy_page';
 import {UserStatus} from 'schema/schema_gen_types';
 import CompleteAccountContent from 'content/complete_account_content';
 import CompleteAccountPage from 'pages/complete_account_page';
-
-export enum ROUTES {
-    SIGN_IN = '/sign_in',
-    CREATE_ACCOUNT = '/create',
-    COMPLETE_ACCOUNT = '/complete_account',
-    TERMS_AND_CONDITIONS = '/terms_conditions',
-    PRIVACY_POLICY = '/privacy',
-    USER_HOME = '/',
-}
+import {ROUTES} from 'routes/routes';
+import DiscoverPage from 'pages/discover_page';
 
 function AppRouter() {
     return (
@@ -82,26 +75,26 @@ function AppRouter() {
                     <Route
                         path={ROUTES.COMPLETE_ACCOUNT}
                         element={
-                            <ProtectedRoute
-                                disallowedUserStates={[
-                                    UserStatus.IdentityVerified,
-                                ]}
-                            >
+                            <ProtectedRoute unverifiedUserRequired>
                                 <CompleteAccountPage></CompleteAccountPage>
                             </ProtectedRoute>
                         }
                     />
 
                     <Route
-                        path="/"
+                        path={ROUTES.USER_HOME}
                         element={
-                            <ProtectedRoute
-                                requiredUserStates={[
-                                    UserStatus.IdentityVerified,
-                                ]}
-                                requiredRedirectPath={ROUTES.COMPLETE_ACCOUNT}
-                            >
+                            <ProtectedRoute verifiedUserRequired>
                                 <PortfolioPage></PortfolioPage>
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path={ROUTES.DISCOVER}
+                        element={
+                            <ProtectedRoute verifiedUserRequired>
+                                <DiscoverPage></DiscoverPage>
                             </ProtectedRoute>
                         }
                     />

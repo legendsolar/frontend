@@ -25,7 +25,7 @@ import {useFormik} from 'formik';
 import * as yup from 'yup';
 
 const ModifyUserInfo = ({
-    initialValues,
+    initialValues = {},
     onSubmit,
     isValid,
     handleChange,
@@ -178,7 +178,9 @@ const ModifyUserInfo = ({
                         <Select
                             helperText={'state'}
                             name="state"
-                            value={formik.values.state}
+                            value={
+                                formik.values.state ? formik.values.state : ''
+                            }
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                         >

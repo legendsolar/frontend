@@ -1,10 +1,17 @@
 import {Typography, Stack, Button} from '@mui/material';
 import React from 'react';
 
-const CompleteStepComponent = ({complete, title, icon, onClick, disabled}) => {
+const CompleteStepComponent = ({
+    complete,
+    title,
+    icon,
+    onClick,
+    disabled,
+    disabledMessage,
+}) => {
     const message = (complete, disabled) => {
         if (disabled) {
-            return 'Complete others first';
+            return disabledMessage;
         }
 
         return complete ? '✅' : 'Get Started';

@@ -12,7 +12,7 @@ import TypemarkSolarSVG from 'assets/logos/typemark_solar_dark.svg';
 const NavBar = ({
     loading,
     userIsAuthenticated,
-    userStatus,
+    userVerified,
     walletBalance,
     onToHomepage,
     onYourRooftop,
@@ -72,27 +72,23 @@ const NavBar = ({
                                 style={{width: '175px'}}
                             ></img>
 
-                            {userIsAuthenticated &&
-                                userStatus ===
-                                    USER_STATUS.IDENTITY_VERIFIED && (
-                                    <LoggedInToolbar
-                                        walletBalance={walletBalance}
-                                        onYourRooftop={onYourRooftop}
-                                        onTransaction={onTransaction}
-                                        onDocuments={onDocuments}
-                                        onAvailablePanels={onAvailablePanels}
-                                        onAccount={onAccount}
-                                        onWallet={onWallet}
-                                    ></LoggedInToolbar>
-                                )}
+                            {userIsAuthenticated && userVerified && (
+                                <LoggedInToolbar
+                                    walletBalance={walletBalance}
+                                    onYourRooftop={onYourRooftop}
+                                    onTransaction={onTransaction}
+                                    onDocuments={onDocuments}
+                                    onAvailablePanels={onAvailablePanels}
+                                    onAccount={onAccount}
+                                    onWallet={onWallet}
+                                ></LoggedInToolbar>
+                            )}
 
-                            {userIsAuthenticated &&
-                                userStatus !==
-                                    USER_STATUS.IDENTITY_VERIFIED && (
-                                    <CreateAccountToolbar
-                                        onToHomepage={onToHomepage}
-                                    ></CreateAccountToolbar>
-                                )}
+                            {userIsAuthenticated && !userVerified && (
+                                <CreateAccountToolbar
+                                    onToHomepage={onToHomepage}
+                                ></CreateAccountToolbar>
+                            )}
 
                             {!userIsAuthenticated && (
                                 <LoggedOutToolbar></LoggedOutToolbar>

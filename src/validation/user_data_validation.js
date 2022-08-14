@@ -107,3 +107,7 @@ export const validateMfaVerifyCode = () => {
 export const validateAccessPhrase = () => {
     return yup.string().required('Required');
 };
+
+export const formatPhoneNumber = (phone) => {
+    return '+1' + phone;
+};

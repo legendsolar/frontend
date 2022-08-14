@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext, createContext} from 'react';
 import {useAuth} from './use_auth';
 
 import {useQuery, gql, useMutation} from '@apollo/client';
+import {formatPhoneNumber} from 'validation/user_data_validation';
 
 const userContext = createContext();
 
@@ -15,11 +16,21 @@ export const useUser = () => {
 };
 
 export const useProvideUser = () => {
+    const {user, signup} = useAuth();
+
     const USER_STATUS_QUERY = gql`
         query User {
             user {
                 id
-                status
+                status {
+                    verified
+                    emailVerified
+                    mfaVerified
+                    acceptance
+                    accreditation
+                    dwollaStatus
+                    dwollaSyncError
+                }
             }
         }
     `;
@@ -28,7 +39,9 @@ export const useProvideUser = () => {
         query User {
             user {
                 id
-                acceptance
+                status {
+                    acceptance
+                }
             }
         }
     `;
@@ -37,7 +50,9 @@ export const useProvideUser = () => {
         query User {
             user {
                 id
-                accreditation
+                status {
+                    accreditation
+                }
             }
         }
     `;
@@ -84,8 +99,38 @@ export const useProvideUser = () => {
             updateUser(input: $input) {
                 user {
                     id
-                    status
-                    acceptance
+                    status {
+                        verified
+                        emailVerified
+                        mfaVerified
+                        acceptance
+                        accreditation
+                        dwollaStatus
+                        dwollaSyncError
+                    }
+                }
+            }
+        }
+    `;
+
+    const MUTATE_USER_ON_CREATE = gql`
+        mutation Mutation($input: UpdateUserInput!) {
+            updateUser(input: $input) {
+                user {
+                    id
+                    status {
+                        verified
+                        emailVerified
+                        mfaVerified
+                        acceptance
+                        accreditation
+                        dwollaStatus
+                        dwollaSyncError
+                    }
+                    firstName
+                    lastName
+                    email
+                    phone
                 }
             }
         }
@@ -96,7 +141,15 @@ export const useProvideUser = () => {
             createUserDwollaAccount(input: $input) {
                 user {
                     id
-                    status
+                    status {
+                        verified
+                        emailVerified
+                        mfaVerified
+                        acceptance
+                        accreditation
+                        dwollaStatus
+                        dwollaSyncError
+                    }
                     dwolla {
                         id
                     }
@@ -116,6 +169,7 @@ export const useProvideUser = () => {
     const USER_META_QUERY = gql`
         query User {
             user {
+                id
                 firstName
                 lastName
                 address {
@@ -199,7 +253,56 @@ export const useProvideUser = () => {
         };
     };
 
+    const useCreateNewUser = () => {
+        const [createNewUserInternal, {data, loading, error}] = useMutation(
+            MUTATE_USER_ON_CREATE,
+        );
+
+        return {
+            createNewUser: async ({
+                firstName,
+                lastName,
+                password,
+                phone,
+                email,
+            }) => {
+                await signup(email, password);
+                return createNewUserInternal({
+                    variables: {
+                        input: {
+                            firstName,
+                            lastName,
+                            phone: formatPhoneNumber(phone),
+                        },
+                    },
+                });
+            },
+            data,
+            loading,
+            error,
+        };
+    };
+
+    const useUpdateUserAccreditation = () => {
+        const [setUser, {data, loading, error}] = useSetUser();
+
+        return {
+            data,
+            loading,
+            error,
+            update: (accreditation) =>
+                setUser({
+                    variables: {
+                        input: {
+                            accreditation,
+                        },
+                    },
+                }),
+        };
+    };
+
     return {
+        useCreateNewUser,
         useGetUserStatus,
         useSetUser,
         useCreateDwollaAccount,
@@ -207,5 +310,6 @@ export const useProvideUser = () => {
         useGetUserAccreditation,
         useUserMetaData,
         useGetUserFacilities,
+        useUpdateUserAccreditation,
     };
 };
