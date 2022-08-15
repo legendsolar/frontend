@@ -1,6 +1,5 @@
 import {useRef, useState, useEffect, useCallback} from 'react';
 import Map from 'react-map-gl';
-import Marker from 'components/map/marker';
 
 interface BasicMapProps {
     width: string;
@@ -32,7 +31,10 @@ const BasicMap = ({width, height, lat, lng, zoom, markers}: BasicMapProps) => {
             }}
             ref={mapRef}
             style={{width, height}}
-            mapStyle={'mapbox://styles/mapbox/light-v10'}
+            mapStyle={'mapbox://styles/john-legends/cl6p8ktei000f15sjhbydsx24'}
+            dragPan={false}
+            dragRotate={false}
+            touchZoomRotate={false}
         >
             {markers?.map((marker) => marker)}
         </Map>

@@ -125,7 +125,6 @@ const WalletPage = () => {
 
     return (
         <SideBarNavView
-            navBar={<NavBar {...navBarProps}></NavBar>}
             drawer={
                 <SideBar>
                     {!accountsLoading && !walletLoading && (

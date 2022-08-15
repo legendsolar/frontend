@@ -41,6 +41,10 @@ const BasicGlobe = ({
             style={{width, height}}
             mapStyle={'mapbox://styles/john-legends/cl6p8ktei000f15sjhbydsx24'}
             projection={'globe'}
+            interactive={false}
+            dragPan={false}
+            dragRotate={false}
+            touchZoomRotate={false}
         >
             {markers?.map((marker) => marker)}
         </Map>

@@ -66,9 +66,9 @@ const NavBar = ({
                     <Box
                         sx={{
                             width: '100%',
-                            ml: 10,
-                            mr: 10,
-                            mt: 6,
+                            ml: 16,
+                            mr: 14,
+                            mt: 10,
                         }}
                     >
                         <Stack

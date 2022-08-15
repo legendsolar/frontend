@@ -1,6 +1,6 @@
 import {Box} from '@mui/material';
 
-const ContentDivider = ({sx, children, color = 'whiteFog'}) => {
+const ContentDivider = ({sx = {}, children, color = 'whiteFog'}) => {
     return (
         <div
             style={{

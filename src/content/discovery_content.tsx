@@ -116,6 +116,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                                     standardWidth={false}
                                     sx={{p: 2}}
                                     style={{}}
+                                    onClick={() => {}}
                                 >
                                     <Typography
                                         variant={'label' as any}

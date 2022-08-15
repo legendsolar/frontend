@@ -7,9 +7,9 @@ const SideBarView = ({
     drawer = <></>,
     mainContent = <></>,
     header = <></>,
-    navBar = <></>,
     drawerAppearsOnTop = true,
     drawerAppearsOnBotton = false,
+    drawerAppearsOnLeft = false,
 }) => {
     const wrappedDrawer = (
         <Container
@@ -82,61 +82,59 @@ const SideBarView = ({
     };
 
     return (
-        <DefaultView navBar={navBar}>
-            <Grid container columnSpacing={4}>
-                <Grid
-                    item
-                    md={4}
+        <Grid container columnSpacing={4}>
+            <Grid
+                item
+                md={4}
+                sx={{
+                    // Remove sidebar on mobile
+                    display: {xs: 'none', sm: 'none', md: 'block'},
+                }}
+            >
+                <Box
+                    style={{
+                        // should not be needed
+                        paddingLeft: 0,
+                        paddingRight: 40,
+                    }}
                     sx={{
-                        // Remove sidebar on mobile
-                        display: {xs: 'none', sm: 'none', md: 'block'},
+                        height: 'max-content',
+                        top: '16px',
+                        position: 'sticky',
                     }}
                 >
-                    <Box
-                        style={{
-                            // should not be needed
-                            paddingLeft: 0,
-                            paddingRight: 40,
-                        }}
-                        sx={{
-                            height: 'max-content',
-                            top: '16px',
-                            position: 'sticky',
-                        }}
-                    >
-                        <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
-                    </Box>
-                </Grid>
+                    <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
+                </Box>
+            </Grid>
 
-                <Grid item xs={12} md={8}>
-                    <Box
-                        sx={{
-                            zIndex: 3,
-                            width: '100%',
-                        }}
-                    >
-                        {getDrawerTop()}
+            <Grid item xs={12} md={8}>
+                <Box
+                    sx={{
+                        zIndex: 3,
+                        width: '100%',
+                    }}
+                >
+                    {getDrawerTop()}
 
-                        {!!header && (
-                            <DefaultErrorBoundary>
-                                <Box sx={{mb: 4}}> {header}</Box>
-                            </DefaultErrorBoundary>
-                        )}
-
+                    {!!header && (
                         <DefaultErrorBoundary>
-                            <Box sx={{mt: {xs: 4, md: 0}}}>{mainContent}</Box>
+                            <Box sx={{mb: 4}}> {header}</Box>
                         </DefaultErrorBoundary>
+                    )}
 
-                        {getDrawerBottom()}
+                    <DefaultErrorBoundary>
+                        <Box sx={{mt: {xs: 4, md: 0}}}>{mainContent}</Box>
+                    </DefaultErrorBoundary>
 
-                        {/** 
+                    {getDrawerBottom()}
+
+                    {/** 
                         Bit of padding below the content to ensure the sidebar can scroll all the way down
                         */}
-                        <Box sx={{height: '200px'}}></Box>
-                    </Box>
-                </Grid>
+                    <Box sx={{height: '200px'}}></Box>
+                </Box>
             </Grid>
-        </DefaultView>
+        </Grid>
     );
 };
 

@@ -1,6 +1,7 @@
 import DefaultView from 'views/default_view';
 import NavBar from 'components/utils/nav_bar';
 import useNavBar from 'hooks/use_nav_bar';
+import PortfolioContent from 'content/portfolio_content';
 
 const PortfolioPage = () => {
     const navBarProps = useNavBar();
@@ -10,7 +11,11 @@ const PortfolioPage = () => {
             authenticated={navBarProps.userIsAuthenticated}
             navBar={<NavBar {...navBarProps}></NavBar>}
         >
-            <div>portfolio</div>
+            <PortfolioContent
+                title={'Title'}
+                subtitle={'SubTitle'}
+                address={'Address'}
+            ></PortfolioContent>
         </DefaultView>
     );
 };

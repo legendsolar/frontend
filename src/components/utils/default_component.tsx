@@ -13,6 +13,7 @@ interface DefaultComponentProps {
     sx?: any;
     style?: any;
     width?: string;
+    onClick?(): void;
 }
 
 const DefaultComponent = forwardRef(
@@ -26,6 +27,7 @@ const DefaultComponent = forwardRef(
             paper = false,
             standardWidth = true,
             width,
+            onClick = () => {},
         }: DefaultComponentProps,
         ref,
     ) => {
@@ -56,6 +58,7 @@ const DefaultComponent = forwardRef(
                 }
                 style={style}
                 ref={ref}
+                onClick={onClick}
             >
                 {content}
             </Paper>
