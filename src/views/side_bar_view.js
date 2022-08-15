@@ -4,9 +4,10 @@ import {ErrorBoundary} from '@sentry/react';
 import DefaultErrorBoundary from 'components/errors/default_error_boundary';
 
 const SideBarView = ({
-    drawer,
-    mainContent,
-    header,
+    drawer = <></>,
+    mainContent = <></>,
+    header = <></>,
+    navBar = <></>,
     drawerAppearsOnTop = true,
     drawerAppearsOnBotton = false,
 }) => {
@@ -81,7 +82,7 @@ const SideBarView = ({
     };
 
     return (
-        <DefaultView>
+        <DefaultView navBar={navBar}>
             <Grid container columnSpacing={4}>
                 <Grid
                     item

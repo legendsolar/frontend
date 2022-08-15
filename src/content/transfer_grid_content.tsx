@@ -15,6 +15,7 @@ import {useState} from 'react';
 import {transferTransformer} from 'hooks/use_transfer';
 import StyledDataGrid from 'components/data_grid/styled_data_grid';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
+import {DataGridDateRange} from 'utils/date_range';
 
 const columns: GridColumns = [
     {
@@ -79,21 +80,13 @@ const columns: GridColumns = [
         },
     },
 ];
-export enum TransferDateRange {
-    WEEK_TO_DATE = 'Week to Date',
-    MONTH_TO_DATE = 'Month to date',
-    QUARTER_TO_DATE = 'Quarter to date',
-    LAST_SIX_MONTHS = 'Last six months',
-    YEAR_TO_DATE = 'Year to date',
-    NONE = 'None',
-}
 interface TransferGridContentProps {
     transfers: Array<any>;
     assetStates: Array<string>;
     assetState: string;
-    dateRange: TransferDateRange;
+    dateRange: DataGridDateRange;
     onDownloadCsv(): Promise<any>;
-    onChangeDateRange(range: TransferDateRange): Promise<any>;
+    onChangeDateRange(range: DataGridDateRange): Promise<any>;
     onChangeAsset(asset: string): Promise<any>;
 }
 
@@ -166,13 +159,13 @@ const TransferGridContent = ({
                             onChange={(e) => {
                                 setLoading(true);
                                 onChangeDateRange(
-                                    e.target.value as TransferDateRange,
+                                    e.target.value as DataGridDateRange,
                                 ).finally(() => {
                                     setLoading(false);
                                 });
                             }}
                         >
-                            {Object.entries(TransferDateRange).map(
+                            {Object.entries(DataGridDateRange).map(
                                 ([key, value]) => {
                                     return (
                                         <MenuItem key={key} value={value}>

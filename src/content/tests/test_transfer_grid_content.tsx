@@ -1,4 +1,4 @@
-import TransferGridContent, {TransferDateRange} from '../transfer_grid_content';
+import TransferGridContent from '../transfer_grid_content';
 import {testTransfers} from 'static_data/placeholder_transfers';
 import {
     differenceInMonths,
@@ -8,12 +8,13 @@ import {
 import delay from 'utils/delay';
 
 import {useState} from 'react';
+import {DataGridDateRange} from 'utils/date_range';
 
 const TestTransferDataGrid = () => {
     const [transfers, setTransfers] = useState<Array<any>>(testTransfers);
     const [asset, setAsset] = useState<string>('');
-    const [dateRange, setDateRange] = useState<TransferDateRange>(
-        TransferDateRange.NONE,
+    const [dateRange, setDateRange] = useState<DataGridDateRange>(
+        DataGridDateRange.NONE,
     );
 
     return (
@@ -30,7 +31,7 @@ const TestTransferDataGrid = () => {
                     setTransfers(
                         testTransfers.filter((transfer) => {
                             switch (range) {
-                                case TransferDateRange.WEEK_TO_DATE:
+                                case DataGridDateRange.WEEK_TO_DATE:
                                     return (
                                         1 >
                                         differenceInWeeks(
@@ -38,7 +39,7 @@ const TestTransferDataGrid = () => {
                                             new Date(transfer.created),
                                         )
                                     );
-                                case TransferDateRange.MONTH_TO_DATE:
+                                case DataGridDateRange.MONTH_TO_DATE:
                                     return (
                                         1 >
                                         differenceInMonths(
@@ -46,7 +47,7 @@ const TestTransferDataGrid = () => {
                                             new Date(transfer.created),
                                         )
                                     );
-                                case TransferDateRange.LAST_SIX_MONTHS:
+                                case DataGridDateRange.LAST_SIX_MONTHS:
                                     return (
                                         6 >
                                         differenceInMonths(
@@ -54,7 +55,7 @@ const TestTransferDataGrid = () => {
                                             new Date(transfer.created),
                                         )
                                     );
-                                case TransferDateRange.YEAR_TO_DATE:
+                                case DataGridDateRange.YEAR_TO_DATE:
                                     return (
                                         12 >
                                         differenceInMonths(

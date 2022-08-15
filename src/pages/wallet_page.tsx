@@ -13,7 +13,11 @@ import AccountListComponent from 'components/transfers/account_list_component';
 import {useTransfer} from 'hooks/use_transfer';
 import {useAccount} from 'hooks/use_accounts';
 
+import useNavBar from 'hooks/use_nav_bar';
+import NavBar from 'components/utils/nav_bar';
+
 const WalletPage = () => {
+    const navBarProps = useNavBar();
     const {
         useAccounts,
         useWallet,
@@ -24,7 +28,6 @@ const WalletPage = () => {
     } = useAccount();
 
     const {useRecentTransfers, useCreateTransfer} = useTransfer();
-    const contentRefs = useRef([]);
     const [tokenRequested, setTokenRequested] = useState(false);
 
     const {
@@ -118,8 +121,11 @@ const WalletPage = () => {
 
     const accountsWithWallet = accounts && wallet ? [...accounts, wallet] : [];
 
+    const contentRefs = useRef<Array<unknown>>([]);
+
     return (
         <SideBarNavView
+            navBar={<NavBar {...navBarProps}></NavBar>}
             drawer={
                 <SideBar>
                     {!accountsLoading && !walletLoading && (
@@ -134,10 +140,10 @@ const WalletPage = () => {
             mainContent={
                 <Stack spacing={4}>
                     <DefaultComponent
-                        variant="container"
+                        paper
                         ref={(el) => (contentRefs.current[2] = el)}
                     >
-                        <Typography variant="smallHeadline">
+                        <Typography variant={'smallHeadline' as any}>
                             Recent Transfers
                         </Typography>
 
@@ -148,7 +154,7 @@ const WalletPage = () => {
                     </DefaultComponent>
 
                     <DefaultComponent
-                        variant="container"
+                        paper
                         ref={(el) => (contentRefs.current[1] = el)}
                     >
                         {!accountsLoading && (

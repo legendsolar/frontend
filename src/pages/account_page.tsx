@@ -1,4 +1,5 @@
 import {useEffect, useRef} from 'react';
+import NavBar from 'components/utils/nav_bar';
 import {useAuth} from 'hooks/use_auth';
 import {useAccount} from 'hooks/use_accounts';
 import {useTransfer} from 'hooks/use_transfer';
@@ -14,8 +15,10 @@ import DefaultComponent from 'components/utils/default_component';
 import ModifyUserInfo from 'components/user/modify_user_info';
 import LoadingComponent from 'components/utils/loading_component';
 import AccountListComponent from 'components/transfers/account_list_component';
+import useNavBar from 'hooks/use_nav_bar';
 
 const AccountPage = () => {
+    const navBarProps = useNavBar();
     const auth = useAuth();
     const {useUserMetaData} = useUser();
     const {
@@ -64,7 +67,7 @@ const AccountPage = () => {
 
     const {open, ready} = usePlaidLinkModal(token, onPlaidLinkComplete);
 
-    const contentRefs = useRef([]);
+    const contentRefs = useRef<Array<unknown>>([]);
 
     const drawerTitles = [
         'Personal Information',
@@ -111,12 +114,14 @@ const AccountPage = () => {
 
     return (
         <SideBarNavView
+            navBar={<NavBar {...navBarProps}></NavBar>}
             drawer={
                 <ScrollToSidebar
                     header={
                         <MemberHeader
                             name={userName}
                             memberInfo={userInfo}
+                            sx={{}}
                         ></MemberHeader>
                     }
                     contentTitles={drawerTitles}
@@ -142,9 +147,10 @@ const AccountPage = () => {
             mainContent={
                 <Stack spacing={6}>
                     <DefaultComponent
+                        paper
                         ref={(el) => (contentRefs.current[0] = el)}
                     >
-                        <Typography variant="smallHeadline">
+                        <Typography variant={'smallHeadline' as any}>
                             Personal Information
                         </Typography>
 
@@ -187,7 +193,7 @@ const AccountPage = () => {
                     <DefaultComponent
                         ref={(el) => (contentRefs.current[2] = el)}
                     >
-                        <Typography variant="smallHeadline">
+                        <Typography variant={'smallHeadline' as any}>
                             Investment History
                         </Typography>
                         {!investmentTransferLoading && (

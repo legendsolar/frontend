@@ -9,6 +9,20 @@ import LoggedOutToolbar from './logged_out_toolbar';
 import LoggedInToolbar from './logged_in_toolbar';
 import TypemarkSolarSVG from 'assets/logos/typemark_solar_dark.svg';
 
+export interface NavBarProps {
+    loading: boolean;
+    userIsAuthenticated: boolean;
+    userVerified: boolean;
+    walletBalance: string;
+    onToHomepage(): void;
+    onYourRooftop(): void;
+    onTransaction(): void;
+    onDocuments(): void;
+    onAvailablePanels(): void;
+    onAccount(): void;
+    onWallet(): void;
+}
+
 const NavBar = ({
     loading,
     userIsAuthenticated,
@@ -21,7 +35,7 @@ const NavBar = ({
     onAvailablePanels,
     onAccount,
     onWallet,
-}) => {
+}: NavBarProps) => {
     const backgroundColor = userIsAuthenticated ? 'whiteFog.main' : 'none';
     const headerHeight = '300px';
     return (
@@ -99,34 +113,6 @@ const NavBar = ({
             </Toolbar>
         </div>
     );
-};
-
-NavBar.propTypes = {
-    loading: PropTypes.bool,
-    userIsAuthenticated: PropTypes.bool,
-    userStatus: PropTypes.string,
-    walletBalance: PropTypes.string,
-    onToHomepage: PropTypes.func,
-    onYourRooftop: PropTypes.func,
-    onTransaction: PropTypes.func,
-    onDocuments: PropTypes.func,
-    onAvailablePanels: PropTypes.func,
-    onAccount: PropTypes.func,
-    onWallet: PropTypes.func,
-};
-
-NavBar.defaultProps = {
-    loading: false,
-    userIsAuthenticated: false,
-    userStatus: null,
-    walletBalance: null,
-    onToHomepage: () => {},
-    onYourRooftop: () => {},
-    onTransaction: () => {},
-    onDocuments: () => {},
-    onAvailablePanels: () => {},
-    onAccount: () => {},
-    onWallet: () => {},
 };
 
 export default NavBar;

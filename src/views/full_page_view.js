@@ -28,6 +28,8 @@ const FullPageView = ({children, authenticated, navBar}) => {
             ></Box>
             {navBar}
             <Box sx={{minHeight: '100vh'}}>{children}</Box>
+
+            <Footer></Footer>
         </Box>
     );
 };

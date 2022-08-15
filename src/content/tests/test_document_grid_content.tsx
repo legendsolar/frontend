@@ -1,7 +1,4 @@
-import DocumentGridContext, {
-    DataGridDateRange,
-} from 'content/document_grid_content';
-import {testTransfers} from 'static_data/placeholder_transfers';
+import DocumentGridContent from 'content/document_grid_content';
 import {
     differenceInMonths,
     differenceInQuarters,
@@ -9,33 +6,34 @@ import {
 } from 'date-fns';
 import delay from 'utils/delay';
 
+import {DataGridDateRange} from 'utils/date_range';
 import {useState} from 'react';
-import {documents} from 'static_data/placeholder_documents';
+import {documents as testDocuments} from 'static_data/placeholder_documents';
 
 const TestTransferDataGrid = () => {
-    const [transfers, setTransfers] = useState<Array<any>>(testTransfers);
+    const [documents, setDocuments] = useState<Array<any>>(testDocuments);
     const [asset, setAsset] = useState<string>('');
     const [dateRange, setDateRange] = useState<DataGridDateRange>(
         DataGridDateRange.NONE,
     );
 
     return (
-        <DocumentGridContext
+        <DocumentGridContent
             documents={documents}
             onDownloadDocument={() => delay(1000)}
             onChangeDateRange={(range) => {
                 console.log(`onChangeDateRange(${range})`);
                 setDateRange(range);
                 return delay(1000).then(() => {
-                    setTransfers(
-                        testTransfers.filter((transfer) => {
+                    setDocuments(
+                        testDocuments.filter((doc) => {
                             switch (range) {
                                 case DataGridDateRange.WEEK_TO_DATE:
                                     return (
                                         1 >
                                         differenceInWeeks(
                                             new Date(),
-                                            new Date(transfer.created),
+                                            new Date(doc.created),
                                         )
                                     );
                                 case DataGridDateRange.MONTH_TO_DATE:
@@ -43,7 +41,7 @@ const TestTransferDataGrid = () => {
                                         1 >
                                         differenceInMonths(
                                             new Date(),
-                                            new Date(transfer.created),
+                                            new Date(doc.created),
                                         )
                                     );
                                 case DataGridDateRange.LAST_SIX_MONTHS:
@@ -51,7 +49,7 @@ const TestTransferDataGrid = () => {
                                         6 >
                                         differenceInMonths(
                                             new Date(),
-                                            new Date(transfer.created),
+                                            new Date(doc.created),
                                         )
                                     );
                                 case DataGridDateRange.YEAR_TO_DATE:
@@ -59,7 +57,7 @@ const TestTransferDataGrid = () => {
                                         12 >
                                         differenceInMonths(
                                             new Date(),
-                                            new Date(transfer.created),
+                                            new Date(doc.created),
                                         )
                                     );
                             }
@@ -73,11 +71,11 @@ const TestTransferDataGrid = () => {
                 setAsset(asset);
                 return delay(1000).then(() => {
                     if (asset === 'None') {
-                        setTransfers(testTransfers);
+                        setDocuments(testDocuments);
                     } else {
-                        setTransfers(
-                            testTransfers.filter(
-                                (transfer) => transfer.facility?.name === asset,
+                        setDocuments(
+                            testDocuments.filter(
+                                (doc: any) => doc.facility?.name === asset,
                             ),
                         );
                     }
@@ -86,7 +84,7 @@ const TestTransferDataGrid = () => {
             assetState={asset}
             assetStates={['Barnyard Solar', 'None']}
             dateRange={dateRange}
-        ></DocumentGridContext>
+        ></DocumentGridContent>
     );
 };
 

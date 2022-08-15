@@ -20,9 +20,21 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
     const [selectedAsset, setSelectedAsset] = useState(assets[0]);
 
     return (
-        <Stack direction={'row'}>
-            <Stack width={'500px'} alignItems={'center'}>
-                <Typography variant={'headline2' as any} sx={{mt: 5, mb: 10}}>
+        <Stack
+            direction={'row'}
+            sx={{
+                mt: '100px',
+            }}
+        >
+            <Stack
+                width={'500px'}
+                sx={{
+                    ml: '55px',
+                    mr: '70px',
+                }}
+                alignItems={'center'}
+            >
+                <Typography variant={'smallHeadline' as any} sx={{mb: '60px'}}>
                     Available Panels
                 </Typography>
 
@@ -89,7 +101,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                 <BasicGlobe
                     lat={selectedAsset.lat}
                     lng={selectedAsset.lng}
-                    zoom={3}
+                    zoom={5}
                     width="100%"
                     height="80vh"
                     markers={assets.map((asset) => (

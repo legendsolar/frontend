@@ -25,7 +25,7 @@ const BasicGlobe = ({
         if (mapRef.current) {
             mapRef.current.flyTo({
                 center: [lng, lat],
-                duration: 1000,
+                duration: 2000,
             });
         }
     }, [lat, lng]);

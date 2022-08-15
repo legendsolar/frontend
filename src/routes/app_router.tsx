@@ -25,6 +25,7 @@ import CompleteAccountContent from 'content/complete_account_content';
 import CompleteAccountPage from 'pages/complete_account_page';
 import {ROUTES} from 'routes/routes';
 import DiscoverPage from 'pages/discover_page';
+import TransactionPage from 'pages/transactions_page';
 
 function AppRouter() {
     return (
@@ -98,104 +99,39 @@ function AppRouter() {
                             </ProtectedRoute>
                         }
                     />
-                    {/*
                     <Route
-                        path="/account"
+                        path={ROUTES.DOCUMENTS}
                         element={
-                            <ProtectedRoute
-                                requiredUserStates={[
-                                    UserStatus.IdentityVerified,
-                                ]}
-                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
-                            >
-                                <AccountPage />
+                            <ProtectedRoute verifiedUserRequired>
+                                <DocumentPage></DocumentPage>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path={ROUTES.TRANSACTIONS}
+                        element={
+                            <ProtectedRoute verifiedUserRequired>
+                                <TransactionPage></TransactionPage>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path={ROUTES.ACCOUNT}
+                        element={
+                            <ProtectedRoute verifiedUserRequired>
+                                <AccountPage></AccountPage>
                             </ProtectedRoute>
                         }
                     />
 
                     <Route
-                        path="/transfer"
+                        path={ROUTES.WALLET}
                         element={
-                            <ProtectedRoute
-                                requiredUserStates={[
-                                    UserStatus.IdentityVerified,
-                                ]}
-                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
-                            >
-                                <WalletPage />
+                            <ProtectedRoute verifiedUserRequired>
+                                <WalletPage></WalletPage>
                             </ProtectedRoute>
                         }
                     />
-
-                    <Route
-                        path="/wallet"
-                        element={
-                            <ProtectedRoute
-                                requiredUserStates={[
-                                    UserStatus.IdentityVerified,
-                                ]}
-                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
-                            >
-                                <WalletPage />
-                            </ProtectedRoute>
-                        }
-                    />
-
-                    <Route
-                        path="/documents"
-                        element={
-                            <ProtectedRoute
-                                requiredUserStates={[
-                                    UserStatus.IdentityVerified,
-                                ]}
-                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
-                            >
-                                <DocumentPage />
-                            </ProtectedRoute>
-                        }
-                    />
-
-                    <Route
-                        path="/transactions"
-                        element={
-                            <ProtectedRoute
-                                requiredUserStates={[
-                                    UserStatus.IdentityVerified,
-                                ]}
-                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
-                            >
-                                <TransactionView />
-                            </ProtectedRoute>
-                        }
-                    />
-
-                    <Route
-                        path="/explore"
-                        element={
-                            <ProtectedRoute
-                                requiredUserStates={[
-                                    UserStatus.IdentityVerified,
-                                ]}
-                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
-                            >
-                                <ExplorePage />
-                            </ProtectedRoute>
-                        }
-                    />
-
-                    <Route
-                        path="/invest/:assetName"
-                        element={
-                            <ProtectedRoute
-                                requiredUserStates={[
-                                    UserStatus.IdentityVerified,
-                                ]}
-                                requiredRedirectPath={ROUTES.CREATE_ACCOUNT}
-                            >
-                                <InvestPage />
-                            </ProtectedRoute>
-                        }
-                    /> */}
                     <Route path="/:path" element={<NotFoundPage />} />
                 </Routes>
             </BrowserRouter>

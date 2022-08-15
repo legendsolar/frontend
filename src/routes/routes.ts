@@ -6,5 +6,8 @@ export enum ROUTES {
     PRIVACY_POLICY = '/privacy',
     USER_HOME = '/',
     DISCOVER = '/discover',
+    DOCUMENTS = '/documents',
+    TRANSACTIONS = '/transactions',
+    ACCOUNT = '/account',
+    WALLET = '/wallet',
 }
-

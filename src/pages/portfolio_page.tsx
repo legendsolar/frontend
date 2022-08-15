@@ -1,10 +1,8 @@
 import DefaultView from 'views/default_view';
 import NavBar from 'components/utils/nav_bar';
-import DiscoveryContent from 'content/discovery_content';
-import assetData from 'static_data/assets';
 import useNavBar from 'hooks/use_nav_bar';
 
-const DiscoverPage = () => {
+const PortfolioPage = () => {
     const navBarProps = useNavBar();
 
     return (
@@ -12,9 +10,9 @@ const DiscoverPage = () => {
             authenticated={navBarProps.userIsAuthenticated}
             navBar={<NavBar {...navBarProps}></NavBar>}
         >
-            <DiscoveryContent assets={assetData}></DiscoveryContent>
+            <div>portfolio</div>
         </DefaultView>
     );
 };
 
-export default DiscoverPage;
+export default PortfolioPage;

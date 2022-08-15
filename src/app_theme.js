@@ -243,7 +243,7 @@ const themeOptions = {
                 {
                     props: {variant: 'container'},
                     style: {
-                        padding: spacing(2),
+                        padding: '100px',
                         borderRadius: '5px',
                         overflow: 'hidden',
                     },

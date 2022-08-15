@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import {useState} from 'react';
 import DocumentDataGrid from 'components/documents/document_data_grid';
+import {DataGridDateRange} from 'utils/date_range';
 
 const columns: GridColumns = [
     {
@@ -61,14 +62,6 @@ const columns: GridColumns = [
         },
     },
 ];
-export enum DataGridDateRange {
-    WEEK_TO_DATE = 'Week to Date',
-    MONTH_TO_DATE = 'Month to date',
-    QUARTER_TO_DATE = 'Quarter to date',
-    LAST_SIX_MONTHS = 'Last six months',
-    YEAR_TO_DATE = 'Year to date',
-    NONE = 'None',
-}
 interface DocumentDataGridProps {
     documents: Array<any>;
     assetStates: Array<string>;
@@ -79,7 +72,7 @@ interface DocumentDataGridProps {
     onChangeAsset(asset: string): Promise<any>;
 }
 
-const DocumentGridContext = ({
+const DocumentGridContent = ({
     documents,
     assetStates,
     assetState,
@@ -180,4 +173,4 @@ const DocumentGridContext = ({
     );
 };
 
-export default DocumentGridContext;
+export default DocumentGridContent;
