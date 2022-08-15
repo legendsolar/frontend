@@ -8,13 +8,14 @@ const CompleteStepComponent = ({
     onClick,
     disabled,
     disabledMessage,
+    completeMessage,
 }) => {
     const message = (complete, disabled) => {
         if (disabled) {
             return disabledMessage;
         }
 
-        return complete ? '✅' : 'Get Started';
+        return complete ? completeMessage : 'Get Started';
     };
 
     return (
@@ -22,7 +23,7 @@ const CompleteStepComponent = ({
             onClick={onClick}
             variant={'flat'}
             color={'light'}
-            disabled={disabled}
+            disabled={disabled || complete}
         >
             <Stack sx={{width: '100%'}} alignItems={'flex-start'}>
                 <Stack

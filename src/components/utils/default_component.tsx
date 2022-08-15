@@ -11,6 +11,7 @@ interface DefaultComponentProps {
     standardWidth?: boolean;
     children?: ReactNode;
     sx?: any;
+    style?: any;
     width?: string;
 }
 
@@ -21,6 +22,7 @@ const DefaultComponent = forwardRef(
             disabled = false,
             children = {},
             sx = {},
+            style = {},
             paper = false,
             standardWidth = true,
             width,
@@ -52,6 +54,7 @@ const DefaultComponent = forwardRef(
                         pointerEvents: pointerEvents,
                     } as any
                 }
+                style={style}
                 ref={ref}
             >
                 {content}
@@ -61,9 +64,9 @@ const DefaultComponent = forwardRef(
         );
 
         if (standardWidth) {
-            return <div style={{width: '400px'}}>{maybePaper}</div>;
+            return <div style={{...style, width: '400px'}}>{maybePaper}</div>;
         } else if (width) {
-            return <div style={{width}}>{maybePaper}</div>;
+            return <div style={{...style, width}}>{maybePaper}</div>;
         } else {
             return maybePaper;
         }

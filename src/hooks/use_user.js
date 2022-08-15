@@ -184,9 +184,15 @@ export const useProvideUser = () => {
             }
         }
     `;
-
-    const useGetUserStatus = () => {
-        const {loading, error, data, refetch} = useQuery(USER_STATUS_QUERY);
+    /**
+     * Warning: skip behavior only works as expected if transitioning from false->true
+     * @param {*} param0
+     * @returns
+     */
+    const useGetUserStatus = ({skip} = {skip: false}) => {
+        const {loading, error, data, refetch} = useQuery(USER_STATUS_QUERY, {
+            skip,
+        });
 
         return {
             loading,

@@ -26,7 +26,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                     Available Panels
                 </Typography>
 
-                {assets.map((asset) => (
+                {assets.map((asset, idx) => (
                     <Accordion
                         variant={'none' as any}
                         sx={{width: '100%'}}
@@ -34,6 +34,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                             setSelectedAsset(asset);
                         }}
                         expanded={selectedAsset === asset}
+                        key={idx}
                     >
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
@@ -93,19 +94,43 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                     height="80vh"
                     markers={assets.map((asset) => (
                         <Marker lng={asset.lng} lat={asset.lat}>
-                            {selectedAsset === asset ? (
+                            <div
+                                style={{
+                                    transform: 'translate(0%, -100%)',
+                                }}
+                            >
                                 <DefaultComponent
                                     paper
                                     standardWidth={false}
                                     sx={{p: 2}}
+                                    style={{}}
                                 >
-                                    <Typography variant={'label' as any}>
-                                        {asset.title}
+                                    <Typography
+                                        variant={'label' as any}
+                                        color={'legendaryGreen.main' as any}
+                                    >
+                                        {asset === selectedAsset
+                                            ? asset.title
+                                            : '☀️'}
                                     </Typography>
                                 </DefaultComponent>
-                            ) : (
-                                <div>☀️</div>
-                            )}
+                                <div
+                                    style={{
+                                        content: '',
+                                        position: 'absolute',
+                                        bottom: '100%',
+
+                                        top: '95%',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+
+                                        /* the arrow */
+                                        border: '8px solid #000',
+                                        borderColor:
+                                            'white transparent transparent transparent',
+                                    }}
+                                ></div>
+                            </div>
                         </Marker>
                     ))}
                 ></BasicGlobe>

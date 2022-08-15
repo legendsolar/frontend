@@ -1,4 +1,5 @@
 import {useAuth} from 'hooks/use_auth';
+import {useEffect} from 'react';
 import {Navigate, useNavigate} from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
 import LoadingView from 'views/loading_view';
@@ -29,20 +30,24 @@ const ProtectedRoute = ({
 
     const {useGetUserStatus} = useUser();
 
-    // TODO would be ideal to only fetch this if user is auth
-    const {loading, error, status, refetch} = useGetUserStatus();
+    /**
+     * Only fetch if user auth is complete. Bug in Apollo Client
+     * makes `skip` only works if false->true, but this works for this use case.
+     *
+     * Bug described in:
+     * https://github.com/apollographql/apollo-client/issues/6190
+     * https://github.com/apollographql/apollo-client/pull/6752
+     *
+     */
+    const {loading, error, status, refetch} = useGetUserStatus({
+        skip: !auth.user,
+    });
 
-    console.log({status});
-
-    if (auth.isAuthenticating) {
+    if (loading || auth.isAuthenticating) {
         return <LoadingView></LoadingView>;
     }
 
-    if (loading) {
-        return <LoadingView></LoadingView>;
-    }
-
-    if (error && !(error?.networkError?.type === 'AuthenticationError')) {
+    if (error) {
         return <ErrorPage></ErrorPage>;
     }
 
@@ -58,7 +63,7 @@ const ProtectedRoute = ({
         );
     }
 
-    if (verifiedUserRequired && !status?.verified) {
+    if (verifiedUserRequired && !status?.verified && status) {
         return (
             <Navigate
                 to={unverifiedUserRedirectPath}
@@ -70,7 +75,7 @@ const ProtectedRoute = ({
         );
     }
 
-    if (unverifiedUserRequired && status?.verified) {
+    if (unverifiedUserRequired && status?.verified && status) {
         return (
             <Navigate
                 to={verifiedUserRedirectPath}

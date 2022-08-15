@@ -25,6 +25,7 @@ export const validatePostalCode = () => {
         .string()
         .matches(/^\d+$/, 'Zip code invalid')
         .min(5, 'Zip code invalid')
+        .max(5, 'Zip code invalid')
         .required('Required');
 };
 

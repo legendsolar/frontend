@@ -138,6 +138,7 @@ const CompleteAccountPage = () => {
                         steps={[
                             {
                                 complete: status.emailVerified,
+                                completeMessage: '✅',
                                 title: 'Verify Email',
                                 icon: (
                                     <Typography variant={'mediumEmoji' as any}>
@@ -152,6 +153,7 @@ const CompleteAccountPage = () => {
                                 complete: status.mfaVerified,
                                 disabled: !stepsComplete.email,
                                 disabledMessage: 'Verify email first',
+                                completeMessage: '✅',
                                 title: 'Verify Phone Number',
 
                                 icon: (
@@ -166,6 +168,7 @@ const CompleteAccountPage = () => {
                             {
                                 complete: status.accreditation?.length > 0,
                                 title: 'Verify Accreditation',
+                                completeMessage: '✅',
                                 icon: (
                                     <Typography variant={'mediumEmoji' as any}>
                                         💸

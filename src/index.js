@@ -74,7 +74,7 @@ const authLink = setContext(async (_, {headers}) => {
 
     if (!user) {
         throwAuthenticationError({
-            message: 'Cannot make GraphQL request, user not authentication',
+            message: 'Cannot make GraphQL request, user not authenticated',
         });
     }
 

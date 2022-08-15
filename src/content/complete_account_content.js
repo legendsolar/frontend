@@ -33,6 +33,7 @@ const CompleteAccountContent = ({stepsTitle, steps, onContinue}) => {
                     onClick={step.onClick}
                     disabled={step.disabled}
                     disabledMessage={step.disabledMessage}
+                    completeMessage={step.completeMessage}
                 ></CompleteStepComponent>
             ))}
         </DefaultComponent>
