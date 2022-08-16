@@ -11,12 +11,13 @@ import ScrollToSidebar from 'components/utils/scroll_to_sidebar';
 import MemberHeader from 'components/user/member_header';
 import TransferGrid from 'components/transfers/transfer_grid';
 import {useUser} from 'hooks/use_user';
-import DefaultComponent from 'components/basics/component';
+import Component from 'components/basics/component';
 import ModifyUserInfo from 'components/user/modify_user_info';
 import LoadingComponent from 'components/basics/loading_component';
 import AccountListComponent from 'components/transfers/account_list_component';
 import useNavBar from 'hooks/use_nav_bar';
 import DefaultView from 'views/default_view';
+import ComponentDivider from 'components/basics/component_divider';
 
 const AccountPage = () => {
     const navBarProps = useNavBar();
@@ -147,14 +148,12 @@ const AccountPage = () => {
                 }
                 mainContent={
                     <Stack spacing={6}>
-                        <DefaultComponent
-                            ref={(el) => (contentRefs.current[0] = el)}
-                        >
+                        <Component ref={(el) => (contentRefs.current[0] = el)}>
                             <Typography variant={'smallHeadline' as any}>
                                 Personal Information
                             </Typography>
 
-                            <Divider></Divider>
+                            <ComponentDivider></ComponentDivider>
 
                             <Typography variant="subtitle2">
                                 Mailing Address
@@ -169,10 +168,11 @@ const AccountPage = () => {
                                     isValid={() => {}}
                                 ></ModifyUserInfo>
                             )}
-                        </DefaultComponent>
+                        </Component>
 
-                        <DefaultComponent
+                        <Component
                             disabled={false}
+                            shadow
                             ref={(el) => (contentRefs.current[1] = el)}
                         >
                             {!accountsLoading && (
@@ -188,11 +188,9 @@ const AccountPage = () => {
                                     }
                                 ></AccountListComponent>
                             )}
-                        </DefaultComponent>
+                        </Component>
 
-                        <DefaultComponent
-                            ref={(el) => (contentRefs.current[2] = el)}
-                        >
+                        <Component ref={(el) => (contentRefs.current[2] = el)}>
                             <Typography variant={'smallHeadline' as any}>
                                 Investment History
                             </Typography>
@@ -201,7 +199,7 @@ const AccountPage = () => {
                                     transfers={investmentTransfers}
                                 ></TransferGrid>
                             )}
-                        </DefaultComponent>
+                        </Component>
                     </Stack>
                 }
             ></SideBarNavView>

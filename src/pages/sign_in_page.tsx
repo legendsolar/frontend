@@ -11,18 +11,13 @@ import PanelInfinitySVG from 'assets/images/panel_infinity.svg';
 import BackButton from 'components/buttons/back_button';
 import DualPaneView from 'views/dual_pane_view';
 import Component from 'components/basics/component';
-
-enum States {
-    SIGN_IN = 'sign_in',
-    MFA_VERIFY = 'mfa_verify',
-    FORGOT_PASSWORD = 'forgot_password',
-}
+import {States} from 'hooks/use_sign_in';
 
 const SignInPage = () => {
     const {
-        state: signInState,
+        state,
         codeSent,
-        setState: setSignInState,
+        setState,
         setCaptcha,
         onSubmitCode,
         onSignInWithGoogle,
@@ -30,8 +25,6 @@ const SignInPage = () => {
         onCreateNewAccount,
         onForgotPassword,
     } = useSignIn();
-
-    const [state, setState] = useState(States.SIGN_IN);
 
     const states = (state: States): JSX.Element => {
         switch (state) {
@@ -58,10 +51,12 @@ const SignInPage = () => {
                 return (
                     <div>
                         <MfaVerifyComponent
+                            color={'light'}
                             onSubmit={onSubmitCode}
                             codeSent={codeSent}
                             initialCodeValues={{}}
                             onChangePhoneRequested={() => {}}
+                            changePhoneAllowed={false}
                         ></MfaVerifyComponent>
                     </div>
                 );

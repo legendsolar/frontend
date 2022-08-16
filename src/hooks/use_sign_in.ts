@@ -6,21 +6,46 @@ import {authErrorHandler} from 'utils/auth_error_translator';
 import {throwValidationError} from 'utils/errors';
 import {useUser} from './use_user';
 import {ROUTES} from 'routes/routes';
+import {boolean} from 'yup';
+import {RecaptchaVerifier} from 'firebase/auth';
 
-const useSignIn = () => {
+export enum States {
+    SIGN_IN = 'sign_in',
+    MFA_VERIFY = 'mfa_verify',
+    FORGOT_PASSWORD = 'forgot_password',
+}
+
+interface useSignInReturnType {
+    state: States;
+    codeSent: boolean;
+    setCaptcha(v: RecaptchaVerifier): void;
+    setState(s: States): void;
+    onForgotPassword({email}: {email: string}): Promise<void>;
+    onSignInSubmit({
+        email,
+        password,
+    }: {
+        email: string;
+        password: string;
+    }): Promise<void>;
+    onSignInWithGoogle(): Promise<void>;
+    onCreateNewAccount(): void;
+    onSignUpWithEmail(): void;
+    onNavigateToSignIn(): void;
+    onSignUpWithGoogle(): Promise<void>;
+    onSubmitCode({code}: {code: string}): Promise<void>;
+}
+
+const useSignIn = (): useSignInReturnType => {
     const navigate = useNavigate();
-
-    const [state, setState] = useState('signin');
+    const [state, setState] = useState(States.SIGN_IN);
     const [resolver, setResolver] = useState(null);
-    const [captcha, setCaptcha] = useState(null);
+    const [captcha, setCaptcha] = useState<RecaptchaVerifier>();
     const [verificationId, setVerificationId] = useState(null);
     const [codeSent, setCodeSent] = useState(false);
 
-    const {useSetUser} = useUser();
-
     const {
         signin,
-        signup,
         signInWithGoogle,
         resetPassword,
         sendMfaVerification,
@@ -33,8 +58,14 @@ const useSignIn = () => {
         navigate('/');
     };
 
-    const onSignInSubmit = async (values) => {
-        return signin(values.email, values.password)
+    const onSignInSubmit = async ({
+        email,
+        password,
+    }: {
+        email: string;
+        password: string;
+    }) => {
+        return signin(email, password)
             .then(() => {
                 onSuccesfulSignIn();
             })
@@ -45,7 +76,7 @@ const useSignIn = () => {
                     return sendMfaVerification(resolver, captcha).then(
                         (verificationId) => {
                             setVerificationId(verificationId);
-                            setState('mfa_verify');
+                            setState(States.MFA_VERIFY);
                             setCodeSent(true);
                         },
                     );
@@ -53,12 +84,6 @@ const useSignIn = () => {
                     authErrorHandler(error);
                 }
             });
-    };
-
-    const onCreateAccountSubmit = async (values) => {
-        return signup(values.email, values.password).catch((error) =>
-            authErrorHandler(error),
-        );
     };
 
     const onCreateNewAccount = () => {
@@ -81,22 +106,18 @@ const useSignIn = () => {
         navigate(ROUTES.SIGN_IN);
     };
 
-    const onForgotPassword = (values) => {
-        return resetPassword(values.email).catch((error) =>
+    const onForgotPassword = ({email}) => {
+        return resetPassword(email).catch((error) => authErrorHandler(error));
+    };
+
+    const onSubmitCode = async ({code}) => {
+        return validateMfaCode(verificationId, code, resolver).catch((error) =>
             authErrorHandler(error),
         );
     };
 
-    const onSubmitCode = async (values) => {
-        return validateMfaCode(verificationId, values.code, resolver).catch(
-            (error) => authErrorHandler(error),
-        );
-    };
-
     const onSignUpWithGoogle = async () => {
-        onSignInWithGoogle().then(() => {
-            onNewUserCreated();
-        });
+        onSignInWithGoogle().then(() => {});
     };
 
     return {
@@ -111,8 +132,6 @@ const useSignIn = () => {
         onSignUpWithEmail,
         onNavigateToSignIn,
         onSignUpWithGoogle,
-        onCreateAccountSubmit,
-        onForgotPassword,
         onSubmitCode,
     };
 };

@@ -1,10 +1,10 @@
-import { Paper } from "@mui/material";
+import Component from 'components/basics/component';
 
-const SideBar = ({ children }) => {
+const SideBar = ({children}) => {
     return (
-        <Paper variant="container" sx={{ width: "100%", m: 0 }}>
+        <Component standardWidth={false} shadow sx={{width: '100%', m: 0}}>
             {children}
-        </Paper>
+        </Component>
     );
 };
 

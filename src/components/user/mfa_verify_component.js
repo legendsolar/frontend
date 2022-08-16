@@ -4,21 +4,14 @@ import {
     TextField,
     Button,
     CircularProgress,
-    Collapse,
     Alert,
     Stack,
     Typography,
 } from '@mui/material';
-import {states} from 'utils/static_lists';
-import {
-    validateMfaVerifyCode,
-    validatePhoneNumber,
-} from 'validation/user_data_validation';
+import {validateMfaVerifyCode} from 'validation/user_data_validation';
 
 import {ErrorTypes} from 'utils/errors';
-import {useEffect} from 'react';
 import {useFormik} from 'formik';
-import {useNavigate} from 'react-router-dom';
 import * as yup from 'yup';
 
 const MfaVerifyComponent = ({
@@ -27,6 +20,7 @@ const MfaVerifyComponent = ({
     codeSent,
     onChangePhoneRequested,
     color = 'dark',
+    changePhoneAllowed = false,
 }) => {
     const [error, setError] = useState(null);
 
@@ -93,21 +87,26 @@ const MfaVerifyComponent = ({
 
                 {error && <Alert severity="error">{error}</Alert>}
 
-                <Stack
-                    direction="row"
-                    justifyContent={'flex-end'}
-                    sx={{pl: 2, pr: 2}}
-                >
-                    <Button variant={'text'} onClick={onChangePhoneRequested}>
-                        <Typography
-                            variant={'smallLabel'}
-                            color="legendaryGreen.main"
-                            sx={{ml: 1}}
+                {changePhoneAllowed && (
+                    <Stack
+                        direction="row"
+                        justifyContent={'flex-end'}
+                        sx={{pl: 2, pr: 2}}
+                    >
+                        <Button
+                            variant={'text'}
+                            onClick={onChangePhoneRequested}
                         >
-                            {'Re-Enter Phone Number'}
-                        </Typography>
-                    </Button>
-                </Stack>
+                            <Typography
+                                variant={'smallLabel'}
+                                color="legendaryGreen.main"
+                                sx={{ml: 1}}
+                            >
+                                {'Re-Enter Phone Number'}
+                            </Typography>
+                        </Button>
+                    </Stack>
+                )}
             </Stack>
         </div>
     );
