@@ -118,9 +118,9 @@ const typographyOptions = {
         },
         subtitle1: {
             fontFamily: 'Be Vietnam Pro',
-            fontWeight: 700,
-            fontSize: '12px',
-            lineHeight: '14px',
+            fontWeight: 600,
+            fontSize: '20px',
+            lineHeight: '25px',
             color: paletteOptions.palette.blackDusk.main,
         },
         body1: {
@@ -140,7 +140,7 @@ const typographyOptions = {
             fontFamily: 'Be Vietnam Pro',
             fontWeight: 600,
             fontSize: '18px',
-            lineHeight: '22.77px',
+            lineHeight: '23px',
             color: paletteOptions.palette.blackDusk.main,
         },
         body2: {
@@ -225,7 +225,7 @@ const typographyOptions = {
  *
  */
 
-const themeOptions = {
+export const themeOptions = {
     spacing: spacing,
     breakpoints: {
         values: {
@@ -233,7 +233,7 @@ const themeOptions = {
             sm: 0, // webflow phone
             md: 478, // webflow landscape phone
             lg: 767, // webflow tablet
-            xl: 991, // desktop
+            xl: 1320 + 70, // desktop
         },
     },
     components: {

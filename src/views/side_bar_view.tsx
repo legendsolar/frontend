@@ -1,4 +1,4 @@
-import {Container, Grid, Box} from '@mui/material';
+import {Container, Grid, Box, Stack} from '@mui/material';
 import DefaultView from 'views/default_view';
 import {ErrorBoundary} from '@sentry/react';
 import DefaultErrorBoundary from 'components/errors/default_error_boundary';
@@ -139,15 +139,14 @@ const SideBarView = ({
     };
 
     return (
-        <Grid container columnSpacing={4}>
+        <Stack direction={'row'} spacing={8}>
             {getDrawerPosition('left')}
-
-            <Grid item xs={12} md={8}>
-                <Box
-                    sx={{
-                        width: '100%',
-                    }}
-                >
+            <Stack
+                sx={{
+                    width: '100%',
+                }}
+            >
+                <Box>
                     {getDrawerPosition('top')}
 
                     {!!header && (
@@ -161,16 +160,11 @@ const SideBarView = ({
                     </DefaultErrorBoundary>
 
                     {getDrawerPosition('bottom')}
-
-                    {/** 
-                        Bit of padding below the content to ensure the sidebar can scroll all the way down
-                        */}
-                    <Box sx={{height: '200px'}}></Box>
                 </Box>
-            </Grid>
+            </Stack>
 
             {getDrawerPosition('right')}
-        </Grid>
+        </Stack>
     );
 };
 

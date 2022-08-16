@@ -1,14 +1,11 @@
-import {Typography, Stack} from '@mui/material';
+import {Typography, Stack, Box} from '@mui/material';
 import ContentDivider from 'components/basics/content_divider';
-import TestMetricGauge from 'components/gauges/tests/test_metric_gauge';
 import BasicMap from 'components/map/basic_map_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
 import Component from 'components/basics/component';
 import RealTimeContent from 'content/real_time_content';
 import {testTransfers} from 'static_data/placeholder_transfers';
 import SideBarView from 'views/side_bar_view';
-
-import PlaceholderWorm from 'components/worm/placeholder_worm';
 import {
     EconomicsSummary,
     GenerationDatum,
@@ -19,7 +16,7 @@ import InvestmentSupportComponent from 'components/invest/investment_support_com
 import IconAccordian from 'utils/icon_accordian';
 import SideBar from 'components/utils/sidebar_component';
 import MetricList from 'components/summary/metric_list';
-
+import SmallPanelDisplaySVG from 'assets/images/small_panel_display.svg';
 interface PortfolioContentProps {
     title?: string;
     address?: string;
@@ -91,7 +88,43 @@ const PortfolioContent = ({
                             }}
                         >
                             <Stack>
-                                <Typography>121 panels</Typography>
+                                <Stack
+                                    direction={'row'}
+                                    justifyContent={'space-between'}
+                                >
+                                    <Typography
+                                        variant={'smallHeadline' as any}
+                                    >
+                                        121 panels
+                                    </Typography>
+                                    <Stack alignItems={'flex-end'}>
+                                        <Typography
+                                            variant={'smallHeadline' as any}
+                                            color={'legendaryGreen.main' as any}
+                                        >
+                                            $13.44
+                                        </Typography>
+                                        <Typography
+                                            variant={'monoButton' as any}
+                                        >
+                                            Today's earnings
+                                        </Typography>
+                                    </Stack>
+                                </Stack>
+                                <Box
+                                    style={{
+                                        marginRight: '-20px',
+                                        marginLeft: '-20px',
+                                    }}
+                                    sx={{
+                                        backgroundColor: 'whiteHaze.main',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <img src={SmallPanelDisplaySVG}></img>
+                                </Box>
                                 <MetricList
                                     dividers
                                     valuePairs={[

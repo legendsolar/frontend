@@ -44,7 +44,7 @@ const RealTimeContent = ({
                 }}
             ></Worm>
 
-            <Stack direction="row">
+            <Stack direction="row" justifyContent={'center'} sx={{pb: 4}}>
                 <Stack>
                     <CarbonGauge
                         max={
@@ -55,14 +55,28 @@ const RealTimeContent = ({
                             current_W * generationMetaData.co2_per_kWh
                         }
                     ></CarbonGauge>
+                    <EarningsCumulativeImpact
+                        cumulativeData={summaryToCumulativeImpact(summary)}
+                        live={true}
+                    ></EarningsCumulativeImpact>
+                    <EarningsCumulativeImpact
+                        cumulativeData={summaryToCumulativeImpact(summary)}
+                        live={true}
+                    ></EarningsCumulativeImpact>
+                    <EarningsCumulativeImpact
+                        cumulativeData={summaryToCumulativeImpact(summary)}
+                        live={true}
+                    ></EarningsCumulativeImpact>
+                    <EarningsCumulativeImpact
+                        cumulativeData={summaryToCumulativeImpact(summary)}
+                        live={true}
+                    ></EarningsCumulativeImpact>
                 </Stack>
                 <Stack>
-                    <Component>
-                        <EarningsCumulativeImpact
-                            cumulativeData={summaryToCumulativeImpact(summary)}
-                            live={true}
-                        ></EarningsCumulativeImpact>
-                    </Component>
+                    <EarningsCumulativeImpact
+                        cumulativeData={summaryToCumulativeImpact(summary)}
+                        live={true}
+                    ></EarningsCumulativeImpact>
                     <CarbonGauge
                         max={
                             generationMetaData.max_kW *

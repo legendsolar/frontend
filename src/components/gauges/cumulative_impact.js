@@ -1,8 +1,9 @@
 import {Typography, Box, Paper, Chip, Stack} from '@mui/material';
 import VertDivider from 'components/basics/vert_divider';
 import PropTypes from 'prop-types';
-
 import {useState} from 'react';
+import Component from 'components/basics/component';
+
 const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
     const [historyState, setHistoryState] = useState('week');
 
@@ -21,14 +22,8 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
           };
 
     return (
-        <Box
-            sx={{
-                minWidth: 300,
-                minHeight: 288,
-                display: 'flex',
-            }}
-        >
-            <Stack justifyContent="space-between" spacing={1} width={'100%'}>
+        <Component>
+            <Stack justifyContent="space-between" spacing={1}>
                 <Stack
                     direction="row"
                     justifyContent={'space-between'}
@@ -114,7 +109,7 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
                     ></Chip>
                 </Stack>
             </Stack>
-        </Box>
+        </Component>
     );
 };
 

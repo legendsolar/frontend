@@ -36,82 +36,67 @@ const NavBar = ({
     onAccount,
     onWallet,
 }: NavBarProps) => {
-    const backgroundColor = userIsAuthenticated ? 'whiteFog.main' : 'none';
-    const headerHeight = '300px';
     return (
-        <div>
+        <Toolbar
+            style={{
+                padding: 0,
+                width: '100%',
+            }}
+        >
             <Box
-                position="absolute"
                 sx={{
-                    height: headerHeight,
-                    width: '100%',
-                    backgroundColor: backgroundColor,
-                    zIndex: -1,
-                    transform: 'translate3d(0, 0, -5px)',
-                }}
-            ></Box>
-            <Toolbar
-                style={{
-                    padding: 0,
                     width: '100%',
                 }}
+                display="flex"
+                justifyContent={'center'}
             >
                 <Box
                     sx={{
                         width: '100%',
+                        mt: 10,
+                        mb: 10,
                     }}
-                    display="flex"
-                    justifyContent={'center'}
                 >
-                    <Box
+                    <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems={'flex-end'}
                         sx={{
                             width: '100%',
-                            ml: 16,
-                            mr: 14,
-                            mt: 10,
+                            zIndex: 1,
+                            transform: 'translate3d(0, 0, 0px)',
                         }}
                     >
-                        <Stack
-                            direction="row"
-                            justifyContent="space-between"
-                            alignItems={'flex-end'}
-                            sx={{
-                                width: '100%',
-                                zIndex: 1,
-                                transform: 'translate3d(0, 0, 0px)',
-                            }}
-                        >
-                            <img
-                                src={TypemarkSolarSVG}
-                                style={{width: '175px'}}
-                            ></img>
+                        <img
+                            src={TypemarkSolarSVG}
+                            style={{width: '175px'}}
+                        ></img>
 
-                            {userIsAuthenticated && userVerified && (
-                                <LoggedInToolbar
-                                    walletBalance={walletBalance}
-                                    onYourRooftop={onYourRooftop}
-                                    onTransaction={onTransaction}
-                                    onDocuments={onDocuments}
-                                    onAvailablePanels={onAvailablePanels}
-                                    onAccount={onAccount}
-                                    onWallet={onWallet}
-                                ></LoggedInToolbar>
-                            )}
+                        {userIsAuthenticated && userVerified && (
+                            <LoggedInToolbar
+                                walletBalance={walletBalance}
+                                onYourRooftop={onYourRooftop}
+                                onTransaction={onTransaction}
+                                onDocuments={onDocuments}
+                                onAvailablePanels={onAvailablePanels}
+                                onAccount={onAccount}
+                                onWallet={onWallet}
+                            ></LoggedInToolbar>
+                        )}
 
-                            {userIsAuthenticated && !userVerified && (
-                                <CreateAccountToolbar
-                                    onToHomepage={onToHomepage}
-                                ></CreateAccountToolbar>
-                            )}
+                        {userIsAuthenticated && !userVerified && (
+                            <CreateAccountToolbar
+                                onToHomepage={onToHomepage}
+                            ></CreateAccountToolbar>
+                        )}
 
-                            {!userIsAuthenticated && (
-                                <LoggedOutToolbar></LoggedOutToolbar>
-                            )}
-                        </Stack>
-                    </Box>
+                        {!userIsAuthenticated && (
+                            <LoggedOutToolbar></LoggedOutToolbar>
+                        )}
+                    </Stack>
                 </Box>
-            </Toolbar>
-        </div>
+            </Box>
+        </Toolbar>
     );
 };
 

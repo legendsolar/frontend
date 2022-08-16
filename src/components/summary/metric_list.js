@@ -21,7 +21,7 @@ const MetricList = ({valuePairs, dividers = false}) => {
                             height: '53px',
                         }}
                     >
-                        <Typography variant="subtitle3" color="blackDawn.main">
+                        <Typography variant="subtitle1" color="blackDawn.main">
                             {metric}
                         </Typography>
                         <Typography variant="subtitle2">{value}</Typography>

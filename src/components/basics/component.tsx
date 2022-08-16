@@ -74,7 +74,7 @@ const Component = forwardRef(
                 sx={
                     {
                         p: 4,
-
+                        boxSizing: 'border-box',
                         ...sx,
                         pointerEvents: pointerEvents,
                     } as any

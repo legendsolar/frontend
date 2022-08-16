@@ -2,6 +2,7 @@ import {Box} from '@mui/material';
 import {useAuth} from 'hooks/use_auth';
 import Footer from 'components/utils/footer';
 import NavBarUserContext from 'components/utils/nav_bar_user_context';
+import MainContentBox from 'utils/main_content_box';
 
 const DefaultView = ({
     children,
@@ -32,31 +33,23 @@ const DefaultView = ({
                     transform: 'translate3d(0, 0, -10px)',
                 }}
             ></Box>
-            {navBar}
+
             <Box
+                position="absolute"
                 sx={{
-                    maxWidth: '1275px',
-                    pl: {
-                        sm: '10px',
-                        md: '10px',
-                        lg: '20px',
-                        xl: '20px',
-                    },
-                    pr: {
-                        sm: '10px',
-                        md: '10px',
-                        lg: '20px',
-                        xl: '20px',
-                    },
-                    mr: 'auto',
-                    ml: 'auto',
-                    mt: 16,
+                    height: '300px',
+                    width: '100%',
+                    backgroundColor: 'whiteFog.main',
+                    zIndex: -1,
+                    transform: 'translate3d(0, 0, -5px)',
                 }}
-            >
+            ></Box>
+            <MainContentBox>
+                {navBar}
                 <Box sx={{minHeight: '100vh'}}>{children}</Box>
 
                 <Footer></Footer>
-            </Box>
+            </MainContentBox>
         </Box>
     );
 };
