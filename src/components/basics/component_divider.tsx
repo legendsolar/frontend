@@ -4,7 +4,7 @@ const ComponentDivider = ({sx = {}}) => {
     return (
         <Divider
             sx={{
-                sx,
+                ...sx,
                 ml: -4,
                 mr: -4,
             }}

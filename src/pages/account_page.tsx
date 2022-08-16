@@ -18,6 +18,8 @@ import AccountListComponent from 'components/transfers/account_list_component';
 import useNavBar from 'hooks/use_nav_bar';
 import DefaultView from 'views/default_view';
 import ComponentDivider from 'components/basics/component_divider';
+import AccreditationStatus from 'components/user/accreditation_status';
+import {ACCREDITATION_OPTIONS} from 'content/verify_accreditation_content';
 
 const AccountPage = () => {
     const navBarProps = useNavBar();
@@ -73,8 +75,8 @@ const AccountPage = () => {
 
     const drawerTitles = [
         'Personal Information',
+        'Accreditation',
         'Connected Accounts',
-        'Investment History',
     ];
 
     const {
@@ -178,6 +180,21 @@ const AccountPage = () => {
                             standardWidth={false}
                             ref={(el) => (contentRefs.current[1] = el)}
                         >
+                            <Typography variant={'smallHeadline' as any}>
+                                Accreditation
+                            </Typography>
+
+                            <ComponentDivider></ComponentDivider>
+                            <AccreditationStatus
+                                options={ACCREDITATION_OPTIONS}
+                            ></AccreditationStatus>
+                        </Component>
+
+                        <Component
+                            disabled={false}
+                            standardWidth={false}
+                            ref={(el) => (contentRefs.current[2] = el)}
+                        >
                             {!accountsLoading && (
                                 <AccountListComponent
                                     accounts={accounts}
@@ -190,20 +207,6 @@ const AccountPage = () => {
                                         createAccountLoading
                                     }
                                 ></AccountListComponent>
-                            )}
-                        </Component>
-
-                        <Component
-                            standardWidth={false}
-                            ref={(el) => (contentRefs.current[2] = el)}
-                        >
-                            <Typography variant={'smallHeadline' as any}>
-                                Investment History
-                            </Typography>
-                            {!investmentTransferLoading && (
-                                <TransferGrid
-                                    transfers={investmentTransfers}
-                                ></TransferGrid>
                             )}
                         </Component>
                     </Stack>

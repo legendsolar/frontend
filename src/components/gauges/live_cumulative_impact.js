@@ -21,10 +21,6 @@ const EarningsCumulativeImpact = ({cumulativeData, live}) => {
     );
 };
 
-EarningsCumulativeImpact.propTypes = {
-    assetId: PropTypes.string.isRequired,
-};
-
 const CarbonCumulativeImpact = ({cumulativeData, live}) => {
     const unitOpts = {
         unit: 'LBS',
@@ -42,10 +38,6 @@ const CarbonCumulativeImpact = ({cumulativeData, live}) => {
     );
 };
 
-CarbonCumulativeImpact.propTypes = {
-    assetId: PropTypes.string.isRequired,
-};
-
 const GenerationCumulativeImpact = ({cumulativeData, live}) => {
     const unitOpts = {
         unit: 'KWH',
@@ -61,10 +53,6 @@ const GenerationCumulativeImpact = ({cumulativeData, live}) => {
             live={live}
         ></CumulativeImpact>
     );
-};
-
-GenerationCumulativeImpact.propTypes = {
-    assetId: PropTypes.string.isRequired,
 };
 
 export {

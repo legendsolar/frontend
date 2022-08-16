@@ -8,6 +8,7 @@ import styles from 'components/gauges/metric_gauge.module.css';
 import LivePill from 'components/pills/live_pill';
 import {useChartDimensions} from 'hooks/use_chart_dimensions';
 import {numberFormatter} from 'utils/number_formatter';
+import Component from 'components/basics/component';
 
 const tinycolor = require('tinycolor2');
 
@@ -45,13 +46,13 @@ function MetricGauge({
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
 
     return (
-        <Box sx={{minWidth: '400px'}}>
+        <Component sx={{p: 1}}>
             <Stack alignItems={'center'}>
                 <Stack
                     direction="row"
                     justifyContent={'space-between'}
                     alignItems={'center'}
-                    sx={{width: '360px', mb: 3}}
+                    sx={{mb: 3}}
                 >
                     <Typography variant="smallHeadline">
                         {unitOpts.title}
@@ -142,7 +143,7 @@ function MetricGauge({
                     </Typography>
                 </Stack>
             </Stack>
-        </Box>
+        </Component>
     );
 }
 

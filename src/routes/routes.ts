@@ -4,7 +4,7 @@ export enum ROUTES {
     COMPLETE_ACCOUNT = '/complete_account',
     TERMS_AND_CONDITIONS = '/terms_conditions',
     PRIVACY_POLICY = '/privacy',
-    USER_HOME = '/',
+    USER_HOME = '/rooftop',
     DISCOVER = '/discover',
     DOCUMENTS = '/documents',
     TRANSACTIONS = '/transactions',

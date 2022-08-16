@@ -3,7 +3,11 @@ import {useAuth} from 'hooks/use_auth';
 import Footer from 'components/utils/footer';
 import NavBarUserContext from 'components/utils/nav_bar_user_context';
 
-const DefaultView = ({children, navBar}) => {
+const DefaultView = ({
+    children,
+    navBar,
+    backgroundColor = 'whiteHaze.main',
+}) => {
     return (
         <Box
             justifyContent="center"
@@ -23,7 +27,7 @@ const DefaultView = ({children, navBar}) => {
                 sx={{
                     width: '100%',
                     height: '100%',
-                    backgroundColor: 'whiteHaze.main',
+                    backgroundColor: backgroundColor,
                     zIndex: -2,
                     transform: 'translate3d(0, 0, -10px)',
                 }}

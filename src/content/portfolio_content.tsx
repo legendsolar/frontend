@@ -4,9 +4,20 @@ import TestMetricGauge from 'components/gauges/tests/test_metric_gauge';
 import BasicMap from 'components/map/basic_map_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
 import Component from 'components/basics/component';
-import RooftopContent from 'content/rooftop_content';
+import RealTimeContent from 'content/real_time_content';
 import {testTransfers} from 'static_data/placeholder_transfers';
 import SideBarView from 'views/side_bar_view';
+
+import PlaceholderWorm from 'components/worm/placeholder_worm';
+import {
+    EconomicsSummary,
+    GenerationDatum,
+    GenerationMetaData,
+    GenerationSummary,
+} from 'schema/schema_gen_types';
+import TestProdWorm from 'components/worm/tests/test_prod_worm';
+import InvestmentSupportComponent from 'components/invest/investment_support_component';
+import IconAccordian from 'utils/icon_accordian';
 
 interface PortfolioContentProps {
     title?: string;
@@ -20,12 +31,22 @@ interface PortfolioContentProps {
     about?: JSX.Element;
     details?: JSX.Element;
     documents?: JSX.Element;
+
+    generationMetaData: GenerationMetaData;
+    facilitySummary: GenerationSummary;
+    facilityEconomics: EconomicsSummary;
+
+    generation: Array<GenerationDatum>;
 }
 
 const PortfolioContent = ({
     title = '',
     address = '',
     subtitle = '',
+    generationMetaData,
+    facilitySummary,
+    facilityEconomics,
+    generation,
 }: PortfolioContentProps) => {
     return (
         <div>
@@ -60,34 +81,126 @@ const PortfolioContent = ({
                 ></BasicMap>
             </Component>
 
-            <Stack>
+            <Stack sx={{mt: 4}}>
                 <SideBarView
-                    drawer={<div></div>}
+                    drawer={
+                        <Component
+                            standardWidth={false}
+                            sx={{
+                                backgroundColor: 'white.main',
+                                width: '100%',
+                            }}
+                            shadow
+                        >
+                            <Typography>drawer</Typography>
+                        </Component>
+                    }
                     mainContent={
-                        <div>
+                        <Stack>
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
                                     All time return
                                 </Typography>
                             </ContentDivider>
 
-                            <Stack direction={'row'}></Stack>
-
-                            <RooftopContent
-                                widgets={
-                                    <Stack direction={'row'}>
-                                        <Stack>
-                                            <Component>
-                                                <TestMetricGauge></TestMetricGauge>
-                                            </Component>
-                                        </Stack>
-
-                                        <Stack></Stack>
+                            <Stack direction={'row'}>
+                                <Component
+                                    standardWidth={false}
+                                    sx={{
+                                        backgroundColor: 'whiteFog.main',
+                                        width: '100%',
+                                    }}
+                                >
+                                    <Stack spacing={1}>
+                                        <Typography
+                                            variant={'smallHeadline' as any}
+                                        >
+                                            💸
+                                        </Typography>
+                                        <Typography
+                                            variant={'headline1' as any}
+                                        >
+                                            {'$' +
+                                                facilitySummary.totalGeneration_kWh *
+                                                    generationMetaData.dollar_per_kWh}
+                                        </Typography>
+                                        <Typography
+                                            variant={'monoButton' as any}
+                                        >
+                                            {'USD Dividends Earned'}
+                                        </Typography>
                                     </Stack>
-                                }
-                            ></RooftopContent>
-                        </div>
+                                </Component>
+                                <Component
+                                    standardWidth={false}
+                                    sx={{
+                                        backgroundColor: 'whiteFog.main',
+                                        width: '100%',
+                                    }}
+                                >
+                                    <Stack spacing={1}>
+                                        <Typography
+                                            variant={'smallHeadline' as any}
+                                        >
+                                            🌱
+                                        </Typography>
+                                        <Typography
+                                            variant={'headline1' as any}
+                                        >
+                                            {'' +
+                                                facilitySummary.totalGeneration_kWh *
+                                                    generationMetaData.co2_per_kWh}
+                                        </Typography>
+                                        <Typography
+                                            variant={'monoButton' as any}
+                                        >
+                                            {'LBS Carbon Averted'}
+                                        </Typography>
+                                    </Stack>
+                                </Component>
+
+                                <Component
+                                    standardWidth={false}
+                                    sx={{
+                                        backgroundColor: 'whiteFog.main',
+                                        width: '100%',
+                                    }}
+                                >
+                                    <Stack spacing={1}>
+                                        <Typography
+                                            variant={'smallHeadline' as any}
+                                        >
+                                            ⚡
+                                        </Typography>
+                                        <Typography
+                                            variant={'headline1' as any}
+                                        >
+                                            {'' +
+                                                facilitySummary.totalGeneration_kWh}
+                                        </Typography>
+                                        <Typography
+                                            variant={'monoButton' as any}
+                                        >
+                                            {'KWH Generated'}
+                                        </Typography>
+                                    </Stack>
+                                </Component>
+                            </Stack>
+
+                            <ContentDivider>
+                                <Typography variant={'monoButton' as any}>
+                                    Real Time Data
+                                </Typography>
+                            </ContentDivider>
+
+                            <RealTimeContent
+                                generation={generation}
+                                generationMetaData={generationMetaData}
+                                summary={facilitySummary}
+                            ></RealTimeContent>
+                        </Stack>
                     }
+                    drawerPosition={'right'}
                 ></SideBarView>
 
                 <ContentDivider>
@@ -105,30 +218,104 @@ const PortfolioContent = ({
 
                 <SideBarView
                     drawer={
-                        <ContentDivider>
-                            <Typography variant={'monoButton' as any}>
-                                Investment Support
-                            </Typography>
-                        </ContentDivider>
+                        <div>
+                            <ContentDivider>
+                                <Typography variant={'monoButton' as any}>
+                                    Investment Support
+                                </Typography>
+                            </ContentDivider>
+                            <InvestmentSupportComponent
+                                title={'Nera Lerner'}
+                                description={
+                                    'Nera is here to share the basics of online solar investing. You’ll have a specilist for the term of your investment. '
+                                }
+                            ></InvestmentSupportComponent>
+                        </div>
                     }
                     mainContent={
-                        <div>
+                        <Stack>
+                            <Component
+                                standardWidth={false}
+                                sx={{
+                                    backgroundColor: 'whiteFog.main',
+                                    width: '100%',
+                                }}
+                            ></Component>
+
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
                                     About this investment
                                 </Typography>
                             </ContentDivider>
+
+                            <IconAccordian
+                                items={[
+                                    {
+                                        title: '7 year term',
+                                        content: (
+                                            <Typography
+                                                variant={'description' as any}
+                                            >
+                                                Test
+                                            </Typography>
+                                        ),
+                                        icon: (
+                                            <Typography
+                                                variant={'description' as any}
+                                            >
+                                                🗓️
+                                            </Typography>
+                                        ),
+                                    },
+                                    {
+                                        title: 'Legends Rooftop monitoring',
+                                        content: (
+                                            <Typography
+                                                variant={'description' as any}
+                                            >
+                                                Test
+                                            </Typography>
+                                        ),
+                                        icon: (
+                                            <Typography
+                                                variant={'description' as any}
+                                            >
+                                                ⚡️
+                                            </Typography>
+                                        ),
+                                    },
+                                ]}
+                            ></IconAccordian>
+
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
                                     Details
                                 </Typography>
                             </ContentDivider>
+
+                            <Stack direction={'row'}>
+                                <Component
+                                    standardWidth={false}
+                                    sx={{
+                                        backgroundColor: 'whiteFog.main',
+                                        width: '100%',
+                                    }}
+                                ></Component>
+                                <Component
+                                    sx={{
+                                        backgroundColor: 'whiteFog.main',
+                                        width: '100%',
+                                    }}
+                                    standardWidth={false}
+                                ></Component>
+                            </Stack>
+
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
                                     Documents
                                 </Typography>
                             </ContentDivider>
-                        </div>
+                        </Stack>
                     }
                 ></SideBarView>
             </Stack>

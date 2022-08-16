@@ -5,7 +5,7 @@ import {isToday, format} from 'date-fns';
 const WormAxis = ({
     domain = [0, 100],
     range = [10, 290],
-    data = null,
+    data = [],
     xAccessor,
     yAccessor,
 }) => {

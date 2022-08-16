@@ -7,6 +7,7 @@ import fakeData from 'components/worm/fake_data';
 import {format, subDays} from 'date-fns';
 import {Typography} from '@mui/material';
 import {Stack} from '@mui/material';
+import {GenerationDatum} from 'schema/schema_gen_types';
 
 var tinycolor = require('tinycolor2');
 
@@ -18,8 +19,8 @@ const defaultChartDisplayParams = {
     maxDaysDisplayed: 7,
 
     background: {
-        dayRegionColor: tinycolor('rgb(255,255,255)'),
-        nightRegionColor: tinycolor('rgb(243,243,243)'),
+        dayRegionColor: tinycolor('rgb(235,235,235)'),
+        nightRegionColor: tinycolor('rgb(244,243,243)'),
     },
 
     wormSunIcon: {
@@ -50,7 +51,15 @@ const defaultChartDisplayParams = {
     },
 };
 
-function Worm({rawData, loading, error, nightThreshold_W}) {
+interface WormProps {
+    rawData: Array<GenerationDatum>;
+    loading: boolean;
+    error: boolean;
+    nightThreshold_W: number;
+    sx?: any;
+}
+
+const Worm = ({rawData, loading, error, nightThreshold_W, sx}: WormProps) => {
     const styleOptions = defaultChartDisplayParams;
 
     if (nightThreshold_W) {
@@ -70,12 +79,16 @@ function Worm({rawData, loading, error, nightThreshold_W}) {
 
     const [ref, dms] = useChartDimensions(chartSettings);
 
-    const data = useMemo(() => {
+    console.log({ref, dms});
+
+    const data = useMemo<Array<GenerationDatum>>(() => {
         if (loading || error) {
-            return {
-                time: 0,
-                wattage: 0,
-            };
+            return [
+                {
+                    time: '0',
+                    wattage: 0,
+                },
+            ];
         }
 
         const daysAllowed = Math.min(
@@ -161,9 +174,11 @@ function Worm({rawData, loading, error, nightThreshold_W}) {
     const SunXPos = xScale(xAccessor(data[data.length - 1]));
 
     return (
-        <Box sx={{p: 0, width: '100%'}} style={{overflow: 'hidden'}}>
+        <Box sx={{p: 0, width: '100%', overflow: 'hidden', ...sx}}>
             <Stack sx={{p: 2}} direction="row" justifyContent="space-between">
-                <Typography variant={'smallHeadline'}>Productivity</Typography>
+                <Typography variant={'smallHeadline' as any}>
+                    Productivity
+                </Typography>
                 <Typography variant={'subtitle2'}>
                     {format(new Date(), 'p')}
                 </Typography>
@@ -254,5 +269,5 @@ function Worm({rawData, loading, error, nightThreshold_W}) {
             </div>
         </Box>
     );
-}
+};
 export default Worm;

@@ -4,11 +4,11 @@ import CheckboxList, {CheckboxItem} from 'components/inputs/checkbox_list';
 import {Button, Typography, CircularProgress} from '@mui/material';
 import {AccreditationOptions} from 'schema/schema_gen_types';
 
-interface AccreditationOption extends CheckboxItem {
+export interface AccreditationOption extends CheckboxItem {
     accredited: boolean;
 }
 
-const ACCREDITATION_OPTIONS: Array<AccreditationOption> = [
+export const ACCREDITATION_OPTIONS: Array<AccreditationOption> = [
     {
         title: 'Income',
         description:

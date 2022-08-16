@@ -118,9 +118,9 @@ const typographyOptions = {
         },
         subtitle1: {
             fontFamily: 'Be Vietnam Pro',
-            fontWeight: 600,
-            fontSize: '20px',
-            lineHeight: '25.3px',
+            fontWeight: 700,
+            fontSize: '12px',
+            lineHeight: '14px',
             color: paletteOptions.palette.blackDusk.main,
         },
         body1: {
