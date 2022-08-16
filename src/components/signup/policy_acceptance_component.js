@@ -3,7 +3,7 @@ import ScrollBottomToComplete from 'components/utils/scroller.js';
 import PrivacyPolicy from 'assets/legal/privacy.js';
 import TermsAndConditions from 'assets/legal/termsAndConditions.js';
 import scrollToPosition from 'utils/scroll_to_position';
-import LoadingComponent from 'components/utils/loading_component';
+import LoadingComponent from 'components/basics/loading_component';
 import {useUser} from 'hooks/use_user';
 import {useState} from 'react';
 

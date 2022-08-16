@@ -8,7 +8,7 @@ import RainShowerLottieJson from 'assets/weather_icons/rain_shower/data.json';
 import SnowLottieJson from 'assets/weather_icons/snowfall/data.json';
 import StarryNightJson from 'assets/weather_icons/starry_night/data.json';
 import FogJson from 'assets/weather_icons/foggy/data.json';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 
 const codeConverter = (code) => {
     const regex = {

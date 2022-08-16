@@ -3,7 +3,7 @@ import {useTheme} from '@mui/material';
 import {Paper, Stack, Divider, Box} from '@mui/material';
 import {Typography} from '@mui/material';
 import PanelsSvg from 'components/icons/panels_svg';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import PropTypes from 'prop-types';
 
 const AccountSummarySidebar = ({
@@ -19,7 +19,7 @@ const AccountSummarySidebar = ({
     const panelColor = theme.palette.skyBlue.main;
 
     return (
-        <DefaultComponent>
+        <Component>
             <Stack sx={{p: 2}}>
                 <Stack spacing={0}>
                     <Typography variant="headline2">{name}</Typography>
@@ -52,7 +52,7 @@ const AccountSummarySidebar = ({
                     </Stack>
                 </Stack>
             </Stack>
-        </DefaultComponent>
+        </Component>
     );
 };
 

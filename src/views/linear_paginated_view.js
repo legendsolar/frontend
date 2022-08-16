@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SideBarView from 'views/side_bar_view';
 import SideBar from 'components/utils/sidebar_component';
 import {useReducer} from 'react';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import PageinatedComponent from 'components/utils/paginated_component';
 
 const LinearPageinatedView = ({pageContent, header, pageIndex}) => {

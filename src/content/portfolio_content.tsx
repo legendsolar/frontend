@@ -3,7 +3,7 @@ import ContentDivider from 'components/basics/content_divider';
 import TestMetricGauge from 'components/gauges/tests/test_metric_gauge';
 import BasicMap from 'components/map/basic_map_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import RooftopContent from 'content/rooftop_content';
 import {testTransfers} from 'static_data/placeholder_transfers';
 import SideBarView from 'views/side_bar_view';
@@ -41,11 +41,7 @@ const PortfolioContent = ({
                     </Typography>
                 </Stack>
             </Stack>
-            <DefaultComponent
-                paper
-                standardWidth={false}
-                sx={{height: '400px', m: 0, p: 0}}
-            >
+            <Component sx={{height: '400px', m: 0, p: 0}}>
                 <BasicMap
                     lat={40.73061}
                     lng={-73.935242}
@@ -53,7 +49,7 @@ const PortfolioContent = ({
                     height={'400px'}
                     zoom={10}
                 ></BasicMap>
-            </DefaultComponent>
+            </Component>
 
             <Stack>
                 <SideBarView
@@ -72,9 +68,9 @@ const PortfolioContent = ({
                                 widgets={
                                     <Stack direction={'row'}>
                                         <Stack>
-                                            <DefaultComponent paper>
+                                            <Component>
                                                 <TestMetricGauge></TestMetricGauge>
-                                            </DefaultComponent>
+                                            </Component>
                                         </Stack>
 
                                         <Stack></Stack>

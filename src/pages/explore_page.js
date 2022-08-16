@@ -4,7 +4,7 @@ import SideBarNavView from 'views/side_bar_view';
 import OfferingComponent from 'components/invest/offering';
 import MetricList from 'components/summary/metric_list';
 import ScrollToSidebar from 'components/utils/scroll_to_sidebar';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import {InvestmentAccountSubtype} from 'plaid';
 import {useTheme} from '@mui/material';
 import PanelsSvg from 'components/icons/panels_svg';

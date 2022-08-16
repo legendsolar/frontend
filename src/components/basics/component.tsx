@@ -3,32 +3,31 @@ import {forwardRef, ReactNode} from 'react';
 import {Paper, Stack} from '@mui/material';
 import {useState} from 'react';
 import DefaultErrorBoundary from 'components/errors/default_error_boundary';
+import shadows from '@mui/material/styles/shadows';
 
-interface DefaultComponentProps {
+interface ComponentProps {
     inactive?: boolean;
     disabled?: boolean;
-    paper?: boolean;
+    shadow?: boolean;
     standardWidth?: boolean;
     children?: ReactNode;
+    haze?: boolean;
     sx?: any;
-    style?: any;
-    width?: string;
     onClick?(): void;
 }
 
-const DefaultComponent = forwardRef(
+const Component = forwardRef(
     (
         {
             inactive = false,
             disabled = false,
             children = {},
             sx = {},
-            style = {},
-            paper = false,
             standardWidth = true,
-            width,
             onClick = () => {},
-        }: DefaultComponentProps,
+            shadow = false,
+            haze = false,
+        }: ComponentProps,
         ref,
     ) => {
         const opacity = inactive || disabled ? 0.5 : 1;
@@ -47,33 +46,38 @@ const DefaultComponent = forwardRef(
             </DefaultErrorBoundary>
         );
 
-        const maybePaper = paper ? (
+        if (standardWidth) {
+            sx.width = '400px';
+        }
+
+        if (shadow) {
+            sx.boxShadow = '0px 0px 25px rgba(99, 110, 114, 0.25);';
+        }
+
+        if (haze) {
+            sx.backgroundColor = 'whiteHaze.main';
+        }
+
+        const variant = shadow ? 'shadow' : 'flat';
+
+        return (
             <Paper
-                variant={'container' as any}
+                ref={ref}
+                onClick={onClick}
+                variant={variant as any}
                 sx={
                     {
+                        p: 4,
+
                         ...sx,
                         pointerEvents: pointerEvents,
                     } as any
                 }
-                style={style}
-                ref={ref}
-                onClick={onClick}
             >
                 {content}
             </Paper>
-        ) : (
-            content
         );
-
-        if (standardWidth) {
-            return <div style={{...style, width: '400px'}}>{maybePaper}</div>;
-        } else if (width) {
-            return <div style={{...style, width}}>{maybePaper}</div>;
-        } else {
-            return maybePaper;
-        }
     },
 );
 
-export default DefaultComponent;
+export default Component;

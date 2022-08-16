@@ -1,4 +1,4 @@
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import {useState} from 'react';
 import {Button, Stack, Typography} from '@mui/material';
 import MfaVerifyComponent from 'components/user/mfa_verify_component';
@@ -23,7 +23,7 @@ const VerifyMfaContent = ({
     switch (state) {
         case states.VERIFY_MFA:
             return (
-                <DefaultComponent>
+                <Component>
                     <Typography variant={'smallHeadline' as any}>
                         Verify MFA
                     </Typography>
@@ -39,11 +39,11 @@ const VerifyMfaContent = ({
                         }
                         color="light"
                     ></MfaVerifyComponent>
-                </DefaultComponent>
+                </Component>
             );
         case states.CHANGE_PHONE:
             return (
-                <DefaultComponent>
+                <Component>
                     <Typography variant={'smallHeadline' as any}>
                         Re-enter phone number
                     </Typography>
@@ -52,7 +52,7 @@ const VerifyMfaContent = ({
                         onSubmit={onChangePhoneRequested}
                         color="light"
                     ></ChangePhoneComponent>
-                </DefaultComponent>
+                </Component>
             );
         default:
             throw Error('Improper state');

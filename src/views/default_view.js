@@ -3,7 +3,7 @@ import {useAuth} from 'hooks/use_auth';
 import Footer from 'components/utils/footer';
 import NavBarUserContext from 'components/utils/nav_bar_user_context';
 
-const DefaultView = ({children, authenticated, navBar}) => {
+const DefaultView = ({children, navBar}) => {
     return (
         <Box
             justifyContent="center"

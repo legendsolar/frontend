@@ -2,7 +2,7 @@ import {ErrorBoundary} from '@sentry/react';
 import React, {useState, useEffect, lazy, useCallback} from 'react';
 import {nanoid} from 'nanoid';
 import qs from 'query-string';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import {Stack, Typography} from '@mui/material';
 import DualPaneView from 'views/dual_pane_view';
 import PersonPanelPinkSVG from 'assets/images/panel_person_pink.svg';
@@ -17,6 +17,9 @@ const basePaths = [
         tests: [
             {
                 name: 'test_content_divider',
+            },
+            {
+                name: 'test_component',
             },
             {
                 name: 'test_divider',

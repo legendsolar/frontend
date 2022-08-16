@@ -8,10 +8,7 @@ const DiscoverPage = () => {
     const navBarProps = useNavBar();
 
     return (
-        <DefaultView
-            authenticated={navBarProps.userIsAuthenticated}
-            navBar={<NavBar {...navBarProps}></NavBar>}
-        >
+        <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
             <DiscoveryContent assets={assetData}></DiscoveryContent>
         </DefaultView>
     );

@@ -9,7 +9,7 @@ import ProtectedUserInfo from 'components/user/protected_user_info';
 import {ErrorTypes} from 'utils/errors';
 import {Error} from 'utils/error_types';
 import {UserDwollaAccountData} from 'schema/schema_gen_types';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 
 interface CreateDwollaAccountProps {
     onSubmit(input: UserDwollaAccountData): Promise<any>;
@@ -47,7 +47,7 @@ const CreateWalletContent = ({
     };
 
     return (
-        <DefaultComponent standardWidth={false} width="500px">
+        <Component standardWidth={false} sx={{width: '500px'}}>
             <Typography variant={'smallHeadline' as any}>
                 Create Legends Wallet
             </Typography>
@@ -132,7 +132,7 @@ const CreateWalletContent = ({
                     'Continue'
                 )}
             </Button>
-        </DefaultComponent>
+        </Component>
     );
 };
 export default CreateWalletContent;

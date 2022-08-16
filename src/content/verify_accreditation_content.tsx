@@ -1,4 +1,4 @@
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import {useState} from 'react';
 import CheckboxList, {CheckboxItem} from 'components/inputs/checkbox_list';
 import {Button, Typography, CircularProgress} from '@mui/material';
@@ -69,7 +69,7 @@ const VerifyAccreditationContent = ({
     };
 
     return (
-        <DefaultComponent>
+        <Component>
             <Typography variant={'smallHeadline' as any}>
                 Accreditation
             </Typography>
@@ -103,7 +103,7 @@ const VerifyAccreditationContent = ({
                     'Continue'
                 )}
             </Button>
-        </DefaultComponent>
+        </Component>
     );
 };
 

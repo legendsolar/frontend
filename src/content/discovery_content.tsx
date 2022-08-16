@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BasicGlobe from 'components/map/basic_globe_component';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import {useState} from 'react';
 import Marker from 'components/map/marker';
 
@@ -56,9 +56,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                             <Typography>{asset.title}</Typography>
                         </AccordionSummary>
 
-                        <DefaultComponent
-                            paper
-                            standardWidth={false}
+                        <Component
                             sx={{
                                 backgroundColor: 'whiteFog.main',
                                 p: 2,
@@ -82,14 +80,13 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                             >
                                 Learn more
                             </Button>
-                        </DefaultComponent>
+                        </Component>
                     </Accordion>
                 ))}
             </Stack>
 
-            <DefaultComponent
+            <Component
                 standardWidth={false}
-                paper
                 sx={{
                     width: '100%',
                     height: '80vh',
@@ -111,11 +108,9 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                                     transform: 'translate(0%, -100%)',
                                 }}
                             >
-                                <DefaultComponent
-                                    paper
+                                <Component
                                     standardWidth={false}
                                     sx={{p: 2}}
-                                    style={{}}
                                     onClick={() => {}}
                                 >
                                     <Typography
@@ -126,7 +121,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                                             ? asset.title
                                             : '☀️'}
                                     </Typography>
-                                </DefaultComponent>
+                                </Component>
                                 <div
                                     style={{
                                         content: '',
@@ -147,7 +142,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                         </Marker>
                     ))}
                 ></BasicGlobe>
-            </DefaultComponent>
+            </Component>
         </Stack>
     );
 };

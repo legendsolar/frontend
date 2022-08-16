@@ -4,7 +4,7 @@ import IconButton from 'components/buttons/icon_button';
 import ContentDivider from 'components/basics/content_divider';
 import GoogleLogo from 'components/icons/google_logo';
 import PropTypes from 'prop-types';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import Divider from 'components/basics/divider';
 
 const SignUpOptionComponent = ({

@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Button, Stack, Typography} from '@mui/material';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import ChangeEmailComponent from 'components/user/change_email_component';
 
 interface VerifyEmailContentProps {
@@ -26,7 +26,7 @@ const VerifyEmailContent = ({
     switch (state) {
         case states.VERIFY_EMAIL:
             return (
-                <DefaultComponent>
+                <Component>
                     <Stack spacing={4}>
                         <Typography variant={'smallHeadline' as any}>
                             Verify Email
@@ -67,11 +67,11 @@ const VerifyEmailContent = ({
                             </Button>
                         </Stack>
                     </Stack>
-                </DefaultComponent>
+                </Component>
             );
         case states.CHANGE_EMAIL:
             return (
-                <DefaultComponent>
+                <Component>
                     <Stack>
                         <Typography variant={'smallHeadline' as any}>
                             Change email
@@ -82,7 +82,7 @@ const VerifyEmailContent = ({
                             onSubmit={onChangeEmailAddressRequested}
                         ></ChangeEmailComponent>
                     </Stack>
-                </DefaultComponent>
+                </Component>
             );
         default:
             throw Error('Improper state');

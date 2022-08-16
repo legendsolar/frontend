@@ -7,13 +7,13 @@ import {
     Typography,
     Stack,
 } from '@mui/material';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 
 const PrecommitLetterComponent = ({onComplete}) => {
     const [signature, setSignature] = useState(null);
 
     return (
-        <DefaultComponent>
+        <Component>
             <Stack spacing={4}>
                 <Typography variant="smallHeadline">
                     Precommit Letter
@@ -93,7 +93,7 @@ const PrecommitLetterComponent = ({onComplete}) => {
                         : 'Click to confirm signature'}
                 </Button>
             </Stack>
-        </DefaultComponent>
+        </Component>
     );
 };
 

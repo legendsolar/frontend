@@ -1,5 +1,5 @@
 import {Box, Typography, Paper, Stack, Button, Grid} from '@mui/material';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import SolarPicture from 'assets/solar_frame.png';
 import PanelsSvg from 'components/icons/panels_svg';
 import {useTheme} from '@mui/material';
@@ -19,7 +19,7 @@ const InvestContent = ({assetId}) => {
 
     return (
         <Stack spacing={4}>
-            <DefaultComponent>
+            <Component>
                 <Stack spacing={4}>
                     <Stack>
                         <Typography variant="smallHeadline">
@@ -79,7 +79,7 @@ const InvestContent = ({assetId}) => {
                         this investment.
                     </Typography>
                 </Stack>
-            </DefaultComponent>
+            </Component>
 
             <Grid
                 container
@@ -95,7 +95,7 @@ const InvestContent = ({assetId}) => {
                         mt: {xs: -4, lg: 0},
                     }}
                 >
-                    <DefaultComponent>
+                    <Component>
                         <Stack spacing={4}>
                             <Typography variant="smallHeadline">
                                 Economics
@@ -121,11 +121,11 @@ const InvestContent = ({assetId}) => {
                                 dividers={true}
                             ></MetricList>
                         </Stack>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
-                    <DefaultComponent>
+                    <Component>
                         <Stack spacing={4}>
                             <Typography variant="smallHeadline">
                                 Specifications
@@ -151,11 +151,11 @@ const InvestContent = ({assetId}) => {
                                 dividers={true}
                             ></MetricList>
                         </Stack>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
             </Grid>
 
-            <DefaultComponent>
+            <Component>
                 <Stack spacing={4}>
                     <Typography variant="smallHeadline">
                         A note on tax benefits
@@ -169,9 +169,9 @@ const InvestContent = ({assetId}) => {
                         depreciation benefits.
                     </Typography>
                 </Stack>
-            </DefaultComponent>
+            </Component>
 
-            <DefaultComponent>
+            <Component>
                 <Stack direction={'row'}>
                     <DocumentIcon
                         color={theme.palette.skyBlue.main}
@@ -190,9 +190,9 @@ const InvestContent = ({assetId}) => {
                         </Stack>
                     </Stack>
                 </Stack>
-            </DefaultComponent>
+            </Component>
 
-            <DefaultComponent>
+            <Component>
                 <Stack spacing={4}>
                     <Typography variant="smallHeadline">Documents</Typography>
 
@@ -213,7 +213,7 @@ const InvestContent = ({assetId}) => {
                         ]}
                     ></DocumentComponent>
                 </Stack>
-            </DefaultComponent>
+            </Component>
         </Stack>
     );
 };

@@ -1,5 +1,5 @@
 import {Grid, Typography, Box, Stack, Button} from '@mui/material';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import LassorImg from 'assets/Lassor.png';
 import NeraImg from 'assets/Nera.png';
 

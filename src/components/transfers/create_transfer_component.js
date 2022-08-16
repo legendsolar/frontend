@@ -14,7 +14,7 @@ import ErrorComponent from 'components/errors/error_component';
 
 import {validateTransferAmount} from 'validation/transaction_validation';
 import TransferComponent from 'components/transfers/transfer_component';
-import LoadingComponent from 'components/utils/loading_component';
+import LoadingComponent from 'components/basics/loading_component';
 import MultiSelect from 'components/inputs/multiselect';
 
 const CreateTransferComponent = ({accounts, loading, onComplete}) => {

@@ -1,5 +1,5 @@
 import {Box} from '@mui/material';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import DefaultView from 'views/default_view';
 
 const ErrorPage = ({}) => {

@@ -7,10 +7,7 @@ const PortfolioPage = () => {
     const navBarProps = useNavBar();
 
     return (
-        <DefaultView
-            authenticated={navBarProps.userIsAuthenticated}
-            navBar={<NavBar {...navBarProps}></NavBar>}
-        >
+        <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
             <PortfolioContent
                 title={'Title'}
                 subtitle={'SubTitle'}

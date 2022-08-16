@@ -1,6 +1,6 @@
 import SignUpOptionComponent from 'components/signup/sign_up_option_component';
 import {useState} from 'react';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {Typography, Stack, Box, Button} from '@mui/material';
 import {ROUTES} from 'routes/routes';
@@ -10,7 +10,7 @@ const CompleteAccountContent = ({stepsTitle, steps, onContinue}) => {
     const allComplete = steps.every((step) => step.complete);
 
     return (
-        <DefaultComponent>
+        <Component>
             <Typography variant="headline2">{stepsTitle}</Typography>
             <Typography variant="body">
                 {allComplete
@@ -36,7 +36,7 @@ const CompleteAccountContent = ({stepsTitle, steps, onContinue}) => {
                     completeMessage={step.completeMessage}
                 ></CompleteStepComponent>
             ))}
-        </DefaultComponent>
+        </Component>
     );
 };
 

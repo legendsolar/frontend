@@ -46,7 +46,7 @@ import VerifyMfaContent from 'content/verify_mfa_content';
 import VerifyAccreditationContent from 'content/verify_accreditation_content';
 import CreateWalletContent from 'content/create_wallet_content';
 import BackButton from 'components/buttons/back_button';
-import LoadingComponent from 'components/utils/loading_component';
+import LoadingComponent from 'components/basics/loading_component';
 
 enum States {
     STEPS_TO_INVEST = 'steps_to_invest',

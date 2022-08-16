@@ -1,6 +1,6 @@
 import {Stack, Typography, Box, Grid, Button} from '@mui/material';
 import PanelsSvg from 'components/icons/panels_svg';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 
 import PanelBlue from 'assets/solar/panel_blue.png';
 import PanelRed from 'assets/solar/panel_red.png';
@@ -27,7 +27,7 @@ const OfferingListComponent = ({offerings, refs, onOfferingClick}) => {
     return (
         <Stack spacing={4}>
             {Object.entries(offerings).map(([key, investment], i) => (
-                <DefaultComponent key={i} ref={(el) => (refs.current[i] = el)}>
+                <Component key={i} ref={(el) => (refs.current[i] = el)}>
                     <Stack spacing={4}>
                         <Stack
                             direction="row"
@@ -119,7 +119,7 @@ const OfferingListComponent = ({offerings, refs, onOfferingClick}) => {
                             Executive summary
                         </Button>
                     </Stack>
-                </DefaultComponent>
+                </Component>
             ))}
         </Stack>
     );

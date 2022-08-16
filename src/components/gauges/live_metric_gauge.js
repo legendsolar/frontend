@@ -6,7 +6,7 @@ import {useDatabase} from 'reactfire';
 import {useDatabaseObjectData} from 'reactfire';
 import PropTypes from 'prop-types';
 
-import LoadingComponent from 'components/utils/loading_component';
+import LoadingComponent from 'components/basics/loading_component';
 
 const ErrorGauge = ({unitOpts}) => {
     unitOpts.liveMessage = `Could not load data`;

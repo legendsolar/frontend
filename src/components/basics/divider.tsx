@@ -1,5 +1,10 @@
 import {Box} from '@mui/material';
-const Divider = ({sx = {}}) => {
+
+interface DividerProps {
+    sx?: any;
+}
+
+const Divider = ({sx = {}}: DividerProps) => {
     return (
         <div>
             <Box

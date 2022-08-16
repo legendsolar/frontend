@@ -5,7 +5,7 @@ import {Paper, Stack, Button, Typography} from '@mui/material';
 import SideBarNavView from 'views/side_bar_view';
 
 import CreateTransferComponent from 'components/transfers/create_transfer_component';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import SideBar from 'components/utils/sidebar_component';
 import TransferGrid from 'components/transfers/transfer_grid';
 import AccountListComponent from 'components/transfers/account_list_component';
@@ -15,6 +15,7 @@ import {useAccount} from 'hooks/use_accounts';
 
 import useNavBar from 'hooks/use_nav_bar';
 import NavBar from 'components/utils/nav_bar';
+import DefaultView from 'views/default_view';
 
 const WalletPage = () => {
     const navBarProps = useNavBar();
@@ -124,55 +125,51 @@ const WalletPage = () => {
     const contentRefs = useRef<Array<unknown>>([]);
 
     return (
-        <SideBarNavView
-            drawer={
-                <SideBar>
-                    {!accountsLoading && !walletLoading && (
-                        <CreateTransferComponent
-                            accounts={accountsWithWallet}
-                            loading={newTransferLoading}
-                            onComplete={onCreateNewTransfer}
-                        ></CreateTransferComponent>
-                    )}
-                </SideBar>
-            }
-            mainContent={
-                <Stack spacing={4}>
-                    <DefaultComponent
-                        paper
-                        ref={(el) => (contentRefs.current[2] = el)}
-                    >
-                        <Typography variant={'smallHeadline' as any}>
-                            Recent Transfers
-                        </Typography>
-
-                        <TransferGrid
-                            transfers={recentTransfers}
-                            loading={recentTransfersLoading}
-                        ></TransferGrid>
-                    </DefaultComponent>
-
-                    <DefaultComponent
-                        paper
-                        ref={(el) => (contentRefs.current[1] = el)}
-                    >
-                        {!accountsLoading && (
-                            <AccountListComponent
-                                accounts={accounts}
-                                onCreateTransfer={(account) => {}}
-                                onAddAccount={ready ? open : () => {}}
-                                onUnlinkAccount={onDeleteAccount}
-                                addAccountDisabled={
-                                    accountsLoading ||
-                                    createLinkTokenLoading ||
-                                    createAccountLoading
-                                }
-                            ></AccountListComponent>
+        <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
+            <SideBarNavView
+                drawer={
+                    <SideBar>
+                        {!accountsLoading && !walletLoading && (
+                            <CreateTransferComponent
+                                accounts={accountsWithWallet}
+                                loading={newTransferLoading}
+                                onComplete={onCreateNewTransfer}
+                            ></CreateTransferComponent>
                         )}
-                    </DefaultComponent>
-                </Stack>
-            }
-        ></SideBarNavView>
+                    </SideBar>
+                }
+                mainContent={
+                    <Stack spacing={4}>
+                        <Component ref={(el) => (contentRefs.current[2] = el)}>
+                            <Typography variant={'smallHeadline' as any}>
+                                Recent Transfers
+                            </Typography>
+
+                            <TransferGrid
+                                transfers={recentTransfers}
+                                loading={recentTransfersLoading}
+                            ></TransferGrid>
+                        </Component>
+
+                        <Component ref={(el) => (contentRefs.current[1] = el)}>
+                            {!accountsLoading && (
+                                <AccountListComponent
+                                    accounts={accounts}
+                                    onCreateTransfer={(account) => {}}
+                                    onAddAccount={ready ? open : () => {}}
+                                    onUnlinkAccount={onDeleteAccount}
+                                    addAccountDisabled={
+                                        accountsLoading ||
+                                        createLinkTokenLoading ||
+                                        createAccountLoading
+                                    }
+                                ></AccountListComponent>
+                            )}
+                        </Component>
+                    </Stack>
+                }
+            ></SideBarNavView>
+        </DefaultView>
     );
 };
 

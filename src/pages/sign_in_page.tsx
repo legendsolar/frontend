@@ -10,7 +10,7 @@ import WomanPanelsSVG from 'assets/images/women_panel.svg';
 import PanelInfinitySVG from 'assets/images/panel_infinity.svg';
 import BackButton from 'components/buttons/back_button';
 import DualPaneView from 'views/dual_pane_view';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 
 enum States {
     SIGN_IN = 'sign_in',
@@ -37,7 +37,7 @@ const SignInPage = () => {
         switch (state) {
             case States.SIGN_IN:
                 return (
-                    <DefaultComponent>
+                    <Component>
                         <SignInComponent
                             onSubmit={onSignInSubmit}
                             onSignInWithGoogle={onSignInWithGoogle}
@@ -51,7 +51,7 @@ const SignInPage = () => {
                         <RecaptchaVerifier
                             captchaComplete={setCaptcha}
                         ></RecaptchaVerifier>
-                    </DefaultComponent>
+                    </Component>
                 );
 
             case States.MFA_VERIFY:
@@ -67,13 +67,13 @@ const SignInPage = () => {
                 );
             case States.FORGOT_PASSWORD:
                 return (
-                    <DefaultComponent>
+                    <Component>
                         <ForgotPasswordComponent
                             onSubmit={onForgotPassword}
                             onBackToSignIn={() => setState(States.SIGN_IN)}
                             color={'light'}
                         ></ForgotPasswordComponent>
-                    </DefaultComponent>
+                    </Component>
                 );
         }
     };

@@ -3,7 +3,7 @@ import InvestContent from 'content/invest_content';
 import {Box, Typography, Paper, Stack, Button, Grid} from '@mui/material';
 import SideBarView from 'views/side_bar_view';
 import OfferingComponent from 'components/invest/offering';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import SolarPicture from 'assets/solar_frame.png';
 import PanelsSvg from 'components/icons/panels_svg';
 import {useTheme} from '@mui/material';
@@ -110,7 +110,7 @@ const InvestPage = () => {
     );
 
     const precommitConfirmed = (
-        <DefaultComponent>
+        <Component>
             <Stack spacing={4}>
                 <Typography variant="smallHeadline">Confirmation</Typography>
                 <Typography variant="headline1">
@@ -126,7 +126,7 @@ const InvestPage = () => {
                     </Button>
                 </Stack>
             </Stack>
-        </DefaultComponent>
+        </Component>
     );
 
     return (

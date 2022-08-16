@@ -1,5 +1,5 @@
 import {Typography} from '@mui/material';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 
 interface RooftopContentProps {
     widgets: JSX.Element;
@@ -7,9 +7,7 @@ interface RooftopContentProps {
 
 const RooftopContent = ({widgets}: RooftopContentProps) => {
     return (
-        <DefaultComponent
-            paper
-            standardWidth={false}
+        <Component
             sx={{
                 backgroundColor: 'whiteFog.main',
             }}
@@ -21,7 +19,7 @@ const RooftopContent = ({widgets}: RooftopContentProps) => {
                 Rooftop
             </Typography>
             {widgets}
-        </DefaultComponent>
+        </Component>
     );
 };
 

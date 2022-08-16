@@ -3,7 +3,7 @@ import DualPaneView from 'views/dual_pane_view';
 
 import WomanPanelsSVG from 'assets/images/women_panel.svg';
 import Scroller from 'components/utils/scroller';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {ROUTES} from 'routes/routes';
 const PrivacyPolicyPage = () => {
@@ -19,7 +19,7 @@ const PrivacyPolicyPage = () => {
                 </Button>
             }
             leftPane={
-                <DefaultComponent>
+                <Component>
                     <Typography variant="smallHeadline">
                         Privacy Policy
                     </Typography>
@@ -94,7 +94,7 @@ const PrivacyPolicyPage = () => {
                             nulla pellentesque dignissim enim sit.
                         </Typography>
                     </Scroller>
-                </DefaultComponent>
+                </Component>
             }
             rightPane={<img src={WomanPanelsSVG} width="375px"></img>}
         ></DualPaneView>

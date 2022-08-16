@@ -1,5 +1,5 @@
 import {Typography, Grid} from '@mui/material';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import PlaceholderWorm from 'components/worm/placeholder_worm';
 import Weather from 'components/weather/weather';
 import {
@@ -21,88 +21,88 @@ const PortfolioPlaceholder = () => {
         <div>
             <Grid container spacing={4} sx={{width: '100%'}}>
                 <Grid item xs={12}>
-                    <DefaultComponent>
+                    <Component>
                         <Typography variant="smallHeadline">
                             You have not purchased any panels yet
                         </Typography>
                         <Typography variant="headline1">
                             Click to view available panels
                         </Typography>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
 
                 <Grid item xs={12}>
-                    <DefaultComponent sx={{m: 0, p: 0}} disabled={true}>
+                    <Component sx={{m: 0, p: 0}} disabled={true}>
                         <PlaceholderWorm></PlaceholderWorm>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
-                    <DefaultComponent disabled={true}>
+                    <Component disabled={true}>
                         <Weather temp={72} code={800} state={'Sunny'}></Weather>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
-                    <DefaultComponent disabled={true}>
+                    <Component disabled={true}>
                         <CarbonGauge
                             max={100}
                             currentValue_unit={10}
                         ></CarbonGauge>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
-                    <DefaultComponent disabled={true}>
+                    <Component disabled={true}>
                         <Typography variant="smallHeadline">
                             Dividends
                         </Typography>
                         <TransferGrid
                             transfers={portfolioPageTransfers}
                         ></TransferGrid>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
-                    <DefaultComponent disabled={true}>
+                    <Component disabled={true}>
                         <EarningsGauge
                             max={100}
                             currentValue_unit={10}
                         ></EarningsGauge>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
-                    <DefaultComponent disabled={true}>
+                    <Component disabled={true}>
                         <GenerationGauge
                             max={100}
                             currentValue_unit={10}
                         ></GenerationGauge>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
-                    <DefaultComponent disabled={true}>
+                    <Component disabled={true}>
                         <CarbonCumulativeImpact
                             live={false}
                         ></CarbonCumulativeImpact>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
-                    <DefaultComponent disabled={true}>
+                    <Component disabled={true}>
                         <EarningsCumulativeImpact
                             live={false}
                         ></EarningsCumulativeImpact>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
-                    <DefaultComponent disabled={true}>
+                    <Component disabled={true}>
                         <GenerationCumulativeImpact
                             live={false}
                         ></GenerationCumulativeImpact>
-                    </DefaultComponent>
+                    </Component>
                 </Grid>
             </Grid>
         </div>

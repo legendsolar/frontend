@@ -13,7 +13,7 @@ import {
     CarbonCumulativeImpact,
 } from 'components/gauges/live_cumulative_impact';
 import WeatherLive from 'components/weather/weather_live';
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import PlaceholderWorm from 'components/worm/placeholder_worm';
 import PortfolioPlaceholder from 'components/placeholders/portfolio_placeholder';
 import Weather from 'components/weather/weather';
@@ -22,94 +22,94 @@ function ComponentGrid(props) {
     return (
         <Grid container spacing={4} sx={{width: '100%'}}>
             <Grid item xs={12}>
-                <DefaultComponent sx={{m: 0, p: 0}}>
+                <Component sx={{m: 0, p: 0}}>
                     <PortfolioPlaceholder></PortfolioPlaceholder>
-                </DefaultComponent>
+                </Component>
             </Grid>
 
             <Grid item xs={12}>
-                <DefaultComponent sx={{m: 0, p: 0}} disabled={true}>
+                <Component sx={{m: 0, p: 0}} disabled={true}>
                     <PlaceholderWorm></PlaceholderWorm>
-                </DefaultComponent>
+                </Component>
             </Grid>
 
             <Grid item xs={12} lg={6}>
-                <DefaultComponent disabled={true}>
+                <Component disabled={true}>
                     <Weather temp={72} code={800} state={'Sunny'}></Weather>
-                </DefaultComponent>
+                </Component>
             </Grid>
 
             <Grid item xs={12} lg={6}>
-                <DefaultComponent disabled={true}>
+                <Component disabled={true}>
                     <CarbonGauge max={100} currentValue_unit={10}></CarbonGauge>
-                </DefaultComponent>
+                </Component>
             </Grid>
 
             <Grid item xs={12} lg={6}>
-                <DefaultComponent disabled={true}>
+                <Component disabled={true}>
                     <EarningsGauge
                         max={100}
                         currentValue_unit={10}
                     ></EarningsGauge>
-                </DefaultComponent>
+                </Component>
             </Grid>
 
             <Grid item xs={12} lg={6}>
-                <DefaultComponent disabled={true}>
+                <Component disabled={true}>
                     <GenerationGauge
                         max={100}
                         currentValue_unit={10}
                     ></GenerationGauge>
-                </DefaultComponent>
+                </Component>
             </Grid>
 
             {/* <Grid item xs={12} lg={6}>
-                <DefaultComponent>
+                <Component>
                     <EarningsGauge assetId={assetDisplayId.id}></EarningsGauge>
-                </DefaultComponent>
+                </Component>
             </Grid>
 
 
             <Grid item md={12} lg={6}>
-                <DefaultComponent>
+                <Component>
                     <EarningsCumulativeImpact
                         assetId={assetDisplayId.id}
                     ></EarningsCumulativeImpact>
-                </DefaultComponent>
+                </Component>
             </Grid>
 
             <Grid item md={12} lg={6}>
-                <DefaultComponent>
+                <Component>
                     <CarbonCumulativeImpact
                         assetId={assetDisplayId.id}
                     ></CarbonCumulativeImpact>
-                </DefaultComponent>
+                </Component>
             </Grid>
             <Grid item xs={12} lg={6}>
-                <DefaultComponent>
+                <Component>
                     <CarbonGauge assetId={assetDisplayId.id}></CarbonGauge>
-                </DefaultComponent>
+                </Component>
             </Grid>
             <Grid item xs={12} lg={6}>
-                <DefaultComponent>
+                <Component>
                     <GenerationGauge
                         assetId={assetDisplayId.id}
                     ></GenerationGauge>
-                </DefaultComponent>
+                </Component>
             </Grid>
 
             <Grid item md={12} lg={6}>
-                <DefaultComponent>
+                <Component>
                     <GenerationCumulativeImpact
                         assetId={assetDisplayId.id}
                     ></GenerationCumulativeImpact>
-                </DefaultComponent>
+                </Component>
             </Grid>
 
             <Grid item md={12} lg={6}>
-                <DefaultComponent>
+                <Component>
                     <WeatherLive></WeatherLive>
-                </DefaultComponent>
+                </Component>
             </Grid>
 
             <Grid item xs={12}>

@@ -1,4 +1,4 @@
-import DefaultComponent from 'components/utils/default_component';
+import Component from 'components/basics/component';
 import DualPaneView from 'views/dual_pane_view';
 import WomanPanelsSVG from 'assets/images/women_panel.svg';
 import LegendsTypemark from 'assets/logos/typemark_dark.png';
