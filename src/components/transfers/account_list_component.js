@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import ComponentDivider from 'components/basics/component_divider';
 
 const accountNumberString = '•••• •••• •••• ';
 
@@ -142,6 +143,7 @@ const AccountListComponent = ({
                 direction={'row'}
                 justifyContent={'space-between'}
                 alignItems={'center'}
+                sx={{mb: 2}}
             >
                 <Typography variant="smallHeadline">
                     {mode === 'confirm'
@@ -157,7 +159,7 @@ const AccountListComponent = ({
                 </IconButton>
             </Stack>
 
-            <Divider sx={{mt: 4}}></Divider>
+            <ComponentDivider></ComponentDivider>
 
             {content}
         </div>

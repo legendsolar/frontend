@@ -13,7 +13,7 @@ const CreateAccountContent = ({
     onNavigateToTermsOfService,
 }) => {
     return (
-        <Component>
+        <Component background={false}>
             <Stack spacing={16}>
                 <SignUpOptionComponent
                     onSignUpWithEmail={onSignUpWithEmail}

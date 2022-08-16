@@ -23,7 +23,7 @@ const DefaultView = ({children, navBar}) => {
                 sx={{
                     width: '100%',
                     height: '100%',
-                    backgroundColor: 'white.main',
+                    backgroundColor: 'whiteHaze.main',
                     zIndex: -2,
                     transform: 'translate3d(0, 0, -10px)',
                 }}

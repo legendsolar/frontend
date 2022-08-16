@@ -51,6 +51,11 @@ const MfaVerifyComponent = ({
     return (
         <div>
             <Stack>
+                <Typography variant="label">
+                    You’ll recive a text message with a confirmation code
+                    shortly.
+                </Typography>
+
                 <TextField
                     color={color}
                     disabled={!codeSent}

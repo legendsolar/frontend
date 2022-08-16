@@ -15,7 +15,7 @@ export enum States {
     FORGOT_PASSWORD = 'forgot_password',
 }
 
-interface useSignInReturnType {
+export interface useSignInReturnType {
     state: States;
     codeSent: boolean;
     setCaptcha(v: RecaptchaVerifier): void;
@@ -51,8 +51,6 @@ const useSignIn = (): useSignInReturnType => {
         sendMfaVerification,
         validateMfaCode,
     } = useAuth();
-
-    const {useCreateNewUser} = useUser();
 
     const onSuccesfulSignIn = () => {
         navigate('/');

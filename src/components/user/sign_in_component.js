@@ -114,7 +114,7 @@ const SignInComponent = ({
                                 color="legendaryGreen.main"
                                 sx={{ml: 1}}
                             >
-                                {'Forogt Password'}
+                                {'Forgot Password'}
                             </Typography>
                         </Button>
                         <Button variant="text" onClick={onCreateNewAccount}>

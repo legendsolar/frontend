@@ -41,7 +41,16 @@ const PortfolioContent = ({
                     </Typography>
                 </Stack>
             </Stack>
-            <Component sx={{height: '400px', m: 0, p: 0}}>
+            <Component
+                standardWidth={false}
+                sx={{
+                    height: '400px',
+                    width: '100%',
+                    m: 0,
+                    p: 0,
+                    overflow: 'hidden',
+                }}
+            >
                 <BasicMap
                     lat={40.73061}
                     lng={-73.935242}

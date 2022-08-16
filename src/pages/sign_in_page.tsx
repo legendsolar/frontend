@@ -1,36 +1,33 @@
-import CenteredComponentView from 'views/centered_component_view';
 import SignInComponent from 'components/user/sign_in_component';
-import useSignIn from 'hooks/use_sign_in';
+import useSignIn, {useSignInReturnType} from 'hooks/use_sign_in';
 import ForgotPasswordComponent from 'components/user/forgot_password_component';
 import MfaVerifyComponent from 'components/user/mfa_verify_component';
-import {ErrorTypes} from 'utils/errors';
 import RecaptchaVerifier from 'components/invisible/recaptcha_verifier';
-import {useState} from 'react';
 import WomanPanelsSVG from 'assets/images/women_panel.svg';
-import PanelInfinitySVG from 'assets/images/panel_infinity.svg';
 import BackButton from 'components/buttons/back_button';
 import DualPaneView from 'views/dual_pane_view';
 import Component from 'components/basics/component';
 import {States} from 'hooks/use_sign_in';
+import {Typography} from '@mui/material';
 
-const SignInPage = () => {
-    const {
-        state,
-        codeSent,
-        setState,
-        setCaptcha,
-        onSubmitCode,
-        onSignInWithGoogle,
-        onSignInSubmit,
-        onCreateNewAccount,
-        onForgotPassword,
-    } = useSignIn();
+interface SignInPageProps extends useSignInReturnType {}
 
+const SignInPage = ({
+    state,
+    codeSent,
+    setState,
+    setCaptcha,
+    onSubmitCode,
+    onSignInWithGoogle,
+    onSignInSubmit,
+    onCreateNewAccount,
+    onForgotPassword,
+}: SignInPageProps) => {
     const states = (state: States): JSX.Element => {
         switch (state) {
             case States.SIGN_IN:
                 return (
-                    <Component>
+                    <Component background={false}>
                         <SignInComponent
                             onSubmit={onSignInSubmit}
                             onSignInWithGoogle={onSignInWithGoogle}
@@ -41,6 +38,9 @@ const SignInPage = () => {
                             color={'light'}
                         ></SignInComponent>
 
+                        {/* Recaptcha must be rendered here for now, 
+                        is it is expected to be completed by 
+                        the time mfa verification is sent*/}
                         <RecaptchaVerifier
                             captchaComplete={setCaptcha}
                         ></RecaptchaVerifier>
@@ -49,7 +49,10 @@ const SignInPage = () => {
 
             case States.MFA_VERIFY:
                 return (
-                    <div>
+                    <Component background={false}>
+                        <Typography variant={'smallHeadline' as any}>
+                            Verify MFA
+                        </Typography>
                         <MfaVerifyComponent
                             color={'light'}
                             onSubmit={onSubmitCode}
@@ -58,11 +61,11 @@ const SignInPage = () => {
                             onChangePhoneRequested={() => {}}
                             changePhoneAllowed={false}
                         ></MfaVerifyComponent>
-                    </div>
+                    </Component>
                 );
             case States.FORGOT_PASSWORD:
                 return (
-                    <Component>
+                    <Component background={false}>
                         <ForgotPasswordComponent
                             onSubmit={onForgotPassword}
                             onBackToSignIn={() => setState(States.SIGN_IN)}
@@ -118,4 +121,4 @@ const SignInPage = () => {
     );
 };
 
-export default SignInPage;
+export default () => <SignInPage {...useSignIn()} />;

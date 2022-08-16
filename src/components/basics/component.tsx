@@ -13,6 +13,7 @@ interface ComponentProps {
     children?: ReactNode;
     haze?: boolean;
     sx?: any;
+    background?: boolean;
     onClick?(): void;
 }
 
@@ -27,6 +28,7 @@ const Component = forwardRef(
             onClick = () => {},
             shadow = false,
             haze = false,
+            background = true,
         }: ComponentProps,
         ref,
     ) => {
@@ -56,6 +58,10 @@ const Component = forwardRef(
 
         if (haze) {
             sx.backgroundColor = 'whiteHaze.main';
+        }
+
+        if (!background) {
+            sx.background = 'None';
         }
 
         const variant = shadow ? 'shadow' : 'flat';

@@ -148,7 +148,10 @@ const AccountPage = () => {
                 }
                 mainContent={
                     <Stack spacing={6}>
-                        <Component ref={(el) => (contentRefs.current[0] = el)}>
+                        <Component
+                            standardWidth={false}
+                            ref={(el) => (contentRefs.current[0] = el)}
+                        >
                             <Typography variant={'smallHeadline' as any}>
                                 Personal Information
                             </Typography>
@@ -172,7 +175,7 @@ const AccountPage = () => {
 
                         <Component
                             disabled={false}
-                            shadow
+                            standardWidth={false}
                             ref={(el) => (contentRefs.current[1] = el)}
                         >
                             {!accountsLoading && (
@@ -190,7 +193,10 @@ const AccountPage = () => {
                             )}
                         </Component>
 
-                        <Component ref={(el) => (contentRefs.current[2] = el)}>
+                        <Component
+                            standardWidth={false}
+                            ref={(el) => (contentRefs.current[2] = el)}
+                        >
                             <Typography variant={'smallHeadline' as any}>
                                 Investment History
                             </Typography>

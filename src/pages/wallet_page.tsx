@@ -128,19 +128,30 @@ const WalletPage = () => {
         <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
             <SideBarNavView
                 drawer={
-                    <SideBar>
-                        {!accountsLoading && !walletLoading && (
-                            <CreateTransferComponent
-                                accounts={accountsWithWallet}
-                                loading={newTransferLoading}
-                                onComplete={onCreateNewTransfer}
-                            ></CreateTransferComponent>
-                        )}
-                    </SideBar>
+                    <Stack spacing={0}>
+                        <Typography variant={'monoButton' as any}>
+                            Wallet Balance
+                        </Typography>
+                        <Typography variant={'headline1' as any}>
+                            ${navBarProps.walletBalance}
+                        </Typography>
+                        <SideBar>
+                            {!accountsLoading && !walletLoading && (
+                                <CreateTransferComponent
+                                    accounts={accountsWithWallet}
+                                    loading={newTransferLoading}
+                                    onComplete={onCreateNewTransfer}
+                                ></CreateTransferComponent>
+                            )}
+                        </SideBar>
+                    </Stack>
                 }
                 mainContent={
                     <Stack spacing={4}>
-                        <Component ref={(el) => (contentRefs.current[2] = el)}>
+                        <Component
+                            standardWidth={false}
+                            ref={(el) => (contentRefs.current[2] = el)}
+                        >
                             <Typography variant={'smallHeadline' as any}>
                                 Recent Transfers
                             </Typography>
@@ -151,7 +162,10 @@ const WalletPage = () => {
                             ></TransferGrid>
                         </Component>
 
-                        <Component ref={(el) => (contentRefs.current[1] = el)}>
+                        <Component
+                            standardWidth={false}
+                            ref={(el) => (contentRefs.current[1] = el)}
+                        >
                             {!accountsLoading && (
                                 <AccountListComponent
                                     accounts={accounts}
@@ -168,6 +182,7 @@ const WalletPage = () => {
                         </Component>
                     </Stack>
                 }
+                drawerPosition={'right'}
             ></SideBarNavView>
         </DefaultView>
     );
