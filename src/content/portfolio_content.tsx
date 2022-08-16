@@ -15,9 +15,10 @@ import {
     GenerationMetaData,
     GenerationSummary,
 } from 'schema/schema_gen_types';
-import TestProdWorm from 'components/worm/tests/test_prod_worm';
 import InvestmentSupportComponent from 'components/invest/investment_support_component';
 import IconAccordian from 'utils/icon_accordian';
+import SideBar from 'components/utils/sidebar_component';
+import MetricList from 'components/summary/metric_list';
 
 interface PortfolioContentProps {
     title?: string;
@@ -84,16 +85,32 @@ const PortfolioContent = ({
             <Stack sx={{mt: 4}}>
                 <SideBarView
                     drawer={
-                        <Component
-                            standardWidth={false}
+                        <SideBar
                             sx={{
                                 backgroundColor: 'white.main',
-                                width: '100%',
                             }}
-                            shadow
                         >
-                            <Typography>drawer</Typography>
-                        </Component>
+                            <Stack>
+                                <Typography>121 panels</Typography>
+                                <MetricList
+                                    dividers
+                                    valuePairs={[
+                                        {
+                                            metric: 'Watts',
+                                            value: '45,600',
+                                        },
+                                        {
+                                            metric: 'Cost',
+                                            value: '$72,000',
+                                        },
+                                        {
+                                            metric: 'Portfolio balance',
+                                            value: '100%',
+                                        },
+                                    ]}
+                                ></MetricList>
+                            </Stack>
+                        </SideBar>
                     }
                     mainContent={
                         <Stack>

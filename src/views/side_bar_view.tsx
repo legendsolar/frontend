@@ -46,19 +46,15 @@ const SideBarView = ({
                             md={4}
                             sx={{
                                 // Remove sidebar on mobile
-                                display: {xs: 'none', sm: 'none', md: 'block'},
+                                display: {xs: 'none', sm: 'none', md: 'flex'},
                             }}
                         >
                             <Box
-                                style={{
-                                    // should not be needed
-                                    paddingLeft: 0,
-                                    paddingRight: 40,
-                                }}
                                 sx={{
                                     height: 'max-content',
-                                    top: '16px',
+                                    top: '0px',
                                     position: 'sticky',
+                                    width: '100%',
                                 }}
                             >
                                 <DefaultErrorBoundary>
@@ -97,19 +93,15 @@ const SideBarView = ({
                             md={4}
                             sx={{
                                 // Remove sidebar on mobile
-                                display: {xs: 'none', sm: 'none', md: 'block'},
+                                display: {xs: 'none', sm: 'none', md: 'flex'},
                             }}
                         >
                             <Box
-                                style={{
-                                    // should not be needed
-                                    paddingLeft: 40,
-                                    paddingRight: 0,
-                                }}
                                 sx={{
                                     height: 'max-content',
-                                    top: '16px',
+                                    top: '0px',
                                     position: 'sticky',
+                                    width: '100%',
                                 }}
                             >
                                 <DefaultErrorBoundary>
@@ -153,7 +145,6 @@ const SideBarView = ({
             <Grid item xs={12} md={8}>
                 <Box
                     sx={{
-                        zIndex: 3,
                         width: '100%',
                     }}
                 >

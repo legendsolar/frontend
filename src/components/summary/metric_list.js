@@ -1,4 +1,5 @@
 import {Stack, Typography, Tooltip} from '@mui/material';
+import ComponentDivider from 'components/basics/component_divider';
 import Divider from 'components/basics/divider';
 import {nanoid} from 'nanoid';
 
@@ -26,7 +27,7 @@ const MetricList = ({valuePairs, dividers = false}) => {
                         <Typography variant="subtitle2">{value}</Typography>
                     </Stack>
                     {dividers && index !== list.length - 1 && (
-                        <Divider></Divider>
+                        <ComponentDivider></ComponentDivider>
                     )}
                 </div>
             ))}

@@ -128,7 +128,7 @@ const WalletPage = () => {
         <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
             <SideBarNavView
                 drawer={
-                    <Stack spacing={0}>
+                    <Stack spacing={0} sx={{mt: 4}}>
                         <Typography variant={'monoButton' as any}>
                             Wallet Balance
                         </Typography>

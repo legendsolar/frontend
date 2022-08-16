@@ -1,8 +1,8 @@
 import Component from 'components/basics/component';
 
-const SideBar = ({children}) => {
+const SideBar = ({children, sx = {}}) => {
     return (
-        <Component standardWidth={false} shadow sx={{width: '100%', m: 0}}>
+        <Component standardWidth={false} shadow sx={{...sx, mt: 4}}>
             {children}
         </Component>
     );
