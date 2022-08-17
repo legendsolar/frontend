@@ -10,6 +10,8 @@ import Component from 'components/basics/component';
 import {States} from 'hooks/use_sign_in';
 import {Typography} from '@mui/material';
 
+import {EXTERNAL_LINKS, redirectToHomePage} from 'webflow/webflowLinking';
+
 interface SignInPageProps extends useSignInReturnType {}
 
 const SignInPage = ({
@@ -95,7 +97,7 @@ const SignInPage = ({
                 return (
                     <BackButton
                         label="Back to Homepage"
-                        onClick={() => {}}
+                        linkText={'https://legends.solar'}
                     ></BackButton>
                 );
 

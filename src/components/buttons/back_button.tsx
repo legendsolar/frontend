@@ -3,17 +3,25 @@ import {ArrowBackIcon} from 'components/icons/icons';
 
 interface BackButtonProps {
     label?: string;
-    onClick(): any;
+    onClick?(): any;
     disabled?: boolean;
+    linkText?: string;
 }
 
 const BackButton = ({
     label = 'Back',
-    onClick,
+    onClick = () => {},
     disabled = false,
+    linkText = '',
 }: BackButtonProps) => {
     return (
-        <Button disabled={disabled} onClick={onClick} sx={{}}>
+        <Button
+            disabled={disabled}
+            onClick={onClick}
+            sx={{}}
+            href={linkText}
+            // target="_blank"
+        >
             <Stack
                 direction="row"
                 sx={{
