@@ -14,54 +14,6 @@ import {useState} from 'react';
 import DocumentDataGrid from 'components/documents/document_data_grid';
 import {DataGridDateRange} from 'utils/date_range';
 
-const columns: GridColumns = [
-    {
-        field: 'name',
-        headerName: 'Document Name',
-        minWidth: 130,
-        flex: 1,
-        editable: false,
-    },
-    {
-        field: 'facility',
-        headerName: 'Solar Farm',
-        minWidth: 90,
-        flex: 1,
-        editable: false,
-    },
-    {
-        field: 'type',
-        headerName: 'Document Type',
-        minWidth: 70,
-        flex: 1,
-        editable: false,
-    },
-    {
-        field: 'created',
-        headerName: 'Date',
-        minWidth: 110,
-        flex: 1,
-        editable: false,
-    },
-    {
-        field: 'download',
-        headerName: '',
-        minWidth: 140,
-        flex: 1,
-        editable: false,
-        renderCell: (params) => {
-            return (
-                <div className="MuiDataGrid-cellContent">
-                    <Chip
-                        label={'Download'}
-                        color={'whiteFog' as any}
-                        sx={{color: 'blackDawn.main'}}
-                    ></Chip>
-                </div>
-            );
-        },
-    },
-];
 interface DocumentDataGridProps {
     documents: Array<any>;
     assetStates: Array<string>;

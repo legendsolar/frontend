@@ -33,7 +33,7 @@ const columns: GridColumns = [
         editable: false,
     },
     {
-        field: 'download',
+        field: 'downloadLink',
         headerName: '',
         minWidth: 140,
         flex: 1,
@@ -42,6 +42,9 @@ const columns: GridColumns = [
             return (
                 <div className="MuiDataGrid-cellContent">
                     <Chip
+                        component={'a'}
+                        href={params.value}
+                        target={'_blank'}
                         label={'Download'}
                         color={'whiteFog' as any}
                         sx={{color: 'blackDawn.main'}}
