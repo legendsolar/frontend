@@ -22,6 +22,7 @@ const PortfolioPage = ({
                 title={facilityData.name}
                 subtitle={'Last updated 15 minutes ago'}
                 address={`${facilityData.address.streetAddress} | ${facilityData.address.city},${facilityData.address.state}`}
+                facility={facilityData}
                 facilitySummary={facilityData.summary}
                 facilityEconomics={facilityData.economics}
                 generationMetaData={facilityData.generationMetaData}

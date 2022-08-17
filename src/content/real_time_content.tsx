@@ -1,5 +1,6 @@
 import Component from 'components/basics/component';
 import {
+    Facility,
     GenerationDatum,
     GenerationMetaData,
     GenerationSummary,
@@ -21,15 +22,13 @@ import {summaryToCumulativeImpact} from 'components/gauges/transformers';
 import LiveWeather from 'components/weather/weather_live';
 
 interface RealTimeContent {
-    generationMetaData: GenerationMetaData;
+    facility: Facility;
     generation: Array<GenerationDatum>;
-    summary: GenerationSummary;
 }
 
 const RealTimeContent = ({
+    facility: {generationMetaData, summary, location},
     generation,
-    generationMetaData,
-    summary,
 }: RealTimeContent) => {
     const current_kW = generation
         ? generation[generation.length - 1].wattage / 1000
@@ -62,7 +61,10 @@ const RealTimeContent = ({
                 spacing={8}
             >
                 <Stack spacing={8}>
-                    <LiveWeather></LiveWeather>
+                    <LiveWeather
+                        lat={location?.lat || 40.712778}
+                        lng={location?.lng || -74.006111}
+                    ></LiveWeather>
                     <EarningsCumulativeImpact
                         cumulativeData={summaryToCumulativeImpact(summary)}
                         live={true}

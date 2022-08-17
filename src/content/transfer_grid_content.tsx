@@ -81,6 +81,7 @@ const columns: GridColumns = [
     },
 ];
 interface TransferGridContentProps {
+    loading: boolean;
     transfers: Array<any>;
     assetStates: Array<string>;
     assetState: string;
@@ -91,6 +92,7 @@ interface TransferGridContentProps {
 }
 
 const TransferGridContent = ({
+    loading,
     transfers,
     assetStates,
     assetState,
@@ -99,8 +101,6 @@ const TransferGridContent = ({
     onChangeDateRange,
     onChangeAsset,
 }: TransferGridContentProps) => {
-    const [loading, setLoading] = useState(false);
-
     return (
         <Box sx={{mt: '30px'}}>
             <Stack
@@ -129,10 +129,7 @@ const TransferGridContent = ({
                             value={assetState}
                             sx={{height: '55px'}}
                             onChange={(e) => {
-                                setLoading(true);
-                                onChangeAsset(e.target.value).finally(() => {
-                                    setLoading(false);
-                                });
+                                onChangeAsset(e.target.value);
                             }}
                         >
                             {assetStates.map((asset) => {
@@ -157,12 +154,9 @@ const TransferGridContent = ({
                             value={dateRange}
                             sx={{height: '55px'}}
                             onChange={(e) => {
-                                setLoading(true);
                                 onChangeDateRange(
                                     e.target.value as DataGridDateRange,
-                                ).finally(() => {
-                                    setLoading(false);
-                                });
+                                );
                             }}
                         >
                             {Object.entries(DataGridDateRange).map(
@@ -182,10 +176,7 @@ const TransferGridContent = ({
                         color={'light' as any}
                         disabled={loading}
                         onClick={() => {
-                            setLoading(true);
-                            onDownloadCsv().finally(() => {
-                                setLoading(false);
-                            });
+                            onDownloadCsv();
                         }}
                     >
                         {loading ? 'Loading...' : 'Download CSV'}

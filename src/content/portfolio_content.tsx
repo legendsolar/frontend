@@ -8,6 +8,7 @@ import {testTransfers} from 'static_data/placeholder_transfers';
 import SideBarView from 'views/side_bar_view';
 import {
     EconomicsSummary,
+    Facility,
     GenerationDatum,
     GenerationMetaData,
     GenerationSummary,
@@ -25,6 +26,7 @@ import PanelParkingLotPNG from 'assets/images/panel_parking_lot.png';
 import PanelWarehousePNG from 'assets/images/panel_warehouse.png';
 import DocumentListComponent from 'components/documents/document_list_component';
 import {documents} from 'components/invest/tests/defaults';
+import LoadingComponent from 'components/basics/loading_component';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
@@ -39,6 +41,8 @@ interface PortfolioContentProps {
     details?: JSX.Element;
     documents?: JSX.Element;
 
+    facility: Facility;
+
     generationMetaData: GenerationMetaData;
     facilitySummary: GenerationSummary;
     facilityEconomics: EconomicsSummary;
@@ -52,12 +56,15 @@ const PortfolioContent = ({
     title = '',
     address = '',
     subtitle = '',
+    facility,
     generationMetaData,
     facilitySummary,
     facilityEconomics,
     generation,
     location,
 }: PortfolioContentProps) => {
+    if (loading) return <LoadingComponent></LoadingComponent>;
+
     return (
         <div>
             <Stack sx={{mb: 3}}>
@@ -255,13 +262,10 @@ const PortfolioContent = ({
                                 </Typography>
                             </ContentDivider>
 
-                            {!loading && (
-                                <RealTimeContent
-                                    generation={generation}
-                                    generationMetaData={generationMetaData}
-                                    summary={facilitySummary}
-                                ></RealTimeContent>
-                            )}
+                            <RealTimeContent
+                                facility={facility}
+                                generation={generation}
+                            ></RealTimeContent>
                         </Stack>
                     }
                     drawerPosition={'right'}

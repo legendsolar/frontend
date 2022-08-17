@@ -19,6 +19,7 @@ const TestTransferDataGrid = () => {
 
     return (
         <TransferGridContent
+            loading={false}
             transfers={transfers}
             onDownloadCsv={() => {
                 console.log('onDownloadCsv');

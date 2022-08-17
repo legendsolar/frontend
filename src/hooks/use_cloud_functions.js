@@ -11,6 +11,8 @@ export const useCloudFunctions = () => {
     );
 
     return {
-        downloadAllTransfers,
+        downloadAllTransfers: async () => {
+            return (await downloadAllTransfers()).data;
+        },
     };
 };

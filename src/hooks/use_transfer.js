@@ -320,8 +320,6 @@ export const useProvideTransfer = () => {
                 variables: {...inputs},
             });
 
-            console.log({cacheData});
-
             const transferList = cacheData ? cacheData[queryName] : [];
             const updatedTransferList = [];
 

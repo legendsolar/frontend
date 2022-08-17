@@ -15,15 +15,13 @@ function loadWeatherPromise(apiKey, lat, long) {
         });
 }
 
-const WeatherLive = (props) => {
+const WeatherLive = ({lat, lng}) => {
     const [weatherObj, setWeatherObj] = useState({});
 
     useEffect(() => {
-        loadWeatherPromise(openWeatherApiKey, 40.712778, -74.006111).then(
-            (response) => {
-                setWeatherObj(response);
-            },
-        );
+        loadWeatherPromise(openWeatherApiKey, lat, lng).then((response) => {
+            setWeatherObj(response);
+        });
     }, []);
 
     var description = 'error loading weather';
