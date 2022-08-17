@@ -1,5 +1,5 @@
 import {Typography, Grid} from '@mui/material';
-import DocumentComponent from 'components/invest/document_component';
+import DocumentListComponent from 'components/documents/document_list_component';
 import Component from 'components/basics/component';
 
 const DocumentPlaceholder = () => {

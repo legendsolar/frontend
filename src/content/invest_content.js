@@ -7,7 +7,7 @@ import MetricList from 'components/summary/metric_list';
 import investmentOpportunities from 'utils/asset_data';
 import ErrorComponent from 'components/errors/error_component';
 import DocumentIcon from 'components/icons/document_icon';
-import DocumentComponent from 'components/invest/document_component';
+import DocumentListComponent from 'components/documents/document_list_component';
 
 const InvestContent = ({assetId}) => {
     const theme = useTheme();
@@ -196,7 +196,7 @@ const InvestContent = ({assetId}) => {
                 <Stack spacing={4}>
                     <Typography variant="smallHeadline">Documents</Typography>
 
-                    <DocumentComponent
+                    <DocumentListComponent
                         documents={[
                             {
                                 title: 'Pro Forma',
@@ -211,7 +211,7 @@ const InvestContent = ({assetId}) => {
                                 color: 'eraserRed',
                             },
                         ]}
-                    ></DocumentComponent>
+                    ></DocumentListComponent>
                 </Stack>
             </Component>
         </Stack>

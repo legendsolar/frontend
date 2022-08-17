@@ -17,6 +17,13 @@ import IconAccordian from 'utils/icon_accordian';
 import SideBar from 'components/utils/sidebar_component';
 import MetricList from 'components/summary/metric_list';
 import SmallPanelDisplaySVG from 'assets/images/small_panel_display.svg';
+import Image from 'utils/image';
+
+import NeraPNG from 'assets/icons/nera.png';
+import PanelParkingLotPNG from 'assets/images/panel_parking_lot.png';
+import PanelWarehousePNG from 'assets/images/panel_warehouse.png';
+import DocumentListComponent from 'components/documents/document_list_component';
+import {documents} from 'components/invest/tests/defaults';
 interface PortfolioContentProps {
     title?: string;
     address?: string;
@@ -71,11 +78,11 @@ const PortfolioContent = ({
                 }}
             >
                 <BasicMap
-                    lat={40.73061}
-                    lng={-73.935242}
+                    lat={41.375094}
+                    lng={-74.692663}
                     width={'100%'}
                     height={'400px'}
-                    zoom={10}
+                    zoom={8}
                 ></BasicMap>
             </Component>
 
@@ -290,7 +297,16 @@ const PortfolioContent = ({
                                     backgroundColor: 'whiteFog.main',
                                     width: '100%',
                                 }}
-                            ></Component>
+                            >
+                                <Stack direction={'row'}>
+                                    <Image src={PanelParkingLotPNG}></Image>
+                                    <Image src={PanelWarehousePNG}></Image>
+
+                                    <Typography variant={'description' as any}>
+                                        Maybe some photos?
+                                    </Typography>
+                                </Stack>
+                            </Component>
 
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
@@ -350,14 +366,60 @@ const PortfolioContent = ({
                                         backgroundColor: 'whiteFog.main',
                                         width: '100%',
                                     }}
-                                ></Component>
+                                >
+                                    <Typography
+                                        variant={'smallHeadline' as any}
+                                    >
+                                        Economics
+                                    </Typography>
+                                    <MetricList
+                                        dividers
+                                        valuePairs={[
+                                            {
+                                                metric: 'Watts',
+                                                value: '45,600',
+                                            },
+                                            {
+                                                metric: 'Cost',
+                                                value: '$72,000',
+                                            },
+                                            {
+                                                metric: 'Portfolio balance',
+                                                value: '100%',
+                                            },
+                                        ]}
+                                    ></MetricList>
+                                </Component>
                                 <Component
                                     sx={{
                                         backgroundColor: 'whiteFog.main',
                                         width: '100%',
                                     }}
                                     standardWidth={false}
-                                ></Component>
+                                >
+                                    <Typography
+                                        variant={'smallHeadline' as any}
+                                    >
+                                        Specifications
+                                    </Typography>
+                                    <MetricList
+                                        dividers
+                                        valuePairs={[
+                                            {
+                                                metric: 'Watts',
+                                                value: '45,600',
+                                            },
+                                            {
+                                                metric: 'Cost',
+                                                value: '$72,000',
+                                            },
+                                            {
+                                                metric: 'Portfolio balance',
+                                                value: '100%',
+                                            },
+                                        ]}
+                                    ></MetricList>
+                                </Component>
                             </Stack>
 
                             <ContentDivider>
@@ -365,6 +427,10 @@ const PortfolioContent = ({
                                     Documents
                                 </Typography>
                             </ContentDivider>
+
+                            <DocumentListComponent
+                                documents={documents}
+                            ></DocumentListComponent>
                         </Stack>
                     }
                 ></SideBarView>

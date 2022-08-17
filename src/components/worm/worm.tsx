@@ -8,6 +8,8 @@ import {format, subDays} from 'date-fns';
 import {Typography} from '@mui/material';
 import {Stack} from '@mui/material';
 import {GenerationDatum} from 'schema/schema_gen_types';
+import {fileURLToPath} from 'url';
+import {subMinutes} from 'date-fns';
 
 var tinycolor = require('tinycolor2');
 
@@ -112,6 +114,16 @@ const Worm = ({rawData, loading, error, nightThreshold_W, sx}: WormProps) => {
         const filteredData = rawData.filter((d) => {
             if (!d) return false;
             return xAccessor(d).getTime() >= minDate.getTime();
+        });
+
+        /**
+         * Add a tiny bit of data before the min date to
+         * ensure a smooth worm transition to edge
+         */
+
+        filteredData.unshift({
+            time: subMinutes(new Date(filteredData[0].time), 1).toISOString(),
+            wattage: filteredData[0].wattage,
         });
 
         return filteredData;

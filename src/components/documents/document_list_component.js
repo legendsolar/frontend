@@ -1,10 +1,11 @@
-import {Stack, List, ListItemButton, Typography} from '@mui/material/';
+import {Stack, List, ListItemButton, Typography, Chip} from '@mui/material/';
 import DocumentIcon from 'components/icons/document_icon';
 import {useStorage} from 'reactfire';
 import {ref, getDownloadURL} from 'firebase/storage';
 import {useTheme} from '@mui/material';
+import Divider from 'components/basics/divider';
 
-const DocumentComponent = ({documents}) => {
+const DocumentListComponent = ({documents}) => {
     const theme = useTheme();
 
     const colorName = (documentObject) => {
@@ -12,17 +13,17 @@ const DocumentComponent = ({documents}) => {
     };
 
     return (
-        <List>
+        <div>
             {documents.map((documentItem, index) => (
-                <ListItemButton
-                    sx={{ml: -4, mr: -4, height: '62px'}}
-                    key={index}
-                >
-                    <a
-                        href={documentItem?.link ? documentItem.link : null}
-                        target="_blank"
-                        download
-                        style={{textDecoration: 'none'}}
+                <div key={index}>
+                    <Stack
+                        sx={{
+                            width: '100%',
+                            height: '86px',
+                        }}
+                        direction={'row'}
+                        justifyContent={'space-between'}
+                        alignItems={'center'}
                     >
                         <Stack
                             sx={{
@@ -44,11 +45,19 @@ const DocumentComponent = ({documents}) => {
                                 {documentItem.title}
                             </Typography>
                         </Stack>
-                    </a>
-                </ListItemButton>
+
+                        <Chip
+                            label={'Download'}
+                            color={'whiteFog'}
+                            sx={{color: 'blackDawn.main'}}
+                        ></Chip>
+                    </Stack>
+
+                    {index !== documents.length - 1 && <Divider></Divider>}
+                </div>
             ))}
-        </List>
+        </div>
     );
 };
 
-export default DocumentComponent;
+export default DocumentListComponent;

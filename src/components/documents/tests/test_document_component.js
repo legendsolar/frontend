@@ -1,12 +1,12 @@
-import {documents} from './defaults';
-import DocumentComponent from '../document_component';
+import {documents} from '../../invest/tests/defaults';
+import DocumentListComponent from '../document_list_component';
 
 const TestDocumentComponent = () => {
     return (
-        <DocumentComponent
+        <DocumentListComponent
             documents={documents}
             onDownloadAttempt={(doc) => alert(JSON.stringify(doc))}
-        ></DocumentComponent>
+        ></DocumentListComponent>
     );
 };
 
