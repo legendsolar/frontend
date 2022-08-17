@@ -35,6 +35,7 @@ const BasicMap = ({width, height, lat, lng, zoom, markers}: BasicMapProps) => {
             dragPan={false}
             dragRotate={false}
             touchZoomRotate={false}
+            scrollZoom={false}
         >
             {markers?.map((marker) => marker)}
         </Map>

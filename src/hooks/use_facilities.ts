@@ -1,6 +1,24 @@
-import {useQuery, gql, useMutation} from '@apollo/client';
+import {useQuery, gql, useMutation, ApolloError} from '@apollo/client';
+import {GenerationDatum} from 'schema/schema_gen_types';
 
-const useFacilities = () => {
+export interface useFacilitiesReturnType {
+    useGetFacilityDataByDate({
+        facilityId,
+        startDate,
+        endDate,
+    }: {
+        facilityId: string;
+        startDate: Date;
+        endDate: Date;
+    }): {
+        data: Array<GenerationDatum>;
+        loading: boolean;
+        error: ApolloError | undefined;
+        refetch(): void;
+    };
+}
+
+const useFacilities = (): useFacilitiesReturnType => {
     const GET_FACILITY_DATA_BY_DATE = gql`
         query UserFacilities($id: String!, $start: String!, $end: String!) {
             facilityGenerationByDate(id: $id, start: $start, end: $end) {
@@ -22,12 +40,8 @@ const useFacilities = () => {
             },
         );
 
-        if (data) {
-            console.log({data});
-        }
-
         return {
-            data: data?.facilityGenerationByDate,
+            data: data?.facilityGenerationByDate as Array<GenerationDatum>,
             loading,
             error,
             refetch,

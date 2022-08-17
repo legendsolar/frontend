@@ -90,6 +90,10 @@ export const useProvideUser = () => {
                     ppaDuration
                     leaseRemaining
                 }
+                location {
+                    lat
+                    lng
+                }
             }
         }
     `;

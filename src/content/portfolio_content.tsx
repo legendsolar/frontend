@@ -11,6 +11,7 @@ import {
     GenerationDatum,
     GenerationMetaData,
     GenerationSummary,
+    Location,
 } from 'schema/schema_gen_types';
 import InvestmentSupportComponent from 'components/invest/investment_support_component';
 import IconAccordian from 'utils/icon_accordian';
@@ -25,6 +26,7 @@ import PanelWarehousePNG from 'assets/images/panel_warehouse.png';
 import DocumentListComponent from 'components/documents/document_list_component';
 import {documents} from 'components/invest/tests/defaults';
 interface PortfolioContentProps {
+    loading?: boolean;
     title?: string;
     address?: string;
     subtitle?: string;
@@ -40,11 +42,13 @@ interface PortfolioContentProps {
     generationMetaData: GenerationMetaData;
     facilitySummary: GenerationSummary;
     facilityEconomics: EconomicsSummary;
+    location?: Location | null;
 
     generation: Array<GenerationDatum>;
 }
 
 const PortfolioContent = ({
+    loading = false,
     title = '',
     address = '',
     subtitle = '',
@@ -52,6 +56,7 @@ const PortfolioContent = ({
     facilitySummary,
     facilityEconomics,
     generation,
+    location,
 }: PortfolioContentProps) => {
     return (
         <div>
@@ -78,8 +83,8 @@ const PortfolioContent = ({
                 }}
             >
                 <BasicMap
-                    lat={41.375094}
-                    lng={-74.692663}
+                    lat={location?.lat || 41.375094}
+                    lng={location?.lng || -74.692663}
                     width={'100%'}
                     height={'400px'}
                     zoom={8}
@@ -250,11 +255,13 @@ const PortfolioContent = ({
                                 </Typography>
                             </ContentDivider>
 
-                            <RealTimeContent
-                                generation={generation}
-                                generationMetaData={generationMetaData}
-                                summary={facilitySummary}
-                            ></RealTimeContent>
+                            {!loading && (
+                                <RealTimeContent
+                                    generation={generation}
+                                    generationMetaData={generationMetaData}
+                                    summary={facilitySummary}
+                                ></RealTimeContent>
+                            )}
                         </Stack>
                     }
                     drawerPosition={'right'}

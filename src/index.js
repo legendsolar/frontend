@@ -97,6 +97,7 @@ const authLink = setContext(async (_, {headers}) => {
 
 // TODO is this causing capcha errors?
 const errorHandler = onError(({networkError, graphQLErrors}) => {
+    console.log('here');
     if (graphQLErrors)
         graphQLErrors.forEach(({message, locations, path}) =>
             console.log(

@@ -31,7 +31,9 @@ const RealTimeContent = ({
     generationMetaData,
     summary,
 }: RealTimeContent) => {
-    const current_kW = generation[generation.length - 1].wattage / 1000;
+    const current_kW = generation
+        ? generation[generation.length - 1].wattage / 1000
+        : 0;
 
     return (
         <Component

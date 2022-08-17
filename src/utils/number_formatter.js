@@ -27,7 +27,7 @@ export const numberFormatter = (number, width = 2, unit = null) => {
 
     if (!unit || numWidth < width) {
         const numString =
-            number >= 1000 ? formatter.format(number) : number.toFixed(number);
+            number >= 1000 ? formatter.format(number) : number.toFixed(decimal);
         // sometimes number will be too wide if too large
         if (unit) {
             return numString + unit;
