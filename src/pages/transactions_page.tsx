@@ -24,10 +24,7 @@ const TransactionPage = () => {
     );
 
     return (
-        <FullPageView
-            authenticated={navBarProps.userIsAuthenticated}
-            navBar={<NavBar {...navBarProps}></NavBar>}
-        >
+        <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
             <TransferGridContent
                 transfers={transfers}
                 onDownloadCsv={() => {
@@ -99,7 +96,7 @@ const TransactionPage = () => {
                 assetStates={['Barnyard Solar', 'None']}
                 dateRange={dateRange}
             ></TransferGridContent>
-        </FullPageView>
+        </DefaultView>
     );
 };
 

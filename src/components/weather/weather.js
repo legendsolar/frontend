@@ -48,7 +48,7 @@ const Weather = ({temp, state, code}) => {
     const lottieJson = codeConverter(code);
 
     return (
-        <Box>
+        <Component shadow>
             <Stack direction="row" justifyContent="space-between">
                 <Typography variant="smallHeadline">Weather</Typography>
                 <Typography variant="headline1">{temp}&deg;</Typography>
@@ -69,7 +69,7 @@ const Weather = ({temp, state, code}) => {
             >
                 {state}
             </Typography>
-        </Box>
+        </Component>
     );
 };
 

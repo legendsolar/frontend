@@ -67,8 +67,6 @@ export const useChartDimensions = (passedSettings) => {
         }
     }, []);
 
-    console.log({insideRef: ref});
-
     const newSettings = combineChartDimensions({
         ...dimensions,
     });

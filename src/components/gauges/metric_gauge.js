@@ -46,13 +46,13 @@ function MetricGauge({
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
 
     return (
-        <Component sx={{p: 1}}>
+        <Component shadow>
             <Stack alignItems={'center'}>
                 <Stack
                     direction="row"
                     justifyContent={'space-between'}
                     alignItems={'center'}
-                    sx={{mb: 3}}
+                    sx={{mb: 3, width: '100%'}}
                 >
                     <Typography variant="smallHeadline">
                         {unitOpts.title}
@@ -68,7 +68,7 @@ function MetricGauge({
                     }}
                     ref={ref}
                 >
-                    <svg className={styles.svgElement} width={dms.width}>
+                    <svg className={styles.svgElement} width={'360px'}>
                         <g className={styles.centerTransform}>
                             <g
                                 className={styles.filledArcs}
@@ -100,7 +100,7 @@ function MetricGauge({
                     </svg>
                     <div className={styles.center}>
                         <Typography variant="headline1" sx={{mt: 'auto'}}>
-                            {error ? '--' : numberFormatter(currentValue)}
+                            {error ? '--' : numberFormatter(currentValue, 2)}
                         </Typography>
                     </div>
                 </div>
@@ -110,7 +110,6 @@ function MetricGauge({
                     sx={{
                         mt: 1,
                         width: '360px',
-                        maxWidth: '400px',
                     }}
                 >
                     <Typography variant="label">

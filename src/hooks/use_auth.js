@@ -18,10 +18,7 @@ import {
     updatePhoneNumber,
 } from 'firebase/auth';
 
-import getParameterByName from 'utils/get_parameter_by_name';
 import {GoogleAuthProvider} from 'firebase/auth';
-
-import {setContext} from '@apollo/client/link/context';
 import settings from 'app_settings';
 import {authErrorHandler} from 'utils/auth_error_translator';
 import {ErrorTypes, throwValidationError} from 'utils/errors';
@@ -40,19 +37,6 @@ export const useAuth = () => {
     return useContext(authContext);
 };
 
-const setApolloContext = (user) => {
-    setContext((_, {headers, ...context}) => {
-        const token = user.token;
-        return {
-            headers: {
-                ...headers,
-                ...(token ? {authorization: `Bearer ${user.token}`} : {}),
-            },
-            ...context,
-        };
-    });
-};
-
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
     const app = useFirebaseApp();
@@ -65,10 +49,6 @@ function useProvideAuth() {
 
     const [isAuthenticating, setIsAuthenticating] = useState(true);
 
-    const [cachedUserData, setCachedUserData] = useState(null);
-
-    // Wrap any Firebase methods we want to use making sure ...
-    // ... to save the user to state.
     const signin = (email, password) => {
         // Removed to stop sign in components from unmounting
         // setIsAuthenticating(true);
@@ -256,12 +236,8 @@ function useProvideAuth() {
         });
     };
 
-    // Subscribe to user on mount
-    // Because this sets state in the callback it will cause any ...
-    // ... component that utilizes this hook to re-render with the ...
-    // ... latest auth object.
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const clearUserData = onAuthStateChanged(auth, (user) => {
             if (!user) {
                 client.resetStore();
             }
@@ -269,11 +245,9 @@ function useProvideAuth() {
             setIsAuthenticating(false);
         });
 
-        // Cleanup subscription on unmount
-        return () => unsubscribe();
+        return () => clearUserData();
     }, []);
 
-    // Return the user object and auth methods
     return {
         isAuthenticating,
         user,

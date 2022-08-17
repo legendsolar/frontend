@@ -1,9 +1,40 @@
-export const numberFormatter = (number, width = 2) => {
+const metricPrefix = {
+    n: 1e-9,
+    μ: 1e-6,
+    m: 1e-3,
+    '': 1,
+    k: 1e3,
+    M: 1e6,
+    G: 1e9,
+};
+
+const compactFormatter = new Intl.NumberFormat('en-US', {notation: 'compact'});
+const formatter = new Intl.NumberFormat('en-US');
+
+/**
+ * Takes a number and formats it to a given width, and unit description, if given
+ * @param {*} number
+ * @param {*} width
+ * @param {*} unit
+ * @returns
+ */
+export const numberFormatter = (number, width = 2, unit = null) => {
     if (Math.abs(number) <= 0.0001) return '0';
 
-    const numWidth = Math.floor(Math.log10(number)) + 1;
+    const numWidth = number > 1 ? Math.floor(Math.log10(number)) + 1 : 1;
 
     const decimal = width - numWidth > 0 ? width - numWidth : 0;
 
-    return number.toFixed(decimal);
+    if (!unit || numWidth < width) {
+        const numString =
+            number >= 1000 ? formatter.format(number) : number.toFixed(number);
+        // sometimes number will be too wide if too large
+        if (unit) {
+            return numString + unit;
+        } else {
+            return numString;
+        }
+    }
+
+    return compactFormatter.format(number) + unit;
 };

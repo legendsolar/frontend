@@ -3,7 +3,10 @@ import NavBar from 'components/utils/nav_bar';
 import useNavBar from 'hooks/use_nav_bar';
 import PortfolioContent from 'content/portfolio_content';
 import {Facility, GenerationDatum} from 'schema/schema_gen_types';
-import {generateFakeProductionData} from 'utils/fake_data';
+import {
+    generateFakeProductionData,
+    useAnimatedProductionData,
+} from 'utils/fake_data';
 
 const PortfolioPage = () => {
     const navBarProps = useNavBar();
@@ -34,7 +37,7 @@ const PortfolioPage = () => {
         generationMetaData: {
             co2_per_kWh: 0.85,
             dollar_per_kWh: 0.15,
-            max_kW: 5000,
+            max_kW: 5,
         },
     };
 
@@ -42,6 +45,8 @@ const PortfolioPage = () => {
         7,
         5000,
     );
+
+    console.log(generation);
 
     return (
         <DefaultView

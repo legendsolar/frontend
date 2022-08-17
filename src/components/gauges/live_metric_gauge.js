@@ -123,11 +123,6 @@ const CarbonGauge = ({max, currentValue_unit}) => {
     );
 };
 
-CarbonGauge.propTypes = {
-    max: PropTypes.number,
-    currentValue_unit: PropTypes.number,
-};
-
 const GenerationGauge = ({max, currentValue_unit}) => {
     const factor = 0.1;
     const unitOpts = {
@@ -147,12 +142,7 @@ const GenerationGauge = ({max, currentValue_unit}) => {
     );
 };
 
-GenerationGauge.propTypes = {
-    assetId: PropTypes.string.isRequired,
-};
-
 const EarningsGauge = ({max, currentValue_unit}) => {
-    const factor = 0.1;
     const unitOpts = {
         unit: 'USD',
         unitDescription: 'Dollars per hour',
@@ -168,10 +158,6 @@ const EarningsGauge = ({max, currentValue_unit}) => {
             currentValue={currentValue_unit}
         ></MetricGauge>
     );
-};
-
-EarningsGauge.propTypes = {
-    assetId: PropTypes.string.isRequired,
 };
 
 export {

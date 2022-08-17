@@ -81,8 +81,6 @@ const Worm = ({rawData, loading, error, nightThreshold_W, sx}: WormProps) => {
 
     const [ref, dms] = useChartDimensions(chartSettings);
 
-    console.log({ref, dms});
-
     const data = useMemo<Array<GenerationDatum>>(() => {
         if (loading || error) {
             return [
@@ -185,6 +183,8 @@ const Worm = ({rawData, loading, error, nightThreshold_W, sx}: WormProps) => {
     const SunYPos = yScale(yAccessor(data[data.length - 1]));
     const SunXPos = xScale(xAccessor(data[data.length - 1]));
 
+    const lastTime = xAccessor(data[data.length - 1]);
+
     return (
         <Box sx={{p: 0, width: '100%', overflow: 'hidden', ...sx}}>
             <Stack sx={{p: 2}} direction="row" justifyContent="space-between">
@@ -192,7 +192,7 @@ const Worm = ({rawData, loading, error, nightThreshold_W, sx}: WormProps) => {
                     Productivity
                 </Typography>
                 <Typography variant={'subtitle2'}>
-                    {format(new Date(), 'p')}
+                    {format(lastTime, 'p')}
                 </Typography>
             </Stack>
             <div className="Chart__wrapper" ref={ref} style={{height: '180px'}}>

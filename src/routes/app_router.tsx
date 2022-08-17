@@ -11,17 +11,9 @@ import ExplorePage from 'pages/explore_page';
 import DocumentPage from 'pages/documents_page';
 import WalletPage from 'pages/wallet_page';
 import AccountPage from 'pages/account_page';
-
 import TermsConditionsPage from 'pages/terms_conditions_page';
-
-import {userStatus as USER_STATUS} from 'utils/user_sign_up_state';
-
-import InvestPage from 'pages/invest_page';
 import ErrorPage from 'pages/error_page';
-import NotFoundPage from 'pages/not_found_page';
 import PrivacyPolicyPage from 'pages/privacy_policy_page';
-import {UserStatus} from 'schema/schema_gen_types';
-import CompleteAccountContent from 'content/complete_account_content';
 import CompleteAccountPage from 'pages/complete_account_page';
 import {ROUTES} from 'routes/routes';
 import DiscoverPage from 'pages/discover_page';

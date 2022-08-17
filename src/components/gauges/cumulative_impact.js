@@ -22,12 +22,12 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
           };
 
     return (
-        <Component>
-            <Stack justifyContent="space-between" spacing={1}>
+        <Component shadow>
+            <Stack justifyContent="space-between" spacing={8}>
                 <Stack
                     direction="row"
                     justifyContent={'space-between'}
-                    sx={{ml: 4}}
+                    sx={{mb: 3, width: '100%'}}
                 >
                     <Typography variant="smallHeadline">
                         {unitOpts.title}

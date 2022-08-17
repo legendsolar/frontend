@@ -84,7 +84,7 @@ const DocumentGridContent = ({
     const [loading, setLoading] = useState(false);
 
     return (
-        <Box sx={{mt: '100px'}}>
+        <Box sx={{mt: '30px'}}>
             <Stack
                 direction="row"
                 justifyContent={'space-between'}

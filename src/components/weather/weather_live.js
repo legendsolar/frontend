@@ -30,7 +30,6 @@ const WeatherLive = (props) => {
     var temp = '-';
     var code = 0;
     if (weatherObj.weather) {
-        console.log(weatherObj.weather);
         description = weatherObj.weather[0].description;
         temp = weatherObj.main.temp.toFixed(0);
         code = weatherObj.weather[0].id;

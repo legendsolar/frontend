@@ -25,10 +25,7 @@ const DocumentPage = () => {
     );
 
     return (
-        <FullPageView
-            authenticated={navBarProps.userIsAuthenticated}
-            navBar={<NavBar {...navBarProps}></NavBar>}
-        >
+        <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
             <DocumentGridContent
                 documents={documents}
                 onDownloadDocument={() => delay(1000)}
@@ -96,7 +93,7 @@ const DocumentPage = () => {
                 assetStates={['Barnyard Solar', 'None']}
                 dateRange={dateRange}
             ></DocumentGridContent>
-        </FullPageView>
+        </DefaultView>
     );
 };
 

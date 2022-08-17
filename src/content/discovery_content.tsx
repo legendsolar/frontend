@@ -23,7 +23,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
         <Stack
             direction={'row'}
             sx={{
-                mt: '100px',
+                mt: '40px',
             }}
         >
             <Stack
@@ -32,9 +32,12 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                     ml: '55px',
                     mr: '70px',
                 }}
-                alignItems={'center'}
+                alignItems={'flex-start'}
             >
-                <Typography variant={'smallHeadline' as any} sx={{mb: '60px'}}>
+                <Typography
+                    variant={'smallHeadline' as any}
+                    sx={{mb: '60px', mt: '20px'}}
+                >
                     Available Panels
                 </Typography>
 
