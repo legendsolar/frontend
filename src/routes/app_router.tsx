@@ -26,6 +26,7 @@ import CompleteAccountPage from 'pages/complete_account_page';
 import {ROUTES} from 'routes/routes';
 import DiscoverPage from 'pages/discover_page';
 import TransactionPage from 'pages/transactions_page';
+import {Navigate, useNavigate} from 'react-router-dom';
 
 function AppRouter() {
     return (
@@ -132,7 +133,31 @@ function AppRouter() {
                             </ProtectedRoute>
                         }
                     />
-                    <Route path="/:path" element={<NotFoundPage />} />
+                    <Route
+                        path="/:path"
+                        element={
+                            <Navigate
+                                to={ROUTES.USER_HOME}
+                                replace
+                                state={{
+                                    path: location.pathname,
+                                }}
+                            />
+                        }
+                    />
+
+                    <Route
+                        path="/"
+                        element={
+                            <Navigate
+                                to={ROUTES.USER_HOME}
+                                replace
+                                state={{
+                                    path: location.pathname,
+                                }}
+                            />
+                        }
+                    />
                 </Routes>
             </BrowserRouter>
         </div>

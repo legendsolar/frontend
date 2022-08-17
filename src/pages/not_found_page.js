@@ -5,8 +5,7 @@ import NavBar from 'components/utils/nav_bar';
 
 const NotFoundPage = ({}) => {
     return (
-        <DefaultView>
-            <NavBar></NavBar>
+        <DefaultView navBar={<NavBar></NavBar>}>
             <Box
                 sx={{height: '100%', width: '100%', mt: 30}}
                 display="flex"
