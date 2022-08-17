@@ -27,6 +27,7 @@ import PanelWarehousePNG from 'assets/images/panel_warehouse.png';
 import DocumentListComponent from 'components/documents/document_list_component';
 import {documents} from 'components/invest/tests/defaults';
 import LoadingComponent from 'components/basics/loading_component';
+import {numberFormatter} from 'utils/number_formatter';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
@@ -190,8 +191,11 @@ const PortfolioContent = ({
                                             variant={'headline1' as any}
                                         >
                                             {'$' +
-                                                facilitySummary.totalGeneration_kWh *
-                                                    generationMetaData.dollar_per_kWh}
+                                                numberFormatter(
+                                                    facilitySummary.totalGeneration_kWh *
+                                                        generationMetaData.dollar_per_kWh,
+                                                    2,
+                                                )}
                                         </Typography>
                                         <Typography
                                             variant={'monoButton' as any}
@@ -217,8 +221,11 @@ const PortfolioContent = ({
                                             variant={'headline1' as any}
                                         >
                                             {'' +
-                                                facilitySummary.totalGeneration_kWh *
-                                                    generationMetaData.co2_per_kWh}
+                                                numberFormatter(
+                                                    facilitySummary.totalGeneration_kWh *
+                                                        generationMetaData.co2_per_kWh,
+                                                    3,
+                                                )}
                                         </Typography>
                                         <Typography
                                             variant={'monoButton' as any}
@@ -245,7 +252,10 @@ const PortfolioContent = ({
                                             variant={'headline1' as any}
                                         >
                                             {'' +
-                                                facilitySummary.totalGeneration_kWh}
+                                                numberFormatter(
+                                                    facilitySummary.totalGeneration_kWh,
+                                                    3,
+                                                )}
                                         </Typography>
                                         <Typography
                                             variant={'monoButton' as any}

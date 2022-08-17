@@ -7,6 +7,8 @@ import {
 import useFacilities from './use_facilities';
 import {subDays} from 'date-fns';
 
+import {useUser} from './use_user';
+
 export interface usePortfolioReturnType {
     loading: boolean;
     facilityData: Facility;
@@ -15,8 +17,15 @@ export interface usePortfolioReturnType {
 
 export const usePortfolio = (): usePortfolioReturnType => {
     const [time, setTime] = useState<Date>(new Date());
+    const {useGetUserFacilities} = useUser();
 
-    const facilityData: Facility = {
+    const {
+        loading: userFacilityLoading,
+        error,
+        facilities,
+    } = useGetUserFacilities();
+
+    const fakeFacilityData: Facility = {
         name: 'Barnyard Solar',
         id: 'qqWHzumNkaVmZEvGfZRnq3',
         address: {
@@ -50,6 +59,13 @@ export const usePortfolio = (): usePortfolioReturnType => {
         },
     };
 
+    const facilityData = facilities
+        ? {
+              ...fakeFacilityData,
+              ...facilities[0],
+          }
+        : fakeFacilityData;
+
     const {useGetFacilityDataByDate} = useFacilities();
 
     const {data: generationData, loading: generationDataLoading} =
@@ -62,7 +78,7 @@ export const usePortfolio = (): usePortfolioReturnType => {
     console.log(generationData);
 
     return {
-        loading: generationDataLoading,
+        loading: generationDataLoading || userFacilityLoading,
         facilityData,
         generationData: generationData,
     };
