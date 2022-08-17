@@ -19,6 +19,7 @@ const TestTransferDataGrid = () => {
 
     return (
         <DocumentGridContent
+            loading={false}
             documents={documents}
             onDownloadDocument={() => delay(1000)}
             onChangeDateRange={(range) => {

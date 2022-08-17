@@ -20,6 +20,7 @@ const DocumentPage = () => {
     const navBarProps = useNavBar();
 
     const [documents, setDocuments] = useState<Array<any>>([]);
+    const [loading, setLoading] = useState<boolean>(false);
     const [asset, setAsset] = useState<string>('');
     const [dateRange, setDateRange] = useState<DataGridDateRange>(
         DataGridDateRange.NONE,
@@ -28,7 +29,9 @@ const DocumentPage = () => {
     const {getUserFiles, getUserFilesWithMetaData} = useStorage();
 
     useEffect(() => {
+        setLoading(true);
         getUserFilesWithMetaData().then((data) => {
+            setLoading(false);
             setDocuments(
                 data.map((file) => {
                     return {
@@ -47,6 +50,7 @@ const DocumentPage = () => {
     return (
         <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
             <DocumentGridContent
+                loading={loading}
                 documents={documents}
                 onDownloadDocument={() => delay(1000)}
                 onChangeDateRange={(range) => {

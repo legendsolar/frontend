@@ -15,6 +15,7 @@ import DocumentDataGrid from 'components/documents/document_data_grid';
 import {DataGridDateRange} from 'utils/date_range';
 
 interface DocumentDataGridProps {
+    loading: boolean;
     documents: Array<any>;
     assetStates: Array<string>;
     assetState: string;
@@ -25,6 +26,7 @@ interface DocumentDataGridProps {
 }
 
 const DocumentGridContent = ({
+    loading,
     documents,
     assetStates,
     assetState,
@@ -33,8 +35,6 @@ const DocumentGridContent = ({
     onChangeDateRange,
     onChangeAsset,
 }: DocumentDataGridProps) => {
-    const [loading, setLoading] = useState(false);
-
     return (
         <Box sx={{mt: '30px'}}>
             <Stack
@@ -63,10 +63,7 @@ const DocumentGridContent = ({
                             value={assetState}
                             sx={{height: '55px'}}
                             onChange={(e) => {
-                                setLoading(true);
-                                onChangeAsset(e.target.value).finally(() => {
-                                    setLoading(false);
-                                });
+                                onChangeAsset(e.target.value);
                             }}
                         >
                             {assetStates.map((asset) => {
@@ -91,12 +88,9 @@ const DocumentGridContent = ({
                             value={dateRange}
                             sx={{height: '55px'}}
                             onChange={(e) => {
-                                setLoading(true);
                                 onChangeDateRange(
                                     e.target.value as DataGridDateRange,
-                                ).finally(() => {
-                                    setLoading(false);
-                                });
+                                );
                             }}
                         >
                             {Object.entries(DataGridDateRange).map(
