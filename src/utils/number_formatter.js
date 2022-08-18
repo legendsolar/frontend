@@ -1,13 +1,3 @@
-const metricPrefix = {
-    n: 1e-9,
-    μ: 1e-6,
-    m: 1e-3,
-    '': 1,
-    k: 1e3,
-    M: 1e6,
-    G: 1e9,
-};
-
 const compactFormatter = new Intl.NumberFormat('en-US', {notation: 'compact'});
 const currencyFormatterInt = new Intl.NumberFormat('en-US', {
     style: 'currency',

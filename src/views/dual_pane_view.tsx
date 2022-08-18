@@ -34,7 +34,7 @@ const DualPaneView = ({
         : 'center';
 
     return (
-        <div>
+        <div style={{height: '100vh'}}>
             <div
                 style={{
                     position: 'absolute',
