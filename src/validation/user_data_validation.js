@@ -6,16 +6,16 @@ export const validateSSN = (fullSSNRequired = false) => {
     if (fullSSNRequired) {
         return yup
             .string()
-            .min(9, 'SSN is invalid')
-            .max(9, 'SSN is invalid')
-            .matches(/^\d+$/, 'SSN is invalid')
+            .min(9, 'SSN invalid')
+            .max(9, 'SSN invalid')
+            .matches(/^\d+$/, 'SSN invalid')
             .required('Required');
     } else {
         return yup
             .string()
-            .min(4, 'SSN is invalid')
-            .max(4, 'SSN is invalid')
-            .matches(/^\d+$/, 'SSN is invalid')
+            .min(4, 'SSN invalid')
+            .max(4, 'SSN invalid')
+            .matches(/^\d+$/, 'SSN invalid')
             .required('Required');
     }
 };
@@ -41,7 +41,7 @@ export const validatePassword = (input) => {
 };
 
 export const validateEmail = () => {
-    return yup.string().email('Email is invalid').required('Required');
+    return yup.string().email('Email invalid').required('Required');
 };
 
 export const validateFirstName = () => {
@@ -65,7 +65,7 @@ export const validateCity = () => {
 };
 
 export const validateState = () => {
-    return yup.string().max(2, 'State code is invalid').required('Required');
+    return yup.string().max(2, 'State code invalid').required('Required');
 };
 
 export const validatePhoneNumber = () => {
@@ -73,7 +73,7 @@ export const validatePhoneNumber = () => {
         .string()
         .matches(
             /^(\+0?1\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
-            'Phone number is invalid',
+            'Phone number invalid',
         )
         .required('Required');
 };
