@@ -15,6 +15,7 @@ const UnexpectedErrorPage = () => {
         >
             <div
                 style={{
+                    marginTop: '30px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -23,7 +24,9 @@ const UnexpectedErrorPage = () => {
             >
                 <LegendsLogoDark></LegendsLogoDark>
                 <div>An unexpected error has occured. </div>
-                <div>If this issue persists, contact:</div>
+                <div>
+                    Try reloading the page, but if this issue persists, contact:
+                </div>
                 <a href="mailto: support@letsbelegends.com">
                     support@letsbelegends.com
                 </a>

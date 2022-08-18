@@ -6,7 +6,7 @@ import LoadingView from 'views/loading_view';
 import {useUser} from 'hooks/use_user';
 import {UserStatus} from 'schema/schema_gen_types';
 import {ROUTES} from 'routes/routes';
-import ErrorPage from 'pages/error_page';
+import UnexpectedErrorPage from 'pages/unexpected_error_page';
 
 interface ProtectedRouteProps {
     children: JSX.Element;
@@ -48,7 +48,7 @@ const ProtectedRoute = ({
     }
 
     if (error) {
-        return <ErrorPage></ErrorPage>;
+        return <UnexpectedErrorPage></UnexpectedErrorPage>;
     }
 
     if (!auth.user) {

@@ -12,20 +12,20 @@ import DocumentPage from 'pages/documents_page';
 import WalletPage from 'pages/wallet_page';
 import AccountPage from 'pages/account_page';
 import TermsConditionsPage from 'pages/terms_conditions_page';
-import ErrorPage from 'pages/error_page';
 import PrivacyPolicyPage from 'pages/privacy_policy_page';
 import CompleteAccountPage from 'pages/complete_account_page';
 import {ROUTES} from 'routes/routes';
 import DiscoverPage from 'pages/discover_page';
 import TransactionPage from 'pages/transactions_page';
 import {Navigate, useNavigate} from 'react-router-dom';
+import UnexpectedErrorPage from 'pages/unexpected_error_page';
 
 function AppRouter() {
     return (
         <div>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/error" element={<ErrorPage />} />
+                    <Route path="/error" element={<UnexpectedErrorPage />} />
 
                     {/** No auth required */}
                     <Route
