@@ -65,11 +65,10 @@
         "yup": "^0.32.11"
     },
     "scripts": {
-        "start": "env-cmd -f ./.env.dev react-scripts start",
+        "start": "env-cmd -f ./.env.production react-scripts start",
         "start:emulators": "env-cmd -f ./.env.emulator react-scripts start",
-        "start:local": "env-cmd -f ./.env.localgql react-scripts start",
         "start:test": "env-cmd -f ./.env.test react-scripts start",
-        "build": "env-cmd -f ./.env.alpha react-scripts build",
+        "build": "env-cmd -f ./.env.production react-scripts build",
         "build:test": "env-cmd -f ./.env.test react-scripts build",
         "preview": "firebase use dev && firebase hosting:channel:deploy `git branch --show-current`-`git rev-parse HEAD`",
         "parseWebflowFooter": "node webflow_html_parser.js",

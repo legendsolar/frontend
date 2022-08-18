@@ -55,7 +55,6 @@ const WalletPage = () => {
     } = useCreateTransfer();
 
     const onCreateNewTransfer = (transfer) => {
-        console.log(transfer);
         const variables = {
             input: {
                 amount: transfer.amount,
@@ -94,7 +93,6 @@ const WalletPage = () => {
     } = useCreateAccount();
 
     const onPlaidLinkComplete = ({publicToken, metadata}) => {
-        console.log({publicToken, metadata});
         const account = metadata.account;
         // create account
         createAccount({

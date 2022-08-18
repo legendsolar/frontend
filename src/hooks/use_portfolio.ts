@@ -75,8 +75,6 @@ export const usePortfolio = (): usePortfolioReturnType => {
             endDate: time,
         });
 
-    console.log(generationData);
-
     return {
         loading: generationDataLoading || userFacilityLoading,
         facilityData,

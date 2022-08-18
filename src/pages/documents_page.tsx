@@ -54,7 +54,6 @@ const DocumentPage = () => {
                 documents={documents}
                 onDownloadDocument={() => delay(1000)}
                 onChangeDateRange={(range) => {
-                    console.log(`onChangeDateRange(${range})`);
                     setDateRange(range);
                     return delay(1000).then(() => {
                         setDocuments(
@@ -99,7 +98,6 @@ const DocumentPage = () => {
                     });
                 }}
                 onChangeAsset={(asset) => {
-                    console.log(`onChangeAsset(${asset})`);
                     setAsset(asset);
                     return delay(1000).then(() => {
                         if (asset === 'None') {

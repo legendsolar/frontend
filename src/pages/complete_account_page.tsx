@@ -246,8 +246,6 @@ const CompleteAccountPage = () => {
                 return (
                     <CreateWalletContent
                         onSubmit={async (input: UserDwollaAccountData) => {
-                            console.log(input);
-
                             const variables = {
                                 input: {
                                     ...transformFormValuesToUserDwollaAccountData(
@@ -255,8 +253,6 @@ const CompleteAccountPage = () => {
                                     ),
                                 },
                             };
-
-                            console.log(variables);
 
                             await createDwollaAccount({
                                 variables,

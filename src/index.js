@@ -26,9 +26,8 @@ import {getAuth} from 'firebase/auth';
 import {throwAuthenticationError, throwSystemError} from 'utils/errors.js';
 import {v4} from 'uuid';
 import {onError} from '@apollo/client/link/error';
-import FirebaseErrorCodes from 'utils/firebase_error_codes.js';
 
-if (process.env.REACT_APP_SENTRY_ENABLED === 'true')
+if (appSettings.sentry.enabled)
     Sentry.init({
         dsn: 'https://befcf88557b54a7c939b8fdacec0cc62@o1127533.ingest.sentry.io/6169541',
         integrations: [
@@ -40,18 +39,18 @@ if (process.env.REACT_APP_SENTRY_ENABLED === 'true')
         // of transactions for performance monitoring.
         // We recommend adjusting this value in production
         tracesSampleRate: appSettings.sentry.sampleRate,
-        debug: true,
+        debug: appSettings.sentry.debug,
         attachStacktrace: true,
         autoSessionTracking: true,
     });
 
-if (process.env.REACT_APP_FULLSTORY_ENALBED === 'true') {
+if (appSettings.fullStory.enabled) {
     FullStory.init({
         orgId: '18J59K',
     });
 }
 
-if (process.env.REACT_APP_LOG_ROCKET_ENALBED === 'true') {
+if (appSettings.logRocket.enabled) {
     LogRocket.init('d6ndfk/legends-app');
 }
 

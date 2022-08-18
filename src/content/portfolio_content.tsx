@@ -28,6 +28,7 @@ import DocumentListComponent from 'components/documents/document_list_component'
 import {documents} from 'components/invest/tests/defaults';
 import LoadingComponent from 'components/basics/loading_component';
 import {numberFormatter} from 'utils/number_formatter';
+import LoadingContent from 'content/loading_content';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
@@ -64,7 +65,7 @@ const PortfolioContent = ({
     generation,
     location,
 }: PortfolioContentProps) => {
-    if (loading) return <LoadingComponent></LoadingComponent>;
+    if (loading) return <LoadingContent />;
 
     return (
         <div>

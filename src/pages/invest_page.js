@@ -31,8 +31,6 @@ const InvestPage = () => {
     };
 
     const reducer = (state, action) => {
-        console.log({state, action});
-        console.log(state.userState, action.type);
         switch (action.type) {
             case 'CHANGE_USERSTATE':
                 return {
