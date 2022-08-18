@@ -27,7 +27,7 @@ import PanelWarehousePNG from 'assets/images/panel_warehouse.png';
 import DocumentListComponent from 'components/documents/document_list_component';
 import {documents} from 'components/invest/tests/defaults';
 import LoadingComponent from 'components/basics/loading_component';
-import {numberFormatter} from 'utils/number_formatter';
+import {numberFormatter, currencyFormatter} from 'utils/number_formatter';
 import LoadingContent from 'content/loading_content';
 interface PortfolioContentProps {
     loading?: boolean;
@@ -116,14 +116,19 @@ const PortfolioContent = ({
                                     <Typography
                                         variant={'smallHeadline' as any}
                                     >
-                                        121 panels
+                                        {facility.generationMetaData
+                                            .panel_count + ' panels'}
                                     </Typography>
                                     <Stack alignItems={'flex-end'}>
                                         <Typography
                                             variant={'smallHeadline' as any}
                                             color={'legendaryGreen.main' as any}
                                         >
-                                            $13.44
+                                            {currencyFormatter(
+                                                facility.summary.day_kWh *
+                                                    facility.generationMetaData
+                                                        .dollar_per_kWh,
+                                            )}
                                         </Typography>
                                         <Typography
                                             variant={'monoButton' as any}
@@ -151,11 +156,17 @@ const PortfolioContent = ({
                                     valuePairs={[
                                         {
                                             metric: 'Watts',
-                                            value: '45,600',
+                                            value: numberFormatter(
+                                                facility.generationMetaData
+                                                    .max_kW * 1000,
+                                                5,
+                                            ),
                                         },
                                         {
                                             metric: 'Cost',
-                                            value: '$72,000',
+                                            value: currencyFormatter(
+                                                facility.economics.cost_dollars,
+                                            ),
                                         },
                                         {
                                             metric: 'Portfolio balance',
@@ -398,16 +409,20 @@ const PortfolioContent = ({
                                         dividers
                                         valuePairs={[
                                             {
-                                                metric: 'Watts',
-                                                value: '45,600',
+                                                metric: 'Investor Funds',
+                                                value: currencyFormatter(
+                                                    facility.economics
+                                                        .cost_dollars,
+                                                ),
                                             },
                                             {
-                                                metric: 'Cost',
-                                                value: '$72,000',
+                                                metric: 'Hold Term',
+                                                value: facility.economics
+                                                    .ppaDuration,
                                             },
                                             {
-                                                metric: 'Portfolio balance',
-                                                value: '100%',
+                                                metric: 'Estimated ROI',
+                                                value: '10.0%',
                                             },
                                         ]}
                                     ></MetricList>
@@ -428,16 +443,19 @@ const PortfolioContent = ({
                                         dividers
                                         valuePairs={[
                                             {
-                                                metric: 'Watts',
+                                                metric: 'Number of Panels',
                                                 value: '45,600',
                                             },
                                             {
-                                                metric: 'Cost',
-                                                value: '$72,000',
+                                                metric: 'Make & model',
+                                                value: facility
+                                                    .generationMetaData.make,
                                             },
                                             {
-                                                metric: 'Portfolio balance',
-                                                value: '100%',
+                                                metric: 'Watts Installed',
+                                                value:
+                                                    facility.generationMetaData
+                                                        .max_kW * 1000,
                                             },
                                         ]}
                                     ></MetricList>

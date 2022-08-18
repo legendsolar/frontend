@@ -9,6 +9,10 @@ const metricPrefix = {
 };
 
 const compactFormatter = new Intl.NumberFormat('en-US', {notation: 'compact'});
+const currencyFormatterInt = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
 const formatter = new Intl.NumberFormat('en-US');
 
 /**
@@ -37,4 +41,8 @@ export const numberFormatter = (number, width = 2, unit = null) => {
     }
 
     return compactFormatter.format(number) + unit;
+};
+
+export const currencyFormatter = (number, unit = '$') => {
+    return currencyFormatterInt.format(number);
 };

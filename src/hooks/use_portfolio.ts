@@ -47,11 +47,17 @@ export const usePortfolio = (): usePortfolioReturnType => {
             uptime_percentage: 0.95,
             yearToDate_kWh: 1000,
         },
-        economics: {},
+        economics: {
+            cost_dollars: 72000,
+            ppaDuration: '7 years',
+            leaseRemaining: '7 years',
+        },
         generationMetaData: {
             co2_per_kWh: 0.85,
             dollar_per_kWh: 0.15,
             max_kW: 2,
+            panel_count: 177,
+            make: 'Panasonic Evervolt',
         },
         location: {
             lat: 41.375094,

@@ -35,6 +35,12 @@ if (appSettings.sentry.enabled)
             new Sentry.Integrations.UserAgent(),
             new Sentry.Integrations.TryCatch(),
         ],
+        beforeSend(event, hint) {
+            if (event.exception) {
+                Sentry.showReportDialog({eventId: event.event_id});
+            }
+            return event;
+        },
         // Set tracesSampleRate to 1.0 to capture 100%
         // of transactions for performance monitoring.
         // We recommend adjusting this value in production
