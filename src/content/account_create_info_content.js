@@ -9,7 +9,11 @@ import SignUpComponent from 'components/signup/sign_up_component';
 
 const AccountCreateInfoContent = ({color, onCreateAccount}) => {
     return (
-        <Component background={false}>
+        <Component
+            background={false}
+            standardWidth={false}
+            sx={{width: '460px'}}
+        >
             <Stack spacing={4}>
                 <Typography variant="smallHeadline">Create Account</Typography>
                 <SignUpComponent
