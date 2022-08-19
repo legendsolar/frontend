@@ -62,19 +62,7 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
         },
     });
 
-    const [passwordHelperMouseover, setPasswordHelperMouseover] =
-        useState(false);
-
-    const passwordHelper = (
-        <div
-            onMouseEnter={() => setPasswordHelperMouseover(true)}
-            onMouseLeave={() => setPasswordHelperMouseover(false)}
-        >
-            {passwordHelperMouseover
-                ? '12 characters, 1 uppercase & 1 special'
-                : 'Password Requirements'}
-        </div>
-    );
+    const passwordHelper = '12 characters, 1 uppercase, 1 special';
 
     return (
         <Box>
