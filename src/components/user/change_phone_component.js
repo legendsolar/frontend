@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {
-    TextField,
     Button,
     CircularProgress,
     Collapse,
@@ -9,6 +8,9 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
+
+import TextField from 'utils/text_field';
+
 import {states} from 'utils/static_lists';
 import {
     validateMfaVerifyCode,
@@ -54,7 +56,7 @@ const ChangePhoneComponent = ({
                 <TextField
                     color={color}
                     error={formik.touched.phone && Boolean(formik.errors.phone)}
-                    helperText={formik.touched.phone && formik.errors.phone}
+                    helperText={formik.errors.phone}
                     value={formik.values.phone}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}

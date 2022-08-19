@@ -3,12 +3,14 @@ import {
     Alert,
     Grid,
     Box,
-    TextField,
     Button,
     CircularProgress,
     Typography,
     Stack,
 } from '@mui/material';
+
+import TextField from 'utils/text_field';
+
 import {
     validateAccessPhrase,
     validateEmail,
@@ -62,7 +64,7 @@ const ChangeEmailComponent = ({initialValues, onSubmit, color = 'dark'}) => {
                 <TextField
                     color={color}
                     error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
+                    helperText={formik.errors.email}
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}

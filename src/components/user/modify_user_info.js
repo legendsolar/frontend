@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import {
-    TextField,
     Grid,
     FormControl,
     InputLabel,
@@ -8,6 +7,9 @@ import {
     MenuItem,
     FormHelperText,
 } from '@mui/material';
+
+import TextField from 'utils/text_field';
+
 import {states} from 'utils/static_lists';
 import {
     validateCity,
@@ -81,9 +83,7 @@ const ModifyUserInfo = ({
                             formik.touched.firstName &&
                             Boolean(formik.errors.firstName)
                         }
-                        helperText={
-                            formik.touched.firstName && formik.errors.firstName
-                        }
+                        helperText={formik.errors.firstName}
                         value={formik.values.firstName}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -101,9 +101,7 @@ const ModifyUserInfo = ({
                             formik.touched.lastName &&
                             Boolean(formik.errors.lastName)
                         }
-                        helperText={
-                            formik.touched.lastName && formik.errors.lastName
-                        }
+                        helperText={formik.errors.lastName}
                         value={formik.values.lastName}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -121,10 +119,7 @@ const ModifyUserInfo = ({
                             formik.touched.streetAddress &&
                             Boolean(formik.errors.streetAddress)
                         }
-                        helperText={
-                            formik.touched.streetAddress &&
-                            formik.errors.streetAddress
-                        }
+                        helperText={formik.errors.streetAddress}
                         value={formik.values.streetAddress}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -142,10 +137,7 @@ const ModifyUserInfo = ({
                             formik.touched.streetAddress2 &&
                             Boolean(formik.errors.streetAddress2)
                         }
-                        helperText={
-                            formik.touched.streetAddress2 &&
-                            formik.errors.streetAddress2
-                        }
+                        helperText={formik.errors.streetAddress2}
                         value={formik.values.streetAddress2}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -164,7 +156,7 @@ const ModifyUserInfo = ({
                         error={
                             formik.touched.city && Boolean(formik.errors.city)
                         }
-                        helperText={formik.touched.city && formik.errors.city}
+                        helperText={formik.errors.city}
                         value={formik.values.city}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -214,10 +206,7 @@ const ModifyUserInfo = ({
                             formik.touched.postalCode &&
                             Boolean(formik.errors.postalCode)
                         }
-                        helperText={
-                            formik.touched.postalCode &&
-                            formik.errors.postalCode
-                        }
+                        helperText={formik.errors.postalCode}
                         value={formik.values.postalCode}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}

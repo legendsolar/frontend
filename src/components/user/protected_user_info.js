@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 import {
     Grid,
-    TextField,
     Typography,
     FormControl,
     InputLabel,
     Select,
     MenuItem,
 } from '@mui/material';
+
+import TextField from 'utils/text_field';
+
 import {useEffect} from 'react';
 import {months} from 'utils/static_lists';
 import {format} from 'date-fns';
@@ -89,7 +91,7 @@ const ProtectedUserInfo = ({
                         }
                         type="password"
                         error={formik.touched.ssn && Boolean(formik.errors.ssn)}
-                        helperText={formik.touched.ssn && formik.errors.ssn}
+                        helperText={formik.errors.ssn}
                         value={formik.values.ssn}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -149,9 +151,7 @@ const ProtectedUserInfo = ({
                                     formik.touched.day &&
                                     Boolean(formik.errors.day)
                                 }
-                                helperText={
-                                    formik.touched.day && formik.errors.day
-                                }
+                                helperText={formik.errors.day}
                                 value={formik.values.day}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
@@ -170,9 +170,7 @@ const ProtectedUserInfo = ({
                                     formik.touched.year &&
                                     Boolean(formik.errors.year)
                                 }
-                                helperText={
-                                    formik.touched.year && formik.errors.year
-                                }
+                                helperText={formik.errors.year}
                                 value={formik.values.year}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}

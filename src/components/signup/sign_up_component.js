@@ -3,12 +3,14 @@ import {
     Alert,
     Grid,
     Box,
-    TextField,
     Button,
     CircularProgress,
     Typography,
     Stack,
 } from '@mui/material';
+
+import TextField from 'utils/text_field';
+
 import {
     validateAccessPhrase,
     validateEmail,
@@ -77,7 +79,7 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
     return (
         <Box>
             <form onSubmit={formik.handleSubmit}>
-                <Grid container spacing={4}>
+                <Grid container spacing={2}>
                     <Grid item xs={12} lg={6}>
                         <TextField
                             color={color}
@@ -85,10 +87,7 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
                                 formik.touched.firstName &&
                                 Boolean(formik.errors.firstName)
                             }
-                            helperText={
-                                formik.touched.firstName &&
-                                formik.errors.firstName
-                            }
+                            helperText={formik.errors.firstName}
                             value={formik.values.firstName}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -101,15 +100,13 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
 
                     <Grid item xs={12} lg={6}>
                         <TextField
+                            disableUnderline
                             color={color}
                             error={
                                 formik.touched.lastName &&
                                 Boolean(formik.errors.lastName)
                             }
-                            helperText={
-                                formik.touched.lastName &&
-                                formik.errors.lastName
-                            }
+                            helperText={formik.errors.lastName}
                             value={formik.values.lastName}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -127,9 +124,7 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
                                 formik.touched.email &&
                                 Boolean(formik.errors.email)
                             }
-                            helperText={
-                                formik.touched.email && formik.errors.email
-                            }
+                            helperText={formik.errors.email}
                             value={formik.values.email}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -147,9 +142,7 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
                                 formik.touched.phone &&
                                 Boolean(formik.errors.phone)
                             }
-                            helperText={
-                                formik.touched.phone && formik.errors.phone
-                            }
+                            helperText={formik.errors.phone}
                             value={formik.values.phone}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -168,7 +161,6 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
                                 Boolean(formik.errors.password)
                             }
                             helperText={
-                                formik.touched.password &&
                                 formik.errors.password
                                     ? formik.errors.password
                                     : passwordHelper
@@ -181,6 +173,7 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            alwaysDisplayHelper={true}
                         />
                     </Grid>
                 </Grid>

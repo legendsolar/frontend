@@ -1,12 +1,8 @@
 import {useState} from 'react';
 
-import {
-    Button,
-    TextField,
-    InputAdornment,
-    Typography,
-    Stack,
-} from '@mui/material';
+import {Button, InputAdornment, Typography, Stack} from '@mui/material';
+
+import TextField from 'utils/text_field';
 import Component from 'components/basics/component';
 
 const PrecommitLetterComponent = ({onComplete}) => {

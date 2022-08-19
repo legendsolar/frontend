@@ -1,14 +1,9 @@
 import PropTypes from 'prop-types';
-import {
-    Typography,
-    Stack,
-    Box,
-    TextField,
-    Button,
-    CircularProgress,
-} from '@mui/material';
+import {Typography, Stack, Box, Button, CircularProgress} from '@mui/material';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
+
+import TextField from 'utils/text_field';
 
 import {validateEmail} from 'validation/user_data_validation';
 import {ErrorTypes} from 'utils/errors';
@@ -56,7 +51,7 @@ const ForgotPasswordComponent = ({
                         error={
                             formik.touched.email && Boolean(formik.errors.email)
                         }
-                        helperText={formik.touched.email && formik.errors.email}
+                        helperText={formik.errors.email}
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}

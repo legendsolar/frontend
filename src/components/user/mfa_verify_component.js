@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {
-    TextField,
     Button,
     CircularProgress,
     Alert,
@@ -9,6 +8,8 @@ import {
     Typography,
 } from '@mui/material';
 import {validateMfaVerifyCode} from 'validation/user_data_validation';
+
+import TextField from 'utils/text_field';
 
 import {ErrorTypes} from 'utils/errors';
 import {useFormik} from 'formik';
@@ -62,7 +63,7 @@ const MfaVerifyComponent = ({
                     error={
                         codeForm.touched.code && Boolean(codeForm.errors.code)
                     }
-                    helperText={codeForm.touched.code && codeForm.errors.code}
+                    helperText={codeForm.errors.code}
                     value={codeForm.values.code}
                     onChange={codeForm.handleChange}
                     onBlur={codeForm.handleBlur}

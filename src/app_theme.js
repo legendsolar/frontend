@@ -667,6 +667,23 @@ export const themeOptions = {
                     '&&:after': {
                         borderBottom: 'none',
                     },
+                    '&:-webkit-autofill': {
+                        WebkitBoxShadow: 'inherit',
+                        WebkitTextFillColor: 'inherit',
+                        caretColor: 'inherit',
+                    },
+                },
+            },
+        },
+
+        MuiInput: {
+            defaultProps: {
+                disabledUnderline: false,
+            },
+            input: {
+                '&:-webkit-autofill': {
+                    transitionDelay: '9999s',
+                    transitionProperty: 'background-color, color',
                 },
             },
         },
@@ -704,6 +721,7 @@ export const themeOptions = {
             ],
             styleOverrides: {
                 root: {
+                    textAlign: 'center',
                     ...typographyOptions.typography.subtitle2,
                 },
             },

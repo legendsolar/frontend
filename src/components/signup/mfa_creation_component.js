@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {
-    TextField,
     Button,
     CircularProgress,
     Collapse,
@@ -9,7 +8,8 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
-import {states} from 'utils/static_lists';
+import TextField from 'utils/text_field';
+
 import {
     validateMfaVerifyCode,
     validatePhoneNumber,
@@ -86,9 +86,7 @@ const MfaCreationComponent = ({
                         phoneForm.touched.phone &&
                         Boolean(phoneForm.errors.phone)
                     }
-                    helperText={
-                        phoneForm.touched.phone && phoneForm.errors.phone
-                    }
+                    helperText={phoneForm.errors.phone}
                     value={phoneForm.values.phone}
                     onChange={phoneForm.handleChange}
                     onBlur={phoneForm.handleBlur}
