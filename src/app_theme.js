@@ -348,11 +348,11 @@ export const themeOptions = {
                             .contrastText,
                         fontWeight: 400,
                         height: '74px',
-                        boxShadow: '0px 0px 25px rgba(99, 110, 114, 0.25)',
 
                         '&:hover': {
                             backgroundColor:
                                 paletteOptions.palette.legendaryGreen.main,
+                            boxShadow: '0px 0px 25px rgba(99, 110, 114, 0.45)',
                         },
                     },
                 },
@@ -394,6 +394,12 @@ export const themeOptions = {
                         color: paletteOptions.palette.blackDawn.contrastText,
 
                         ...typographyOptions.typography.subtitle2,
+
+                        '&:hover': {
+                            backgroundColor:
+                                paletteOptions.palette.blackDawn.main,
+                            boxShadow: '0px 0px 25px rgba(99, 110, 114, 0.25)',
+                        },
                     },
                 },
                 {
@@ -627,9 +633,6 @@ export const themeOptions = {
                     borderRadius: '0px',
                     whiteSpace: 'nowrap',
                     minWidth: 'auto',
-                    '&:hover': {
-                        opacity: '0.75',
-                    },
                 },
             },
         },
