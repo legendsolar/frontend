@@ -16,6 +16,7 @@ export interface APP_SETTINGS {
     timeout_ms: number;
     emailVerificationRedirectUrl: string;
     minPlatformAge: number;
+    mapBoxStyleUrl: string;
 }
 
 const settings: APP_SETTINGS = {
@@ -38,6 +39,7 @@ const settings: APP_SETTINGS = {
         process.env.REACT_APP_BASE_URL + ROUTES.COMPLETE_ACCOUNT,
 
     minPlatformAge: 18,
+    mapBoxStyleUrl: 'mapbox://styles/lassorfeasley/cl6o7cer3004314mli5jr7zos',
 };
 
 export default settings;

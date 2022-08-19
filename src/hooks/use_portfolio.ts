@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Facility, GenerationDatum} from 'schema/schema_gen_types';
+import {Facility, GenerationDatum, Transfer} from 'schema/schema_gen_types';
 import {
     generateFakeProductionData,
     useAnimatedProductionData,
@@ -7,12 +7,18 @@ import {
 import useFacilities from './use_facilities';
 import {subDays} from 'date-fns';
 
+import {useTransfer} from 'hooks/use_transfer';
 import {useUser} from './use_user';
+import {Document} from 'components/documents/types';
+import {useStorage} from './use_storage';
 
 export interface usePortfolioReturnType {
     loading: boolean;
     facilityData: Facility;
     generationData: Array<GenerationDatum>;
+    transfers: Array<Transfer>;
+    documents: Array<Document>;
+    lastUpdatedDate: Date | null;
 }
 
 export const usePortfolio = (): usePortfolioReturnType => {
@@ -81,9 +87,38 @@ export const usePortfolio = (): usePortfolioReturnType => {
             endDate: time,
         });
 
+    const lastUpdatedDate = generationData
+        ? generationData.reduce(
+              (value, current) =>
+                  new Date(current.time).getTime() > value.getTime()
+                      ? new Date(current.time)
+                      : value,
+              new Date(0),
+          )
+        : null;
+
+    const {useRecentTransfers} = useTransfer();
+
+    const {useUserDocuments} = useStorage();
+
+    const {
+        loading: recentTransfersLoading,
+        error: recentError,
+        transfers: recentTransfers,
+    } = useRecentTransfers(5);
+
+    const {loading: documentsLoading, documents} = useUserDocuments();
+
     return {
-        loading: generationDataLoading || userFacilityLoading,
+        loading:
+            generationDataLoading ||
+            userFacilityLoading ||
+            recentTransfersLoading ||
+            documentsLoading,
         facilityData,
         generationData: generationData,
+        lastUpdatedDate,
+        documents: documents,
+        transfers: recentTransfers,
     };
 };

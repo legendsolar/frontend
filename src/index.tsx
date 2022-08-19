@@ -7,25 +7,10 @@ import * as FullStory from '@fullstory/browser';
 import LogRocket from 'logrocket';
 
 import appSettings from 'app_settings';
-
 import smoothscroll from 'smoothscroll-polyfill';
+import {ApolloProvider} from '@apollo/client';
 
-import {
-    ApolloClient,
-    InMemoryCache,
-    ApolloProvider,
-    useQuery,
-    gql,
-} from '@apollo/client';
-
-import {signOut} from 'firebase/auth';
-
-import {createHttpLink} from '@apollo/client';
-import {setContext} from '@apollo/client/link/context';
-import {getAuth} from 'firebase/auth';
-import {throwAuthenticationError, throwSystemError} from 'utils/errors.js';
-import {v4} from 'uuid';
-import {onError} from '@apollo/client/link/error';
+import {client} from 'apollo_client_init';
 
 if (appSettings.sentry.enabled)
     Sentry.init({
@@ -62,62 +47,7 @@ if (appSettings.logRocket.enabled) {
 
 smoothscroll.polyfill();
 
-const httpLink = createHttpLink({
-    uri: process.env.REACT_APP_GRAPH_QL_SERVER_URL,
-});
-
-const sessionId = v4();
-
-const getUserSessionId = () => {
-    return sessionId;
-};
-
-const authLink = setContext(async (_, {headers}) => {
-    // get the authentication token from local storage if it exists
-
-    const user = getAuth().currentUser;
-
-    if (!user) {
-        throwAuthenticationError({
-            message: 'Cannot make GraphQL request, user not authenticated',
-        });
-    }
-
-    try {
-        const token = await user.getIdToken();
-
-        // return the headers to the context so httpLink can read them
-        return {
-            headers: {
-                ...headers,
-                authorization: token ? `Bearer ${token}` : '',
-                ['session-id']: getUserSessionId(),
-            },
-        };
-    } catch (e) {
-        signOut(getAuth());
-        throw e;
-    }
-});
-
-// TODO is this causing capcha errors?
-const errorHandler = onError(({networkError, graphQLErrors}) => {
-    console.log('here');
-    if (graphQLErrors)
-        graphQLErrors.forEach(({message, locations, path}) =>
-            console.log(
-                `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-            ),
-        );
-    if (networkError) console.log(`[Network error]: ${networkError}`);
-});
-
-const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
-});
-
-function importBuildTarget() {
+const importBuildTarget = () => {
     if (process.env.REACT_APP_BUILD_TARGET === 'APP') {
         return import('./app.js');
     } else if (process.env.REACT_APP_BUILD_TARGET === 'TEST') {
@@ -129,7 +59,7 @@ function importBuildTarget() {
             ),
         );
     }
-}
+};
 
 importBuildTarget().then(({default: Environment}) =>
     ReactDOM.render(

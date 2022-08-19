@@ -89,11 +89,9 @@ const useSignIn = (): useSignInReturnType => {
     };
 
     const onSignInWithGoogle = async () => {
-        return signInWithGoogle()
-            .then(() => {
-                onSuccesfulSignIn();
-            })
-            .catch((error) => authErrorHandler(error));
+        return signInWithGoogle().then(() => {
+            onSuccesfulSignIn();
+        });
     };
 
     const onSignUpWithEmail = () => {
@@ -105,17 +103,15 @@ const useSignIn = (): useSignInReturnType => {
     };
 
     const onForgotPassword = ({email}) => {
-        return resetPassword(email).catch((error) => authErrorHandler(error));
+        return resetPassword(email);
     };
 
     const onSubmitCode = async ({code}) => {
-        return validateMfaCode(verificationId, code, resolver).catch((error) =>
-            authErrorHandler(error),
-        );
+        return validateMfaCode(verificationId, code, resolver);
     };
 
     const onSignUpWithGoogle = async () => {
-        onSignInWithGoogle().then(() => {});
+        onSignInWithGoogle();
     };
 
     return {

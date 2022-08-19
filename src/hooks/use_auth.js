@@ -103,13 +103,16 @@ function useProvideAuth() {
                     setUser(response.user);
                 }
             })
+            .catch((error) => authErrorHandler(error))
             .finally(() => {
                 setIsAuthenticating(false);
             });
     };
 
     const resetPassword = (email) => {
-        return sendPasswordResetEmail(auth, email);
+        return sendPasswordResetEmail(auth, email).catch((error) =>
+            authErrorHandler(error),
+        );
     };
 
     const sendEmailVerify = () => {

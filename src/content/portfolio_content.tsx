@@ -13,6 +13,7 @@ import {
     GenerationMetaData,
     GenerationSummary,
     Location,
+    Transfer,
 } from 'schema/schema_gen_types';
 import InvestmentSupportComponent from 'components/invest/investment_support_component';
 import IconAccordian from 'utils/icon_accordian';
@@ -29,27 +30,15 @@ import {documents} from 'components/invest/tests/defaults';
 import LoadingComponent from 'components/basics/loading_component';
 import {numberFormatter, currencyFormatter} from 'utils/number_formatter';
 import LoadingContent from 'content/loading_content';
+import {Document} from 'components/documents/types';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
     address?: string;
     subtitle?: string;
-    allTimeReturn?: JSX.Element;
-    realTimeData?: JSX.Element;
-    sidebar?: JSX.Element;
-    transactions?: JSX.Element;
-    investmentSupport?: JSX.Element;
-    about?: JSX.Element;
-    details?: JSX.Element;
-    documents?: JSX.Element;
-
     facility: Facility;
-
-    generationMetaData: GenerationMetaData;
-    facilitySummary: GenerationSummary;
-    facilityEconomics: EconomicsSummary;
-    location?: Location | null;
-
+    transfers: Array<Transfer>;
+    documents: Array<Document>;
     generation: Array<GenerationDatum>;
 }
 
@@ -59,12 +48,12 @@ const PortfolioContent = ({
     address = '',
     subtitle = '',
     facility,
-    generationMetaData,
-    facilitySummary,
-    facilityEconomics,
+    transfers,
+    documents,
     generation,
-    location,
 }: PortfolioContentProps) => {
+    const {generationMetaData, location, economics, summary} = facility;
+
     if (loading) return <LoadingContent />;
 
     return (
@@ -116,8 +105,8 @@ const PortfolioContent = ({
                                     <Typography
                                         variant={'smallHeadline' as any}
                                     >
-                                        {facility.generationMetaData
-                                            .panel_count + ' panels'}
+                                        {generationMetaData.panel_count +
+                                            ' panels'}
                                     </Typography>
                                     <Stack alignItems={'flex-end'}>
                                         <Typography
@@ -125,9 +114,8 @@ const PortfolioContent = ({
                                             color={'legendaryGreen.main' as any}
                                         >
                                             {currencyFormatter(
-                                                facility.summary.day_kWh *
-                                                    facility.generationMetaData
-                                                        .dollar_per_kWh,
+                                                summary.day_kWh *
+                                                    generationMetaData.dollar_per_kWh,
                                             )}
                                         </Typography>
                                         <Typography
@@ -157,15 +145,15 @@ const PortfolioContent = ({
                                         {
                                             metric: 'Watts',
                                             value: numberFormatter(
-                                                facility.generationMetaData
-                                                    .max_kW * 1000,
+                                                generationMetaData.max_kW *
+                                                    1000,
                                                 5,
                                             ),
                                         },
                                         {
                                             metric: 'Cost',
                                             value: currencyFormatter(
-                                                facility.economics.cost_dollars,
+                                                economics.cost_dollars,
                                             ),
                                         },
                                         {
@@ -204,7 +192,7 @@ const PortfolioContent = ({
                                         >
                                             {'$' +
                                                 numberFormatter(
-                                                    facilitySummary.totalGeneration_kWh *
+                                                    summary.totalGeneration_kWh *
                                                         generationMetaData.dollar_per_kWh,
                                                     2,
                                                 )}
@@ -234,7 +222,7 @@ const PortfolioContent = ({
                                         >
                                             {'' +
                                                 numberFormatter(
-                                                    facilitySummary.totalGeneration_kWh *
+                                                    summary.totalGeneration_kWh *
                                                         generationMetaData.co2_per_kWh,
                                                     3,
                                                 )}
@@ -265,7 +253,7 @@ const PortfolioContent = ({
                                         >
                                             {'' +
                                                 numberFormatter(
-                                                    facilitySummary.totalGeneration_kWh,
+                                                    summary.totalGeneration_kWh,
                                                     3,
                                                 )}
                                         </Typography>
@@ -295,14 +283,14 @@ const PortfolioContent = ({
 
                 <ContentDivider>
                     <Typography variant={'monoButton' as any}>
-                        Transactions
+                        Recent Transactions
                     </Typography>
                 </ContentDivider>
                 <TransferDataGrid
-                    transfers={testTransfers.slice(0, 5)}
+                    transfers={transfers}
                     loading={false}
                     sx={{
-                        height: '500px',
+                        height: '400px',
                     }}
                 ></TransferDataGrid>
 

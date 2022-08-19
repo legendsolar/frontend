@@ -15,11 +15,12 @@ import {
 import delay from 'utils/delay';
 import {documents as testDocuments} from 'static_data/placeholder_documents';
 import {useStorage} from 'hooks/use_storage';
+import {Document} from 'components/documents/types';
 
 const DocumentPage = () => {
     const navBarProps = useNavBar();
 
-    const [documents, setDocuments] = useState<Array<any>>([]);
+    const [documents, setDocuments] = useState<Array<Document>>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [asset, setAsset] = useState<string>('');
     const [dateRange, setDateRange] = useState<DataGridDateRange>(
@@ -36,12 +37,17 @@ const DocumentPage = () => {
                 data.map((file) => {
                     return {
                         id: file?.metadata?.fullPath,
-                        name: file?.metadata?.customMetadata.displayName,
-                        type: file?.metadata?.customMetadata.documentType,
-                        created: file?.metadata?.timeCreated,
-                        facility: file?.metadata?.customMetadata.asset,
+                        name:
+                            file?.metadata?.customMetadata?.displayName ||
+                            'well',
+                        type:
+                            file?.metadata?.customMetadata?.documentType ||
+                            'test',
+                        created: new Date(file?.metadata?.timeCreated),
+                        facility:
+                            file?.metadata?.customMetadata?.asset || 'test',
                         downloadLink: file?.link,
-                    };
+                    } as Document;
                 }),
             );
         });
@@ -55,61 +61,11 @@ const DocumentPage = () => {
                 onDownloadDocument={() => delay(1000)}
                 onChangeDateRange={(range) => {
                     setDateRange(range);
-                    return delay(1000).then(() => {
-                        setDocuments(
-                            testDocuments.filter((doc) => {
-                                switch (range) {
-                                    case DataGridDateRange.WEEK_TO_DATE:
-                                        return (
-                                            1 >
-                                            differenceInWeeks(
-                                                new Date(),
-                                                new Date(doc.created),
-                                            )
-                                        );
-                                    case DataGridDateRange.MONTH_TO_DATE:
-                                        return (
-                                            1 >
-                                            differenceInMonths(
-                                                new Date(),
-                                                new Date(doc.created),
-                                            )
-                                        );
-                                    case DataGridDateRange.LAST_SIX_MONTHS:
-                                        return (
-                                            6 >
-                                            differenceInMonths(
-                                                new Date(),
-                                                new Date(doc.created),
-                                            )
-                                        );
-                                    case DataGridDateRange.YEAR_TO_DATE:
-                                        return (
-                                            12 >
-                                            differenceInMonths(
-                                                new Date(),
-                                                new Date(doc.created),
-                                            )
-                                        );
-                                }
-                                return true;
-                            }),
-                        );
-                    });
+                    return delay(1000).then(() => {});
                 }}
                 onChangeAsset={(asset) => {
                     setAsset(asset);
-                    return delay(1000).then(() => {
-                        if (asset === 'None') {
-                            setDocuments(testDocuments);
-                        } else {
-                            setDocuments(
-                                testDocuments.filter(
-                                    (doc: any) => doc.facility?.name === asset,
-                                ),
-                            );
-                        }
-                    });
+                    return delay(1000).then(() => {});
                 }}
                 assetState={asset}
                 assetStates={['Barnyard Solar', 'None']}
