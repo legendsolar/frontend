@@ -430,13 +430,13 @@ export const themeOptions = {
                     },
                 },
 
-                {
-                    props: {variant: 'flat', disabled: true},
-                    style: {
-                        backgroundColor: paletteOptions.palette.whiteFog.main,
-                        color: paletteOptions.palette.blackDawn.main,
-                    },
-                },
+                // {
+                //     // props: {variant: 'flat', disabled: true},
+                //     // style: {
+                //     //     backgroundColor: paletteOptions.palette.whiteFog.main,
+                //     //     color: paletteOptions.palette.blackDawn.main,
+                //     // },
+                // },
 
                 {
                     props: {variant: 'mini'},

@@ -47,7 +47,10 @@ const CreateWalletContent = ({
     };
 
     return (
-        <Component standardWidth={false} sx={{width: '500px'}}>
+        <Component
+            standardWidth={false}
+            sx={{width: '500px', background: 'none'}}
+        >
             <Typography variant={'smallHeadline' as any}>
                 Create Legends Wallet
             </Typography>

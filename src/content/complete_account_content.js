@@ -10,7 +10,7 @@ const CompleteAccountContent = ({stepsTitle, steps, onContinue}) => {
     const allComplete = steps.every((step) => step.complete);
 
     return (
-        <Component>
+        <Component sx={{background: 'none'}}>
             <Typography variant="headline2">{stepsTitle}</Typography>
             <Typography variant="body">
                 {allComplete

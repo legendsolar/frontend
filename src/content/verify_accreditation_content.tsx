@@ -69,7 +69,7 @@ const VerifyAccreditationContent = ({
     };
 
     return (
-        <Component>
+        <Component sx={{background: 'none'}}>
             <Typography variant={'smallHeadline' as any}>
                 Accreditation
             </Typography>
