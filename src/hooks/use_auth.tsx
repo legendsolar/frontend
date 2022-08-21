@@ -41,6 +41,7 @@ export const useAuth = (): useAuthReturnType => {
 
 interface useAuthReturnType {
     isAuthenticating: boolean;
+    authenticated: boolean;
     user: User | null;
     signin(email: string, password: string): Promise<void>;
     signup(email: string, password: string): Promise<UserCredential>;
@@ -325,6 +326,7 @@ const useProvideAuth = (): useAuthReturnType => {
 
     return {
         isAuthenticating,
+        authenticated: !!user,
         user,
         signin,
         signup,

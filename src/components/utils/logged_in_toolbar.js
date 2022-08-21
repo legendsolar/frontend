@@ -42,7 +42,7 @@ const LoggedInToolbar = ({
                     Legends Wallet
                 </Typography>
                 <Button variant="header-filled" sx={{mt: 0}} onClick={onWallet}>
-                    {'$' + (walletBalance ? walletBalance : '-')}
+                    {walletBalance ? walletBalance : '-'}
                 </Button>
             </Stack>
         </Stack>
