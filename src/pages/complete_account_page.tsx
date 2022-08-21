@@ -202,7 +202,7 @@ const CompleteAccountPage = () => {
                 return (
                     <VerifyEmailContent
                         color="light"
-                        email={user?.email}
+                        email={user?.email ? user.email : ''}
                         onChangeEmailAddressRequested={(email) => {
                             console.log(email);
                             return delay(1000);

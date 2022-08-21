@@ -10,7 +10,7 @@ import {createHttpLink} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
 
 import {getAuth} from 'firebase/auth';
-import {throwAuthenticationError, throwSystemError} from 'utils/errors.js';
+import {throwAuthenticationError, throwSystemError} from 'utils/errors';
 import {onError} from '@apollo/client/link/error';
 import {signOut} from 'firebase/auth';
 import {getUserSessionId} from 'session_id';

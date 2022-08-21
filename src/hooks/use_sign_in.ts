@@ -3,7 +3,11 @@ import {useNavigate} from 'react-router-dom';
 import {useAuth} from './use_auth';
 import {useLocation} from 'react-router-dom';
 import {authErrorHandler} from 'utils/auth_error_translator';
-import {throwValidationError} from 'utils/errors';
+import {
+    throwInternalStateError,
+    throwSystemError,
+    throwValidationError,
+} from 'utils/errors';
 import {useUser} from './use_user';
 import {ROUTES} from 'routes/routes';
 import {boolean} from 'yup';
@@ -41,7 +45,9 @@ const useSignIn = (): useSignInReturnType => {
     const [state, setState] = useState(States.SIGN_IN);
     const [resolver, setResolver] = useState(null);
     const [captcha, setCaptcha] = useState<RecaptchaVerifier>();
-    const [verificationId, setVerificationId] = useState(null);
+    const [verificationId, setVerificationId] = useState<string | undefined>(
+        undefined,
+    );
     const [codeSent, setCodeSent] = useState(false);
 
     const {
@@ -63,25 +69,32 @@ const useSignIn = (): useSignInReturnType => {
         email: string;
         password: string;
     }) => {
-        return signin(email, password)
-            .then(() => {
-                onSuccesfulSignIn();
-            })
-            .catch((error) => {
-                if (error.code === 'auth/multi-factor-auth-required') {
-                    const resolver = error.resolver;
-                    setResolver(resolver);
-                    return sendMfaVerification(resolver, captcha).then(
-                        (verificationId) => {
-                            setVerificationId(verificationId);
-                            setState(States.MFA_VERIFY);
-                            setCodeSent(true);
-                        },
-                    );
-                } else {
-                    authErrorHandler(error);
+        try {
+            await signin(email, password);
+            onSuccesfulSignIn();
+        } catch (error: any) {
+            if (error.code === 'auth/multi-factor-auth-required') {
+                const resolver = error.resolver;
+                setResolver(resolver);
+                if (!captcha) {
+                    throwSystemError({
+                        message:
+                            'cannot complete sign in with mfa: captcha not complete or invalid',
+                    });
+                    return;
                 }
-            });
+
+                const verificationId = await sendMfaVerification(
+                    resolver,
+                    captcha,
+                );
+                setVerificationId(verificationId);
+                setState(States.MFA_VERIFY);
+                setCodeSent(true);
+            } else {
+                throw error;
+            }
+        }
     };
 
     const onCreateNewAccount = () => {
@@ -107,7 +120,22 @@ const useSignIn = (): useSignInReturnType => {
     };
 
     const onSubmitCode = async ({code}) => {
-        return validateMfaCode(verificationId, code, resolver);
+        if (!verificationId) {
+            throwInternalStateError({
+                message:
+                    'mfa code submission failed: verification id not set on code set',
+            });
+            return;
+        }
+
+        if (!resolver) {
+            throwInternalStateError({
+                message: 'mfa code submission failed: resolver not set',
+            });
+            return;
+        }
+
+        return await validateMfaCode(verificationId, code, resolver);
     };
 
     const onSignUpWithGoogle = async () => {

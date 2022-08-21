@@ -12,7 +12,7 @@ const StyledDataGrid = ({columns, rows, loading, sx}: DataGridProps) => {
     columns[0].headerClassName = 'first-column';
 
     return (
-        <Box sx={sx}>
+        <Box sx={{...sx, marginLeft: '-20px', marginRight: '-20px'}}>
             <DataGrid
                 loading={loading}
                 rows={rows}
@@ -32,6 +32,11 @@ const StyledDataGrid = ({columns, rows, loading, sx}: DataGridProps) => {
 
                     '& .MuiDataGrid-cellContent': {
                         marginLeft: '100px',
+                    },
+
+                    '& .MuiDataGrid-root': {
+                        paddingLeft: '-100px',
+                        paddingRight: '-100px',
                     },
                 }}
             />

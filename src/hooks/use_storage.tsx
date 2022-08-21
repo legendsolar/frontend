@@ -41,7 +41,7 @@ export const useStorage = () => {
 };
 
 interface useStorageReturnType {
-    getUserFiles(): Promise<ListResult>;
+    getUserFiles(): Promise<ListResult | null>;
     getUserFilesWithMetaData(): Promise<
         Array<{metadata: FullMetadata; ref: StorageReference; link: string}>
     >;
@@ -57,12 +57,20 @@ const useProvideStorage = (): useStorageReturnType => {
     // complete hack... need to update this ASAP
 
     const getUserFiles = async () => {
+        if (!user) {
+            return null;
+        }
+
         const listRef = ref(storage, `${user.uid}/r`);
 
         return listAll(listRef); // returns refs
     };
 
     const getUserFilesWithMetaData = async () => {
+        if (!user) {
+            return [];
+        }
+
         const listRef = ref(storage, `${user.uid}/r`);
 
         const refs = (await listAll(listRef)).items; // returns refs

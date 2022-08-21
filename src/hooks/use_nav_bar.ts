@@ -18,7 +18,7 @@ const useNavBar = () => {
 
     const props: NavBarProps = {
         loading: statusLoading,
-        userIsAuthenticated: auth.user,
+        userIsAuthenticated: !!auth.user,
         userVerified: status.verified,
         walletBalance: '100',
         onToHomepage: () => navigate(ROUTES.USER_HOME),
