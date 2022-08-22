@@ -2,6 +2,7 @@ import {GridColumns} from '@mui/x-data-grid';
 import {Chip} from '@mui/material';
 
 import StyledDataGrid from 'components/data_grid/styled_data_grid';
+import {format} from 'date-fns';
 
 const columns: GridColumns = [
     {
@@ -31,6 +32,9 @@ const columns: GridColumns = [
         minWidth: 110,
         flex: 1,
         editable: false,
+        valueFormatter: (params) => {
+            return format(params.value as Date, 'PP');
+        },
     },
     {
         field: 'downloadLink',

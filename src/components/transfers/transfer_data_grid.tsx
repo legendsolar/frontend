@@ -1,5 +1,5 @@
 import {GridColumns} from '@mui/x-data-grid';
-import {Box, Chip} from '@mui/material';
+import {Chip} from '@mui/material';
 import StyledDataGrid from 'components/data_grid/styled_data_grid';
 
 const columns: GridColumns = [
