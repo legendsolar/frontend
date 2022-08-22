@@ -400,7 +400,7 @@ const PortfolioContent = ({
                                                 metric: 'Investor Funds',
                                                 value: currencyFormatter(
                                                     facility.economics
-                                                        .cost_dollars || 'NA',
+                                                        .cost_dollars,
                                                 ),
                                             },
                                             {

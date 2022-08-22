@@ -80,7 +80,7 @@ const MfaVerifyComponent = ({
                     sx={{width: '100%', mt: 4}}
                 >
                     {codeForm.isValidating || codeForm.isSubmitting ? (
-                        <CircularProgress color="light"></CircularProgress>
+                        <LoadingText></LoadingText>
                     ) : (
                         'Submit'
                     )}

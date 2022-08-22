@@ -16,6 +16,7 @@ import {transferTransformer} from 'hooks/use_transfer';
 import StyledDataGrid from 'components/data_grid/styled_data_grid';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
 import {DataGridDateRange} from 'utils/date_range';
+import LoadingText from 'components/utils/loading_text';
 
 const columns: GridColumns = [
     {
@@ -179,7 +180,7 @@ const TransferGridContent = ({
                             onDownloadCsv();
                         }}
                     >
-                        {loading ? 'Loading...' : 'Download CSV'}
+                        {loading ? <LoadingText></LoadingText> : 'Download CSV'}
                     </Button>
                 </Stack>
             </Stack>

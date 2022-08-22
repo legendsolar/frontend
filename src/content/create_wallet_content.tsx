@@ -10,6 +10,7 @@ import {ErrorTypes} from 'utils/errors';
 import {Error} from 'utils/error_types';
 import {UserDwollaAccountData} from 'schema/schema_gen_types';
 import Component from 'components/basics/component';
+import LoadingText from 'components/utils/loading_text';
 
 interface CreateDwollaAccountProps {
     onSubmit(input: UserDwollaAccountData): Promise<any>;
@@ -129,11 +130,7 @@ const CreateWalletContent = ({
                 color={'legendaryGreen' as any}
                 onClick={submit}
             >
-                {loading ? (
-                    <CircularProgress color={'light' as any} size={30} />
-                ) : (
-                    'Continue'
-                )}
+                {loading ? <LoadingText></LoadingText> : 'Continue'}
             </Button>
         </Component>
     );

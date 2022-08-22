@@ -76,7 +76,7 @@ const ForgotPasswordComponent = ({
                         sx={{width: '100%', mt: 4}}
                     >
                         {formik.isValidating || formik.isSubmitting ? (
-                            <CircularProgress color="light"></CircularProgress>
+                            <LoadingText></LoadingText>
                         ) : (
                             buttonString
                         )}

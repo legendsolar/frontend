@@ -20,6 +20,7 @@ import {useEffect} from 'react';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 import {transformPhoneNumber} from 'transformers/user_input_transformers';
+import LoadingText from 'components/utils/loading_text';
 
 const MfaCreationComponent = ({
     initialPhoneNumberValues,
@@ -109,7 +110,7 @@ const MfaCreationComponent = ({
                     sx={{width: '100%', mt: 4}}
                 >
                     {phoneForm.isValidating || phoneForm.isSubmitting ? (
-                        <CircularProgress color="light"></CircularProgress>
+                        <LoadingText></LoadingText>
                     ) : (
                         'Send Code'
                     )}

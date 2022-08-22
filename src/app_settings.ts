@@ -17,6 +17,7 @@ export interface APP_SETTINGS {
     emailVerificationRedirectUrl: string;
     minPlatformAge: number;
     mapBoxStyleUrl: string;
+    loadingAnimationTiming_ms: number;
 }
 
 const settings: APP_SETTINGS = {
@@ -40,6 +41,9 @@ const settings: APP_SETTINGS = {
 
     minPlatformAge: 18,
     mapBoxStyleUrl: 'mapbox://styles/lassorfeasley/cl6o7cer3004314mli5jr7zos',
+
+    // Animations
+    loadingAnimationTiming_ms: 300,
 };
 
 export default settings;

@@ -1,6 +1,8 @@
 import {Stack, Button, Typography} from '@mui/material';
+import LoadingText from './loading_text';
 
 const LoggedInToolbar = ({
+    loading,
     onYourRooftop,
     onTransaction,
     onDocuments,
@@ -42,7 +44,7 @@ const LoggedInToolbar = ({
                     Legends Wallet
                 </Typography>
                 <Button variant="header-filled" sx={{mt: 0}} onClick={onWallet}>
-                    {walletBalance ? walletBalance : '-'}
+                    {loading ? <LoadingText /> : walletBalance}
                 </Button>
             </Stack>
         </Stack>

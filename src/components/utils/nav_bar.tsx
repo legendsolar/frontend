@@ -74,6 +74,7 @@ const NavBar = ({
 
                         {userIsAuthenticated && userVerified && (
                             <LoggedInToolbar
+                                loading={loading}
                                 walletBalance={walletBalance}
                                 onYourRooftop={onYourRooftop}
                                 onTransaction={onTransaction}

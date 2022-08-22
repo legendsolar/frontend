@@ -16,6 +16,7 @@ import {validateTransferAmount} from 'validation/transaction_validation';
 import TransferComponent from 'components/transfers/transfer_component';
 import LoadingComponent from 'components/basics/loading_component';
 import MultiSelect from 'components/inputs/multiselect';
+import LoadingText from 'components/utils/loading_text';
 
 const CreateTransferComponent = ({accounts, loading, onComplete}) => {
     const [sourceAccount, setSourceAccount] = useState(null);
@@ -203,11 +204,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     }}
                     disabled={loading}
                 >
-                    {loading ? (
-                        <CircularProgress color="dark" size={30} />
-                    ) : (
-                        'Confirm Transfer'
-                    )}
+                    {loading ? <LoadingText></LoadingText> : 'Confirm Transfer'}
                 </Button>
             </Stack>
         );

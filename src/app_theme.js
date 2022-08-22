@@ -390,6 +390,7 @@ export const themeOptions = {
                     props: {variant: 'secondary'},
                     style: {
                         height: '55px',
+                        width: '180px',
                         backgroundColor: paletteOptions.palette.blackDawn.main,
                         color: paletteOptions.palette.blackDawn.contrastText,
 

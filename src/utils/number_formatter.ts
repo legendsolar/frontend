@@ -54,7 +54,9 @@ export const numberFormatter = (
     return formatter.format(number);
 };
 
-export const currencyFormatter = (number: number) => {
+export const currencyFormatter = (number: number | undefined | null) => {
+    if (number == null) return '-';
+
     if (number < 100) {
         return currencyFormatterInt_under100.format(number);
     }

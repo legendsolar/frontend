@@ -23,6 +23,7 @@ import {ErrorTypes} from 'utils/errors';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 import {useState} from 'react';
+import LoadingText from 'components/utils/loading_text';
 
 const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
     const [error, setError] = useState(null);
@@ -181,7 +182,7 @@ const SignUpComponent = ({initialValues, onSubmit, color = 'dark'}) => {
                         {formik.isValidating ||
                         formik.isSubmitting ||
                         loading ? (
-                            <CircularProgress color={color}></CircularProgress>
+                            <LoadingText></LoadingText>
                         ) : (
                             'Continue'
                         )}

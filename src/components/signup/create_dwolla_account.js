@@ -7,6 +7,7 @@ import Divider from 'components/basics/divider';
 import ModifyUserInfo from 'components/user/modify_user_info';
 import ProtectedUserInfo from 'components/user/protected_user_info';
 import {ErrorTypes} from 'utils/errors';
+import LoadingText from 'components/utils/loading_text';
 
 const CreateDwollaAccount = ({userStatus, onSubmit, color = 'dark'}) => {
     const fullSSNRequired = userStatus === 'DWOLLA_ACCOUNT_RETRY_REQ';
@@ -103,11 +104,7 @@ const CreateDwollaAccount = ({userStatus, onSubmit, color = 'dark'}) => {
                 color="legendaryGreen"
                 onClick={submit}
             >
-                {loading ? (
-                    <CircularProgress color="light" size={30} />
-                ) : (
-                    'Continue'
-                )}
+                {loading ? <LoadingText></LoadingText> : 'Continue'}
             </Button>
         </Stack>
     );

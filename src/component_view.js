@@ -253,6 +253,9 @@ const basePaths = [
         type: 'components',
         tests: [
             {
+                name: 'test_loading_text',
+            },
+            {
                 name: 'test_nav_bar',
             },
         ],

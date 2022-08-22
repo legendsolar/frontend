@@ -30,10 +30,10 @@ const useNavBar = () => {
         walletRefetch();
     }, [authenticated]);
 
-    const walletBalance = walletLoading ? '...' : '$' + wallet.amount;
+    const walletBalance = '$' + wallet?.amount;
 
     const props: NavBarProps = {
-        loading: statusLoading,
+        loading: statusLoading || walletLoading,
         userIsAuthenticated: authenticated,
         userVerified: status.verified,
         walletBalance,

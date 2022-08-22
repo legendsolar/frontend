@@ -1,5 +1,6 @@
 import {Typography, Stack, Button, CircularProgress} from '@mui/material';
 import MultiSelect from 'components/inputs/multiselect';
+import LoadingText from 'components/utils/loading_text';
 import {useEffect, useState} from 'react';
 
 const IdentityVerificationKBA = ({onSubmit, kbaQuestions}) => {
@@ -44,11 +45,7 @@ const IdentityVerificationKBA = ({onSubmit, kbaQuestions}) => {
                 }}
                 disabled={submitDisabled()}
             >
-                {loading ? (
-                    <CircularProgress color="light"></CircularProgress>
-                ) : (
-                    'Submit'
-                )}
+                {loading ? <LoadingText></LoadingText> : 'Submit'}
             </Button>
         </Stack>
     );
