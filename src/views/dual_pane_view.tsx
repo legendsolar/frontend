@@ -9,6 +9,7 @@ interface DualPaneViewProps {
     rightPane?: JSX.Element;
     upperLeftCorner?: JSX.Element;
     lowerRightCorner?: JSX.Element;
+    paneToHide?: 'left' | 'right';
     options?: any;
 }
 
@@ -18,6 +19,7 @@ const DualPaneView = ({
     upperLeftCorner,
     lowerRightCorner,
     options,
+    paneToHide = 'right',
 }: DualPaneViewProps) => {
     const defaultLowerRightCorner = lowerRightCorner ? (
         lowerRightCorner
@@ -50,6 +52,10 @@ const DualPaneView = ({
                         width: '100%',
                         height: '100%',
                         backgroundColor: 'whiteHaze.main',
+                        display: {
+                            md: paneToHide === 'left' ? 'none' : 'flex',
+                            lg: 'flex',
+                        },
                     }}
                     display="flex"
                     justifyContent={leftPaneJustify}
@@ -61,23 +67,30 @@ const DualPaneView = ({
                     sx={{
                         width: '100%',
                         height: '100%',
+                        display: {
+                            md: paneToHide === 'right' ? 'none' : 'flex',
+                            lg: 'flex',
+                        },
                     }}
-                    display="flex"
                     justifyContent={rightPaneJustify}
                     alignItems="center"
                 >
                     {rightPane}
                 </Box>
             </Stack>
-            <div
-                style={{
+            <Box
+                sx={{
                     position: 'absolute',
                     bottom: '40px',
                     right: '40px',
+                    display: {
+                        md: 'none',
+                        lg: 'flex',
+                    },
                 }}
             >
                 {defaultLowerRightCorner}
-            </div>
+            </Box>
         </div>
     );
 };

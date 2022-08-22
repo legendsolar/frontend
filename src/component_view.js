@@ -27,6 +27,9 @@ const basePaths = [
             {
                 name: 'test',
             },
+            {
+                name: 'test_breakpoints',
+            },
         ],
     },
     {
