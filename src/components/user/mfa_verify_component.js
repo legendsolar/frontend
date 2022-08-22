@@ -8,6 +8,7 @@ import {
     Typography,
 } from '@mui/material';
 import {validateMfaVerifyCode} from 'validation/user_data_validation';
+import LoadingText from 'components/utils/loading_text';
 
 import TextField from 'utils/text_field';
 
