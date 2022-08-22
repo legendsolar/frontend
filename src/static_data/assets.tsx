@@ -1,7 +1,18 @@
-const assetData = [
+import {ProspectiveAsset} from 'components/discovery/types';
+
+const assetData: Array<ProspectiveAsset> = [
     {
+        id: '9e99c6d8-7de8-45df-b2ee-a1196616b83e',
         title: 'Santa Rosa Solar',
-        minInvestment: '$131,000',
+        minInvestment: 131000,
+        estimatedROI: 0.097,
+        numberOfPanels: 105,
+        address: {
+            streetAddress: '2826 Dutton Meadow',
+            city: 'Santa Rosa',
+            state: 'CA',
+            postalCode: '95407',
+        },
         metrics: [
             {
                 metric: 'Location',
@@ -18,20 +29,6 @@ const assetData = [
             {
                 metric: 'Total Investment',
                 value: '$131,000',
-            },
-        ],
-        specifications: [
-            {
-                metric: 'Number of panels',
-                value: '114',
-            },
-            {
-                metric: 'Make & model',
-                value: 'Phono Solar 400W',
-            },
-            {
-                metric: 'Watts Installed',
-                value: '45,600 W',
             },
         ],
         content: [
@@ -87,14 +84,24 @@ const assetData = [
                 ],
             },
         ],
-        color: 'blue',
-        lat: 38.44466,
-        lng: -122.720306,
+        location: {
+            lat: 38.44466,
+            lng: -122.720306,
+        },
     },
 
     {
+        id: '45c97a26-2985-4861-9c18-a37130b37888',
         title: 'Glassboro Solar',
-        minInvestment: '$131,000',
+        minInvestment: 131000,
+        estimatedROI: 0.097,
+        numberOfPanels: 105,
+        address: {
+            streetAddress: '2826 Dutton Meadow',
+            city: 'Santa Rosa',
+            state: 'CA',
+            postalCode: '95407',
+        },
         metrics: [
             {
                 metric: 'Number of panels',
@@ -109,30 +116,24 @@ const assetData = [
                 value: '45,600 W',
             },
         ],
-
-        specifications: [
-            {
-                metric: 'Number of panels',
-                value: '114',
-            },
-            {
-                metric: 'Make & model',
-                value: 'Phono Solar 400W',
-            },
-            {
-                metric: 'Watts Installed',
-                value: '45,600 W',
-            },
-        ],
-        color: 'yellow',
-        lat: 39.702892,
-        lng: -75.111839,
+        location: {
+            lat: 39.702892,
+            lng: -75.111839,
+        },
     },
 
     {
+        id: '734645a9-40ea-464f-aaa9-4de40ea585c1',
         title: 'Lake Elsinore Solar',
-        minInvestment: '$131,000',
-
+        minInvestment: 131000,
+        estimatedROI: 0.097,
+        numberOfPanels: 105,
+        address: {
+            streetAddress: '2826 Dutton Meadow',
+            city: 'Santa Rosa',
+            state: 'CA',
+            postalCode: '95407',
+        },
         metrics: [
             {
                 metric: 'Number of panels',
@@ -147,31 +148,25 @@ const assetData = [
                 value: '45,600 W',
             },
         ],
-
-        specifications: [
-            {
-                metric: 'Number of panels',
-                value: '114',
-            },
-            {
-                metric: 'Make & model',
-                value: 'Phono Solar 400W',
-            },
-            {
-                metric: 'Watts Installed',
-                value: '45,600 W',
-            },
-        ],
-        color: 'green',
-        lat: 33.66808,
-        lng: -117.32726,
+        location: {
+            lat: 33.66808,
+            lng: -117.32726,
+        },
     },
 
     {
+        id: 'f07864f4-3786-4c77-ac86-e4a365338f22',
         title: 'Lindenwold Solar',
 
-        minInvestment: '$131,000',
-
+        minInvestment: 131000,
+        estimatedROI: 0.097,
+        numberOfPanels: 105,
+        address: {
+            streetAddress: '2826 Dutton Meadow',
+            city: 'Santa Rosa',
+            state: 'CA',
+            postalCode: '95407',
+        },
         metrics: [
             {
                 metric: 'Number of panels',
@@ -186,31 +181,26 @@ const assetData = [
                 value: '45,600 W',
             },
         ],
-
-        specifications: [
-            {
-                metric: 'Number of panels',
-                value: '114',
-            },
-            {
-                metric: 'Make & model',
-                value: 'Phono Solar 400W',
-            },
-            {
-                metric: 'Watts Installed',
-                value: '45,600 W',
-            },
-        ],
-        color: 'red',
-        lat: 39.817226,
-        lng: -74.988892,
+        location: {
+            lat: 39.817226,
+            lng: -74.988892,
+        },
     },
 
     {
+        id: '1d5456ea-6c8f-4608-99bc-f381b6524bd4',
         title: 'Honolulu Solar',
 
-        minInvestment: '$131,000',
+        minInvestment: 131000,
 
+        estimatedROI: 0.097,
+        numberOfPanels: 105,
+        address: {
+            streetAddress: '2826 Dutton Meadow',
+            city: 'Santa Rosa',
+            state: 'CA',
+            postalCode: '95407',
+        },
         metrics: [
             {
                 metric: 'Number of panels',
@@ -225,31 +215,24 @@ const assetData = [
                 value: '45,600 W',
             },
         ],
-
-        specifications: [
-            {
-                metric: 'Number of panels',
-                value: '114',
-            },
-            {
-                metric: 'Make & model',
-                value: 'Phono Solar 400W',
-            },
-            {
-                metric: 'Watts Installed',
-                value: '45,600 W',
-            },
-        ],
-        color: 'red',
-        lat: 21.315603,
-        lng: -157.858093,
+        location: {
+            lat: 21.315603,
+            lng: -157.858093,
+        },
     },
 
     {
+        id: 'd9f40fcd-7164-4bf6-8de1-717d8d240e59',
         title: 'Fairbanks Solar',
-
-        minInvestment: '$131,000',
-
+        minInvestment: 131000,
+        estimatedROI: 0.097,
+        numberOfPanels: 105,
+        address: {
+            streetAddress: '2826 Dutton Meadow',
+            city: 'Santa Rosa',
+            state: 'CA',
+            postalCode: '95407',
+        },
         metrics: [
             {
                 metric: 'Number of panels',
@@ -264,24 +247,10 @@ const assetData = [
                 value: '45,600 W',
             },
         ],
-
-        specifications: [
-            {
-                metric: 'Number of panels',
-                value: '114',
-            },
-            {
-                metric: 'Make & model',
-                value: 'Phono Solar 400W',
-            },
-            {
-                metric: 'Watts Installed',
-                value: '45,600 W',
-            },
-        ],
-        color: 'red',
-        lat: 64.835365,
-        lng: -147.776749,
+        location: {
+            lat: 64.835365,
+            lng: -147.776749,
+        },
     },
 ];
 

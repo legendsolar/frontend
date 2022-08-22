@@ -3,7 +3,18 @@ import ComponentDivider from 'components/basics/component_divider';
 import Divider from 'components/basics/divider';
 import {nanoid} from 'nanoid';
 
-const MetricList = ({valuePairs, dividers = false}) => {
+export interface Metric {
+    metric: string;
+    value: string;
+}
+
+const MetricList = ({
+    valuePairs,
+    dividers = false,
+}: {
+    valuePairs: Array<Metric>;
+    dividers?: boolean;
+}) => {
     if (!valuePairs) {
         return <></>;
     }

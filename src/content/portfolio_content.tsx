@@ -400,13 +400,14 @@ const PortfolioContent = ({
                                                 metric: 'Investor Funds',
                                                 value: currencyFormatter(
                                                     facility.economics
-                                                        .cost_dollars,
+                                                        .cost_dollars || 'NA',
                                                 ),
                                             },
                                             {
                                                 metric: 'Hold Term',
-                                                value: facility.economics
-                                                    .ppaDuration,
+                                                value:
+                                                    facility.economics
+                                                        .ppaDuration || 'NA',
                                             },
                                             {
                                                 metric: 'Estimated ROI',
@@ -436,14 +437,18 @@ const PortfolioContent = ({
                                             },
                                             {
                                                 metric: 'Make & model',
-                                                value: facility
-                                                    .generationMetaData.make,
+                                                value:
+                                                    facility.generationMetaData
+                                                        .make || 'NA',
                                             },
                                             {
                                                 metric: 'Watts Installed',
                                                 value:
-                                                    facility.generationMetaData
-                                                        .max_kW * 1000,
+                                                    numberFormatter(
+                                                        facility
+                                                            .generationMetaData
+                                                            .max_kW * 1000,
+                                                    ) || 'NA',
                                             },
                                         ]}
                                     ></MetricList>

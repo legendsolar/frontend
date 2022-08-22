@@ -11,9 +11,11 @@ import BasicGlobe from 'components/map/basic_globe_component';
 import Component from 'components/basics/component';
 import {useState} from 'react';
 import Marker from 'components/map/marker';
+import {ProspectiveAsset} from 'components/discovery/types';
+import {currencyFormatter} from 'utils/number_formatter';
 
 interface DiscoveryContentProps {
-    assets: Array<any>;
+    assets: Array<ProspectiveAsset>;
 }
 
 const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
@@ -56,7 +58,14 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography>{asset.title}</Typography>
+                            <Stack>
+                                <Typography>{asset.title}</Typography>
+                                <Typography variant={'label' as any}>
+                                    {`${currencyFormatter(
+                                        asset.minInvestment,
+                                    )} | ${asset.numberOfPanels} panels`}
+                                </Typography>
+                            </Stack>
                         </AccordionSummary>
 
                         <Component
@@ -70,11 +79,25 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                                 justifyContent={'space-between'}
                             >
                                 <Typography variant={'label' as any}>
-                                    {'2868 Dutton Meadow'}
+                                    {asset.address.streetAddress}
                                 </Typography>
                                 <Typography variant={'label' as any}>
-                                    {'Santa Rosa, CA 95407'}
+                                    {`${asset.address.city}, ${asset.address.state} ${asset.address.postalCode}`}
                                 </Typography>
+                            </Stack>
+
+                            <Stack
+                                direction={'row'}
+                                justifyContent={'space-between'}
+                            >
+                                <Stack>
+                                    <Typography variant={'label' as any}>
+                                        {'Estimated ROI'}
+                                    </Typography>
+                                    <Typography variant={'label' as any}>
+                                        {asset.estimatedROI}
+                                    </Typography>
+                                </Stack>
                             </Stack>
 
                             <Button
@@ -99,13 +122,16 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                 }}
             >
                 <BasicGlobe
-                    lat={selectedAsset.lat}
-                    lng={selectedAsset.lng}
+                    lat={selectedAsset.location.lat}
+                    lng={selectedAsset.location.lng}
                     zoom={5}
                     width="100%"
                     height="80vh"
                     markers={assets.map((asset) => (
-                        <Marker lng={asset.lng} lat={asset.lat}>
+                        <Marker
+                            lng={asset.location.lng}
+                            lat={asset.location.lat}
+                        >
                             <div
                                 style={{
                                     transform: 'translate(0%, -100%)',

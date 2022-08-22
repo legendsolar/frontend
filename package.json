@@ -73,7 +73,9 @@
         "build:test": "env-cmd -f ./.env.test react-scripts build",
         "preview": "firebase use dev && firebase hosting:channel:deploy `git branch --show-current`-`git rev-parse HEAD`",
         "parseWebflowFooter": "node webflow_html_parser.js",
-        "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'"
+        "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'",
+        "test": "env-cmd -f ./.env.test react-scripts test --watchAll=false",
+        "test:watch": "env-cmd -f ./.env.test react-scripts test --watchAll"
     },
     "eslintConfig": {
         "extends": [
