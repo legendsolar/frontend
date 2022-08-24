@@ -397,8 +397,6 @@ export const themeOptions = {
                         ...typographyOptions.typography.subtitle2,
 
                         '&:hover': {
-                            backgroundColor:
-                                paletteOptions.palette.blackDawn.main,
                             boxShadow: '0px 0px 25px rgba(99, 110, 114, 0.25)',
                         },
                     },
@@ -408,11 +406,6 @@ export const themeOptions = {
                     style: {
                         backgroundColor: paletteOptions.palette.whiteFog.main,
                         color: paletteOptions.palette.blackDawn.main,
-
-                        '&:hover': {
-                            backgroundColor:
-                                paletteOptions.palette.whiteFog.main,
-                        },
                     },
                 },
                 {

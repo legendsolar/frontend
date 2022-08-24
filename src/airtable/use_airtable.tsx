@@ -29,7 +29,11 @@ export const useAirtable = () => {
 };
 
 interface useAirtableReturnType {
-    useBase(baseName: string): {loading: boolean; page: Records<FieldSet>};
+    useBase(baseName: string): {
+        loading: boolean;
+        page: Records<FieldSet>;
+        fetchNextPage(): void;
+    };
 }
 
 const useProvideAirtable = (): useAirtableReturnType => {
@@ -38,6 +42,7 @@ const useProvideAirtable = (): useAirtableReturnType => {
     const useBase = (baseName: string) => {
         const [loading, setLoading] = useState(false);
         const [page, setPage] = useState<Records<FieldSet>>([]);
+        const [fetchNext, setFetchNext] = useState<() => void>();
 
         useMemo(() => {
             setLoading(true);
@@ -46,6 +51,7 @@ const useProvideAirtable = (): useAirtableReturnType => {
                 .eachPage((records, fetchNextPage) => {
                     setPage(records);
                     setLoading(false);
+                    setFetchNext(fetchNextPage);
                 })
                 .finally(() => setLoading(false));
         }, [baseName]);
@@ -53,6 +59,12 @@ const useProvideAirtable = (): useAirtableReturnType => {
         return {
             loading,
             page,
+            fetchNextPage: () => {
+                setLoading(true);
+                if (fetchNext) {
+                    fetchNext();
+                }
+            },
         };
     };
 

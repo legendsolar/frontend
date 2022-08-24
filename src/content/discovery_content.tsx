@@ -6,13 +6,13 @@ import {
     AccordionSummary,
     Button,
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import BasicGlobe from 'components/map/basic_globe_component';
 import Component from 'components/basics/component';
 import {useState} from 'react';
 import Marker from 'components/map/marker';
 import {ProspectiveAsset} from 'components/discovery/types';
-import {currencyFormatter} from 'utils/number_formatter';
+import {currencyFormatter, numberFormatter} from 'utils/number_formatter';
 
 interface DiscoveryContentProps {
     assets: Array<ProspectiveAsset>;
@@ -54,13 +54,15 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                         key={idx}
                     >
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
+                            expandIcon={<ExpandCircleDownIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
                             <Stack>
-                                <Typography>{asset.title}</Typography>
-                                <Typography variant={'label' as any}>
+                                <Typography variant="subtitle1">
+                                    {asset.title}
+                                </Typography>
+                                <Typography variant={'monoButton' as any}>
                                     {`${currencyFormatter(
                                         asset.minInvestment,
                                     )} | ${asset.numberOfPanels} panels`}
@@ -71,7 +73,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                         <Component
                             sx={{
                                 backgroundColor: 'whiteFog.main',
-                                p: 2,
+                                p: 4,
                             }}
                         >
                             <Stack
@@ -90,17 +92,36 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                                 direction={'row'}
                                 justifyContent={'space-between'}
                             >
-                                <Stack>
-                                    <Typography variant={'label' as any}>
+                                <Stack alignItems={'center'}>
+                                    <Typography variant={'subtitle1' as any}>
+                                        {'💸 ' + asset.estimatedROI + '%'}
+                                    </Typography>
+                                    <Typography variant={'monoButton' as any}>
                                         {'Estimated ROI'}
                                     </Typography>
-                                    <Typography variant={'label' as any}>
-                                        {asset.estimatedROI}
+                                </Stack>
+                                <Stack alignItems={'center'}>
+                                    <Typography variant={'subtitle1' as any}>
+                                        {'⚡' +
+                                            numberFormatter(asset.capacity_kW) +
+                                            'kW'}
+                                    </Typography>
+                                    <Typography variant={'monoButton' as any}>
+                                        {'Installed Capacity'}
+                                    </Typography>
+                                </Stack>
+                                <Stack alignItems={'center'}>
+                                    <Typography variant={'subtitle1' as any}>
+                                        {asset.holdTerm_years + ' years'}
+                                    </Typography>
+                                    <Typography variant={'monoButton' as any}>
+                                        {'Hold Term'}
                                     </Typography>
                                 </Stack>
                             </Stack>
 
                             <Button
+                                sx={{width: '100%', m: -4}}
                                 variant={'secondary' as any}
                                 color={'light' as any}
                             >
@@ -115,7 +136,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                 standardWidth={false}
                 sx={{
                     width: '100%',
-                    height: '80vh',
+                    height: '70vh',
                     p: 0,
                     overflow: 'hidden',
                     borderRadius: '20px',
@@ -126,7 +147,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                     lng={selectedAsset.location.lng}
                     zoom={5}
                     width="100%"
-                    height="80vh"
+                    height="70vh"
                     markers={assets.map((asset) => (
                         <Marker
                             lng={asset.location.lng}

@@ -35,6 +35,9 @@ const transformAirtableRecordToAsset = (
                 value: '$131,000',
             },
         ],
+        capacity_kW: r.get('Kilowatts installed') as number,
+        color: r.get('Theme color') as string,
+        holdTerm_years: r.get('Hold term (Years)') as number,
 
         location: {
             lat: r.get('latitude') as number,
