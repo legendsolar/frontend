@@ -10,6 +10,7 @@ import UnexpectedErrorPage from 'pages/unexpected_error_page';
 import {ProvideTransfer} from 'hooks/use_transfer';
 import {ProvideAccount} from 'hooks/use_accounts';
 import {ProvideStorage} from 'hooks/use_storage';
+import {ProvideAirtable} from 'airtable/use_airtable';
 
 const App = () => {
     const firebaseConfig = {
@@ -33,7 +34,9 @@ const App = () => {
                                 <ProvideStorage>
                                     <ProvideTransfer>
                                         <ProvideAccount>
-                                            <AppRouter></AppRouter>
+                                            <ProvideAirtable>
+                                                <AppRouter></AppRouter>
+                                            </ProvideAirtable>
                                         </ProvideAccount>
                                     </ProvideTransfer>
                                 </ProvideStorage>
