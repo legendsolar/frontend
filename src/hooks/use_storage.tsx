@@ -91,27 +91,29 @@ const useProvideStorage = (): useStorageReturnType => {
         useMemo(async () => {
             setLoading(true);
 
-            const data = await getUserFilesWithMetaData();
+            try {
+                const data = await getUserFilesWithMetaData();
 
-            setDocuments(
-                data.map((file) => {
-                    return {
-                        id: file?.metadata?.fullPath,
-                        name:
-                            file?.metadata?.customMetadata?.displayName ||
-                            'well',
-                        type:
-                            file?.metadata?.customMetadata?.documentType ||
-                            'test',
-                        created: new Date(file?.metadata?.timeCreated),
-                        facility:
-                            file?.metadata?.customMetadata?.asset || 'test',
-                        downloadLink: file?.link,
-                    } as Document;
-                }),
-            );
-
-            setLoading(false);
+                setDocuments(
+                    data.map((file) => {
+                        return {
+                            id: file?.metadata?.fullPath,
+                            name:
+                                file?.metadata?.customMetadata?.displayName ||
+                                'well',
+                            type:
+                                file?.metadata?.customMetadata?.documentType ||
+                                'test',
+                            created: new Date(file?.metadata?.timeCreated),
+                            facility:
+                                file?.metadata?.customMetadata?.asset || 'test',
+                            downloadLink: file?.link,
+                        } as Document;
+                    }),
+                );
+            } finally {
+                setLoading(false);
+            }
         }, []);
 
         return {

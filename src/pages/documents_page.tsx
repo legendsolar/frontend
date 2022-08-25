@@ -7,6 +7,7 @@ import {DataGridDateRange} from 'utils/date_range';
 import {useEffect, useState} from 'react';
 import {documents} from 'static_data/placeholder_documents';
 
+import EmptyContent from 'content/empty_content';
 import {
     differenceInMonths,
     differenceInQuarters,
@@ -32,7 +33,6 @@ const DocumentPage = () => {
     useEffect(() => {
         setLoading(true);
         getUserFilesWithMetaData().then((data) => {
-            setLoading(false);
             setDocuments(
                 data.map((file) => {
                     return {
@@ -50,11 +50,15 @@ const DocumentPage = () => {
                     } as Document;
                 }),
             );
+
+            setLoading(false);
         });
     }, []);
 
-    return (
-        <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
+    const content =
+        !loading && documents.length <= 0 ? (
+            <EmptyContent />
+        ) : (
             <DocumentGridContent
                 loading={loading}
                 documents={documents}
@@ -71,6 +75,11 @@ const DocumentPage = () => {
                 assetStates={['Barnyard Solar', 'None']}
                 dateRange={dateRange}
             ></DocumentGridContent>
+        );
+
+    return (
+        <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
+            {content}
         </DefaultView>
     );
 };

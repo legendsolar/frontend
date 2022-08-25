@@ -4,12 +4,7 @@ import useNavBar from 'hooks/use_nav_bar';
 import {testTransfers} from 'static_data/placeholder_transfers';
 import TransferGridContent from 'content/transfer_grid_content';
 import {DataGridDateRange} from 'utils/date_range';
-
-import {
-    differenceInMonths,
-    differenceInQuarters,
-    differenceInWeeks,
-} from 'date-fns';
+import EmptyContent from 'content/empty_content';
 import delay from 'utils/delay';
 
 import {useEffect, useState} from 'react';
@@ -33,10 +28,10 @@ const TransactionPage = () => {
         transfers: recentTransfers,
     } = useRecentTransfers(25);
 
-    const {downloadAllTransfers} = useCloudFunctions();
-
-    return (
-        <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
+    const content =
+        !loading && transfers.length <= 0 ? (
+            <EmptyContent />
+        ) : (
             <TransferGridContent
                 loading={recentTransfersLoading || loading}
                 transfers={recentTransfers}
@@ -61,6 +56,13 @@ const TransactionPage = () => {
                 assetStates={['Barnyard Solar', 'None']}
                 dateRange={dateRange}
             ></TransferGridContent>
+        );
+
+    const {downloadAllTransfers} = useCloudFunctions();
+
+    return (
+        <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
+            {content}
         </DefaultView>
     );
 };

@@ -21,7 +21,9 @@ const StyledDataGrid = ({columns, rows, loading, sx}: DataGridProps) => {
                 headerHeight={38}
                 disableSelectionOnClick
                 sx={{
-                    color: 'blackDawn.main',
+                    '& .MuiDataGrid-virtualScroller': {
+                        backgroundColor: 'none',
+                    },
                     '& .MuiDataGrid-columnHeaders': {
                         minHeight: '38px',
                     },

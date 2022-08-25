@@ -31,12 +31,13 @@ import LoadingComponent from 'components/basics/loading_component';
 import {numberFormatter, currencyFormatter} from 'utils/number_formatter';
 import LoadingContent from 'content/loading_content';
 import {Document} from 'components/documents/types';
+import EmptyContent, {EmptyContentProps} from './empty_content';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
     address?: string;
     subtitle?: string;
-    facility: Facility;
+    facility: Facility | null;
     transfers: Array<Transfer>;
     documents: Array<Document>;
     generation: Array<GenerationDatum>;
@@ -52,9 +53,15 @@ const PortfolioContent = ({
     documents,
     generation,
 }: PortfolioContentProps) => {
-    const {generationMetaData, location, economics, summary} = facility;
-
     if (loading) return <LoadingContent />;
+
+    console.log(facility);
+
+    if (!facility) return <EmptyContent />;
+
+    const nonNullFacility = facility as unknown as Facility;
+
+    const {generationMetaData, location, economics, summary} = nonNullFacility;
 
     return (
         <div>
@@ -273,7 +280,7 @@ const PortfolioContent = ({
                             </ContentDivider>
 
                             <RealTimeContent
-                                facility={facility}
+                                facility={nonNullFacility}
                                 generation={generation}
                             ></RealTimeContent>
                         </Stack>
@@ -399,14 +406,14 @@ const PortfolioContent = ({
                                             {
                                                 metric: 'Investor Funds',
                                                 value: currencyFormatter(
-                                                    facility.economics
+                                                    nonNullFacility.economics
                                                         .cost_dollars,
                                                 ),
                                             },
                                             {
                                                 metric: 'Hold Term',
                                                 value:
-                                                    facility.economics
+                                                    nonNullFacility.economics
                                                         .ppaDuration || 'NA',
                                             },
                                             {
@@ -438,14 +445,15 @@ const PortfolioContent = ({
                                             {
                                                 metric: 'Make & model',
                                                 value:
-                                                    facility.generationMetaData
+                                                    nonNullFacility
+                                                        .generationMetaData
                                                         .make || 'NA',
                                             },
                                             {
                                                 metric: 'Watts Installed',
                                                 value:
                                                     numberFormatter(
-                                                        facility
+                                                        nonNullFacility
                                                             .generationMetaData
                                                             .max_kW * 1000,
                                                     ) || 'NA',

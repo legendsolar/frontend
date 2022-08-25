@@ -14,7 +14,7 @@ import {useStorage} from './use_storage';
 
 export interface usePortfolioReturnType {
     loading: boolean;
-    facilityData: Facility;
+    facilityData: Facility | null;
     generationData: Array<GenerationDatum>;
     transfers: Array<Transfer>;
     documents: Array<Document>;
@@ -30,53 +30,6 @@ export const usePortfolio = (): usePortfolioReturnType => {
         error,
         facilities,
     } = useGetUserFacilities();
-
-    const fakeFacilityData: Facility = {
-        name: 'Barnyard Solar',
-        id: 'qqWHzumNkaVmZEvGfZRnq3',
-        address: {
-            city: 'Port Jervis',
-            postalCode: '11111',
-            state: 'NY',
-            streetAddress: '285 Fulton St',
-        },
-        created: '2022-05-21T16:51:26',
-        summary: {
-            day_kWh: 1,
-            monthToDate_kWh: 10,
-            pastMonthGeneration_kWh: 10,
-            pastWeek_kWh: 5,
-            pastYearGeneration_kWh: 1000,
-            performance_ratio: 1,
-            totalGeneration_kWh: 10000,
-            twentyFourHourGeneration_kWh: 1,
-            uptime_percentage: 0.95,
-            yearToDate_kWh: 1000,
-        },
-        economics: {
-            cost_dollars: 72000,
-            ppaDuration: '7 years',
-            leaseRemaining: '7 years',
-        },
-        generationMetaData: {
-            co2_per_kWh: 0.85,
-            dollar_per_kWh: 0.15,
-            max_kW: 2,
-            panel_count: 177,
-            make: 'Panasonic Evervolt',
-        },
-        location: {
-            lat: 41.375094,
-            lng: -74.692663,
-        },
-    };
-
-    const facilityData = facilities
-        ? {
-              ...fakeFacilityData,
-              ...facilities[0],
-          }
-        : fakeFacilityData;
 
     const {useGetFacilityDataByDate} = useFacilities();
 
@@ -109,12 +62,23 @@ export const usePortfolio = (): usePortfolioReturnType => {
 
     const {loading: documentsLoading, documents} = useUserDocuments();
 
+    const facilityData = facilities ? facilities[0] : null;
+
+    const loading =
+        generationDataLoading ||
+        userFacilityLoading ||
+        recentTransfersLoading ||
+        (documentsLoading && !userFacilityLoading && !facilityData);
+
+    console.log({
+        userFacilityLoading,
+        generationDataLoading,
+        recentTransfersLoading,
+        documentsLoading,
+    });
+
     return {
-        loading:
-            generationDataLoading ||
-            userFacilityLoading ||
-            recentTransfersLoading ||
-            documentsLoading,
+        loading,
         facilityData,
         generationData: generationData,
         lastUpdatedDate,

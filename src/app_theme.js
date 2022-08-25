@@ -292,7 +292,12 @@ export const themeOptions = {
             styleOverrides: {
                 root: {
                     ...typographyOptions.typography.subtitle3,
+                    backgroundColor: 'none',
                     border: 'none',
+                    '& .MuiDataGrid-virtualScroller': {
+                        backgroundColor: 'none',
+                    },
+
                     '& .MuiDataGrid-columnHeader:focus-within, & .MuiDataGrid-cell:focus-within':
                         {
                             outline: 'none',
@@ -309,7 +314,7 @@ export const themeOptions = {
 
                     '& .MuiDataGrid-columnHeaders': {
                         minHeight: '38px',
-                        backgroundColor: paletteOptions.palette.whiteHaze.main,
+                        backgroundColor: 'none',
                     },
 
                     '& .MuiDataGrid-columnSeparator': {

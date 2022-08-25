@@ -5,6 +5,7 @@ import PortfolioContent from 'content/portfolio_content';
 import {Facility, GenerationDatum} from 'schema/schema_gen_types';
 import {usePortfolio, usePortfolioReturnType} from 'hooks/use_portfolio';
 import {dateDifferenceHumanReadable} from 'utils/date_formatter';
+import useEmptyContent from 'hooks/use_empty_content';
 
 const PortfolioPage = ({
     loading,
@@ -30,9 +31,9 @@ const PortfolioPage = ({
         >
             <PortfolioContent
                 loading={loading}
-                title={facilityData.name}
+                title={facilityData?.name}
                 subtitle={subtitle}
-                address={`${facilityData.address.streetAddress} | ${facilityData.address.city},${facilityData.address.state}`}
+                address={`${facilityData?.address?.streetAddress} | ${facilityData?.address?.city},${facilityData?.address?.state}`}
                 facility={facilityData}
                 generation={generationData}
                 documents={documents}
