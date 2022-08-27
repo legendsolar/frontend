@@ -44,7 +44,10 @@ interface useAuthReturnType {
     authenticated: boolean;
     user: User | null;
     signin(email: string, password: string): Promise<void>;
-    signup(email: string, password: string): Promise<UserCredential>;
+    signup(
+        email: string,
+        password: string,
+    ): Promise<UserCredential | undefined>;
     signout(): Promise<void>;
     signInWithGoogle(): Promise<void>;
     resetPassword(email: string): Promise<void>;
@@ -107,13 +110,18 @@ const useProvideAuth = (): useAuthReturnType => {
 
     const signup = async (email: string, password: string) => {
         // setIsAuthenticating(true);
-        const resp = await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password,
-        );
 
-        return resp;
+        try {
+            const resp = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password,
+            );
+
+            return resp;
+        } catch (error: any) {
+            authErrorHandler(error);
+        }
         // .finally(() => {
         //     setIsAuthenticating(false);
         // });
