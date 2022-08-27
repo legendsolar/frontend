@@ -51,11 +51,15 @@ const authLink = setContext(async (_, {headers}) => {
 const errorLink = onError(({networkError, graphQLErrors}) => {
     console.log('here');
     if (graphQLErrors)
-        graphQLErrors.forEach(({message, locations, path}) =>
+        graphQLErrors.forEach(({message, locations, path}) => {
+            if (message.includes('Context creation failed')) {
+                signOut(getAuth());
+            }
+
             console.log(
                 `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-            ),
-        );
+            );
+        });
     if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 

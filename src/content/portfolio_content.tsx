@@ -26,12 +26,10 @@ import NeraPNG from 'assets/icons/nera.png';
 import PanelParkingLotPNG from 'assets/images/panel_parking_lot.png';
 import PanelWarehousePNG from 'assets/images/panel_warehouse.png';
 import DocumentListComponent from 'components/documents/document_list_component';
-import {documents} from 'components/invest/tests/defaults';
-import LoadingComponent from 'components/basics/loading_component';
 import {numberFormatter, currencyFormatter} from 'utils/number_formatter';
 import LoadingContent from 'content/loading_content';
 import {Document} from 'components/documents/types';
-import EmptyContent, {EmptyContentProps} from './empty_content';
+import EmptyContent from './empty_content';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;

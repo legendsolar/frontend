@@ -5,7 +5,7 @@ import WomanPanelsSVG from 'assets/images/women_panel.svg';
 import Scroller from 'components/utils/scroller';
 import Component from 'components/basics/component';
 
-import {useLocation, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {ROUTES} from 'routes/routes';
 
 const TermsConditionsPage = () => {
