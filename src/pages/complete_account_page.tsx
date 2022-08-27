@@ -1,23 +1,9 @@
 import {useEffect} from 'react';
-import {Typography, Stack, Button} from '@mui/material';
+import {Typography} from '@mui/material';
 import {useAuth} from 'hooks/use_auth';
-import {useLocation, useNavigate} from 'react-router-dom';
-import AccreditationStatus from 'components/user/accreditation_status';
-import CreateDwollaAccount from 'components/signup/create_dwolla_account';
-import LoadingView from 'views/loading_view';
-import LinearPageinatedView from 'views/linear_paginated_view';
-import {signUpOrder, userSignUpOrder} from 'utils/user_sign_up_state';
-import SignUpComponent from 'components/signup/sign_up_component';
-import PolicyAcceptanceComponent from 'components/signup/policy_acceptance_component';
-import scrollToPosition from 'utils/scroll_to_position';
+import {useNavigate} from 'react-router-dom';
 import {useUser} from 'hooks/use_user';
-import useSignIn from 'hooks/use_sign_in';
 import {useState} from 'react';
-import {format} from 'date-fns';
-import CompleteSignUp from 'components/signup/complete_sign_up';
-import {userStatus as USER_STATUS} from 'utils/user_sign_up_state';
-import EmailVerificationComponent from 'components/signup/email_verification_component';
-import MfaCreationComponent from 'components/signup/mfa_creation_component';
 import {transformFormValuesToUserDwollaAccountData} from 'components/utils/transformers';
 import RecaptchaVerifier from 'components/invisible/recaptcha_verifier';
 
@@ -26,20 +12,12 @@ import delay from 'utils/delay';
 import DualPaneView from 'views/dual_pane_view';
 
 import PanelInfinitySVG from 'assets/images/panel_infinity.svg';
-import PanelPersonBlueSVG from 'assets/images/panel_person_blue.svg';
 import PanelPersonGreenSVG from 'assets/images/panel_person_green.svg';
-import PanelPersonOrangeSVG from 'assets/images/panel_person_orange.svg';
 import PanelPersonPinkSVG from 'assets/images/panel_person_pink.svg';
 import PanelPersonRedSVG from 'assets/images/panel_person_red.svg';
 import PanelPersonYellowSVG from 'assets/images/panel_person_yellow.svg';
 
-import useLinearFlow from 'hooks/use_linear_flow';
-import SignUpOptionComponent from 'components/signup/sign_up_option_component';
-import CreateAccountContent from 'content/create_account_content';
-import AccountCreateInfoContent from 'content/account_create_info_content';
 import {ROUTES} from 'routes/routes';
-import {UserStatus} from 'schema/schema_gen_types';
-import SignInPage from './sign_in_page';
 import CompleteAccountContent from 'content/complete_account_content';
 import VerifyEmailContent from 'content/verify_email_content';
 import VerifyMfaContent from 'content/verify_mfa_content';

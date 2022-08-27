@@ -1,5 +1,5 @@
 import TransferDataGrid from '../transfer_data_grid';
-import {testTransfers} from 'static_data/placeholder_transfers';
+import {testTransfers} from 'static/placeholder_transfers';
 
 const TestTransferDataGrid = () => {
     return (

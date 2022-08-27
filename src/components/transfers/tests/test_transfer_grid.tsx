@@ -1,5 +1,5 @@
 import TransferGrid from '../transfer_grid';
-import {testTransfers} from 'static_data/placeholder_transfers';
+import {testTransfers} from 'static/placeholder_transfers';
 import {useState} from 'react';
 
 const TestTransactionComponent = () => {

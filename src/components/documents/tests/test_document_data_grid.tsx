@@ -1,5 +1,5 @@
 import DocumentDataGrid from '../document_data_grid';
-import {documents} from 'static_data/placeholder_documents';
+import {documents} from 'static/placeholder_documents';
 
 const TestTransferDataGrid = () => {
     return (

@@ -4,7 +4,7 @@ import BasicMap from 'components/map/basic_map_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
 import Component from 'components/basics/component';
 import RealTimeContent from 'content/real_time_content';
-import {testTransfers} from 'static_data/placeholder_transfers';
+import {testTransfers} from 'static/placeholder_transfers';
 import SideBarView from 'views/side_bar_view';
 import {
     EconomicsSummary,

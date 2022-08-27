@@ -1,5 +1,5 @@
 import TransferGridContent from '../transfer_grid_content';
-import {testTransfers} from 'static_data/placeholder_transfers';
+import {testTransfers} from 'static/placeholder_transfers';
 import {
     differenceInMonths,
     differenceInQuarters,

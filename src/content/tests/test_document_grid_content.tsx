@@ -8,7 +8,7 @@ import delay from 'utils/delay';
 
 import {DataGridDateRange} from 'utils/date_range';
 import {useState} from 'react';
-import {documents as testDocuments} from 'static_data/placeholder_documents';
+import {documents as testDocuments} from 'static/placeholder_documents';
 
 const TestTransferDataGrid = () => {
     const [documents, setDocuments] = useState<Array<any>>(testDocuments);

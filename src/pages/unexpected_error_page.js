@@ -1,4 +1,4 @@
-import {whiteHaze} from 'static_data/colors';
+import {whiteHaze} from 'static/colors';
 import LegendsLogoDark from 'components/icons/legends_logo_dark';
 
 const UnexpectedErrorPage = () => {

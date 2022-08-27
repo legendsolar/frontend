@@ -14,7 +14,7 @@ import {
     GenerationCumulativeImpact,
 } from 'components/gauges/live_cumulative_impact';
 import TransferGrid from 'components/transfers/transfer_grid';
-import {portfolioPageTransfers} from 'static_data/placeholder_transfers';
+import {portfolioPageTransfers} from 'static/placeholder_transfers';
 
 const PortfolioPlaceholder = () => {
     return (

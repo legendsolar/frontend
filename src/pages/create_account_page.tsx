@@ -24,7 +24,6 @@ import RecaptchaVerifier from 'components/invisible/recaptcha_verifier';
 import DualPaneView from 'views/dual_pane_view';
 import WomanPanelsSVG from 'assets/images/women_panel.svg';
 import PanelInfinitySVG from 'assets/images/panel_infinity.svg';
-import useLinearFlow from 'hooks/use_linear_flow';
 import SignUpOptionComponent from 'components/signup/sign_up_option_component';
 import CreateAccountContent from 'content/create_account_content';
 import AccountCreateInfoContent from 'content/account_create_info_content';

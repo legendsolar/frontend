@@ -5,7 +5,7 @@ import DocumentGridContent from 'content/document_grid_content';
 import FullPageView from 'views/full_page_view';
 import {DataGridDateRange} from 'utils/date_range';
 import {useEffect, useState} from 'react';
-import {documents} from 'static_data/placeholder_documents';
+import {documents} from 'static/placeholder_documents';
 
 import EmptyContent from 'content/empty_content';
 import {
@@ -14,7 +14,7 @@ import {
     differenceInWeeks,
 } from 'date-fns';
 import delay from 'utils/delay';
-import {documents as testDocuments} from 'static_data/placeholder_documents';
+import {documents as testDocuments} from 'static/placeholder_documents';
 import {useStorage} from 'hooks/use_storage';
 import {Document} from 'components/documents/types';
 
