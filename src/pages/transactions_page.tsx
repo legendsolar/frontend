@@ -13,7 +13,6 @@ import {useCloudFunctions} from 'hooks/use_cloud_functions';
 
 const TransactionPage = () => {
     const navBarProps = useNavBar();
-    const [transfers, setTransfers] = useState<Array<any>>([]);
     const [asset, setAsset] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
     const [dateRange, setDateRange] = useState<DataGridDateRange>(
@@ -29,7 +28,7 @@ const TransactionPage = () => {
     } = useRecentTransfers(25);
 
     const content =
-        !loading && transfers.length <= 0 ? (
+        !loading && recentTransfers.length <= 0 ? (
             <EmptyContent />
         ) : (
             <TransferGridContent

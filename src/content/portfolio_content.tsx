@@ -331,10 +331,6 @@ const PortfolioContent = ({
                                 <Stack direction={'row'}>
                                     <Image src={PanelParkingLotPNG}></Image>
                                     <Image src={PanelWarehousePNG}></Image>
-
-                                    <Typography variant={'description' as any}>
-                                        Maybe some photos?
-                                    </Typography>
                                 </Stack>
                             </Component>
 

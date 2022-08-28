@@ -33,23 +33,6 @@ export const usePortfolio = (): usePortfolioReturnType => {
 
     const {useGetFacilityDataByDate} = useFacilities();
 
-    const {data: generationData, loading: generationDataLoading} =
-        useGetFacilityDataByDate({
-            facilityId: 'qqWHzumNkaVmZEvGfZRnq3',
-            startDate: subDays(time, 7),
-            endDate: time,
-        });
-
-    const lastUpdatedDate = generationData
-        ? generationData.reduce(
-              (value, current) =>
-                  new Date(current.time).getTime() > value.getTime()
-                      ? new Date(current.time)
-                      : value,
-              new Date(0),
-          )
-        : null;
-
     const {useRecentTransfers} = useTransfer();
 
     const {useUserDocuments} = useStorage();
@@ -63,6 +46,23 @@ export const usePortfolio = (): usePortfolioReturnType => {
     const {loading: documentsLoading, documents} = useUserDocuments();
 
     const facilityData = facilities ? facilities[0] : null;
+
+    const {data: generationData, loading: generationDataLoading} =
+        useGetFacilityDataByDate({
+            facilityId: facilityData?.id,
+            startDate: subDays(time, 7),
+            endDate: time,
+        });
+
+    const lastUpdatedDate = generationData
+        ? generationData.reduce(
+              (value, current) =>
+                  new Date(current.time).getTime() > value.getTime()
+                      ? new Date(current.time)
+                      : value,
+              new Date(0),
+          )
+        : null;
 
     const loading =
         generationDataLoading ||

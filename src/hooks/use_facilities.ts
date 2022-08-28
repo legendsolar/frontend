@@ -7,7 +7,7 @@ export interface useFacilitiesReturnType {
         startDate,
         endDate,
     }: {
-        facilityId: string;
+        facilityId: string | undefined;
         startDate: Date;
         endDate: Date;
     }): {
@@ -32,6 +32,7 @@ const useFacilities = (): useFacilitiesReturnType => {
         const {loading, error, data, refetch} = useQuery(
             GET_FACILITY_DATA_BY_DATE,
             {
+                skip: !facilityId,
                 variables: {
                     id: facilityId,
                     start: startDate.toISOString(),
