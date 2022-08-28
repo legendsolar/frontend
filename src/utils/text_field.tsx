@@ -11,11 +11,13 @@ const TextField = ({
     label,
     id,
     autoComplete,
+    disabled,
 
     alwaysDisplayHelper = false,
 }) => {
     return (
         <MuiTextField
+            disabled={disabled}
             color={color}
             error={error}
             helperText={

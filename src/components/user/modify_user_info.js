@@ -32,6 +32,8 @@ const ModifyUserInfo = ({
     isValid,
     handleChange,
     color = 'dark',
+    disabled = false,
+    userVerified = false,
 }) => {
     const formik = useFormik({
         initialValues: initialValues,
@@ -78,6 +80,7 @@ const ModifyUserInfo = ({
             <Grid container spacing={2} sx={{width: '100%'}}>
                 <Grid item xs={12} lg={6}>
                     <TextField
+                        disabled={disabled || userVerified}
                         color={color}
                         error={
                             formik.touched.firstName &&
@@ -96,6 +99,7 @@ const ModifyUserInfo = ({
 
                 <Grid item xs={12} lg={6}>
                     <TextField
+                        disabled={disabled || userVerified}
                         color={color}
                         error={
                             formik.touched.lastName &&
@@ -123,6 +127,7 @@ const ModifyUserInfo = ({
                         value={formik.values.streetAddress}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
+                        disabled={disabled}
                         id="streetAddress"
                         label="Street Address"
                         name="streetAddress"
@@ -141,6 +146,7 @@ const ModifyUserInfo = ({
                         value={formik.values.streetAddress2}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
+                        disabled={disabled}
                         id="streetAddress2"
                         label="Apt Number, PO Box, ect (optional)"
                         name="streetAddress2"
@@ -160,12 +166,18 @@ const ModifyUserInfo = ({
                         value={formik.values.city}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
+                        disabled={disabled}
                         autoComplete="city"
                     ></TextField>
                 </Grid>
 
                 <Grid item xs={12} md={2}>
-                    <FormControl variant="filled" fullWidth color={color}>
+                    <FormControl
+                        variant="filled"
+                        fullWidth
+                        color={color}
+                        disabled={disabled}
+                    >
                         <InputLabel>State</InputLabel>
                         <Select
                             helperText={'state'}
@@ -210,6 +222,7 @@ const ModifyUserInfo = ({
                         value={formik.values.postalCode}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
+                        disabled={disabled}
                         autoComplete="postalCode"
                     ></TextField>
                 </Grid>

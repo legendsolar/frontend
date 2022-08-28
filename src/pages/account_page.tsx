@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import NavBar from 'components/utils/nav_bar';
 import {useAuth} from 'hooks/use_auth';
 import {useAccount} from 'hooks/use_accounts';
@@ -20,11 +20,17 @@ import DefaultView from 'views/default_view';
 import ComponentDivider from 'components/basics/component_divider';
 import AccreditationStatus from 'components/user/accreditation_status';
 import {ACCREDITATION_OPTIONS} from 'content/verify_accreditation_content';
+import EditIcon from '@mui/icons-material/Edit';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import {transformValuesToUserAddress} from 'components/utils/transformers';
+import LoadingText from 'components/utils/loading_text';
 
 const AccountPage = () => {
     const navBarProps = useNavBar();
     const auth = useAuth();
-    const {useUserMetaData, useGetUserAccreditation} = useUser();
+    const {useUserMetaData, useGetUserAccreditation, useSetUser} = useUser();
+    const {setUser, loading} = useSetUser();
 
     const {
         loading: accreditationLoading,
@@ -38,7 +44,6 @@ const AccountPage = () => {
         useCreateLinkToken,
         useCreateAccount,
     } = useAccount();
-    const {useTransfersByType} = useTransfer();
 
     const {
         createLinkToken,
@@ -55,7 +60,6 @@ const AccountPage = () => {
     } = useCreateAccount();
 
     const onPlaidLinkComplete = ({publicToken, metadata}) => {
-        console.log({publicToken, metadata});
         const account = metadata.account;
         // create account
         createAccount({
@@ -117,6 +121,22 @@ const AccountPage = () => {
         accounts,
     } = useAccounts();
 
+    const [userDataEditMode, setUserDataEditMode] = useState<boolean>(false);
+    const [userDataEditValid, setUserDataEditValid] = useState<boolean>(false);
+    const [values, setValues] = useState<any>({});
+
+    const onUpdateUserAddress = async () => {
+        await setUser({
+            variables: {
+                input: {
+                    address: transformValuesToUserAddress(values),
+                },
+            },
+        });
+        setUserDataEditMode(false);
+        setUserDataEditValid(false);
+    };
+
     return (
         <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
             <SideBarNavView
@@ -155,9 +175,29 @@ const AccountPage = () => {
                             standardWidth={false}
                             ref={(el) => (contentRefs.current[0] = el)}
                         >
-                            <Typography variant={'smallHeadline' as any}>
-                                Personal Information
-                            </Typography>
+                            <Stack
+                                direction={'row'}
+                                justifyContent={'space-between'}
+                                alignItems={'center'}
+                                sx={{mb: 2}}
+                            >
+                                <Typography variant={'smallHeadline' as any}>
+                                    Personal Information
+                                </Typography>
+
+                                <IconButton
+                                    onClick={() => {
+                                        setUserDataEditMode(!userDataEditMode);
+                                    }}
+                                    sx={{fontSize: '18px'}}
+                                >
+                                    {!userDataEditMode ? (
+                                        <EditIcon></EditIcon>
+                                    ) : (
+                                        <CloseIcon></CloseIcon>
+                                    )}
+                                </IconButton>
+                            </Stack>
 
                             <ComponentDivider></ComponentDivider>
 
@@ -171,8 +211,27 @@ const AccountPage = () => {
                                 <ModifyUserInfo
                                     initialValues={userInfoInitial}
                                     onSubmit={() => {}}
-                                    isValid={() => {}}
+                                    isValid={(valid) =>
+                                        setUserDataEditValid(valid)
+                                    }
+                                    disabled={!userDataEditMode}
+                                    handleChange={(values) => setValues(values)}
+                                    userVerified={navBarProps.userVerified}
                                 ></ModifyUserInfo>
+                            )}
+
+                            {userDataEditMode && (
+                                <Button
+                                    variant={'primary' as any}
+                                    disabled={!userDataEditValid}
+                                    onClick={onUpdateUserAddress}
+                                >
+                                    {loading ? (
+                                        <LoadingText></LoadingText>
+                                    ) : (
+                                        'Update Address'
+                                    )}
+                                </Button>
                             )}
                         </Component>
 

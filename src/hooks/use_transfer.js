@@ -287,9 +287,8 @@ export const useProvideTransfer = () => {
     };
 
     const useCreateTransfer = () => {
-        const [internalCreateTransfer, {data, loading, error}] = useMutation(
-            TRANSFER_CREATE_MUTATION,
-        );
+        const [internalCreateTransfer, {data, loading, error, reset}] =
+            useMutation(TRANSFER_CREATE_MUTATION);
 
         const createTransfer = ({variables}) => {
             internalCreateTransfer({
@@ -304,6 +303,7 @@ export const useProvideTransfer = () => {
             createTransfer,
             loading,
             error,
+            reset,
             transfer: data?.createTransfer,
         };
     };

@@ -5,20 +5,26 @@ import {
     TextField,
     InputAdornment,
     CircularProgress,
+    Alert,
 } from '@mui/material';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-import {useState, useReducer, useEffect} from 'react';
+import {useState, useReducer} from 'react';
 import ErrorComponent from 'components/errors/error_component';
 
 import {validateTransferAmount} from 'validation/transaction_validation';
 import TransferComponent from 'components/transfers/transfer_component';
-import LoadingComponent from 'components/basics/loading_component';
 import MultiSelect from 'components/inputs/multiselect';
 import LoadingText from 'components/utils/loading_text';
 
-const CreateTransferComponent = ({accounts, loading, onComplete}) => {
+const CreateTransferComponent = ({
+    accounts,
+    loading,
+    error,
+    onComplete,
+    onReset,
+}) => {
     const [sourceAccount, setSourceAccount] = useState(null);
     const [destinationAccount, setDestinationAccount] = useState(null);
     const [transferAmount, setTransferAmount] = useState(undefined);
@@ -61,17 +67,32 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
           })
         : [];
 
+    const sourceAccountOptions = accounts
+        ? accounts
+              .filter((account) => account.type === 'WALLET')
+              .map((account) => {
+                  return {...account, text: account.name, value: account.id};
+              })
+        : [];
+
+    const destinationAccountOptions = accounts
+        ? accounts
+              .filter(
+                  (account) =>
+                      account.type !== 'WALLET' && account !== sourceAccount,
+              )
+              .map((account) => {
+                  return {...account, text: account.name, value: account.id};
+              })
+        : [];
+
     const onAccountSelected = (event) => {
         const {name, value} = event.target;
-
-        console.log(event);
-        console.log(name, value);
 
         const account = displayAccounts.filter(
             (account) => account.id === value,
         )[0];
 
-        console.log(account);
         if (name === 'sourceAccount') {
             setSourceAccount(account);
         } else if (name === 'destinationAccount') {
@@ -94,6 +115,24 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
     };
 
     const accountsEmpty = !accounts || accounts.length === 0;
+
+    if (error) {
+        return (
+            <Stack spacing={2}>
+                <Alert severity="error">{error}</Alert>
+                <Button
+                    variant="primary"
+                    onClick={() => {
+                        onReset();
+                        goBack();
+                    }}
+                >
+                    {' '}
+                    Go Back
+                </Button>
+            </Stack>
+        );
+    }
 
     if (state.page === 'setup') {
         return (
@@ -132,7 +171,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     name={'sourceAccount'}
                     text="From"
                     selected={sourceAccount}
-                    fields={displayAccounts}
+                    fields={sourceAccountOptions}
                     onChangeListener={onAccountSelected}
                     disabled={accountsEmpty}
                 ></MultiSelect>
@@ -141,7 +180,7 @@ const CreateTransferComponent = ({accounts, loading, onComplete}) => {
                     name={'destinationAccount'}
                     text="To"
                     selected={destinationAccount}
-                    fields={displayAccounts}
+                    fields={destinationAccountOptions}
                     onChangeListener={onAccountSelected}
                     disabled={accountsEmpty}
                 ></MultiSelect>

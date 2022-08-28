@@ -10,7 +10,7 @@ import {useState} from 'react';
 const PolicyAcceptanceComponent = ({onComplete}) => {
     const {useGetUserAcceptance, useSetUser} = useUser();
     const {loading, error, data} = useGetUserAcceptance();
-    const [setUser] = useSetUser();
+    const {setUser} = useSetUser();
 
     const [dwollaCheckbox, setDwollaCheckbox] = useState(false);
 

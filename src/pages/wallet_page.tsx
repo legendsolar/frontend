@@ -50,6 +50,7 @@ const WalletPage = () => {
     const {
         loading: newTransferLoading,
         error: newTransferError,
+        reset: resetTransferCreation,
         transfer: newTransfer,
         createTransfer,
     } = useCreateTransfer();
@@ -139,6 +140,12 @@ const WalletPage = () => {
                                     accounts={accountsWithWallet}
                                     loading={newTransferLoading}
                                     onComplete={onCreateNewTransfer}
+                                    error={
+                                        newTransferError
+                                            ? 'Error creating transfer'
+                                            : null
+                                    }
+                                    onReset={resetTransferCreation}
                                 ></CreateTransferComponent>
                             )}
                         </SideBar>

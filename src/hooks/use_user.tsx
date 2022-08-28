@@ -32,7 +32,13 @@ interface useUserReturnType {
         refetch(): void;
     };
 
-    useSetUser(): any;
+    useSetUser(): {
+        setUser: (input: any) => Promise<any>;
+        data: any;
+        loading: boolean;
+        error: ApolloError | undefined;
+    };
+
     useCreateDwollaAccount(): {
         createDwollaAccount: (input: any) => Promise<any>;
         data: any;
@@ -315,7 +321,14 @@ export const useProvideUser = (): useUserReturnType => {
     };
 
     const useSetUser = () => {
-        return useMutation(MUTATE_USER);
+        const [setUser, {data, loading, error}] = useMutation(MUTATE_USER);
+
+        return {
+            setUser,
+            data,
+            loading,
+            error,
+        };
     };
 
     const useCreateDwollaAccount = () => {
@@ -403,7 +416,7 @@ export const useProvideUser = (): useUserReturnType => {
     };
 
     const useUpdateUserAccreditation = () => {
-        const [setUser, {data, loading, error}] = useSetUser();
+        const {setUser, data, loading, error} = useSetUser();
 
         return {
             data,

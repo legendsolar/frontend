@@ -92,7 +92,7 @@ const AccountListComponent = ({
                     </Stack>
                 </Stack>
 
-                <Divider></Divider>
+                <ComponentDivider></ComponentDivider>
             </div>
         ))
     ) : (
