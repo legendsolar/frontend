@@ -22,14 +22,14 @@ const columns: GridColumns = [
     {
         field: 'sourceName',
         headerName: 'From',
-        minWidth: 130,
+        minWidth: 160,
         flex: 1,
         editable: false,
     },
     {
         field: 'destinationName',
         headerName: 'To',
-        minWidth: 90,
+        minWidth: 160,
         flex: 1,
         editable: false,
     },

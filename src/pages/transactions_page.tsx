@@ -28,7 +28,7 @@ const TransactionPage = () => {
     } = useRecentTransfers(25);
 
     const content =
-        !loading && recentTransfers.length <= 0 ? (
+        !loading && recentTransfers?.length <= 0 ? (
             <EmptyContent />
         ) : (
             <TransferGridContent
