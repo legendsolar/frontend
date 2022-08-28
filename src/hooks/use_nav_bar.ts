@@ -35,7 +35,7 @@ const useNavBar = () => {
     const props: NavBarProps = {
         loading: statusLoading || walletLoading,
         userIsAuthenticated: authenticated,
-        userVerified: status.verified,
+        userVerified: status?.verified || false,
         walletBalance,
         onToHomepage: () => navigate(ROUTES.USER_HOME),
         onYourRooftop: () => navigate(ROUTES.USER_HOME),

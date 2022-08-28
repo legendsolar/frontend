@@ -9,5 +9,7 @@ export default () => (
         }}
         fullSSNRequired={false}
         color={'light'}
+        loading={false}
+        error={undefined}
     ></CreateWalletContent>
 );

@@ -24,7 +24,14 @@ import {ACCREDITATION_OPTIONS} from 'content/verify_accreditation_content';
 const AccountPage = () => {
     const navBarProps = useNavBar();
     const auth = useAuth();
-    const {useUserMetaData} = useUser();
+    const {useUserMetaData, useGetUserAccreditation} = useUser();
+
+    const {
+        loading: accreditationLoading,
+        error: accreditationError,
+        accreditation,
+    } = useGetUserAccreditation();
+
     const {
         useAccounts,
         usePlaidLinkModal,
@@ -110,12 +117,6 @@ const AccountPage = () => {
         accounts,
     } = useAccounts();
 
-    const {
-        loading: investmentTransferLoading,
-        error: investmentError,
-        transfers: investmentTransfers,
-    } = useTransfersByType('INVESTMENT', 4);
-
     return (
         <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
             <SideBarNavView
@@ -186,7 +187,14 @@ const AccountPage = () => {
 
                             <ComponentDivider></ComponentDivider>
                             <AccreditationStatus
-                                options={ACCREDITATION_OPTIONS}
+                                options={ACCREDITATION_OPTIONS.filter(
+                                    (option) =>
+                                        accreditation
+                                            ? accreditation?.includes(
+                                                  option.accreditationOption,
+                                              )
+                                            : false,
+                                )}
                             ></AccreditationStatus>
                         </Component>
 

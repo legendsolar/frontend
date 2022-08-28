@@ -3,9 +3,11 @@ import {useState} from 'react';
 import CheckboxList, {CheckboxItem} from 'components/inputs/checkbox_list';
 import {Button, Typography, CircularProgress} from '@mui/material';
 import {AccreditationOptions} from 'schema/schema_gen_types';
+import LoadingText from 'components/utils/loading_text';
 
 export interface AccreditationOption extends CheckboxItem {
     accredited: boolean;
+    accreditationOption: AccreditationOptions;
 }
 
 export const ACCREDITATION_OPTIONS: Array<AccreditationOption> = [
@@ -15,6 +17,7 @@ export const ACCREDITATION_OPTIONS: Array<AccreditationOption> = [
             'I earn $200,000 yearly, or $300,000 with my spousal equivalant',
         accredited: true,
         key: AccreditationOptions.Income as string,
+        accreditationOption: AccreditationOptions.Income,
     },
     {
         title: 'Personal Net Worth',
@@ -22,6 +25,7 @@ export const ACCREDITATION_OPTIONS: Array<AccreditationOption> = [
             'I have $1,000,000 in assets, excluding my primary residence',
         accredited: true,
         key: AccreditationOptions.NetWorth as string,
+        accreditationOption: AccreditationOptions.NetWorth,
     },
     {
         title: 'License Holder',
@@ -29,6 +33,7 @@ export const ACCREDITATION_OPTIONS: Array<AccreditationOption> = [
             'I hold a Series 7, 65, or 82 license currently in good standing',
         accredited: true,
         key: AccreditationOptions.LicenseHolder as string,
+        accreditationOption: AccreditationOptions.LicenseHolder,
     },
     {
         title: 'Entity Owner',
@@ -36,6 +41,7 @@ export const ACCREDITATION_OPTIONS: Array<AccreditationOption> = [
             'I own an entity (e.g. family office) with $5,000,000+ in assets',
         accredited: true,
         key: AccreditationOptions.EntityOwner as string,
+        accreditationOption: AccreditationOptions.EntityOwner,
     },
     {
         title: 'None of the above',
@@ -43,12 +49,13 @@ export const ACCREDITATION_OPTIONS: Array<AccreditationOption> = [
         accredited: true,
         exclusive: true,
         key: AccreditationOptions.None as string,
+        accreditationOption: AccreditationOptions.None,
     },
 ];
 
 interface VerifyAccreditationContentProps {
     onAccreditationStatusSubmit(
-        statuses: Array<AccreditationOption>,
+        statuses: Array<AccreditationOptions>,
     ): Promise<any>;
 }
 
@@ -63,7 +70,11 @@ const VerifyAccreditationContent = ({
 
     const onContinue = () => {
         setLoading(true);
-        onAccreditationStatusSubmit(accreditationList).finally(() => {
+        onAccreditationStatusSubmit(
+            accreditationList.map(
+                (accreditation) => accreditation.accreditationOption,
+            ),
+        ).finally(() => {
             setLoading(false);
         });
     };
@@ -97,11 +108,7 @@ const VerifyAccreditationContent = ({
             ></CheckboxList>
 
             <Button variant={'primary' as any} onClick={onContinue}>
-                {loading ? (
-                    <CircularProgress color={'light' as any} size={30} />
-                ) : (
-                    'Continue'
-                )}
+                {loading ? <LoadingText></LoadingText> : 'Continue'}
             </Button>
         </Component>
     );

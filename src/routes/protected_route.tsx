@@ -39,9 +39,7 @@ const ProtectedRoute = ({
      * https://github.com/apollographql/apollo-client/pull/6752
      *
      */
-    const {loading, error, status, refetch} = useGetUserStatus({
-        skip: !auth.user,
-    });
+    const {loading, error, status, refetch} = useGetUserStatus(!auth.user);
 
     if (loading || auth.isAuthenticating) {
         return <LoadingView></LoadingView>;

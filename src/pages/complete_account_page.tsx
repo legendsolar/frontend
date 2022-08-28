@@ -67,11 +67,13 @@ const CompleteAccountPage = () => {
         city,
         postalCode,
         phone,
-        refetch: userDataRefetch,
     } = useUserMetaData();
 
-    const {createDwollaAccount, loading: createDwollaAccountLoading} =
-        useCreateDwollaAccount();
+    const {
+        createDwollaAccount,
+        loading: createDwollaAccountLoading,
+        error: createDwollaAccountError,
+    } = useCreateDwollaAccount();
 
     const {update: updateAccreditation} = useUpdateUserAccreditation();
 
@@ -80,7 +82,9 @@ const CompleteAccountPage = () => {
     const stepsComplete = {
         email: status?.emailVerified,
         mfa: status?.mfaVerified,
-        accreditation: status?.accreditation?.length > 0,
+        accreditation: status?.accreditation
+            ? status.accreditation.length > 0
+            : false,
         wallet: status?.verified,
     };
 
@@ -97,6 +101,8 @@ const CompleteAccountPage = () => {
             enrollUserMfa(phone, captcha);
         }
     }, [loading, status, state, captcha]);
+
+    console.log({createDwollaAccountError});
 
     const states = (state: States): JSX.Element => {
         switch (state) {
@@ -144,7 +150,7 @@ const CompleteAccountPage = () => {
                                 },
                             },
                             {
-                                complete: status.accreditation?.length > 0,
+                                complete: stepsComplete.accreditation,
                                 title: 'Verify Accreditation',
                                 completeMessage: '✅',
                                 icon: (
@@ -250,6 +256,12 @@ const CompleteAccountPage = () => {
                             postalCode,
                             city,
                         }}
+                        loading={createDwollaAccountLoading}
+                        error={
+                            createDwollaAccountError
+                                ? 'Cannot create account, contact support at support@legends.solar'
+                                : undefined
+                        }
                     ></CreateWalletContent>
                 );
         }

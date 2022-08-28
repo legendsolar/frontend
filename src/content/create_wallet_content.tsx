@@ -17,6 +17,8 @@ interface CreateDwollaAccountProps {
     fullSSNRequired: boolean;
     color: 'dark' | 'light';
     initialValues?: any;
+    loading: boolean;
+    error: string | undefined;
 }
 
 const CreateWalletContent = ({
@@ -24,27 +26,15 @@ const CreateWalletContent = ({
     fullSSNRequired,
     color = 'dark',
     initialValues = {},
+    loading,
+    error,
 }: CreateDwollaAccountProps) => {
     const [userInfoValid, setUserInfoValid] = useState(false);
     const [protectedUserInfoValid, setProtectedUserInfoValid] = useState(false);
-    const [error, setError] = useState<Error>();
     const [values, setValues] = useState<any>({});
-    const [loading, setLoading] = useState(false);
 
     const submit = () => {
-        setLoading(true);
-        onSubmit(values)
-            .catch((error) => {
-                if (
-                    error.type === ErrorTypes.SystemError ||
-                    error.type === ErrorTypes.DwollaError
-                ) {
-                    setError(error.message);
-                }
-            })
-            .finally(() => {
-                setLoading(false); // probably causing a react error after this component is no longer rendered
-            });
+        onSubmit(values);
     };
 
     return (
@@ -111,11 +101,7 @@ const CreateWalletContent = ({
                 completed={false}
             ></ProtectedUserInfo>
 
-            {error && (
-                <Alert severity="error">
-                    {'Sorry, retry! ' + error.message}
-                </Alert>
-            )}
+            {error && <Alert severity="error">{error}</Alert>}
 
             <Collapse in={fullSSNRequired}>
                 <Alert severity="error">

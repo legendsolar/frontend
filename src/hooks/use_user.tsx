@@ -1,10 +1,92 @@
 import React, {useState, useEffect, useContext, createContext} from 'react';
 import {useAuth} from './use_auth';
 
-import {useQuery, gql, useMutation} from '@apollo/client';
+import {useQuery, gql, useMutation, ApolloError} from '@apollo/client';
 import {formatPhoneNumber} from 'validation/user_data_validation';
+import {
+    AcceptanceStatus,
+    AccreditationOptions,
+    Facility,
+    UserStatus,
+} from 'schema/schema_gen_types';
 
-const userContext = createContext();
+interface useUserReturnType {
+    useGetUserStatus(skip?: boolean): {
+        loading: boolean;
+        error: ApolloError | undefined;
+        status: UserStatus;
+        refetch(): void;
+    };
+
+    useGetUserAcceptance(): {
+        loading: boolean;
+        error: ApolloError | undefined;
+        acceptance: Array<AcceptanceStatus> | undefined;
+        refetch(): void;
+    };
+
+    useGetUserAccreditation(): {
+        loading: boolean;
+        error: ApolloError | undefined;
+        accreditation: Array<AccreditationOptions> | undefined;
+        refetch(): void;
+    };
+
+    useSetUser(): any;
+    useCreateDwollaAccount(): {
+        createDwollaAccount: (input: any) => Promise<any>;
+        data: any;
+        loading: boolean;
+        error: ApolloError | undefined;
+    };
+
+    useUserMetaData(): {
+        loading: boolean;
+        error: ApolloError | undefined;
+        firstName: string;
+        lastName: string;
+        info: string;
+        streetAddress: string;
+        streetAddress2: string;
+        city: string;
+        state: string;
+        postalCode: string;
+        phone: string;
+        email: string;
+    };
+
+    useCreateNewUser(): {
+        createNewUser({
+            firstName,
+            lastName,
+            password,
+            phone,
+            email,
+        }: {
+            firstName: string;
+            lastName: string;
+            password: string;
+            phone: string;
+            email: string;
+        }): Promise<any>;
+        data: any;
+        loading: boolean;
+        error: ApolloError | undefined;
+    };
+    useGetUserFacilities(): {
+        facilities: Array<Facility>;
+        loading: boolean;
+        error: ApolloError | undefined;
+    };
+    useUpdateUserAccreditation(): {
+        data: any;
+        loading: boolean;
+        error: ApolloError | undefined;
+        update: (accreditation: Array<AccreditationOptions>) => void;
+    };
+}
+
+const userContext = createContext<useUserReturnType>({} as useUserReturnType);
 
 export const ProvideUser = ({children}) => {
     const user = useProvideUser();
@@ -15,7 +97,7 @@ export const useUser = () => {
     return useContext(userContext);
 };
 
-export const useProvideUser = () => {
+export const useProvideUser = (): useUserReturnType => {
     const {user, signup} = useAuth();
 
     const USER_STATUS_QUERY = gql`
@@ -190,10 +272,10 @@ export const useProvideUser = () => {
     `;
     /**
      * Warning: skip behavior only works as expected if transitioning from false->true
-     * @param {*} param0
+     * @param {}
      * @returns
      */
-    const useGetUserStatus = ({skip} = {skip: false}) => {
+    const useGetUserStatus = (skip: boolean = false) => {
         const {loading, error, data, refetch} = useQuery(USER_STATUS_QUERY, {
             skip,
         });
@@ -207,11 +289,29 @@ export const useProvideUser = () => {
     };
 
     const useGetUserAcceptance = () => {
-        return useQuery(USER_ACCEPTANCE_QUERY);
+        const {loading, error, data, refetch} = useQuery(USER_ACCEPTANCE_QUERY);
+
+        return {
+            loading,
+            error,
+            acceptance: data?.user?.status
+                ?.acceptance as Array<AcceptanceStatus>,
+            refetch,
+        };
     };
 
     const useGetUserAccreditation = () => {
-        return useQuery(USER_ACCREDITATION_QUERY);
+        const {loading, error, data, refetch} = useQuery(
+            USER_ACCREDITATION_QUERY,
+        );
+
+        return {
+            loading,
+            error,
+            accreditation: data?.user?.status
+                ?.accreditation as Array<AccreditationOptions>,
+            refetch,
+        };
     };
 
     const useSetUser = () => {
@@ -234,8 +334,10 @@ export const useProvideUser = () => {
     const useUserMetaData = () => {
         const {loading, error, data} = useQuery(USER_META_QUERY);
 
-        const firstName = data?.user?.firstName ? data.user.firstName : '';
-        const lastName = data?.user?.lastName ? data.user.lastName : '';
+        const firstName: string = data?.user?.firstName
+            ? data.user.firstName
+            : '';
+        const lastName: string = data?.user?.lastName ? data.user.lastName : '';
         const info = 'Member since 2022';
 
         return {
@@ -244,12 +346,13 @@ export const useProvideUser = () => {
             firstName,
             lastName,
             info,
-            streetAddress: data?.user?.address?.streetAddress,
-            streetAddress2: data?.user?.address?.streetAddress2,
-            city: data?.user?.address?.city,
-            postalCode: data?.user?.address?.postalCode,
-            phone: data?.user?.phone,
-            email: data?.user?.email,
+            streetAddress: data?.user?.address?.streetAddress as string,
+            streetAddress2: data?.user?.address?.streetAddress2 as string,
+            city: data?.user?.address?.city as string,
+            state: data?.user?.address?.state as string,
+            postalCode: data?.user?.address?.postalCode as string,
+            phone: data?.user?.phone as string,
+            email: data?.user?.email as string,
         };
     };
 
@@ -275,6 +378,12 @@ export const useProvideUser = () => {
                 password,
                 phone,
                 email,
+            }: {
+                firstName: string;
+                lastName: string;
+                password: string;
+                phone: string;
+                email: string;
             }) => {
                 await signup(email, password);
                 return createNewUserInternal({
