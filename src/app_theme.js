@@ -162,7 +162,7 @@ const typographyOptions = {
             fontWeight: 'bold',
             fontWeight: 700,
             color: paletteOptions.palette.blackDusk.main,
-            lineHeight: '30.36px',
+            lineHeight: '30px',
         },
         subtitle3: {
             fontFamily: 'Be Vietnam Pro',

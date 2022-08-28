@@ -22,7 +22,6 @@ import MetricList from 'components/summary/metric_list';
 import SmallPanelDisplaySVG from 'assets/images/small_panel_display.svg';
 import Image from 'utils/image';
 
-import NeraPNG from 'assets/icons/nera.png';
 import PanelParkingLotPNG from 'assets/images/panel_parking_lot.png';
 import PanelWarehousePNG from 'assets/images/panel_warehouse.png';
 import DocumentListComponent from 'components/documents/document_list_component';
@@ -304,7 +303,7 @@ const PortfolioContent = ({
 
                 <SideBarView
                     drawer={
-                        <div>
+                        <Box sx={{mt: 4}}>
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
                                     Investment Support
@@ -312,11 +311,13 @@ const PortfolioContent = ({
                             </ContentDivider>
                             <InvestmentSupportComponent
                                 title={'Nera Lerner'}
+                                subtitle={'Solar Investing Specialist'}
                                 description={
                                     'Nera is here to share the basics of online solar investing. You’ll have a specilist for the term of your investment. '
                                 }
+                                sx={{mt: 4}}
                             ></InvestmentSupportComponent>
-                        </div>
+                        </Box>
                     }
                     mainContent={
                         <Stack>
