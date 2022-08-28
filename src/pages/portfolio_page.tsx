@@ -6,6 +6,8 @@ import {Facility, GenerationDatum} from 'schema/schema_gen_types';
 import {usePortfolio, usePortfolioReturnType} from 'hooks/use_portfolio';
 import {dateDifferenceHumanReadable} from 'utils/date_formatter';
 import useEmptyContent from 'hooks/use_empty_content';
+import {differenceInDays} from 'date-fns';
+import {useState} from 'react';
 
 const PortfolioPage = ({
     loading,
@@ -17,10 +19,16 @@ const PortfolioPage = ({
 }: usePortfolioReturnType) => {
     const navBarProps = useNavBar();
 
-    const subtitle = lastUpdatedDate
+    const [now, setNow] = useState(new Date());
+
+    const dataStale = lastUpdatedDate
+        ? differenceInDays(now, lastUpdatedDate) > 2
+        : true;
+
+    const subtitle = !dataStale
         ? `Last updated ${dateDifferenceHumanReadable(
               new Date(),
-              lastUpdatedDate,
+              lastUpdatedDate as Date,
           )} ago`
         : 'Error loading data';
 
@@ -38,6 +46,7 @@ const PortfolioPage = ({
                 generation={generationData}
                 documents={documents}
                 transfers={transfers}
+                dataStale={dataStale}
             ></PortfolioContent>
         </DefaultView>
     );

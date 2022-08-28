@@ -38,6 +38,7 @@ interface PortfolioContentProps {
     facility: Facility | null;
     transfers: Array<Transfer>;
     documents: Array<Document>;
+    dataStale: boolean;
     generation: Array<GenerationDatum>;
 }
 
@@ -50,6 +51,7 @@ const PortfolioContent = ({
     transfers,
     documents,
     generation,
+    dataStale,
 }: PortfolioContentProps) => {
     if (loading) return <LoadingContent />;
 
@@ -280,6 +282,7 @@ const PortfolioContent = ({
                             <RealTimeContent
                                 facility={nonNullFacility}
                                 generation={generation}
+                                dataStale={dataStale}
                             ></RealTimeContent>
                         </Stack>
                     }
