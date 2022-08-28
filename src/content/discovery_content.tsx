@@ -148,7 +148,10 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                     zoom={5}
                     width="100%"
                     height="70vh"
-                    markers={assets.map((asset) => (
+                    markers={[
+                        ...assets.filter((asset) => asset !== selectedAsset),
+                        selectedAsset,
+                    ].map((asset) => (
                         <Marker
                             lng={asset.location.lng}
                             lat={asset.location.lat}
@@ -160,7 +163,9 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                             >
                                 <Component
                                     standardWidth={false}
-                                    sx={{p: 2}}
+                                    sx={{
+                                        p: 2,
+                                    }}
                                     onClick={() => {}}
                                 >
                                     <Typography
