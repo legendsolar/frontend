@@ -117,7 +117,7 @@ const CreateAccountPage = () => {
                 return (
                     <BackButton
                         label="Back to Homepage"
-                        onClick={() => {}}
+                        linkText="https://www.legends.solar"
                     ></BackButton>
                 );
 
