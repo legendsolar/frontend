@@ -6,6 +6,7 @@ import {
     constructQueryCacheKey,
     deconstructQueryCacheKey,
 } from './query_cache_utils';
+import {LOCAL_STORAGE_KEYS} from 'storage/local_storage_keys';
 
 const accountContext = createContext();
 
@@ -108,7 +109,7 @@ export const useProvideAccount = () => {
         };
     };
 
-    const useCreateLinkToken = () => {
+    const useGetLinkToken = () => {
         const CREATE_LINK_TOKEN = gql`
             mutation CreatePlaidLinkToken {
                 createPlaidLinkToken {
@@ -119,6 +120,12 @@ export const useProvideAccount = () => {
 
         const [createLinkToken, {data, loading, error}] =
             useMutation(CREATE_LINK_TOKEN);
+
+        const token = data?.createPlaidLinkToken?.token;
+
+        if (token && !loading && !error) {
+            localStorage.setItem(LOCAL_STORAGE_KEYS.PLAID_LINK_TOKEN, token);
+        }
 
         return {
             createLinkToken,
@@ -175,6 +182,7 @@ export const useProvideAccount = () => {
         const {open, ready} = usePlaidLink({
             token: token,
             onSuccess: (public_token, metadata) => {
+                console.log(public_token, metadata);
                 onComplete({publicToken: public_token, metadata});
             },
         });
@@ -252,7 +260,7 @@ export const useProvideAccount = () => {
     return {
         useAccounts,
         useWallet,
-        useCreateLinkToken,
+        useCreateLinkToken: useGetLinkToken,
         useCreateAccount,
         useDeleteAccount,
         usePlaidLinkModal,

@@ -1,13 +1,9 @@
 import PortfolioPage from 'pages/portfolio_page';
 import SignInView from 'pages/sign_in_page';
-import SignUpView from 'pages/sign_up_page';
 import {Link, Routes, Route, BrowserRouter} from 'react-router-dom';
 import ProtectedRoute from 'routes/protected_route';
 import UnprotectedRoute from 'routes/unprotected_route';
-import TransactionView from 'pages/transactions_page';
-import SignUpProcessPage from 'pages/complete_account_page';
 import CreateAccountPage from 'pages/create_account_page';
-import ExplorePage from 'pages/explore_page';
 import DocumentPage from 'pages/documents_page';
 import WalletPage from 'pages/wallet_page';
 import AccountPage from 'pages/account_page';
@@ -19,6 +15,7 @@ import DiscoverPage from 'pages/discover_page';
 import TransactionPage from 'pages/transactions_page';
 import {Navigate, useNavigate} from 'react-router-dom';
 import UnexpectedErrorPage from 'pages/unexpected_error_page';
+import OAuthLink from 'pages/plaid_oath_complete';
 
 function AppRouter() {
     return (
@@ -124,6 +121,11 @@ function AppRouter() {
                                 <WalletPage></WalletPage>
                             </ProtectedRoute>
                         }
+                    />
+
+                    <Route
+                        path={ROUTES.PLAID_OATH_COMPLETE}
+                        element={<OAuthLink></OAuthLink>}
                     />
                     <Route
                         path="/:path"

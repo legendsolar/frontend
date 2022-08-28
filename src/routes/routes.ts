@@ -1,8 +1,8 @@
 export enum ROUTES {
     SIGN_IN = '/sign_in',
     CREATE_ACCOUNT = '/create',
-    COMPLETE_ACCOUNT = '/complete_account',
-    TERMS_AND_CONDITIONS = '/terms_conditions',
+    COMPLETE_ACCOUNT = '/complete-account',
+    TERMS_AND_CONDITIONS = '/terms-conditions',
     PRIVACY_POLICY = '/privacy',
     USER_HOME = '/rooftop',
     DISCOVER = '/discover',
@@ -10,4 +10,5 @@ export enum ROUTES {
     TRANSACTIONS = '/transactions',
     ACCOUNT = '/account',
     WALLET = '/wallet',
+    PLAID_OATH_COMPLETE = '/oath-complete',
 }
