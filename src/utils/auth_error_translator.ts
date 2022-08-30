@@ -112,7 +112,7 @@ export const authErrorHandler = (error: any) => {
 
         case 'auth/network-request-failed':
             throwSystemError({
-                message: 'Not connected to the internet',
+                message: 'Failed to connect, contact support@legends.solar',
             });
             return;
 

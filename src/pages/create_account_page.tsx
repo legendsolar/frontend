@@ -3,7 +3,6 @@ import {Typography, Stack, Button} from '@mui/material';
 import {useAuth} from 'hooks/use_auth';
 import {useLocation, useNavigate} from 'react-router-dom';
 import AccreditationStatus from 'components/user/accreditation_status';
-import CreateDwollaAccount from 'components/signup/create_dwolla_account';
 import LoadingView from 'views/loading_view';
 import LinearPageinatedView from 'views/linear_paginated_view';
 import {signUpOrder, userSignUpOrder} from 'utils/user_sign_up_state';

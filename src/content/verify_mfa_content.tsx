@@ -23,7 +23,7 @@ const VerifyMfaContent = ({
     switch (state) {
         case states.VERIFY_MFA:
             return (
-                <Component>
+                <Component sx={{background: 'none'}}>
                     <Typography variant={'smallHeadline' as any}>
                         Verify MFA
                     </Typography>

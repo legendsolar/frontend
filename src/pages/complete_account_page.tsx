@@ -75,7 +75,8 @@ const CompleteAccountPage = () => {
         error: createDwollaAccountError,
     } = useCreateDwollaAccount();
 
-    const {update: updateAccreditation} = useUpdateUserAccreditation();
+    const {update: updateAccreditation, loading: accreditationUpdateLoading} =
+        useUpdateUserAccreditation();
 
     const loading = statusLoading || userDataLoading;
 
@@ -221,9 +222,11 @@ const CompleteAccountPage = () => {
                 return (
                     <VerifyAccreditationContent
                         onAccreditationStatusSubmit={async (accreditation) => {
+                            console.log(accreditation);
                             await updateAccreditation(accreditation);
                             setState(States.STEPS_TO_INVEST);
                         }}
+                        loading={accreditationUpdateLoading}
                     ></VerifyAccreditationContent>
                 );
             case States.WALLET:

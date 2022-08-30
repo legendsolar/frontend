@@ -1,4 +1,4 @@
-import {Alert, Collapse, Stack, CircularProgress} from '@mui/material';
+import {Alert, Collapse, Stack, CircularProgress, Link} from '@mui/material';
 import {useAuth} from 'hooks/use_auth';
 import {Button, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
@@ -11,6 +11,8 @@ import {Error} from 'utils/error_types';
 import {UserDwollaAccountData} from 'schema/schema_gen_types';
 import Component from 'components/basics/component';
 import LoadingText from 'components/utils/loading_text';
+import CheckboxItem from 'components/inputs/checkbox_item';
+import ComponentDivider from 'components/basics/component_divider';
 
 interface CreateDwollaAccountProps {
     onSubmit(input: UserDwollaAccountData): Promise<any>;
@@ -32,6 +34,8 @@ const CreateWalletContent = ({
     const [userInfoValid, setUserInfoValid] = useState(false);
     const [protectedUserInfoValid, setProtectedUserInfoValid] = useState(false);
     const [values, setValues] = useState<any>({});
+    const [acceptDwollaPolicy, setAcceptDwollaPolicy] =
+        useState<boolean>(false);
 
     const submit = () => {
         onSubmit(values);
@@ -50,7 +54,13 @@ const CreateWalletContent = ({
                 Information will never be used for marketing.
             </Typography>
 
-            <Typography variant="subtitle2">Mailing Address</Typography>
+            <ComponentDivider
+                sx={{backgroundColor: 'white.main', mt: 0}}
+            ></ComponentDivider>
+
+            <Typography variant={'monoButton' as any}>
+                Mailing Address
+            </Typography>
 
             <ModifyUserInfo
                 initialValues={{
@@ -72,12 +82,16 @@ const CreateWalletContent = ({
                 }
             ></ModifyUserInfo>
 
+            <ComponentDivider
+                sx={{backgroundColor: 'white.main', mt: 0}}
+            ></ComponentDivider>
+
             <Stack
                 direction={'row'}
                 alignItems={'center'}
                 justifyContent={'space-between'}
             >
-                <Typography variant="subtitle2">
+                <Typography variant={'monoButton' as any}>
                     Personal Information
                 </Typography>
             </Stack>
@@ -103,16 +117,59 @@ const CreateWalletContent = ({
 
             {error && <Alert severity="error">{error}</Alert>}
 
-            <Collapse in={fullSSNRequired}>
+            {fullSSNRequired && (
                 <Alert severity="error">
                     Additional verification is required. Double check that your
                     information is correct and enter your complete 9 digit SSN
                 </Alert>
-            </Collapse>
+            )}
+
+            <CheckboxItem
+                title="Dwolla Privacy Policy"
+                checked={acceptDwollaPolicy}
+                description={
+                    <div>
+                        I agree to Dwolla's{' '}
+                        <Typography
+                            variant={'description' as any}
+                            component={Link}
+                            href={
+                                'https://www.legends.solar/legal/privacy-policy'
+                            }
+                        >
+                            privacy policy
+                        </Typography>{' '}
+                        and{' '}
+                        <Typography
+                            variant={'description' as any}
+                            component={Link}
+                            href={
+                                'https://www.legends.solar/legal/terms-and-conditions'
+                            }
+                        >
+                            {' '}
+                            terms of service
+                        </Typography>
+                    </div>
+                }
+                onClick={() => {
+                    setAcceptDwollaPolicy(!acceptDwollaPolicy);
+                }}
+            ></CheckboxItem>
+
+            <ComponentDivider
+                sx={{backgroundColor: 'white.main', mt: 0}}
+            ></ComponentDivider>
 
             <Button
                 variant={'primary' as any}
-                disabled={!(userInfoValid && protectedUserInfoValid)}
+                disabled={
+                    !(
+                        userInfoValid &&
+                        protectedUserInfoValid &&
+                        acceptDwollaPolicy
+                    )
+                }
                 color={'legendaryGreen' as any}
                 onClick={submit}
             >

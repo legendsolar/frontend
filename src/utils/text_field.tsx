@@ -12,6 +12,7 @@ const TextField = ({
     id,
     autoComplete,
     disabled,
+    type,
 
     alwaysDisplayHelper = false,
 }) => {
@@ -29,6 +30,7 @@ const TextField = ({
             name={name}
             label={label}
             id={id}
+            type={type}
             autoComplete={autoComplete}
         ></MuiTextField>
     );

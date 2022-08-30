@@ -77,18 +77,14 @@ const ProtectedUserInfo = ({
     return (
         <div>
             <Grid container spacing={2} sx={{width: '100%'}}>
-                <Grid item xs={12} md={12} lg={4}>
+                <Grid item xs={12} md={12} lg={3}>
                     <Typography variant="subtitle3">{'SSN '}</Typography>
                     <TextField
                         color={color}
                         data-private
                         disabled={completed}
                         name="ssn"
-                        label={
-                            fullSSNRequired
-                                ? 'Complete SSN'
-                                : 'Last four digits'
-                        }
+                        label={fullSSNRequired ? 'Complete SSN' : 'Last four'}
                         type="password"
                         error={formik.touched.ssn && Boolean(formik.errors.ssn)}
                         helperText={formik.errors.ssn}
@@ -99,11 +95,11 @@ const ProtectedUserInfo = ({
                     ></TextField>
                 </Grid>
 
-                <Grid item xs={12} md={12} lg={8}>
+                <Grid item xs={12} md={12} lg={9}>
                     <Typography variant="subtitle3">Birthday</Typography>
 
-                    <Grid container spacing={2} sx={{width: '100%'}}>
-                        <Grid item xs={4} md={4}>
+                    <Grid container spacing={0} sx={{width: '100%'}}>
+                        <Grid item xs={6} md={6}>
                             <FormControl
                                 color={color}
                                 variant="filled"
@@ -138,13 +134,13 @@ const ProtectedUserInfo = ({
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={4} md={4}>
+                        <Grid item xs={3} md={3}>
                             <TextField
                                 color={color}
                                 data-private
                                 disabled={completed}
                                 name="day"
-                                label="Day"
+                                label="DD"
                                 variant="filled"
                                 type={completed ? 'string' : 'number'}
                                 error={
@@ -159,13 +155,13 @@ const ProtectedUserInfo = ({
                             ></TextField>
                         </Grid>
 
-                        <Grid item xs={4} md={4}>
+                        <Grid item xs={3} md={3}>
                             <TextField
                                 color={color}
                                 data-private
                                 disabled={completed}
                                 name="year"
-                                label="Year"
+                                label="YYYY"
                                 error={
                                     formik.touched.year &&
                                     Boolean(formik.errors.year)

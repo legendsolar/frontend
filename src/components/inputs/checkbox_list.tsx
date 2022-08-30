@@ -1,46 +1,56 @@
 import {useEffect, useState} from 'react';
 import {Box, Checkbox, Stack, Typography} from '@mui/material';
 import Divider from 'components/basics/divider';
+import CheckboxItem, {
+    CheckboxItemInterface,
+} from 'components/inputs/checkbox_item';
 
-export interface CheckboxItem {
-    title: string;
-    description: string;
-    key: string;
-    checked?: boolean;
+export interface CheckboxListItem extends CheckboxItemInterface {
     exclusive?: boolean;
+    key: string;
 }
 
-interface CheckboxListProps {
-    items: Array<CheckboxItem>;
-    onInputChange(items: Array<CheckboxItem>): any;
+interface CheckboxListProps<T extends CheckboxListItem> {
+    items: Array<T>;
+    onInputChange(items: Array<T>): any;
     disabled: boolean;
 }
 
-const CheckboxList = ({items, onInputChange, disabled}: CheckboxListProps) => {
-    const [checkedList, setCheckedList] = useState(
+const CheckboxList = <T extends CheckboxListItem>({
+    items,
+    onInputChange,
+    disabled,
+}: CheckboxListProps<T>) => {
+    const [checkedList, setCheckedList] = useState<Array<T>>(
         items.map((item) => ({
             ...item,
-            checked: item.checked ? true : false,
-            exclusive: item.exclusive ? true : false,
+            checked: item?.checked ? true : false,
+            disabled: item?.disabled ? true : false,
         })),
     );
     const [exclusive, setExclusive] = useState('');
 
-    const setCheckedItem = (item: CheckboxItem) => {
+    const setCheckedItem = (item: CheckboxListItem) => {
         const list = [...checkedList];
 
         if (!item.checked) {
+            // item was not checked
             if (item.exclusive) {
-                list.map((item) => {
-                    item.checked = false;
+                list.map((i) => {
+                    i.checked = false;
+                    i.disabled = true;
                 });
                 setExclusive(item.key);
             }
 
+            item.disabled = false;
             item.checked = true;
         } else {
             if (item.exclusive) {
                 setExclusive('');
+                list.map((i) => {
+                    i.disabled = false;
+                });
             }
 
             item.checked = false;
@@ -53,63 +63,28 @@ const CheckboxList = ({items, onInputChange, disabled}: CheckboxListProps) => {
     return (
         <Stack spacing={2}>
             {checkedList.map((item, index, list) => {
+                const key = index;
                 return (
-                    <div style={{margin: '0px'}} key={index}>
-                        <Box
-                            sx={{
-                                height: '88px',
-                                display: 'flex',
-                                ml: -4,
-                                mr: -4,
-                                pr: 4,
-                                pl: 4,
-                                '&:hover': {
-                                    backgroundColor: 'white.main',
+                    <div style={{margin: '0px'}} key={key}>
+                        <CheckboxItem
+                            {...{
+                                ...item,
+                                key,
+                                onClick: () => {
+                                    setCheckedItem(item);
+                                },
+                                sx: {
+                                    ml: -4,
+                                    mr: -4,
+                                    pr: 4,
+                                    pl: 4,
+                                    '&:hover': {
+                                        backgroundColor: 'white.main',
+                                    },
+                                    height: '88px',
                                 },
                             }}
-                            alignItems="center"
-                            key={item.key}
-                            onClick={(event) => {
-                                if (
-                                    !disabled &&
-                                    !(exclusive ? exclusive != item.key : false)
-                                ) {
-                                    setCheckedItem(item);
-                                }
-                            }}
-                        >
-                            <Stack
-                                direction="row"
-                                alignItems="flex-start"
-                                spacing={2}
-                            >
-                                <Checkbox
-                                    sx={{
-                                        fontSize: '22px',
-                                        mt: 'auto',
-                                        mb: 'auto',
-                                    }}
-                                    checked={item.checked}
-                                    disabled={
-                                        exclusive
-                                            ? exclusive != item.key
-                                            : false || disabled
-                                    }
-                                ></Checkbox>
-                                <Stack spacing={0}>
-                                    <Typography
-                                        sx={{mt: 1, mb: 1}}
-                                        variant={'smallLabel' as any}
-                                    >
-                                        {item.title}
-                                    </Typography>
-
-                                    <Typography variant={'description' as any}>
-                                        {item.description}
-                                    </Typography>
-                                </Stack>
-                            </Stack>
-                        </Box>
+                        ></CheckboxItem>
                         {/* {index !== list.length - 1 && <Divider></Divider>} */}
                     </div>
                 );

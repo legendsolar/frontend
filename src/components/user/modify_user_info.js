@@ -38,8 +38,6 @@ const ModifyUserInfo = ({
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: yup.object().shape({
-            firstName: validateFirstName(),
-            lastName: validateLastName(),
             streetAddress: validateStreetAddress(),
             streetAddress2: validateStreetAddressTwo(),
             city: validateCity(),
@@ -77,46 +75,13 @@ const ModifyUserInfo = ({
 
     return (
         <div>
-            <Grid container spacing={2} sx={{width: '100%'}}>
-                <Grid item xs={12} lg={6}>
-                    <TextField
-                        disabled={disabled || userVerified}
-                        color={color}
-                        error={
-                            formik.touched.firstName &&
-                            Boolean(formik.errors.firstName)
-                        }
-                        helperText={formik.errors.firstName}
-                        value={formik.values.firstName}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        id="firstName"
-                        label="First Name"
-                        name="firstName"
-                        autoComplete="firstName"
-                    />
-                </Grid>
-
-                <Grid item xs={12} lg={6}>
-                    <TextField
-                        disabled={disabled || userVerified}
-                        color={color}
-                        error={
-                            formik.touched.lastName &&
-                            Boolean(formik.errors.lastName)
-                        }
-                        helperText={formik.errors.lastName}
-                        value={formik.values.lastName}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        id="lastName"
-                        label="Last Name"
-                        name="lastName"
-                        autoComplete="lastName"
-                    />
-                </Grid>
-
-                <Grid item xs={12} md={8}>
+            <Grid
+                container
+                columnSpacing={2}
+                rowSpacing={1}
+                sx={{width: '100%'}}
+            >
+                <Grid item xs={12} md={12}>
                     <TextField
                         color={color}
                         error={
@@ -135,7 +100,7 @@ const ModifyUserInfo = ({
                     ></TextField>
                 </Grid>
 
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={12}>
                     <TextField
                         color={color}
                         error={
@@ -154,7 +119,7 @@ const ModifyUserInfo = ({
                     ></TextField>
                 </Grid>
 
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={5}>
                     <TextField
                         color={color}
                         name="city"
@@ -171,7 +136,7 @@ const ModifyUserInfo = ({
                     ></TextField>
                 </Grid>
 
-                <Grid item xs={12} md={2}>
+                <Grid item xs={12} md={3}>
                     <FormControl
                         variant="filled"
                         fullWidth

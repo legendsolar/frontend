@@ -12,7 +12,6 @@ import {
 import TextField from 'utils/text_field';
 
 import {
-    validateAccessPhrase,
     validateEmail,
     validateFirstName,
     validateLastName,

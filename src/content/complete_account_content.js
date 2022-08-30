@@ -14,8 +14,8 @@ const CompleteAccountContent = ({stepsTitle, steps, onContinue}) => {
             <Typography variant="headline2">{stepsTitle}</Typography>
             <Typography variant="body">
                 {allComplete
-                    ? 'You are almost ready to invest'
-                    : 'You are ready to invest'}
+                    ? 'You are ready to invest'
+                    : 'You are almost ready to invest'}
             </Typography>
 
             {allComplete && (

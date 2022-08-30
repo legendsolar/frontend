@@ -1,11 +1,11 @@
 import Component from 'components/basics/component';
 import {useState} from 'react';
-import CheckboxList, {CheckboxItem} from 'components/inputs/checkbox_list';
+import CheckboxList, {CheckboxListItem} from 'components/inputs/checkbox_list';
 import {Button, Typography, CircularProgress} from '@mui/material';
 import {AccreditationOptions} from 'schema/schema_gen_types';
 import LoadingText from 'components/utils/loading_text';
 
-export interface AccreditationOption extends CheckboxItem {
+export interface AccreditationOption extends CheckboxListItem {
     accredited: boolean;
     accreditationOption: AccreditationOptions;
 }
@@ -54,29 +54,24 @@ export const ACCREDITATION_OPTIONS: Array<AccreditationOption> = [
 ];
 
 interface VerifyAccreditationContentProps {
-    onAccreditationStatusSubmit(
-        statuses: Array<AccreditationOptions>,
-    ): Promise<any>;
+    onAccreditationStatusSubmit(statuses: Array<AccreditationOptions>): void;
+    loading: boolean;
 }
 
 const VerifyAccreditationContent = ({
     onAccreditationStatusSubmit,
+    loading,
 }: VerifyAccreditationContentProps) => {
-    const [loading, setLoading] = useState(false);
-
     const [accreditationList, setAccreditationList] = useState<
         Array<AccreditationOption>
     >([]);
 
     const onContinue = () => {
-        setLoading(true);
         onAccreditationStatusSubmit(
             accreditationList.map(
                 (accreditation) => accreditation.accreditationOption,
             ),
-        ).finally(() => {
-            setLoading(false);
-        });
+        );
     };
 
     return (
@@ -93,16 +88,10 @@ const VerifyAccreditationContent = ({
                 Check all that apply
             </Typography>
 
-            <CheckboxList
+            <CheckboxList<AccreditationOption>
                 items={ACCREDITATION_OPTIONS}
                 onInputChange={(items) => {
-                    const newList = items
-                        .filter((item) => item.checked)
-                        .map(
-                            (item) =>
-                                item.key as unknown as AccreditationOption,
-                        );
-                    setAccreditationList(newList);
+                    setAccreditationList(items);
                 }}
                 disabled={false}
             ></CheckboxList>
