@@ -1,4 +1,5 @@
 import {TextField as MuiTextField} from '@mui/material';
+import {inputLabelClasses} from '@mui/material/InputLabel';
 
 const TextField = ({
     color,
@@ -32,6 +33,15 @@ const TextField = ({
             id={id}
             type={type}
             autoComplete={autoComplete}
+            InputLabelProps={{
+                sx: !error
+                    ? {
+                          [`&.${inputLabelClasses.focused}`]: {
+                              color: 'blackDusk.main',
+                          },
+                      }
+                    : {},
+            }}
         ></MuiTextField>
     );
 };
