@@ -26,6 +26,7 @@ const CreateAccountContent = ({
                     <Typography
                         variant="link"
                         component={Link}
+                        target={'_blank'}
                         href={'https://www.legends.solar/legal/privacy-policy'}
                         // onClick={onNavigateToPrivacyPolicy}
                     >
@@ -36,6 +37,7 @@ const CreateAccountContent = ({
                     <Typography
                         variant="link"
                         component={Link}
+                        target={'_blank'}
                         href={
                             'https://www.legends.solar/legal/terms-and-conditions'
                         }

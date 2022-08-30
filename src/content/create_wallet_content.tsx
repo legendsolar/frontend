@@ -133,22 +133,12 @@ const CreateWalletContent = ({
                         <Typography
                             variant={'description' as any}
                             component={Link}
+                            target={'_blank'}
                             href={
-                                'https://www.legends.solar/legal/privacy-policy'
+                                'https://www.dwolla.com/legal/platform-agreement/#legal-content'
                             }
                         >
                             privacy policy
-                        </Typography>{' '}
-                        and{' '}
-                        <Typography
-                            variant={'description' as any}
-                            component={Link}
-                            href={
-                                'https://www.legends.solar/legal/terms-and-conditions'
-                            }
-                        >
-                            {' '}
-                            terms of service
                         </Typography>
                     </div>
                 }
