@@ -29,7 +29,7 @@ export const validatePostalCode = () => {
         .required('Required');
 };
 
-export const validatePassword = (input) => {
+export const validatePassword = () => {
     return yup
         .string()
         .min(12, 'Password must be a min of 12 characters')

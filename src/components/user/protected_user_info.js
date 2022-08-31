@@ -12,7 +12,6 @@ import TextField from 'utils/text_field';
 
 import {useEffect} from 'react';
 import {months} from 'utils/static_lists';
-import {format} from 'date-fns';
 import {
     validateMonth,
     validateDay,
