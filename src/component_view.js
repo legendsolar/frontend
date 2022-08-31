@@ -27,9 +27,6 @@ const basePaths = [
             {
                 name: 'test',
             },
-            {
-                name: 'test_breakpoints',
-            },
         ],
     },
     {
@@ -320,6 +317,21 @@ const basePaths = [
         tests: [
             {
                 name: 'test_prod_worm',
+            },
+        ],
+    },
+    {
+        name: 'design',
+        type: 'design',
+        tests: [
+            {
+                name: 'design_sys_demo',
+            },
+            {
+                name: 'sizing_demo',
+            },
+            {
+                name: 'test_breakpoints',
             },
         ],
     },

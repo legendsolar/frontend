@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {useTheme} from '@mui/material';
 import {Paper, Button, Stack, Typography, Box, Divider} from '@mui/material';
+import LoadingText from 'components/utils/loading_text';
 
 const DesignSysDemo = (props) => {
     const theme = useTheme();
@@ -130,6 +131,9 @@ const DesignSysDemo = (props) => {
                     <Typography variant="subtitle3">Primary</Typography>
 
                     <Button variant="primary">Primary Button</Button>
+                    <Button variant="primary">
+                        <LoadingText></LoadingText>
+                    </Button>
                     <Button variant="primary" disabled={true}>
                         Disabled
                     </Button>
