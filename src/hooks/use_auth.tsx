@@ -61,7 +61,7 @@ interface useAuthReturnType {
         resolver: MultiFactorResolver,
         recaptchaVerifier: RecaptchaVerifier,
     ): Promise<string | undefined>;
-    enrollWithMfaCode(code: string): Promise<void>;
+    completeMfaEnrollment(code: string): Promise<void>;
     validateMfaCode(
         verificationId: string,
         code: string,
@@ -345,7 +345,7 @@ const useProvideAuth = (): useAuthReturnType => {
         getRecaptchaVerifier,
         enrollUserMfa,
         sendMfaVerification,
-        enrollWithMfaCode,
+        completeMfaEnrollment: enrollWithMfaCode,
         validateMfaCode,
     };
 };

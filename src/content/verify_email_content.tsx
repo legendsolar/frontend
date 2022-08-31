@@ -26,7 +26,7 @@ const VerifyEmailContent = ({
     switch (state) {
         case states.VERIFY_EMAIL:
             return (
-                <Component>
+                <Component sx={{background: 'none'}}>
                     <Stack spacing={4}>
                         <Typography variant={'smallHeadline' as any}>
                             Verify Email
@@ -48,7 +48,7 @@ const VerifyEmailContent = ({
                         >
                             Send Again
                         </Button>
-                        <Stack
+                        {/* <Stack
                             direction="row"
                             justifyContent={'flex-end'}
                             sx={{pl: 2, pr: 2}}
@@ -62,16 +62,16 @@ const VerifyEmailContent = ({
                                     color="legendaryGreen.main"
                                     sx={{ml: 1}}
                                 >
-                                    {'Re-Enter Email'}
+                                    {'Change Email'}
                                 </Typography>
                             </Button>
-                        </Stack>
+                        </Stack> */}
                     </Stack>
                 </Component>
             );
         case states.CHANGE_EMAIL:
             return (
-                <Component>
+                <Component sx={{background: 'none'}}>
                     <Stack>
                         <Typography variant={'smallHeadline' as any}>
                             Change email

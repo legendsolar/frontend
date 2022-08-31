@@ -21,7 +21,7 @@ const CreateAccountContent = ({
                     onNavigateToSignIn={onNavigateToSignIn}
                 ></SignUpOptionComponent>
 
-                <Typography variant="description" sx={{pr: 2, pl: 2}}>
+                <Typography variant="description">
                     Signing up for an account means you agree to our
                     <Typography
                         variant="link"

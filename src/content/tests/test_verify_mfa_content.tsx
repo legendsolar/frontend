@@ -10,5 +10,6 @@ export default () => (
             console.log(code);
             return delay(1000);
         }}
+        captchaComplete={() => {}}
     ></VerifyMfaContent>
 );

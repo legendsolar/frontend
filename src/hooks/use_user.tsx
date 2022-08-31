@@ -8,7 +8,9 @@ import {
     AccreditationOptions,
     Facility,
     UserStatus,
+    UpdateUserInput,
 } from 'schema/schema_gen_types';
+import {removeNullObjectValues} from 'utils/object_utils';
 
 interface useUserReturnType {
     useGetUserStatus(skip?: boolean): {
@@ -200,6 +202,17 @@ export const useProvideUser = (): useUserReturnType => {
                         dwollaStatus
                         dwollaSyncError
                     }
+                    firstName
+                    lastName
+                    email
+                    phone
+                    address {
+                        streetAddress
+                        streetAddress2
+                        city
+                        state
+                        postalCode
+                    }
                 }
             }
         }
@@ -321,10 +334,35 @@ export const useProvideUser = (): useUserReturnType => {
     };
 
     const useSetUser = () => {
-        const [setUser, {data, loading, error}] = useMutation(MUTATE_USER);
+        const [setUserInternal, {data, loading, error}] =
+            useMutation(MUTATE_USER);
 
         return {
-            setUser,
+            setUser: ({
+                address,
+                phone,
+                acceptance,
+                accreditation,
+                firstName,
+                lastName,
+            }: UpdateUserInput) => {
+                const input = {
+                    address,
+                    phone: phone ? formatPhoneNumber(phone) : null,
+                    acceptance,
+                    accreditation,
+                    firstName,
+                    lastName,
+                };
+
+                removeNullObjectValues(input);
+
+                return setUserInternal({
+                    variables: {
+                        input,
+                    },
+                });
+            },
             data,
             loading,
             error,
@@ -422,13 +460,9 @@ export const useProvideUser = (): useUserReturnType => {
             data,
             loading,
             error,
-            update: (accreditation) =>
+            update: (accreditation: Array<AccreditationOptions>) =>
                 setUser({
-                    variables: {
-                        input: {
-                            accreditation,
-                        },
-                    },
+                    accreditation,
                 }),
         };
     };

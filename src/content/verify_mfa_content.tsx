@@ -3,15 +3,18 @@ import {useState} from 'react';
 import {Button, Stack, Typography} from '@mui/material';
 import MfaVerifyComponent from 'components/user/mfa_verify_component';
 import ChangePhoneComponent from 'components/user/change_phone_component';
-
+import RecaptchaVerifier from 'components/invisible/recaptcha_verifier';
+import {RecaptchaVerifier as FirebaseRecaptchaVerifier} from 'firebase/auth';
 interface VerifyMfaContentProps {
     onChangePhoneRequested(newPhone: string): Promise<void>;
     onMfaCodeSubmit(code: string): Promise<void>;
+    captchaComplete(captcha: FirebaseRecaptchaVerifier): void;
 }
 
 const VerifyMfaContent = ({
     onChangePhoneRequested,
     onMfaCodeSubmit,
+    captchaComplete,
 }: VerifyMfaContentProps) => {
     const states = {
         VERIFY_MFA: 'verify_mfa',
@@ -39,17 +42,38 @@ const VerifyMfaContent = ({
                         }
                         color="light"
                     ></MfaVerifyComponent>
+                    <Stack direction="row" justifyContent={'flex-end'}>
+                        <Button
+                            variant={'text' as any}
+                            onClick={() => setState(states.CHANGE_PHONE)}
+                        >
+                            <Typography
+                                variant={'smallLabel' as any}
+                                color="legendaryGreen.main"
+                                sx={{ml: 1}}
+                            >
+                                {'Change Phone'}
+                            </Typography>
+                        </Button>
+                    </Stack>
+
+                    <RecaptchaVerifier
+                        captchaComplete={captchaComplete}
+                    ></RecaptchaVerifier>
                 </Component>
             );
         case states.CHANGE_PHONE:
             return (
-                <Component>
+                <Component sx={{background: 'none'}}>
                     <Typography variant={'smallHeadline' as any}>
-                        Re-enter phone number
+                        Change phone number
                     </Typography>
 
                     <ChangePhoneComponent
-                        onSubmit={onChangePhoneRequested}
+                        onSubmit={({phone}) => {
+                            onChangePhoneRequested(phone);
+                            setState(states.VERIFY_MFA);
+                        }}
                         color="light"
                     ></ChangePhoneComponent>
                 </Component>

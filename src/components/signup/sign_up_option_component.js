@@ -37,11 +37,7 @@ const SignUpOptionComponent = ({
             onClick={onSignUpWithEmail}
         ></IconButton>
 
-        <Stack
-            direction="row"
-            justifyContent={'space-between'}
-            sx={{pl: 2, pr: 2}}
-        >
+        <Stack direction="row" justifyContent={'space-between'}>
             <Typography variant="smallLabel">
                 {'Already have an account?'}
             </Typography>

@@ -110,5 +110,6 @@ export const validateAccessPhrase = () => {
 };
 
 export const formatPhoneNumber = (phone) => {
-    return '+1' + phone;
+    const formattedNumber = phone.replace(/ /g, '');
+    return '+1' + formattedNumber;
 };

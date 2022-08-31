@@ -5,7 +5,6 @@ import {useNavigate} from 'react-router-dom';
 import {useUser} from 'hooks/use_user';
 import {useState} from 'react';
 import {transformFormValuesToUserDwollaAccountData} from 'components/utils/transformers';
-import RecaptchaVerifier from 'components/invisible/recaptcha_verifier';
 
 import {UserDwollaAccountData} from 'schema/schema_gen_types';
 import delay from 'utils/delay';
@@ -25,6 +24,7 @@ import VerifyAccreditationContent from 'content/verify_accreditation_content';
 import CreateWalletContent from 'content/create_wallet_content';
 import BackButton from 'components/buttons/back_button';
 import LoadingComponent from 'components/basics/loading_component';
+import {RecaptchaVerifier as FirebaseRecaptchaVerifier} from 'firebase/auth';
 
 enum States {
     STEPS_TO_INVEST = 'steps_to_invest',
@@ -39,16 +39,23 @@ const CompleteAccountPage = () => {
 
     const navigate = useNavigate();
 
-    const {user, signout, sendEmailVerify, enrollUserMfa, enrollWithMfaCode} =
-        useAuth();
+    const {
+        user,
+        signout,
+        sendEmailVerify,
+        enrollUserMfa,
+        completeMfaEnrollment: enrollWithMfaCode,
+    } = useAuth();
+
     const {
         useGetUserStatus,
         useUserMetaData,
         useUpdateUserAccreditation,
         useCreateDwollaAccount,
+        useSetUser,
     } = useUser();
 
-    const [captcha, setCaptcha] = useState(null);
+    const [captcha, setCaptcha] = useState<FirebaseRecaptchaVerifier>();
 
     const {
         loading: statusLoading,
@@ -68,6 +75,12 @@ const CompleteAccountPage = () => {
         postalCode,
         phone,
     } = useUserMetaData();
+
+    const {
+        loading: mutatePhoneLoading,
+        error: mutatePhoneError,
+        setUser,
+    } = useSetUser();
 
     const {
         createDwollaAccount,
@@ -99,11 +112,11 @@ const CompleteAccountPage = () => {
 
     useEffect(() => {
         if (state === States.PHONE && captcha && phone && !status.mfaVerified) {
+            console.log({phone, captcha});
+            console.log('ran enroll MFA');
             enrollUserMfa(phone, captcha);
         }
-    }, [loading, status, state, captcha]);
-
-    console.log({createDwollaAccountError});
+    }, [loading, status, state, captcha, phone]);
 
     const states = (state: States): JSX.Element => {
         switch (state) {
@@ -199,20 +212,19 @@ const CompleteAccountPage = () => {
                 return (
                     <div>
                         {/** Don't render captcha until MFA verification */}
-                        <RecaptchaVerifier
-                            captchaComplete={setCaptcha}
-                        ></RecaptchaVerifier>
                         <VerifyMfaContent
-                            onChangePhoneRequested={(newPhone) => {
-                                // if (captcha && newPhone) {
-                                //     enrollUserMfa(phone, captcha);
-                                // }
-                                console.log(newPhone);
-                                return delay(1000);
+                            captchaComplete={setCaptcha}
+                            onChangePhoneRequested={async (phone) => {
+                                // Mutate user data to new phone
+                                // This should change the phone field
+                                // and re run enrollUserMfa when it completes
+                                setUser({
+                                    phone,
+                                });
                             }}
                             onMfaCodeSubmit={async (code) => {
                                 await enrollWithMfaCode(code);
-                                await statusRefetch();
+                                statusRefetch();
                                 setState(States.STEPS_TO_INVEST);
                             }}
                         ></VerifyMfaContent>
@@ -222,8 +234,7 @@ const CompleteAccountPage = () => {
                 return (
                     <VerifyAccreditationContent
                         onAccreditationStatusSubmit={async (accreditation) => {
-                            console.log(accreditation);
-                            await updateAccreditation(accreditation);
+                            updateAccreditation(accreditation);
                             setState(States.STEPS_TO_INVEST);
                         }}
                         loading={accreditationUpdateLoading}
