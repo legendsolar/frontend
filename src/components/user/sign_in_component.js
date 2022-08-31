@@ -6,6 +6,7 @@ import {
     TextField,
     Button,
     CircularProgress,
+    Link,
 } from '@mui/material';
 import IconButton from 'components/buttons/icon_button';
 import GoogleLogo from 'components/icons/google_logo';
@@ -46,11 +47,18 @@ const SignInComponent = ({
             <form onSubmit={formik.handleSubmit}>
                 <Stack spacing={4}>
                     <Typography variant="smallHeadline">Login</Typography>
-                    <Typography variant="label">
+
+                    <Typography variant="description">
                         Legends Solar is currently in closed beta. Please{' '}
-                        <a href={'https://www.legends.solar/get-early-access'}>
+                        <Typography
+                            variant="link"
+                            component={Link}
+                            target={'_blank'}
+                            sx={{textTransform: 'none'}}
+                            href={'https://www.legends.solar/get-early-access'}
+                        >
                             join our waitlist
-                        </a>{' '}
+                        </Typography>{' '}
                         to reserve your place when we launch.
                     </Typography>
 
