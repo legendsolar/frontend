@@ -38,6 +38,8 @@ const ModifyUserInfo = ({
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: yup.object().shape({
+            firstName: validateFirstName(),
+            lastName: validateLastName(),
             streetAddress: validateStreetAddress(),
             streetAddress2: validateStreetAddressTwo(),
             city: validateCity(),
@@ -78,7 +80,7 @@ const ModifyUserInfo = ({
             <Grid
                 container
                 columnSpacing={2}
-                rowSpacing={1}
+                rowSpacing={0}
                 sx={{width: '100%'}}
             >
                 <Grid item xs={12} md={12}>
@@ -136,7 +138,7 @@ const ModifyUserInfo = ({
                     ></TextField>
                 </Grid>
 
-                <Grid item xs={12} md={3}>
+                <Grid item xs={12} md={3} sx={{mb: 3}}>
                     <FormControl
                         variant="filled"
                         fullWidth

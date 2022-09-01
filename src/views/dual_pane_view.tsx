@@ -3,6 +3,7 @@ import DefaultView from 'views/default_view';
 import {ErrorBoundary} from '@sentry/react';
 import DefaultErrorBoundary from 'components/errors/default_error_boundary';
 import LegendsTypemarkSVG from 'assets/logos/typemark_dark.svg';
+import {whiteHaze} from 'static/colors';
 
 interface DualPaneViewProps {
     leftPane?: JSX.Element;
@@ -36,26 +37,47 @@ const DualPaneView = ({
         : 'center';
 
     return (
-        <div style={{height: '100vh'}}>
-            <div
-                style={{
-                    position: 'absolute',
+        <Box
+            sx={{
+                minHeight: '100vh',
+
+                backgroundColor: {
+                    xs: 'whiteHaze.main',
+                    lg: 'none',
+                },
+            }}
+        >
+            <Box
+                sx={{
+                    position: {
+                        xs: 'static',
+                        lg: 'absolute',
+                    },
                     top: '40px',
                     left: '40px',
+                    p: {
+                        xs: 5,
+                        lg: 0,
+                    },
                 }}
             >
                 {upperLeftCorner}
-            </div>
-            <Stack direction="row" spacing={0} width="100%" height="100vh">
+            </Box>
+            <Stack direction="row" spacing={0} width="100%">
                 <Box
                     sx={{
                         width: '100%',
-                        height: '100%',
-                        backgroundColor: 'whiteHaze.main',
+
+                        minHeight: {
+                            xs: '100%',
+                            lg: '100vh',
+                        },
                         display: {
-                            md: paneToHide === 'left' ? 'none' : 'flex',
+                            xs: paneToHide === 'left' ? 'none' : 'flex',
                             lg: 'flex',
                         },
+
+                        backgroundColor: 'whiteHaze.main',
                     }}
                     display="flex"
                     justifyContent={leftPaneJustify}
@@ -66,10 +88,17 @@ const DualPaneView = ({
                 <Box
                     sx={{
                         width: '100%',
-                        height: '100%',
+                        minHeight: {
+                            xs: '100%',
+                            lg: '100vh',
+                        },
                         display: {
-                            md: paneToHide === 'right' ? 'none' : 'flex',
+                            xs: paneToHide === 'right' ? 'none' : 'flex',
                             lg: 'flex',
+                        },
+
+                        backgroundColor: {
+                            xs: 'white.main',
                         },
                     }}
                     justifyContent={rightPaneJustify}
@@ -84,14 +113,14 @@ const DualPaneView = ({
                     bottom: '40px',
                     right: '40px',
                     display: {
-                        md: 'none',
+                        xs: 'none',
                         lg: 'flex',
                     },
                 }}
             >
                 {defaultLowerRightCorner}
             </Box>
-        </div>
+        </Box>
     );
 };
 

@@ -76,7 +76,7 @@ const ProtectedUserInfo = ({
     return (
         <div>
             <Grid container spacing={2} sx={{width: '100%'}}>
-                <Grid item xs={3} md={3} lg={3}>
+                <Grid item xs={12} md={3} lg={3}>
                     <Typography variant="subtitle3">{'SSN '}</Typography>
                     <TextField
                         color={color}
@@ -94,7 +94,7 @@ const ProtectedUserInfo = ({
                     ></TextField>
                 </Grid>
 
-                <Grid item xs={9} md={9} lg={9}>
+                <Grid item xs={12} md={9} lg={9}>
                     <Typography variant="subtitle3">Birthday</Typography>
 
                     <Grid container spacing={0} sx={{width: '100%'}}>
