@@ -41,13 +41,13 @@ const paletteOptions = {
         },
         whiteHaze: {
             main: whiteHaze,
-            contrastText: blackDawn,
+            contrastText: blackDusk,
             dark: '#d3d3d3',
             light: '#ededed',
         },
         whiteFog: {
             main: whiteFog,
-            contrastText: blackDawn,
+            contrastText: blackDusk,
             dark: '#bcbcbc',
             light: '#efefef',
         },

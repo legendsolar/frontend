@@ -2,6 +2,11 @@ import {useState} from 'react';
 import {useTheme} from '@mui/material';
 import {Paper, Button, Stack, Typography, Box, Divider} from '@mui/material';
 import LoadingText from 'components/utils/loading_text';
+import IconButton from 'components/buttons/icon_button';
+import GoogleLogo from 'components/icons/google_logo';
+import Email from '@mui/icons-material/Email';
+import TextField from 'utils/text_field';
+import Component from 'components/basics/component';
 
 const DesignSysDemo = (props) => {
     const theme = useTheme();
@@ -11,10 +16,14 @@ const DesignSysDemo = (props) => {
 
     return (
         <Stack spacing={2} sx={{m: 2}}>
-            <Typography variant="headline1">Theme</Typography>
+            <Typography variant="headline1">Legends Design System</Typography>
+
+            <Divider />
+
             <Paper variant="container">
                 <Stack>
                     <Typography variant="subtitle2">{'Typography'}</Typography>
+                    <Typography>{'Default'}</Typography>
                     <Typography variant="headline1">{'Headline 1'}</Typography>
                     <Typography variant="subtitle1">Subtitle 1</Typography>
                     <Typography variant="body1">Body 1</Typography>
@@ -27,8 +36,14 @@ const DesignSysDemo = (props) => {
                     </Typography>
                     <Typography variant="subtitle3">Subtitle 3</Typography>
                     <Typography variant="label">Label</Typography>
+                    <Typography variant="smallLabel">Small Label</Typography>
+                    <Typography variant="monoButton">Mono Button</Typography>
+                    <Typography variant="Link">Link</Typography>
+                    <Typography variant="mediumEmoji">Emojis ✉️ ⚡</Typography>
                 </Stack>
             </Paper>
+
+            <Divider />
 
             <Paper variant="container">
                 <Typography variant="subtitle2">
@@ -123,6 +138,8 @@ const DesignSysDemo = (props) => {
                 <Box sx={{height: '50px', bgcolor: color}}></Box>
             </Paper>
 
+            <Divider />
+
             <Typography variant="headline1">Inputs</Typography>
 
             <Paper variant="container">
@@ -143,6 +160,20 @@ const DesignSysDemo = (props) => {
                         Secondary Button
                     </Button>
 
+                    <IconButton
+                        variant="small"
+                        label="Google Icon Button"
+                        color="legendaryGreen"
+                        icon={<GoogleLogo height={'64px'}></GoogleLogo>}
+                    ></IconButton>
+
+                    <IconButton
+                        variant="small"
+                        label="Email Emoji Button"
+                        color="legendaryGreen"
+                        icon={<Email />}
+                    ></IconButton>
+
                     <Typography variant="subtitle3">Mini</Typography>
                     <Button variant="mini">Mini Button</Button>
                     <Button variant="mini" disabled={true}>
@@ -156,7 +187,27 @@ const DesignSysDemo = (props) => {
                         Bubble Color
                     </Button>
 
-                    <Button variant="header">Header Button</Button>
+                    <TextField label="Text Field (dark)"></TextField>
+
+                    <TextField
+                        label="Text Field (dark, error)"
+                        error={'This is an error'}
+                        helperText={'Helper text'}
+                    ></TextField>
+
+                    <Component haze={true}>
+                        <TextField
+                            color="light"
+                            label="Text Field (light)"
+                        ></TextField>
+
+                        <TextField
+                            color="light"
+                            label="Text Field (light, error)"
+                            error={'This is an error'}
+                            helperText={'Helper text'}
+                        ></TextField>
+                    </Component>
                 </Stack>
             </Paper>
         </Stack>
