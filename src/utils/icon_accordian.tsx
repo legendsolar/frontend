@@ -10,24 +10,27 @@ interface Item {
 
 const IconAccordian = ({items}: {items: Array<Item>}) => {
     const accordian = items.map(({title, content, icon}, idx) => (
-        <Accordion
-            key={idx}
-            variant={'none' as any}
-            sx={{
-                '&:before': {
-                    display: 'none',
-                },
-            }}
-        >
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Stack direction="row" spacing={4}>
-                    {icon}
-                    <Typography>{title}</Typography>
-                </Stack>
-            </AccordionSummary>
+        <div>
+            <Accordion
+                key={idx}
+                variant={'none' as any}
+                sx={{
+                    '&:before': {
+                        display: 'none',
+                    },
+                }}
+            >
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Stack direction="row" spacing={4}>
+                        {icon}
+                        <Typography>{title}</Typography>
+                    </Stack>
+                </AccordionSummary>
 
-            {content}
-        </Accordion>
+                {content}
+            </Accordion>
+            {idx !== items.length - 1 && <Divider></Divider>}
+        </div>
     ));
 
     return <div>{accordian}</div>;

@@ -53,7 +53,10 @@ const DocumentListComponent = ({documents}: {documents: Array<Document>}) => {
                             target={'_blank'}
                             label={'Download'}
                             color={'whiteFog' as any}
-                            sx={{color: 'blackDawn.main'}}
+                            sx={{
+                                color: 'blackDawn.main',
+                                '&:hover': {opacity: 0.75},
+                            }}
                         ></Chip>
                     </Stack>
 

@@ -1,20 +1,8 @@
 import {Typography, Stack, Box, Button} from '@mui/material';
 import ContentDivider from 'components/basics/content_divider';
 import BasicMap from 'components/map/basic_map_component';
-import TransferDataGrid from 'components/transfers/transfer_data_grid';
 import Component from 'components/basics/component';
-import RealTimeContent from 'content/real_time_content';
-import {testTransfers} from 'static/placeholder_transfers';
 import SideBarView from 'views/side_bar_view';
-import {
-    EconomicsSummary,
-    Facility,
-    GenerationDatum,
-    GenerationMetaData,
-    GenerationSummary,
-    Location,
-    Transfer,
-} from 'schema/schema_gen_types';
 import InvestmentSupportComponent from 'components/invest/investment_support_component';
 import IconAccordian from 'utils/icon_accordian';
 import SideBar from 'components/utils/sidebar_component';
@@ -27,8 +15,6 @@ import PanelWarehousePNG from 'assets/images/panel_warehouse.png';
 import DocumentListComponent from 'components/documents/document_list_component';
 import {numberFormatter, currencyFormatter} from 'utils/number_formatter';
 import LoadingContent from 'content/loading_content';
-import {Document} from 'components/documents/types';
-import EmptyContent from './empty_content';
 import {ProspectiveAsset} from 'components/discovery/types';
 import {formatAddress, formatAddressLine} from 'utils/address_formatter';
 import TimelineComponent from 'utils/timeline_component';
