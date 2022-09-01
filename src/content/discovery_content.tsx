@@ -16,9 +16,10 @@ import {currencyFormatter, numberFormatter} from 'utils/number_formatter';
 
 interface DiscoveryContentProps {
     assets: Array<ProspectiveAsset>;
+    onAssetClick(asset: ProspectiveAsset): void;
 }
 
-const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
+const DiscoveryContent = ({assets, onAssetClick}: DiscoveryContentProps) => {
     const [selectedAsset, setSelectedAsset] = useState(assets[0]);
 
     return (
@@ -124,6 +125,7 @@ const DiscoveryContent = ({assets}: DiscoveryContentProps) => {
                                 sx={{width: '100%', m: -4}}
                                 variant={'secondary' as any}
                                 color={'light' as any}
+                                onClick={() => onAssetClick(asset)}
                             >
                                 Learn more
                             </Button>

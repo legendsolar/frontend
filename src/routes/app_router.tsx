@@ -16,6 +16,7 @@ import TransactionPage from 'pages/transactions_page';
 import {Navigate, useNavigate} from 'react-router-dom';
 import UnexpectedErrorPage from 'pages/unexpected_error_page';
 import OAuthLink from 'pages/plaid_oath_complete';
+import DiscoverAssetPage from 'pages/discover_asset_page';
 
 function AppRouter() {
     return (
@@ -89,6 +90,16 @@ function AppRouter() {
                             </ProtectedRoute>
                         }
                     />
+
+                    <Route
+                        path={ROUTES.DISCOVER + '/:assetId'}
+                        element={
+                            <ProtectedRoute verifiedUserRequired>
+                                <DiscoverAssetPage></DiscoverAssetPage>
+                            </ProtectedRoute>
+                        }
+                    />
+
                     <Route
                         path={ROUTES.DOCUMENTS}
                         element={

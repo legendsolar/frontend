@@ -35,7 +35,16 @@ const MetricList = ({
                         <Typography variant="subtitle1" color="blackDawn.main">
                             {metric}
                         </Typography>
-                        <Typography variant="subtitle2">{value}</Typography>
+                        <Typography
+                            variant={
+                                value.length > 12
+                                    ? ('subtitle3' as any)
+                                    : ('subtitle2' as any)
+                            }
+                            sx={{textAlign: 'right'}}
+                        >
+                            {value}
+                        </Typography>
                     </Stack>
                     {dividers && index !== list.length - 1 && (
                         <ComponentDivider></ComponentDivider>

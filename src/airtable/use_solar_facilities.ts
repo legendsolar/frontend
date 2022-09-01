@@ -1,10 +1,30 @@
-import {ProspectiveAsset} from 'components/discovery/types';
+import {AssetDocument, ProspectiveAsset} from 'components/discovery/types';
 import {Record, FieldSet} from 'airtable';
 import {useAirtable} from './use_airtable';
+import {Document} from 'components/documents/types';
+
+const airtableDocumentTransformer = (
+    airtableDoc: Array<any>,
+    assetName: string,
+): Array<Document> => {
+    if (airtableDoc) {
+        return airtableDoc.map((doc) => ({
+            id: doc.id,
+            name: doc.filename,
+            type: 'Invement Document',
+            created: new Date(),
+            facility: assetName,
+            downloadLink: doc.url,
+        }));
+    } else {
+        return [];
+    }
+};
 
 const transformAirtableRecordToAsset = (
     r: Record<FieldSet>,
 ): ProspectiveAsset => {
+    console.log({document: r.get('Pro forma')});
     return {
         id: r.getId(),
         title: r.get('Name') as string,
@@ -38,7 +58,29 @@ const transformAirtableRecordToAsset = (
         capacity_kW: r.get('Kilowatts installed') as number,
         color: r.get('Theme color') as string,
         holdTerm_years: r.get('Hold term (Years)') as number,
-
+        panelModel: r.get('Panel model') as string,
+        summary: r.get('Investment Summary') as string,
+        about: {
+            yearTerm: r.get('About 7 Year Term') as string,
+            rooftopMonitoring: r.get('About Rooftop Monitoring') as string,
+            investmentTaxCredit: r.get('About Investment Tax Credit') as string,
+            rainOrShine: r.get('About Rain Or Shine') as string,
+            workmanshipWarrenty: r.get('About Workmanship Warrenty') as string,
+        },
+        documents: [
+            ...airtableDocumentTransformer(
+                r.get('Pro forma') as Array<any>,
+                r.get('Name') as string,
+            ),
+            ...airtableDocumentTransformer(
+                r.get('Solar energy services agreement') as Array<any>,
+                r.get('Name') as string,
+            ),
+            ...airtableDocumentTransformer(
+                r.get('Warranty') as Array<any>,
+                r.get('Name') as string,
+            ),
+        ],
         location: {
             lat: r.get('latitude') as number,
             lng: r.get('longitude') as number,
