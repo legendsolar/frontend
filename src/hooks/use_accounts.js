@@ -197,14 +197,10 @@ export const useProvideAccount = () => {
         Object.keys(cachedQueries).map((key) => {
             const {query, inputs, queryName} = deconstructQueryCacheKey(key);
 
-            console.log({query, inputs, queryName});
-
             const cacheData = cache.readQuery({
                 query: query,
                 variables: {...inputs},
             });
-
-            console.log({cacheData});
 
             const accountList = cacheData[queryName]
                 ? cacheData[queryName]
@@ -229,8 +225,6 @@ export const useProvideAccount = () => {
         Object.keys(cachedQueries).map((key) => {
             const {query, inputs, queryName} = deconstructQueryCacheKey(key);
 
-            console.log({query, inputs, queryName});
-
             const cacheData = cache.readQuery({
                 query: query,
                 variables: {...inputs},
@@ -243,8 +237,6 @@ export const useProvideAccount = () => {
             const updatedAccountList = accountList.filter(
                 (account) => account.id !== removeId,
             );
-
-            console.log({updated: updatedAccountList});
 
             const updatedCacheData = {};
             updatedCacheData[queryName] = updatedAccountList;

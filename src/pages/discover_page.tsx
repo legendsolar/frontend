@@ -15,8 +15,6 @@ const DiscoverPage = () => {
 
     const {loading, assets} = useSolarFacilities();
 
-    console.log({loading, assets});
-
     if (loading) {
         return <LoadingView></LoadingView>;
     }

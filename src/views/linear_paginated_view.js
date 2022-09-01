@@ -7,7 +7,6 @@ import Component from 'components/basics/component';
 import PageinatedComponent from 'components/utils/paginated_component';
 
 const LinearPageinatedView = ({pageContent, header, pageIndex}) => {
-    console.log(pageIndex);
     const titles = pageContent.map((content, index) => {
         if (content.sidebar !== false) {
             return (

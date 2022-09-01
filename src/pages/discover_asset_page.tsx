@@ -17,8 +17,6 @@ const DiscoverAssetPage = () => {
 
     const navBarProps = useNavBar();
 
-    console.log({assetId, assets});
-
     if (loading) {
         return <LoadingView></LoadingView>;
     }

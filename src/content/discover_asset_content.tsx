@@ -18,6 +18,7 @@ import LoadingContent from 'content/loading_content';
 import {ProspectiveAsset} from 'components/discovery/types';
 import {formatAddress, formatAddressLine} from 'utils/address_formatter';
 import TimelineComponent from 'utils/timeline_component';
+import MapTerrain3D from 'components/map/map_terrain_3d';
 interface DiscoverAssetContentProps {
     loading: boolean;
     asset: ProspectiveAsset;
@@ -54,13 +55,14 @@ const DiscoverAssetContent = ({
                     overflow: 'hidden',
                 }}
             >
-                <BasicMap
+                <MapTerrain3D
                     lat={asset.location?.lat || 41.375094}
                     lng={asset.location?.lng || -74.692663}
                     width={'100%'}
                     height={'400px'}
                     zoom={13}
-                ></BasicMap>
+                    initBearing={0}
+                ></MapTerrain3D>
             </Component>
 
             <Stack sx={{mt: 4}}>

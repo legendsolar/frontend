@@ -112,8 +112,6 @@ const CompleteAccountPage = () => {
 
     useEffect(() => {
         if (state === States.PHONE && captcha && phone && !status.mfaVerified) {
-            console.log({phone, captcha});
-            console.log('ran enroll MFA');
             enrollUserMfa(phone, captcha);
         }
     }, [loading, status, state, captcha, phone]);
@@ -202,7 +200,6 @@ const CompleteAccountPage = () => {
                         color="light"
                         email={user?.email ? user.email : ''}
                         onChangeEmailAddressRequested={(email) => {
-                            console.log(email);
                             return delay(1000);
                         }}
                         onSendVerificationEmailAgain={sendEmailVerify}

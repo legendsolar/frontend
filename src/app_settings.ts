@@ -40,7 +40,7 @@ const settings: APP_SETTINGS = {
         process.env.REACT_APP_BASE_URL + ROUTES.COMPLETE_ACCOUNT,
 
     minPlatformAge: 18,
-    mapBoxStyleUrl: 'mapbox://styles/lassorfeasley/cl6o7cer3004314mli5jr7zos',
+    mapBoxStyleUrl: 'mapbox://styles/john-legends/cl6p8ktei000f15sjhbydsx24',
 
     // Animations
     loadingAnimationTiming_ms: 300,

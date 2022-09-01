@@ -24,7 +24,6 @@ const airtableDocumentTransformer = (
 const transformAirtableRecordToAsset = (
     r: Record<FieldSet>,
 ): ProspectiveAsset => {
-    console.log({document: r.get('Pro forma')});
     return {
         id: r.getId(),
         title: r.get('Name') as string,
