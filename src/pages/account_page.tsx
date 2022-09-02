@@ -77,8 +77,9 @@ const AccountPage = () => {
     };
 
     useEffect(() => {
-        if (!createLinkTokenLoading && !token) createLinkToken();
-    }, [createLinkTokenLoading, token]);
+        if (!createLinkTokenLoading && !token && !createLinkTokenError)
+            createLinkToken();
+    }, [createLinkTokenLoading, token, createLinkTokenError]);
 
     const {open, ready} = usePlaidLinkModal(token, onPlaidLinkComplete);
 
@@ -121,6 +122,8 @@ const AccountPage = () => {
         accounts,
     } = useAccounts();
 
+    console.log(accreditation);
+
     const [userDataEditMode, setUserDataEditMode] = useState<boolean>(false);
     const [userDataEditValid, setUserDataEditValid] = useState<boolean>(false);
     const [values, setValues] = useState<any>({});
@@ -146,7 +149,6 @@ const AccountPage = () => {
                             <MemberHeader
                                 name={userName}
                                 memberInfo={userInfo}
-                                sx={{}}
                             ></MemberHeader>
                         }
                         contentTitles={drawerTitles}
@@ -271,7 +273,8 @@ const AccountPage = () => {
                                     addAccountDisabled={
                                         accountsLoading ||
                                         createLinkTokenLoading ||
-                                        createAccountLoading
+                                        createAccountLoading ||
+                                        createLinkTokenError
                                     }
                                 ></AccountListComponent>
                             )}

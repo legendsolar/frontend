@@ -103,7 +103,7 @@ const paletteOptions = {
     },
 };
 
-const typographyOptions = {
+export const typographyOptions = {
     typography: {
         fontFamily: 'Be Vietnam Pro',
         fontSize: '12px',

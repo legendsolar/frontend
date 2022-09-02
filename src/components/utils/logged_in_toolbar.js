@@ -33,7 +33,7 @@ const LoggedInToolbar = ({
                 <Typography variant="monoButton">Account</Typography>
             </Button>
 
-            <Stack sx={{width: '175px'}} spacing={1}>
+            <Stack sx={{width: '175px', alignItems: 'flex-end'}} spacing={1}>
                 <Typography
                     display="inline"
                     variant="monoButton"
@@ -43,7 +43,17 @@ const LoggedInToolbar = ({
                 >
                     Legends Wallet
                 </Typography>
-                <Button variant="header-filled" sx={{mt: 0}} onClick={onWallet}>
+                <Button
+                    variant="header-filled"
+                    sx={{
+                        mt: 0,
+                        justifyContent: 'flex-end',
+                        width: '100%',
+                        maxWidth: '175px',
+                        p: 4,
+                    }}
+                    onClick={onWallet}
+                >
                     {loading ? <LoadingText /> : walletBalance}
                 </Button>
             </Stack>

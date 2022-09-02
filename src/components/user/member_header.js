@@ -4,7 +4,7 @@ import {ref} from 'firebase/database';
 import {useAuth} from 'hooks/use_auth';
 import PropTypes from 'prop-types';
 
-const MemberHeader = ({name, memberInfo, sx}) => {
+const MemberHeader = ({name, memberInfo, sx = {}}) => {
     return (
         <Stack sx={sx ? sx : {}} spacing={0}>
             <Typography variant="headline2">{name}</Typography>
