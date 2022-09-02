@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import BankAccountIcon from 'assets/icons/bank_account_icon.png';
 import PanelIcon from 'assets/icons/panel_icon.png';
 import WalletIcon from 'assets/icons/wallet_icon.png';
-
-import {format} from 'date-fns';
+import {typographyOptions} from 'app_theme';
 
 const accountToIcon = (account) => {
     switch (account.type) {
@@ -153,14 +152,13 @@ const TransferComponent = ({transfer}) => {
                             left: '50%',
                             transform:
                                 'translateX(-50%) translateY(-50%) rotate(90deg);',
-                            fontFamily: 'Azeret Mono',
-                            fontSize: '12px',
+
                             verticalAlign: 'middle',
                             textAlign: 'center',
                             whiteSpace: 'nowrap',
                             textTransform: 'uppercase',
-                            fontWeight: 800,
                         }}
+                        variant={'monoButton'}
                     >
                         {status ? status : 'Unknown'}
                     </Typography>
