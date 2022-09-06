@@ -1,5 +1,5 @@
 import {Typography, Box, Stack, Button} from '@mui/material';
-import EmailIcon from '@mui/icons-material/Email';
+import {EnvelopeIcon, GoogleIcon} from 'components/icons/emoji_icons';
 import IconButton from 'components/buttons/icon_button';
 import ContentDivider from 'components/basics/content_divider';
 import GoogleLogo from 'components/icons/google_logo';
@@ -33,7 +33,7 @@ const SignUpOptionComponent = ({
             variant="small"
             label="Sign up with email"
             color="legendaryGreen"
-            icon={<EmailIcon sx={{ml: 3, fontSize: '24px'}}></EmailIcon>}
+            icon={<EnvelopeIcon></EnvelopeIcon>}
             onClick={onSignUpWithEmail}
         ></IconButton>
 

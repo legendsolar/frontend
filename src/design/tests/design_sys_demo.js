@@ -1,12 +1,38 @@
 import {useState} from 'react';
 import {useTheme} from '@mui/material';
-import {Paper, Button, Stack, Typography, Box, Divider} from '@mui/material';
+import {
+    Paper,
+    Button,
+    Stack,
+    Grid,
+    Typography,
+    Box,
+    Divider,
+} from '@mui/material';
 import LoadingText from 'components/utils/loading_text';
 import IconButton from 'components/buttons/icon_button';
 import GoogleLogo from 'components/icons/google_logo';
 import Email from '@mui/icons-material/Email';
 import TextField from 'utils/text_field';
 import Component from 'components/basics/component';
+import {
+    BankIcon,
+    CalendarIcon,
+    CashIcon,
+    EditFilledIcon,
+    EnvelopeIcon,
+    HammerIcon,
+    LeafIcon,
+    MagGlassIcon,
+    SunIcon,
+    PhoneIcon,
+    CheckIcon,
+    GoogleIcon,
+    PinIcon,
+    PowerIcon,
+    UmbrellaIcon,
+    UserDataIcon,
+} from 'components/icons/emoji_icons';
 
 const DesignSysDemo = (props) => {
     const theme = useTheme();
@@ -210,6 +236,87 @@ const DesignSysDemo = (props) => {
                     </Component>
                 </Stack>
             </Paper>
+
+            <Typography variant="subtitle2">Icons</Typography>
+
+            <Grid container spacing={2}>
+                {[
+                    {
+                        icon: <BankIcon></BankIcon>,
+                        name: 'Bank',
+                    },
+
+                    {
+                        icon: <CalendarIcon />,
+                        name: 'Calendar',
+                    },
+                    {
+                        icon: <CashIcon />,
+                        name: 'Cash',
+                    },
+                    {
+                        icon: <CheckIcon />,
+                        name: 'Check',
+                    },
+                    {
+                        icon: <EditFilledIcon />,
+                        name: 'Edit Filled',
+                    },
+                    {
+                        icon: <EnvelopeIcon />,
+                        name: 'Envelope',
+                    },
+                    {
+                        icon: <GoogleIcon />,
+                        name: 'Google',
+                    },
+                    {
+                        icon: <HammerIcon />,
+                        name: 'Hammer',
+                    },
+                    {
+                        icon: <LeafIcon />,
+                        name: 'Leaf',
+                    },
+                    {
+                        icon: <MagGlassIcon />,
+                        name: 'Mag Glass',
+                    },
+                    {
+                        icon: <PhoneIcon />,
+                        name: 'Phone',
+                    },
+                    {
+                        icon: <PinIcon />,
+                        name: 'Pin',
+                    },
+                    {
+                        icon: <PowerIcon />,
+                        name: 'Power',
+                    },
+                    {
+                        icon: <SunIcon />,
+                        name: 'Sun',
+                    },
+                    {
+                        icon: <UmbrellaIcon />,
+                        name: 'Umbrella',
+                    },
+                    {
+                        icon: <UserDataIcon />,
+                        name: 'User Data',
+                    },
+                ].map(({icon, name}) => (
+                    <Grid item>
+                        <Stack alignItems={'center'}>
+                            {icon}
+                            <Typography variant="description">
+                                {name}
+                            </Typography>
+                        </Stack>
+                    </Grid>
+                ))}
+            </Grid>
         </Stack>
     );
 };
