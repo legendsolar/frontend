@@ -22,8 +22,12 @@ const minNumber = 0.00001;
  * Calculates number width if output with full precision in chars, including commas and periods
  * @param number
  */
-export const numberWidth = (number: number): number => {
-    return defaultFormatter.format(number).length;
+export const integerWidth = (number: number): number => {
+    if (Math.abs(number) > 1) {
+        return defaultFormatter.format(number).length;
+    } else {
+        return 1;
+    }
 };
 
 /**
@@ -35,21 +39,26 @@ export const numberWidth = (number: number): number => {
  */
 export const numberFormatter = (
     number: number,
-    width: number = 2,
+    width: number = 1,
     sciNotation: boolean = false,
 ) => {
     if (Math.abs(number) <= 0.0001) return '0';
 
-    const numWidth = numberWidth(number);
+    const intWidth = integerWidth(number);
 
-    const decimal = width - numWidth > 0 ? width - numWidth : 0;
+    const remainingForDecimal =
+        width - intWidth - 1 > 0 ? width - intWidth - 1 : 0;
 
-    if (sciNotation && numWidth > width) {
+    if (sciNotation && intWidth > width) {
         return compactFormatter.format(number);
     }
 
+    console.log({number, remainingForDecimal, intWidth, width});
+
     const formatter = new Intl.NumberFormat('en-US', {
-        maximumFractionDigits: decimal,
+        maximumFractionDigits: remainingForDecimal,
+        minimumFractionDigits:
+            remainingForDecimal > 1 ? remainingForDecimal - 1 : 0,
     });
     return formatter.format(number);
 };

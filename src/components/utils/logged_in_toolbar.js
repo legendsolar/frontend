@@ -1,4 +1,5 @@
 import {Stack, Button, Typography} from '@mui/material';
+import {WalletIcon} from 'components/icons/custom_icons';
 import LoadingText from './loading_text';
 
 const LoggedInToolbar = ({
@@ -47,13 +48,14 @@ const LoggedInToolbar = ({
                     variant="header-filled"
                     sx={{
                         mt: 0,
-                        justifyContent: 'flex-end',
+                        justifyContent: 'space-between',
                         width: '100%',
                         maxWidth: '175px',
                         p: 4,
                     }}
                     onClick={onWallet}
                 >
+                    <WalletIcon />
                     {loading ? <LoadingText /> : walletBalance}
                 </Button>
             </Stack>

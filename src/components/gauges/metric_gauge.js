@@ -100,7 +100,7 @@ function MetricGauge({
                     </svg>
                     <div className={styles.center}>
                         <Typography variant="headline1" sx={{mt: 'auto'}}>
-                            {error ? '--' : numberFormatter(currentValue, 2)}
+                            {error ? '--' : numberFormatter(currentValue, 3)}
                         </Typography>
                     </div>
                 </div>

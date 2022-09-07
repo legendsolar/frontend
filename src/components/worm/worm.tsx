@@ -191,12 +191,12 @@ const Worm = ({
 
     return (
         <Box sx={{p: 0, width: '100%', overflow: 'hidden', ...sx}}>
-            <Stack sx={{p: 2}} direction="row" justifyContent="space-between">
+            <Stack sx={{p: 4}} direction="row" justifyContent="space-between">
                 <Typography variant={'smallHeadline' as any}>
                     Productivity
                 </Typography>
-                <Typography variant={'subtitle2'}>
-                    {format(lastTime, 'p')}
+                <Typography variant={'body1'}>
+                    {format(lastTime, 'h a')}
                 </Typography>
             </Stack>
             <div className="Chart__wrapper" ref={ref} style={{height: '180px'}}>

@@ -1,18 +1,20 @@
 import {
     currencyFormatter,
     numberFormatter,
-    numberWidth,
+    integerWidth,
 } from 'utils/number_formatter';
 
 test('properly calculates number width in chars', () => {
-    expect(numberWidth(0.001)).toBe(5);
-    expect(numberWidth(1)).toBe(1);
-    expect(numberWidth(1.0)).toBe(1);
-    expect(numberWidth(100)).toBe(3);
-    expect(numberWidth(100.001)).toBe(7);
-    expect(numberWidth(100.99)).toBe(6);
-    expect(numberWidth(1000.99)).toBe(8);
-    expect(numberWidth(1e6)).toBe(9);
+    expect(integerWidth(0.001)).toBe(1);
+    expect(integerWidth(0.555)).toBe(1);
+    expect(integerWidth(0.55555)).toBe(1);
+    expect(integerWidth(1)).toBe(1);
+    expect(integerWidth(1.0)).toBe(1);
+    expect(integerWidth(100)).toBe(3);
+    expect(integerWidth(100.001)).toBe(7);
+    expect(integerWidth(100.99)).toBe(6);
+    expect(integerWidth(1000.99)).toBe(8);
+    expect(integerWidth(1e6)).toBe(9);
 });
 
 test('formats numbers without sci notation', () => {
@@ -22,6 +24,11 @@ test('formats numbers without sci notation', () => {
     expect(numberFormatter(100.001)).toBe('100');
     expect(numberFormatter(100.99)).toBe('101');
     expect(numberFormatter(1000.99)).toBe('1,001');
+
+    expect(numberFormatter(0.55555)).toBe('1');
+    expect(numberFormatter(0.55555, 3)).toBe('0.6');
+    expect(numberFormatter(0.55555, 4)).toBe('0.56');
+    expect(numberFormatter(0.55555, 5)).toBe('0.556');
 });
 
 test('formats numbers with sci notation', () => {
