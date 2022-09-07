@@ -18,7 +18,7 @@ jobs:
         with:
           token: ${{ secrets.BOT_PAT_TOKEN}}
           submodules: recursive
-      - run: npm ci && npm run build
+      - run: npm ci && npm run build:dev
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
