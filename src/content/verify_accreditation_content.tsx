@@ -4,6 +4,7 @@ import CheckboxList, {CheckboxListItem} from 'components/inputs/checkbox_list';
 import {Button, Typography, CircularProgress} from '@mui/material';
 import {AccreditationOptions} from 'schema/schema_gen_types';
 import LoadingText from 'components/utils/loading_text';
+import ContentDivider from 'components/basics/content_divider';
 
 export interface AccreditationOption extends CheckboxListItem {
     accredited: boolean;
@@ -84,9 +85,11 @@ const VerifyAccreditationContent = ({
                 Legends Solar offerings
             </Typography>
 
-            <Typography variant={'subtitle2' as any}>
-                Check all that apply
-            </Typography>
+            <ContentDivider color="white">
+                <Typography variant={'monoButton' as any}>
+                    Check all that apply
+                </Typography>
+            </ContentDivider>
 
             <CheckboxList<AccreditationOption>
                 items={ACCREDITATION_OPTIONS}

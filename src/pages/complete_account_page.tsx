@@ -25,6 +25,12 @@ import CreateWalletContent from 'content/create_wallet_content';
 import BackButton from 'components/buttons/back_button';
 import LoadingComponent from 'components/basics/loading_component';
 import {RecaptchaVerifier as FirebaseRecaptchaVerifier} from 'firebase/auth';
+import {
+    BankIcon,
+    CashIcon,
+    EnvelopeIcon,
+    PhoneIcon,
+} from 'components/icons/emoji_icons';
 
 enum States {
     STEPS_TO_INVEST = 'steps_to_invest',
@@ -136,11 +142,7 @@ const CompleteAccountPage = () => {
                                 complete: status.emailVerified,
                                 completeMessage: '✅',
                                 title: 'Verify Email',
-                                icon: (
-                                    <Typography variant={'mediumEmoji' as any}>
-                                        📧
-                                    </Typography>
-                                ),
+                                icon: <EnvelopeIcon></EnvelopeIcon>,
                                 onClick: () => {
                                     setState(States.EMAIL);
                                 },
@@ -152,11 +154,7 @@ const CompleteAccountPage = () => {
                                 completeMessage: '✅',
                                 title: 'Verify Phone Number',
 
-                                icon: (
-                                    <Typography variant={'mediumEmoji' as any}>
-                                        📞
-                                    </Typography>
-                                ),
+                                icon: <PhoneIcon></PhoneIcon>,
                                 onClick: () => {
                                     setState(States.PHONE);
                                 },
@@ -165,11 +163,7 @@ const CompleteAccountPage = () => {
                                 complete: stepsComplete.accreditation,
                                 title: 'Verify Accreditation',
                                 completeMessage: '✅',
-                                icon: (
-                                    <Typography variant={'mediumEmoji' as any}>
-                                        💸
-                                    </Typography>
-                                ),
+                                icon: <CashIcon></CashIcon>,
                                 onClick: () => {
                                     setState(States.ACCREDITATION);
                                 },
@@ -182,11 +176,7 @@ const CompleteAccountPage = () => {
                                     !stepsComplete.accreditation,
                                 disabledMessage: 'Complete others first',
                                 title: 'Create Wallet',
-                                icon: (
-                                    <Typography variant={'mediumEmoji' as any}>
-                                        🏛
-                                    </Typography>
-                                ),
+                                icon: <BankIcon></BankIcon>,
                                 onClick: () => {
                                     setState(States.WALLET);
                                 },

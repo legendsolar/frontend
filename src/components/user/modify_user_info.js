@@ -76,125 +76,113 @@ const ModifyUserInfo = ({
     ]);
 
     return (
-        <div>
-            <Grid
-                container
-                columnSpacing={2}
-                rowSpacing={0}
-                sx={{width: '100%'}}
-            >
-                <Grid item xs={12} md={12}>
-                    <TextField
-                        color={color}
-                        error={
-                            formik.touched.streetAddress &&
-                            Boolean(formik.errors.streetAddress)
-                        }
-                        helperText={formik.errors.streetAddress}
-                        value={formik.values.streetAddress}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        disabled={disabled}
-                        id="streetAddress"
-                        label="Street Address"
-                        name="streetAddress"
-                        autoComplete="streetAddress"
-                    ></TextField>
-                </Grid>
-
-                <Grid item xs={12} md={12}>
-                    <TextField
-                        color={color}
-                        error={
-                            formik.touched.streetAddress2 &&
-                            Boolean(formik.errors.streetAddress2)
-                        }
-                        helperText={formik.errors.streetAddress2}
-                        value={formik.values.streetAddress2}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        disabled={disabled}
-                        id="streetAddress2"
-                        label="Apt Number, PO Box, ect (optional)"
-                        name="streetAddress2"
-                        autoComplete="streetAddress2"
-                    ></TextField>
-                </Grid>
-
-                <Grid item xs={12} md={5}>
-                    <TextField
-                        color={color}
-                        name="city"
-                        label="City"
-                        error={
-                            formik.touched.city && Boolean(formik.errors.city)
-                        }
-                        helperText={formik.errors.city}
-                        value={formik.values.city}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        disabled={disabled}
-                        autoComplete="city"
-                    ></TextField>
-                </Grid>
-
-                <Grid item xs={12} md={3} sx={{mb: 3}}>
-                    <FormControl
-                        variant="filled"
-                        fullWidth
-                        color={color}
-                        disabled={disabled}
-                    >
-                        <InputLabel>State</InputLabel>
-                        <Select
-                            helperText={'state'}
-                            name="state"
-                            value={
-                                formik.values.state ? formik.values.state : ''
-                            }
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        >
-                            {states.map((state) => {
-                                return (
-                                    <MenuItem key={state} value={state}>
-                                        {state}
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-
-                        {formik.touched.state &&
-                        Boolean(formik.errors.state) ? (
-                            <FormHelperText error>
-                                {formik.touched.state && formik.errors.state}
-                            </FormHelperText>
-                        ) : (
-                            <></>
-                        )}
-                    </FormControl>
-                </Grid>
-
-                <Grid item xs={12} md={4}>
-                    <TextField
-                        color={color}
-                        name="postalCode"
-                        label="Zip Code"
-                        fullWidth
-                        error={
-                            formik.touched.postalCode &&
-                            Boolean(formik.errors.postalCode)
-                        }
-                        helperText={formik.errors.postalCode}
-                        value={formik.values.postalCode}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        disabled={disabled}
-                        autoComplete="postalCode"
-                    ></TextField>
-                </Grid>
+        <Grid container columnSpacing={2} rowSpacing={0} sx={{width: '100%'}}>
+            <Grid item xs={12} md={12}>
+                <TextField
+                    color={color}
+                    error={
+                        formik.touched.streetAddress &&
+                        Boolean(formik.errors.streetAddress)
+                    }
+                    helperText={formik.errors.streetAddress}
+                    value={formik.values.streetAddress}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    disabled={disabled}
+                    id="streetAddress"
+                    label="Street Address"
+                    name="streetAddress"
+                    autoComplete="streetAddress"
+                ></TextField>
             </Grid>
-        </div>
+
+            <Grid item xs={12} md={12}>
+                <TextField
+                    color={color}
+                    error={
+                        formik.touched.streetAddress2 &&
+                        Boolean(formik.errors.streetAddress2)
+                    }
+                    helperText={formik.errors.streetAddress2}
+                    value={formik.values.streetAddress2}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    disabled={disabled}
+                    id="streetAddress2"
+                    label="Apt Number, PO Box, ect (optional)"
+                    name="streetAddress2"
+                    autoComplete="streetAddress2"
+                ></TextField>
+            </Grid>
+
+            <Grid item xs={12} md={5}>
+                <TextField
+                    color={color}
+                    name="city"
+                    label="City"
+                    error={formik.touched.city && Boolean(formik.errors.city)}
+                    helperText={formik.errors.city}
+                    value={formik.values.city}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    disabled={disabled}
+                    autoComplete="city"
+                ></TextField>
+            </Grid>
+
+            <Grid item xs={12} md={3} sx={{mb: 3}}>
+                <FormControl
+                    variant="filled"
+                    fullWidth
+                    color={color}
+                    disabled={disabled}
+                >
+                    <InputLabel>State</InputLabel>
+                    <Select
+                        helperText={'state'}
+                        name="state"
+                        value={formik.values.state ? formik.values.state : ''}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    >
+                        {states.map((state) => {
+                            return (
+                                <MenuItem key={state} value={state}>
+                                    {state}
+                                </MenuItem>
+                            );
+                        })}
+                    </Select>
+
+                    {formik.touched.state && Boolean(formik.errors.state) ? (
+                        <FormHelperText error>
+                            {formik.touched.state && formik.errors.state}
+                        </FormHelperText>
+                    ) : (
+                        <></>
+                    )}
+                </FormControl>
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+                <TextField
+                    color={color}
+                    name="postalCode"
+                    label="Zip Code"
+                    fullWidth
+                    error={
+                        formik.touched.postalCode &&
+                        Boolean(formik.errors.postalCode)
+                    }
+                    helperText={formik.errors.postalCode}
+                    value={formik.values.postalCode}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    disabled={disabled}
+                    autoComplete="postalCode"
+                ></TextField>
+            </Grid>
+        </Grid>
     );
 };
 

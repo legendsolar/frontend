@@ -12,7 +12,7 @@ import {UserDwollaAccountData} from 'schema/schema_gen_types';
 import Component from 'components/basics/component';
 import LoadingText from 'components/utils/loading_text';
 import CheckboxItem from 'components/inputs/checkbox_item';
-import ComponentDivider from 'components/basics/component_divider';
+import ContentDivider from 'components/basics/content_divider';
 
 interface CreateDwollaAccountProps {
     onSubmit(input: UserDwollaAccountData): Promise<any>;
@@ -54,13 +54,11 @@ const CreateWalletContent = ({
                 Information will never be used for marketing.
             </Typography>
 
-            <ComponentDivider
-                sx={{backgroundColor: 'white.main', mt: 0}}
-            ></ComponentDivider>
-
-            <Typography variant={'monoButton' as any}>
-                Mailing Address
-            </Typography>
+            <ContentDivider color="white">
+                <Typography variant={'monoButton' as any}>
+                    Mailing Address
+                </Typography>
+            </ContentDivider>
 
             <ModifyUserInfo
                 initialValues={{
@@ -82,19 +80,11 @@ const CreateWalletContent = ({
                 }
             ></ModifyUserInfo>
 
-            <ComponentDivider
-                sx={{backgroundColor: 'white.main', mt: 0}}
-            ></ComponentDivider>
-
-            <Stack
-                direction={'row'}
-                alignItems={'center'}
-                justifyContent={'space-between'}
-            >
+            <ContentDivider color="white">
                 <Typography variant={'monoButton' as any}>
                     Personal Information
                 </Typography>
-            </Stack>
+            </ContentDivider>
 
             <ProtectedUserInfo
                 initialValues={{
@@ -146,10 +136,6 @@ const CreateWalletContent = ({
                     setAcceptDwollaPolicy(!acceptDwollaPolicy);
                 }}
             ></CheckboxItem>
-
-            <ComponentDivider
-                sx={{backgroundColor: 'white.main', mt: 0}}
-            ></ComponentDivider>
 
             <Button
                 variant={'primary' as any}
