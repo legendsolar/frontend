@@ -58,10 +58,18 @@ interface WormProps {
     loading: boolean;
     error: boolean;
     nightThreshold_W: number;
+    max_W: number;
     sx?: any;
 }
 
-const Worm = ({rawData, loading, error, nightThreshold_W, sx}: WormProps) => {
+const Worm = ({
+    rawData,
+    loading,
+    error,
+    nightThreshold_W,
+    max_W,
+    sx,
+}: WormProps) => {
     const styleOptions = defaultChartDisplayParams;
 
     if (nightThreshold_W) {
@@ -128,11 +136,7 @@ const Worm = ({rawData, loading, error, nightThreshold_W, sx}: WormProps) => {
     }, [rawData, loading, error, dms.boundedWidth]);
 
     const yScale = useMemo(
-        () =>
-            d3
-                .scaleLinear()
-                .domain(d3.extent(data, yAccessor))
-                .range([dms.boundedHeight, 0]),
+        () => d3.scaleLinear().domain([0, max_W]).range([dms.boundedHeight, 0]),
         [dms.boundedHeight, data],
     );
 

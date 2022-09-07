@@ -77,6 +77,7 @@ const RealTimeContent = ({
                 loading={false}
                 error={false}
                 nightThreshold_W={(generationMetaData.max_kW * 1000) / 3}
+                max_W={generationMetaData.max_kW * 1000}
                 sx={{
                     backgroundColor: 'whiteFog.main',
                 }}
