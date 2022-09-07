@@ -29,6 +29,8 @@ import {numberFormatter, currencyFormatter} from 'utils/number_formatter';
 import LoadingContent from 'content/loading_content';
 import {Document} from 'components/documents/types';
 import EmptyContent from './empty_content';
+import {CashIcon, LeafIcon, PowerIcon} from 'components/icons/emoji_icons';
+import MetricBox from 'components/gauges/metric_box';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
@@ -180,96 +182,37 @@ const PortfolioContent = ({
                             </ContentDivider>
 
                             <Stack direction={'row'}>
-                                <Component
-                                    standardWidth={false}
-                                    sx={{
-                                        backgroundColor: 'whiteFog.main',
-                                        width: '100%',
-                                    }}
-                                >
-                                    <Stack spacing={1}>
-                                        <Typography
-                                            variant={'smallHeadline' as any}
-                                        >
-                                            💸
-                                        </Typography>
-                                        <Typography
-                                            variant={'headline1' as any}
-                                        >
-                                            {'$' +
-                                                numberFormatter(
-                                                    summary.totalGeneration_kWh *
-                                                        generationMetaData.dollar_per_kWh,
-                                                    2,
-                                                )}
-                                        </Typography>
-                                        <Typography
-                                            variant={'monoButton' as any}
-                                        >
-                                            {'USD Dividends Earned'}
-                                        </Typography>
-                                    </Stack>
-                                </Component>
-                                <Component
-                                    standardWidth={false}
-                                    sx={{
-                                        backgroundColor: 'whiteFog.main',
-                                        width: '100%',
-                                    }}
-                                >
-                                    <Stack spacing={1}>
-                                        <Typography
-                                            variant={'smallHeadline' as any}
-                                        >
-                                            🌱
-                                        </Typography>
-                                        <Typography
-                                            variant={'headline1' as any}
-                                        >
-                                            {'' +
-                                                numberFormatter(
-                                                    summary.totalGeneration_kWh *
-                                                        generationMetaData.co2_per_kWh,
-                                                    3,
-                                                )}
-                                        </Typography>
-                                        <Typography
-                                            variant={'monoButton' as any}
-                                        >
-                                            {'LBS Carbon Averted'}
-                                        </Typography>
-                                    </Stack>
-                                </Component>
+                                <MetricBox
+                                    metric={
+                                        '$' +
+                                        numberFormatter(
+                                            summary.totalGeneration_kWh *
+                                                generationMetaData.dollar_per_kWh,
+                                            2,
+                                        )
+                                    }
+                                    icon={<CashIcon></CashIcon>}
+                                    title={'USD Dividends Earned'}
+                                ></MetricBox>
 
-                                <Component
-                                    standardWidth={false}
-                                    sx={{
-                                        backgroundColor: 'whiteFog.main',
-                                        width: '100%',
-                                    }}
-                                >
-                                    <Stack spacing={1}>
-                                        <Typography
-                                            variant={'smallHeadline' as any}
-                                        >
-                                            ⚡
-                                        </Typography>
-                                        <Typography
-                                            variant={'headline1' as any}
-                                        >
-                                            {'' +
-                                                numberFormatter(
-                                                    summary.totalGeneration_kWh,
-                                                    3,
-                                                )}
-                                        </Typography>
-                                        <Typography
-                                            variant={'monoButton' as any}
-                                        >
-                                            {'KWH Generated'}
-                                        </Typography>
-                                    </Stack>
-                                </Component>
+                                <MetricBox
+                                    metric={numberFormatter(
+                                        summary.totalGeneration_kWh *
+                                            generationMetaData.co2_per_kWh,
+                                        3,
+                                    )}
+                                    icon={<LeafIcon />}
+                                    title={'LBS Carbon Averted'}
+                                ></MetricBox>
+
+                                <MetricBox
+                                    metric={numberFormatter(
+                                        summary.totalGeneration_kWh,
+                                        3,
+                                    )}
+                                    icon={<PowerIcon />}
+                                    title={'kWh Generated'}
+                                ></MetricBox>
                             </Stack>
 
                             <ContentDivider>
