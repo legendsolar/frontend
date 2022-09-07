@@ -1,5 +1,5 @@
 import {Stack, Button, Typography} from '@mui/material';
-import {WalletIcon} from 'components/icons/custom_icons';
+import {WalletIcon} from 'components/icons/icons';
 import LoadingText from './loading_text';
 
 const LoggedInToolbar = ({

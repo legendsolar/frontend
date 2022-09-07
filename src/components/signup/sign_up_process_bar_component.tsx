@@ -1,9 +1,9 @@
 import {Stack, Typography, Button} from '@mui/material';
-import {CircledIcon} from 'components/icons/icons.js';
+import {CircledIcon} from 'components/icons/icons';
 export interface SignUpProcessItem {
-    title: string,
-    icon: JSX.Element,
-    onClick(): any,
+    title: string;
+    icon: JSX.Element;
+    onClick(): any;
 }
 
 interface SignUpProcessBarComponentProps {
@@ -11,15 +11,19 @@ interface SignUpProcessBarComponentProps {
     sx: any;
 }
 
-
-const SignUpProcessBarComponent = ({processItems, sx={}} : SignUpProcessBarComponentProps) => {
-    const processItem = ({title, icon, onClick} : SignUpProcessItem, idx: number) => (
+const SignUpProcessBarComponent = ({
+    processItems,
+    sx = {},
+}: SignUpProcessBarComponentProps) => {
+    const processItem = (
+        {title, icon, onClick}: SignUpProcessItem,
+        idx: number,
+    ) => (
         <Button onClick={onClick}>
-
-        <Stack alignItems={'center'} key={idx}>
-            <CircledIcon icon={icon}></CircledIcon>
-            <Typography variant={"subtitle3" as any}>{title}</Typography>
-        </Stack>
+            <Stack alignItems={'center'} key={idx}>
+                <CircledIcon icon={icon}></CircledIcon>
+                <Typography variant={'subtitle3' as any}>{title}</Typography>
+            </Stack>
         </Button>
     );
 

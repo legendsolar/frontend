@@ -15,6 +15,7 @@ import GoogleLogo from 'components/icons/google_logo';
 import Email from '@mui/icons-material/Email';
 import TextField from 'utils/text_field';
 import Component from 'components/basics/component';
+
 import {
     BankIcon,
     CalendarIcon,
@@ -26,13 +27,20 @@ import {
     MagGlassIcon,
     SunIcon,
     PhoneIcon,
-    CheckIcon,
-    GoogleIcon,
     PinIcon,
     PowerIcon,
     UmbrellaIcon,
     UserDataIcon,
 } from 'components/icons/emoji_icons';
+
+import {
+    CheckIcon,
+    InstagramIcon,
+    LinkIcon,
+    LinkedInIcon,
+    TwitterIcon,
+    GoogleIcon,
+} from 'components/icons/icons';
 
 const DesignSysDemo = (props) => {
     const theme = useTheme();
@@ -275,6 +283,18 @@ const DesignSysDemo = (props) => {
                         name: 'Hammer',
                     },
                     {
+                        icon: <InstagramIcon />,
+                        name: 'Instagram',
+                    },
+                    {
+                        icon: <LinkIcon />,
+                        name: 'Link',
+                    },
+                    {
+                        icon: <LinkedInIcon />,
+                        name: 'LinkedIn',
+                    },
+                    {
                         icon: <LeafIcon />,
                         name: 'Leaf',
                     },
@@ -297,6 +317,10 @@ const DesignSysDemo = (props) => {
                     {
                         icon: <SunIcon />,
                         name: 'Sun',
+                    },
+                    {
+                        icon: <TwitterIcon />,
+                        name: 'Twitter',
                     },
                     {
                         icon: <UmbrellaIcon />,

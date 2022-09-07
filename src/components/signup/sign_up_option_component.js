@@ -1,11 +1,9 @@
 import {Typography, Box, Stack, Button} from '@mui/material';
-import {EnvelopeIcon, GoogleIcon} from 'components/icons/emoji_icons';
+import {EnvelopeIcon} from 'components/icons/emoji_icons';
+import {GoogleIcon} from 'components/icons/icons';
 import IconButton from 'components/buttons/icon_button';
 import ContentDivider from 'components/basics/content_divider';
-import GoogleLogo from 'components/icons/google_logo';
 import PropTypes from 'prop-types';
-import Component from 'components/basics/component';
-import Divider from 'components/basics/divider';
 
 const SignUpOptionComponent = ({
     onSignUpWithGoogle,
@@ -21,7 +19,7 @@ const SignUpOptionComponent = ({
             variant="small"
             label="Sign up with Google"
             color="white"
-            icon={<GoogleLogo height={'64px'}></GoogleLogo>}
+            icon={<GoogleIcon />}
             onClick={onSignUpWithEmail}
         ></IconButton>
 

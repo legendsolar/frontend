@@ -622,8 +622,6 @@ export const themeOptions = {
                     lineHeight: '20px',
                     textTransform: 'none',
                     borderRadius: '0px',
-                    whiteSpace: 'nowrap',
-                    minWidth: 'auto',
                 },
             },
         },
@@ -644,6 +642,12 @@ export const themeOptions = {
                     style: {
                         backgroundColor: paletteOptions.palette.white.main,
                         color: paletteOptions.palette.blackDusk.main,
+                    },
+                },
+                {
+                    props: {error: true},
+                    style: {
+                        border: `1px solid ${paletteOptions.palette.eraserRed.main}`,
                     },
                 },
             ],
@@ -716,6 +720,7 @@ export const themeOptions = {
             styleOverrides: {
                 root: {
                     textAlign: 'center',
+                    top: '3px',
                     ...typographyOptions.typography.subtitle2,
                 },
             },
