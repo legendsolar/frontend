@@ -26,7 +26,7 @@ import {useEffect} from 'react';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 
-interface Values {
+export interface Values {
     streetAddress: string;
     streetAddress2: string;
     city: string;

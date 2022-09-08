@@ -20,10 +20,11 @@ const TestMultiselect = () => {
         },
     ];
 
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState<{value: string}>({value: ''});
 
-    const onChangeListener = (event) => {
-        setSelected(event.target);
+    const onChangeListener = ({name, value}) => {
+        console.log({onChangeListener: {name, value}});
+        setSelected({value});
     };
 
     return (
@@ -32,7 +33,6 @@ const TestMultiselect = () => {
             text="Test Multiselect Text"
             fields={fields}
             selected={selected}
-            error={null}
             onChangeListener={onChangeListener}
         ></MultiSelect>
     );

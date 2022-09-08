@@ -12,7 +12,7 @@ import MemberHeader from 'components/user/member_header';
 import TransferGrid from 'components/transfers/transfer_grid';
 import {useUser} from 'hooks/use_user';
 import Component from 'components/basics/component';
-import ModifyUserInfo from 'components/inputs/modify_user_info';
+import ModifyUserInfo, {Values} from 'components/inputs/modify_user_info';
 import LoadingComponent from 'components/basics/loading_component';
 import AccountListComponent from 'components/transfers/account_list_component';
 import useNavBar from 'hooks/use_nav_bar';
@@ -106,9 +106,7 @@ const AccountPage = () => {
     const userName = firstName + ' ' + lastName;
     const userInfo = info;
 
-    const userInfoInitial = {
-        firstName,
-        lastName,
+    const userInfoInitial: Values = {
         streetAddress,
         streetAddress2,
         city,

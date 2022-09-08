@@ -17,7 +17,7 @@ interface MultiSelectProps {
         value: string;
     };
     error?: string;
-    disabled: boolean;
+    disabled?: boolean;
     onChangeListener({name, value}: {name: string; value: string}): void;
 }
 
@@ -26,13 +26,13 @@ const MultiSelect = ({
     text,
     fields,
     selected,
-    error,
-    disabled,
+    error = undefined,
+    disabled = false,
     onChangeListener,
 }: MultiSelectProps) => {
     const handleChange = (event) => {
         const {name, value} = event.target;
-        onChangeListener(value);
+        onChangeListener({name, value});
     };
 
     return (
