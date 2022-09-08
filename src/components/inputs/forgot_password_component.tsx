@@ -4,17 +4,28 @@ import {useFormik} from 'formik';
 import * as yup from 'yup';
 
 import TextField from 'components/inputs/text_field';
-
+import LoadingText from 'components/utils/loading_text';
 import {validateEmail} from 'validation/user_data_validation';
 import {ErrorTypes} from 'utils/errors';
 import {useState} from 'react';
 
+interface Values {
+    email: string;
+}
+
+interface Props {
+    initialValues?: Values;
+    onSubmit(values: Values): Promise<void>;
+    onBackToSignIn(): void;
+    color?: string;
+}
+
 const ForgotPasswordComponent = ({
-    initialValues,
+    initialValues = {email: ''},
     onSubmit,
     onBackToSignIn,
-    color,
-}) => {
+    color = 'dark',
+}: Props) => {
     const [resetLinkSent, setResetLinkSent] = useState(false);
 
     const formik = useFormik({
@@ -28,8 +39,6 @@ const ForgotPasswordComponent = ({
                     setResetLinkSent(true);
                 })
                 .catch((error) => {
-                    console.log('error');
-
                     if (error.type === ErrorTypes.ValidationError) {
                         setErrors({
                             [error.source]: error.message,
@@ -63,8 +72,8 @@ const ForgotPasswordComponent = ({
                     />
 
                     <Button
-                        variant="primary"
-                        onClick={formik.handleSubmit}
+                        variant={'primary' as any}
+                        onClick={() => formik.handleSubmit()}
                         disabled={
                             formik.isValidating ||
                             formik.isSubmitting ||
@@ -72,7 +81,7 @@ const ForgotPasswordComponent = ({
                             !formik.isValid ||
                             resetLinkSent
                         }
-                        color="legendaryGreen"
+                        color={'legendaryGreen' as any}
                         sx={{width: '100%', mt: 4}}
                     >
                         {formik.isValidating || formik.isSubmitting ? (
@@ -85,7 +94,7 @@ const ForgotPasswordComponent = ({
                     <Stack direction={'row'} justifyContent={'space-between'}>
                         <Button variant="text" onClick={onBackToSignIn}>
                             <Typography
-                                variant="smallLabel"
+                                variant={'smallLabel' as any}
                                 color="legendaryGreen.main"
                                 sx={{ml: 1}}
                             >
@@ -97,20 +106,6 @@ const ForgotPasswordComponent = ({
             </form>
         </Box>
     );
-};
-
-ForgotPasswordComponent.propTypes = {
-    initialValues: PropTypes.shape({
-        email: PropTypes.string,
-    }),
-    onSubmit: PropTypes.func.isRequired,
-    onBackToSignIn: PropTypes.func.isRequired,
-};
-
-ForgotPasswordComponent.defaultProps = {
-    initialValues: {
-        email: '',
-    },
 };
 
 export default ForgotPasswordComponent;

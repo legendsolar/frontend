@@ -106,6 +106,27 @@ const basePaths = [
             {
                 name: 'test_checkbox_list',
             },
+            {
+                name: 'test_change_email_component',
+            },
+            {
+                name: 'test_change_phone_component',
+            },
+            {
+                name: 'test_forgot_password_component',
+            },
+            {
+                name: 'test_mfa_verify_component',
+            },
+            {
+                name: 'test_modify_user_info',
+            },
+            {
+                name: 'test_protected_user_info',
+            },
+            {
+                name: 'test_sign_in_component',
+            },
         ],
     },
 
@@ -235,17 +256,7 @@ const basePaths = [
     {
         name: 'user',
         type: 'components',
-        tests: [
-            {
-                name: 'test_sign_in_component',
-            },
-            {
-                name: 'test_modify_user_info',
-            },
-            {
-                name: 'test_protected_user_info',
-            },
-        ],
+        tests: [],
     },
 
     {

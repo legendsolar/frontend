@@ -1,8 +1,8 @@
 import Component from 'components/basics/component';
 import {useState} from 'react';
 import {Button, Stack, Typography} from '@mui/material';
-import MfaVerifyComponent from 'components/user/mfa_verify_component';
-import ChangePhoneComponent from 'components/user/change_phone_component';
+import MfaVerifyComponent from 'components/inputs/mfa_verify_component';
+import ChangePhoneComponent from 'components/inputs/change_phone_component';
 import RecaptchaVerifier from 'components/invisible/recaptcha_verifier';
 import {RecaptchaVerifier as FirebaseRecaptchaVerifier} from 'firebase/auth';
 interface VerifyMfaContentProps {
@@ -35,7 +35,7 @@ const VerifyMfaContent = ({
                         shortly.
                     </Typography>
                     <MfaVerifyComponent
-                        onSubmit={({code}) => onMfaCodeSubmit(code)}
+                        onSubmit={async ({code}) => onMfaCodeSubmit(code)}
                         codeSent={true}
                         onChangePhoneRequested={() =>
                             setState(states.CHANGE_PHONE)
@@ -70,7 +70,7 @@ const VerifyMfaContent = ({
                     </Typography>
 
                     <ChangePhoneComponent
-                        onSubmit={({phone}) => {
+                        onSubmit={async ({phone}) => {
                             onChangePhoneRequested(phone);
                             setState(states.VERIFY_MFA);
                         }}

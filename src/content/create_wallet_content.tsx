@@ -4,8 +4,8 @@ import {Button, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
 
 import Divider from 'components/basics/divider';
-import ModifyUserInfo from 'components/user/modify_user_info';
-import ProtectedUserInfo from 'components/user/protected_user_info';
+import ModifyUserInfo from 'components/inputs/modify_user_info';
+import ProtectedUserInfo from 'components/inputs/protected_user_info';
 import {ErrorTypes} from 'utils/errors';
 import {Error} from 'utils/error_types';
 import {UserDwollaAccountData} from 'schema/schema_gen_types';

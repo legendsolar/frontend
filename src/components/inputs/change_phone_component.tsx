@@ -11,27 +11,31 @@ import {
 
 import TextField from 'components/inputs/text_field';
 
-import {states} from 'utils/static_lists';
-import {
-    validateMfaVerifyCode,
-    validatePhoneNumber,
-} from 'validation/user_data_validation';
+import {validatePhoneNumber} from 'validation/user_data_validation';
 
 import {ErrorTypes} from 'utils/errors';
-import {useEffect} from 'react';
 import {useFormik} from 'formik';
-import {useNavigate} from 'react-router-dom';
 import * as yup from 'yup';
 
+interface Values {
+    phone: string;
+}
+
+interface Props {
+    initialValues?: Values;
+    onSubmit(values: Values): Promise<void>;
+    color?: string;
+}
+
 const ChangePhoneComponent = ({
-    initialPhoneNumberValues,
+    initialValues = {phone: ''},
     onSubmit,
     color = 'dark',
-}) => {
+}: Props) => {
     const [error, setError] = useState(null);
 
     const formik = useFormik({
-        initialValues: initialPhoneNumberValues,
+        initialValues,
         validationSchema: yup.object().shape({
             phone: validatePhoneNumber(),
         }),
@@ -66,8 +70,8 @@ const ChangePhoneComponent = ({
                     autoComplete="tel-national"
                 />
                 <Button
-                    variant="primary"
-                    onClick={formik.handleSubmit}
+                    variant={'primary' as any}
+                    onClick={() => formik.handleSubmit()}
                     disabled={
                         formik.isValidating ||
                         formik.isSubmitting ||
@@ -77,7 +81,9 @@ const ChangePhoneComponent = ({
                     sx={{width: '100%', mt: 4}}
                 >
                     {formik.isValidating || formik.isSubmitting ? (
-                        <CircularProgress color="light"></CircularProgress>
+                        <CircularProgress
+                            color={'light' as any}
+                        ></CircularProgress>
                     ) : (
                         'Send confirmation'
                     )}
@@ -87,20 +93,6 @@ const ChangePhoneComponent = ({
             </Stack>
         </div>
     );
-};
-
-ChangePhoneComponent.propTypes = {
-    initialPhoneNumberValues: PropTypes.shape({
-        phone: PropTypes.string,
-    }),
-    onSubmit: PropTypes.func,
-};
-
-ChangePhoneComponent.defaultProps = {
-    initialPhoneNumberValues: {
-        phone: '',
-    },
-    onSubmit: () => {},
 };
 
 export default ChangePhoneComponent;

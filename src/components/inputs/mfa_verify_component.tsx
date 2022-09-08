@@ -16,18 +16,31 @@ import {ErrorTypes} from 'utils/errors';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 
+interface Values {
+    code: string;
+}
+
+interface Props {
+    initialValues?: Values;
+    onSubmit(values: Values): Promise<void>;
+    codeSent: boolean;
+    onChangePhoneRequested(): void;
+    color?: string;
+    changePhoneAllowed?: boolean;
+}
+
 const MfaVerifyComponent = ({
-    initialCodeValues,
+    initialValues = {code: ''},
     onSubmit,
     codeSent,
     onChangePhoneRequested,
     color = 'light',
     changePhoneAllowed = false,
-}) => {
+}: Props) => {
     const [error, setError] = useState(null);
 
     const codeForm = useFormik({
-        initialValues: initialCodeValues,
+        initialValues: initialValues,
         validationSchema: yup.object().shape({
             code: validateMfaVerifyCode(),
         }),
@@ -41,10 +54,6 @@ const MfaVerifyComponent = ({
 
                 if (error.type == ErrorTypes.SystemError) {
                     setError(error.message);
-                }
-
-                if (error.type === ErrorTypes.NewLogInRequired) {
-                    navigate('/signIn');
                 }
             });
         },
@@ -69,8 +78,8 @@ const MfaVerifyComponent = ({
                 />
 
                 <Button
-                    variant="primary"
-                    onClick={codeForm.handleSubmit}
+                    variant={'primary' as any}
+                    onClick={() => codeForm.handleSubmit()}
                     disabled={
                         codeForm.isValidating ||
                         codeForm.isSubmitting ||
@@ -100,7 +109,7 @@ const MfaVerifyComponent = ({
                             onClick={onChangePhoneRequested}
                         >
                             <Typography
-                                variant={'smallLabel'}
+                                variant={'smallLabel' as any}
                                 color="legendaryGreen.main"
                                 sx={{ml: 1}}
                             >
@@ -118,7 +127,7 @@ MfaVerifyComponent.propTypes = {
     initialPhoneNumberValues: PropTypes.shape({
         code: PropTypes.string,
     }),
-    initialCodeValues: PropTypes.shape({
+    initialValues: PropTypes.shape({
         code: PropTypes.string,
     }),
     onSubmit: PropTypes.func,
@@ -129,7 +138,7 @@ MfaVerifyComponent.defaultProps = {
     initialPhoneNumberValues: {
         phone: '',
     },
-    initialCodeValues: {
+    initialValues: {
         code: '',
     },
     onSubmit: () => {},

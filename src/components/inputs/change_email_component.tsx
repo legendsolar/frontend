@@ -1,31 +1,30 @@
 import PropTypes from 'prop-types';
-import {
-    Alert,
-    Grid,
-    Box,
-    Button,
-    CircularProgress,
-    Typography,
-    Stack,
-} from '@mui/material';
+import {Alert, Grid, Box, Button, Stack} from '@mui/material';
 
 import TextField from 'components/inputs/text_field';
 
-import {
-    validateAccessPhrase,
-    validateEmail,
-    validateFirstName,
-    validateLastName,
-    validatePassword,
-    validatePhoneNumber,
-} from 'validation/user_data_validation';
+import {validateEmail} from 'validation/user_data_validation';
 import {ErrorTypes} from 'utils/errors';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 import {useState} from 'react';
 import LoadingText from 'components/utils/loading_text';
 
-const ChangeEmailComponent = ({initialValues, onSubmit, color = 'dark'}) => {
+interface Values {
+    email: string;
+}
+
+interface Props {
+    initialValues?: Values;
+    onSubmit(values: Values): Promise<void>;
+    color?: string;
+}
+
+const ChangeEmailComponent = ({
+    initialValues = {email: ''},
+    onSubmit,
+    color = 'dark',
+}: Props) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -52,11 +51,6 @@ const ChangeEmailComponent = ({initialValues, onSubmit, color = 'dark'}) => {
                     setLoading(false);
                 });
         },
-        onChange: () => {
-            if (error) {
-                setError(false);
-            }
-        },
     });
 
     return (
@@ -77,15 +71,15 @@ const ChangeEmailComponent = ({initialValues, onSubmit, color = 'dark'}) => {
 
                 <Stack>
                     <Button
-                        variant="primary"
-                        onClick={formik.handleSubmit}
+                        variant={'primary' as any}
+                        onClick={() => formik.handleSubmit()}
                         disabled={
                             formik.isValidating ||
                             formik.isSubmitting ||
                             !formik.dirty ||
                             !formik.isValid
                         }
-                        color="legendaryGreen"
+                        color={'legendaryGreen' as any}
                         sx={{width: '100%', mt: 4}}
                     >
                         {formik.isValidating ||
@@ -102,19 +96,6 @@ const ChangeEmailComponent = ({initialValues, onSubmit, color = 'dark'}) => {
             </form>
         </Box>
     );
-};
-
-ChangeEmailComponent.propTypes = {
-    initialValues: PropTypes.shape({
-        email: PropTypes.string,
-    }),
-    onSubmit: PropTypes.func.isRequired,
-};
-
-ChangeEmailComponent.defaultProps = {
-    initialValues: {
-        email: '',
-    },
 };
 
 export default ChangeEmailComponent;

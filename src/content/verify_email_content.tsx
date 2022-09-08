@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Button, Stack, Typography} from '@mui/material';
 import Component from 'components/basics/component';
-import ChangeEmailComponent from 'components/user/change_email_component';
+import ChangeEmailComponent from 'components/inputs/change_email_component';
 
 interface VerifyEmailContentProps {
     color: string;
@@ -79,7 +79,9 @@ const VerifyEmailContent = ({
 
                         <ChangeEmailComponent
                             color={color}
-                            onSubmit={onChangeEmailAddressRequested}
+                            onSubmit={async ({email}) =>
+                                onChangeEmailAddressRequested(email)
+                            }
                         ></ChangeEmailComponent>
                     </Stack>
                 </Component>

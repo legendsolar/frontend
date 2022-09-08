@@ -1,7 +1,7 @@
-import SignInComponent from 'components/user/sign_in_component';
+import SignInComponent from 'components/inputs/sign_in_component';
 import useSignIn, {useSignInReturnType} from 'hooks/use_sign_in';
-import ForgotPasswordComponent from 'components/user/forgot_password_component';
-import MfaVerifyComponent from 'components/user/mfa_verify_component';
+import ForgotPasswordComponent from 'components/inputs/forgot_password_component';
+import MfaVerifyComponent from 'components/inputs/mfa_verify_component';
 import RecaptchaVerifier from 'components/invisible/recaptcha_verifier';
 import WomanPanelsSVG from 'assets/images/women_panel.svg';
 import BackButton from 'components/buttons/back_button';
@@ -58,7 +58,6 @@ const SignInPage = ({
                             color={'light'}
                             onSubmit={onSubmitCode}
                             codeSent={codeSent}
-                            initialCodeValues={{}}
                             onChangePhoneRequested={() => {}}
                             changePhoneAllowed={false}
                         ></MfaVerifyComponent>

@@ -12,7 +12,7 @@ const TextField = ({
     label,
     id,
     autoComplete = '',
-    disabled,
+    disabled = false,
     type = 'string',
     alwaysDisplayHelper = false,
     variant = 'filled',
