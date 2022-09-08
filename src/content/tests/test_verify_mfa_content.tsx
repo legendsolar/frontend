@@ -11,5 +11,6 @@ export default () => (
             return delay(1000);
         }}
         captchaComplete={() => {}}
+        mfaCodeSent={true}
     ></VerifyMfaContent>
 );

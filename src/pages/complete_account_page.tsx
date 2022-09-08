@@ -4,7 +4,6 @@ import {useAuth} from 'hooks/use_auth';
 import {useNavigate} from 'react-router-dom';
 import {useUser} from 'hooks/use_user';
 import {useState} from 'react';
-import {transformFormValuesToUserDwollaAccountData} from 'components/utils/transformers';
 
 import {UserDwollaAccountData} from 'schema/schema_gen_types';
 import delay from 'utils/delay';
@@ -21,7 +20,9 @@ import CompleteAccountContent from 'content/complete_account_content';
 import VerifyEmailContent from 'content/verify_email_content';
 import VerifyMfaContent from 'content/verify_mfa_content';
 import VerifyAccreditationContent from 'content/verify_accreditation_content';
-import CreateWalletContent from 'content/create_wallet_content';
+import CreateWalletContent, {
+    transformFormValuesToUserDwollaAccountData,
+} from 'content/create_wallet_content';
 import BackButton from 'components/buttons/back_button';
 import LoadingComponent from 'components/basics/loading_component';
 import {RecaptchaVerifier as FirebaseRecaptchaVerifier} from 'firebase/auth';
@@ -42,6 +43,7 @@ enum States {
 
 const CompleteAccountPage = () => {
     const [state, setState] = useState(States.STEPS_TO_INVEST);
+    const [mfaCodeSent, setMfaCodeSent] = useState(false);
 
     const navigate = useNavigate();
 
@@ -119,6 +121,7 @@ const CompleteAccountPage = () => {
     useEffect(() => {
         if (state === States.PHONE && captcha && phone && !status.mfaVerified) {
             enrollUserMfa(phone, captcha);
+            setMfaCodeSent(true);
         }
     }, [loading, status, state, captcha, phone]);
 
@@ -214,6 +217,7 @@ const CompleteAccountPage = () => {
                                 statusRefetch();
                                 setState(States.STEPS_TO_INVEST);
                             }}
+                            mfaCodeSent={mfaCodeSent}
                         ></VerifyMfaContent>
                     </div>
                 );
@@ -230,33 +234,21 @@ const CompleteAccountPage = () => {
             case States.WALLET:
                 return (
                     <CreateWalletContent
-                        onSubmit={async (input: UserDwollaAccountData) => {
-                            const variables = {
-                                input: {
-                                    ...transformFormValuesToUserDwollaAccountData(
-                                        input,
-                                    ),
-                                },
-                            };
-
+                        onSubmit={async (input) => {
                             await createDwollaAccount({
-                                variables,
+                                firstName,
+                                lastName,
+                                ...transformFormValuesToUserDwollaAccountData(
+                                    input,
+                                ),
                             });
 
-                            await statusRefetch();
+                            statusRefetch();
 
                             setState(States.STEPS_TO_INVEST);
                         }}
                         fullSSNRequired={false}
                         color={'light'}
-                        initialValues={{
-                            firstName,
-                            lastName,
-                            streetAddress,
-                            streetAddress2,
-                            postalCode,
-                            city,
-                        }}
                         loading={createDwollaAccountLoading}
                         error={
                             createDwollaAccountError

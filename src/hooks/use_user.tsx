@@ -9,6 +9,7 @@ import {
     Facility,
     UserStatus,
     UpdateUserInput,
+    UserDwollaAccountData,
 } from 'schema/schema_gen_types';
 import {removeNullObjectValues} from 'utils/object_utils';
 
@@ -42,7 +43,7 @@ interface useUserReturnType {
     };
 
     useCreateDwollaAccount(): {
-        createDwollaAccount: (input: any) => Promise<any>;
+        createDwollaAccount: (input: UserDwollaAccountData) => Promise<any>;
         data: any;
         loading: boolean;
         error: ApolloError | undefined;
@@ -370,12 +371,12 @@ export const useProvideUser = (): useUserReturnType => {
     };
 
     const useCreateDwollaAccount = () => {
-        const [createDwollaAccount, {data, loading, error}] = useMutation(
-            CREATE_DWOLLA_ACCOUNT,
-        );
+        const [createDwollaAccountInternal, {data, loading, error}] =
+            useMutation(CREATE_DWOLLA_ACCOUNT);
 
         return {
-            createDwollaAccount,
+            createDwollaAccount: (input: UserDwollaAccountData) =>
+                createDwollaAccountInternal({variables: {input}}),
             data,
             loading,
             error,

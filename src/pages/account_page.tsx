@@ -23,7 +23,7 @@ import {ACCREDITATION_OPTIONS} from 'content/verify_accreditation_content';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import {transformValuesToUserAddress} from 'components/utils/transformers';
+import {transformValuesToUserAddress} from 'content/create_wallet_content';
 import LoadingText from 'components/utils/loading_text';
 
 const AccountPage = () => {

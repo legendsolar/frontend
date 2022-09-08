@@ -9,12 +9,14 @@ interface VerifyMfaContentProps {
     onChangePhoneRequested(newPhone: string): Promise<void>;
     onMfaCodeSubmit(code: string): Promise<void>;
     captchaComplete(captcha: FirebaseRecaptchaVerifier): void;
+    mfaCodeSent: boolean;
 }
 
 const VerifyMfaContent = ({
     onChangePhoneRequested,
     onMfaCodeSubmit,
     captchaComplete,
+    mfaCodeSent,
 }: VerifyMfaContentProps) => {
     const states = {
         VERIFY_MFA: 'verify_mfa',
@@ -36,7 +38,7 @@ const VerifyMfaContent = ({
                     </Typography>
                     <MfaVerifyComponent
                         onSubmit={async ({code}) => onMfaCodeSubmit(code)}
-                        codeSent={true}
+                        codeSent={mfaCodeSent}
                         onChangePhoneRequested={() =>
                             setState(states.CHANGE_PHONE)
                         }

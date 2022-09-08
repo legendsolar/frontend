@@ -8,17 +8,52 @@ import ModifyUserInfo from 'components/inputs/modify_user_info';
 import ProtectedUserInfo from 'components/inputs/protected_user_info';
 import {ErrorTypes} from 'utils/errors';
 import {Error} from 'utils/error_types';
-import {UserDwollaAccountData} from 'schema/schema_gen_types';
+import {
+    Address,
+    AddressInput,
+    UserDwollaAccountData,
+} from 'schema/schema_gen_types';
 import Component from 'components/basics/component';
 import LoadingText from 'components/utils/loading_text';
 import CheckboxItem from 'components/inputs/checkbox_item';
 import ContentDivider from 'components/basics/content_divider';
+import {format} from 'date-fns';
 
+export const transformFormValuesToUserDwollaAccountData = (values: Values) => {
+    const dob = new Date(`${values.month} ${values.day} ${values.year}`);
+
+    return {
+        address: transformValuesToUserAddress(values),
+        ssn: values.ssn,
+        dateOfBirth: format(dob, 'P'),
+    };
+};
+
+export const transformValuesToUserAddress = (values: Values): AddressInput => {
+    return {
+        streetAddress: values.streetAddress,
+        streetAddress2: values.streetAddress2,
+        city: values.city,
+        state: values.state,
+        postalCode: values.postalCode,
+    };
+};
+
+interface Values {
+    streetAddress: string;
+    streetAddress2: string;
+    city: string;
+    state: string;
+    postalCode: string;
+    ssn: string;
+    day: number;
+    month: string;
+    year: string;
+}
 interface CreateDwollaAccountProps {
-    onSubmit(input: UserDwollaAccountData): Promise<any>;
+    onSubmit(input: Values): void;
     fullSSNRequired: boolean;
     color: 'dark' | 'light';
-    initialValues?: any;
     loading: boolean;
     error: string | undefined;
 }
@@ -27,18 +62,19 @@ const CreateWalletContent = ({
     onSubmit,
     fullSSNRequired,
     color = 'dark',
-    initialValues = {},
     loading,
     error,
 }: CreateDwollaAccountProps) => {
     const [userInfoValid, setUserInfoValid] = useState(false);
     const [protectedUserInfoValid, setProtectedUserInfoValid] = useState(false);
-    const [values, setValues] = useState<any>({});
+    const [values, setValues] = useState<Values>();
     const [acceptDwollaPolicy, setAcceptDwollaPolicy] =
         useState<boolean>(false);
 
     const submit = () => {
-        onSubmit(values);
+        if (values) {
+            onSubmit(values);
+        }
     };
 
     return (
@@ -61,13 +97,6 @@ const CreateWalletContent = ({
             </ContentDivider>
 
             <ModifyUserInfo
-                initialValues={{
-                    streetAddress: initialValues?.streetAddress,
-                    streetAddress2: initialValues?.streetAddress2,
-                    city: initialValues?.city,
-                    state: initialValues?.state,
-                    postalCode: initialValues?.postalCode,
-                }}
                 color={color}
                 isValid={(valid: any) => setUserInfoValid(valid)}
                 handleChange={(childValues: any) =>
@@ -85,12 +114,6 @@ const CreateWalletContent = ({
             </ContentDivider>
 
             <ProtectedUserInfo
-                initialValues={{
-                    ssn: initialValues?.ssn,
-                    year: initialValues?.year,
-                    month: initialValues?.month,
-                    day: initialValues?.day,
-                }}
                 color={color}
                 fullSSNRequired={fullSSNRequired}
                 isValid={(valid: any) => setProtectedUserInfoValid(valid)}
