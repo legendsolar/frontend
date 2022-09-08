@@ -4,8 +4,8 @@ import ModifyUserInfo from '../modify_user_info';
 const TestModifyUserInfo = () => {
     return (
         <ModifyUserInfo
-            onSubmit={() => alert('onSubmit')}
-            isValid={(valid) => console.log('valid: ' + valid)}
+            isValid={(valid) => console.log({isValid: {valid}})}
+            handleChange={(values) => console.log({handleChange: {values}})}
         ></ModifyUserInfo>
     );
 };

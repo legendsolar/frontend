@@ -62,8 +62,6 @@ const CreateWalletContent = ({
 
             <ModifyUserInfo
                 initialValues={{
-                    firstName: initialValues?.firstName,
-                    lastName: initialValues?.lastName,
                     streetAddress: initialValues?.streetAddress,
                     streetAddress2: initialValues?.streetAddress2,
                     city: initialValues?.city,

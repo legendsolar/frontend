@@ -26,13 +26,13 @@ import * as yup from 'yup';
 
 interface Values {
     ssn: string;
-    day: string;
+    day: number;
     month: string;
     year: string;
 }
 
 interface ProtectedUserInfoProps {
-    initialValues: Values;
+    initialValues?: Values;
     fullSSNRequired: boolean;
     completed: boolean;
     isValid(valid: boolean): void;
@@ -41,7 +41,7 @@ interface ProtectedUserInfoProps {
 }
 
 const ProtectedUserInfo = ({
-    initialValues = {ssn: '', day: '', month: '', year: ''},
+    initialValues = {ssn: '', day: 0, month: '', year: ''},
     fullSSNRequired,
     completed,
     isValid,

@@ -218,7 +218,6 @@ const AccountPage = () => {
                                     }
                                     disabled={!userDataEditMode}
                                     handleChange={(values) => setValues(values)}
-                                    userVerified={navBarProps.userVerified}
                                 ></ModifyUserInfo>
                             )}
 

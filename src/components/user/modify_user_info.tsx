@@ -26,35 +26,45 @@ import {useEffect} from 'react';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 
+interface Values {
+    streetAddress: string;
+    streetAddress2: string;
+    city: string;
+    state: string;
+    postalCode: string;
+}
+
+interface Props {
+    initialValues?: Values;
+    isValid(valid: boolean): void;
+    handleChange(values: Values): void;
+    color?: string;
+    disabled?: boolean;
+}
+
 const ModifyUserInfo = ({
-    initialValues = {},
-    onSubmit,
+    initialValues = {
+        streetAddress: '',
+        streetAddress2: '',
+        city: '',
+        state: '',
+        postalCode: '',
+    },
     isValid,
     handleChange,
     color = 'dark',
     disabled = false,
-    userVerified = false,
-}) => {
+}: Props) => {
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: yup.object().shape({
-            firstName: validateFirstName(),
-            lastName: validateLastName(),
             streetAddress: validateStreetAddress(),
             streetAddress2: validateStreetAddressTwo(),
             city: validateCity(),
             state: validateState(),
             postalCode: validatePostalCode(),
         }),
-        onSubmit: async (values, {setErrors}) => {
-            onSubmit(values).catch((error) => {
-                if (error.type === ErrorTypes.ValidationError) {
-                    setErrors({
-                        [error.source]: error.message,
-                    });
-                }
-            });
-        },
+        onSubmit: async (values, {setErrors}) => {},
     });
 
     useEffect(() => {
@@ -119,6 +129,7 @@ const ModifyUserInfo = ({
                 <TextField
                     color={color}
                     name="city"
+                    id="city"
                     label="City"
                     error={formik.touched.city && Boolean(formik.errors.city)}
                     helperText={formik.errors.city}
@@ -134,12 +145,12 @@ const ModifyUserInfo = ({
                 <FormControl
                     variant="filled"
                     fullWidth
-                    color={color}
+                    color={color as any}
                     disabled={disabled}
                 >
                     <InputLabel>State</InputLabel>
                     <Select
-                        helperText={'state'}
+                        // helperText={'state'}
                         name="state"
                         value={formik.values.state ? formik.values.state : ''}
                         onChange={formik.handleChange}
@@ -166,10 +177,10 @@ const ModifyUserInfo = ({
 
             <Grid item xs={12} md={4}>
                 <TextField
+                    id="postalCode"
                     color={color}
                     name="postalCode"
                     label="Zip Code"
-                    fullWidth
                     error={
                         formik.touched.postalCode &&
                         Boolean(formik.errors.postalCode)
