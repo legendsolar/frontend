@@ -4,27 +4,42 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import {Typography, useTheme} from '@mui/material';
-import styles from 'components/gauges/metric_gauge.module.css';
 import LivePill from 'components/pills/live_pill';
 import {useChartDimensions} from 'hooks/use_chart_dimensions';
 import {numberFormatter} from 'utils/number_formatter';
 import Component from 'components/basics/component';
 
-const tinycolor = require('tinycolor2');
+export interface UnitOpts {
+    title: string;
+    unit: string;
+    unitDescription: string;
+    liveMessage: string;
+    strokeColor: string;
+}
 
-function MetricGauge({
+interface Props {
+    min: number;
+    max: number;
+    currentValue: number;
+    unitOpts: UnitOpts;
+    circleRadius?: number;
+    arcWidth?: number;
+    gaugeAngleTravel?: number;
+    error: string;
+}
+
+const MetricGauge = ({
     min,
     max,
     currentValue,
     unitOpts,
 
-    circleRadius,
-    arcWidth,
-    componentWidth,
-    gaugeAngleTravel,
+    circleRadius = 90 + 45,
+    arcWidth = 90,
+    gaugeAngleTravel = 180,
 
     error,
-}) {
+}: Props) => {
     const theme = useTheme();
 
     const [ref, dms] = useChartDimensions({
@@ -54,30 +69,46 @@ function MetricGauge({
                     alignItems={'center'}
                     sx={{mb: 3, width: '100%'}}
                 >
-                    <Typography variant="smallHeadline">
+                    <Typography variant={'smallHeadline' as any}>
                         {unitOpts.title}
                     </Typography>
                     <LivePill error={error}></LivePill>
                 </Stack>
                 <div
-                    className={styles.gauge}
                     style={{
+                        position: 'relative',
                         maxWidth: '400px',
                         width: '100%',
                         height: 184,
                     }}
                     ref={ref}
                 >
-                    <svg className={styles.svgElement} width={'360px'}>
-                        <g className={styles.centerTransform}>
+                    <svg
+                        style={{
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            left: 0,
+                            right: 0,
+                        }}
+                        width={'360px'}
+                    >
+                        <g
+                            style={{
+                                transform: 'translate(50%,100%)',
+                            }}
+                        >
                             <g
-                                className={styles.filledArcs}
                                 style={{
+                                    transform: 'rotate(180deg)',
+                                    fill: 'none',
                                     strokeWidth: arcWidth,
                                 }}
                             >
                                 <circle
-                                    className={styles.background}
+                                    style={{
+                                        stroke: '#F4F5f5',
+                                    }}
                                     r={circleRadius}
                                 />
                                 <circle
@@ -98,8 +129,20 @@ function MetricGauge({
                             ></rect>
                         </g>
                     </svg>
-                    <div className={styles.center}>
-                        <Typography variant="headline1" sx={{mt: 'auto'}}>
+                    <div
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'end',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Typography
+                            variant={'headline1' as any}
+                            sx={{mt: 'auto'}}
+                        >
                             {error ? '--' : numberFormatter(currentValue, 3)}
                         </Typography>
                     </div>
@@ -112,7 +155,7 @@ function MetricGauge({
                         width: '360px',
                     }}
                 >
-                    <Typography variant="label">
+                    <Typography variant={'label' as any}>
                         {error
                             ? `${unitOpts.unit}-`
                             : `${numberFormatter(min)} ${unitOpts.unit}`}
@@ -122,7 +165,7 @@ function MetricGauge({
                         {unitOpts.unitDescription}
                     </Typography>
 
-                    <Typography variant="label">
+                    <Typography variant={'label' as any}>
                         {error
                             ? `${unitOpts.unit}-`
                             : `${numberFormatter(max)} ${unitOpts.unit}`}
@@ -137,14 +180,14 @@ function MetricGauge({
                         width: '360px',
                     }}
                 >
-                    <Typography variant="label" sx={{ml: 'auto'}}>
+                    <Typography variant={'label' as any} sx={{ml: 'auto'}}>
                         {unitOpts.liveMessage}
                     </Typography>
                 </Stack>
             </Stack>
         </Component>
     );
-}
+};
 
 MetricGauge.propTypes = {
     min: PropTypes.number.isRequired,

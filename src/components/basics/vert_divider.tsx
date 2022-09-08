@@ -1,6 +1,6 @@
 import {Divider} from '@mui/material';
 
-const VertDivider = ({sx}: {sx: any}) => {
+const VertDivider = ({sx = {}}: {sx?: any}) => {
     return (
         <div>
             <Divider

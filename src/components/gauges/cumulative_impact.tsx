@@ -3,8 +3,20 @@ import VertDivider from 'components/basics/vert_divider';
 import PropTypes from 'prop-types';
 import {useState} from 'react';
 import Component from 'components/basics/component';
+import {UnitOpts} from 'components/gauges/metric_gauge';
 
-const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
+interface Props {
+    cumulativeData: {
+        day: number;
+        week: number;
+        month: number;
+        year: number;
+    };
+    unitOpts: UnitOpts;
+    live: boolean;
+}
+
+const CumulativeImpact = ({cumulativeData, unitOpts, live}: Props) => {
     const [historyState, setHistoryState] = useState('week');
 
     const parsedCumulativeData = live
@@ -29,14 +41,14 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
                     justifyContent={'space-between'}
                     sx={{mb: 3, width: '100%'}}
                 >
-                    <Typography variant="smallHeadline">
+                    <Typography variant={'smallHeadline' as any}>
                         {unitOpts.title}
                     </Typography>
                 </Stack>
 
                 <Stack direction="row" justifyContent="space-evenly">
                     <Stack justifyContent={'center'}>
-                        <Typography variant="label" align="center">
+                        <Typography variant={'label' as any} align="center">
                             AVG
                         </Typography>
 
@@ -47,7 +59,7 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
                     <VertDivider></VertDivider>
                     <Stack justifyContent={'center'}>
                         <Typography
-                            variant="headline1"
+                            variant={'headline1' as any}
                             sx={{
                                 color: unitOpts.strokeColor,
                             }}
@@ -63,7 +75,7 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
                     <VertDivider></VertDivider>
 
                     <Stack justifyContent={'center'}>
-                        <Typography align="center" variant="label">
+                        <Typography align="center" variant={'label' as any}>
                             BEST
                         </Typography>
 
@@ -82,7 +94,11 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
                         label={historyState == 'year' ? 'Year to Date' : 'Y2D'}
                         onClick={() => setHistoryState('year')}
                         clickable={true}
-                        variant={historyState == 'year' ? 'selected' : 'light'}
+                        variant={
+                            historyState == 'year'
+                                ? 'selected'
+                                : ('light' as any)
+                        }
                     ></Chip>
 
                     <Chip
@@ -91,42 +107,38 @@ const CumulativeImpact = ({cumulativeData, unitOpts, live}) => {
                         }
                         onClick={() => setHistoryState('month')}
                         clickable={true}
-                        variant={historyState == 'month' ? 'selected' : 'light'}
+                        variant={
+                            historyState == 'month'
+                                ? 'selected'
+                                : ('light' as any)
+                        }
                     ></Chip>
 
                     <Chip
                         label={historyState == 'week' ? 'Week to Date' : 'W2D'}
                         onClick={() => setHistoryState('week')}
                         clickable={true}
-                        variant={historyState == 'week' ? 'selected' : 'light'}
+                        variant={
+                            historyState == 'week'
+                                ? 'selected'
+                                : ('light' as any)
+                        }
                     ></Chip>
 
                     <Chip
                         label={historyState == 'day' ? 'Past 24 Hours' : '24H'}
                         onClick={() => setHistoryState('day')}
                         clickable={true}
-                        variant={historyState == 'day' ? 'selected' : 'light'}
+                        variant={
+                            historyState == 'day'
+                                ? 'selected'
+                                : ('light' as any)
+                        }
                     ></Chip>
                 </Stack>
             </Stack>
         </Component>
     );
-};
-
-CumulativeImpact.propTypes = {
-    cumulativeData: PropTypes.shape({
-        day: PropTypes.number.isRequired,
-        week: PropTypes.number.isRequired,
-        month: PropTypes.number.isRequired,
-        year: PropTypes.number.isRequired,
-    }),
-    unitOpts: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        unit: PropTypes.string.isRequired,
-        unitDescription: PropTypes.string.isRequired,
-        strokeColor: PropTypes.string.isRequired,
-    }),
-    live: PropTypes.bool,
 };
 
 export default CumulativeImpact;

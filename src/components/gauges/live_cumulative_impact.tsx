@@ -3,53 +3,59 @@ import PropTypes from 'prop-types';
 import CumulativeImpact from 'components/gauges/cumulative_impact';
 import LoadingComponent from 'components/basics/loading_component';
 import {useDatabase, useDatabaseObjectData} from 'reactfire';
+import {UnitOpts} from './metric_gauge';
+
+export const earningsUnitOpts: UnitOpts = {
+    unit: 'DOLLARS',
+    unitDescription: 'Dollars',
+    title: 'Cash Earned',
+    strokeColor: '#30A462',
+    liveMessage: 'Updated 15 minutes ago',
+};
+
+export const generationUnitOpts: UnitOpts = {
+    unit: 'KWH',
+    unitDescription: 'KILOWATTS',
+    title: 'Generation',
+    strokeColor: '#EAB31E',
+    liveMessage: 'Updated 15 minutes ago',
+};
+
+export const carbonUnitOpts: UnitOpts = {
+    unit: 'LBS',
+    unitDescription: 'Pounds ',
+    title: 'Carbon Aversion',
+    strokeColor: '#477FB2',
+    liveMessage: 'Updated 15 minutes ago',
+};
 
 const EarningsCumulativeImpact = ({cumulativeData, live}) => {
-    const unitOpts = {
-        unit: 'DOLLARS',
-        unitDescription: 'Dollars',
-        title: 'Cash Earned',
-        strokeColor: '#30A462',
-    };
-
     return (
         <CumulativeImpact
             cumulativeData={cumulativeData}
-            unitOpts={unitOpts}
+            unitOpts={earningsUnitOpts}
             live={live}
         ></CumulativeImpact>
     );
 };
 
 const CarbonCumulativeImpact = ({cumulativeData, live}) => {
-    const unitOpts = {
-        unit: 'LBS',
-        unitDescription: 'Pounds ',
-        title: 'Carbon Aversion',
-        strokeColor: '#477FB2',
-    };
+    const unitOpts = {};
 
     return (
         <CumulativeImpact
             cumulativeData={cumulativeData}
-            unitOpts={unitOpts}
+            unitOpts={carbonUnitOpts}
             live={live}
         ></CumulativeImpact>
     );
 };
 
 const GenerationCumulativeImpact = ({cumulativeData, live}) => {
-    const unitOpts = {
-        unit: 'KWH',
-        unitDescription: 'KILOWATTS',
-        title: 'Generation',
-        strokeColor: '#EAB31E',
-    };
-
     return (
         <CumulativeImpact
             cumulativeData={cumulativeData}
-            unitOpts={unitOpts}
+            unitOpts={generationUnitOpts}
             live={live}
         ></CumulativeImpact>
     );
