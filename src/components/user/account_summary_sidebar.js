@@ -2,7 +2,6 @@ import React from 'react';
 import {useTheme} from '@mui/material';
 import {Paper, Stack, Divider, Box} from '@mui/material';
 import {Typography} from '@mui/material';
-import PanelsSvg from 'components/icons/panels_svg';
 import Component from 'components/basics/component';
 import PropTypes from 'prop-types';
 
@@ -34,7 +33,7 @@ const AccountSummarySidebar = ({
                     <Typography variant="subtitle1">⚡{kwTotal} Kw</Typography>
                 </Stack>
 
-                <PanelsSvg color={panelColor}></PanelsSvg>
+                {/* <PanelsSvg color={panelColor}></PanelsSvg> */}
 
                 <Stack direction="row" justifyContent="space-between">
                     <Stack>

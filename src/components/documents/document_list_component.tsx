@@ -1,5 +1,5 @@
 import {Stack, List, ListItemButton, Typography, Chip} from '@mui/material/';
-import DocumentIcon from 'components/icons/document_icon';
+import {DocumentIcon} from 'components/icons/icons';
 import {useStorage} from 'reactfire';
 import {ref, getDownloadURL} from 'firebase/storage';
 import {useTheme} from '@mui/material';
@@ -34,13 +34,13 @@ const DocumentListComponent = ({documents}: {documents: Array<Document>}) => {
                             justifyContent={'flex-start'}
                         >
                             <DocumentIcon
-                                color={
-                                    theme.palette[colorName(documentItem)].main
-                                }
-                                darkColor={
-                                    theme.palette[colorName(documentItem)].dark
-                                }
-                                width={25}
+                            // color={
+                            //     theme.palette[colorName(documentItem)].main
+                            // }
+                            // darkColor={
+                            //     theme.palette[colorName(documentItem)].dark
+                            // }
+                            // width={25}
                             ></DocumentIcon>
                             <Typography variant="subtitle1">
                                 {documentItem.name}

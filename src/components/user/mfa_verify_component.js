@@ -10,7 +10,7 @@ import {
 import {validateMfaVerifyCode} from 'validation/user_data_validation';
 import LoadingText from 'components/utils/loading_text';
 
-import TextField from 'utils/text_field';
+import TextField from 'components/inputs/text_field';
 
 import {ErrorTypes} from 'utils/errors';
 import {useFormik} from 'formik';

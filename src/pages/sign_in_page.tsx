@@ -32,7 +32,6 @@ const SignInPage = ({
                     <Component background={false}>
                         <SignInComponent
                             onSubmit={onSignInSubmit}
-                            onSignInWithGoogle={onSignInWithGoogle}
                             onForgotPassword={() =>
                                 setState(States.FORGOT_PASSWORD)
                             }

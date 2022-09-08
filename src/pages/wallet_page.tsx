@@ -140,10 +140,15 @@ const WalletPage = () => {
                                     accounts={accountsWithWallet}
                                     loading={newTransferLoading}
                                     onComplete={onCreateNewTransfer}
+                                    maxAmount={
+                                        navBarProps?.walletBalance
+                                            ? navBarProps.walletBalance
+                                            : '0'
+                                    }
                                     error={
                                         newTransferError
                                             ? 'Error creating transfer'
-                                            : null
+                                            : undefined
                                     }
                                     onReset={resetTransferCreation}
                                 ></CreateTransferComponent>

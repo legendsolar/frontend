@@ -8,7 +8,7 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
-import TextField from 'utils/text_field';
+import TextField from 'components/inputs/text_field';
 
 import {
     validateMfaVerifyCode,

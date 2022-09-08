@@ -11,9 +11,8 @@ import {
 } from '@mui/material';
 import LoadingText from 'components/utils/loading_text';
 import IconButton from 'components/buttons/icon_button';
-import GoogleLogo from 'components/icons/google_logo';
 import Email from '@mui/icons-material/Email';
-import TextField from 'utils/text_field';
+import TextField from 'components/inputs/text_field';
 import Component from 'components/basics/component';
 
 import {
@@ -198,7 +197,7 @@ const DesignSysDemo = (props) => {
                         variant="small"
                         label="Google Icon Button"
                         color="legendaryGreen"
-                        icon={<GoogleLogo height={'64px'}></GoogleLogo>}
+                        icon={<GoogleIcon />}
                     ></IconButton>
 
                     <IconButton

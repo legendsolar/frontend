@@ -9,7 +9,7 @@ import {
     Typography,
 } from '@mui/material';
 
-import TextField from 'utils/text_field';
+import TextField from 'components/inputs/text_field';
 
 import {states} from 'utils/static_lists';
 import {
