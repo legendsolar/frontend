@@ -1,42 +1,42 @@
 import {Box, Typography, Container, Stack} from '@mui/material';
 import PropTypes from 'prop-types';
-import BankAccountIcon from 'assets/icons/bank_account_icon.png';
-import PanelIcon from 'assets/icons/panel_icon.png';
-import WalletIcon from 'assets/icons/wallet_icon.png';
 import {typographyOptions} from 'app_theme';
+
+import {WalletIcon, PanelIcon} from 'components/icons/icons';
+import {BankIcon} from 'components/icons/emoji_icons';
 
 const accountToIcon = (account) => {
     switch (account.type) {
         case 'WALLET':
-            return WalletIcon;
+            return <WalletIcon />;
         case 'SAVINGS':
-            return BankAccountIcon;
+            return <BankIcon />;
         case 'CHECKINGS':
-            return BankAccountIcon;
+            return <BankIcon />;
         default:
-            return BankAccountIcon;
+            return <BankIcon />;
     }
 };
 
 const transferToIconTypes = (transfer) => {
     if (transfer.type === 'DIVIDEND') {
         return {
-            left: PanelIcon,
-            right: WalletIcon,
+            left: <PanelIcon />,
+            right: <WalletIcon />,
         };
     }
 
     if (transfer.type === 'INVESTMENT') {
         return {
-            left: BankAccountIcon,
-            right: PanelIcon,
+            left: <BankIcon></BankIcon>,
+            right: <PanelIcon />,
         };
     }
 
     if (transfer.type === 'TRANSFER') {
         return {
-            left: WalletIcon,
-            right: BankAccountIcon,
+            left: <WalletIcon />,
+            right: <BankIcon />,
         };
     }
 
@@ -74,7 +74,7 @@ const TransferComponent = ({transfer}) => {
                 alignItems={'flex-end'}
                 sx={{m: 1}}
             >
-                <Typography variant="label">{title}</Typography>
+                <Typography variant={'label' as any}>{title}</Typography>
 
                 <Typography variant="subtitle2">
                     {amountString(amount)}
@@ -120,7 +120,7 @@ const TransferComponent = ({transfer}) => {
                         alignItems="center"
                         sx={{width: '50%'}}
                     >
-                        <img src={left}></img>
+                        {left}
                     </Box>
 
                     <Box
@@ -129,7 +129,7 @@ const TransferComponent = ({transfer}) => {
                         alignItems="center"
                         sx={{width: '50%'}}
                     >
-                        <img src={right}></img>
+                        {right}
                     </Box>
                 </Stack>
 
@@ -158,7 +158,7 @@ const TransferComponent = ({transfer}) => {
                             whiteSpace: 'nowrap',
                             textTransform: 'uppercase',
                         }}
-                        variant={'monoButton'}
+                        variant={'monoButton' as any}
                     >
                         {status ? status : 'Unknown'}
                     </Typography>
@@ -166,9 +166,11 @@ const TransferComponent = ({transfer}) => {
             </Container>
 
             <Stack direction="row" justifyContent="space-between" sx={{m: 1}}>
-                <Typography variant="label">{sourceName}</Typography>
+                <Typography variant={'label' as any}>{sourceName}</Typography>
 
-                <Typography variant="label">{destinationName}</Typography>
+                <Typography variant={'label' as any}>
+                    {destinationName}
+                </Typography>
             </Stack>
         </Container>
     );

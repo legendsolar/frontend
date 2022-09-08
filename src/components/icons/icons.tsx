@@ -7,6 +7,7 @@ import LinkIconSvg from 'assets/icons/link_icon.svg';
 import LinkedInIconSvg from 'assets/icons/linkedin_icon.svg';
 import TwitterIconSvg from 'assets/icons/twitter_icon.svg';
 import DocumentSvg from 'assets/icons/document_icon.svg';
+import PanelSvg from 'assets/icons/panel_icon.svg';
 import {Box} from '@mui/material';
 import CheckIconSvg from 'assets/icons/check_icon.svg';
 
@@ -20,6 +21,16 @@ export const WalletIcon = (sx = {}) => {
 
 export const GoogleIcon = (sx = {}) => {
     return <BaseIcon src={GoogleIconSvg} alt={'Bank Icon'} sx={sx}></BaseIcon>;
+};
+
+export const PanelIcon = (sx = {}) => {
+    return (
+        <BaseIcon
+            src={PanelSvg}
+            alt={'Panel Icon'}
+            sx={{width: '53px', height: '26.5px', ...sx}}
+        ></BaseIcon>
+    );
 };
 
 export const DocumentIcon = (sx = {}) => {
