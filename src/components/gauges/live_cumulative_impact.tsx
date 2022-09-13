@@ -9,7 +9,7 @@ export const earningsUnitOpts: UnitOpts = {
     unit: 'DOLLARS',
     unitDescription: 'Dollars',
     title: 'Cash Earned',
-    strokeColor: '#30A462',
+    strokeColor: 'grassGreen',
     liveMessage: 'Updated 15 minutes ago',
 };
 
@@ -17,7 +17,7 @@ export const generationUnitOpts: UnitOpts = {
     unit: 'KWH',
     unitDescription: 'KILOWATTS',
     title: 'Generation',
-    strokeColor: '#EAB31E',
+    strokeColor: 'pencilYellow',
     liveMessage: 'Updated 15 minutes ago',
 };
 
@@ -25,7 +25,7 @@ export const carbonUnitOpts: UnitOpts = {
     unit: 'LBS',
     unitDescription: 'Pounds ',
     title: 'Carbon Aversion',
-    strokeColor: '#477FB2',
+    strokeColor: 'skyBlue',
     liveMessage: 'Updated 15 minutes ago',
 };
 
