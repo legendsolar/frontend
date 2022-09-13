@@ -76,7 +76,8 @@
         "parseWebflowFooter": "node webflow_html_parser.js",
         "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'",
         "test": "env-cmd -f ./.env.test react-scripts test --watchAll=false",
-        "test:watch": "env-cmd -f ./.env.test react-scripts test --watchAll"
+        "test:watch": "env-cmd -f ./.env.test react-scripts test --watchAll",
+        "deploy:dev": "firebase use development && firebase deploy --only hosting:dev-app"
     },
     "eslintConfig": {
         "extends": [
@@ -111,6 +112,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-react": "^7.29.4",
         "eslint-plugin-react-hooks": "^4.4.0",
+        "firebase-tools": "^11.9.0",
         "prettier": "^2.6.2",
         "query-string": "^7.1.1"
     }

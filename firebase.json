@@ -1,6 +1,5 @@
 {
   "hosting": [
-
   {
     "target": "app",
     "public": "build",
@@ -17,7 +16,7 @@
     ]
   },
   {
-    "target": "dev",
+    "target": "dev-app",
     "public": "build",
     "ignore": [
       "firebase.json",
