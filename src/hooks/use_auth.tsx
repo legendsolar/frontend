@@ -332,6 +332,19 @@ const useProvideAuth = (): useAuthReturnType => {
         return () => clearUserData();
     }, []);
 
+    useEffect(() => {
+        if (process.env.REACT_APP_PRE_SIGNED_DEMO === 'true') {
+            if (!user) {
+                // this is super dumb
+                signInWithEmailAndPassword(
+                    auth,
+                    'demo@legends.solar',
+                    'password1234',
+                );
+            }
+        }
+    }, []);
+
     return {
         isAuthenticating,
         authenticated: !!user,

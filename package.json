@@ -72,12 +72,14 @@
         "build": "env-cmd -f ./.env.production react-scripts build",
         "build:dev": "env-cmd -f ./.env.dev react-scripts build",
         "build:test": "env-cmd -f ./.env.test react-scripts build",
+        "build:demo": "env-cmd -f ./.env.demo react-scripts build",
         "preview": "firebase use dev && firebase hosting:channel:deploy `git branch --show-current`-`git rev-parse HEAD`",
         "parseWebflowFooter": "node webflow_html_parser.js",
         "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'",
         "test": "env-cmd -f ./.env.test react-scripts test --watchAll=false",
         "test:watch": "env-cmd -f ./.env.test react-scripts test --watchAll",
-        "deploy:dev": "firebase use development && firebase deploy --only hosting:dev-app"
+        "deploy:dev": "firebase use development && firebase deploy --only hosting:dev-app",
+        "deploy:demo": "firebase use development && firebase deploy --only hosting:demo"
     },
     "eslintConfig": {
         "extends": [

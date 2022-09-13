@@ -21,6 +21,9 @@
         ],
         "dev-components": [
           "legends-dev-component-staging"
+      ],
+      "demo": [
+        "legends-dev-demo"
       ]
     }
   }

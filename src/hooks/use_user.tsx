@@ -164,6 +164,7 @@ export const useProvideUser = (): useUserReturnType => {
                     dollar_per_kWh
                     co2_per_kWh
                     make
+                    panel_count
                 }
                 summary {
                     totalGeneration_kWh
@@ -180,6 +181,7 @@ export const useProvideUser = (): useUserReturnType => {
                 economics {
                     ppaDuration
                     leaseRemaining
+                    cost_dollars
                 }
                 location {
                     lat

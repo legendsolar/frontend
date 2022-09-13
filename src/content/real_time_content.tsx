@@ -87,9 +87,9 @@ const RealTimeContent = ({
                 direction="row"
                 justifyContent={'center'}
                 sx={{pb: 4}}
-                spacing={2.5}
+                spacing={1}
             >
-                <Stack spacing={2.5}>
+                <Stack spacing={1}>
                     <LiveWeather
                         lat={location?.lat || 40.712778}
                         lng={location?.lng || -74.006111}
@@ -113,7 +113,7 @@ const RealTimeContent = ({
                         live={true}
                     ></GenerationCumulativeImpact>
                 </Stack>
-                <Stack spacing={2.5}>
+                <Stack spacing={1}>
                     <CarbonGauge
                         max={
                             generationMetaData.max_kW *
