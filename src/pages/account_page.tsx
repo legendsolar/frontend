@@ -141,6 +141,7 @@ const AccountPage = () => {
     return (
         <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
             <SideBarNavView
+                constrainedDrawerPostion="none"
                 drawer={
                     <ScrollToSidebar
                         header={

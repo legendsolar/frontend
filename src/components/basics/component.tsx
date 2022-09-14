@@ -48,7 +48,7 @@ const Component = forwardRef(
             </DefaultErrorBoundary>
         );
 
-        if (standardWidth) {
+        if (standardWidth && !sx.width) {
             sx.width = '400px';
         }
 

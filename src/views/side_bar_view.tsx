@@ -1,4 +1,12 @@
-import {Container, Grid, Box, Stack} from '@mui/material';
+import {
+    Container,
+    Grid,
+    Box,
+    Stack,
+    useMediaQuery,
+    useTheme,
+    Breakpoint,
+} from '@mui/material';
 import DefaultView from 'views/default_view';
 import {ErrorBoundary} from '@sentry/react';
 import DefaultErrorBoundary from 'components/errors/default_error_boundary';
@@ -7,7 +15,9 @@ interface SideBarViewProps {
     drawer?: JSX.Element;
     mainContent?: JSX.Element;
     header?: JSX.Element;
-    drawerPosition?: 'left' | 'right' | 'top' | 'bottom';
+    drawerPosition?: 'left' | 'right' | 'top' | 'bottom' | 'none';
+    constrainedDrawerPostion?: 'left' | 'right' | 'top' | 'bottom' | 'none';
+    constrainedBreakpoint?: Breakpoint;
 }
 
 const SideBarView = ({
@@ -15,40 +25,30 @@ const SideBarView = ({
     mainContent = <></>,
     header = <></>,
     drawerPosition = 'left',
+    constrainedDrawerPostion = 'top',
+    constrainedBreakpoint = 'xl',
 }: SideBarViewProps) => {
-    const wrappedDrawer = (
-        <Container
-            sx={{
-                width: '100%',
-                pl: 0,
-                pr: 0,
-                mb: {
-                    sm: 2,
-                    md: 0,
-                },
-                display: {
-                    sm: 'block',
-                    md: 'none',
-                },
-            }}
-        >
-            <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
-        </Container>
+    const theme = useTheme();
+    const constrained = useMediaQuery(
+        theme.breakpoints.down(constrainedBreakpoint),
     );
 
+    console.log({constrained});
+
+    const currentDisplayPosition = () => {
+        if (constrained) {
+            return constrainedDrawerPostion;
+        }
+
+        return drawerPosition;
+    };
+
     const getDrawerPosition = (position: string) => {
-        if (position === drawerPosition)
+        if (position === currentDisplayPosition())
             switch (drawerPosition) {
                 case 'left':
                     return (
-                        <Grid
-                            item
-                            md={4}
-                            sx={{
-                                // Remove sidebar on mobile
-                                display: {xs: 'none', sm: 'none', md: 'flex'},
-                            }}
-                        >
+                        <Grid item xl={4} lg={12}>
                             <Box
                                 sx={{
                                     height: 'max-content',
@@ -74,10 +74,6 @@ const SideBarView = ({
                                     sm: 4,
                                     md: 0,
                                 },
-                                display: {
-                                    sm: 'block',
-                                    md: 'none',
-                                },
                             }}
                         >
                             <DefaultErrorBoundary>
@@ -88,14 +84,7 @@ const SideBarView = ({
 
                 case 'right':
                     return (
-                        <Grid
-                            item
-                            md={4}
-                            sx={{
-                                // Remove sidebar on mobile
-                                display: {xs: 'none', sm: 'none', md: 'flex'},
-                            }}
-                        >
+                        <Grid item xl={4} lg={12}>
                             <Box
                                 sx={{
                                     height: 'max-content',
@@ -122,10 +111,6 @@ const SideBarView = ({
                                     sm: 4,
                                     md: 0,
                                 },
-                                display: {
-                                    sm: 'block',
-                                    md: 'none',
-                                },
                             }}
                         >
                             <DefaultErrorBoundary>
@@ -139,32 +124,38 @@ const SideBarView = ({
     };
 
     return (
-        <Stack direction={'row'} spacing={8}>
-            {getDrawerPosition('left')}
-            <Stack
-                sx={{
-                    width: '100%',
-                }}
-            >
-                <Box>
-                    {getDrawerPosition('top')}
+        <div>
+            <Grid container columnSpacing={4}>
+                {getDrawerPosition('left')}
+                <Grid item xl={8} lg={12}>
+                    <Stack
+                        sx={{
+                            width: '100%',
+                        }}
+                    >
+                        <Box>
+                            {getDrawerPosition('top')}
 
-                    {!!header && (
-                        <DefaultErrorBoundary>
-                            <Box sx={{mb: 4}}> {header}</Box>
-                        </DefaultErrorBoundary>
-                    )}
+                            {!!header && (
+                                <DefaultErrorBoundary>
+                                    <Box sx={{mb: 4}}> {header}</Box>
+                                </DefaultErrorBoundary>
+                            )}
 
-                    <DefaultErrorBoundary>
-                        <Box sx={{mt: {xs: 4, md: 0}}}>{mainContent}</Box>
-                    </DefaultErrorBoundary>
+                            <DefaultErrorBoundary>
+                                <Box sx={{mt: {xs: 4, md: 0}}}>
+                                    {mainContent}
+                                </Box>
+                            </DefaultErrorBoundary>
 
-                    {getDrawerPosition('bottom')}
-                </Box>
-            </Stack>
+                            {getDrawerPosition('bottom')}
+                        </Box>
+                    </Stack>
+                </Grid>
 
-            {getDrawerPosition('right')}
-        </Stack>
+                {getDrawerPosition('right')}
+            </Grid>
+        </div>
     );
 };
 

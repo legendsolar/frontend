@@ -8,6 +8,7 @@ import CreateAccountToolbar from './create_account_toolbar';
 import LoggedOutToolbar from './logged_out_toolbar';
 import LoggedInToolbar from './logged_in_toolbar';
 import TypemarkSolarSVG from 'assets/logos/typemark_solar_dark.svg';
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 
 export interface NavBarProps {
     loading: boolean;

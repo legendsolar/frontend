@@ -133,10 +133,12 @@ const PortfolioContent = ({
 
             <Stack sx={{mt: 4}}>
                 <SideBarView
+                    drawerPosition={'right'}
                     drawer={
                         <SideBar
                             sx={{
                                 backgroundColor: 'white.main',
+                                width: '100%',
                             }}
                         >
                             <Stack>
@@ -263,7 +265,6 @@ const PortfolioContent = ({
                             ></RealTimeContent>
                         </Stack>
                     }
-                    drawerPosition={'right'}
                 ></SideBarView>
 
                 <ContentDivider>
@@ -280,6 +281,7 @@ const PortfolioContent = ({
                 ></TransferDataGrid>
 
                 <SideBarView
+                    drawerPosition={'left'}
                     drawer={
                         <Box sx={{mt: 4}}>
                             <ContentDivider>
