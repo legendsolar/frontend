@@ -92,7 +92,11 @@ export const useSolarFacilities = () => {
 
     const {loading, page} = useBase('Solar facilities');
 
-    const assets = loading ? [] : page.map(transformAirtableRecordToAsset);
+    const assets = loading
+        ? []
+        : page
+              .filter((asset) => !asset.get('Hidden') as boolean)
+              .map(transformAirtableRecordToAsset);
 
     return {
         loading,
