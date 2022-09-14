@@ -5,8 +5,8 @@ const MainContentBox = ({children}) => (
     <Box
         sx={{
             maxWidth: {
-                xl: themeOptions.breakpoints.values.xl - 40 + 'px',
-                lg: themeOptions.breakpoints.values.lg - 40 + 'px', // about
+                xl: themeOptions.breakpoints.values.xl + 'px',
+                lg: themeOptions.breakpoints.values.lg + 'px', // about
             },
             pl: {
                 sm: '10px',

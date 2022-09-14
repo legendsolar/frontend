@@ -2,6 +2,7 @@ import {Grid, Typography, Box, Stack, Button} from '@mui/material';
 import Component from 'components/basics/component';
 import LassorImg from 'assets/Lassor.png';
 import NeraImg from 'assets/Nera.png';
+import {EXTERNAL_LINKS} from 'webflow/webflowLinking';
 
 const Footer = () => {
     return (
@@ -17,7 +18,7 @@ const Footer = () => {
                                     </Typography>
 
                                     <Button
-                                        href={'https://www.legends.solar/'}
+                                        href={EXTERNAL_LINKS.HOME}
                                         variant="text"
                                     >
                                         <Typography variant="body2">
@@ -26,9 +27,7 @@ const Footer = () => {
                                     </Button>
 
                                     <Button
-                                        href={
-                                            'https://www.legends.solar/about-legends'
-                                        }
+                                        href={EXTERNAL_LINKS.PAGES.ABOUT_US}
                                         variant="text"
                                     >
                                         <Typography variant="body2">
@@ -37,9 +36,7 @@ const Footer = () => {
                                     </Button>
 
                                     <Button
-                                        href={
-                                            'https://www.legends.solar/the-team'
-                                        }
+                                        href={EXTERNAL_LINKS.PAGES.TEAM}
                                         variant="text"
                                     >
                                         <Typography variant="body2">
@@ -52,9 +49,7 @@ const Footer = () => {
                             <Grid item xs={12} sm={6} lg={3}>
                                 <Stack>
                                     <Button
-                                        href={
-                                            'https://www.legends.solar/reserve-panels'
-                                        }
+                                        href={EXTERNAL_LINKS.PAGES.LEARN}
                                         variant="text"
                                     >
                                         <Typography variant="smallHeadline">
@@ -63,9 +58,7 @@ const Footer = () => {
                                     </Button>
 
                                     <Button
-                                        href={
-                                            'https://www.legends.solar/how-it-works'
-                                        }
+                                        href={EXTERNAL_LINKS.PAGES.HOW_IT_WORKS}
                                         variant="text"
                                     >
                                         <Typography variant="body2">
@@ -74,7 +67,7 @@ const Footer = () => {
                                     </Button>
 
                                     <Button
-                                        href={'https://www.legends.solar/faqs'}
+                                        href={EXTERNAL_LINKS.PAGES.FAQS}
                                         variant="text"
                                     >
                                         <Typography variant="body2">
@@ -83,9 +76,7 @@ const Footer = () => {
                                     </Button>
 
                                     <Button
-                                        href={
-                                            'https://www.legends.solar/news-room'
-                                        }
+                                        href={EXTERNAL_LINKS.PAGES.NEWS_ROOM}
                                         variant="text"
                                     >
                                         <Typography variant="body2">
@@ -102,9 +93,7 @@ const Footer = () => {
                                     </Typography>
 
                                     <Button
-                                        href={
-                                            'https://twitter.com/legends_solar'
-                                        }
+                                        href={EXTERNAL_LINKS.CONNECT.TWITTER}
                                         variant="text"
                                     >
                                         <Typography variant="body2">
@@ -113,9 +102,7 @@ const Footer = () => {
                                     </Button>
 
                                     <Button
-                                        href={
-                                            'https://www.instagram.com/legends.solar/'
-                                        }
+                                        href={EXTERNAL_LINKS.CONNECT.INSTAGRAM}
                                         variant="text"
                                     >
                                         <Typography variant="body2">
@@ -124,9 +111,7 @@ const Footer = () => {
                                     </Button>
 
                                     <Button
-                                        href={
-                                            'https://www.linkedin.com/company/legendssolar/'
-                                        }
+                                        href={EXTERNAL_LINKS.CONNECT.LINKED_IN}
                                         variant="text"
                                     >
                                         <Typography variant="body2">
@@ -144,7 +129,7 @@ const Footer = () => {
 
                                     <Button
                                         href={
-                                            'https://www.legends.solar/legal/privacy-policy'
+                                            EXTERNAL_LINKS.LEGAL.PRIVACY_POLICY
                                         }
                                         variant="text"
                                     >
@@ -155,7 +140,8 @@ const Footer = () => {
 
                                     <Button
                                         href={
-                                            'https://www.legends.solar/legal/terms-and-conditions'
+                                            EXTERNAL_LINKS.LEGAL
+                                                .TERMS_AND_CONDITIONS
                                         }
                                         variant="text"
                                     >
@@ -165,9 +151,7 @@ const Footer = () => {
                                     </Button>
 
                                     <Button
-                                        href={
-                                            'https://www.legends.solar/legal/legal'
-                                        }
+                                        href={EXTERNAL_LINKS.LEGAL.DISCLAIMER}
                                         variant="text"
                                     >
                                         <Typography variant="body2">

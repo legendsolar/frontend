@@ -6,35 +6,38 @@ import {
     generationUnitOpts,
 } from './live_cumulative_impact';
 
-const CarbonGauge = ({max, currentValue_unit}) => {
+const CarbonGauge = ({max, currentValue_unit, message}) => {
     return (
         <MetricGauge
             unitOpts={carbonUnitOpts}
             min={0}
             max={max}
             currentValue={currentValue_unit}
+            message={message}
         ></MetricGauge>
     );
 };
 
-const GenerationGauge = ({max, currentValue_unit}) => {
+const GenerationGauge = ({max, currentValue_unit, message}) => {
     return (
         <MetricGauge
             unitOpts={generationUnitOpts}
             min={0}
             max={max}
             currentValue={currentValue_unit}
+            message={message}
         ></MetricGauge>
     );
 };
 
-const EarningsGauge = ({max, currentValue_unit}) => {
+const EarningsGauge = ({max, currentValue_unit, message}) => {
     return (
         <MetricGauge
             unitOpts={earningsUnitOpts}
             min={0}
             max={max}
             currentValue={currentValue_unit}
+            message={message}
         ></MetricGauge>
     );
 };

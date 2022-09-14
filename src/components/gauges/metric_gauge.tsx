@@ -13,7 +13,6 @@ export interface UnitOpts {
     title: string;
     unit: string;
     unitDescription: string;
-    liveMessage: string;
     strokeColor: string;
 }
 
@@ -21,6 +20,7 @@ interface Props {
     min: number;
     max: number;
     currentValue: number;
+    message?: string;
     unitOpts: UnitOpts;
     circleRadius?: number;
     arcWidth?: number;
@@ -33,7 +33,7 @@ const MetricGauge = ({
     max,
     currentValue,
     unitOpts,
-
+    message = '',
     circleRadius = 90 + 45,
     arcWidth = 90,
     gaugeAngleTravel = 180,
@@ -181,7 +181,7 @@ const MetricGauge = ({
                     }}
                 >
                     <Typography variant={'label' as any} sx={{ml: 'auto'}}>
-                        {unitOpts.liveMessage}
+                        {message}
                     </Typography>
                 </Stack>
             </Stack>

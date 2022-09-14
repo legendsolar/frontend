@@ -4,17 +4,8 @@ import BasicMap from 'components/map/basic_map_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
 import Component from 'components/basics/component';
 import RealTimeContent from 'content/real_time_content';
-import {testTransfers} from 'static/placeholder_transfers';
 import SideBarView from 'views/side_bar_view';
-import {
-    EconomicsSummary,
-    Facility,
-    GenerationDatum,
-    GenerationMetaData,
-    GenerationSummary,
-    Location,
-    Transfer,
-} from 'schema/schema_gen_types';
+import {Facility, GenerationDatum, Transfer} from 'schema/schema_gen_types';
 import InvestmentSupportComponent from 'components/invest/investment_support_component';
 import IconAccordian from 'utils/icon_accordian';
 import SideBar from 'components/utils/sidebar_component';
@@ -31,6 +22,7 @@ import {Document} from 'components/documents/types';
 import EmptyContent from './empty_content';
 import {CashIcon, LeafIcon, PowerIcon} from 'components/icons/emoji_icons';
 import MetricBox from 'components/gauges/metric_box';
+import {siteCopy} from 'static/copy';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
@@ -55,8 +47,6 @@ const PortfolioContent = ({
     dataStale,
 }: PortfolioContentProps) => {
     if (loading) return <LoadingContent />;
-
-    console.log(facility);
 
     if (!facility) return <EmptyContent />;
 
@@ -122,7 +112,7 @@ const PortfolioContent = ({
                                             color={'legendaryGreen.main' as any}
                                         >
                                             {currencyFormatter(
-                                                summary.day_kWh *
+                                                summary.twentyFourHourGeneration_kWh *
                                                     generationMetaData.dollar_per_kWh,
                                             )}
                                         </Typography>
@@ -225,6 +215,7 @@ const PortfolioContent = ({
                                 facility={nonNullFacility}
                                 generation={generation}
                                 dataStale={dataStale}
+                                message={subtitle}
                             ></RealTimeContent>
                         </Stack>
                     }
@@ -291,7 +282,7 @@ const PortfolioContent = ({
                                             <Typography
                                                 variant={'description' as any}
                                             >
-                                                Test
+                                                {siteCopy.aboutSevenYearTerm}
                                             </Typography>
                                         ),
                                         icon: (
@@ -308,7 +299,9 @@ const PortfolioContent = ({
                                             <Typography
                                                 variant={'description' as any}
                                             >
-                                                Test
+                                                {
+                                                    siteCopy.aboutRooftopMonitoring
+                                                }
                                             </Typography>
                                         ),
                                         icon: (
@@ -316,6 +309,25 @@ const PortfolioContent = ({
                                                 variant={'description' as any}
                                             >
                                                 ⚡️
+                                            </Typography>
+                                        ),
+                                    },
+                                    {
+                                        title: 'Investment Tax Credit',
+                                        content: (
+                                            <Typography
+                                                variant={'description' as any}
+                                            >
+                                                {
+                                                    siteCopy.aboutInvestmentTaxCredit
+                                                }
+                                            </Typography>
+                                        ),
+                                        icon: (
+                                            <Typography
+                                                variant={'description' as any}
+                                            >
+                                                💸
                                             </Typography>
                                         ),
                                     },
@@ -381,7 +393,9 @@ const PortfolioContent = ({
                                         valuePairs={[
                                             {
                                                 metric: 'Number of Panels',
-                                                value: '45,600',
+                                                value: generationMetaData.panel_count.toFixed(
+                                                    0,
+                                                ),
                                             },
                                             {
                                                 metric: 'Make & model',

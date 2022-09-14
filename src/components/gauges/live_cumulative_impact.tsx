@@ -10,7 +10,6 @@ export const earningsUnitOpts: UnitOpts = {
     unitDescription: 'Dollars',
     title: 'Cash Earned',
     strokeColor: 'grassGreen',
-    liveMessage: 'Updated 15 minutes ago',
 };
 
 export const generationUnitOpts: UnitOpts = {
@@ -18,7 +17,6 @@ export const generationUnitOpts: UnitOpts = {
     unitDescription: 'KILOWATTS',
     title: 'Generation',
     strokeColor: 'pencilYellow',
-    liveMessage: 'Updated 15 minutes ago',
 };
 
 export const carbonUnitOpts: UnitOpts = {
@@ -26,7 +24,6 @@ export const carbonUnitOpts: UnitOpts = {
     unitDescription: 'Pounds ',
     title: 'Carbon Aversion',
     strokeColor: 'skyBlue',
-    liveMessage: 'Updated 15 minutes ago',
 };
 
 const EarningsCumulativeImpact = ({cumulativeData, live}) => {

@@ -1,6 +1,7 @@
-import {Typography, Stack, Box} from '@mui/material';
+import {Typography, Stack, Box, Button} from '@mui/material';
 import Component from 'components/basics/component';
 import NeraPNG from 'assets/icons/nera.png';
+import {EXTERNAL_LINKS} from 'webflow/webflowLinking';
 interface InvestmentSupportComponentProps {
     title: string;
     subtitle: string;
@@ -68,7 +69,11 @@ const InvestmentSupportComponent = ({
                 justifyContent={'flex-end'}
                 alignItems={'center'}
             >
-                <Typography variant={'monoButton' as any}>Biography</Typography>
+                <Button href={EXTERNAL_LINKS.TEAM.NERA} variant="text">
+                    <Typography variant={'monoButton' as any}>
+                        Biography
+                    </Typography>
+                </Button>
             </Box>
         </Component>
     );

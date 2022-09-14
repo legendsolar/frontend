@@ -22,17 +22,20 @@ import {summaryToCumulativeImpact} from 'components/gauges/transformers';
 import LiveWeather from 'components/weather/weather_live';
 import {themeOptions} from 'app_theme';
 import {eraserRed} from 'static/colors';
+import {multiplyObject} from 'utils/object_utils';
 
 interface RealTimeContent {
     facility: Facility;
     generation: Array<GenerationDatum>;
     dataStale: boolean;
+    message?: string;
 }
 
 const RealTimeContent = ({
     facility: {generationMetaData, summary, location},
     generation,
     dataStale,
+    message = '',
 }: RealTimeContent) => {
     if (dataStale) {
         return (
@@ -87,15 +90,18 @@ const RealTimeContent = ({
                 direction="row"
                 justifyContent={'center'}
                 sx={{pb: 4}}
-                spacing={1}
+                spacing={4}
             >
-                <Stack spacing={1}>
+                <Stack spacing={4}>
                     <LiveWeather
                         lat={location?.lat || 40.712778}
                         lng={location?.lng || -74.006111}
                     ></LiveWeather>
                     <EarningsCumulativeImpact
-                        cumulativeData={summaryToCumulativeImpact(summary)}
+                        cumulativeData={multiplyObject(
+                            summaryToCumulativeImpact(summary),
+                            generationMetaData.dollar_per_kWh,
+                        )}
                         live={true}
                     ></EarningsCumulativeImpact>
                     <EarningsGauge
@@ -106,14 +112,18 @@ const RealTimeContent = ({
                         currentValue_unit={
                             current_kW * generationMetaData.dollar_per_kWh
                         }
+                        message={message}
                     ></EarningsGauge>
 
                     <GenerationCumulativeImpact
-                        cumulativeData={summaryToCumulativeImpact(summary)}
+                        cumulativeData={multiplyObject(
+                            summaryToCumulativeImpact(summary),
+                            1,
+                        )}
                         live={true}
                     ></GenerationCumulativeImpact>
                 </Stack>
-                <Stack spacing={1}>
+                <Stack spacing={4}>
                     <CarbonGauge
                         max={
                             generationMetaData.max_kW *
@@ -122,16 +132,21 @@ const RealTimeContent = ({
                         currentValue_unit={
                             current_kW * generationMetaData.co2_per_kWh
                         }
+                        message={message}
                     ></CarbonGauge>
 
                     <CarbonCumulativeImpact
-                        cumulativeData={summaryToCumulativeImpact(summary)}
+                        cumulativeData={multiplyObject(
+                            summaryToCumulativeImpact(summary),
+                            generationMetaData.co2_per_kWh,
+                        )}
                         live={true}
                     ></CarbonCumulativeImpact>
 
                     <GenerationGauge
                         max={generationMetaData.max_kW}
                         currentValue_unit={current_kW}
+                        message={message}
                     ></GenerationGauge>
                 </Stack>
             </Stack>
