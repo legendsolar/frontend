@@ -37,7 +37,7 @@ export const validatePassword = () => {
             /(?=.*[\d\W])(?=.*[a-zA-Z])/,
             'Password must contain one letter and one symbol or digit',
         )
-        .required('Required');
+        .required('Password must contain one letter and one symbol or digit');
 };
 
 export const validateEmail = () => {

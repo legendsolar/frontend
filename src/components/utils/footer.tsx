@@ -13,7 +13,9 @@ const Footer = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6} lg={3}>
                                 <Stack>
-                                    <Typography variant="smallHeadline">
+                                    <Typography
+                                        variant={'smallHeadline' as any}
+                                    >
                                         Company
                                     </Typography>
 
@@ -48,7 +50,9 @@ const Footer = () => {
 
                             <Grid item xs={12} sm={6} lg={3}>
                                 <Stack>
-                                    <Typography variant="smallHeadline">
+                                    <Typography
+                                        variant={'smallHeadline' as any}
+                                    >
                                         Learn
                                     </Typography>
 
@@ -83,7 +87,9 @@ const Footer = () => {
 
                             <Grid item xs={12} sm={6} lg={3}>
                                 <Stack>
-                                    <Typography variant="smallHeadline">
+                                    <Typography
+                                        variant={'smallHeadline' as any}
+                                    >
                                         Connect
                                     </Typography>
 
@@ -118,7 +124,9 @@ const Footer = () => {
 
                             <Grid item xs={12} sm={6} lg={3}>
                                 <Stack>
-                                    <Typography variant="smallHeadline">
+                                    <Typography
+                                        variant={'smallHeadline' as any}
+                                    >
                                         Legal
                                     </Typography>
 
@@ -189,7 +197,7 @@ const Footer = () => {
                         >
                             Legends Incorporated
                         </Typography>
-                        <Typography variant="label">
+                        <Typography variant={'smallHeadline' as any}>
                             134 North 4th Street Brooklyn, NY 11249
                         </Typography>
                     </Stack>

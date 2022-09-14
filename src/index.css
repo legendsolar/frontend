@@ -12,6 +12,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+svg {
+    -webkit-transform: translate3d(0,0,0);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
