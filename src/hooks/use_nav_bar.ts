@@ -30,7 +30,7 @@ const useNavBar = () => {
         walletRefetch();
     }, [authenticated]);
 
-    const walletBalance = '$' + wallet?.amount;
+    const walletBalance = wallet?.amount;
 
     const props: NavBarProps = {
         loading: statusLoading || walletLoading,

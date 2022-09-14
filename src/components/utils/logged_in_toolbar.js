@@ -56,7 +56,7 @@ const LoggedInToolbar = ({
                     onClick={onWallet}
                 >
                     <WalletIcon />
-                    {loading ? <LoadingText /> : walletBalance}
+                    {loading ? <LoadingText /> : '$' + walletBalance}
                 </Button>
             </Stack>
         </Stack>

@@ -142,7 +142,7 @@ const CreateTransferComponent = ({
                         Transfer Cash
                     </Typography>
                     <Typography variant={'label' as any}>
-                        {maxAmount} maximum
+                        ${maxAmount} maximum
                     </Typography>
                 </Stack>
 
@@ -161,8 +161,10 @@ const CreateTransferComponent = ({
                         setTransferAmount(value);
                     }}
                     onBlur={(e) => {
-                        const validatedAmount =
-                            validateTransferAmount(transferAmount);
+                        const validatedAmount = validateTransferAmount(
+                            transferAmount,
+                            parseFloat(maxAmount),
+                        );
 
                         setTransferAmount(validatedAmount.value);
                     }}

@@ -132,7 +132,7 @@ const WalletPage = () => {
                             Wallet Balance
                         </Typography>
                         <Typography variant={'headline1' as any}>
-                            {navBarProps.walletBalance}
+                            {'$' + navBarProps.walletBalance}
                         </Typography>
                         <SideBar>
                             {!accountsLoading && !walletLoading && (

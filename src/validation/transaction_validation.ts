@@ -1,5 +1,15 @@
-export const validateTransferAmount = (inputString) => {
-    const maxTransferAmount = 2000;
+export const validateTransferAmount = (
+    inputString: string | null | undefined,
+    maxAmount: number,
+) => {
+    if (!inputString) {
+        return {
+            value: '0',
+            error: true,
+            errMsg: 'Transaction amount must positive',
+        };
+    }
+
     try {
         const float = parseFloat(inputString);
 
@@ -11,9 +21,9 @@ export const validateTransferAmount = (inputString) => {
             };
         }
 
-        if (float > 2000) {
+        if (float > maxAmount) {
             return {
-                value: '2000',
+                value: maxAmount.toFixed(2),
                 error: true,
                 errMsg: 'Transaction amount must positive',
             };
