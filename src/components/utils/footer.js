@@ -48,14 +48,9 @@ const Footer = () => {
 
                             <Grid item xs={12} sm={6} lg={3}>
                                 <Stack>
-                                    <Button
-                                        href={EXTERNAL_LINKS.PAGES.LEARN}
-                                        variant="text"
-                                    >
-                                        <Typography variant="smallHeadline">
-                                            Learn
-                                        </Typography>
-                                    </Button>
+                                    <Typography variant="smallHeadline">
+                                        Learn
+                                    </Typography>
 
                                     <Button
                                         href={EXTERNAL_LINKS.PAGES.HOW_IT_WORKS}

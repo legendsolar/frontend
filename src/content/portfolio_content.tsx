@@ -13,6 +13,7 @@ import MetricList from 'components/summary/metric_list';
 import SmallPanelDisplaySVG from 'assets/images/small_panel_display.svg';
 import Image from 'utils/image';
 
+import Marker from 'components/map/marker';
 import PanelParkingLotPNG from 'assets/images/panel_parking_lot.png';
 import PanelWarehousePNG from 'assets/images/panel_warehouse.png';
 import DocumentListComponent from 'components/documents/document_list_component';
@@ -84,6 +85,49 @@ const PortfolioContent = ({
                     width={'100%'}
                     height={'400px'}
                     zoom={8}
+                    markers={[
+                        <Marker
+                            lng={facility?.location?.lng || 0}
+                            lat={facility?.location?.lat || 0}
+                        >
+                            <div
+                                style={{
+                                    transform: 'translate(0%, -100%)',
+                                }}
+                            >
+                                <Component
+                                    standardWidth={false}
+                                    sx={{
+                                        p: 2,
+                                    }}
+                                    onClick={() => {}}
+                                >
+                                    <Typography
+                                        variant={'label' as any}
+                                        color={'legendaryGreen.main' as any}
+                                    >
+                                        {title}
+                                    </Typography>
+                                </Component>
+                                <div
+                                    style={{
+                                        content: '',
+                                        position: 'absolute',
+                                        bottom: '100%',
+
+                                        top: '95%',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+
+                                        /* the arrow */
+                                        border: '8px solid #000',
+                                        borderColor:
+                                            'white transparent transparent transparent',
+                                    }}
+                                ></div>
+                            </div>
+                        </Marker>,
+                    ]}
                 ></BasicMap>
             </Component>
 
