@@ -1,6 +1,6 @@
 {
   "short_name": "Legends App",
-  "name": "Legends App Beta",
+  "name": "Legends App",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#5A6367",
