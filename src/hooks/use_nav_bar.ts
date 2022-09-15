@@ -5,13 +5,18 @@ import {useAuth} from 'hooks/use_auth';
 import {useUser} from 'hooks/use_user';
 import {useAccount} from './use_accounts';
 import {useMemo} from 'react';
+import {useMediaQuery, useTheme} from '@mui/material';
 
 const useNavBar = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const {authenticated} = useAuth();
 
     const {useGetUserStatus} = useUser();
     const {useWallet} = useAccount();
+
+    const theme = useTheme();
+    const constrained = useMediaQuery(theme.breakpoints.down('xl'));
 
     const {
         loading: statusLoading,
@@ -37,6 +42,8 @@ const useNavBar = () => {
         userIsAuthenticated: authenticated,
         userVerified: status?.verified || false,
         walletBalance,
+        currentState: ('/' + location.pathname.split('/')[1]) as ROUTES,
+        constrained,
         onToHomepage: () => navigate(ROUTES.USER_HOME),
         onYourRooftop: () => navigate(ROUTES.USER_HOME),
         onTransaction: () => navigate(ROUTES.TRANSACTIONS),

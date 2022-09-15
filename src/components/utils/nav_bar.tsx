@@ -8,13 +8,14 @@ import CreateAccountToolbar from './create_account_toolbar';
 import LoggedOutToolbar from './logged_out_toolbar';
 import LoggedInToolbar from './logged_in_toolbar';
 import TypemarkSolarSVG from 'assets/logos/typemark_solar_dark.svg';
-import DensityMediumIcon from '@mui/icons-material/DensityMedium';
-
+import {ROUTES} from 'routes/routes';
 export interface NavBarProps {
     loading: boolean;
     userIsAuthenticated: boolean;
     userVerified: boolean;
     walletBalance: string;
+    currentState: ROUTES;
+    constrained: boolean;
     onToHomepage(): void;
     onYourRooftop(): void;
     onTransaction(): void;
@@ -29,6 +30,7 @@ const NavBar = ({
     userIsAuthenticated,
     userVerified,
     walletBalance,
+    constrained,
     onToHomepage,
     onYourRooftop,
     onTransaction,
@@ -36,6 +38,7 @@ const NavBar = ({
     onAvailablePanels,
     onAccount,
     onWallet,
+    currentState,
 }: NavBarProps) => {
     return (
         <Toolbar
@@ -83,6 +86,8 @@ const NavBar = ({
                                 onAvailablePanels={onAvailablePanels}
                                 onAccount={onAccount}
                                 onWallet={onWallet}
+                                currentState={currentState}
+                                constrained={constrained}
                             ></LoggedInToolbar>
                         )}
 

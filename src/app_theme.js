@@ -195,6 +195,15 @@ export const typographyOptions = {
             textTransform: 'uppercase',
         },
 
+        monoButtonBold: {
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '12px',
+            lineHeight: '14px',
+            fontWeight: 800,
+            color: paletteOptions.palette.blackDusk.main,
+            textTransform: 'uppercase',
+        },
+
         link: {
             fontFamily: 'Be Vietnam Pro',
             fontSize: '14px',
@@ -540,7 +549,7 @@ export const themeOptions = {
                         border: `2px solid ${paletteOptions.palette.white.main}`,
                         '&:hover': {
                             opacity: '0.75',
-                            backgroundColor: 'none',
+                            backgroundColor: 'transparent',
                         },
                     },
                 },

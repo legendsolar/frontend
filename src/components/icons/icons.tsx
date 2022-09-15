@@ -75,6 +75,7 @@ export const TwitterIcon = (sx = {}) => {
 export const CircledIcon = ({icon, sx = {}}) => (
     <Box
         sx={{
+            display: 'flex',
             borderRadius: '50%',
             background: '#FFF',
             p: 2,
