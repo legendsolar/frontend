@@ -16,7 +16,7 @@ const InvestmentSupportComponent = ({
     sx,
 }: InvestmentSupportComponentProps) => {
     return (
-        <Component shadow sx={{...sx, p: 0}}>
+        <Component shadow sx={{...sx, p: 0, width: '100%'}}>
             <Stack sx={{m: 4}}>
                 <Stack direction="row" justifyContent={'space-between'}>
                     <Stack direction="row" justifyContent={'space-between'}>

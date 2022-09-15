@@ -48,7 +48,7 @@ const SideBarView = ({
             switch (drawerPosition) {
                 case 'left':
                     return (
-                        <Grid item xl={4} lg={12}>
+                        <Grid item xl={4} xs={12}>
                             <Box
                                 sx={{
                                     height: 'max-content',
@@ -84,7 +84,7 @@ const SideBarView = ({
 
                 case 'right':
                     return (
-                        <Grid item xl={4} lg={12}>
+                        <Grid item xl={4} xs={12}>
                             <Box
                                 sx={{
                                     height: 'max-content',
@@ -127,7 +127,7 @@ const SideBarView = ({
         <div>
             <Grid container columnSpacing={4}>
                 {getDrawerPosition('left')}
-                <Grid item xl={8} lg={12}>
+                <Grid item xl={8} xs={12}>
                     <Stack
                         sx={{
                             width: '100%',

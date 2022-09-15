@@ -8,10 +8,10 @@ const Footer = () => {
     return (
         <Box sx={{mt: 10}}>
             <Grid container spacing={4}>
-                <Grid item xs={12} md={8}>
+                <Grid item xs={12} lg={8}>
                     <Stack>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6} lg={3}>
+                            <Grid item xs={12} md={6} lg={3}>
                                 <Stack>
                                     <Typography
                                         variant={'smallHeadline' as any}
@@ -48,7 +48,7 @@ const Footer = () => {
                                 </Stack>
                             </Grid>
 
-                            <Grid item xs={12} sm={6} lg={3}>
+                            <Grid item xs={12} md={6} lg={3}>
                                 <Stack>
                                     <Typography
                                         variant={'smallHeadline' as any}
@@ -85,7 +85,7 @@ const Footer = () => {
                                 </Stack>
                             </Grid>
 
-                            <Grid item xs={12} sm={6} lg={3}>
+                            <Grid item xs={12} md={6} lg={3}>
                                 <Stack>
                                     <Typography
                                         variant={'smallHeadline' as any}
@@ -122,7 +122,7 @@ const Footer = () => {
                                 </Stack>
                             </Grid>
 
-                            <Grid item xs={12} sm={6} lg={3}>
+                            <Grid item xs={12} md={6} lg={3}>
                                 <Stack>
                                     <Typography
                                         variant={'smallHeadline' as any}
@@ -167,7 +167,7 @@ const Footer = () => {
                     </Stack>
                 </Grid>
 
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} lg={4}>
                     <Stack>
                         <Stack>
                             <Typography

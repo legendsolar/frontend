@@ -12,7 +12,7 @@ import {
     EarningsGauge,
     GenerationGauge,
 } from 'components/gauges/live_metric_gauge';
-import {Stack, Typography} from '@mui/material';
+import {Stack, Typography, Grid} from '@mui/material';
 import {
     CarbonCumulativeImpact,
     EarningsCumulativeImpact,
@@ -86,70 +86,69 @@ const RealTimeContent = ({
                 }}
             ></Worm>
 
-            <Stack
-                direction="row"
-                justifyContent={'center'}
-                sx={{pb: 4}}
-                spacing={4}
-            >
-                <Stack spacing={4}>
-                    <LiveWeather
-                        lat={location?.lat || 40.712778}
-                        lng={location?.lng || -74.006111}
-                    ></LiveWeather>
-                    <EarningsCumulativeImpact
-                        cumulativeData={multiplyObject(
-                            summaryToCumulativeImpact(summary),
-                            generationMetaData.dollar_per_kWh,
-                        )}
-                        live={true}
-                    ></EarningsCumulativeImpact>
-                    <EarningsGauge
-                        max={
-                            generationMetaData.max_kW *
-                            generationMetaData.dollar_per_kWh
-                        }
-                        currentValue_unit={
-                            current_kW * generationMetaData.dollar_per_kWh
-                        }
-                        message={message}
-                    ></EarningsGauge>
+            <Grid container sx={{pb: 4, pl: 4}}>
+                <Grid item xs={12} lg={6}>
+                    <Stack spacing={4}>
+                        <LiveWeather
+                            lat={location?.lat || 40.712778}
+                            lng={location?.lng || -74.006111}
+                        ></LiveWeather>
+                        <EarningsCumulativeImpact
+                            cumulativeData={multiplyObject(
+                                summaryToCumulativeImpact(summary),
+                                generationMetaData.dollar_per_kWh,
+                            )}
+                            live={true}
+                        ></EarningsCumulativeImpact>
+                        <EarningsGauge
+                            max={
+                                generationMetaData.max_kW *
+                                generationMetaData.dollar_per_kWh
+                            }
+                            currentValue_unit={
+                                current_kW * generationMetaData.dollar_per_kWh
+                            }
+                            message={message}
+                        ></EarningsGauge>
 
-                    <GenerationCumulativeImpact
-                        cumulativeData={multiplyObject(
-                            summaryToCumulativeImpact(summary),
-                            1,
-                        )}
-                        live={true}
-                    ></GenerationCumulativeImpact>
-                </Stack>
-                <Stack spacing={4}>
-                    <CarbonGauge
-                        max={
-                            generationMetaData.max_kW *
-                            generationMetaData.co2_per_kWh
-                        }
-                        currentValue_unit={
-                            current_kW * generationMetaData.co2_per_kWh
-                        }
-                        message={message}
-                    ></CarbonGauge>
+                        <GenerationCumulativeImpact
+                            cumulativeData={multiplyObject(
+                                summaryToCumulativeImpact(summary),
+                                1,
+                            )}
+                            live={true}
+                        ></GenerationCumulativeImpact>
+                    </Stack>
+                </Grid>
+                <Grid item xs={12} lg={6}>
+                    <Stack spacing={4}>
+                        <CarbonGauge
+                            max={
+                                generationMetaData.max_kW *
+                                generationMetaData.co2_per_kWh
+                            }
+                            currentValue_unit={
+                                current_kW * generationMetaData.co2_per_kWh
+                            }
+                            message={message}
+                        ></CarbonGauge>
 
-                    <CarbonCumulativeImpact
-                        cumulativeData={multiplyObject(
-                            summaryToCumulativeImpact(summary),
-                            generationMetaData.co2_per_kWh,
-                        )}
-                        live={true}
-                    ></CarbonCumulativeImpact>
+                        <CarbonCumulativeImpact
+                            cumulativeData={multiplyObject(
+                                summaryToCumulativeImpact(summary),
+                                generationMetaData.co2_per_kWh,
+                            )}
+                            live={true}
+                        ></CarbonCumulativeImpact>
 
-                    <GenerationGauge
-                        max={generationMetaData.max_kW}
-                        currentValue_unit={current_kW}
-                        message={message}
-                    ></GenerationGauge>
-                </Stack>
-            </Stack>
+                        <GenerationGauge
+                            max={generationMetaData.max_kW}
+                            currentValue_unit={current_kW}
+                            message={message}
+                        ></GenerationGauge>
+                    </Stack>
+                </Grid>
+            </Grid>
         </Component>
     );
 };

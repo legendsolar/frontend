@@ -1,4 +1,4 @@
-import {Typography, Stack, Box} from '@mui/material';
+import {Typography, Stack, Box, Grid} from '@mui/material';
 import ContentDivider from 'components/basics/content_divider';
 import BasicMap from 'components/map/basic_map_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
@@ -138,7 +138,6 @@ const PortfolioContent = ({
                         <SideBar
                             sx={{
                                 backgroundColor: 'white.main',
-                                width: '100%',
                             }}
                         >
                             <Stack>
@@ -216,40 +215,47 @@ const PortfolioContent = ({
                                     All time return
                                 </Typography>
                             </ContentDivider>
+                            <Grid container>
+                                <Grid item lg={4} xs={12}>
+                                    <MetricBox
+                                        metric={
+                                            '$' +
+                                            numberFormatter(
+                                                summary.totalGeneration_kWh *
+                                                    generationMetaData.dollar_per_kWh,
+                                                2,
+                                            )
+                                        }
+                                        icon={<CashIcon></CashIcon>}
+                                        title={'USD Dividends Earned'}
+                                    ></MetricBox>
+                                </Grid>
 
-                            <Stack direction={'row'}>
-                                <MetricBox
-                                    metric={
-                                        '$' +
-                                        numberFormatter(
+                                <Grid item lg={4} xs={12}>
+                                    <MetricBox
+                                        metric={numberFormatter(
                                             summary.totalGeneration_kWh *
-                                                generationMetaData.dollar_per_kWh,
-                                            2,
-                                        )
-                                    }
-                                    icon={<CashIcon></CashIcon>}
-                                    title={'USD Dividends Earned'}
-                                ></MetricBox>
+                                                generationMetaData.co2_per_kWh,
+                                            3,
+                                        )}
+                                        icon={<LeafIcon />}
+                                        title={'LBS Carbon Averted'}
+                                    ></MetricBox>
+                                </Grid>
 
-                                <MetricBox
-                                    metric={numberFormatter(
-                                        summary.totalGeneration_kWh *
-                                            generationMetaData.co2_per_kWh,
-                                        3,
-                                    )}
-                                    icon={<LeafIcon />}
-                                    title={'LBS Carbon Averted'}
-                                ></MetricBox>
+                                <Grid item lg={4} xs={12}>
+                                    <MetricBox
+                                        metric={numberFormatter(
+                                            summary.totalGeneration_kWh,
+                                            3,
+                                        )}
+                                        icon={<PowerIcon />}
+                                        title={'kWh Generated'}
+                                    ></MetricBox>
+                                </Grid>
+                            </Grid>
 
-                                <MetricBox
-                                    metric={numberFormatter(
-                                        summary.totalGeneration_kWh,
-                                        3,
-                                    )}
-                                    icon={<PowerIcon />}
-                                    title={'kWh Generated'}
-                                ></MetricBox>
-                            </Stack>
+                            <Stack direction={'row'}></Stack>
 
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
@@ -386,83 +392,96 @@ const PortfolioContent = ({
                                 </Typography>
                             </ContentDivider>
 
-                            <Stack direction={'row'}>
-                                <Component
-                                    standardWidth={false}
-                                    sx={{
-                                        backgroundColor: 'whiteFog.main',
-                                        width: '100%',
-                                    }}
-                                >
-                                    <Typography
-                                        variant={'smallHeadline' as any}
-                                    >
-                                        Economics
-                                    </Typography>
-                                    <MetricList
-                                        dividers
-                                        valuePairs={[
-                                            {
-                                                metric: 'Investor Funds',
-                                                value: currencyFormatter(
-                                                    nonNullFacility.economics
-                                                        .cost_dollars,
-                                                ),
-                                            },
-                                            {
-                                                metric: 'Hold Term',
-                                                value:
-                                                    nonNullFacility.economics
-                                                        .ppaDuration || 'NA',
-                                            },
-                                            {
-                                                metric: 'Estimated ROI',
-                                                value: '10.0%',
-                                            },
-                                        ]}
-                                    ></MetricList>
-                                </Component>
-                                <Component
-                                    sx={{
-                                        backgroundColor: 'whiteFog.main',
-                                        width: '100%',
-                                    }}
-                                    standardWidth={false}
-                                >
-                                    <Typography
-                                        variant={'smallHeadline' as any}
-                                    >
-                                        Specifications
-                                    </Typography>
-                                    <MetricList
-                                        dividers
-                                        valuePairs={[
-                                            {
-                                                metric: 'Number of Panels',
-                                                value: generationMetaData.panel_count.toFixed(
-                                                    0,
-                                                ),
-                                            },
-                                            {
-                                                metric: 'Make & model',
-                                                value:
-                                                    nonNullFacility
-                                                        .generationMetaData
-                                                        .make || 'NA',
-                                            },
-                                            {
-                                                metric: 'Watts Installed',
-                                                value:
-                                                    numberFormatter(
-                                                        nonNullFacility
-                                                            .generationMetaData
-                                                            .max_kW * 1000,
-                                                    ) || 'NA',
-                                            },
-                                        ]}
-                                    ></MetricList>
-                                </Component>
-                            </Stack>
+                            <div>
+                                <Grid container spacing={4}>
+                                    <Grid item lg={6} xs={12}>
+                                        <Component
+                                            standardWidth={false}
+                                            sx={{
+                                                backgroundColor:
+                                                    'whiteFog.main',
+                                                width: '100%',
+                                            }}
+                                        >
+                                            <Typography
+                                                variant={'smallHeadline' as any}
+                                            >
+                                                Economics
+                                            </Typography>
+                                            <MetricList
+                                                dividers
+                                                valuePairs={[
+                                                    {
+                                                        metric: 'Investor Funds',
+                                                        value: currencyFormatter(
+                                                            nonNullFacility
+                                                                .economics
+                                                                .cost_dollars,
+                                                        ),
+                                                    },
+                                                    {
+                                                        metric: 'Hold Term',
+                                                        value:
+                                                            nonNullFacility
+                                                                .economics
+                                                                .ppaDuration ||
+                                                            'NA',
+                                                    },
+                                                    {
+                                                        metric: 'Estimated ROI',
+                                                        value: '10.0%',
+                                                    },
+                                                ]}
+                                            ></MetricList>
+                                        </Component>
+                                    </Grid>
+
+                                    <Grid item lg={6} xs={12}>
+                                        <Component
+                                            sx={{
+                                                backgroundColor:
+                                                    'whiteFog.main',
+                                                width: '100%',
+                                            }}
+                                            standardWidth={false}
+                                        >
+                                            <Typography
+                                                variant={'smallHeadline' as any}
+                                            >
+                                                Specifications
+                                            </Typography>
+                                            <MetricList
+                                                dividers
+                                                valuePairs={[
+                                                    {
+                                                        metric: 'Number of Panels',
+                                                        value: generationMetaData.panel_count.toFixed(
+                                                            0,
+                                                        ),
+                                                    },
+                                                    {
+                                                        metric: 'Make & model',
+                                                        value:
+                                                            nonNullFacility
+                                                                .generationMetaData
+                                                                .make || 'NA',
+                                                    },
+                                                    {
+                                                        metric: 'Watts Installed',
+                                                        value:
+                                                            numberFormatter(
+                                                                nonNullFacility
+                                                                    .generationMetaData
+                                                                    .max_kW *
+                                                                    1000,
+                                                            ) || 'NA',
+                                                    },
+                                                ]}
+                                            ></MetricList>
+                                        </Component>
+                                    </Grid>
+                                </Grid>
+                            </div>
 
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
