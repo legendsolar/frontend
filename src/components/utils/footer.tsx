@@ -1,7 +1,4 @@
 import {Grid, Typography, Box, Stack, Button} from '@mui/material';
-import Component from 'components/basics/component';
-import LassorImg from 'assets/Lassor.png';
-import NeraImg from 'assets/Nera.png';
 import {EXTERNAL_LINKS} from 'webflow/webflowLinking';
 
 const Footer = () => {
@@ -23,7 +20,10 @@ const Footer = () => {
                                         href={EXTERNAL_LINKS.HOME}
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
                                             Home
                                         </Typography>
                                     </Button>
@@ -32,7 +32,10 @@ const Footer = () => {
                                         href={EXTERNAL_LINKS.PAGES.ABOUT_US}
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
                                             About us
                                         </Typography>
                                     </Button>
@@ -41,7 +44,10 @@ const Footer = () => {
                                         href={EXTERNAL_LINKS.PAGES.TEAM}
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
                                             The team
                                         </Typography>
                                     </Button>
@@ -60,7 +66,10 @@ const Footer = () => {
                                         href={EXTERNAL_LINKS.PAGES.HOW_IT_WORKS}
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
                                             How it works
                                         </Typography>
                                     </Button>
@@ -69,7 +78,10 @@ const Footer = () => {
                                         href={EXTERNAL_LINKS.PAGES.FAQS}
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
                                             FAQs
                                         </Typography>
                                     </Button>
@@ -78,7 +90,10 @@ const Footer = () => {
                                         href={EXTERNAL_LINKS.PAGES.NEWS_ROOM}
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
                                             News Room
                                         </Typography>
                                     </Button>
@@ -97,7 +112,10 @@ const Footer = () => {
                                         href={EXTERNAL_LINKS.CONNECT.TWITTER}
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
                                             Twitter
                                         </Typography>
                                     </Button>
@@ -106,7 +124,10 @@ const Footer = () => {
                                         href={EXTERNAL_LINKS.CONNECT.INSTAGRAM}
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
                                             Instagram
                                         </Typography>
                                     </Button>
@@ -115,7 +136,10 @@ const Footer = () => {
                                         href={EXTERNAL_LINKS.CONNECT.LINKED_IN}
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
                                             LinkedIn
                                         </Typography>
                                     </Button>
@@ -136,7 +160,10 @@ const Footer = () => {
                                         }
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
                                             Privacy Policy
                                         </Typography>
                                     </Button>
@@ -148,8 +175,11 @@ const Footer = () => {
                                         }
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
-                                            Terms & Conditions
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
+                                            {'Terms & Conditions'}
                                         </Typography>
                                     </Button>
 
@@ -157,7 +187,10 @@ const Footer = () => {
                                         href={EXTERNAL_LINKS.LEGAL.DISCLAIMER}
                                         variant="text"
                                     >
-                                        <Typography variant="body2">
+                                        <Typography
+                                            variant="body2"
+                                            color={'blackDawn.main'}
+                                        >
                                             Disclaimer
                                         </Typography>
                                     </Button>
@@ -168,7 +201,7 @@ const Footer = () => {
                 </Grid>
 
                 <Grid item xs={12} lg={4}>
-                    <Stack>
+                    <Stack spacing={4}>
                         <Stack>
                             <Typography
                                 sx={{
@@ -180,26 +213,23 @@ const Footer = () => {
                                 Designed by Legends
                             </Typography>
 
-                            <Typography
-                                sx={{
-                                    fontSize: '20px',
-                                    fontWeight: '600',
-                                    lineHeight: '25px',
-                                }}
-                            >
+                            <Typography variant={'body1' as any}>
                                 in Brooklyn, New York
                             </Typography>
                         </Stack>
 
-                        <Typography
-                            variant="subtitle1"
-                            sx={{mt: 4, fontWeight: '700'}}
-                        >
-                            Legends Incorporated
-                        </Typography>
-                        <Typography variant={'smallHeadline' as any}>
-                            134 North 4th Street Brooklyn, NY 11249
-                        </Typography>
+                        <Stack>
+                            <Typography variant={'body1' as any}>
+                                Legends Incorporated
+                            </Typography>
+                            <Typography variant={'uppercaseDescription' as any}>
+                                134 North 4th Street
+                            </Typography>
+
+                            <Typography variant={'uppercaseDescription' as any}>
+                                Brooklyn, NY 11249
+                            </Typography>
+                        </Stack>
                     </Stack>
                 </Grid>
             </Grid>

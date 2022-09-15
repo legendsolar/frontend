@@ -47,7 +47,7 @@ const columns: GridColumns = [
                         <Chip
                             label={'Pending'}
                             color={'pencilYellow' as any}
-                            sx={{color: 'blackDawn.main'}}
+                            sx={{color: 'blackDusk.main'}}
                         ></Chip>
                     </div>
                 );
@@ -57,7 +57,7 @@ const columns: GridColumns = [
                         <Chip
                             label={'Complete'}
                             color={'grassGreen' as any}
-                            sx={{color: 'blackDawn.main'}}
+                            sx={{color: 'blackDusk.main'}}
                         ></Chip>
                     </div>
                 );

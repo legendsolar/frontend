@@ -18,69 +18,6 @@ import TransferDataGrid from 'components/transfers/transfer_data_grid';
 import {DataGridDateRange} from 'utils/date_range';
 import LoadingText from 'components/utils/loading_text';
 
-const columns: GridColumns = [
-    {
-        field: 'sourceName',
-        headerName: 'From',
-        minWidth: 160,
-        flex: 1,
-        editable: false,
-    },
-    {
-        field: 'destinationName',
-        headerName: 'To',
-        minWidth: 160,
-        flex: 1,
-        editable: false,
-    },
-    {
-        field: 'amount',
-        headerName: 'Amount',
-        minWidth: 70,
-        flex: 1,
-        editable: false,
-        valueFormatter: (params) => {
-            return '$' + params.value;
-        },
-    },
-    {
-        field: 'date',
-        headerName: 'Date',
-        minWidth: 110,
-        flex: 1,
-        editable: false,
-    },
-    {
-        field: 'status',
-        headerName: 'Status',
-        minWidth: 140,
-        flex: 1,
-        editable: false,
-        renderCell: (params) => {
-            if (params.value === 'PENDING') {
-                return (
-                    <div className="MuiDataGrid-cellContent">
-                        <Chip
-                            label={'Pending'}
-                            color={'pencilYellow' as any}
-                            sx={{color: 'blackDawn.main'}}
-                        ></Chip>
-                    </div>
-                );
-            } else if (params.value === 'PROCESSED') {
-                return (
-                    <div className="MuiDataGrid-cellContent">
-                        <Chip
-                            label={'Complete'}
-                            color={'grassGreen' as any}
-                            sx={{color: 'blackDawn.main'}}
-                        ></Chip>
-                    </div>
-                );
-            }
-        },
-    },
-];
 interface TransferGridContentProps {
     loading: boolean;
     transfers: Array<any>;

@@ -217,6 +217,14 @@ export const typographyOptions = {
             fontSize: '25px',
             fontWeight: 600,
         },
+        uppercaseDescription: {
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '12px',
+            lineHeight: '24px',
+            fontWeight: 300,
+            color: paletteOptions.palette.blackDusk.main,
+            textTransform: 'uppercase',
+        },
     },
 };
 
