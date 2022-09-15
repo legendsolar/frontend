@@ -8,6 +8,7 @@ import CancelSharpIcon from '@mui/icons-material/CancelSharp';
 import {CircledIcon} from 'components/icons/icons';
 import {IconButton} from '@mui/material';
 import {BankIcon} from 'components/icons/emoji_icons';
+import TypewriterText from './typewriter_text';
 const LoggedInToolbar = ({
     loading,
     onYourRooftop,
@@ -89,7 +90,7 @@ const LoggedInToolbar = ({
                         onClick={onWallet}
                     >
                         <WalletIcon />
-                        {loading ? <LoadingText /> : '$' + walletBalance}
+                        {loading ? <TypewriterText /> : '$' + walletBalance}
                     </Button>
                 </Stack>
             );
