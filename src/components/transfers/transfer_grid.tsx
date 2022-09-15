@@ -28,7 +28,7 @@ const TransferGrid = ({
                 {!emptyTransfers
                     ? transfers.map((transfer) => {
                           return (
-                              <Grid item xs={6} key={transfer.id}>
+                              <Grid item xs={12} lg={6} key={transfer.id}>
                                   <TransferComponent
                                       transfer={transfer}
                                   ></TransferComponent>

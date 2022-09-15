@@ -18,6 +18,7 @@ interface SideBarViewProps {
     drawerPosition?: 'left' | 'right' | 'top' | 'bottom' | 'none';
     constrainedDrawerPostion?: 'left' | 'right' | 'top' | 'bottom' | 'none';
     constrainedBreakpoint?: Breakpoint;
+    drawerGridSize?: number;
 }
 
 const SideBarView = ({
@@ -27,13 +28,12 @@ const SideBarView = ({
     drawerPosition = 'left',
     constrainedDrawerPostion = 'top',
     constrainedBreakpoint = 'xl',
+    drawerGridSize = 4,
 }: SideBarViewProps) => {
     const theme = useTheme();
     const constrained = useMediaQuery(
         theme.breakpoints.down(constrainedBreakpoint),
     );
-
-    console.log({constrained});
 
     const currentDisplayPosition = () => {
         if (constrained) {
@@ -48,11 +48,11 @@ const SideBarView = ({
             switch (drawerPosition) {
                 case 'left':
                     return (
-                        <Grid item xl={4} xs={12}>
+                        <Grid item xl={drawerGridSize} xs={12}>
                             <Box
                                 sx={{
                                     height: 'max-content',
-                                    top: '0px',
+                                    top: '20px',
                                     position: 'sticky',
                                     width: '100%',
                                 }}
@@ -84,11 +84,11 @@ const SideBarView = ({
 
                 case 'right':
                     return (
-                        <Grid item xl={4} xs={12}>
+                        <Grid item xl={drawerGridSize} xs={12}>
                             <Box
                                 sx={{
                                     height: 'max-content',
-                                    top: '0px',
+                                    top: '20px',
                                     position: 'sticky',
                                     width: '100%',
                                 }}
@@ -127,7 +127,7 @@ const SideBarView = ({
         <div>
             <Grid container columnSpacing={4}>
                 {getDrawerPosition('left')}
-                <Grid item xl={8} xs={12}>
+                <Grid item xl={12 - drawerGridSize} xs={12}>
                     <Stack
                         sx={{
                             width: '100%',

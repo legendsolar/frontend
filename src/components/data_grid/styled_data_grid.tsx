@@ -20,27 +20,7 @@ const StyledDataGrid = ({columns, rows, loading, sx}: DataGridProps) => {
                 autoPageSize
                 headerHeight={38}
                 disableSelectionOnClick
-                sx={{
-                    '& .MuiDataGrid-virtualScroller': {
-                        backgroundColor: 'none',
-                    },
-                    '& .MuiDataGrid-columnHeaders': {
-                        minHeight: '38px',
-                    },
-                    '& .MuiDataGrid-footerContainer': {
-                        border: 'none',
-                    },
-                    '& .first-column': {marginLeft: '100px'},
-
-                    '& .MuiDataGrid-cellContent': {
-                        marginLeft: '100px',
-                    },
-
-                    '& .MuiDataGrid-root': {
-                        paddingLeft: '-100px',
-                        paddingRight: '-100px',
-                    },
-                }}
+                sx={{}}
             />
         </Box>
     );

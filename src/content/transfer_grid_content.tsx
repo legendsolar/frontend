@@ -32,12 +32,7 @@ interface TransferGridContentProps {
 const TransferGridContent = ({
     loading,
     transfers,
-    assetStates,
-    assetState,
-    dateRange,
     onDownloadCsv,
-    onChangeDateRange,
-    onChangeAsset,
 }: TransferGridContentProps) => {
     return (
         <Box sx={{mt: '30px'}}>
@@ -45,70 +40,12 @@ const TransferGridContent = ({
                 direction="row"
                 justifyContent={'space-between'}
                 alignItems={'center'}
-                sx={{
-                    ml: '55px',
-                    mr: '70px',
-                }}
             >
                 <Typography variant={'smallHeadline' as any}>
                     Transactions
                 </Typography>
 
                 <Stack direction="row" justifyContent={'flex-end'}>
-                    <FormControl
-                        variant={'filled' as any}
-                        fullWidth
-                        color={'light' as any}
-                        sx={{width: '180px'}}
-                    >
-                        <InputLabel>Asset</InputLabel>
-                        <Select
-                            name="state"
-                            value={assetState}
-                            sx={{height: '55px'}}
-                            onChange={(e) => {
-                                onChangeAsset(e.target.value);
-                            }}
-                        >
-                            {assetStates.map((asset) => {
-                                return (
-                                    <MenuItem key={asset} value={asset}>
-                                        {asset}
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-
-                    <FormControl
-                        variant="filled"
-                        fullWidth
-                        color={'light' as any}
-                        sx={{width: '180px'}}
-                    >
-                        <InputLabel>Date Range</InputLabel>
-                        <Select
-                            name="state"
-                            value={dateRange}
-                            sx={{height: '55px'}}
-                            onChange={(e) => {
-                                onChangeDateRange(
-                                    e.target.value as DataGridDateRange,
-                                );
-                            }}
-                        >
-                            {Object.entries(DataGridDateRange).map(
-                                ([key, value]) => {
-                                    return (
-                                        <MenuItem key={key} value={value}>
-                                            {value}
-                                        </MenuItem>
-                                    );
-                                },
-                            )}
-                        </Select>
-                    </FormControl>
-
                     <Button
                         variant={'secondary' as any}
                         color={'light' as any}
@@ -117,7 +54,7 @@ const TransferGridContent = ({
                             onDownloadCsv();
                         }}
                     >
-                        {loading ? <LoadingText></LoadingText> : 'Download CSV'}
+                        {loading ? <LoadingText></LoadingText> : 'Download'}
                     </Button>
                 </Stack>
             </Stack>
@@ -125,9 +62,9 @@ const TransferGridContent = ({
                 transfers={transfers}
                 loading={loading}
                 sx={{
-                    height: '100vh',
+                    height: '80vh',
                     width: '100%',
-                    mt: 2,
+                    mt: '12px',
                 }}
             ></TransferDataGrid>
         </Box>

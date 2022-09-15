@@ -337,6 +337,10 @@ export const themeOptions = {
                     '& .MuiDataGrid-columnSeparator': {
                         visibility: 'hidden',
                     },
+
+                    '& .MuiDataGrid-row': {
+                        minHeight: '110px',
+                    },
                 },
             },
         },
