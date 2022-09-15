@@ -86,7 +86,7 @@ const RealTimeContent = ({
                 }}
             ></Worm>
 
-            <Grid container rowSpacing={4} sx={{pl: 4, pb: 4}}>
+            <Grid container rowSpacing={4} sx={{pl: {md: 4, xs: 0}, pb: 4}}>
                 <Grid item xs={12} lg={6}>
                     <Stack spacing={4}>
                         <LiveWeather

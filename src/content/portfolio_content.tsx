@@ -1,4 +1,4 @@
-import {Typography, Stack, Box, Grid} from '@mui/material';
+import {Typography, Stack, Box, Grid, Slider} from '@mui/material';
 import ContentDivider from 'components/basics/content_divider';
 import BasicMap from 'components/map/basic_map_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
@@ -307,18 +307,13 @@ const PortfolioContent = ({
                     }
                     mainContent={
                         <Stack>
-                            <Component
-                                standardWidth={false}
-                                sx={{
-                                    backgroundColor: 'whiteFog.main',
-                                    width: '100%',
-                                }}
-                            >
-                                <Stack direction={'row'}>
-                                    <Image src={PanelParkingLotPNG}></Image>
-                                    <Image src={PanelWarehousePNG}></Image>
-                                </Stack>
-                            </Component>
+                            <Stack direction={'row'} sx={{overflowX: 'scroll'}}>
+                                <Image src={PanelParkingLotPNG}></Image>
+                                <Image src={PanelParkingLotPNG}></Image>
+                                <Image src={PanelParkingLotPNG}></Image>
+                                <Image src={PanelParkingLotPNG}></Image>
+                                <Image src={PanelWarehousePNG}></Image>
+                            </Stack>
 
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
