@@ -4,6 +4,8 @@ import {typographyOptions} from 'app_theme';
 
 import {WalletIcon, PanelIcon} from 'components/icons/icons';
 import {BankIcon} from 'components/icons/emoji_icons';
+import {Transfer} from 'schema/schema_gen_types';
+import {DisplayTransfer} from './transfer_transforms';
 
 const accountToIcon = (account) => {
     switch (account.type) {
@@ -21,22 +23,24 @@ const accountToIcon = (account) => {
 const transferToIconTypes = (transfer) => {
     if (transfer.type === 'DIVIDEND') {
         return {
-            left: <PanelIcon />,
-            right: <WalletIcon />,
+            left: <PanelIcon sx={{width: '106px', height: '53px'}}></PanelIcon>,
+            right: <WalletIcon sx={{width: '50px', height: '50px'}} />,
         };
     }
 
     if (transfer.type === 'INVESTMENT') {
         return {
-            left: <BankIcon></BankIcon>,
-            right: <PanelIcon />,
+            left: <BankIcon sx={{width: '50px', height: '50px'}}></BankIcon>,
+            right: (
+                <PanelIcon sx={{width: '106px', height: '53px'}}></PanelIcon>
+            ),
         };
     }
 
     if (transfer.type === 'TRANSFER') {
         return {
-            left: <WalletIcon />,
-            right: <BankIcon />,
+            left: <WalletIcon sx={{width: '50px', height: '50px'}} />,
+            right: <BankIcon sx={{width: '50px', height: '50px'}} />,
         };
     }
 
@@ -49,9 +53,16 @@ const transferToIconTypes = (transfer) => {
     };
 };
 
-const TransferComponent = ({transfer}) => {
-    const {title, color, status, destinationName, sourceName, amount, created} =
-        transfer;
+const TransferComponent = ({transfer}: {transfer: DisplayTransfer}) => {
+    const {
+        title,
+        color,
+        statusName,
+        destinationName,
+        sourceName,
+        amount,
+        date,
+    } = transfer;
 
     const amountString = (amount) => {
         try {
@@ -67,12 +78,12 @@ const TransferComponent = ({transfer}) => {
     const {left, right} = transferToIconTypes(transfer);
 
     return (
-        <Container sx={{width: '100%', minWidth: '320px'}}>
+        <Container sx={{width: '100%', minWidth: '320px', maxWidth: '400px'}}>
             <Stack
                 direction="row"
                 justifyContent="space-between"
                 alignItems={'flex-end'}
-                sx={{m: 1}}
+                sx={{mb: 1}}
             >
                 <Typography variant={'label' as any}>{title}</Typography>
 
@@ -160,12 +171,12 @@ const TransferComponent = ({transfer}) => {
                         }}
                         variant={'monoButton' as any}
                     >
-                        {status ? status : 'Unknown'}
+                        {statusName ? statusName : 'Unknown'}
                     </Typography>
                 </Box>
             </Container>
 
-            <Stack direction="row" justifyContent="space-between" sx={{m: 1}}>
+            <Stack direction="row" justifyContent="space-between" sx={{mt: 1}}>
                 <Typography variant={'label' as any}>{sourceName}</Typography>
 
                 <Typography variant={'label' as any}>
@@ -175,18 +186,4 @@ const TransferComponent = ({transfer}) => {
         </Container>
     );
 };
-
-TransferComponent.propTypes = {
-    transfer: PropTypes.shape({
-        title: PropTypes.string,
-        color: PropTypes.string,
-        status: PropTypes.string,
-        destinationName: PropTypes.string,
-        sourceName: PropTypes.string,
-        amount: PropTypes.string,
-    }).isRequired,
-};
-
-TransferComponent.defaultProps = {};
-
 export default TransferComponent;

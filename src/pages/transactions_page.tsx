@@ -6,7 +6,7 @@ import TransferGridContent from 'content/transfer_grid_content';
 import {DataGridDateRange} from 'utils/date_range';
 import EmptyContent from 'content/empty_content';
 import delay from 'utils/delay';
-
+import FullPageView from 'views/full_page_view';
 import {useEffect, useState} from 'react';
 import {useTransfer} from 'hooks/use_transfer';
 import {useCloudFunctions} from 'hooks/use_cloud_functions';
@@ -60,9 +60,9 @@ const TransactionPage = () => {
     const {downloadAllTransfers} = useCloudFunctions();
 
     return (
-        <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
+        <FullPageView navBar={<NavBar {...navBarProps}></NavBar>}>
             {content}
-        </DefaultView>
+        </FullPageView>
     );
 };
 

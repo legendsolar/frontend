@@ -67,13 +67,13 @@ const paletteOptions = {
         },
         grassGreen: {
             main: grassGreen,
-            contrastText: '#FFF',
+            contrastText: blackDusk,
             dark: '#26834e',
             light: '#59b681',
         },
         pencilYellow: {
             main: pencilYellow,
-            contrastText: '#FFF',
+            contrastText: blackDusk,
             dark: '#bb8f18',
             light: '#eec24a',
         },

@@ -14,64 +14,64 @@ import SunIconPng from 'assets/icons/sun_icon.png';
 import UmbrellaIconPng from 'assets/icons/umbrella_icon.png';
 import UserDataIconPng from 'assets/icons/user_data_icon.png';
 
-export const BankIcon = (sx = {}) => {
+export const BankIcon = ({sx = {}}) => {
     return (
         <BaseIcon src={BankAccountIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>
     );
 };
 
-export const CalendarIcon = (sx = {}) => {
+export const CalendarIcon = ({sx = {}}) => {
     return (
         <BaseIcon src={CalendarIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>
     );
 };
-export const CashIcon = (sx = {}) => {
+export const CashIcon = ({sx = {}}) => {
     return <BaseIcon src={CashIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>;
 };
-export const EditFilledIcon = (sx = {}) => {
+export const EditFilledIcon = ({sx = {}}) => {
     return (
         <BaseIcon src={EditFilledIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>
     );
 };
-export const EnvelopeIcon = (sx = {}) => {
+export const EnvelopeIcon = ({sx = {}}) => {
     return (
         <BaseIcon src={EnvelopeIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>
     );
 };
 
-export const HammerIcon = (sx = {}) => {
+export const HammerIcon = ({sx = {}}) => {
     return <BaseIcon src={HammerIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>;
 };
-export const LeafIcon = (sx = {}) => {
+export const LeafIcon = ({sx = {}}) => {
     return <BaseIcon src={LeafIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>;
 };
-export const MagGlassIcon = (sx = {}) => {
+export const MagGlassIcon = ({sx = {}}) => {
     return (
         <BaseIcon src={MagGlassIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>
     );
 };
-export const PhoneIcon = (sx = {}) => {
+export const PhoneIcon = ({sx = {}}) => {
     return <BaseIcon src={PhoneIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>;
 };
 
-export const PinIcon = (sx = {}) => {
+export const PinIcon = ({sx = {}}) => {
     return <BaseIcon src={PinIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>;
 };
-export const PowerIcon = (sx = {}) => {
+export const PowerIcon = ({sx = {}}) => {
     return <BaseIcon src={PowerIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>;
 };
 
-export const SunIcon = (sx = {}) => {
+export const SunIcon = ({sx = {}}) => {
     return <BaseIcon src={SunIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>;
 };
 
-export const UmbrellaIcon = (sx = {}) => {
+export const UmbrellaIcon = ({sx = {}}) => {
     return (
         <BaseIcon src={UmbrellaIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>
     );
 };
 
-export const UserDataIcon = (sx = {}) => {
+export const UserDataIcon = ({sx = {}}) => {
     return (
         <BaseIcon src={UserDataIconPng} alt={'Bank Icon'} sx={sx}></BaseIcon>
     );

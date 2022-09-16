@@ -15,15 +15,15 @@ export const ArrowBackIcon = ({sx}) => (
     <BaseIcon src={ArrowBackFilledSvg} alt="" sx={sx}></BaseIcon>
 );
 
-export const WalletIcon = (sx = {}) => {
+export const WalletIcon = ({sx = {}}) => {
     return <BaseIcon src={WalletPng} alt={'Wallet Icon'} sx={sx}></BaseIcon>;
 };
 
-export const GoogleIcon = (sx = {}) => {
+export const GoogleIcon = ({sx = {}}) => {
     return <BaseIcon src={GoogleIconSvg} alt={'Bank Icon'} sx={sx}></BaseIcon>;
 };
 
-export const PanelIcon = (sx = {}) => {
+export const PanelIcon = ({sx = {}}) => {
     return (
         <BaseIcon
             src={PanelSvg}
@@ -33,19 +33,19 @@ export const PanelIcon = (sx = {}) => {
     );
 };
 
-export const DocumentIcon = (sx = {}) => {
+export const DocumentIcon = ({sx = {}}) => {
     return (
         <BaseIcon src={DocumentSvg} alt={'Document Icon'} sx={sx}></BaseIcon>
     );
 };
 
-export const CheckIcon = (sx = {}) => {
+export const CheckIcon = ({sx = {}}) => {
     return (
         <BaseIcon src={CheckIconSvg} alt={'Check Icon Svg'} sx={sx}></BaseIcon>
     );
 };
 
-export const InstagramIcon = (sx = {}) => {
+export const InstagramIcon = ({sx = {}}) => {
     return (
         <BaseIcon
             src={InstagramIconSvg}
@@ -54,10 +54,10 @@ export const InstagramIcon = (sx = {}) => {
         ></BaseIcon>
     );
 };
-export const LinkIcon = (sx = {}) => {
+export const LinkIcon = ({sx = {}}) => {
     return <BaseIcon src={LinkIconSvg} alt={'Link Icon'} sx={sx}></BaseIcon>;
 };
-export const LinkedInIcon = (sx = {}) => {
+export const LinkedInIcon = ({sx = {}}) => {
     return (
         <BaseIcon
             src={LinkedInIconSvg}
@@ -66,7 +66,7 @@ export const LinkedInIcon = (sx = {}) => {
         ></BaseIcon>
     );
 };
-export const TwitterIcon = (sx = {}) => {
+export const TwitterIcon = ({sx = {}}) => {
     return (
         <BaseIcon src={TwitterIconSvg} alt={'Twitter Icon'} sx={sx}></BaseIcon>
     );

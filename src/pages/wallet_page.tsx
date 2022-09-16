@@ -134,7 +134,7 @@ const WalletPage = () => {
                         <Typography variant={'headline1' as any}>
                             {'$' + navBarProps.walletBalance}
                         </Typography>
-                        <SideBar>
+                        <SideBar sx={{mt: 0}}>
                             {!accountsLoading && !walletLoading && (
                                 <CreateTransferComponent
                                     accounts={accountsWithWallet}

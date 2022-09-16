@@ -2,7 +2,7 @@ import {Box, Stack, Paper, Grid, Container} from '@mui/material';
 import Footer from 'components/utils/footer';
 import MainContentBox from 'utils/main_content_box';
 
-const FullPageView = ({children, authenticated, navBar}) => {
+const FullPageView = ({children, navBar}) => {
     return (
         <Box
             justifyContent="center"

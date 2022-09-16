@@ -1,3 +1,4 @@
+import {DisplayTransfer} from 'components/transfers/transfer_transforms';
 import {
     AccountType,
     Transfer,
@@ -29,6 +30,18 @@ export const transferPageTransfers: Array<any> = [
         destinationName: 'Legends Wallet',
         sourceName: 'Solar Holdings',
         color: 'blackDusk',
+    },
+];
+
+export const testDisplayTransfers: Array<DisplayTransfer> = [
+    {
+        amount: '$59.15',
+        date: '6/10/2022',
+        title: 'Dividend Payment',
+        destinationName: 'Legends Wallet',
+        sourceName: 'Solar Holdings',
+        color: 'blackDusk',
+        statusName: 'PROCESSED',
     },
 ];
 

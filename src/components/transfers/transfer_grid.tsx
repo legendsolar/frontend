@@ -1,12 +1,12 @@
 import {Grid, Typography, Paper, CircularProgress} from '@mui/material';
 import TransferComponent from 'components/transfers/transfer_component';
-import {Transfer} from 'schema/schema_gen_types';
+import {DisplayTransfer} from './transfer_transforms';
 
 const TransferGrid = ({
     transfers,
     loading,
 }: {
-    transfers: Array<Transfer>;
+    transfers: Array<DisplayTransfer>;
     loading: boolean;
 }) => {
     const emptyTransfers = !transfers || transfers.length === 0;
@@ -16,6 +16,7 @@ const TransferGrid = ({
             <Grid
                 container
                 rowSpacing={4}
+                columnSpacing={2}
                 justifyContent="center"
                 alignItems="center"
             >
@@ -26,9 +27,9 @@ const TransferGrid = ({
                 )}
 
                 {!emptyTransfers
-                    ? transfers.map((transfer) => {
+                    ? transfers.map((transfer, i) => {
                           return (
-                              <Grid item xs={12} lg={6} key={transfer.id}>
+                              <Grid item xs={12} lg={6} key={i}>
                                   <TransferComponent
                                       transfer={transfer}
                                   ></TransferComponent>

@@ -56,8 +56,10 @@ const TransferDataGrid = ({
                         <div className="MuiDataGrid-cellContent">
                             <Chip
                                 label={'Pending'}
-                                color={'pencilYellow' as any}
-                                sx={{color: 'blackDawn.main'}}
+                                sx={{
+                                    backgroundColor: 'pencilYellow.light',
+                                    color: 'blackDusk.main',
+                                }}
                             ></Chip>
                         </div>
                     );
@@ -66,8 +68,10 @@ const TransferDataGrid = ({
                         <div className="MuiDataGrid-cellContent">
                             <Chip
                                 label={'Complete'}
-                                color={'grassGreen' as any}
-                                sx={{color: 'blackDawn.main'}}
+                                sx={{
+                                    backgroundColor: 'grassGreen.light',
+                                    color: 'blackDusk.main',
+                                }}
                             ></Chip>
                         </div>
                     );

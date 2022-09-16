@@ -4,7 +4,7 @@ import {
     deconstructQueryCacheKey,
 } from './query_cache_utils';
 import {format} from 'date-fns';
-
+import {transferTransformer} from 'components/transfers/transfer_transforms';
 import {useQuery, gql, useMutation} from '@apollo/client';
 
 const transferContext = createContext();
@@ -20,72 +20,6 @@ export const ProvideTransfer = ({children}) => {
 
 export const useTransfer = () => {
     return useContext(transferContext);
-};
-
-const createdDate = (created) => {
-    try {
-        return format(created, 'PP');
-    } catch {
-        const date = new Date(created);
-        return format(date, 'PP');
-    }
-};
-
-const transferTitle = (transfer) => {
-    if (transfer.type === 'DIVIDEND') {
-        return 'Dividend for ' + transfer.month;
-    } else {
-        return createdDate(transfer.created);
-    }
-};
-
-const transferSourceName = (transfer) => {
-    if (transfer.type === 'DIVIDEND') {
-        return transfer.facility.name;
-    } else {
-        return transfer.sourceAccount.name;
-    }
-};
-
-const transferTypeTransformer = (type) => {
-    switch (type) {
-        case 'DIVIDEND':
-            return 'Dividend Payment';
-        case 'INVESTMENT':
-            return 'Investment';
-        case 'TRANSFER':
-            return 'Bank Transfer';
-        default:
-            return 'Unknown';
-    }
-};
-
-const transferColorTransformer = (status) => {
-    switch (status) {
-        case 'FAILED':
-            return 'eraserRed';
-        case 'PENDING':
-            return 'pencilYellow';
-        case 'PROCESSED':
-            return 'blackDusk';
-        case 'CANCELLED':
-            return 'eraserRed';
-        case 'UNKNOWN':
-            return 'eraserRed';
-        default:
-            return 'eraserRed';
-    }
-};
-
-export const transferTransformer = (transfer) => {
-    return {
-        ...transfer,
-        title: transferTitle(transfer),
-        destinationName: transfer.destinationAccount.name,
-        sourceName: transferSourceName(transfer),
-        color: transferColorTransformer(transfer.status),
-        date: createdDate(new Date(transfer.created)),
-    };
 };
 
 export const useProvideTransfer = () => {

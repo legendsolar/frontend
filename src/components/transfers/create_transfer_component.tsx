@@ -19,6 +19,7 @@ import MultiSelect from 'components/inputs/multiselect';
 import LoadingText from 'components/utils/loading_text';
 import {Account, CreateTransferInput} from 'schema/schema_gen_types';
 import {currencyFormatter} from 'utils/number_formatter';
+import {createdDate, DisplayTransfer} from './transfer_transforms';
 
 interface CreateTransferComponentProps {
     accounts: Array<Account>;
@@ -101,17 +102,16 @@ const CreateTransferComponent = ({
         }
     };
 
-    const transferObject = {
+    const transferObject: DisplayTransfer = {
         title: 'New Transfer',
-        amount: transferAmount,
-        sourceName: sourceAccount?.name,
-        sourceAccount,
-        destinationName: destinationAccount?.name,
-        destinationAccount,
+        amount: transferAmount ? transferAmount : 'error',
+        sourceName: sourceAccount?.name ? sourceAccount.name : 'source',
+        destinationName: destinationAccount?.name
+            ? destinationAccount.name
+            : 'destination',
         color: state.page === 'review' ? 'legendaryGreen' : 'pencilYellow',
-        status: state.page === 'review' ? 'IN REVIEW' : 'PENDING',
-        type: 'TRANSFER',
-        created: new Date(),
+        statusName: state.page === 'review' ? 'IN REVIEW' : 'PENDING',
+        date: createdDate(new Date()),
     };
 
     const accountsEmpty = !accounts || accounts.length === 0;
