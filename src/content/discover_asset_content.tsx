@@ -19,6 +19,13 @@ import {ProspectiveAsset} from 'components/discovery/types';
 import {formatAddress, formatAddressLine} from 'utils/address_formatter';
 import TimelineComponent from 'utils/timeline_component';
 import MapTerrain3D from 'components/map/map_terrain_3d';
+import {
+    CalendarIcon,
+    CashIcon,
+    HammerIcon,
+    PowerIcon,
+    UmbrellaIcon,
+} from 'components/icons/emoji_icons';
 interface DiscoverAssetContentProps {
     loading: boolean;
     asset: ProspectiveAsset;
@@ -171,93 +178,53 @@ const DiscoverAssetContent = ({
                                     {
                                         title: '7 year term',
                                         content: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
+                                            <Typography variant={'body' as any}>
                                                 {asset.about.yearTerm}
                                             </Typography>
                                         ),
-                                        icon: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
-                                                🗓️
-                                            </Typography>
-                                        ),
+                                        icon: <CalendarIcon></CalendarIcon>,
                                     },
                                     {
                                         title: 'Legends Rooftop monitoring',
                                         content: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
+                                            <Typography variant={'body' as any}>
                                                 {asset.about.rooftopMonitoring}
                                             </Typography>
                                         ),
-                                        icon: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
-                                                ⚡️
-                                            </Typography>
-                                        ),
+                                        icon: <PowerIcon />,
                                     },
                                     {
                                         title: 'Investment Tax Credit',
                                         content: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
+                                            <Typography variant={'body' as any}>
                                                 {
                                                     asset.about
                                                         .investmentTaxCredit
                                                 }
                                             </Typography>
                                         ),
-                                        icon: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
-                                                💸
-                                            </Typography>
-                                        ),
+                                        icon: <CashIcon />,
                                     },
                                     {
                                         title: 'Rain or Shine Contract',
                                         content: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
+                                            <Typography variant={'body' as any}>
                                                 {asset.about.rainOrShine}
                                             </Typography>
                                         ),
-                                        icon: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
-                                                ☂️
-                                            </Typography>
-                                        ),
+                                        icon: <UmbrellaIcon></UmbrellaIcon>,
                                     },
                                     {
                                         title: 'Full Workmanship Warrenty',
                                         content: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
+                                            <Typography variant={'body' as any}>
                                                 {
                                                     asset.about
                                                         .workmanshipWarrenty
                                                 }
                                             </Typography>
                                         ),
-                                        icon: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
-                                                🔨
-                                            </Typography>
-                                        ),
+                                        icon: <HammerIcon />,
                                     },
                                 ]}
                             ></IconAccordian>

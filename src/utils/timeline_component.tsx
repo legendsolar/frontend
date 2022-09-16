@@ -16,7 +16,12 @@ interface TimelineComponentProps {
 const TimelineComponent = ({steps}: TimelineComponentProps) => {
     return (
         <Box
-            sx={{backgroundColor: 'whiteHaze.main', position: 'relative', p: 0}}
+            sx={{
+                backgroundColor: 'whiteHaze.main',
+                position: 'relative',
+                p: 0,
+                borderRadius: '5px',
+            }}
         >
             {steps.map((step, idx) => (
                 <Grid container>
@@ -34,7 +39,9 @@ const TimelineComponent = ({steps}: TimelineComponentProps) => {
                                 alignItems: 'center',
                             }}
                         >
-                            <Typography variant={'headline1' as any}>
+                            <Typography
+                                sx={{fontWeight: '800', fontSize: '35px'}}
+                            >
                                 {idx + 1}
                             </Typography>
                         </Box>

@@ -21,7 +21,12 @@ import {numberFormatter, currencyFormatter} from 'utils/number_formatter';
 import LoadingContent from 'content/loading_content';
 import {Document} from 'components/documents/types';
 import EmptyContent from './empty_content';
-import {CashIcon, LeafIcon, PowerIcon} from 'components/icons/emoji_icons';
+import {
+    CalendarIcon,
+    CashIcon,
+    LeafIcon,
+    PowerIcon,
+} from 'components/icons/emoji_icons';
 import MetricBox from 'components/gauges/metric_box';
 import {siteCopy} from 'static/copy';
 interface PortfolioContentProps {
@@ -307,14 +312,6 @@ const PortfolioContent = ({
                     }
                     mainContent={
                         <Stack>
-                            <Stack direction={'row'} sx={{overflowX: 'scroll'}}>
-                                <Image src={PanelParkingLotPNG}></Image>
-                                <Image src={PanelParkingLotPNG}></Image>
-                                <Image src={PanelParkingLotPNG}></Image>
-                                <Image src={PanelParkingLotPNG}></Image>
-                                <Image src={PanelWarehousePNG}></Image>
-                            </Stack>
-
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
                                     About this investment
@@ -332,13 +329,7 @@ const PortfolioContent = ({
                                                 {siteCopy.aboutSevenYearTerm}
                                             </Typography>
                                         ),
-                                        icon: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
-                                                🗓️
-                                            </Typography>
-                                        ),
+                                        icon: <CalendarIcon></CalendarIcon>,
                                     },
                                     {
                                         title: 'Legends Rooftop monitoring',
@@ -351,32 +342,18 @@ const PortfolioContent = ({
                                                 }
                                             </Typography>
                                         ),
-                                        icon: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
-                                                ⚡️
-                                            </Typography>
-                                        ),
+                                        icon: <PowerIcon></PowerIcon>,
                                     },
                                     {
                                         title: 'Investment Tax Credit',
                                         content: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
+                                            <Typography variant={'body' as any}>
                                                 {
                                                     siteCopy.aboutInvestmentTaxCredit
                                                 }
                                             </Typography>
                                         ),
-                                        icon: (
-                                            <Typography
-                                                variant={'description' as any}
-                                            >
-                                                💸
-                                            </Typography>
-                                        ),
+                                        icon: <CashIcon></CashIcon>,
                                     },
                                 ]}
                             ></IconAccordian>

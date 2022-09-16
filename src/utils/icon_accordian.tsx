@@ -1,6 +1,7 @@
 import {Typography, Accordion, AccordionSummary, Stack} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Divider from 'components/basics/divider';
+import Component from 'components/basics/component';
 
 interface Item {
     title: string;
@@ -20,14 +21,29 @@ const IconAccordian = ({items}: {items: Array<Item>}) => {
                     },
                 }}
             >
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <Stack direction="row" spacing={4}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    sx={{
+                        height: '105px',
+                    }}
+                >
+                    <Stack direction="row" spacing={4} sx={{height: '100%'}}>
                         {icon}
-                        <Typography>{title}</Typography>
+                        <Typography variant={'subtitle2' as any}>
+                            {title}
+                        </Typography>
                     </Stack>
                 </AccordionSummary>
 
-                {content}
+                <Component
+                    standardWidth={false}
+                    background
+                    sx={{
+                        backgroundColor: 'whiteFog.main',
+                    }}
+                >
+                    {content}
+                </Component>
             </Accordion>
             {idx !== items.length - 1 && <Divider></Divider>}
         </div>
