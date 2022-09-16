@@ -29,6 +29,7 @@ import {
 } from 'components/icons/emoji_icons';
 import MetricBox from 'components/gauges/metric_box';
 import {siteCopy} from 'static/copy';
+import {MetricComponent} from 'utils/metric_component';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
@@ -367,90 +368,61 @@ const PortfolioContent = ({
                             <div>
                                 <Grid container spacing={4}>
                                     <Grid item lg={6} xs={12}>
-                                        <Component
-                                            standardWidth={false}
-                                            sx={{
-                                                backgroundColor:
-                                                    'whiteFog.main',
-                                                width: '100%',
-                                            }}
-                                        >
-                                            <Typography
-                                                variant={'smallHeadline' as any}
-                                            >
-                                                Economics
-                                            </Typography>
-                                            <MetricList
-                                                dividers
-                                                valuePairs={[
-                                                    {
-                                                        metric: 'Investor Funds',
-                                                        value: currencyFormatter(
-                                                            nonNullFacility
-                                                                .economics
-                                                                .cost_dollars,
-                                                        ),
-                                                    },
-                                                    {
-                                                        metric: 'Hold Term',
-                                                        value:
-                                                            nonNullFacility
-                                                                .economics
-                                                                .ppaDuration ||
-                                                            'NA',
-                                                    },
-                                                    {
-                                                        metric: 'Estimated ROI',
-                                                        value: '10.0%',
-                                                    },
-                                                ]}
-                                            ></MetricList>
-                                        </Component>
+                                        <MetricComponent
+                                            title={'Economics'}
+                                            valuePairs={[
+                                                {
+                                                    metric: 'Investor Funds',
+                                                    value: currencyFormatter(
+                                                        nonNullFacility
+                                                            .economics
+                                                            .cost_dollars,
+                                                    ),
+                                                },
+                                                {
+                                                    metric: 'Hold Term',
+                                                    value:
+                                                        nonNullFacility
+                                                            .economics
+                                                            .ppaDuration ||
+                                                        'NA',
+                                                },
+                                                {
+                                                    metric: 'Estimated ROI',
+                                                    value: '10.0%',
+                                                },
+                                            ]}
+                                        ></MetricComponent>
                                     </Grid>
 
                                     <Grid item lg={6} xs={12}>
-                                        <Component
-                                            sx={{
-                                                backgroundColor:
-                                                    'whiteFog.main',
-                                                width: '100%',
-                                            }}
-                                            standardWidth={false}
-                                        >
-                                            <Typography
-                                                variant={'smallHeadline' as any}
-                                            >
-                                                Specifications
-                                            </Typography>
-                                            <MetricList
-                                                dividers
-                                                valuePairs={[
-                                                    {
-                                                        metric: 'Number of Panels',
-                                                        value: generationMetaData.panel_count.toFixed(
-                                                            0,
-                                                        ),
-                                                    },
-                                                    {
-                                                        metric: 'Make & model',
-                                                        value:
+                                        <MetricComponent
+                                            title={'Specifications'}
+                                            valuePairs={[
+                                                {
+                                                    metric: 'Number of Panels',
+                                                    value: generationMetaData.panel_count.toFixed(
+                                                        0,
+                                                    ),
+                                                },
+                                                {
+                                                    metric: 'Make & model',
+                                                    value:
+                                                        nonNullFacility
+                                                            .generationMetaData
+                                                            .make || 'NA',
+                                                },
+                                                {
+                                                    metric: 'Watts Installed',
+                                                    value:
+                                                        numberFormatter(
                                                             nonNullFacility
                                                                 .generationMetaData
-                                                                .make || 'NA',
-                                                    },
-                                                    {
-                                                        metric: 'Watts Installed',
-                                                        value:
-                                                            numberFormatter(
-                                                                nonNullFacility
-                                                                    .generationMetaData
-                                                                    .max_kW *
-                                                                    1000,
-                                                            ) || 'NA',
-                                                    },
-                                                ]}
-                                            ></MetricList>
-                                        </Component>
+                                                                .max_kW * 1000,
+                                                        ) || 'NA',
+                                                },
+                                            ]}
+                                        />
                                     </Grid>
                                 </Grid>
                             </div>

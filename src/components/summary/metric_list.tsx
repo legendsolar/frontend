@@ -11,9 +11,13 @@ export interface Metric {
 const MetricList = ({
     valuePairs,
     dividers = false,
+    dividerSx = {},
+    dividerStart = false,
 }: {
     valuePairs: Array<Metric>;
     dividers?: boolean;
+    dividerSx?: any;
+    dividerStart?: boolean;
 }) => {
     if (!valuePairs) {
         return <></>;
@@ -21,8 +25,11 @@ const MetricList = ({
 
     return (
         <Stack spacing={2} sx={{width: '100%', height: '100%'}}>
+            {dividerStart && (
+                <ComponentDivider sx={dividerSx}></ComponentDivider>
+            )}
             {valuePairs.map(({metric, value}, index, list) => (
-                <div key={nanoid()}>
+                <div key={nanoid()} style={{margin: '0px'}}>
                     <Stack
                         direction="row"
                         justifyContent={'space-between'}
@@ -32,7 +39,10 @@ const MetricList = ({
                             height: '53px',
                         }}
                     >
-                        <Typography variant="subtitle1" color="blackDawn.main">
+                        <Typography
+                            variant={'subtitle3' as any}
+                            color="blackDawn.main"
+                        >
                             {metric}
                         </Typography>
                         <Typography
@@ -47,7 +57,7 @@ const MetricList = ({
                         </Typography>
                     </Stack>
                     {dividers && index !== list.length - 1 && (
-                        <ComponentDivider></ComponentDivider>
+                        <ComponentDivider sx={dividerSx}></ComponentDivider>
                     )}
                 </div>
             ))}

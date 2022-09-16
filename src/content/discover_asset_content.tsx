@@ -26,6 +26,7 @@ import {
     PowerIcon,
     UmbrellaIcon,
 } from 'components/icons/emoji_icons';
+import {MetricComponent} from 'utils/metric_component';
 interface DiscoverAssetContentProps {
     loading: boolean;
     asset: ProspectiveAsset;
@@ -335,77 +336,49 @@ const DiscoverAssetContent = ({
                             </ContentDivider>
 
                             <Stack direction={'row'}>
-                                <Component
-                                    standardWidth={false}
-                                    sx={{
-                                        backgroundColor: 'whiteFog.main',
-                                        width: '100%',
-                                    }}
-                                >
-                                    <Typography
-                                        variant={'smallHeadline' as any}
-                                    >
-                                        Economics
-                                    </Typography>
-                                    <MetricList
-                                        dividers
-                                        valuePairs={[
-                                            {
-                                                metric: 'Investor Funds',
-                                                value: currencyFormatter(
-                                                    asset.minInvestment,
-                                                ),
-                                            },
-                                            {
-                                                metric: 'Hold Term',
-                                                value: asset.holdTerm_years.toFixed(
-                                                    0,
-                                                ),
-                                            },
-                                            {
-                                                metric: 'Estimated ROI',
-                                                value:
-                                                    asset.estimatedROI.toFixed(
-                                                        1,
-                                                    ) + '%',
-                                            },
-                                        ]}
-                                    ></MetricList>
-                                </Component>
-                                <Component
-                                    sx={{
-                                        backgroundColor: 'whiteFog.main',
-                                        width: '100%',
-                                    }}
-                                    standardWidth={false}
-                                >
-                                    <Typography
-                                        variant={'smallHeadline' as any}
-                                    >
-                                        Specifications
-                                    </Typography>
-                                    <MetricList
-                                        dividers
-                                        valuePairs={[
-                                            {
-                                                metric: 'Number of Panels',
-                                                value: asset.numberOfPanels.toFixed(
-                                                    0,
-                                                ),
-                                            },
-                                            {
-                                                metric: 'Make & model',
-                                                value: 'N/A',
-                                            },
-                                            {
-                                                metric: 'Watts Installed',
-                                                value: asset.capacity_kW.toFixed(
-                                                    1,
-                                                ),
-                                            },
-                                        ]}
-                                    ></MetricList>
-                                </Component>
+                                <MetricComponent
+                                    title={'Economics'}
+                                    valuePairs={[
+                                        {
+                                            metric: 'Investor Funds',
+                                            value: currencyFormatter(
+                                                asset.minInvestment,
+                                            ),
+                                        },
+                                        {
+                                            metric: 'Hold Term',
+                                            value: asset.holdTerm_years.toFixed(
+                                                0,
+                                            ),
+                                        },
+                                        {
+                                            metric: 'Estimated ROI',
+                                            value:
+                                                asset.estimatedROI.toFixed(1) +
+                                                '%',
+                                        },
+                                    ]}
+                                ></MetricComponent>
+
+                                <MetricComponent
+                                    title={'Specifications'}
+                                    valuePairs={[
+                                        {
+                                            metric: 'Number of Panels',
+                                            value: asset.numberOfPanels.toFixed(
+                                                0,
+                                            ),
+                                        },
+                                        {
+                                            metric: 'Make & model',
+                                            value: 'N/A',
+                                        },
+                                        {
+                                            metric: 'Watts Installed',
+                                            value: asset.capacity_kW.toFixed(1),
+                                        },
+                                    ]}
+                                ></MetricComponent>
                             </Stack>
 
                             <ContentDivider>
