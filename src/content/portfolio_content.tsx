@@ -30,6 +30,7 @@ import {
 import MetricBox from 'components/gauges/metric_box';
 import {siteCopy} from 'static/copy';
 import {MetricComponent} from 'utils/metric_component';
+import {testTransfers} from 'static/placeholder_transfers';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
@@ -287,9 +288,7 @@ const PortfolioContent = ({
                 <TransferDataGrid
                     transfers={transfers}
                     loading={false}
-                    sx={{
-                        height: '400px',
-                    }}
+                    autoHeight={true}
                 ></TransferDataGrid>
 
                 <SideBarView

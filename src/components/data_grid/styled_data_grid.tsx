@@ -9,6 +9,7 @@ interface DataGridProps {
     loading: boolean;
     defaultSortModel?: GridSortModel;
     viewPortOverrideWidthPx?: number;
+    autoHeight?: boolean;
     sx?: any;
 }
 
@@ -18,6 +19,7 @@ const StyledDataGrid = ({
     loading,
     defaultSortModel = undefined,
     viewPortOverrideWidthPx = undefined,
+    autoHeight = false,
     sx = {},
 }: DataGridProps) => {
     const [sortModel, setSortModel] = useState<GridSortModel | undefined>(
@@ -55,6 +57,19 @@ const StyledDataGrid = ({
 
             column.width = (remainingWidth * flex) / totalFlex;
         });
+
+        sx = {
+            '& .MuiDataGrid-row': {
+                paddingLeft: fromViewportPadding(),
+                paddingRight: fromViewportPadding(),
+            },
+
+            '& .MuiDataGrid-columnHeadersInner': {
+                paddingLeft: fromViewportPadding(),
+                paddingRight: fromViewportPadding(),
+            },
+            ...sx,
+        };
     }
 
     return (
@@ -70,21 +85,12 @@ const StyledDataGrid = ({
             disableColumnMenu
             sortModel={sortModel}
             onSortModelChange={(model) => setSortModel(model as GridSortModel)}
+            autoHeight={autoHeight}
             sx={{
                 height: '80vh',
 
                 '& .MuiDataGrid-row:hover': {
                     backgroundColor: 'none',
-                },
-
-                '& .MuiDataGrid-row': {
-                    paddingLeft: fromViewportPadding(),
-                    paddingRight: fromViewportPadding(),
-                },
-
-                '& .MuiDataGrid-columnHeadersInner': {
-                    paddingLeft: fromViewportPadding(),
-                    paddingRight: fromViewportPadding(),
                 },
 
                 ...sx,

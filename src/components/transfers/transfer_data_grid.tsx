@@ -4,6 +4,7 @@ import StyledDataGrid from 'components/data_grid/styled_data_grid';
 
 interface TransferDataGridProps {
     transfers: Array<any>;
+    autoHeight?: boolean;
     loading: boolean;
     viewPortOverrideWidthPx?: number;
     sx?: any;
@@ -13,6 +14,7 @@ const TransferDataGrid = ({
     transfers,
     loading,
     viewPortOverrideWidthPx = undefined,
+    autoHeight = false,
     sx = {},
 }: TransferDataGridProps) => {
     // lassor owes me
@@ -86,6 +88,7 @@ const TransferDataGrid = ({
             rows={transfers}
             loading={loading}
             viewPortOverrideWidthPx={viewPortOverrideWidthPx}
+            autoHeight={autoHeight}
             defaultSortModel={[
                 {
                     field: 'date',
