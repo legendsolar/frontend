@@ -60,6 +60,7 @@ const DocumentGridContent = ({
             <DocumentDataGrid
                 documents={documents}
                 loading={loading}
+                viewPortOverrideWidthPx={dms.width}
                 sx={{
                     height: '80vh',
                     width: '100%',
