@@ -1,5 +1,6 @@
 import {Box, Stack, Paper, Grid, Container} from '@mui/material';
 import Footer from 'components/utils/footer';
+import MainContentBox from 'utils/main_content_box';
 
 const FullPageView = ({children, authenticated, navBar}) => {
     return (
@@ -26,10 +27,24 @@ const FullPageView = ({children, authenticated, navBar}) => {
                     transform: 'translate3d(0, 0, -10px)',
                 }}
             ></Box>
-            {navBar}
+
+            <Box
+                position="absolute"
+                sx={{
+                    height: '300px',
+                    width: '100%',
+                    backgroundColor: 'whiteFog.main',
+                    zIndex: -1,
+                    transform: 'translate3d(0, 0, -5px)',
+                }}
+            ></Box>
+
+            <MainContentBox>{navBar}</MainContentBox>
             <Box sx={{minHeight: '100vh'}}>{children}</Box>
 
-            <Footer></Footer>
+            <MainContentBox>
+                <Footer></Footer>
+            </MainContentBox>
         </Box>
     );
 };

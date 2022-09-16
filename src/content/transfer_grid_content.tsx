@@ -10,14 +10,11 @@ import {
     MenuItem,
     Chip,
 } from '@mui/material';
-import {format} from 'date-fns';
-import {useState} from 'react';
-import {transferTransformer} from 'hooks/use_transfer';
-import StyledDataGrid from 'components/data_grid/styled_data_grid';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
 import {DataGridDateRange} from 'utils/date_range';
 import LoadingText from 'components/utils/loading_text';
-
+import MainContentBox from 'utils/main_content_box';
+import {useChartDimensions} from 'hooks/use_chart_dimensions';
 interface TransferGridContentProps {
     loading: boolean;
     transfers: Array<any>;
@@ -34,37 +31,47 @@ const TransferGridContent = ({
     transfers,
     onDownloadCsv,
 }: TransferGridContentProps) => {
+    const [ref, dms] = useChartDimensions({
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 0,
+        marginBottom: 0,
+    });
+
     return (
         <Box sx={{mt: '30px'}}>
-            <Stack
-                direction="row"
-                justifyContent={'space-between'}
-                alignItems={'center'}
-            >
-                <Typography variant={'smallHeadline' as any}>
-                    Transactions
-                </Typography>
+            <MainContentBox passedRef={ref}>
+                <Stack
+                    direction="row"
+                    justifyContent={'space-between'}
+                    alignItems={'center'}
+                >
+                    <Typography variant={'smallHeadline' as any}>
+                        Transactions
+                    </Typography>
 
-                <Stack direction="row" justifyContent={'flex-end'}>
-                    <Button
-                        variant={'secondary' as any}
-                        color={'light' as any}
-                        disabled={loading}
-                        onClick={() => {
-                            onDownloadCsv();
-                        }}
-                    >
-                        {loading ? <LoadingText></LoadingText> : 'Download'}
-                    </Button>
+                    <Stack direction="row" justifyContent={'flex-end'}>
+                        <Button
+                            variant={'secondary' as any}
+                            color={'light' as any}
+                            disabled={loading}
+                            onClick={() => {
+                                onDownloadCsv();
+                            }}
+                        >
+                            {loading ? <LoadingText></LoadingText> : 'Download'}
+                        </Button>
+                    </Stack>
                 </Stack>
-            </Stack>
+            </MainContentBox>
             <TransferDataGrid
                 transfers={transfers}
                 loading={loading}
+                viewPortOverrideWidthPx={dms.width}
                 sx={{
                     height: '80vh',
                     width: '100%',
-                    mt: '12px',
+                    mt: '10px',
                 }}
             ></TransferDataGrid>
         </Box>

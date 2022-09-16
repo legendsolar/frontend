@@ -42,6 +42,16 @@ const basePaths = [
         ],
     },
     {
+        name: 'data_grid',
+        type: 'components',
+        tests: [
+            {
+                name: 'test_styled_data_grid',
+            },
+        ],
+    },
+
+    {
         name: 'documents',
         type: 'components',
         tests: [

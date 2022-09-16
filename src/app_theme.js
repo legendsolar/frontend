@@ -331,7 +331,7 @@ export const themeOptions = {
 
                     '& .MuiDataGrid-columnHeaders': {
                         minHeight: '38px',
-                        backgroundColor: 'none',
+                        backgroundColor: whiteHaze,
                     },
 
                     '& .MuiDataGrid-columnSeparator': {
@@ -339,8 +339,42 @@ export const themeOptions = {
                     },
 
                     '& .MuiDataGrid-row': {
+                        position: 'relative',
+                        ...typographyOptions.typography.subtitle3,
+                        color: blackDawn,
                         minHeight: '110px',
+                        border: 'none',
                     },
+
+                    '& .MuiDataGrid-row:before': {
+                        position: 'absolute',
+                        left: '0px',
+                        right: '0px',
+                        content: '""',
+                        // width: '100%',
+                        border: '1px solid ' + whiteFog,
+                    },
+
+                    '& .MuiDataGrid-cell': {
+                        border: 'none',
+                    },
+
+                    '& .MuiDataGrid-row:hover': {
+                        backgroundColor: 'none',
+                    },
+
+                    '& .MuiTablePagination-displayedRows': {
+                        ...typographyOptions.typography.subtitle3,
+                        color: blackDawn,
+                    },
+
+                    '& .MuiDataGrid-footerContainer': {
+                        border: 'none',
+                    },
+
+                    // '& .MuiDataGrid-columnHeaderTitleContainer': {
+                    //     justifyContent: 'space-between',
+                    // },
                 },
             },
         },
