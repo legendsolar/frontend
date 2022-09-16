@@ -14,6 +14,8 @@ import {useState} from 'react';
 import DocumentDataGrid from 'components/documents/document_data_grid';
 import {DataGridDateRange} from 'utils/date_range';
 
+import {useChartDimensions} from 'hooks/use_chart_dimensions';
+import MainContentBox from 'utils/main_content_box';
 interface DocumentDataGridProps {
     loading: boolean;
     documents: Array<any>;
@@ -35,18 +37,26 @@ const DocumentGridContent = ({
     onChangeDateRange,
     onChangeAsset,
 }: DocumentDataGridProps) => {
+    const [ref, dms] = useChartDimensions({
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 0,
+        marginBottom: 0,
+    });
     return (
         <Box sx={{mt: '30px'}}>
-            <Stack
-                direction="row"
-                justifyContent={'space-between'}
-                alignItems={'center'}
-                sx={{mb: '37px'}}
-            >
-                <Typography variant={'smallHeadline' as any}>
-                    Documents
-                </Typography>
-            </Stack>
+            <MainContentBox passedRef={ref}>
+                <Stack
+                    direction="row"
+                    justifyContent={'space-between'}
+                    alignItems={'center'}
+                    sx={{mb: '37px'}}
+                >
+                    <Typography variant={'smallHeadline' as any}>
+                        Documents
+                    </Typography>
+                </Stack>
+            </MainContentBox>
             <DocumentDataGrid
                 documents={documents}
                 loading={loading}

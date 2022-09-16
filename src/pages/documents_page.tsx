@@ -2,10 +2,10 @@ import DefaultView from 'views/default_view';
 import NavBar from 'components/utils/nav_bar';
 import useNavBar from 'hooks/use_nav_bar';
 import DocumentGridContent from 'content/document_grid_content';
-import FullPageView from 'views/full_page_view';
 import {DataGridDateRange} from 'utils/date_range';
 import {useEffect, useState} from 'react';
 import {documents} from 'static/placeholder_documents';
+import FullPageView from 'views/full_page_view';
 
 import EmptyContent from 'content/empty_content';
 import {
@@ -78,9 +78,9 @@ const DocumentPage = () => {
         );
 
     return (
-        <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
+        <FullPageView navBar={<NavBar {...navBarProps}></NavBar>}>
             {content}
-        </DefaultView>
+        </FullPageView>
     );
 };
 
