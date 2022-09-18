@@ -16,6 +16,7 @@ import {useAccount} from 'hooks/use_accounts';
 import useNavBar from 'hooks/use_nav_bar';
 import NavBar from 'components/utils/nav_bar';
 import DefaultView from 'views/default_view';
+import {CreateTransferInput} from 'schema/schema_gen_types';
 
 const WalletPage = () => {
     const navBarProps = useNavBar();
@@ -55,12 +56,12 @@ const WalletPage = () => {
         createTransfer,
     } = useCreateTransfer();
 
-    const onCreateNewTransfer = (transfer) => {
+    const onCreateNewTransfer = (newTransfer: CreateTransferInput) => {
         const variables = {
             input: {
-                amount: transfer.amount,
-                sourceAccountId: transfer.sourceAccount.id,
-                destinationAccountId: transfer.destinationAccount.id,
+                amount: newTransfer.amount,
+                sourceAccountId: newTransfer.sourceAccountId,
+                destinationAccountId: newTransfer.destinationAccountId,
             },
         };
 

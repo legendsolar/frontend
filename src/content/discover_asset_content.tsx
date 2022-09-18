@@ -148,26 +148,6 @@ const DiscoverAssetContent = ({
                                 {asset.summary}
                             </Typography>
 
-                            <Component
-                                standardWidth={false}
-                                sx={{
-                                    backgroundColor: 'whiteFog.main',
-                                    width: '100%',
-                                }}
-                            >
-                                <Stack
-                                    direction={'row'}
-                                    alignItems={'flex-end'}
-                                >
-                                    <Image src={PanelParkingLotPNG}></Image>
-                                    <Image src={PanelWarehousePNG}></Image>
-                                    <Typography variant={'description' as any}>
-                                        Cras mattis consectetur purus sit amet
-                                        fermentum. Donec sed odio dui.
-                                    </Typography>
-                                </Stack>
-                            </Component>
-
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
                                     About this investment
@@ -269,6 +249,10 @@ const DiscoverAssetContent = ({
                                         linkBubble: (
                                             <Button
                                                 variant={'mini' as any}
+                                                href={
+                                                    'https://www.legends.solar/learn/selection'
+                                                }
+                                                target="_blank"
                                                 sx={{
                                                     width: 'fit-content',
                                                     backgroundColor:
@@ -298,6 +282,10 @@ const DiscoverAssetContent = ({
                                         linkBubble: (
                                             <Button
                                                 variant={'mini' as any}
+                                                href={
+                                                    'https://www.legends.solar/learn/cost'
+                                                }
+                                                target="_blank"
                                                 sx={{
                                                     width: 'fit-content',
                                                     backgroundColor:
@@ -316,6 +304,10 @@ const DiscoverAssetContent = ({
                                         linkBubble: (
                                             <Button
                                                 variant={'mini' as any}
+                                                href={
+                                                    'https://www.legends.solar/learn/legends-solar'
+                                                }
+                                                target="_blank"
                                                 sx={{
                                                     width: 'fit-content',
                                                     backgroundColor:

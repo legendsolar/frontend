@@ -42,6 +42,7 @@ export const testDisplayTransfers: Array<DisplayTransfer> = [
         sourceName: 'Solar Holdings',
         color: 'blackDusk',
         statusName: 'PROCESSED',
+        type: TransferType.Dividend,
     },
 ];
 

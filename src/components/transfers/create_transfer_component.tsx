@@ -17,7 +17,11 @@ import {validateTransferAmount} from 'validation/transaction_validation';
 import TransferComponent from 'components/transfers/transfer_component';
 import MultiSelect from 'components/inputs/multiselect';
 import LoadingText from 'components/utils/loading_text';
-import {Account, CreateTransferInput} from 'schema/schema_gen_types';
+import {
+    Account,
+    CreateTransferInput,
+    TransferType,
+} from 'schema/schema_gen_types';
 import {currencyFormatter} from 'utils/number_formatter';
 import {createdDate, DisplayTransfer} from './transfer_transforms';
 
@@ -112,6 +116,7 @@ const CreateTransferComponent = ({
         color: state.page === 'review' ? 'legendaryGreen' : 'pencilYellow',
         statusName: state.page === 'review' ? 'IN REVIEW' : 'PENDING',
         date: createdDate(new Date()),
+        type: TransferType.Transfer,
     };
 
     const accountsEmpty = !accounts || accounts.length === 0;

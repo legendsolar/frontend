@@ -9,9 +9,10 @@ export interface DisplayTransfer {
     color: string;
     date: string;
     amount: string;
+    type: TransferType;
 }
 
-export const createdDate = (created) => {
+export const createdDate = (created: Date): string => {
     try {
         return format(created, 'PP');
     } catch {

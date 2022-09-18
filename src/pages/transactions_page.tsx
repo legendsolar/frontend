@@ -35,11 +35,15 @@ const TransactionPage = () => {
                 loading={recentTransfersLoading || loading}
                 transfers={recentTransfers}
                 onDownloadCsv={async () => {
-                    setLoading(true);
-                    const out: any = await downloadAllTransfers();
-                    window.open(out.downloadLink);
-                    setLoading(false);
-                    return;
+                    try {
+                        setLoading(true);
+                        const out: any = await downloadAllTransfers();
+                        window.open(out.downloadLink);
+                        setLoading(false);
+                        return;
+                    } catch (e) {
+                        setLoading(false);
+                    }
                 }}
                 onChangeDateRange={(range) => {
                     setDateRange(range);
