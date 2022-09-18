@@ -53,8 +53,6 @@ export const numberFormatter = (
         return compactFormatter.format(number);
     }
 
-    console.log({number, remainingForDecimal, intWidth, width});
-
     const formatter = new Intl.NumberFormat('en-US', {
         maximumFractionDigits: remainingForDecimal,
         minimumFractionDigits:

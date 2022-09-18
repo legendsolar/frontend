@@ -70,13 +70,6 @@ export const usePortfolio = (): usePortfolioReturnType => {
         recentTransfersLoading ||
         (documentsLoading && !userFacilityLoading && !facilityData);
 
-    console.log({
-        userFacilityLoading,
-        generationDataLoading,
-        recentTransfersLoading,
-        documentsLoading,
-    });
-
     return {
         loading,
         facilityData,

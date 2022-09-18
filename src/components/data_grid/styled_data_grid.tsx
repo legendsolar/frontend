@@ -87,7 +87,7 @@ const StyledDataGrid = ({
             onSortModelChange={(model) => setSortModel(model as GridSortModel)}
             autoHeight={autoHeight}
             sx={{
-                height: '80vh',
+                // height: '80vh',
 
                 '& .MuiDataGrid-row:hover': {
                     backgroundColor: 'none',

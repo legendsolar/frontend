@@ -30,7 +30,6 @@ import {
 import MetricBox from 'components/gauges/metric_box';
 import {siteCopy} from 'static/copy';
 import {MetricComponent} from 'utils/metric_component';
-import {testTransfers} from 'static/placeholder_transfers';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
@@ -61,6 +60,8 @@ const PortfolioContent = ({
     const nonNullFacility = facility as unknown as Facility;
 
     const {generationMetaData, location, economics, summary} = nonNullFacility;
+
+    console.log(transfers);
 
     return (
         <div>
@@ -287,7 +288,7 @@ const PortfolioContent = ({
                 </ContentDivider>
                 <TransferDataGrid
                     transfers={transfers}
-                    loading={false}
+                    loading={loading}
                     autoHeight={true}
                 ></TransferDataGrid>
 

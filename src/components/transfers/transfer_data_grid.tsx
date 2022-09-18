@@ -17,8 +17,6 @@ const TransferDataGrid = ({
     autoHeight = false,
     sx = {},
 }: TransferDataGridProps) => {
-    // lassor owes me
-
     const columns: GridColumns = [
         {
             field: 'sourceName',
