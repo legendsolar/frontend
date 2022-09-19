@@ -1,4 +1,4 @@
-import {Typography, Stack, Box, Button} from '@mui/material';
+import {Typography, Stack, Box, Button, Grid} from '@mui/material';
 import ContentDivider from 'components/basics/content_divider';
 import BasicMap from 'components/map/basic_map_component';
 import Component from 'components/basics/component';
@@ -327,52 +327,60 @@ const DiscoverAssetContent = ({
                                 </Typography>
                             </ContentDivider>
 
-                            <Stack direction={'row'}>
-                                <MetricComponent
-                                    title={'Economics'}
-                                    valuePairs={[
-                                        {
-                                            metric: 'Investor Funds',
-                                            value: currencyFormatter(
-                                                asset.minInvestment,
-                                            ),
-                                        },
-                                        {
-                                            metric: 'Hold Term',
-                                            value: asset.holdTerm_years.toFixed(
-                                                0,
-                                            ),
-                                        },
-                                        {
-                                            metric: 'Estimated ROI',
-                                            value:
-                                                asset.estimatedROI.toFixed(1) +
-                                                '%',
-                                        },
-                                    ]}
-                                ></MetricComponent>
+                            <div>
+                                <Grid container spacing={4}>
+                                    <Grid item lg={6} xs={12}>
+                                        <MetricComponent
+                                            title={'Economics'}
+                                            valuePairs={[
+                                                {
+                                                    metric: 'Investor Funds',
+                                                    value: currencyFormatter(
+                                                        asset.minInvestment,
+                                                    ),
+                                                },
+                                                {
+                                                    metric: 'Hold Term',
+                                                    value: asset.holdTerm_years.toFixed(
+                                                        0,
+                                                    ),
+                                                },
+                                                {
+                                                    metric: 'Estimated ROI',
+                                                    value:
+                                                        asset.estimatedROI.toFixed(
+                                                            1,
+                                                        ) + '%',
+                                                },
+                                            ]}
+                                        ></MetricComponent>
+                                    </Grid>
 
-                                <MetricComponent
-                                    title={'Specifications'}
-                                    valuePairs={[
-                                        {
-                                            metric: 'Number of Panels',
-                                            value: asset.numberOfPanels.toFixed(
-                                                0,
-                                            ),
-                                        },
-                                        {
-                                            metric: 'Make & model',
-                                            value: 'N/A',
-                                        },
-                                        {
-                                            metric: 'Watts Installed',
-                                            value: asset.capacity_kW.toFixed(1),
-                                        },
-                                    ]}
-                                ></MetricComponent>
-                            </Stack>
-
+                                    <Grid item lg={6} xs={12}>
+                                        <MetricComponent
+                                            title={'Specifications'}
+                                            valuePairs={[
+                                                {
+                                                    metric: 'Number of Panels',
+                                                    value: asset.numberOfPanels.toFixed(
+                                                        0,
+                                                    ),
+                                                },
+                                                {
+                                                    metric: 'Make & model',
+                                                    value: 'N/A',
+                                                },
+                                                {
+                                                    metric: 'Watts Installed',
+                                                    value: asset.capacity_kW.toFixed(
+                                                        1,
+                                                    ),
+                                                },
+                                            ]}
+                                        ></MetricComponent>
+                                    </Grid>
+                                </Grid>
+                            </div>
                             <ContentDivider>
                                 <Typography variant={'monoButton' as any}>
                                     Documents
