@@ -93,7 +93,10 @@ const TransferDataGrid = ({
                     sort: 'asc',
                 },
             ]}
-            sx={sx}
+            sx={{
+                height: '500px',
+                ...sx,
+            }}
         ></StyledDataGrid>
     );
 };

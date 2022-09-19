@@ -286,11 +286,12 @@ const PortfolioContent = ({
                         Recent Transactions
                     </Typography>
                 </ContentDivider>
-                <TransferDataGrid
-                    transfers={transfers}
-                    loading={loading}
-                    autoHeight={true}
-                ></TransferDataGrid>
+                <div style={{height: '500px'}}>
+                    <TransferDataGrid
+                        transfers={transfers}
+                        loading={loading}
+                    ></TransferDataGrid>
+                </div>
 
                 <SideBarView
                     drawerPosition={'left'}
