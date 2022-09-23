@@ -34,6 +34,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import {transformValuesToUserAddress} from 'content/create_wallet_content';
 import LoadingText from 'components/utils/loading_text';
+import {AccountStatus} from 'schema/schema_gen_types';
 
 const AccountPage = () => {
     const navBarProps = useNavBar();
@@ -70,13 +71,22 @@ const AccountPage = () => {
 
     const onPlaidLinkComplete = ({publicToken, metadata}) => {
         const account = metadata.account;
+
+        console.log({publicToken, metadata});
+
+        const institution = metadata?.institution?.name
+            ? metadata.institution.name
+            : 'Unknown';
         // create account
         createAccount({
             variables: {
                 input: {
                     publicToken: publicToken,
                     plaidId: account.id,
-                    institution: metadata.institution.name,
+                    institution,
+                    status: account.verification_status
+                        ? AccountStatus.Verified
+                        : AccountStatus.Verified,
                     name: account.name,
                     type: account.subtype.toUpperCase(),
                     mask: account.mask,
@@ -129,7 +139,7 @@ const AccountPage = () => {
         accounts,
     } = useAccounts();
 
-    console.log(accreditation);
+    console.log({accounts});
 
     const [userDataEditMode, setUserDataEditMode] = useState<boolean>(false);
     const [userDataEditValid, setUserDataEditValid] = useState<boolean>(false);

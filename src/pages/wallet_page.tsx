@@ -16,7 +16,7 @@ import {useAccount} from 'hooks/use_accounts';
 import useNavBar from 'hooks/use_nav_bar';
 import NavBar from 'components/utils/nav_bar';
 import DefaultView from 'views/default_view';
-import {CreateTransferInput} from 'schema/schema_gen_types';
+import {AccountStatus, CreateTransferInput} from 'schema/schema_gen_types';
 
 const WalletPage = () => {
     const navBarProps = useNavBar();
@@ -103,6 +103,9 @@ const WalletPage = () => {
                     publicToken: publicToken,
                     plaidId: account.id,
                     institution: metadata.institution.name,
+                    status: account.verification_status
+                        ? AccountStatus.Verified
+                        : AccountStatus.Verified,
                     name: account.name,
                     type: account.subtype.toUpperCase(),
                     mask: account.mask,

@@ -39,6 +39,7 @@ export const useProvideAccount = () => {
                 name
                 type
                 mask
+                status
             }
         }
     `;
@@ -67,6 +68,7 @@ export const useProvideAccount = () => {
                 name
                 type
                 mask
+                status
             }
         }
     `;
@@ -78,6 +80,7 @@ export const useProvideAccount = () => {
                 name
                 type
                 mask
+                status
             }
         }
     `;

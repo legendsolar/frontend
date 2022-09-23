@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import {ROUTES} from 'routes/routes';
 import {LOCAL_STORAGE_KEYS} from 'storage/local_storage_keys';
 import {useAccount} from 'hooks/use_accounts';
+import {AccountStatus} from 'schema/schema_gen_types';
 
 const OAuthLink = () => {
     const navigate = useNavigate();
@@ -37,6 +38,9 @@ const OAuthLink = () => {
                     publicToken: public_token,
                     plaidId: account.id,
                     institution: metadata.institution.name,
+                    status: account.verification_status
+                        ? AccountStatus.Verified
+                        : AccountStatus.Verified,
                     name: account.name,
                     type: account.subtype.toUpperCase(),
                     mask: account.mask,
