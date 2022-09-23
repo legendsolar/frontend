@@ -4,7 +4,16 @@ import {useAuth} from 'hooks/use_auth';
 import {useAccount} from 'hooks/use_accounts';
 import {useTransfer} from 'hooks/use_transfer';
 
-import {Paper, Stack, Button, Typography, ListItemButton} from '@mui/material';
+import {
+    Paper,
+    Stack,
+    Button,
+    Typography,
+    ListItemButton,
+    Box,
+    useMediaQuery,
+    useTheme,
+} from '@mui/material';
 import Divider from 'components/basics/divider';
 import SideBarNavView from 'views/side_bar_view';
 import ScrollToSidebar from 'components/utils/scroll_to_sidebar';
@@ -134,6 +143,9 @@ const AccountPage = () => {
         setUserDataEditValid(false);
     };
 
+    const theme = useTheme();
+    const constrained = useMediaQuery(theme.breakpoints.down('xl'));
+
     return (
         <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
             <SideBarNavView
@@ -168,6 +180,13 @@ const AccountPage = () => {
                 }
                 mainContent={
                     <Stack spacing={6}>
+                        {constrained && (
+                            <MemberHeader
+                                name={userName}
+                                memberInfo={userInfo}
+                            ></MemberHeader>
+                        )}
+
                         <Component
                             standardWidth={false}
                             ref={(el) => (contentRefs.current[0] = el)}

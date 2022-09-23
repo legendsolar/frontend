@@ -10,7 +10,7 @@ import {useMediaQuery, useTheme} from '@mui/material';
 const useNavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const {authenticated} = useAuth();
+    const {authenticated, signout} = useAuth();
 
     const {useGetUserStatus} = useUser();
     const {useWallet} = useAccount();
@@ -50,6 +50,7 @@ const useNavBar = () => {
         onDocuments: () => navigate(ROUTES.DOCUMENTS),
         onAccount: () => navigate(ROUTES.ACCOUNT),
         onWallet: () => navigate(ROUTES.WALLET),
+        onLogOut: () => signout(),
         onAvailablePanels: () => navigate(ROUTES.DISCOVER),
     };
 

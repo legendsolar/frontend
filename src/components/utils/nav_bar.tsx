@@ -23,6 +23,7 @@ export interface NavBarProps {
     onAvailablePanels(): void;
     onAccount(): void;
     onWallet(): void;
+    onLogOut(): void;
 }
 
 const NavBar = ({
@@ -38,6 +39,7 @@ const NavBar = ({
     onAvailablePanels,
     onAccount,
     onWallet,
+    onLogOut,
     currentState,
 }: NavBarProps) => {
     return (
@@ -86,6 +88,7 @@ const NavBar = ({
                                 onAvailablePanels={onAvailablePanels}
                                 onAccount={onAccount}
                                 onWallet={onWallet}
+                                onLogOut={onLogOut}
                                 currentState={currentState}
                                 constrained={constrained}
                             ></LoggedInToolbar>

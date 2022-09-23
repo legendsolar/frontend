@@ -17,6 +17,7 @@ const LoggedInToolbar = ({
     onAvailablePanels,
     onAccount,
     onWallet,
+    onLogOut,
     walletBalance,
     currentState,
     constrained,
@@ -154,9 +155,21 @@ const LoggedInToolbar = ({
                 }}
                 onOpen={() => {}}
             >
-                <Stack alignItems={'center'}>
-                    {headers.map(renderHeader)}
-                    {icon}
+                <Stack
+                    alignItems={'center'}
+                    justifyContent={'space-between'}
+                    sx={{height: '100%'}}
+                >
+                    <Stack alignItems={'center'}>
+                        {headers.map(renderHeader)}
+                        {icon}
+                    </Stack>
+
+                    <Button variant={'header' as any} onClick={onLogOut}>
+                        <Typography variant={'monoButtonBold' as any}>
+                            {'Log Out'}
+                        </Typography>
+                    </Button>
                 </Stack>
             </SwipeableDrawer>
         </Stack>
