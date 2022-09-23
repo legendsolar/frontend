@@ -382,14 +382,23 @@ const CompleteAccountPage = () => {
     const upperLeftStates = (state: States): JSX.Element => {
         switch (state) {
             case States.STEPS_TO_INVEST:
-                return (
-                    <BackButton
-                        label={'Sign out'}
-                        onClick={() => {
-                            signout();
-                        }}
-                    ></BackButton>
-                );
+                if (stepsComplete.information)
+                    return (
+                        <BackButton
+                            label={'Sign out'}
+                            onClick={() => {
+                                signout();
+                            }}
+                        ></BackButton>
+                    );
+                else
+                    return (
+                        <BackButton
+                            label="Back to Homepage"
+                            linkText={'https://legends.solar'}
+                        ></BackButton>
+                    );
+
             default:
                 return (
                     <BackButton

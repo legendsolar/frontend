@@ -1,7 +1,7 @@
 import useNavBar from 'hooks/use_nav_bar';
 import {useEffect, useCallback} from 'react';
-import {usePlaidLink} from 'react-plaid-link';
 import {useNavigate} from 'react-router-dom';
+import {useState} from 'react';
 import {ROUTES} from 'routes/routes';
 import {LOCAL_STORAGE_KEYS} from 'storage/local_storage_keys';
 import WomanPanelsSVG from 'assets/images/women_panel.svg';
@@ -16,6 +16,7 @@ import {useFirebaseApp} from 'reactfire';
 import ChangeEmailComponent from 'components/inputs/change_email_component';
 import Component from 'components/basics/component';
 import BackButton from 'components/buttons/back_button';
+import {authErrorHandler} from 'utils/auth_error_translator';
 
 const emailParam = (url: string) => {
     const objUrl = new URL(url);
@@ -46,8 +47,12 @@ const ActionLinkHandlerPage = () => {
 
     const onEmailEntered = async ({email}) => {
         if (isSignInWithEmailLink(auth, window.location.href) && email) {
-            await signInWithEmailLink(auth, email, window.location.href);
-            navigate(ROUTES.USER_HOME);
+            try {
+                await signInWithEmailLink(auth, email, window.location.href);
+                navigate(ROUTES.USER_HOME);
+            } catch (e) {
+                authErrorHandler(e);
+            }
         } else {
             // TODO error
         }
