@@ -2,6 +2,7 @@ import {Typography, Stack, Box, Button} from '@mui/material';
 import Component from 'components/basics/component';
 import NeraPNG from 'assets/icons/nera.png';
 import {EXTERNAL_LINKS} from 'webflow/webflowLinking';
+import {CalendarIcon, EnvelopeIcon} from 'components/icons/emoji_icons';
 interface InvestmentSupportComponentProps {
     title: string;
     subtitle: string;
@@ -20,7 +21,14 @@ const InvestmentSupportComponent = ({
             <Stack sx={{m: 4}}>
                 <Stack direction="row" justifyContent={'space-between'}>
                     <Stack direction="row" justifyContent={'space-between'}>
-                        <img src={NeraPNG}></img>
+                        <img
+                            style={{
+                                width: '52px',
+                                height: '52px',
+                                borderRadius: '5px',
+                            }}
+                            src={NeraPNG}
+                        ></img>
                         <Stack justifyContent={'flex-end'}>
                             <Typography variant={'smallHeadline' as any}>
                                 {title}
@@ -31,30 +39,41 @@ const InvestmentSupportComponent = ({
                         </Stack>
                     </Stack>
 
-                    <Stack direction="row" justifyContent={'space-between'}>
-                        <Stack
-                            justifyContent={'flex-end'}
-                            alignItems={'center'}
+                    <Stack direction="row" justifyContent={'flex-end'}>
+                        <Button
+                            href={EXTERNAL_LINKS.TEAM.NERA}
+                            variant="text"
+                            target={'_blank'}
+                            sx={{
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                flexDirection: 'column',
+                                mt: 1,
+                                mb: 1,
+                            }}
                         >
-                            <Typography variant={'mediumEmoji' as any}>
-                                {'📅'}
-                            </Typography>
+                            <CalendarIcon />
                             <Typography variant={'monoButton' as any}>
                                 Meet
                             </Typography>
-                        </Stack>
+                        </Button>
 
-                        <Stack
-                            justifyContent={'flex-end'}
-                            alignItems={'center'}
+                        <Button
+                            href={EXTERNAL_LINKS.MAILTO.NERA}
+                            variant="text"
+                            target={'_blank'}
+                            style={{marginTop: '5px', marginBottom: '5px'}}
+                            sx={{
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                flexDirection: 'column',
+                            }}
                         >
-                            <Typography variant={'mediumEmoji' as any}>
-                                {'✉️'}
-                            </Typography>
+                            <EnvelopeIcon />
                             <Typography variant={'monoButton' as any}>
                                 Email
                             </Typography>
-                        </Stack>
+                        </Button>
                     </Stack>
                 </Stack>
                 <Typography variant={'body' as any}>{description}</Typography>

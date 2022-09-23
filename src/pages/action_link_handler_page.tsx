@@ -4,9 +4,9 @@ import {usePlaidLink} from 'react-plaid-link';
 import {useNavigate} from 'react-router-dom';
 import {ROUTES} from 'routes/routes';
 import {LOCAL_STORAGE_KEYS} from 'storage/local_storage_keys';
-import PanelPersonBlueSVG from 'assets/images/panel_person_blue.svg';
+import WomanPanelsSVG from 'assets/images/women_panel.svg';
 import DualPaneView from 'views/dual_pane_view';
-import {Typography} from '@mui/material';
+import {Typography, Link} from '@mui/material';
 import {
     getAuth,
     isSignInWithEmailLink,
@@ -15,6 +15,7 @@ import {
 import {useFirebaseApp} from 'reactfire';
 import ChangeEmailComponent from 'components/inputs/change_email_component';
 import Component from 'components/basics/component';
+import BackButton from 'components/buttons/back_button';
 
 const emailParam = (url: string) => {
     const objUrl = new URL(url);
@@ -37,6 +38,10 @@ const ActionLinkHandlerPage = () => {
         if (!isSignInWithEmailLink(auth, window.location.href)) {
             navigate(ROUTES.USER_HOME);
         }
+
+        if (auth.currentUser) {
+            navigate(ROUTES.USER_HOME);
+        }
     }, []);
 
     const onEmailEntered = async ({email}) => {
@@ -53,23 +58,56 @@ const ActionLinkHandlerPage = () => {
             leftPane={
                 <Component sx={{background: 'none'}}>
                     <Typography variant={'smallHeadline' as any}>
-                        Complete Sign In
+                        Complete Sign Up
                     </Typography>
 
                     <Typography variant={'body2' as any}>
-                        Enter the email that the magic link was sent to
+                        Enter the email that the magic sign up link was sent to.
                     </Typography>
                     <ChangeEmailComponent
                         onSubmit={onEmailEntered}
                         color="light"
-                        buttonMessage="Log In"
+                        buttonMessage="Sign Up"
                     ></ChangeEmailComponent>
+
+                    <Typography variant={'description' as any}>
+                        Signing up for an account means you agree to our
+                        <Typography
+                            variant={'link' as any}
+                            component={Link}
+                            target={'_blank'}
+                            href={
+                                'https://www.legends.solar/legal/privacy-policy'
+                            }
+                            // onClick={onNavigateToPrivacyPolicy}
+                        >
+                            {' '}
+                            privacy policy
+                        </Typography>{' '}
+                        and{' '}
+                        <Typography
+                            variant={'link' as any}
+                            component={Link}
+                            target={'_blank'}
+                            href={
+                                'https://www.legends.solar/legal/terms-and-conditions'
+                            }
+                        >
+                            {' '}
+                            terms of service
+                        </Typography>
+                    </Typography>
                 </Component>
             }
             rightPane={
-                <img src={PanelPersonBlueSVG} style={{width: '300px'}}></img>
+                <img src={WomanPanelsSVG} style={{width: '300px'}}></img>
             }
-            upperLeftCorner={<></>}
+            upperLeftCorner={
+                <BackButton
+                    label="Back to Homepage"
+                    linkText={'https://legends.solar'}
+                ></BackButton>
+            }
             options={{
                 rightPane: {
                     justifyContent: 'center',

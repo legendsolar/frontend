@@ -28,4 +28,7 @@ export const EXTERNAL_LINKS = {
             'https://www.legends.solar/legal/terms-and-conditions',
         DISCLAIMER: 'https://www.legends.solar/legal/legal',
     },
+    MAILTO: {
+        NERA: "mailto:nera@letsBeLegends.com?subject=Let's%20be%20Legends",
+    },
 };
