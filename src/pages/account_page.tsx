@@ -128,11 +128,7 @@ const AccountPage = () => {
 
     const onUpdateUserAddress = async () => {
         await setUser({
-            variables: {
-                input: {
-                    address: transformValuesToUserAddress(values),
-                },
-            },
+            address: transformValuesToUserAddress(values),
         });
         setUserDataEditMode(false);
         setUserDataEditValid(false);

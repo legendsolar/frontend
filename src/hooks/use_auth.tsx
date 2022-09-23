@@ -17,6 +17,7 @@ import {
     UserCredential,
     User,
     MultiFactorResolver,
+    updatePassword,
 } from 'firebase/auth';
 
 import {GoogleAuthProvider} from 'firebase/auth';
@@ -51,6 +52,7 @@ interface useAuthReturnType {
     signout(): Promise<void>;
     signInWithGoogle(): Promise<void>;
     resetPassword(email: string): Promise<void>;
+    updateUserPassword(password: string): Promise<void>;
     sendEmailVerify(): Promise<void>;
     getRecaptchaVerifier(
         currentRef: HTMLElement,
@@ -158,6 +160,16 @@ const useProvideAuth = (): useAuthReturnType => {
     const resetPassword = async (email: string) => {
         try {
             await sendPasswordResetEmail(auth, email);
+        } catch (error) {
+            authErrorHandler(error);
+        }
+    };
+
+    const updateUserPassword = async (password: string) => {
+        try {
+            if (user) {
+                await updatePassword(user, password);
+            }
         } catch (error) {
             authErrorHandler(error);
         }
@@ -353,6 +365,7 @@ const useProvideAuth = (): useAuthReturnType => {
         signup,
         signout,
         resetPassword,
+        updateUserPassword,
         signInWithGoogle,
         sendEmailVerify,
         getRecaptchaVerifier,

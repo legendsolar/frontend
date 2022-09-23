@@ -11,4 +11,5 @@ export enum ROUTES {
     ACCOUNT = '/account',
     WALLET = '/wallet',
     PLAID_OATH_COMPLETE = '/oath-complete',
+    ACTION_LINK = '/action-link',
 }

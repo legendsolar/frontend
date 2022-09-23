@@ -1,3 +1,4 @@
+import settings from 'app_settings';
 import {useRef, useState, useEffect, useCallback} from 'react';
 import Map from 'react-map-gl';
 
@@ -38,7 +39,7 @@ const BasicGlobe = ({
             }}
             ref={mapRef}
             style={{width, height}}
-            mapStyle={'mapbox://styles/john-legends/cl6p8ktei000f15sjhbydsx24'}
+            mapStyle={settings.mapBoxStyleUrl}
             projection={'globe'}
             interactive={false}
             dragPan={false}

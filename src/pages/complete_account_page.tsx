@@ -4,13 +4,13 @@ import {useAuth} from 'hooks/use_auth';
 import {useNavigate} from 'react-router-dom';
 import {useUser} from 'hooks/use_user';
 import {useState} from 'react';
-
-import {UserDwollaAccountData} from 'schema/schema_gen_types';
+import Component from 'components/basics/component';
 import delay from 'utils/delay';
 import DualPaneView from 'views/dual_pane_view';
 
 import PanelInfinitySVG from 'assets/images/panel_infinity.svg';
 import PanelPersonGreenSVG from 'assets/images/panel_person_green.svg';
+import PanelPersonBlueSVG from 'assets/images/panel_person_blue.svg';
 import PanelPersonPinkSVG from 'assets/images/panel_person_pink.svg';
 import PanelPersonRedSVG from 'assets/images/panel_person_red.svg';
 import PanelPersonYellowSVG from 'assets/images/panel_person_yellow.svg';
@@ -31,10 +31,17 @@ import {
     CashIcon,
     EnvelopeIcon,
     PhoneIcon,
+    UserDataIcon,
 } from 'components/icons/emoji_icons';
+
+import {CheckIcon} from 'components/icons/icons';
+import UserInformationContent from 'content/user_information_content';
+import {sign} from 'crypto';
 
 enum States {
     STEPS_TO_INVEST = 'steps_to_invest',
+    PASSWORD_RESET_REQ = 'password_reset_req',
+    INFORMATION = 'information',
     EMAIL = 'email',
     PHONE = 'phone',
     ACCREDITATION = 'accreditation',
@@ -52,6 +59,7 @@ const CompleteAccountPage = () => {
         signout,
         sendEmailVerify,
         enrollUserMfa,
+        updateUserPassword,
         completeMfaEnrollment: enrollWithMfaCode,
     } = useAuth();
 
@@ -102,6 +110,7 @@ const CompleteAccountPage = () => {
     const loading = statusLoading || userDataLoading;
 
     const stepsComplete = {
+        information: firstName && lastName && phone,
         email: status?.emailVerified,
         mfa: status?.mfaVerified,
         accreditation: status?.accreditation
@@ -125,6 +134,25 @@ const CompleteAccountPage = () => {
         }
     }, [loading, status, state, captcha, phone]);
 
+    const [subUserInfoLoading, setSubUserInfoLoading] = useState(false);
+
+    const onSubmitUserInformation = async ({
+        firstName,
+        lastName,
+        phone,
+        password,
+    }) => {
+        setSubUserInfoLoading(true);
+        await setUser({firstName, lastName, phone});
+        await updateUserPassword(password);
+
+        await signout();
+
+        setSubUserInfoLoading(false);
+
+        navigate(ROUTES.SIGN_IN);
+    };
+
     const states = (state: States): JSX.Element => {
         switch (state) {
             case States.STEPS_TO_INVEST:
@@ -143,7 +171,7 @@ const CompleteAccountPage = () => {
                         steps={[
                             {
                                 complete: status.emailVerified,
-                                completeMessage: '✅',
+                                completeMessage: <CheckIcon />,
                                 title: 'Verify Email',
                                 icon: <EnvelopeIcon></EnvelopeIcon>,
                                 onClick: () => {
@@ -151,10 +179,22 @@ const CompleteAccountPage = () => {
                                 },
                             },
                             {
+                                complete: stepsComplete.information,
+                                completeMessage: <CheckIcon />,
+                                title: 'Complete Information',
+                                icon: <UserDataIcon />,
+                                onClick: () => {
+                                    setState(States.INFORMATION);
+                                },
+                            },
+                            {
                                 complete: status.mfaVerified,
-                                disabled: !stepsComplete.email,
-                                disabledMessage: 'Verify email first',
-                                completeMessage: '✅',
+                                disabled:
+                                    !stepsComplete.email ||
+                                    !stepsComplete.information,
+                                disabledMessage:
+                                    'Verify email and information first',
+                                completeMessage: <CheckIcon />,
                                 title: 'Verify Phone Number',
 
                                 icon: <PhoneIcon></PhoneIcon>,
@@ -165,7 +205,7 @@ const CompleteAccountPage = () => {
                             {
                                 complete: stepsComplete.accreditation,
                                 title: 'Verify Accreditation',
-                                completeMessage: '✅',
+                                completeMessage: <CheckIcon />,
                                 icon: <CashIcon></CashIcon>,
                                 onClick: () => {
                                     setState(States.ACCREDITATION);
@@ -178,6 +218,7 @@ const CompleteAccountPage = () => {
                                     !stepsComplete.mfa ||
                                     !stepsComplete.accreditation,
                                 disabledMessage: 'Complete others first',
+                                completeMessage: <CheckIcon />,
                                 title: 'Create Wallet',
                                 icon: <BankIcon></BankIcon>,
                                 onClick: () => {
@@ -186,6 +227,29 @@ const CompleteAccountPage = () => {
                             },
                         ]}
                     ></CompleteAccountContent>
+                );
+            case States.PASSWORD_RESET_REQ:
+                return (
+                    <Component sx={{background: 'none'}}>
+                        <UserInformationContent
+                            color="light"
+                            onSubmit={onSubmitUserInformation}
+                            loading={false}
+                            error={undefined}
+                        ></UserInformationContent>
+                    </Component>
+                );
+
+            case States.INFORMATION:
+                return (
+                    <Component sx={{background: 'none'}}>
+                        <UserInformationContent
+                            color="light"
+                            onSubmit={onSubmitUserInformation}
+                            loading={subUserInfoLoading}
+                            error={undefined}
+                        ></UserInformationContent>
+                    </Component>
                 );
             case States.EMAIL:
                 return (
@@ -264,6 +328,20 @@ const CompleteAccountPage = () => {
         switch (state) {
             case States.STEPS_TO_INVEST:
                 return <img src={PanelInfinitySVG}></img>;
+            case States.PASSWORD_RESET_REQ:
+                return (
+                    <img
+                        src={PanelPersonBlueSVG}
+                        style={{width: '300px'}}
+                    ></img>
+                );
+            case States.INFORMATION:
+                return (
+                    <img
+                        src={PanelPersonBlueSVG}
+                        style={{width: '300px'}}
+                    ></img>
+                );
             case States.EMAIL:
                 return (
                     <img
@@ -296,13 +374,7 @@ const CompleteAccountPage = () => {
         switch (state) {
             case States.STEPS_TO_INVEST:
                 return 'flex-end';
-            case States.EMAIL:
-                return 'center';
-            case States.PHONE:
-                return 'center';
-            case States.ACCREDITATION:
-                return 'center';
-            case States.WALLET:
+            default:
                 return 'center';
         }
     };
@@ -318,28 +390,7 @@ const CompleteAccountPage = () => {
                         }}
                     ></BackButton>
                 );
-            case States.EMAIL:
-                return (
-                    <BackButton
-                        label={'Back'}
-                        onClick={() => setState(States.STEPS_TO_INVEST)}
-                    ></BackButton>
-                );
-            case States.PHONE:
-                return (
-                    <BackButton
-                        label={'Back'}
-                        onClick={() => setState(States.STEPS_TO_INVEST)}
-                    ></BackButton>
-                );
-            case States.ACCREDITATION:
-                return (
-                    <BackButton
-                        label={'Back'}
-                        onClick={() => setState(States.STEPS_TO_INVEST)}
-                    ></BackButton>
-                );
-            case States.WALLET:
+            default:
                 return (
                     <BackButton
                         label={'Back'}

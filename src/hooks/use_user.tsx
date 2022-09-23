@@ -36,7 +36,7 @@ interface useUserReturnType {
     };
 
     useSetUser(): {
-        setUser: (input: any) => Promise<any>;
+        setUser: (input: UpdateUserInput) => Promise<any>;
         data: any;
         loading: boolean;
         error: ApolloError | undefined;

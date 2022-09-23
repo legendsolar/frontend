@@ -70,6 +70,7 @@ const DiscoverAssetContent = ({
                     height={'400px'}
                     zoom={13}
                     initBearing={0}
+                    markers={[]}
                 ></MapTerrain3D>
             </Component>
 

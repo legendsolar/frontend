@@ -17,6 +17,7 @@ import {Navigate, useNavigate} from 'react-router-dom';
 import UnexpectedErrorPage from 'pages/unexpected_error_page';
 import OAuthLink from 'pages/plaid_oath_complete';
 import DiscoverAssetPage from 'pages/discover_asset_page';
+import ActionLinkHandlerPage from 'pages/action_link_handler_page';
 
 function AppRouter() {
     return (
@@ -138,6 +139,12 @@ function AppRouter() {
                         path={ROUTES.PLAID_OATH_COMPLETE}
                         element={<OAuthLink></OAuthLink>}
                     />
+
+                    <Route
+                        path={ROUTES.ACTION_LINK}
+                        element={<ActionLinkHandlerPage />}
+                    />
+
                     <Route
                         path="/:path"
                         element={
