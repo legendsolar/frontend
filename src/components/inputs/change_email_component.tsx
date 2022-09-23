@@ -18,12 +18,14 @@ interface Props {
     initialValues?: Values;
     onSubmit(values: Values): Promise<void>;
     color?: string;
+    buttonMessage?: string;
 }
 
 const ChangeEmailComponent = ({
     initialValues = {email: ''},
     onSubmit,
     color = 'dark',
+    buttonMessage = 'Resend Verification',
 }: Props) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -87,7 +89,7 @@ const ChangeEmailComponent = ({
                         loading ? (
                             <LoadingText></LoadingText>
                         ) : (
-                            'Resend Verification'
+                            buttonMessage
                         )}
                     </Button>
 
