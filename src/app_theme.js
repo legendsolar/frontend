@@ -123,6 +123,13 @@ export const typographyOptions = {
             lineHeight: '25px',
             color: paletteOptions.palette.blackDusk.main,
         },
+        body: {
+            fontFamily: 'Be Vietnam Pro',
+            fontSize: '20px',
+            lineHeight: '25px',
+            fontWeight: 400,
+            color: paletteOptions.palette.blackDusk.main,
+        },
         body1: {
             fontFamily: 'Be Vietnam Pro',
             fontSize: '20px',
