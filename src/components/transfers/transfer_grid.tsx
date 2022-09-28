@@ -17,7 +17,7 @@ const TransferGrid = ({
                 container
                 rowSpacing={4}
                 columnSpacing={2}
-                justifyContent="center"
+                justifyContent="flex-start"
                 alignItems="center"
             >
                 {loading && (
