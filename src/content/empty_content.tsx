@@ -4,9 +4,13 @@ import useEmptyContent from 'hooks/use_empty_content';
 
 export interface EmptyContentProps {
     onViewAvailablePanels(): void;
+    messageOverride?: String;
 }
 
-const EmptyContent = ({onViewAvailablePanels}: EmptyContentProps) => {
+const EmptyContent = ({
+    onViewAvailablePanels,
+    messageOverride,
+}: EmptyContentProps) => {
     return (
         <Box>
             <Stack alignItems={'center'} sx={{mt: '150px'}}>
@@ -15,8 +19,10 @@ const EmptyContent = ({onViewAvailablePanels}: EmptyContentProps) => {
                     sx={{mb: '100px', maxWidth: '800px'}}
                 >
                     <Typography variant={'headline2' as any}>
-                        You haven’t purchased solar panels yet, so there is
-                        nothing to see on your rooftop.
+                        {messageOverride
+                            ? messageOverride
+                            : `You haven\’t purchased solar panels yet, so there is
+                        nothing to see on your rooftop.`}
                     </Typography>
                     <Button
                         variant={'primary' as any}
@@ -31,4 +37,6 @@ const EmptyContent = ({onViewAvailablePanels}: EmptyContentProps) => {
     );
 };
 
-export default () => <EmptyContent {...useEmptyContent()}></EmptyContent>;
+export default ({messageOverride}: {messageOverride?: string}) => (
+    <EmptyContent {...useEmptyContent({messageOverride})}></EmptyContent>
+);

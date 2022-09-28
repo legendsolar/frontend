@@ -25,6 +25,7 @@ import {
     transformPlaidDataToCreateAccountInput,
     transformPlaidVerificationStatus,
 } from 'transformers/plaid_api_transformers';
+import RecentTransfersComponent from 'components/transfers/recent_transfers_component';
 
 const WalletPage = () => {
     const navBarProps = useNavBar();
@@ -166,19 +167,10 @@ const WalletPage = () => {
                 }
                 mainContent={
                     <Stack spacing={4}>
-                        <Component
-                            standardWidth={false}
-                            ref={(el) => (contentRefs.current[2] = el)}
-                        >
-                            <Typography variant={'smallHeadline' as any}>
-                                Recent Transfers
-                            </Typography>
-
-                            <TransferGrid
-                                transfers={recentTransfers}
-                                loading={recentTransfersLoading}
-                            ></TransferGrid>
-                        </Component>
+                        <RecentTransfersComponent
+                            transfers={recentTransfers}
+                            loading={recentTransfersLoading}
+                        ></RecentTransfersComponent>
 
                         <Component
                             standardWidth={false}

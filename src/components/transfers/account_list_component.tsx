@@ -182,7 +182,7 @@ const AccountListComponent = ({
                         onClick={onAddAccount}
                         disabled={addAccountDisabled}
                     >
-                        Add new account
+                        {'Connect New Account'}
                     </Button>
                 </Stack>
             </div>

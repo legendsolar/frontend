@@ -20,6 +20,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@keyframes opacityAnimation { 
+  0% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}
+
 /* be-vietnam-pro-100 - latin */
 @font-face {
   font-family: 'Be Vietnam Pro';

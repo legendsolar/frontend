@@ -29,7 +29,9 @@ const TransactionPage = () => {
 
     const content =
         !loading && recentTransfers?.length <= 0 ? (
-            <EmptyContent />
+            <EmptyContent
+                messageOverride={`You haven't received any transactions yet`}
+            ></EmptyContent>
         ) : (
             <TransferGridContent
                 loading={recentTransfersLoading || loading}
