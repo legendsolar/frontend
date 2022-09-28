@@ -66,6 +66,7 @@ const TransferDataGrid = ({
                                         .setAlpha(0.5)
                                         .toRgbString(),
                                     color: 'blackDusk.main',
+                                    width: '100px',
                                 }}
                             ></Chip>
                         </div>
@@ -82,6 +83,7 @@ const TransferDataGrid = ({
                                         .setAlpha(0.5)
                                         .toRgbString(),
                                     color: 'blackDusk.main',
+                                    width: '100px',
                                 }}
                             ></Chip>
                         </div>
