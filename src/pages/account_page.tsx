@@ -34,7 +34,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import {transformValuesToUserAddress} from 'content/create_wallet_content';
 import LoadingText from 'components/utils/loading_text';
-import {AccountStatus} from 'schema/schema_gen_types';
+import {BankAccount, CreateAccountInput} from 'schema/schema_gen_types';
+import {
+    transformPlaidDataToCreateAccountInput,
+    transformPlaidVerificationStatus,
+} from 'transformers/plaid_api_transformers';
 
 const AccountPage = () => {
     const navBarProps = useNavBar();
@@ -70,37 +74,31 @@ const AccountPage = () => {
     } = useCreateAccount();
 
     const onPlaidLinkComplete = ({publicToken, metadata}) => {
-        const account = metadata.account;
-
-        console.log({publicToken, metadata});
-
-        const institution = metadata?.institution?.name
-            ? metadata.institution.name
-            : 'Unknown';
         // create account
+
+        const input = transformPlaidDataToCreateAccountInput(
+            publicToken,
+            metadata,
+        );
+
         createAccount({
             variables: {
-                input: {
-                    publicToken: publicToken,
-                    plaidId: account.id,
-                    institution,
-                    status: account.verification_status
-                        ? AccountStatus.Verified
-                        : AccountStatus.Verified,
-                    name: account.name,
-                    type: account.subtype.toUpperCase(),
-                    mask: account.mask,
-                },
+                input,
             },
         });
     };
-
-    useEffect(() => {
-        if (!createLinkTokenLoading && !token && !createLinkTokenError)
-            createLinkToken();
-    }, [createLinkTokenLoading, token, createLinkTokenError]);
-
     const {open, ready} = usePlaidLinkModal(token, onPlaidLinkComplete);
+
+    // useEffect(() => {
+    //     if (!createLinkTokenLoading && !token && !createLinkTokenError)
+    //         createLinkToken();
+    // }, [createLinkTokenLoading, token, createLinkTokenError]);
+
+    const onCompleteAccountLink = async (account: BankAccount) => {
+        console.log(account.plaid.accessToken);
+        await createLinkToken(account.plaid.accessToken);
+        // open();
+    };
 
     const contentRefs = useRef<Array<unknown>>([]);
 
@@ -293,6 +291,9 @@ const AccountPage = () => {
                                     onCreateTransfer={(account) => {}}
                                     onAddAccount={ready ? open : () => {}}
                                     onUnlinkAccount={() => {}}
+                                    onCompleteAccountLink={
+                                        onCompleteAccountLink
+                                    }
                                     addAccountDisabled={
                                         accountsLoading ||
                                         createLinkTokenLoading ||

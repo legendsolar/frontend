@@ -28,7 +28,7 @@ export type Account = {
     id: Scalars['ID'];
     mask?: Maybe<Scalars['String']>;
     name?: Maybe<Scalars['String']>;
-    status?: Maybe<AccountStatus>;
+    status?: Maybe<DwollaAccountStatus>;
     type?: Maybe<AccountType>;
     valid?: Maybe<Scalars['Boolean']>;
 };
@@ -36,12 +36,6 @@ export type Account = {
 export type AccountInput = {
     type?: InputMaybe<AccountType>;
 };
-
-export enum AccountStatus {
-    Unknown = 'UNKNOWN',
-    Unverified = 'UNVERIFIED',
-    Verified = 'VERIFIED',
-}
 
 export enum AccountType {
     Checking = 'CHECKING',
@@ -84,12 +78,17 @@ export type BankAccount = Account & {
     __typename?: 'BankAccount';
     created?: Maybe<Scalars['String']>;
     id: Scalars['ID'];
-    institution?: Maybe<Scalars['String']>;
+    institution: Scalars['String'];
     mask?: Maybe<Scalars['String']>;
     name?: Maybe<Scalars['String']>;
-    status?: Maybe<AccountStatus>;
+    plaid: PlaidAccountData;
+    status?: Maybe<DwollaAccountStatus>;
     type?: Maybe<AccountType>;
     valid?: Maybe<Scalars['Boolean']>;
+};
+
+export type CreatLinkTokenInput = {
+    accessToken?: InputMaybe<Scalars['String']>;
 };
 
 export type CreateAccountInput = {
@@ -97,8 +96,8 @@ export type CreateAccountInput = {
     mask: Scalars['String'];
     name: Scalars['String'];
     plaidId: Scalars['String'];
+    plaidStatus: PlaidAccountStatus;
     publicToken: Scalars['String'];
-    status: AccountStatus;
     type: AccountType;
 };
 
@@ -107,6 +106,12 @@ export type CreateTransferInput = {
     destinationAccountId: Scalars['String'];
     sourceAccountId: Scalars['String'];
 };
+
+export enum DwollaAccountStatus {
+    Unknown = 'UNKNOWN',
+    Unverified = 'UNVERIFIED',
+    Verified = 'VERIFIED',
+}
 
 export enum DwollaUserStatus {
     Created = 'CREATED',
@@ -183,11 +188,11 @@ export type Location = {
 
 export type Mutation = {
     __typename?: 'Mutation';
-    createAccount?: Maybe<Account>;
+    createAccount?: Maybe<BankAccount>;
     createPlaidLinkToken?: Maybe<PlaidLinkToken>;
     createTransfer?: Maybe<Transfer>;
     createUserDwollaAccount: UpdateUserMutationResponse;
-    removeAccount?: Maybe<Account>;
+    removeAccount?: Maybe<BankAccount>;
     submitIdVerificationDocument: SubmitIdVerifDocMutResp;
     submitKbaSession: SubmitKbaSessionMutResp;
     updateUser: UpdateUserMutationResponse;
@@ -195,6 +200,10 @@ export type Mutation = {
 
 export type MutationCreateAccountArgs = {
     input?: InputMaybe<CreateAccountInput>;
+};
+
+export type MutationCreatePlaidLinkTokenArgs = {
+    input?: InputMaybe<CreatLinkTokenInput>;
 };
 
 export type MutationCreateTransferArgs = {
@@ -227,6 +236,21 @@ export type MutationResponse = {
     success: Scalars['Boolean'];
 };
 
+export type PlaidAccountData = {
+    __typename?: 'PlaidAccountData';
+    accessToken: Scalars['String'];
+    id: Scalars['ID'];
+    processorToken?: Maybe<Scalars['String']>;
+    status: PlaidAccountStatus;
+};
+
+export enum PlaidAccountStatus {
+    Failed = 'FAILED',
+    PendingVerification = 'PENDING_VERIFICATION',
+    Unverified = 'UNVERIFIED',
+    Verified = 'VERIFIED',
+}
+
 export type PlaidLinkToken = {
     __typename?: 'PlaidLinkToken';
     expiration: Scalars['String'];
@@ -246,7 +270,7 @@ export type Query = {
     facilityGenerationByDate?: Maybe<Array<GenerationDatum>>;
     recentFacilityGenerationBySample?: Maybe<Array<GenerationDatum>>;
     user?: Maybe<User>;
-    userAccounts?: Maybe<Array<Account>>;
+    userAccounts?: Maybe<Array<BankAccount>>;
     userFacilities?: Maybe<Array<Facility>>;
     userKbaSession?: Maybe<KbaSession>;
     userTransfers?: Maybe<Array<Transfer>>;
@@ -401,7 +425,7 @@ export type Wallet = Account & {
     id: Scalars['ID'];
     mask?: Maybe<Scalars['String']>;
     name?: Maybe<Scalars['String']>;
-    status?: Maybe<AccountStatus>;
+    status?: Maybe<DwollaAccountStatus>;
     type?: Maybe<AccountType>;
     valid?: Maybe<Scalars['Boolean']>;
 };

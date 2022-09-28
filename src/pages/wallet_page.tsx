@@ -16,7 +16,15 @@ import {useAccount} from 'hooks/use_accounts';
 import useNavBar from 'hooks/use_nav_bar';
 import NavBar from 'components/utils/nav_bar';
 import DefaultView from 'views/default_view';
-import {AccountStatus, CreateTransferInput} from 'schema/schema_gen_types';
+import {
+    BankAccount,
+    CreateAccountInput,
+    CreateTransferInput,
+} from 'schema/schema_gen_types';
+import {
+    transformPlaidDataToCreateAccountInput,
+    transformPlaidVerificationStatus,
+} from 'transformers/plaid_api_transformers';
 
 const WalletPage = () => {
     const navBarProps = useNavBar();
@@ -94,22 +102,18 @@ const WalletPage = () => {
         account,
     } = useCreateAccount();
 
+    const onCompleteAccountLink = (account: BankAccount) => {};
+
     const onPlaidLinkComplete = ({publicToken, metadata}) => {
-        const account = metadata.account;
+        const input = transformPlaidDataToCreateAccountInput(
+            publicToken,
+            metadata,
+        );
+
         // create account
         createAccount({
             variables: {
-                input: {
-                    publicToken: publicToken,
-                    plaidId: account.id,
-                    institution: metadata.institution.name,
-                    status: account.verification_status
-                        ? AccountStatus.Verified
-                        : AccountStatus.Verified,
-                    name: account.name,
-                    type: account.subtype.toUpperCase(),
-                    mask: account.mask,
-                },
+                input,
             },
         });
     };
@@ -186,6 +190,9 @@ const WalletPage = () => {
                                     onCreateTransfer={(account) => {}}
                                     onAddAccount={ready ? open : () => {}}
                                     onUnlinkAccount={onDeleteAccount}
+                                    onCompleteAccountLink={
+                                        onCompleteAccountLink
+                                    }
                                     addAccountDisabled={
                                         accountsLoading ||
                                         createLinkTokenLoading ||

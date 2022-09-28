@@ -40,6 +40,11 @@ export const useProvideAccount = () => {
                 type
                 mask
                 status
+                plaid {
+                    id
+                    status
+                    accessToken
+                }
             }
         }
     `;
@@ -85,6 +90,14 @@ export const useProvideAccount = () => {
         }
     `;
 
+    const CREATE_LINK_TOKEN = gql`
+        mutation CreatePlaidLinkToken($input: CreatLinkTokenInput) {
+            createPlaidLinkToken(input: $input) {
+                token
+            }
+        }
+    `;
+
     const useAccounts = () => {
         const {loading, error, data} = useQuery(ACCOUNTS_QUERY, {});
 
@@ -113,14 +126,6 @@ export const useProvideAccount = () => {
     };
 
     const useGetLinkToken = () => {
-        const CREATE_LINK_TOKEN = gql`
-            mutation CreatePlaidLinkToken {
-                createPlaidLinkToken {
-                    token
-                }
-            }
-        `;
-
         const [createLinkToken, {data, loading, error}] =
             useMutation(CREATE_LINK_TOKEN);
 
@@ -131,7 +136,19 @@ export const useProvideAccount = () => {
         }
 
         return {
-            createLinkToken,
+            createLinkToken: (accessToken) => {
+                const input = {
+                    accessToken,
+                };
+
+                console.log({input});
+
+                return createLinkToken({
+                    variables: {
+                        input,
+                    },
+                });
+            },
             loading,
             error,
             token: data?.createPlaidLinkToken?.token,
@@ -182,6 +199,7 @@ export const useProvideAccount = () => {
     };
 
     const usePlaidLinkModal = (token, onComplete) => {
+        console.log(token);
         const {open, ready} = usePlaidLink({
             token: token,
             onSuccess: (public_token, metadata) => {

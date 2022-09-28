@@ -5,7 +5,11 @@ import {useNavigate} from 'react-router-dom';
 import {ROUTES} from 'routes/routes';
 import {LOCAL_STORAGE_KEYS} from 'storage/local_storage_keys';
 import {useAccount} from 'hooks/use_accounts';
-import {AccountStatus} from 'schema/schema_gen_types';
+import {CreateAccountInput} from 'schema/schema_gen_types';
+import {
+    transformPlaidDataToCreateAccountInput,
+    transformPlaidVerificationStatus,
+} from 'transformers/plaid_api_transformers';
 
 const OAuthLink = () => {
     const navigate = useNavigate();
@@ -29,22 +33,15 @@ const OAuthLink = () => {
     const onSuccess = (public_token: string, metadata: any) => {
         // send public_token to server, retrieve access_token and item_id
         // return to "https://example.com" upon completion
-        const account = metadata.account;
+        const input = transformPlaidDataToCreateAccountInput(
+            public_token,
+            metadata,
+        );
 
         // create account
         createAccount({
             variables: {
-                input: {
-                    publicToken: public_token,
-                    plaidId: account.id,
-                    institution: metadata.institution.name,
-                    status: account.verification_status
-                        ? AccountStatus.Verified
-                        : AccountStatus.Verified,
-                    name: account.name,
-                    type: account.subtype.toUpperCase(),
-                    mask: account.mask,
-                },
+                input,
             },
         });
 

@@ -5,14 +5,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import ComponentDivider from 'components/basics/component_divider';
-import {Account} from 'schema/schema_gen_types';
+import {
+    Account,
+    BankAccount,
+    DwollaAccountStatus,
+    PlaidAccountStatus,
+} from 'schema/schema_gen_types';
 
 const accountNumberString = '•••• •••• •••• ';
 
 interface AccountListComponentProps {
-    accounts: Array<Account>;
-    onCreateTransfer(account: Account): void;
-    onUnlinkAccount(account: Account): void;
+    accounts: Array<BankAccount>;
+    onCreateTransfer(account: BankAccount): void;
+    onUnlinkAccount(account: BankAccount): void;
+    onCompleteAccountLink(account: BankAccount): void;
     onAddAccount(): void;
     addAccountDisabled: boolean;
 }
@@ -21,12 +27,13 @@ const AccountListComponent = ({
     accounts,
     onCreateTransfer,
     onUnlinkAccount,
+    onCompleteAccountLink,
     onAddAccount,
     addAccountDisabled,
 }: AccountListComponentProps) => {
     const [mode, setMode] = useState<string>('normal');
     const [selectedUnlinkAccount, setSelectedUnlinkAccount] =
-        useState<Account>();
+        useState<BankAccount>();
 
     const onEditButton = () => {
         if (mode === 'normal') {
@@ -36,7 +43,7 @@ const AccountListComponent = ({
         }
     };
 
-    const onTransferUnlinkButton = (account: Account) => {
+    const onTransferUnlinkButton = (account: BankAccount) => {
         if (mode === 'normal') {
             onCreateTransfer(account);
         } else {
@@ -55,6 +62,55 @@ const AccountListComponent = ({
 
     const onCancelUnlink = () => {
         setMode('normal');
+    };
+
+    const renderButton = (account: BankAccount) => {
+        if (account.status === DwollaAccountStatus.Verified) {
+            return (
+                <Button
+                    variant={'bubble' as any}
+                    sx={{
+                        color:
+                            mode === 'normal'
+                                ? 'legendaryGreen.main'
+                                : 'eraserRed.main',
+                    }}
+                    onClick={() => onTransferUnlinkButton(account)}
+                >
+                    {mode === 'normal' ? 'Transfer' : 'Unlink'}
+                </Button>
+            );
+        } else if (
+            account.plaid?.status === PlaidAccountStatus.PendingVerification
+        ) {
+            return (
+                <Button
+                    variant={'bubble' as any}
+                    sx={{
+                        color: 'pencilYellow.main',
+                    }}
+                    onClick={() => {
+                        onCompleteAccountLink(account);
+                    }}
+                >
+                    {'Complete Verification'}
+                </Button>
+            );
+        }
+    };
+
+    const renderSubtext = (account) => {
+        if (account.status === DwollaAccountStatus.Verified) {
+            return <></>;
+        }
+        if (account.plaid?.status === PlaidAccountStatus.PendingVerification) {
+            return (
+                <></>
+                // <Typography variant={'label' as any}>
+                //     Microdeposits will be made to verify your account
+                // </Typography>
+            );
+        }
     };
 
     const accountContent = accounts ? (
@@ -80,18 +136,8 @@ const AccountListComponent = ({
                     </Stack>
 
                     <Stack justifyContent={'center'}>
-                        <Button
-                            variant={'bubble' as any}
-                            sx={{
-                                color:
-                                    mode === 'normal'
-                                        ? 'legendaryGreen.main'
-                                        : 'eraserRed.main',
-                            }}
-                            onClick={() => onTransferUnlinkButton(account)}
-                        >
-                            {mode === 'normal' ? 'Transfer' : 'Unlink'}
-                        </Button>
+                        {renderButton(account)}
+                        {renderSubtext(account)}
                     </Stack>
                 </Stack>
 
