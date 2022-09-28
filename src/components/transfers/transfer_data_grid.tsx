@@ -90,7 +90,7 @@ const TransferDataGrid = ({
             defaultSortModel={[
                 {
                     field: 'date',
-                    sort: 'asc',
+                    sort: 'desc',
                 },
             ]}
             sx={{

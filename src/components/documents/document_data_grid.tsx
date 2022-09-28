@@ -78,7 +78,7 @@ const DocumentDataGrid = ({
             defaultSortModel={[
                 {
                     field: 'created',
-                    sort: 'asc',
+                    sort: 'desc',
                 },
             ]}
             sx={sx}
