@@ -1,7 +1,9 @@
 import {GridColumns} from '@mui/x-data-grid';
 import {Chip} from '@mui/material';
 import StyledDataGrid from 'components/data_grid/styled_data_grid';
+import {paletteOptions} from 'app_theme';
 
+var tinycolor = require('tinycolor2');
 interface TransferDataGridProps {
     transfers: Array<any>;
     autoHeight?: boolean;
@@ -57,7 +59,12 @@ const TransferDataGrid = ({
                             <Chip
                                 label={'Pending'}
                                 sx={{
-                                    backgroundColor: 'pencilYellow.light',
+                                    backgroundColor: tinycolor(
+                                        paletteOptions.palette.pencilYellow
+                                            .main,
+                                    )
+                                        .setAlpha(0.5)
+                                        .toRgbString(),
                                     color: 'blackDusk.main',
                                 }}
                             ></Chip>
@@ -69,7 +76,11 @@ const TransferDataGrid = ({
                             <Chip
                                 label={'Complete'}
                                 sx={{
-                                    backgroundColor: 'grassGreen.light',
+                                    backgroundColor: tinycolor(
+                                        paletteOptions.palette.grassGreen.main,
+                                    )
+                                        .setAlpha(0.5)
+                                        .toRgbString(),
                                     color: 'blackDusk.main',
                                 }}
                             ></Chip>

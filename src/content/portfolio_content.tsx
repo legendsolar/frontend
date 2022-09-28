@@ -69,10 +69,16 @@ const PortfolioContent = ({
                 <Typography variant={'headline2' as any}>{title}</Typography>
 
                 <Stack direction="row" justifyContent={'space-between'}>
-                    <Typography variant={'monoButton' as any}>
+                    <Typography
+                        variant={'monoButton' as any}
+                        sx={{color: 'blackDawn.main'}}
+                    >
                         {address}
                     </Typography>
-                    <Typography variant={'monoButton' as any}>
+                    <Typography
+                        variant={'monoButton' as any}
+                        sx={{color: 'blackDawn.main'}}
+                    >
                         {subtitle}
                     </Typography>
                 </Stack>
@@ -80,7 +86,7 @@ const PortfolioContent = ({
             <Component
                 standardWidth={false}
                 sx={{
-                    height: '400px',
+                    height: '320px',
                     width: '100%',
                     m: 0,
                     p: 0,
@@ -91,7 +97,7 @@ const PortfolioContent = ({
                     lat={location?.lat || 41.375094}
                     lng={location?.lng || -74.692663}
                     width={'100%'}
-                    height={'400px'}
+                    height={'320px'}
                     zoom={8}
                     markers={[
                         <Marker

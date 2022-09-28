@@ -19,7 +19,7 @@ import 'theme_types';
 
 const spacing = (s) => `${s * 5}px`;
 
-const paletteOptions = {
+export const paletteOptions = {
     palette: {
         dark: {
             main: '#000',
@@ -35,7 +35,7 @@ const paletteOptions = {
         },
         legendaryGreen: {
             main: legendaryGreen,
-            light: '#708d70',
+            light: '#30A462',
             dark: '#244124',
             contrastText: '#fff',
         },
@@ -593,6 +593,7 @@ export const themeOptions = {
                         height: '50px',
                         color: paletteOptions.palette.white.main,
                         border: `2px solid ${paletteOptions.palette.white.main}`,
+                        borderRadius: '5px',
                         '&:hover': {
                             opacity: '0.75',
                             backgroundColor: 'transparent',
@@ -606,6 +607,7 @@ export const themeOptions = {
                         ...typographyOptions.typography.subtitle1,
                         height: '50px',
                         backgroundColor: paletteOptions.palette.white.main,
+                        borderRadius: '5px',
                         color: paletteOptions.palette.blackDusk.main,
                         '&:hover': {
                             opacity: '0.75',
