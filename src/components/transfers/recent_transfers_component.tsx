@@ -9,7 +9,7 @@ interface Props {
     loading: boolean;
 }
 
-const RecentTransfersComponent = ({transfers, loading}) => {
+const RecentTransfersComponent = ({transfers, loading}: Props) => {
     const emptyOrNull = !transfers || transfers?.length === 0;
 
     const emptyOrNullOrLoading = emptyOrNull || loading;

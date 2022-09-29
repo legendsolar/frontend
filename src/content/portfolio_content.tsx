@@ -30,6 +30,7 @@ import {
 import MetricBox from 'components/gauges/metric_box';
 import {siteCopy} from 'static/copy';
 import {MetricComponent} from 'utils/metric_component';
+import MapTerrain3D from 'components/map/map_terrain_3d';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
@@ -93,12 +94,13 @@ const PortfolioContent = ({
                     overflow: 'hidden',
                 }}
             >
-                <BasicMap
-                    lat={location?.lat || 41.375094}
-                    lng={location?.lng || -74.692663}
+                <MapTerrain3D
+                    lat={facility.location?.lat || 41.375094}
+                    lng={facility.location?.lng || -74.692663}
                     width={'100%'}
                     height={'320px'}
-                    zoom={8}
+                    zoom={13}
+                    initBearing={0}
                     markers={[
                         <Marker
                             lng={facility?.location?.lng || 0}
@@ -142,7 +144,7 @@ const PortfolioContent = ({
                             </div>
                         </Marker>,
                     ]}
-                ></BasicMap>
+                ></MapTerrain3D>
             </Component>
 
             <Stack sx={{mt: 4}}>
