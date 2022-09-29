@@ -26,9 +26,10 @@ const BasicGlobe = ({
             mapRef.current.flyTo({
                 center: [lng, lat],
                 duration: 2000,
+                zoom: zoom,
             });
         }
-    }, [lat, lng]);
+    }, [lat, lng, zoom]);
 
     return (
         <Map

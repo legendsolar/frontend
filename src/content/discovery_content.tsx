@@ -16,6 +16,8 @@ import {ProspectiveAsset} from 'components/discovery/types';
 import {currencyFormatter, numberFormatter} from 'utils/number_formatter';
 import SideBarView from 'views/side_bar_view';
 import {CalendarIcon, CashIcon, PowerIcon} from 'components/icons/emoji_icons';
+import {Location} from 'schema/schema_gen_types';
+import settings from 'app_settings';
 
 interface DiscoveryContentProps {
     assets: Array<ProspectiveAsset>;
@@ -23,7 +25,19 @@ interface DiscoveryContentProps {
 }
 
 const DiscoveryContent = ({assets, onAssetClick}: DiscoveryContentProps) => {
-    const [selectedAsset, setSelectedAsset] = useState(assets[0]);
+    const [selectedAsset, setSelectedAsset] = useState<ProspectiveAsset>();
+
+    const globeLocation: Location = selectedAsset
+        ? selectedAsset.location
+        : settings.defaultDiscoveryPageMapLocation;
+
+    const assetMarkerArray = [
+        ...assets.filter((asset) => asset !== selectedAsset),
+    ];
+
+    if (selectedAsset) {
+        assetMarkerArray.push(selectedAsset);
+    }
 
     return (
         <SideBarView
@@ -44,17 +58,12 @@ const DiscoveryContent = ({assets, onAssetClick}: DiscoveryContentProps) => {
                     }}
                 >
                     <BasicGlobe
-                        lat={selectedAsset.location.lat}
-                        lng={selectedAsset.location.lng}
-                        zoom={5}
+                        lat={globeLocation.lat}
+                        lng={globeLocation.lng}
+                        zoom={selectedAsset ? 5 : 3}
                         width="100%"
                         height="70vh"
-                        markers={[
-                            ...assets.filter(
-                                (asset) => asset !== selectedAsset,
-                            ),
-                            selectedAsset,
-                        ].map((asset) => (
+                        markers={assetMarkerArray.map((asset) => (
                             <Marker
                                 lng={asset.location.lng}
                                 lat={asset.location.lat}
@@ -116,7 +125,11 @@ const DiscoveryContent = ({assets, onAssetClick}: DiscoveryContentProps) => {
                             variant={'none' as any}
                             sx={{width: '100%'}}
                             onChange={() => {
-                                setSelectedAsset(asset);
+                                if (selectedAsset !== asset) {
+                                    setSelectedAsset(asset);
+                                } else {
+                                    setSelectedAsset(undefined);
+                                }
                             }}
                             expanded={selectedAsset === asset}
                             key={idx}

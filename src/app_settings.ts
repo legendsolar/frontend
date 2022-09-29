@@ -1,4 +1,5 @@
 import {ROUTES} from 'routes/routes';
+import {Location} from 'schema/schema_gen_types';
 import {defaultIfNull} from 'utils/default_if_null';
 
 export interface APP_SETTINGS {
@@ -18,6 +19,7 @@ export interface APP_SETTINGS {
     minPlatformAge: number;
     mapBoxStyleUrl: string;
     loadingAnimationTiming_ms: number;
+    defaultDiscoveryPageMapLocation: Location;
 }
 
 const settings: APP_SETTINGS = {
@@ -44,6 +46,11 @@ const settings: APP_SETTINGS = {
 
     // Animations
     loadingAnimationTiming_ms: 300,
+
+    defaultDiscoveryPageMapLocation: {
+        lat: 39.828175,
+        lng: -98.5795,
+    },
 };
 
 export default settings;

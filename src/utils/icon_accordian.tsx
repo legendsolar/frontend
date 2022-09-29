@@ -20,6 +20,7 @@ const IconAccordian = ({items}: {items: Array<Item>}) => {
                         display: 'none',
                     },
                 }}
+                defaultExpanded={false}
             >
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
