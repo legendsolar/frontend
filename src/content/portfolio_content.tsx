@@ -31,6 +31,7 @@ import MetricBox from 'components/gauges/metric_box';
 import {siteCopy} from 'static/copy';
 import {MetricComponent} from 'utils/metric_component';
 import MapTerrain3D from 'components/map/map_terrain_3d';
+import TooltipMarker from 'components/map/tooltip_marker';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
@@ -102,47 +103,10 @@ const PortfolioContent = ({
                     zoom={13}
                     initBearing={0}
                     markers={[
-                        <Marker
-                            lng={facility?.location?.lng || 0}
-                            lat={facility?.location?.lat || 0}
-                        >
-                            <div
-                                style={{
-                                    transform: 'translate(0%, -100%)',
-                                }}
-                            >
-                                <Component
-                                    standardWidth={false}
-                                    sx={{
-                                        p: 2,
-                                    }}
-                                    onClick={() => {}}
-                                >
-                                    <Typography
-                                        variant={'label' as any}
-                                        color={'legendaryGreen.main' as any}
-                                    >
-                                        {title}
-                                    </Typography>
-                                </Component>
-                                <div
-                                    style={{
-                                        content: '',
-                                        position: 'absolute',
-                                        bottom: '100%',
-
-                                        top: '95%',
-                                        left: '50%',
-                                        transform: 'translateX(-50%)',
-
-                                        /* the arrow */
-                                        border: '8px solid #000',
-                                        borderColor:
-                                            'white transparent transparent transparent',
-                                    }}
-                                ></div>
-                            </div>
-                        </Marker>,
+                        <TooltipMarker
+                            location={facility.location}
+                            title={facility.name}
+                        ></TooltipMarker>,
                     ]}
                 ></MapTerrain3D>
             </Component>

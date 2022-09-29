@@ -27,6 +27,7 @@ import {
     UmbrellaIcon,
 } from 'components/icons/emoji_icons';
 import {MetricComponent} from 'utils/metric_component';
+import TooltipMarker from 'components/map/tooltip_marker';
 interface DiscoverAssetContentProps {
     loading: boolean;
     asset: ProspectiveAsset;
@@ -70,7 +71,12 @@ const DiscoverAssetContent = ({
                     height={'320px'}
                     zoom={13}
                     initBearing={0}
-                    markers={[]}
+                    markers={[
+                        <TooltipMarker
+                            location={asset.location}
+                            title={asset.title}
+                        ></TooltipMarker>,
+                    ]}
                 ></MapTerrain3D>
             </Component>
 
