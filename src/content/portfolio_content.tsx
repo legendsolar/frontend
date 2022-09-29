@@ -232,7 +232,7 @@ const PortfolioContent = ({
                                 </Typography>
                             </ContentDivider>
                             <Grid container>
-                                <Grid item lg={4} xs={12}>
+                                <Grid item lg={4} xs={4}>
                                     <MetricBox
                                         metric={
                                             '$' +
@@ -247,7 +247,7 @@ const PortfolioContent = ({
                                     ></MetricBox>
                                 </Grid>
 
-                                <Grid item lg={4} xs={12}>
+                                <Grid item lg={4} xs={4}>
                                     <MetricBox
                                         metric={numberFormatter(
                                             summary.totalGeneration_kWh *
@@ -259,7 +259,7 @@ const PortfolioContent = ({
                                     ></MetricBox>
                                 </Grid>
 
-                                <Grid item lg={4} xs={12}>
+                                <Grid item lg={4} xs={4}>
                                     <MetricBox
                                         metric={numberFormatter(
                                             summary.totalGeneration_kWh,
