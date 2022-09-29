@@ -274,6 +274,11 @@ const DiscoveryContent = ({assets, onAssetClick}: DiscoveryContentProps) => {
                                     sx={{
                                         width: '100%',
                                         backgroundColor: 'whiteFog.main',
+
+                                        '&:hover': {
+                                            backgroundColor: '#E4E5E5',
+                                            boxShadow: 'none',
+                                        },
                                     }}
                                     variant={'secondary' as any}
                                     onClick={() => onAssetClick(asset)}
