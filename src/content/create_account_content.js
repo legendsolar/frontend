@@ -21,7 +21,7 @@ const CreateAccountContent = ({
                     onNavigateToSignIn={onNavigateToSignIn}
                 ></SignUpOptionComponent>
 
-                <Typography variant="description">
+                {/* <Typography variant="description">
                     Signing up for an account means you agree to our
                     <Typography
                         variant="link"
@@ -45,7 +45,7 @@ const CreateAccountContent = ({
                         {' '}
                         terms of service
                     </Typography>
-                </Typography>
+                </Typography> */}
             </Stack>
         </Component>
     );

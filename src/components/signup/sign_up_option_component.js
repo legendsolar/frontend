@@ -1,9 +1,10 @@
-import {Typography, Box, Stack, Button} from '@mui/material';
+import {Typography, Box, Stack, Button, Link} from '@mui/material';
 import {EnvelopeIcon} from 'components/icons/emoji_icons';
 import {GoogleIcon} from 'components/icons/icons';
 import IconButton from 'components/buttons/icon_button';
 import ContentDivider from 'components/basics/content_divider';
 import PropTypes from 'prop-types';
+import Divider from 'components/basics/divider';
 
 const SignUpOptionComponent = ({
     onSignUpWithGoogle,
@@ -15,25 +16,41 @@ const SignUpOptionComponent = ({
             Create Account
         </Typography>
 
-        <IconButton
+        <Typography variant={'description'}>
+            Legends Solar is currently in closed beta. Please{' '}
+            <Typography
+                variant={'link'}
+                component={Link}
+                target={'_blank'}
+                sx={{textTransform: 'none'}}
+                href={'https://www.legends.solar/get-early-access'}
+            >
+                join our waitlist
+            </Typography>{' '}
+            to reserve your place when we launch to the public.
+        </Typography>
+
+        {/* <IconButton
             variant="small"
             label="Sign up with Google"
             color="white"
             icon={<GoogleIcon />}
             onClick={onSignUpWithEmail}
-        ></IconButton>
+        ></IconButton> */}
 
-        <ContentDivider>
+        <Divider />
+
+        {/* <ContentDivider>
             <Typography variant="label">OR </Typography>
-        </ContentDivider>
+        </ContentDivider> */}
 
-        <IconButton
+        {/* <IconButton
             variant="small"
             label="Sign up with email"
             color="legendaryGreen"
             icon={<EnvelopeIcon></EnvelopeIcon>}
             onClick={onSignUpWithEmail}
-        ></IconButton>
+        ></IconButton> */}
 
         <Stack direction="row" justifyContent={'space-between'}>
             <Typography variant="smallLabel">

@@ -57,23 +57,9 @@ const SignInComponent = ({
     return (
         <Box>
             <form onSubmit={formik.handleSubmit}>
-                <Stack spacing={4}>
+                <Stack spacing={4} sx={{mb: 1}}>
                     <Typography variant={'smallHeadline' as any}>
                         Login
-                    </Typography>
-
-                    <Typography variant={'description' as any}>
-                        Legends Solar is currently in closed beta. Please{' '}
-                        <Typography
-                            variant={'link' as any}
-                            component={Link}
-                            target={'_blank'}
-                            sx={{textTransform: 'none'}}
-                            href={'https://www.legends.solar/get-early-access'}
-                        >
-                            join our waitlist
-                        </Typography>{' '}
-                        to reserve your place when we launch.
                     </Typography>
 
                     <TextField
