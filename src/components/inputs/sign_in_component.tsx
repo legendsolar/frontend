@@ -3,15 +3,20 @@ import {
     Typography,
     Stack,
     Box,
-    TextField,
     Button,
     CircularProgress,
     Link,
 } from '@mui/material';
 import {useFormik} from 'formik';
+import TextField from './text_field';
+
 import * as yup from 'yup';
 
-import {validateEmail, validatePassword} from 'validation/user_data_validation';
+import {
+    validateEmail,
+    validatePassword,
+    validateSignInPassword,
+} from 'validation/user_data_validation';
 import {ErrorTypes} from 'utils/errors';
 
 interface SignInComponentProps {
@@ -36,7 +41,7 @@ const SignInComponent = ({
         initialValues: initialValues,
         validationSchema: yup.object().shape({
             email: validateEmail(),
-            password: validatePassword(),
+            password: validateSignInPassword(),
         }),
         onSubmit: async (values, {setErrors}) => {
             onSubmit(values).catch((error) => {
@@ -85,26 +90,28 @@ const SignInComponent = ({
                         autoComplete="email"
                         color={color as any}
                     />
+                </Stack>
 
-                    <TextField
-                        error={
-                            formik.touched.password &&
-                            Boolean(formik.errors.password)
-                        }
-                        helperText={
-                            formik.touched.password && formik.errors.password
-                        }
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        color={color as any}
-                    />
+                <TextField
+                    error={
+                        formik.touched.password &&
+                        Boolean(formik.errors.password)
+                    }
+                    helperText={
+                        formik.touched.password && formik.errors.password
+                    }
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    color={color as any}
+                />
 
+                <Stack spacing={4}>
                     <Button
                         variant={'primary' as any}
                         onClick={(e) => formik.handleSubmit()}

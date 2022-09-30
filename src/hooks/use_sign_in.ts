@@ -92,7 +92,7 @@ const useSignIn = (): useSignInReturnType => {
                 setState(States.MFA_VERIFY);
                 setCodeSent(true);
             } else {
-                throw error;
+                authErrorHandler(error);
             }
         }
     };

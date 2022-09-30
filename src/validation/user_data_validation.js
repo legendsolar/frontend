@@ -38,6 +38,10 @@ export const validatePassword = () => {
         .required('Password must contain one uppercase, one symbol or digit');
 };
 
+export const validateSignInPassword = () => {
+    return yup.string().required('Required');
+};
+
 export const validateConfirmPassword = (password) => {
     return yup.string().matches(password).required('Password does not match');
 };
