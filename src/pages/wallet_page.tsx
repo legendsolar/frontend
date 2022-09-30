@@ -40,6 +40,7 @@ const WalletPage = () => {
 
     const {useRecentTransfers, useCreateTransfer} = useTransfer();
     const [tokenRequested, setTokenRequested] = useState(false);
+    const [openRequested, setOpenRequested] = useState(false);
 
     const {
         loading: accountsLoading,
@@ -103,7 +104,12 @@ const WalletPage = () => {
         account,
     } = useCreateAccount();
 
-    const onCompleteAccountLink = (account: BankAccount) => {};
+    const onCompleteAccountLink = async (account: BankAccount) => {
+        console.log(account.plaid.accessToken);
+        await createLinkToken(account.plaid.accessToken);
+        setOpenRequested(true);
+        // open();
+    };
 
     const onPlaidLinkComplete = ({publicToken, metadata}) => {
         const input = transformPlaidDataToCreateAccountInput(
@@ -127,6 +133,13 @@ const WalletPage = () => {
     }, [createLinkTokenLoading, token, tokenRequested]);
 
     const {open, ready} = usePlaidLinkModal(token, onPlaidLinkComplete);
+
+    useEffect(() => {
+        if (ready && openRequested) {
+            setOpenRequested(false);
+            open();
+        }
+    }, [ready, openRequested]);
 
     const accountsWithWallet = accounts && wallet ? [...accounts, wallet] : [];
 

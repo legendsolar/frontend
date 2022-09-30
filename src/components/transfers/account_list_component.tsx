@@ -18,7 +18,7 @@ interface AccountListComponentProps {
     accounts: Array<BankAccount>;
     onCreateTransfer(account: BankAccount): void;
     onUnlinkAccount(account: BankAccount): void;
-    onCompleteAccountLink(account: BankAccount): void;
+    onCompleteAccountLink(account: BankAccount): Promise<void>;
     onAddAccount(): void;
     addAccountDisabled: boolean;
 }
@@ -145,7 +145,7 @@ const AccountListComponent = ({
             </div>
         ))
     ) : (
-        <Typography>No accounts</Typography>
+        <></>
     );
 
     const content =

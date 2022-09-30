@@ -45,6 +45,7 @@ const AccountPage = () => {
     const auth = useAuth();
     const {useUserMetaData, useGetUserAccreditation, useSetUser} = useUser();
     const {setUser, loading} = useSetUser();
+    const [openRequested, setOpenRequested] = useState(false);
 
     const {
         loading: accreditationLoading,
@@ -89,14 +90,22 @@ const AccountPage = () => {
     };
     const {open, ready} = usePlaidLinkModal(token, onPlaidLinkComplete);
 
-    // useEffect(() => {
-    //     if (!createLinkTokenLoading && !token && !createLinkTokenError)
-    //         createLinkToken();
-    // }, [createLinkTokenLoading, token, createLinkTokenError]);
+    useEffect(() => {
+        if (!createLinkTokenLoading && !token && !createLinkTokenError)
+            createLinkToken();
+    }, [createLinkTokenLoading, token, createLinkTokenError]);
+
+    useEffect(() => {
+        if (ready && openRequested) {
+            setOpenRequested(false);
+            open();
+        }
+    }, [ready, openRequested]);
 
     const onCompleteAccountLink = async (account: BankAccount) => {
         console.log(account.plaid.accessToken);
         await createLinkToken(account.plaid.accessToken);
+        setOpenRequested(true);
         // open();
     };
 
