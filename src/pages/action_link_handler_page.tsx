@@ -67,7 +67,7 @@ const ActionLinkHandlerPage = () => {
                     </Typography>
 
                     <Typography variant={'body2' as any}>
-                        Enter the email that the magic sign up link was sent to.
+                        Enter the email that the sign up link was sent to.
                     </Typography>
                     <ChangeEmailComponent
                         onSubmit={onEmailEntered}

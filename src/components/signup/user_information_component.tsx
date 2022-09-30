@@ -12,6 +12,7 @@ import {
 import TextField from 'components/inputs/text_field';
 
 import {
+    validateConfirmPassword,
     validateEmail,
     validateFirstName,
     validateLastName,
@@ -29,6 +30,7 @@ interface Values {
     lastName: string;
     phone: string;
     password: string;
+    confirmPassword: string;
 }
 
 interface Props {
@@ -54,19 +56,24 @@ const UserInformationComponent = ({
                   lastName: '',
                   phone: '',
                   password: '',
+                  confirmPassword: '',
               },
         validationSchema: yup.object().shape({
             firstName: validateFirstName(),
             lastName: validateLastName(),
             phone: validatePhoneNumber(),
             password: validatePassword(),
+            confirmPassword: yup
+                .string()
+                .oneOf([yup.ref('password'), null], 'Password does not match')
+                .required('Required'),
         }),
         onSubmit: async (values, {setErrors}) => {
             onSubmit(values);
         },
     });
 
-    const passwordHelper = '12 characters, 1 uppercase, 1 special';
+    const passwordHelper = '12 characters, 1 uppercase, 1 special or digit';
 
     return (
         <Box>
@@ -147,6 +154,28 @@ const UserInformationComponent = ({
                             id="password"
                             autoComplete="current-password"
                             alwaysDisplayHelper={true}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} lg={12}>
+                        <TextField
+                            color={color}
+                            error={
+                                formik.touched.confirmPassword &&
+                                Boolean(formik.errors.confirmPassword)
+                            }
+                            helperText={
+                                formik.touched.confirmPassword &&
+                                formik.errors.confirmPassword
+                            }
+                            value={formik.values.confirmPassword}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            name="confirmPassword"
+                            label="Confirm Password"
+                            type="password"
+                            id="confirmPassword"
+                            autoComplete="current-password"
                         />
                     </Grid>
                 </Grid>

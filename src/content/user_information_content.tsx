@@ -1,4 +1,4 @@
-import {Typography} from '@mui/material';
+import {Typography, Box} from '@mui/material';
 import Component from 'components/basics/component';
 import UserInformationComponent from 'components/signup/user_information_component';
 
@@ -29,7 +29,11 @@ const UserInformationContent = ({
             </Typography>
 
             <Typography variant={'body2' as any}>
-                You will have to sign in again after updating your password
+                {'You will '}
+                <Box fontWeight="bold" display="inline">
+                    {'have to log in again '}
+                </Box>
+                {'after creating your password'}
             </Typography>
 
             <UserInformationComponent

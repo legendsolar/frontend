@@ -32,12 +32,14 @@ export const validatePostalCode = () => {
 export const validatePassword = () => {
     return yup
         .string()
-        .min(12, 'Password must be a min of 12 characters')
-        .matches(
-            /(?=.*[\d\W])(?=.*[a-zA-Z])/,
-            'Password must contain one letter and one symbol or digit',
-        )
-        .required('Password must contain one letter and one symbol or digit');
+        .min(12, 'Must be a min of 12 characters')
+        .matches(/[A-Z]/, 'Must contain 1 uppercase')
+        .matches(/[\d#$@!%&*?]/, 'Must contain 1 symbol or digit')
+        .required('Password must contain one uppercase, one symbol or digit');
+};
+
+export const validateConfirmPassword = (password) => {
+    return yup.string().matches(password).required('Password does not match');
 };
 
 export const validateEmail = () => {
