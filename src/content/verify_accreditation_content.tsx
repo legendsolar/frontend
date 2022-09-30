@@ -75,6 +75,14 @@ const VerifyAccreditationContent = ({
         );
     };
 
+    const isValid = () => {
+        return accreditationList.some(
+            (option) =>
+                option.checked &&
+                option.accreditationOption !== AccreditationOptions.None,
+        );
+    };
+
     return (
         <Component sx={{background: 'none'}}>
             <Typography variant={'smallHeadline' as any}>
@@ -99,7 +107,11 @@ const VerifyAccreditationContent = ({
                 disabled={false}
             ></CheckboxList>
 
-            <Button variant={'primary' as any} onClick={onContinue}>
+            <Button
+                variant={'primary' as any}
+                onClick={onContinue}
+                disabled={!isValid()}
+            >
                 {loading ? <LoadingText></LoadingText> : 'Continue'}
             </Button>
         </Component>
