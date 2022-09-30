@@ -21,7 +21,7 @@ if (appSettings.sentry.enabled)
             new Sentry.Integrations.TryCatch(),
         ],
         beforeSend(event, hint) {
-            if (event.exception) {
+            if (event.exception && appSettings.sentry.showReportDialogEnabled) {
                 Sentry.showReportDialog({eventId: event.event_id});
             }
             return event;

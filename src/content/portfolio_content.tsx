@@ -362,7 +362,7 @@ const PortfolioContent = ({
                                                 },
                                                 {
                                                     metric: 'Estimated ROI',
-                                                    value: '10.0%',
+                                                    value: '7.0%',
                                                 },
                                             ]}
                                         ></MetricComponent>

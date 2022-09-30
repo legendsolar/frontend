@@ -7,6 +7,7 @@ export interface APP_SETTINGS {
         enabled: boolean;
         sampleRate: number;
         debug: boolean;
+        showReportDialogEnabled: boolean;
     };
     logRocket: {
         enabled: boolean;
@@ -30,6 +31,7 @@ const settings: APP_SETTINGS = {
             process.env.REACT_APP_SENTRY_SAMPLE_RATE,
             1.0,
         ),
+        showReportDialogEnabled: false,
     },
     logRocket: {
         enabled: process.env.REACT_APP_LOG_ROCKET_ENALBED === 'true',
