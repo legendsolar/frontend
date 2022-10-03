@@ -113,7 +113,7 @@ export const typographyOptions = {
             fontFamily: 'Be Vietnam Pro',
             fontWeight: 600,
             fontSize: '60px',
-            lineHeight: '76px',
+            lineHeight: '65px',
             color: paletteOptions.palette.blackDusk.main,
         },
         subtitle1: {

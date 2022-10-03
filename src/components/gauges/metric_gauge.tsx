@@ -13,7 +13,9 @@ export interface UnitOpts {
     title: string;
     unit: string;
     unitDescription: string;
+    unitSubHeading?: string;
     strokeColor: string;
+    unitFormatter(u: number, includeUnit?: boolean, width?: number): string;
 }
 
 interface Props {
@@ -141,9 +143,15 @@ const MetricGauge = ({
                     >
                         <Typography
                             variant={'headline1' as any}
-                            sx={{mt: 'auto'}}
+                            sx={{mt: 'auto', lineHeight: '65px'}}
                         >
-                            {error ? '--' : numberFormatter(currentValue, 3)}
+                            {error
+                                ? '--'
+                                : unitOpts.unitFormatter(
+                                      currentValue,
+                                      false,
+                                      3,
+                                  )}
                         </Typography>
                     </div>
                 </div>
@@ -155,20 +163,28 @@ const MetricGauge = ({
                         width: '360px',
                     }}
                 >
-                    <Typography variant={'label' as any}>
+                    <Typography variant={'subtitle3' as any}>
                         {error
                             ? `${unitOpts.unit}-`
-                            : `${numberFormatter(min)} ${unitOpts.unit}`}
+                            : unitOpts.unitFormatter(min)}
                     </Typography>
 
-                    <Typography variant="body1">
-                        {unitOpts.unitDescription}
-                    </Typography>
+                    <Stack alignItems={'center'} justifyContent={'flex-start'}>
+                        <Typography variant="subtitle1">
+                            {unitOpts.unitDescription}
+                        </Typography>
 
-                    <Typography variant={'label' as any}>
+                        {unitOpts.unitSubHeading && (
+                            <Typography variant={'label' as any}>
+                                {unitOpts.unitSubHeading}
+                            </Typography>
+                        )}
+                    </Stack>
+
+                    <Typography variant={'subtitle3' as any}>
                         {error
                             ? `${unitOpts.unit}-`
-                            : `${numberFormatter(max)} ${unitOpts.unit}`}
+                            : unitOpts.unitFormatter(max)}
                     </Typography>
                 </Stack>
 

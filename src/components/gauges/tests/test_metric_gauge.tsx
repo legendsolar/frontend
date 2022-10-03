@@ -8,6 +8,7 @@ const TestMetricGauge = () => {
             max={10}
             currentValue={5}
             unitOpts={unitOpts}
+            message={'Live Message'}
         ></MetricGauge>
     );
 };
