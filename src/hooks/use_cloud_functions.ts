@@ -1,7 +1,11 @@
 import {getFunctions, httpsCallable} from 'firebase/functions';
 import {useFirebaseApp} from 'reactfire';
 
-export const useCloudFunctions = () => {
+interface useCloudFunctionsReturnType {
+    downloadAllTransfers(): Promise<string>;
+}
+
+export const useCloudFunctions = (): useCloudFunctionsReturnType => {
     const app = useFirebaseApp();
     const functions = getFunctions(app);
 
@@ -12,7 +16,8 @@ export const useCloudFunctions = () => {
 
     return {
         downloadAllTransfers: async () => {
-            return (await downloadAllTransfers()).data;
+            const resp = (await downloadAllTransfers()).data as any;
+            return resp?.result?.downloadLink;
         },
     };
 };

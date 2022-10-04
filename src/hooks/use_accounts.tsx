@@ -1,14 +1,80 @@
 import React, {useState, useEffect, useContext, createContext} from 'react';
 import {useAuth} from './use_auth';
 import {usePlaidLink} from 'react-plaid-link';
-import {useQuery, gql, useMutation} from '@apollo/client';
+import {
+    useQuery,
+    gql,
+    useMutation,
+    ApolloError,
+    ApolloCache,
+} from '@apollo/client';
 import {
     constructQueryCacheKey,
     deconstructQueryCacheKey,
 } from './query_cache_utils';
 import {LOCAL_STORAGE_KEYS} from 'storage/local_storage_keys';
+import {
+    BankAccount,
+    CreateAccountInput,
+    RemoveAccountInput,
+    Wallet,
+} from 'schema/schema_gen_types';
 
-const accountContext = createContext();
+interface useAccountReturnType {
+    useAccounts(): {
+        accounts: Array<BankAccount>;
+        loading: boolean;
+        error: ApolloError | undefined;
+    };
+
+    useWallet(): {
+        wallet: Wallet | undefined;
+        loading: boolean;
+        error: ApolloError | undefined;
+        refetch(): void;
+    };
+
+    useCreateLinkToken(): {
+        createLinkToken: (accessToken?: string) => Promise<string>;
+        token: string | undefined;
+        loading: boolean;
+        error: ApolloError | undefined;
+    };
+
+    useCreateAccount(): {
+        createAccount: (input: CreateAccountInput) => Promise<BankAccount>;
+        account: BankAccount | undefined;
+        loading: boolean;
+        error: ApolloError | undefined;
+    };
+
+    useDeleteAccount(): {
+        deleteAccount: (input: RemoveAccountInput) => Promise<BankAccount>;
+        account: BankAccount | undefined;
+        loading: boolean;
+        error: ApolloError | undefined;
+    };
+
+    usePlaidLinkModal(
+        token: string,
+        onComplete: ({
+            publicToken,
+            metadata,
+        }: {
+            publicToken: string;
+            metadata: any;
+        }) => void,
+    ): {
+        open: Function;
+        exit: Function;
+        error: ErrorEvent | null;
+        ready: boolean;
+    };
+}
+
+const accountContext = createContext<useAccountReturnType>(
+    {} as useAccountReturnType,
+);
 
 export const ProvideAccount = ({children}) => {
     const account = useProvideAccount();
@@ -23,13 +89,7 @@ export const useAccount = () => {
     return useContext(accountContext);
 };
 
-const accountTransformer = (account) => {
-    return {
-        ...account,
-    };
-};
-
-export const useProvideAccount = () => {
+export const useProvideAccount = (): useAccountReturnType => {
     const cachedQueries = {};
 
     const ACCOUNTS_QUERY = gql`
@@ -101,14 +161,18 @@ export const useProvideAccount = () => {
     const useAccounts = () => {
         const {loading, error, data} = useQuery(ACCOUNTS_QUERY, {});
 
-        const key = constructQueryCacheKey(ACCOUNTS_QUERY, {}, 'userAccounts');
+        const key = constructQueryCacheKey({
+            query: ACCOUNTS_QUERY,
+            inputs: {},
+            queryName: 'userAccounts',
+        });
 
         cachedQueries[key] = true;
 
         return {
             loading,
             error,
-            accounts: data?.userAccounts?.map(accountTransformer),
+            accounts: data?.userAccounts ? data.userAccounts : [],
         };
     };
 
@@ -118,9 +182,7 @@ export const useProvideAccount = () => {
         return {
             loading,
             error,
-            wallet: data?.userWallet
-                ? accountTransformer(data.userWallet)
-                : null,
+            wallet: data?.userWallet,
             refetch,
         };
     };
@@ -136,18 +198,18 @@ export const useProvideAccount = () => {
         }
 
         return {
-            createLinkToken: (accessToken) => {
+            createLinkToken: async (accessToken?: string) => {
                 const input = {
                     accessToken,
                 };
 
-                console.log({input});
-
-                return createLinkToken({
+                const resp = await createLinkToken({
                     variables: {
                         input,
                     },
                 });
+
+                return resp.data.createPlaidLinkToken.token;
             },
             loading,
             error,
@@ -159,13 +221,15 @@ export const useProvideAccount = () => {
         const [internalCreateAccount, {data, loading, error}] =
             useMutation(CREATE_ACCOUNT);
 
-        const createAccount = ({variables}) => {
-            internalCreateAccount({
-                variables,
+        const createAccount = async (input: CreateAccountInput) => {
+            const resp = await internalCreateAccount({
+                variables: input,
                 update: (cache, {data}) => {
                     forceAddDataToCache(cache, data.createAccount);
                 },
             });
+
+            return resp.data.createAccount;
         };
 
         return {
@@ -180,14 +244,15 @@ export const useProvideAccount = () => {
         const [internalDeleteAccount, {data, loading, error}] =
             useMutation(DELETE_ACCOUNT);
 
-        const deleteAccount = ({variables}) => {
-            internalDeleteAccount({
-                variables,
+        const deleteAccount = async (input: RemoveAccountInput) => {
+            const resp = await internalDeleteAccount({
+                variables: input,
                 update: (cache, {data}) => {
-                    console.log(data);
                     forceRemoveDataFromCache(cache, data.removeAccount.id);
                 },
             });
+
+            return resp.data.deleteAccount;
         };
 
         return {
@@ -198,9 +263,17 @@ export const useProvideAccount = () => {
         };
     };
 
-    const usePlaidLinkModal = (token, onComplete) => {
-        console.log(token);
-        const {open, ready} = usePlaidLink({
+    const usePlaidLinkModal = (
+        token: string,
+        onComplete: ({
+            publicToken,
+            metadata,
+        }: {
+            publicToken: string;
+            metadata: any;
+        }) => void,
+    ) => {
+        const {open, ready, exit, error} = usePlaidLink({
             token: token,
             onSuccess: (public_token, metadata) => {
                 console.log(public_token, metadata);
@@ -209,11 +282,13 @@ export const useProvideAccount = () => {
         });
         return {
             open,
+            exit,
             ready,
+            error,
         };
     };
 
-    const forceAddDataToCache = (cache, newData) => {
+    const forceAddDataToCache = (cache: ApolloCache<any>, newData: any) => {
         // Update all cached queries
         Object.keys(cachedQueries).map((key) => {
             const {query, inputs, queryName} = deconstructQueryCacheKey(key);
@@ -221,15 +296,13 @@ export const useProvideAccount = () => {
             const cacheData = cache.readQuery({
                 query: query,
                 variables: {...inputs},
-            });
+            }) as Array<any>;
 
             const accountList = cacheData[queryName]
                 ? cacheData[queryName]
                 : [];
 
-            const updatedAccountList = [];
-
-            updatedAccountList.push(newData, ...accountList);
+            const updatedAccountList = [newData, ...accountList];
 
             const updatedCacheData = {};
             updatedCacheData[queryName] = updatedAccountList;
@@ -242,14 +315,17 @@ export const useProvideAccount = () => {
         });
     };
 
-    const forceRemoveDataFromCache = (cache, removeId) => {
+    const forceRemoveDataFromCache = (
+        cache: ApolloCache<any>,
+        removeId: string,
+    ) => {
         Object.keys(cachedQueries).map((key) => {
             const {query, inputs, queryName} = deconstructQueryCacheKey(key);
 
             const cacheData = cache.readQuery({
                 query: query,
                 variables: {...inputs},
-            });
+            }) as Array<any>;
 
             const accountList = cacheData[queryName]
                 ? cacheData[queryName]

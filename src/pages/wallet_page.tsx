@@ -26,6 +26,7 @@ import {
     transformPlaidVerificationStatus,
 } from 'transformers/plaid_api_transformers';
 import RecentTransfersComponent from 'components/transfers/recent_transfers_component';
+import {transferTransformer} from 'components/transfers/transfer_transforms';
 
 const WalletPage = () => {
     const navBarProps = useNavBar();
@@ -67,26 +68,20 @@ const WalletPage = () => {
     } = useCreateTransfer();
 
     const onCreateNewTransfer = (newTransfer: CreateTransferInput) => {
-        const variables = {
-            input: {
-                amount: newTransfer.amount,
-                sourceAccountId: newTransfer.sourceAccountId,
-                destinationAccountId: newTransfer.destinationAccountId,
-            },
-        };
+        // const variables = {
+        //     input: {
+        //         amount: newTransfer.amount,
+        //         sourceAccountId: newTransfer.sourceAccountId,
+        //         destinationAccountId: newTransfer.destinationAccountId,
+        //     },
+        // };
 
-        createTransfer({
-            variables,
-        });
+        createTransfer(newTransfer);
     };
 
     const onDeleteAccount = (account) => {
         return deleteAccount({
-            variables: {
-                input: {
-                    accountId: account?.id,
-                },
-            },
+            accountId: account?.id,
         });
     };
 
@@ -118,11 +113,7 @@ const WalletPage = () => {
         );
 
         // create account
-        createAccount({
-            variables: {
-                input,
-            },
-        });
+        createAccount(input);
     };
 
     useEffect(() => {
@@ -132,7 +123,10 @@ const WalletPage = () => {
         }
     }, [createLinkTokenLoading, token, tokenRequested]);
 
-    const {open, ready} = usePlaidLinkModal(token, onPlaidLinkComplete);
+    const {open, ready} = usePlaidLinkModal(
+        token ? token : '',
+        onPlaidLinkComplete,
+    );
 
     useEffect(() => {
         if (ready && openRequested) {
@@ -144,6 +138,10 @@ const WalletPage = () => {
     const accountsWithWallet = accounts && wallet ? [...accounts, wallet] : [];
 
     const contentRefs = useRef<Array<unknown>>([]);
+
+    const displayTransfers = recentTransfers
+        ? recentTransfers.map(transferTransformer)
+        : [];
 
     return (
         <DefaultView navBar={<NavBar {...navBarProps}></NavBar>}>
@@ -181,7 +179,7 @@ const WalletPage = () => {
                 mainContent={
                     <Stack spacing={4}>
                         <RecentTransfersComponent
-                            transfers={recentTransfers}
+                            transfers={displayTransfers}
                             loading={recentTransfersLoading}
                         ></RecentTransfersComponent>
 
@@ -193,7 +191,9 @@ const WalletPage = () => {
                                 <AccountListComponent
                                     accounts={accounts}
                                     onCreateTransfer={(account) => {}}
-                                    onAddAccount={ready ? open : () => {}}
+                                    onAddAccount={
+                                        ready ? () => open() : () => {}
+                                    }
                                     onUnlinkAccount={onDeleteAccount}
                                     onCompleteAccountLink={
                                         onCompleteAccountLink

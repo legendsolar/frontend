@@ -69,9 +69,9 @@ const VerifyAccreditationContent = ({
 
     const onContinue = () => {
         onAccreditationStatusSubmit(
-            accreditationList.map(
-                (accreditation) => accreditation.accreditationOption,
-            ),
+            accreditationList
+                .filter((accreditation) => accreditation.checked)
+                .map((accreditation) => accreditation.accreditationOption),
         );
     };
 

@@ -261,6 +261,13 @@ export const useProvideUser = (): useUserReturnType => {
                     dwolla {
                         id
                     }
+                    address {
+                        streetAddress
+                        streetAddress2
+                        city
+                        state
+                        postalCode
+                    }
                 }
             }
         }

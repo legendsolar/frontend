@@ -82,13 +82,12 @@ const AccountPage = () => {
             metadata,
         );
 
-        createAccount({
-            variables: {
-                input,
-            },
-        });
+        createAccount(input);
     };
-    const {open, ready} = usePlaidLinkModal(token, onPlaidLinkComplete);
+    const {open, ready} = usePlaidLinkModal(
+        token ? token : '',
+        onPlaidLinkComplete,
+    );
 
     useEffect(() => {
         if (!createLinkTokenLoading && !token && !createLinkTokenError)
@@ -298,7 +297,9 @@ const AccountPage = () => {
                                 <AccountListComponent
                                     accounts={accounts}
                                     onCreateTransfer={(account) => {}}
-                                    onAddAccount={ready ? open : () => {}}
+                                    onAddAccount={
+                                        ready ? () => open() : () => {}
+                                    }
                                     onUnlinkAccount={() => {}}
                                     onCompleteAccountLink={
                                         onCompleteAccountLink
@@ -307,7 +308,7 @@ const AccountPage = () => {
                                         accountsLoading ||
                                         createLinkTokenLoading ||
                                         createAccountLoading ||
-                                        createLinkTokenError
+                                        !!createLinkTokenError
                                     }
                                 ></AccountListComponent>
                             )}

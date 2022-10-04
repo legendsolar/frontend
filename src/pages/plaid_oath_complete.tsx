@@ -39,11 +39,7 @@ const OAuthLink = () => {
         );
 
         // create account
-        createAccount({
-            variables: {
-                input,
-            },
-        });
+        createAccount(input);
 
         localStorage.removeItem(LOCAL_STORAGE_KEYS.PLAID_LINK_TOKEN);
 

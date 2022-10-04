@@ -5,9 +5,56 @@ import {
 } from './query_cache_utils';
 import {format} from 'date-fns';
 import {transferTransformer} from 'components/transfers/transfer_transforms';
-import {useQuery, gql, useMutation} from '@apollo/client';
+import {useQuery, gql, useMutation, ApolloError} from '@apollo/client';
+import {
+    CreateTransferInput,
+    Transfer,
+    TransferStatus,
+    TransferType,
+} from 'schema/schema_gen_types';
 
-const transferContext = createContext();
+interface useTransferReturnType {
+    useTransfersByType(
+        type: TransferType,
+        limit?: number,
+        offest?: number,
+    ): {
+        transfers: Array<Transfer>;
+        loading: boolean;
+        error: ApolloError | undefined;
+    };
+
+    useTransfersByStatus(
+        status: TransferStatus,
+        limit?: number,
+        offset?: number,
+    ): {
+        transfers: Array<Transfer>;
+        loading: boolean;
+        error: ApolloError | undefined;
+    };
+
+    useRecentTransfers(
+        limit?: number,
+        offset?: number,
+    ): {
+        transfers: Array<Transfer>;
+        loading: boolean;
+        error: ApolloError | undefined;
+    };
+
+    useCreateTransfer(): {
+        transfer: Transfer | undefined;
+        loading: boolean;
+        error: ApolloError | undefined;
+        reset(): void;
+        createTransfer(input: CreateTransferInput): Promise<Transfer>;
+    };
+}
+
+const transferContext = createContext<useTransferReturnType>(
+    {} as useTransferReturnType,
+);
 
 export const ProvideTransfer = ({children}) => {
     const transfer = useProvideTransfer();
@@ -22,7 +69,7 @@ export const useTransfer = () => {
     return useContext(transferContext);
 };
 
-export const useProvideTransfer = () => {
+export const useProvideTransfer = (): useTransferReturnType => {
     const TRANSFERS_BY_TYPE_QUERY = gql`
         query Query($type: TransferType!, $limit: Int!, $offset: Int) {
             userTransfersByType(type: $type, limit: $limit, offset: $offset) {
@@ -147,15 +194,15 @@ export const useProvideTransfer = () => {
             },
         });
 
-        const key = constructQueryCacheKey(
-            TRANSFERS_BY_STATUS_QUERY,
-            {
+        const key = constructQueryCacheKey({
+            query: TRANSFERS_BY_STATUS_QUERY,
+            inputs: {
                 status,
                 limit,
                 offset,
             },
-            'userTransfersByStatus',
-        );
+            queryName: 'userTransfersByStatus',
+        });
 
         cachedQueries[key] = true;
 
@@ -175,15 +222,15 @@ export const useProvideTransfer = () => {
             },
         });
 
-        const key = constructQueryCacheKey(
-            TRANSFERS_BY_TYPE_QUERY,
-            {
+        const key = constructQueryCacheKey({
+            query: TRANSFERS_BY_TYPE_QUERY,
+            inputs: {
                 type,
                 limit,
                 offset,
             },
-            'userTransfersByType',
-        );
+            queryName: 'userTransfersByType',
+        });
 
         cachedQueries[key] = true;
 
@@ -202,14 +249,14 @@ export const useProvideTransfer = () => {
             },
         });
 
-        const key = constructQueryCacheKey(
-            TRANSFERS_RECENT_QUERY,
-            {
+        const key = constructQueryCacheKey({
+            query: TRANSFERS_RECENT_QUERY,
+            inputs: {
                 limit,
                 offset,
             },
-            'userTransfers',
-        );
+            queryName: 'userTransfers',
+        });
 
         cachedQueries[key] = true;
 
@@ -224,13 +271,17 @@ export const useProvideTransfer = () => {
         const [internalCreateTransfer, {data, loading, error, reset}] =
             useMutation(TRANSFER_CREATE_MUTATION);
 
-        const createTransfer = ({variables}) => {
-            internalCreateTransfer({
-                variables,
+        const createTransfer = async (
+            input: CreateTransferInput,
+        ): Promise<Transfer> => {
+            const resp = await internalCreateTransfer({
+                variables: input,
                 update: (cache, {data}) => {
                     forceUpdateCache(cache, data.createTransfer);
                 },
             });
+
+            return resp.data.createTransfer;
         };
 
         return {
@@ -255,7 +306,7 @@ export const useProvideTransfer = () => {
             });
 
             const transferList = cacheData ? cacheData[queryName] : [];
-            const updatedTransferList = [];
+            const updatedTransferList: Array<any> = [];
 
             if (inputs.type && newData.type === inputs.type) {
                 updatedTransferList.push(newData, ...transferList);
