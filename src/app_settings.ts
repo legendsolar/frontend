@@ -11,6 +11,7 @@ export interface APP_SETTINGS {
     };
     logRocket: {
         enabled: boolean;
+        projectId: string;
     };
     fullStory: {
         enabled: boolean;
@@ -35,6 +36,9 @@ const settings: APP_SETTINGS = {
     },
     logRocket: {
         enabled: process.env.REACT_APP_LOG_ROCKET_ENALBED === 'true',
+        projectId: process.env?.REACT_APP_LOG_ROCKET_PROJECT_ID
+            ? process.env?.REACT_APP_LOG_ROCKET_PROJECT_ID
+            : '',
     },
     fullStory: {
         enabled: process.env.REACT_APP_FULLSTORY_ENABLED === 'true',

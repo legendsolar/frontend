@@ -42,7 +42,8 @@ if (appSettings.fullStory.enabled) {
 }
 
 if (appSettings.logRocket.enabled) {
-    LogRocket.init('d6ndfk/legends-app');
+    console.warn('log rocket enabled');
+    LogRocket.init(appSettings.logRocket.projectId);
 }
 
 smoothscroll.polyfill();
