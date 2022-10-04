@@ -39,6 +39,7 @@ import {
     transformPlaidDataToCreateAccountInput,
     transformPlaidVerificationStatus,
 } from 'transformers/plaid_api_transformers';
+import {usePlaid} from 'hooks/use_plaid';
 
 const AccountPage = () => {
     const navBarProps = useNavBar();
@@ -53,12 +54,9 @@ const AccountPage = () => {
         accreditation,
     } = useGetUserAccreditation();
 
-    const {
-        useAccounts,
-        usePlaidLinkModal,
-        useCreateLinkToken,
-        useCreateAccount,
-    } = useAccount();
+    const {useAccounts, useCreateLinkToken, useCreateAccount} = useAccount();
+
+    const {usePlaidLinkModal, loading: plaidLoading} = usePlaid();
 
     const {
         createLinkToken,
@@ -84,10 +82,7 @@ const AccountPage = () => {
 
         createAccount(input);
     };
-    const {open, ready} = usePlaidLinkModal(
-        token ? token : '',
-        onPlaidLinkComplete,
-    );
+    const {open, ready} = usePlaidLinkModal(token);
 
     useEffect(() => {
         if (!createLinkTokenLoading && !token && !createLinkTokenError)

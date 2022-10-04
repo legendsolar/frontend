@@ -275,7 +275,7 @@ export const useProvideTransfer = (): useTransferReturnType => {
             input: CreateTransferInput,
         ): Promise<Transfer> => {
             const resp = await internalCreateTransfer({
-                variables: input,
+                variables: {input},
                 update: (cache, {data}) => {
                     forceUpdateCache(cache, data.createTransfer);
                 },

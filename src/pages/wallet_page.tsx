@@ -27,17 +27,12 @@ import {
 } from 'transformers/plaid_api_transformers';
 import RecentTransfersComponent from 'components/transfers/recent_transfers_component';
 import {transferTransformer} from 'components/transfers/transfer_transforms';
+import {usePlaid} from 'hooks/use_plaid';
 
 const WalletPage = () => {
     const navBarProps = useNavBar();
-    const {
-        useAccounts,
-        useWallet,
-        usePlaidLinkModal,
-        useCreateLinkToken,
-        useCreateAccount,
-        useDeleteAccount,
-    } = useAccount();
+    const {useAccounts, useWallet, useCreateLinkToken, useDeleteAccount} =
+        useAccount();
 
     const {useRecentTransfers, useCreateTransfer} = useTransfer();
     const [tokenRequested, setTokenRequested] = useState(false);
@@ -67,6 +62,8 @@ const WalletPage = () => {
         createTransfer,
     } = useCreateTransfer();
 
+    const {usePlaidLinkModal, loading: plaidLoading} = usePlaid();
+
     const onCreateNewTransfer = (newTransfer: CreateTransferInput) => {
         // const variables = {
         //     input: {
@@ -92,28 +89,11 @@ const WalletPage = () => {
         token,
     } = useCreateLinkToken();
 
-    const {
-        createAccount,
-        loading: createAccountLoading,
-        error: createAccoutError,
-        account,
-    } = useCreateAccount();
-
     const onCompleteAccountLink = async (account: BankAccount) => {
         console.log(account.plaid.accessToken);
         await createLinkToken(account.plaid.accessToken);
         setOpenRequested(true);
         // open();
-    };
-
-    const onPlaidLinkComplete = ({publicToken, metadata}) => {
-        const input = transformPlaidDataToCreateAccountInput(
-            publicToken,
-            metadata,
-        );
-
-        // create account
-        createAccount(input);
     };
 
     useEffect(() => {
@@ -123,10 +103,7 @@ const WalletPage = () => {
         }
     }, [createLinkTokenLoading, token, tokenRequested]);
 
-    const {open, ready} = usePlaidLinkModal(
-        token ? token : '',
-        onPlaidLinkComplete,
-    );
+    const {open, ready} = usePlaidLinkModal(token);
 
     useEffect(() => {
         if (ready && openRequested) {
@@ -201,7 +178,7 @@ const WalletPage = () => {
                                     addAccountDisabled={
                                         accountsLoading ||
                                         createLinkTokenLoading ||
-                                        createAccountLoading
+                                        plaidLoading
                                     }
                                 ></AccountListComponent>
                             )}

@@ -54,22 +54,6 @@ interface useAccountReturnType {
         loading: boolean;
         error: ApolloError | undefined;
     };
-
-    usePlaidLinkModal(
-        token: string,
-        onComplete: ({
-            publicToken,
-            metadata,
-        }: {
-            publicToken: string;
-            metadata: any;
-        }) => void,
-    ): {
-        open: Function;
-        exit: Function;
-        error: ErrorEvent | null;
-        ready: boolean;
-    };
 }
 
 const accountContext = createContext<useAccountReturnType>(
@@ -223,7 +207,7 @@ export const useProvideAccount = (): useAccountReturnType => {
 
         const createAccount = async (input: CreateAccountInput) => {
             const resp = await internalCreateAccount({
-                variables: input,
+                variables: {input},
                 update: (cache, {data}) => {
                     forceAddDataToCache(cache, data.createAccount);
                 },
@@ -246,7 +230,7 @@ export const useProvideAccount = (): useAccountReturnType => {
 
         const deleteAccount = async (input: RemoveAccountInput) => {
             const resp = await internalDeleteAccount({
-                variables: input,
+                variables: {input},
                 update: (cache, {data}) => {
                     forceRemoveDataFromCache(cache, data.removeAccount.id);
                 },
@@ -260,31 +244,6 @@ export const useProvideAccount = (): useAccountReturnType => {
             loading,
             error,
             account: data?.deleteAccount,
-        };
-    };
-
-    const usePlaidLinkModal = (
-        token: string,
-        onComplete: ({
-            publicToken,
-            metadata,
-        }: {
-            publicToken: string;
-            metadata: any;
-        }) => void,
-    ) => {
-        const {open, ready, exit, error} = usePlaidLink({
-            token: token,
-            onSuccess: (public_token, metadata) => {
-                console.log(public_token, metadata);
-                onComplete({publicToken: public_token, metadata});
-            },
-        });
-        return {
-            open,
-            exit,
-            ready,
-            error,
         };
     };
 
@@ -352,6 +311,5 @@ export const useProvideAccount = (): useAccountReturnType => {
         useCreateLinkToken: useGetLinkToken,
         useCreateAccount,
         useDeleteAccount,
-        usePlaidLinkModal,
     };
 };
