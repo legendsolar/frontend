@@ -11,7 +11,6 @@ const TestCumulativeImpact = () => {
                 year: 1000,
             }}
             unitOpts={unitOpts}
-            live={true}
         ></CumulativeImpact>
     );
 };

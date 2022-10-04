@@ -4,34 +4,27 @@ import PropTypes from 'prop-types';
 import {useState} from 'react';
 import Component from 'components/basics/component';
 import {UnitOpts} from 'components/gauges/metric_gauge';
+import {defined, mapFunction} from 'utils/object_utils';
 
-interface Props {
-    cumulativeData: {
-        day: number;
-        week: number;
-        month: number;
-        year: number;
-    };
-    unitOpts: UnitOpts;
-    live: boolean;
+export interface CumulativeData {
+    day: number;
+    week: number;
+    month: number;
+    year: number;
 }
 
-const CumulativeImpact = ({cumulativeData, unitOpts, live}: Props) => {
+interface Props {
+    cumulativeData: CumulativeData;
+    unitOpts: UnitOpts;
+}
+
+const CumulativeImpact = ({cumulativeData, unitOpts}: Props) => {
     const [historyState, setHistoryState] = useState('week');
 
-    const parsedCumulativeData = live
-        ? {
-              day: cumulativeData.day.toFixed(2),
-              week: cumulativeData.week.toFixed(2),
-              month: cumulativeData.month.toFixed(2),
-              year: cumulativeData.year.toFixed(2),
-          }
-        : {
-              day: '-',
-              week: '-',
-              month: '-',
-              year: '-',
-          };
+    const parsedCumulativeData = mapFunction<CumulativeData>(
+        cumulativeData,
+        (val) => (defined(val) ? val.toFixed(2) : '-'),
+    );
 
     return (
         <Component shadow>

@@ -56,7 +56,6 @@ const EarningsCumulativeImpact = ({cumulativeData, live}) => {
         <CumulativeImpact
             cumulativeData={cumulativeData}
             unitOpts={earningsUnitOpts}
-            live={live}
         ></CumulativeImpact>
     );
 };
@@ -68,7 +67,6 @@ const CarbonCumulativeImpact = ({cumulativeData, live}) => {
         <CumulativeImpact
             cumulativeData={cumulativeData}
             unitOpts={carbonUnitOpts}
-            live={live}
         ></CumulativeImpact>
     );
 };
@@ -78,7 +76,6 @@ const GenerationCumulativeImpact = ({cumulativeData, live}) => {
         <CumulativeImpact
             cumulativeData={cumulativeData}
             unitOpts={generationUnitOpts}
-            live={live}
         ></CumulativeImpact>
     );
 };

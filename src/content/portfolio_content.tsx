@@ -1,6 +1,5 @@
 import {Typography, Stack, Box, Grid, Slider} from '@mui/material';
 import ContentDivider from 'components/basics/content_divider';
-import BasicMap from 'components/map/basic_map_component';
 import TransferDataGrid from 'components/transfers/transfer_data_grid';
 import Component from 'components/basics/component';
 import RealTimeContent from 'content/real_time_content';
@@ -11,11 +10,6 @@ import IconAccordian from 'utils/icon_accordian';
 import SideBar from 'components/utils/sidebar_component';
 import MetricList from 'components/summary/metric_list';
 import SmallPanelDisplaySVG from 'assets/images/small_panel_display.svg';
-import Image from 'utils/image';
-
-import Marker from 'components/map/marker';
-import PanelParkingLotPNG from 'assets/images/panel_parking_lot.png';
-import PanelWarehousePNG from 'assets/images/panel_warehouse.png';
 import DocumentListComponent from 'components/documents/document_list_component';
 import {numberFormatter, currencyFormatter} from 'utils/number_formatter';
 import LoadingContent from 'content/loading_content';

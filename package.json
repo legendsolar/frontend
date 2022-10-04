@@ -65,7 +65,8 @@
         "yup": "^0.32.11"
     },
     "scripts": {
-        "start": "env-cmd -f ./.env.production react-scripts start",
+        "start": "env-cmd -f ./.env.dev react-scripts start",
+        "start:production": "env-cmd -f ./.env.production react-scripts start",
         "start:emulators": "env-cmd -f ./.env.emulator react-scripts start",
         "start:test": "env-cmd -f ./.env.test react-scripts start",
         "build": "env-cmd -f ./.env.production react-scripts build",
@@ -78,7 +79,7 @@
         "test": "env-cmd -f ./.env.test react-scripts test --watchAll=false",
         "test:watch": "env-cmd -f ./.env.test react-scripts test --watchAll",
         "deploy:dev": "firebase use development && firebase deploy --only hosting:dev-app",
-        "deploy:demo": "firebase use development && firebase deploy --only hosting:demo"
+        "deploy:demo": "npm run build:demo && firebase use development && firebase deploy --only hosting:demo"
     },
     "eslintConfig": {
         "extends": [
