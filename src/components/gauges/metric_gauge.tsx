@@ -36,7 +36,7 @@ const MetricGauge = ({
     currentValue,
     unitOpts,
     message = '',
-    circleRadius = 90 + 45,
+    circleRadius = 150 - 45,
     arcWidth = 90,
     gaugeAngleTravel = 180,
 
@@ -58,12 +58,46 @@ const MetricGauge = ({
     const currentAngle = error
         ? 270
         : 180 + normalizedCurrentValue * gaugeAngleTravel;
-    const strokeTotalLength = circleRadius * Math.PI * 2;
+
+    const outerCircleRadius = circleRadius + arcWidth / 2;
+
+    const radiusFromHeight =
+        outerCircleRadius < dms.height ? outerCircleRadius : dms.height;
+    const radiusFromWidth =
+        outerCircleRadius * 2 < dms.width ? outerCircleRadius : dms.width / 2;
+
+    const currentCircleOuterRadius = Math.min(
+        radiusFromHeight,
+        radiusFromWidth,
+    );
+
+    const currentCircleRadius = currentCircleOuterRadius - arcWidth / 2;
+    const currentCircleInnerRadius = currentCircleOuterRadius - arcWidth;
+
+    const strokeTotalLength = currentCircleRadius * Math.PI * 2;
     const strokeCurrentLength =
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
 
+    console.log({
+        height: dms.height,
+        width: dms.width,
+        currentCircleOuterRadius,
+        currentCircleInnerRadius,
+
+        radiusFromHeight,
+        radiusFromWidth,
+    });
+
+    const getGaugeNumber = () => {
+        if (currentCircleInnerRadius > 20) {
+            return error
+                ? '--'
+                : unitOpts.unitFormatter(currentValue, false, 3);
+        }
+    };
+
     return (
-        <Component shadow>
+        <Component shadow resize={true}>
             <Stack alignItems={'center'}>
                 <Stack
                     direction="row"
@@ -79,25 +113,25 @@ const MetricGauge = ({
                 <div
                     style={{
                         position: 'relative',
-                        maxWidth: '400px',
                         width: '100%',
-                        height: 184,
+                        height: 150,
+
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'end',
+                        alignItems: 'center',
                     }}
-                    ref={ref}
                 >
                     <svg
+                        ref={ref}
                         style={{
-                            position: 'absolute',
                             width: '100%',
-                            height: '100%',
-                            left: 0,
-                            right: 0,
+                            maxWidth: '300px',
                         }}
-                        width={'360px'}
                     >
                         <g
                             style={{
-                                transform: 'translate(50%,100%)',
+                                transform: `translate(${currentCircleOuterRadius}px,100%)`,
                             }}
                         >
                             <g
@@ -111,18 +145,18 @@ const MetricGauge = ({
                                     style={{
                                         stroke: '#F4F5f5',
                                     }}
-                                    r={circleRadius}
+                                    r={currentCircleRadius}
                                 />
                                 <circle
                                     stroke={
                                         theme.palette[unitOpts.strokeColor].main
                                     }
-                                    r={circleRadius}
+                                    r={currentCircleRadius}
                                     stroke-dasharray={`${strokeCurrentLength} ${strokeTotalLength}`}
                                 />
                             </g>
                             <rect
-                                x={circleRadius - arcWidth / 2}
+                                x={currentCircleRadius - arcWidth / 2}
                                 y="-2"
                                 width={arcWidth}
                                 height="4"
@@ -133,8 +167,13 @@ const MetricGauge = ({
                     </svg>
                     <div
                         style={{
-                            width: '100%',
-                            height: '100%',
+                            position: 'absolute',
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'end',
@@ -143,15 +182,14 @@ const MetricGauge = ({
                     >
                         <Typography
                             variant={'headline1' as any}
-                            sx={{mt: 'auto', lineHeight: '65px'}}
+                            sx={{
+                                mt: 'auto',
+                                lineHeight:
+                                    currentCircleInnerRadius - 10 + 'px',
+                                fontSize: currentCircleInnerRadius - 3 + 'px',
+                            }}
                         >
-                            {error
-                                ? '--'
-                                : unitOpts.unitFormatter(
-                                      currentValue,
-                                      false,
-                                      3,
-                                  )}
+                            {getGaugeNumber()}
                         </Typography>
                     </div>
                 </div>
@@ -160,7 +198,8 @@ const MetricGauge = ({
                     justifyContent="space-between"
                     sx={{
                         mt: 1,
-                        width: '360px',
+                        width: '100%',
+                        maxWidth: '300px',
                     }}
                 >
                     <Typography variant={'subtitle3' as any}>
@@ -193,7 +232,7 @@ const MetricGauge = ({
                     justifyContent="end"
                     sx={{
                         mt: 3,
-                        width: '360px',
+                        width: '100%',
                     }}
                 >
                     <Typography variant={'label' as any} sx={{ml: 'auto'}}>

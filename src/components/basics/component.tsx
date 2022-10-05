@@ -10,6 +10,7 @@ interface ComponentProps {
     disabled?: boolean;
     shadow?: boolean;
     standardWidth?: boolean;
+    resize?: boolean;
     children?: ReactNode;
     haze?: boolean;
     sx?: any;
@@ -25,6 +26,7 @@ const Component = forwardRef(
             children = {},
             sx = {},
             standardWidth = true,
+            resize = false,
             onClick = () => {},
             shadow = false,
             haze = false,
@@ -49,7 +51,11 @@ const Component = forwardRef(
         );
 
         if (standardWidth && !sx.width) {
-            sx.width = '400px';
+            sx.maxWidth = '400px';
+
+            if (!resize) {
+                sx.width = '400px';
+            }
         }
 
         if (shadow) {

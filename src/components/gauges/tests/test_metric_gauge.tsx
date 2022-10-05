@@ -6,7 +6,7 @@ const TestMetricGauge = () => {
         <MetricGauge
             min={0}
             max={10}
-            currentValue={5}
+            currentValue={7.5}
             unitOpts={unitOpts}
             message={'Live Message'}
         ></MetricGauge>
