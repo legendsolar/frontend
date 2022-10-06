@@ -75,9 +75,29 @@ export default () => {
                             md: {theme.breakpoints.values.md + 'px'}
                         </Typography>
 
-                        <Typography color={'blackDusk.contrastText' as any}>
-                            {`(${settings.width}x${settings.height})`}
-                        </Typography>
+                        <Box
+                            sx={{
+                                height: '100vh',
+                                width: theme.breakpoints.values.sm + 'px',
+                                backgroundColor: 'black',
+                                position: 'relative',
+
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <Typography
+                                color={'blackDusk.contrastText' as any}
+                                sx={{position: 'absolute', top: 0, left: 0}}
+                            >
+                                sm: {theme.breakpoints.values.sm + 'px'}
+                            </Typography>
+
+                            <Typography color={'blackDusk.contrastText' as any}>
+                                {`(${settings.width}x${settings.height})`}
+                            </Typography>
+                        </Box>
                     </Box>
                 </Box>
             </Box>

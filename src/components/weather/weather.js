@@ -48,7 +48,7 @@ const Weather = ({temp, state, code}) => {
     const lottieJson = codeConverter(code);
 
     return (
-        <Component shadow>
+        <Component shadow resize={true}>
             <Stack direction="row" justifyContent="space-between">
                 <Typography variant="smallHeadline">Weather</Typography>
                 <Typography variant="headline1">{temp}&deg;</Typography>

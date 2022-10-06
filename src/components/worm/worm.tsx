@@ -16,7 +16,7 @@ var tinycolor = require('tinycolor2');
 const defaultChartDisplayParams = {
     timeAxisLabels: true,
     currentTimeDisplay: false,
-    minPixelsPerDay: 100,
+    minPixelsPerDay: 50,
     minDaysDisplayed: 2,
     maxDaysDisplayed: 7,
 

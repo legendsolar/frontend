@@ -20,13 +20,13 @@ const MainContentBox = ({children, passedRef = null}) => (
                 xl: themeOptions.breakpoints.values.xl + 'px',
             },
             pl: {
-                sm: '10px',
+                sm: '0px',
                 md: '10px',
                 lg: '20px',
                 xl: '20px',
             },
             pr: {
-                sm: '10px',
+                sm: '0px',
                 md: '10px',
                 lg: '20px',
                 xl: '20px',

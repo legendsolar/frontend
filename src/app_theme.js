@@ -254,7 +254,7 @@ export const themeOptions = {
     breakpoints: {
         values: {
             xs: 0,
-            sm: 0, // webflow phone
+            sm: 320, // webflow phone
             md: 478, // webflow landscape phone
             lg: 860, // webflow tablet 820 + 40
             xl: 1280 + 40, // desktop 1240 + 40 + 40

@@ -27,7 +27,7 @@ const CumulativeImpact = ({cumulativeData, unitOpts}: Props) => {
     );
 
     return (
-        <Component shadow>
+        <Component shadow resize={true}>
             <Stack justifyContent="space-between" spacing={8}>
                 <Stack
                     direction="row"
@@ -40,7 +40,10 @@ const CumulativeImpact = ({cumulativeData, unitOpts}: Props) => {
                 </Stack>
 
                 <Stack direction="row" justifyContent="space-evenly">
-                    <Stack justifyContent={'center'}>
+                    <Stack
+                        justifyContent={'center'}
+                        sx={{display: {xs: 'none', md: 'inline'}}}
+                    >
                         <Typography variant={'label' as any} align="center">
                             AVG
                         </Typography>
@@ -67,7 +70,10 @@ const CumulativeImpact = ({cumulativeData, unitOpts}: Props) => {
                     </Stack>
                     <VertDivider></VertDivider>
 
-                    <Stack justifyContent={'center'}>
+                    <Stack
+                        justifyContent={'center'}
+                        sx={{display: {xs: 'none', md: 'inline'}}}
+                    >
                         <Typography align="center" variant={'label' as any}>
                             BEST
                         </Typography>

@@ -61,6 +61,14 @@ const NavBar = ({
                         width: '100%',
                         mt: 10,
                         mb: 10,
+                        ml: {
+                            md: 0,
+                            sm: 5,
+                        },
+                        mr: {
+                            md: 0,
+                            sm: 5,
+                        },
                     }}
                 >
                     <Stack
@@ -73,10 +81,17 @@ const NavBar = ({
                             transform: 'translate3d(0, 0, 0px)',
                         }}
                     >
-                        <img
+                        <Box
+                            component={'img'}
                             src={TypemarkSolarSVG}
-                            style={{width: '175px'}}
-                        ></img>
+                            sx={{
+                                width: {
+                                    lg: '175px',
+                                    md: '125px',
+                                    xs: '100px',
+                                },
+                            }}
+                        ></Box>
 
                         {userIsAuthenticated && userVerified && (
                             <LoggedInToolbar
