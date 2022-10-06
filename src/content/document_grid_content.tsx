@@ -44,7 +44,7 @@ const DocumentGridContent = ({
         marginBottom: 0,
     });
     return (
-        <Box sx={{mt: '30px'}}>
+        <Box sx={{mt: {lg: '30px', md: '45px', sm: '50px'}}}>
             <MainContentBox passedRef={ref}>
                 <Stack
                     direction="row"
