@@ -117,10 +117,13 @@ const Worm = ({
             daysAllowed,
         );
 
-        const filteredData = rawData.filter((d) => {
-            if (!d) return false;
-            return xAccessor(d).getTime() >= minDate.getTime();
-        });
+        const filteredData = rawData
+            .filter((d) => {
+                if (!d) return false;
+                return xAccessor(d).getTime() >= minDate.getTime();
+            })
+            // if data is coming in out of order?
+            .sort((a, b) => xAccessor(a).getTime() - xAccessor(b).getTime());
 
         /**
          * Add a tiny bit of data before the min date to
