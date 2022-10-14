@@ -5,6 +5,7 @@ import * as Sentry from '@sentry/react';
 import {Integrations} from '@sentry/tracing';
 import * as FullStory from '@fullstory/browser';
 import LogRocket from 'logrocket';
+import posthog from 'posthog-js';
 
 import appSettings from 'app_settings';
 import smoothscroll from 'smoothscroll-polyfill';
@@ -34,6 +35,12 @@ if (appSettings.sentry.enabled)
         attachStacktrace: true,
         autoSessionTracking: true,
     });
+
+if (appSettings.posthog.enabled) {
+    posthog.init(appSettings.posthog.projectId, {
+        api_host: 'https://app.posthog.com',
+    });
+}
 
 if (appSettings.fullStory.enabled) {
     FullStory.init({

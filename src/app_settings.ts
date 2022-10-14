@@ -16,6 +16,10 @@ export interface APP_SETTINGS {
     fullStory: {
         enabled: boolean;
     };
+    posthog: {
+        enabled: boolean;
+        projectId: string;
+    };
     timeout_ms: number;
     emailVerificationRedirectUrl: string;
     minPlatformAge: number;
@@ -42,6 +46,12 @@ const settings: APP_SETTINGS = {
     },
     fullStory: {
         enabled: process.env.REACT_APP_FULLSTORY_ENABLED === 'true',
+    },
+    posthog: {
+        enabled: process.env.REACT_APP_POSTHOG_ENABLED === 'true',
+        projectId: process.env?.REACT_APP_POSTHOG_PROJECT_ID
+            ? process.env?.REACT_APP_POSTHOG_PROJECT_ID
+            : '',
     },
     timeout_ms: 5000,
     emailVerificationRedirectUrl:
