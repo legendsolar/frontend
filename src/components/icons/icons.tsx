@@ -84,3 +84,16 @@ export const CircledIcon = ({icon, sx = {}}) => (
         {icon}
     </Box>
 );
+
+export const RoundedBoxIcon = ({icon, sx = {}}) => (
+    <Box
+        sx={{
+            display: 'flex',
+            borderRadius: '10px',
+            background: '#FFF',
+            p: 2,
+        }}
+    >
+        {icon}
+    </Box>
+);

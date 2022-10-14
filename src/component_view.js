@@ -30,6 +30,15 @@ const basePaths = [
         ],
     },
     {
+        name: 'calculator',
+        type: 'components',
+        tests: [
+            {
+                name: 'test_returns_calculator',
+            },
+        ],
+    },
+    {
         name: 'buttons',
         type: 'components',
         tests: [
@@ -362,6 +371,18 @@ const viewOptions = [
     {
         name: 'None',
         render: (componentUnderTest) => <div>{componentUnderTest}</div>,
+    },
+    {
+        name: 'Centered',
+        render: (componentUnderTest) => (
+            <Stack
+                sx={{height: '100vh'}}
+                justifyContent={'center'}
+                alignItems={'center'}
+            >
+                {componentUnderTest}
+            </Stack>
+        ),
     },
     {
         name: 'DualPaneView',
