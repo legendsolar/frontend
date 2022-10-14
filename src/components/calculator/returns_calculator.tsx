@@ -19,10 +19,8 @@ import {
 } from '@mui/material';
 import {useState} from 'react';
 
-import {legendaryGreen} from 'static/colors';
 import Component from 'components/basics/component';
 import {paletteOptions} from 'app_theme';
-import da from 'date-fns/esm/locale/da/index.js';
 import {
     CashIcon,
     LeafIcon,
