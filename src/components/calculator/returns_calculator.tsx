@@ -15,6 +15,7 @@ import {
     Stack,
     Typography,
     Switch,
+    Box,
     useTheme,
 } from '@mui/material';
 import {useState} from 'react';
@@ -50,12 +51,13 @@ ChartJS.register({
 
         ctx.textAlign = 'center';
         ctx.fillStyle = paletteOptions.palette.white.main;
+        ctx.font = `bold 13px Be Vietnam Pro`;
 
         chart.data.labels?.map((l, i) => {
             ctx.fillText(
                 l as string,
                 x.getPixelForValue(i),
-                y.getPixelForValue(0) - 10,
+                y.getPixelForValue(0) - 5,
             );
         });
     },
@@ -134,7 +136,7 @@ const ReturnsCalculator = ({
     // const years = R.range(0, 10);
 
     const years = Array.from({length: maxYears}, (x, i) => i);
-    const labels = years.map((y: number) => 'Y' + y);
+    const labels = years.map((y: number) => 'Y' + (y + 1));
 
     // const panelsValue = R.mapAccum(
     //     (acc, value) => [
@@ -156,7 +158,13 @@ const ReturnsCalculator = ({
 
     const displayData = reinvest
         ? years.map((y) => 1.3 ** y * panels)
-        : years.map((y) => 1.3 * y * panels);
+        : years.map((y) => 1.3 * (y + 1) * panels);
+
+    const min =
+        displayData.reduce((min, i) => (min < i ? min : i), Number.MAX_VALUE) +
+        0;
+
+    console.log(min);
 
     const color = theme.palette[unitState.strokeColor].main;
 
@@ -217,15 +225,14 @@ const ReturnsCalculator = ({
                             position: 'absolute',
                             margin: 'auto',
                             width: '50%',
-                            height: '150px',
                         }}
                     >
-                        <Component
-                            standardWidth={false}
-                            background={true}
+                        <Box
                             sx={{
                                 backgroundColor: 'whiteHaze.main',
                                 width: '100%',
+                                p: 2,
+                                borderRadius: '5px',
                             }}
                         >
                             <Stack direction="row">
@@ -250,7 +257,7 @@ const ReturnsCalculator = ({
                                     'You could illumintae the status of liberty with the power this invesmtent will generate!'
                                 }
                             </Typography>
-                        </Component>
+                        </Box>
                     </div>
                     <Bar
                         options={{
@@ -279,11 +286,6 @@ const ReturnsCalculator = ({
                                         display: false,
                                         drawBorder: false,
                                     },
-                                    min:
-                                        displayData.reduce(
-                                            (min, i) => (min < i ? min : i),
-                                            0,
-                                        ) + 0,
                                 },
                                 x: {
                                     display: false,
@@ -315,6 +317,7 @@ const ReturnsCalculator = ({
                                     borderColor: 'rgba(0,0,0,0)',
                                     borderWidth: 0,
                                     borderRadius: 5,
+                                    borderSkipped: false,
                                 },
                             ],
                         }}
