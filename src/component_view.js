@@ -376,9 +376,8 @@ const viewOptions = [
         name: 'Centered',
         render: (componentUnderTest) => (
             <Stack
-                sx={{height: '100vh'}}
+                sx={{height: '100vh', ml: 4, mr: 4}}
                 justifyContent={'center'}
-                alignItems={'center'}
             >
                 {componentUnderTest}
             </Stack>
