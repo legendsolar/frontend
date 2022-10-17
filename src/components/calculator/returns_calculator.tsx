@@ -290,13 +290,13 @@ const ReturnsCalculator = ({
                                         icon={<SunIcon></SunIcon>}
                                     ></RoundedBoxIcon>
                                 </Stack>
-                                <Stack>
+                                <Stack spacing={0}>
                                     <Typography variant={'subtitle3' as any}>
                                         {renderHeadline(unitState)}
                                     </Typography>
                                     <Typography
-                                        variant={'headline2' as any}
-                                        color={'legendaryGreen.main'}
+                                        variant={'smallHeadline' as any}
+                                        color={color}
                                     >{`${unitState.format(
                                         totalInUnit,
                                     )}`}</Typography>
