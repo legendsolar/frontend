@@ -36,13 +36,13 @@ export const dollars: Unit = {
 export const energy: Unit = {
     unit: 'KWH',
     enum: UnitEnum.ENERGY,
-    unitSubHeading: 'per hour',
+    unitSubHeading: '',
     unitDescription: 'Kilowatts',
     title: 'Generation',
     color: 'pencilYellow',
     format: (u: number, includeUnit: boolean = true, width?: number) => {
         if (includeUnit) {
-            return `${numberFormatter(u, width, true)} kWh`;
+            return `${numberFormatter(u, width, true)}Wh`;
         } else {
             return `${numberFormatter(u, width, true)}`;
         }

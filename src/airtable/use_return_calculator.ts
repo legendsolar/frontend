@@ -18,7 +18,7 @@ const transformAirtableRecordToAnalogies = (
         totals: {
             [UnitEnum.DOLLARS]: r.get('10 yr Dividends') as number,
             [UnitEnum.CARBON]: r.get('lbs Carbon') as number,
-            [UnitEnum.ENERGY]: r.get('kWh Generated') as number,
+            [UnitEnum.ENERGY]: (r.get('kWh Generated') as number) * 1000,
         },
     };
 };
