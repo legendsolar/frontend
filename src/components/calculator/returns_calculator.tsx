@@ -8,7 +8,7 @@ import {
     Legend,
 } from 'chart.js';
 import {Bar} from 'react-chartjs-2';
-import Slider from '@mui/material/Slider';
+import Slider, {SliderThumb} from '@mui/material/Slider';
 import {
     Button,
     Checkbox,
@@ -30,7 +30,15 @@ import {
 } from 'components/icons/emoji_icons';
 import {RoundedBoxIcon} from 'components/icons/icons';
 import {UnitOpts} from 'components/gauges/metric_gauge';
-import {numberFormatter} from 'utils/number_formatter';
+import {currencyFormatter, numberFormatter} from 'utils/number_formatter';
+import {
+    carbonEnglish,
+    dollars,
+    energy,
+    panels as panelsUnit,
+    Unit,
+    UnitEnum,
+} from 'static/units';
 
 ChartJS.register(
     CategoryScale,
@@ -63,58 +71,37 @@ ChartJS.register({
     },
 });
 
-export const earningsUnitOpts: UnitOpts = {
-    unit: '',
-    unitDescription: 'Dollars',
-    unitSubHeading: 'per hour',
-    title: 'Cash Earned',
-    strokeColor: 'legendaryGreen',
-    unitFormatter: (u: number, includeUnit: boolean = true, width?: number) => {
-        return currencyFormatterInt_over100.format(u);
-    },
-};
+export interface PanelRecord {
+    panelCount: number;
+    analogies: {
+        [UnitEnum.DOLLARS]: string;
+        [UnitEnum.CARBON]: string;
+        [UnitEnum.ENERGY]: string;
+    };
+    totals: {
+        [UnitEnum.DOLLARS]: number;
+        [UnitEnum.CARBON]: number;
+        [UnitEnum.ENERGY]: number;
+    };
+}
 
-export const generationUnitOpts: UnitOpts = {
-    unit: 'KWH',
-    unitSubHeading: 'per hour',
-    unitDescription: 'Kilowatts',
-    title: 'Generation',
-    strokeColor: 'pencilYellow',
-    unitFormatter: (u: number, includeUnit: boolean = true, width?: number) => {
-        if (includeUnit) {
-            return `${numberFormatter(u, width, true)} kWh`;
-        } else {
-            return `${numberFormatter(u, width, true)}`;
-        }
-    },
-};
+interface CustomSunThumbProps extends React.HTMLAttributes<unknown> {}
 
-export const carbonUnitOpts: UnitOpts = {
-    unit: 'LBS',
-    unitDescription: 'Pounds ',
-    unitSubHeading: 'per hour',
-    title: 'Carbon Aversion',
-    strokeColor: 'skyBlue',
-    unitFormatter: (u: number, includeUnit: boolean = true, width?: number) => {
-        if (includeUnit) {
-            return `${numberFormatter(u, width, true)} LBS`;
-        } else {
-            return `${numberFormatter(u, width, true)}`;
-        }
-    },
+const CustomSunThumb = ({children, ...other}: CustomSunThumbProps) => {
+    return (
+        <SliderThumb {...other}>
+            {children}
+            <SunIcon />
+        </SliderThumb>
+    );
 };
-
-const currencyFormatterInt_over100 = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-});
 
 interface Props {
     maxYears: number;
     maxPanels: number;
     minPanels: number;
     panelCost: number;
+    panelRecords: Array<PanelRecord>;
 }
 
 const ReturnsCalculator = ({
@@ -122,6 +109,7 @@ const ReturnsCalculator = ({
     maxPanels,
     minPanels,
     panelCost,
+    panelRecords,
 }: Props) => {
     const theme = useTheme();
 
@@ -131,45 +119,42 @@ const ReturnsCalculator = ({
 
     const [panels, setPanels] = useState<number>(1);
     const [reinvest, setReinvest] = useState<boolean>(true);
-    const [unitState, setUnitState] = useState<UnitOpts>(earningsUnitOpts);
+    const [unitState, setUnitState] = useState<Unit>(energy);
 
     // const years = R.range(0, 10);
 
     const years = Array.from({length: maxYears}, (x, i) => i);
     const labels = years.map((y: number) => 'Y' + (y + 1));
 
-    // const panelsValue = R.mapAccum(
-    //     (acc, value) => [
-    //         acc * (1 - dep_percentage),
-    //         acc * (1 - dep_percentage),
-    //     ],
-    //     initialInvestment,
-    //     years,
-    // )[1];
-
-    // const totals = R.mapAccum(
-    //     (acc, value) => [
-    //         acc * (1 + year_percentage),
-    //         acc * (1 + year_percentage),
-    //     ],
-    //     initialInvestment,
-    //     years,
-    // )[1];
-
     const displayData = reinvest
         ? years.map((y) => 1.3 ** y * panels)
         : years.map((y) => 1.3 * (y + 1) * panels);
 
-    const min =
-        displayData.reduce((min, i) => (min < i ? min : i), Number.MAX_VALUE) +
-        0;
+    const color = theme.palette[unitState.color].main;
 
-    console.log(min);
+    const record =
+        panels > panelRecords.length
+            ? panelRecords[panelRecords.length - 1]
+            : panelRecords[panels - 1];
 
-    const color = theme.palette[unitState.strokeColor].main;
+    const analogyText = record.analogies[unitState.enum];
+    const totalInUnit = record.totals[unitState.enum];
+
+    const renderHeadline = (unit: Unit) => {
+        switch (unit.enum) {
+            case UnitEnum.DOLLARS:
+                return `${maxYears} year earning potential`;
+            case UnitEnum.ENERGY:
+                return `${maxYears} year generation potential`;
+            case UnitEnum.CARBON:
+                return `${maxYears} year aversion potential`;
+            default:
+                return '';
+        }
+    };
 
     return (
-        <Component standardWidth={false} sx={{p: 0}}>
+        <Component standardWidth={false} sx={{p: 0, overflow: 'hidden'}}>
             <Stack sx={{p: 4, backgroundColor: 'whiteFog.main'}}>
                 <Stack
                     direction="row"
@@ -179,26 +164,70 @@ const ReturnsCalculator = ({
                     <Stack direction="row" alignItems={'center'}>
                         <Typography
                             variant={'headline2' as any}
-                        >{`${panels} Panels`}</Typography>
+                        >{`${panelsUnit.format(panels)}`}</Typography>
                         <Typography
                             variant={'headline2' as any}
                         >{`|`}</Typography>
                         <Typography
                             variant={'headline2' as any}
-                        >{`${currencyFormatterInt_over100.format(
-                            panels * panelCost,
-                        )}`}</Typography>
+                        >{`${dollars.format(panels * panelCost)}`}</Typography>
                     </Stack>
-                    <Stack direction="row" alignItems={'center'}>
-                        <Typography variant={'description' as any}>
-                            {'Reinvest Earnings'}
-                        </Typography>
-                        <Switch
-                            defaultChecked={reinvest}
-                            onChange={() => {
-                                setReinvest(!reinvest);
+                    <Stack direction="row" spacing={1} sx={{mt: 2}}>
+                        <Button
+                            sx={{
+                                backgroundColor: 'whiteHaze.main',
+                                borderRadius: '5px 0px 0px 5px',
+                                p: 4,
                             }}
-                        />
+                            onClick={() => {
+                                setUnitState(dollars);
+                            }}
+                        >
+                            <CashIcon></CashIcon>
+                            <Typography
+                                variant={'smallHeadline' as any}
+                                sx={{ml: 2}}
+                            >
+                                Cash
+                            </Typography>
+                        </Button>
+
+                        <Button
+                            sx={{
+                                backgroundColor: 'whiteHaze.main',
+                                borderRadius: '0px',
+                                p: 4,
+                            }}
+                            onClick={() => {
+                                setUnitState(carbonEnglish);
+                            }}
+                        >
+                            <LeafIcon></LeafIcon>
+                            <Typography
+                                variant={'smallHeadline' as any}
+                                sx={{ml: 2}}
+                            >
+                                Carbon
+                            </Typography>
+                        </Button>
+                        <Button
+                            sx={{
+                                backgroundColor: 'whiteHaze.main',
+                                borderRadius: '0px 5px 5px 0px',
+                                p: 4,
+                            }}
+                            onClick={() => {
+                                setUnitState(energy);
+                            }}
+                        >
+                            <PowerIcon />
+                            <Typography
+                                variant={'smallHeadline' as any}
+                                sx={{ml: 2}}
+                            >
+                                Electricity
+                            </Typography>
+                        </Button>
                     </Stack>
                 </Stack>
                 <Slider
@@ -209,9 +238,29 @@ const ReturnsCalculator = ({
                     }
                     min={1}
                     max={10}
+                    marks={true}
+                    color={energy.color as any}
+                    components={{Thumb: CustomSunThumb}}
+                    sx={{
+                        '& .MuiSlider-thumb': {
+                            height: 30,
+                            width: 30,
+                            backgroundColor: '#FFF',
+                            boxShadow: 'none',
+                            border: '1px solid currentColor',
+                        },
+                        '& .MuiSlider-mark': {
+                            height: 5,
+                            width: 5,
+                            backgroundColor: '#FFF',
+                            boxShadow: 'none',
+                            border: '3px solid currentColor',
+                            borderRadius: '50%',
+                        },
+                    }}
                 />
             </Stack>
-            <Stack sx={{p: 4}}>
+            <Stack sx={{pl: 4, pr: 4, pb: 4, pt: 0}}>
                 <div
                     style={{
                         position: 'relative',
@@ -242,20 +291,19 @@ const ReturnsCalculator = ({
                                     ></RoundedBoxIcon>
                                 </Stack>
                                 <Stack>
-                                    <Typography
-                                        variant={'subtitle3' as any}
-                                    >{`10 year ${'generation'} potential`}</Typography>
+                                    <Typography variant={'subtitle3' as any}>
+                                        {renderHeadline(unitState)}
+                                    </Typography>
                                     <Typography
                                         variant={'headline2' as any}
-                                    >{`${unitState.unitFormatter(
-                                        1000 * panels,
+                                        color={'legendaryGreen.main'}
+                                    >{`${unitState.format(
+                                        totalInUnit,
                                     )}`}</Typography>
                                 </Stack>
                             </Stack>
                             <Typography variant={'description' as any}>
-                                {
-                                    'You could illumintae the status of liberty with the power this invesmtent will generate!'
-                                }
+                                {analogyText}
                             </Typography>
                         </Box>
                     </div>
@@ -275,9 +323,7 @@ const ReturnsCalculator = ({
                                     ticks: {
                                         display: false,
                                         callback: (value, index, ticks) =>
-                                            currencyFormatterInt_over100.format(
-                                                value as number,
-                                            ),
+                                            dollars.format(value as number),
                                     },
                                     title: {
                                         display: false,
@@ -323,54 +369,20 @@ const ReturnsCalculator = ({
                         }}
                     ></Bar>
                 </div>
+            </Stack>
 
-                <Stack direction="row" sx={{mt: 2}}>
-                    <Button
-                        sx={{
-                            backgroundColor: 'whiteHaze.main',
-                            borderRadius: '5px',
-                            p: 4,
-                        }}
-                        onClick={() => {
-                            setUnitState(earningsUnitOpts);
-                        }}
-                    >
-                        <CashIcon></CashIcon>
-                        <Typography variant={'smallHeadline' as any}>
-                            Cash
-                        </Typography>
-                    </Button>
-
-                    <Button
-                        sx={{
-                            backgroundColor: 'whiteHaze.main',
-                            borderRadius: '5px',
-                            p: 4,
-                        }}
-                        onClick={() => {
-                            setUnitState(carbonUnitOpts);
-                        }}
-                    >
-                        <LeafIcon></LeafIcon>
-                        <Typography variant={'smallHeadline' as any}>
-                            Carbon
-                        </Typography>
-                    </Button>
-                    <Button
-                        sx={{
-                            backgroundColor: 'whiteHaze.main',
-                            borderRadius: '5px',
-                            p: 4,
-                        }}
-                        onClick={() => {
-                            setUnitState(generationUnitOpts);
-                        }}
-                    >
-                        <PowerIcon />
-                        <Typography variant={'smallHeadline' as any}>
-                            Electricity
-                        </Typography>
-                    </Button>
+            <Stack sx={{p: 4, backgroundColor: 'whiteFog.main'}}>
+                <Stack
+                    direction="row"
+                    justifyContent={'space-between'}
+                    alignItems={'center'}
+                >
+                    <Typography variant={'smallHeadline' as any}>
+                        {`$250 EST COST PER PANEL`}
+                    </Typography>
+                    <Typography variant={'smallHeadline' as any}>
+                        {`8.2% EST ROI`}
+                    </Typography>
                 </Stack>
             </Stack>
         </Component>

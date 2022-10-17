@@ -36,6 +36,9 @@ const basePaths = [
             {
                 name: 'test_returns_calculator',
             },
+            {
+                name: 'test_airtable_returns_calculator',
+            },
         ],
     },
     {
