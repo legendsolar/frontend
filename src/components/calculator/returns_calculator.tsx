@@ -180,9 +180,11 @@ const ReturnsCalculator = ({
                         >{`${panelsUnit.format(panels)}`}</Typography>
                         <Typography
                             variant={'headline2' as any}
+                            color={'white.main'}
                         >{`|`}</Typography>
                         <Typography
                             variant={'headline2' as any}
+                            color={'blackDawn.main'}
                         >{`${dollars.format(panels * panelCost)}`}</Typography>
                     </Stack>
                     <Stack direction="row" spacing={1} sx={{mt: 2}}>
@@ -256,11 +258,11 @@ const ReturnsCalculator = ({
                     components={{Thumb: CustomThumb}}
                     sx={{
                         '& .MuiSlider-thumb': {
-                            height: 35,
-                            width: 35,
+                            height: 37,
+                            width: 37,
                             backgroundColor: '#FFF',
                             boxShadow: 'none',
-                            border: '1px solid currentColor',
+                            border: '3px solid currentColor',
                         },
                         '& .MuiSlider-mark': {
                             height: 5,
