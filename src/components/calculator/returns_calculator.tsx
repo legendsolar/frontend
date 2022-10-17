@@ -87,15 +87,6 @@ export interface PanelRecord {
 
 interface CustomSunThumbProps extends React.HTMLAttributes<unknown> {}
 
-const CustomSunThumb = ({children, ...other}: CustomSunThumbProps) => {
-    return (
-        <SliderThumb {...other}>
-            {children}
-            <SunIcon />
-        </SliderThumb>
-    );
-};
-
 interface Props {
     maxYears: number;
     maxPanels: number;
@@ -153,9 +144,31 @@ const ReturnsCalculator = ({
         }
     };
 
+    const renderThumb = (unit: Unit) => {
+        switch (unit.enum) {
+            case UnitEnum.DOLLARS:
+                return <CashIcon />;
+            case UnitEnum.ENERGY:
+                return <PowerIcon />;
+            case UnitEnum.CARBON:
+                return <LeafIcon />;
+            default:
+                return <SunIcon />;
+        }
+    };
+
+    const CustomThumb = ({children, ...other}: CustomSunThumbProps) => {
+        return (
+            <SliderThumb {...other}>
+                {children}
+                {renderThumb(unitState)}
+            </SliderThumb>
+        );
+    };
+
     return (
         <Component standardWidth={false} sx={{p: 0, overflow: 'hidden'}}>
-            <Stack sx={{p: 4, backgroundColor: 'whiteFog.main'}}>
+            <Stack sx={{p: 4, backgroundColor: 'whiteFog.main'}} spacing={4}>
                 <Stack
                     direction="row"
                     justifyContent={'space-between'}
@@ -239,12 +252,12 @@ const ReturnsCalculator = ({
                     min={1}
                     max={10}
                     marks={true}
-                    color={energy.color as any}
-                    components={{Thumb: CustomSunThumb}}
+                    color={unitState.color as any}
+                    components={{Thumb: CustomThumb}}
                     sx={{
                         '& .MuiSlider-thumb': {
-                            height: 30,
-                            width: 30,
+                            height: 35,
+                            width: 35,
                             backgroundColor: '#FFF',
                             boxShadow: 'none',
                             border: '1px solid currentColor',
