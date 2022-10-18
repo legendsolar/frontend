@@ -35,8 +35,6 @@ export const useReturnCalculator = () => {
 
     const records = loading ? [] : page.map(transformAirtableRecordToAnalogies);
 
-    console.log(records.length > 0 ? records[0].imageUrl : null);
-
     return {
         loading,
         records,
