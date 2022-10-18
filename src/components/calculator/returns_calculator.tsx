@@ -6,6 +6,7 @@ import {
     Title,
     Tooltip,
     Legend,
+    LogarithmicScale,
 } from 'chart.js';
 import {Bar} from 'react-chartjs-2';
 import Slider, {SliderThumb} from '@mui/material/Slider';
@@ -122,9 +123,11 @@ const ReturnsCalculator = ({
     const years = Array.from({length: maxYears}, (x, i) => i);
     const labels = years.map((y: number) => 'Y' + (y + 1));
 
-    const displayData = reinvest
+    const fakePanelFunction = (y, panels) => (1.3 * (y + 1) * panels) / 2 + 4;
+
+    const displayData = false
         ? years.map((y) => 1.3 ** y * panels)
-        : years.map((y) => 1.3 * (y + 1) * panels);
+        : years.map((y) => fakePanelFunction(y, panels));
 
     const color = theme.palette[unitState.color].main;
 
@@ -360,6 +363,8 @@ const ReturnsCalculator = ({
                                         display: false,
                                         drawBorder: false,
                                     },
+                                    max: fakePanelFunction(maxYears, maxPanels),
+                                    min: 0,
                                 },
                                 x: {
                                     display: false,
