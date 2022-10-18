@@ -20,6 +20,11 @@ const transformAirtableRecordToAnalogies = (
             [UnitEnum.CARBON]: r.get('lbs Carbon') as number,
             [UnitEnum.ENERGY]: (r.get('kWh Generated') as number) * 1000,
         },
+        imageUrl: {
+            [UnitEnum.DOLLARS]: (r.get('Cash emoji') as any)[0].url,
+            [UnitEnum.CARBON]: (r.get('Weight emoji') as any)[0].url,
+            [UnitEnum.ENERGY]: (r.get('Generation emoji') as any)[0].url,
+        },
     };
 };
 
@@ -29,6 +34,8 @@ export const useReturnCalculator = () => {
     const {loading, page} = useBase('Legends Return Calculator');
 
     const records = loading ? [] : page.map(transformAirtableRecordToAnalogies);
+
+    console.log(records.length > 0 ? records[0].imageUrl : null);
 
     return {
         loading,

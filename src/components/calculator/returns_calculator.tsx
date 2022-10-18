@@ -83,6 +83,11 @@ export interface PanelRecord {
         [UnitEnum.CARBON]: number;
         [UnitEnum.ENERGY]: number;
     };
+    imageUrl: {
+        [UnitEnum.DOLLARS]: string;
+        [UnitEnum.CARBON]: string;
+        [UnitEnum.ENERGY]: string;
+    };
 }
 
 interface CustomSunThumbProps extends React.HTMLAttributes<unknown> {}
@@ -129,6 +134,7 @@ const ReturnsCalculator = ({
             : panelRecords[panels - 1];
 
     const analogyText = record.analogies[unitState.enum];
+    const analogyEmojiUrl = record.imageUrl[unitState.enum];
     const totalInUnit = record.totals[unitState.enum];
 
     const renderHeadline = (unit: Unit) => {
@@ -302,7 +308,14 @@ const ReturnsCalculator = ({
                             <Stack direction="row">
                                 <Stack>
                                     <RoundedBoxIcon
-                                        icon={<SunIcon></SunIcon>}
+                                        icon={
+                                            <Box
+                                                component={'img'}
+                                                src={analogyEmojiUrl}
+                                                maxHeight={'30px'}
+                                                maxWidth={'30px'}
+                                            />
+                                        }
                                     ></RoundedBoxIcon>
                                 </Stack>
                                 <Stack spacing={0}>
