@@ -2,7 +2,7 @@
     "name": "frontend",
     "version": "0.1.0",
     "private": true,
-    "main": "src/index.tsx",
+    "main": "src/index.js",
     "dependencies": {
         "@apollo/client": "^3.5.10",
         "@emotion/react": "^11.7.1",
@@ -70,10 +70,12 @@
         "start:production": "env-cmd -f ./.env.production react-scripts start",
         "start:emulators": "env-cmd -f ./.env.emulator react-scripts start",
         "start:test": "env-cmd -f ./.env.test react-scripts start",
+        "start:exporter": "env-cmd -f ./.env.exporter react-scripts start",
         "build": "env-cmd -f ./.env.production react-scripts build",
         "build:dev": "env-cmd -f ./.env.dev react-scripts build",
         "build:test": "env-cmd -f ./.env.test react-scripts build",
         "build:demo": "env-cmd -f ./.env.demo react-scripts build",
+        "build:exporter": "env-cmd -f ./.env.exporter react-scripts build",
         "preview": "firebase use dev && firebase hosting:channel:deploy `git branch --show-current`-`git rev-parse HEAD`",
         "parseWebflowFooter": "node webflow_html_parser.js",
         "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'",
@@ -116,7 +118,9 @@
         "eslint-plugin-react": "^7.29.4",
         "eslint-plugin-react-hooks": "^4.4.0",
         "firebase-tools": "^11.9.0",
+        "parcel": "^2.7.0",
         "prettier": "^2.6.2",
+        "process": "^0.11.10",
         "query-string": "^7.1.1"
     }
 }

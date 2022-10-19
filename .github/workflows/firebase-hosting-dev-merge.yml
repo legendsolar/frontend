@@ -28,5 +28,13 @@ jobs:
           channelId: live
           projectId: legends-dev-362321
           target: dev-components
+      - run: npm ci && npm run build:exporter
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.DEV_FIREBASE_TOKEN }}'
+          channelId: live
+          projectId: legends-dev-362321
+          target: calculator 
 
 

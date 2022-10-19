@@ -1,32 +1,35 @@
 {
-  "projects": {
-    "production": "legends-alpha",
-    "development": "legends-dev-362321"
-  },
-  "targets": {
-    "legends-alpha": {
-      "hosting": {
-        "app": [
-          "legends-alpha"
-        ],
-        "components": [
-          "legends-component-staging"
-        ]
-      }
+    "projects": {
+        "production": "legends-alpha",
+        "development": "legends-dev-362321"
     },
-    "legends-dev-362321": {
-      "hosting": {
-        "dev-app": [
-          "legends-dev-362321"
-        ],
-        "dev-components": [
-          "legends-dev-component-staging"
-      ],
-      "demo": [
-        "legends-dev-demo"
-      ]
-    }
-  }
-  },
-  "etags": {}
+    "targets": {
+        "legends-alpha": {
+            "hosting": {
+                "app": [
+                    "legends-alpha"
+                ],
+                "components": [
+                    "legends-component-staging"
+                ]
+            }
+        },
+        "legends-dev-362321": {
+            "hosting": {
+                "dev-app": [
+                    "legends-dev-362321"
+                ],
+                "dev-components": [
+                    "legends-dev-component-staging"
+                ],
+                "calculator": [
+                    "calculator-panels"
+                ],
+                "demo": [
+                    "legends-dev-demo"
+                ]
+            }
+        }
+    },
+    "etags": {}
 }

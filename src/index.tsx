@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'index.css';
+import './index.css';
 import * as Sentry from '@sentry/react';
 import {Integrations} from '@sentry/tracing';
 import * as FullStory from '@fullstory/browser';
 import LogRocket from 'logrocket';
 import posthog from 'posthog-js';
 
-import appSettings from 'app_settings';
+import appSettings from './app_settings';
 import smoothscroll from 'smoothscroll-polyfill';
 import {ApolloProvider} from '@apollo/client';
 
@@ -60,6 +60,8 @@ const importBuildTarget = () => {
         return import('./app.js');
     } else if (process.env.REACT_APP_BUILD_TARGET === 'TEST') {
         return import('./test.js');
+    } else if (process.env.REACT_APP_BUILD_TARGET === 'COMPONENT_EXPORTER') {
+        return import('./component_exporter.js');
     } else {
         return Promise.reject(
             new Error(
@@ -76,6 +78,10 @@ importBuildTarget().then(({default: Environment}) =>
                 <Environment />
             </ApolloProvider>
         </React.StrictMode>,
-        document.getElementById('root'),
+        document.getElementById(
+            process.env?.REACT_APP_RENDER_DIV_ID
+                ? process.env.REACT_APP_RENDER_DIV_ID
+                : 'root',
+        ),
     ),
 );

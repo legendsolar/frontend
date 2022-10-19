@@ -9,6 +9,7 @@ import PersonPanelPinkSVG from 'assets/images/panel_person_pink.svg';
 import DefaultView from 'views/default_view';
 import FullPageView from 'views/full_page_view';
 import NavBar from 'components/utils/nav_bar';
+import {lazyImport} from 'utils/import_component';
 
 const basePaths = [
     {
@@ -437,13 +438,6 @@ const viewOptions = [
     },
 ];
 
-const importComponent = (path) =>
-    lazy(() =>
-        import(`${path}`).catch((e) => {
-            return import(`./views/error`);
-        }),
-    );
-
 const setQueryStringWithoutPageReload = (qsValue) => {
     const newurl =
         window.location.protocol +
@@ -536,7 +530,7 @@ const ComponentView = () => {
                                 ? `./${base.type}/${base.name}/tests/${test.name}`
                                 : `./${base.type}/tests/${test.name}`;
                         console.log(path);
-                        const Component = await importComponent(path);
+                        const Component = await lazyImport(path);
                         return <Component key={nanoid()} />;
                     }
 
