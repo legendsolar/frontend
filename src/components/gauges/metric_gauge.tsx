@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import {Typography, useTheme} from '@mui/material';
 import LivePill from 'components/pills/live_pill';
 import {useChartDimensions} from 'hooks/use_chart_dimensions';
-import {numberFormatter} from 'utils/number_formatter';
 import Component from 'components/basics/component';
+import {Unit} from 'static/units';
 
 export interface UnitOpts {
     title: string;
@@ -23,7 +21,7 @@ interface Props {
     max: number;
     currentValue: number;
     message?: string;
-    unitOpts: UnitOpts;
+    unitOpts: Unit;
     circleRadius?: number;
     arcWidth?: number;
     gaugeAngleTravel?: number;
@@ -90,9 +88,7 @@ const MetricGauge = ({
 
     const getGaugeNumber = () => {
         if (currentCircleInnerRadius > 20) {
-            return error
-                ? '--'
-                : unitOpts.unitFormatter(currentValue, false, 3);
+            return error ? '--' : unitOpts.format(currentValue, false, 3);
         }
     };
 
@@ -148,9 +144,7 @@ const MetricGauge = ({
                                     r={currentCircleRadius}
                                 />
                                 <circle
-                                    stroke={
-                                        theme.palette[unitOpts.strokeColor].main
-                                    }
+                                    stroke={theme.palette[unitOpts.color].main}
                                     r={currentCircleRadius}
                                     stroke-dasharray={`${strokeCurrentLength} ${strokeTotalLength}`}
                                 />
@@ -203,9 +197,7 @@ const MetricGauge = ({
                     }}
                 >
                     <Typography variant={'subtitle3' as any}>
-                        {error
-                            ? `${unitOpts.unit}-`
-                            : unitOpts.unitFormatter(min)}
+                        {error ? `${unitOpts.unit}-` : unitOpts.format(min)}
                     </Typography>
 
                     <Stack alignItems={'center'} justifyContent={'flex-start'}>
@@ -221,9 +213,7 @@ const MetricGauge = ({
                     </Stack>
 
                     <Typography variant={'subtitle3' as any}>
-                        {error
-                            ? `${unitOpts.unit}-`
-                            : unitOpts.unitFormatter(max)}
+                        {error ? `${unitOpts.unit}-` : unitOpts.format(max)}
                     </Typography>
                 </Stack>
 
