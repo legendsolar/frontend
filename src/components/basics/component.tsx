@@ -1,11 +1,9 @@
 // @ts-nocheck
 import {forwardRef, ReactNode} from 'react';
 import {Paper, Stack} from '@mui/material';
-import {useState} from 'react';
 import DefaultErrorBoundary from 'components/errors/default_error_boundary';
-import shadows from '@mui/material/styles/shadows';
 
-interface ComponentProps {
+export interface ComponentProps {
     inactive?: boolean;
     disabled?: boolean;
     shadow?: boolean;

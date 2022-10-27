@@ -4,7 +4,7 @@ import { Paper, Stack } from '@mui/material';
 import { useState } from 'react';
 import shadows from '@mui/material/styles/shadows';
 
-interface ComponentProps {
+export interface ComponentProps {
   inactive?: boolean;
   disabled?: boolean;
   shadow?: boolean;

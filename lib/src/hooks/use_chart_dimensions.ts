@@ -29,18 +29,20 @@ const combineChartDimensions = (dimensions: Dimentions): BoundedDimentions => {
     marginBottom: dimensions.marginBottom || 40,
     marginLeft: dimensions.marginLeft || 0,
   };
+
+  console.log({ parsedDimensions });
   return {
     ...parsedDimensions,
     boundedHeight: Math.max(
-      parsedDimensions.height
-        ? parsedDimensions.height
-        : 0 - parsedDimensions.marginTop - parsedDimensions.marginBottom,
+      parsedDimensions.height -
+        parsedDimensions.marginTop -
+        parsedDimensions.marginBottom,
       0
     ),
     boundedWidth: Math.max(
-      parsedDimensions.width
-        ? parsedDimensions.width
-        : 0 - parsedDimensions.marginLeft - parsedDimensions.marginRight,
+      parsedDimensions.width -
+        parsedDimensions.marginLeft -
+        parsedDimensions.marginRight,
       0
     ),
   };
@@ -48,7 +50,7 @@ const combineChartDimensions = (dimensions: Dimentions): BoundedDimentions => {
 
 export const useChartDimensions = (passedSettings: any) => {
   const ref = useRef<HTMLElement>();
-  const [dimensions, setDimensions] = useState(
+  const [dimensions, setDimensions] = useState<BoundedDimentions>(
     combineChartDimensions({ ...passedSettings, width: 0, height: 0 })
   );
 
@@ -78,9 +80,12 @@ export const useChartDimensions = (passedSettings: any) => {
       resizeObserver.observe(element);
 
       setDimensions({
-        ...dimensions,
-        width: element.clientWidth,
-        height: element.clientHeight,
+        ...combineChartDimensions({
+          ...dimensions,
+          width: element.clientWidth,
+          height: element.clientHeight,
+        }),
+        boundedHeight: 120,
       });
 
       return () => resizeObserver.unobserve(element);
