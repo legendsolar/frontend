@@ -36,7 +36,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "lib",
+  "name": "component-lib",
   "author": "",
   "module": "dist/lib.esm.js",
   "size-limit": [

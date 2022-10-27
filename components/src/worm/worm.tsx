@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import * as d3 from 'd3';
 import { useChartDimensions } from 'hooks/use_chart_dimensions';
 import { useMemo } from 'react';
-import WormAxis from 'components/worm/worm_axis';
+import WormAxis from 'worm/worm_axis';
 import { format, subDays } from 'date-fns';
 import { Typography } from '@mui/material';
 import { Stack } from '@mui/material';

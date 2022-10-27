@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import Worm, { WormProps } from '../src/components/worm/worm';
-import Component from '../src/components/basics/component';
+import Component from '../src/basics/component';
 import { generateFakeProductionData } from '../src/utils/fake_data';
 
 const generationFunctions = {

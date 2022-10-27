@@ -14,4 +14,5 @@ export const Thing: FC<Props> = ({ children }) => {
   return <div>{children || `the snozzberries taste like snozzberries`}</div>;
 };
 
-export * from './components/gauges/metric_gauge';
+export * from './gauges/metric_gauge';
+export * from './theme/theme';

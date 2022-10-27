@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import Component, { ComponentProps } from '../src/components/basics/component';
+import Component, { ComponentProps } from '../src/basics/component';
 
 const meta: Meta = {
   title: 'Component',
