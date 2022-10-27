@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Box } from '@mui/material';
 import * as d3 from 'd3';
 import { useChartDimensions } from 'hooks/use_chart_dimensions';

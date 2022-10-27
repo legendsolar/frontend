@@ -1,10 +1,6 @@
-import {
-  addHours,
-  getHours,
-  getMilliseconds,
-  getMinutes,
-  subDays,
-} from 'date-fns';
+// @ts-nocheck
+
+import { addHours, getHours, getMinutes, subDays } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { GenerationDatum } from 'schema/schema_gen_types';
 
