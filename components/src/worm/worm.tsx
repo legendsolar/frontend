@@ -1,40 +1,38 @@
-// @ts-nocheck
-
 import { Box } from '@mui/material';
 import * as d3 from 'd3';
-import { useChartDimensions } from 'hooks/use_chart_dimensions';
+import { useChartDimensions } from '../hooks/use_chart_dimensions';
 import { useMemo } from 'react';
-import WormAxis from 'worm/worm_axis';
+import WormAxis from './worm_axis';
 import { format, subDays } from 'date-fns';
 import { Typography } from '@mui/material';
 import { Stack } from '@mui/material';
-import { GenerationDatum } from 'schema/schema_gen_types';
+import { GenerationDatum } from '../schema/schema_gen_types';
 import { subMinutes } from 'date-fns';
 
 var tinycolor = require('tinycolor2');
 
-const defaultChartDisplayParams = {
+export const defaultChartDisplayParams = {
   timeAxisLabels: true,
-  currentTimeDisplay: false,
+  currentTimeDisplay: true,
   minPixelsPerDay: 50,
   minDaysDisplayed: 2,
   maxDaysDisplayed: 7,
 
   background: {
-    dayRegionColor: tinycolor('rgb(235,235,235)'),
-    nightRegionColor: tinycolor('rgb(244,243,243)'),
+    dayRegionColor: tinycolor('rgb(235,235,235)').toRgbString(),
+    nightRegionColor: tinycolor('rgb(244,243,243)').toRgbString(),
   },
 
   wormSunIcon: {
-    dayColor: tinycolor('rgb(250,223,79)'),
-    nightColor: tinycolor('rgb(33,30,32)'),
+    dayColor: tinycolor('rgb(250,223,79)').toRgbString(),
+    nightColor: tinycolor('rgb(33,30,32)').toRgbString(),
     gradientSteps: [0.5, 1],
     radius: 30,
   },
 
   worm: {
-    dayColor: tinycolor('#30A462'),
-    nightColor: tinycolor('rgb(33,30,32)'),
+    dayColor: tinycolor('#30A462').toRgbString(),
+    nightColor: tinycolor('rgb(33,30,32)').toRgbString(),
     nightThreshold_W: 500,
     width: 6.3,
   },
@@ -42,14 +40,21 @@ const defaultChartDisplayParams = {
   dayNightIcons: {
     rightMargin: 20,
     iconSpacing: 8 + 8.5,
-    dayIconColor: tinycolor('rgb(243,243,243)'),
-    nightIconColor: tinycolor('rgb(243,243,243)'),
+    dayIconColor: tinycolor('rgb(243,243,243)').toRgbString(),
+    nightIconColor: tinycolor('rgb(243,243,243)').toRgbString(),
     dayIconRadius: 8.5,
     nightIconRadius: 8.5,
   },
 
   animation: {
     time_s: 0,
+  },
+
+  chartMarginSettings: {
+    marginLeft: 0,
+    marginRight: 60,
+    marginTop: 30,
+    marginBottom: 60,
   },
 };
 
@@ -60,28 +65,19 @@ export interface WormProps {
   nightThreshold_W: number;
   max_W: number;
   sx?: any;
+
+  styleOptions?: typeof defaultChartDisplayParams;
 }
 
 const Worm = ({
   rawData,
   loading,
   error,
-  nightThreshold_W,
+  styleOptions = defaultChartDisplayParams,
   max_W,
   sx,
 }: WormProps) => {
-  const styleOptions = defaultChartDisplayParams;
-
-  if (nightThreshold_W) {
-    styleOptions.worm.nightThreshold_W = nightThreshold_W;
-  }
-
-  const chartSettings = {
-    marginLeft: 0,
-    marginRight: 60,
-    marginTop: 30,
-    marginBottom: 60,
-  };
+  const chartSettings = styleOptions.chartMarginSettings;
 
   const parseDate = (date: string) => new Date(date);
   const yAccessor = (d: GenerationDatum) => d.wattage;
@@ -149,7 +145,7 @@ const Worm = ({
     () =>
       d3
         .scaleTime()
-        .domain(d3.extent(data, xAccessor))
+        .domain(d3.extent(data, xAccessor) as any)
         .range([0, dms.boundedWidth]),
     [dms.boundedWidth, data]
   );
@@ -159,8 +155,8 @@ const Worm = ({
   const lineGen = d3
     .line()
     .curve(d3.curveBasis)
-    .x((d) => xScale(xAccessor(d)))
-    .y((d) => yScale(yAccessor(d)));
+    .x((d) => xScale(xAccessor(d as any)))
+    .y((d) => yScale(yAccessor(d as any)));
 
   const Sun = ({
     width,
@@ -174,7 +170,7 @@ const Worm = ({
     y: number;
   }) => {
     const sunStyle = styleOptions.wormSunIcon;
-    const lowAlphaSunColor = tinycolor(sunStyle.dayColor.toRgbString());
+    const lowAlphaSunColor = tinycolor(sunStyle.dayColor);
     lowAlphaSunColor.setAlpha(0);
 
     return (
@@ -205,9 +201,16 @@ const Worm = ({
     <Box sx={{ p: 0, width: '100%', overflow: 'hidden', ...sx }}>
       <Stack sx={{ p: 4 }} direction="row" justifyContent="space-between">
         <Typography variant={'smallHeadline' as any}>Productivity</Typography>
-        <Typography variant={'body1'}>{format(lastTime, 'h a')}</Typography>
+
+        {styleOptions.currentTimeDisplay && (
+          <Typography variant={'body1'}>{format(lastTime, 'h a')}</Typography>
+        )}
       </Stack>
-      <div className="Chart__wrapper" ref={ref} style={{ height: '180px' }}>
+      <div
+        className="Chart__wrapper"
+        ref={ref as any}
+        style={{ height: '180px' }}
+      >
         <svg width={dms.width} height={dms.height}>
           <linearGradient
             id="wormGradient"
@@ -243,7 +246,7 @@ const Worm = ({
             )})`}
           >
             <path
-              d={lineGen(data)}
+              d={lineGen(data as any) as any}
               style={{
                 fill: 'none',
                 stroke: 'url(#wormGradient)',
@@ -258,15 +261,17 @@ const Worm = ({
               height={styleOptions.wormSunIcon.radius}
             ></Sun>
 
-            <g transform={`translate(${[0, dms.boundedHeight].join(',')})`}>
-              <WormAxis
-                domain={xScale.domain()}
-                range={xScale.range()}
-                data={data}
-                xAccessor={xAccessor}
-                yAccessor={yAccessor}
-              />
-            </g>
+            {styleOptions.timeAxisLabels && (
+              <g transform={`translate(${[0, dms.boundedHeight].join(',')})`}>
+                <WormAxis
+                  domain={xScale.domain() as any}
+                  range={xScale.range()}
+                  data={data}
+                  xAccessor={xAccessor as any}
+                  yAccessor={yAccessor as any}
+                />
+              </g>
+            )}
           </g>
         </svg>
       </div>

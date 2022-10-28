@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import Worm, { WormProps } from '../src/components/worm/worm';
+import Worm, { defaultChartDisplayParams, WormProps } from '../src/worm/worm';
 import Component from '../src/basics/component';
 import { generateFakeProductionData } from '../src/utils/fake_data';
 
@@ -56,7 +56,7 @@ Default.args = {
   rawData: generateFakeProductionData(7, 3000),
   loading: false,
   error: false,
-  nightThreshold_W: 1000,
+  styleOptions: defaultChartDisplayParams,
   max_W: 3000,
   sx: {},
 } as WormProps;
