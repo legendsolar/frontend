@@ -12,7 +12,7 @@ import {
   grassGreen,
   pencilYellow,
   eraserRed,
-} from 'static/colors';
+} from '../static/colors';
 
 // import 'theme_types';
 /**

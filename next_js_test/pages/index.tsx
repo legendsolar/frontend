@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
-import {MetricGauge} from '../../components/dist';
-// import {energy} from '@/components/src/static/units.js';
+import {MetricGauge, energy} from 'component-lib';
 
 export default function Home() {
     return (
