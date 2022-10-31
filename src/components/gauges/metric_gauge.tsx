@@ -108,7 +108,7 @@ const MetricGauge = ({
                     <Typography variant={'smallHeadline' as any}>
                         {unitOpts.title}
                     </Typography>
-                    <LivePill error={error ? error : 'Live'}></LivePill>
+                    <LivePill error={error}></LivePill>
                 </Stack>
                 <div
                     style={{

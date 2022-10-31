@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Chip} from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
-const LivePill = ({error}: {error: string}) => {
+const LivePill = ({error}: {error: string | undefined}) => {
     return (
         <Chip
             size="small"
