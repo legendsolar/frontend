@@ -26,16 +26,17 @@ import {siteCopy} from 'static/copy';
 import {MetricComponent} from 'utils/metric_component';
 import MapTerrain3D from 'components/map/map_terrain_3d';
 import TooltipMarker from 'components/map/tooltip_marker';
+
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
     address?: string;
     subtitle?: string;
-    facility: Facility | null;
+    facility: Facility | undefined;
     transfers: Array<Transfer>;
     documents: Array<Document>;
     dataStale: boolean;
-    generation: Array<GenerationDatum>;
+    generation: Array<GenerationDatum> | undefined;
 }
 
 const PortfolioContent = ({
@@ -56,8 +57,6 @@ const PortfolioContent = ({
     const nonNullFacility = facility as unknown as Facility;
 
     const {generationMetaData, location, economics, summary} = nonNullFacility;
-
-    console.log(transfers);
 
     return (
         <div>

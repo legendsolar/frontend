@@ -5,21 +5,43 @@ import {
     useAnimatedProductionData,
 } from 'utils/fake_data';
 import useFacilities from './use_facilities';
-import {subDays} from 'date-fns';
-
 import {useTransfer} from 'hooks/use_transfer';
 import {useUser} from './use_user';
 import {Document} from 'components/documents/types';
 import {useStorage} from './use_storage';
-
+import {differenceInSeconds, subDays} from 'date-fns';
 export interface usePortfolioReturnType {
     loading: boolean;
-    facilityData: Facility | null;
-    generationData: Array<GenerationDatum>;
+    facilityData: Facility | undefined;
+    generationData: Array<GenerationDatum> | undefined;
     transfers: Array<Transfer>;
     documents: Array<Document>;
     lastUpdatedDate: Date | null;
 }
+
+const sumOverGeneration = (
+    array: Array<GenerationDatum>,
+    start: Date,
+    end: Date,
+): number => {
+    return array
+        .filter((g) => {
+            const d = new Date(g.time);
+
+            return start < d && d < end;
+        })
+        .reduce((sum, g, i, array) => {
+            const deltaT_s =
+                i > 0
+                    ? differenceInSeconds(
+                          new Date(g.time),
+                          new Date(array[i - 1].time),
+                      )
+                    : 0;
+
+            return (g.wattage * deltaT_s) / (60 * 60) + sum;
+        }, 0);
+};
 
 export const usePortfolio = (): usePortfolioReturnType => {
     const [time, setTime] = useState<Date>(new Date());
@@ -45,14 +67,20 @@ export const usePortfolio = (): usePortfolioReturnType => {
 
     const {loading: documentsLoading, documents} = useUserDocuments();
 
-    const facilityData = facilities ? facilities[0] : null;
+    const facilityData = facilities ? facilities[0] : undefined;
 
-    const {data: generationData, loading: generationDataLoading} =
+    const {data: rawGenerationData, loading: generationDataLoading} =
         useGetFacilityDataByDate({
             facilityId: facilityData?.id,
             startDate: subDays(time, 7),
             endDate: time,
         });
+
+    const generationData = rawGenerationData
+        ? [...rawGenerationData].sort(
+              (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
+          )
+        : undefined;
 
     const lastUpdatedDate = generationData
         ? generationData.reduce(
@@ -70,9 +98,26 @@ export const usePortfolio = (): usePortfolioReturnType => {
         recentTransfersLoading ||
         (documentsLoading && !userFacilityLoading && !facilityData);
 
+    const calculatedDayKWh = generationData
+        ? sumOverGeneration(
+              generationData,
+              subDays(new Date(), 1),
+              new Date(),
+          ) / 1000
+        : 0;
+
     return {
         loading,
-        facilityData,
+        facilityData: facilityData
+            ? {
+                  ...facilityData,
+                  summary: {
+                      ...facilityData.summary,
+                      day_kWh: calculatedDayKWh,
+                      twentyFourHourGeneration_kWh: calculatedDayKWh,
+                  },
+              }
+            : undefined,
         generationData: generationData,
         lastUpdatedDate,
         documents: documents,

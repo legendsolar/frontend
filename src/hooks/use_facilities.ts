@@ -11,7 +11,7 @@ export interface useFacilitiesReturnType {
         startDate: Date;
         endDate: Date;
     }): {
-        data: Array<GenerationDatum>;
+        data: Array<GenerationDatum> | undefined;
         loading: boolean;
         error: ApolloError | undefined;
         refetch(): void;
@@ -42,7 +42,9 @@ const useFacilities = (): useFacilitiesReturnType => {
         );
 
         return {
-            data: data?.facilityGenerationByDate as Array<GenerationDatum>,
+            data: data
+                ? (data?.facilityGenerationByDate as Array<GenerationDatum>)
+                : undefined,
             loading,
             error,
             refetch,

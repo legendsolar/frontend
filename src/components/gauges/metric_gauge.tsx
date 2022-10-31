@@ -27,7 +27,7 @@ interface Props {
     circleRadius?: number;
     arcWidth?: number;
     gaugeAngleTravel?: number;
-    error: string;
+    error?: string;
 }
 
 const MetricGauge = ({
@@ -108,7 +108,7 @@ const MetricGauge = ({
                     <Typography variant={'smallHeadline' as any}>
                         {unitOpts.title}
                     </Typography>
-                    <LivePill error={error}></LivePill>
+                    <LivePill error={error ? error : 'Live'}></LivePill>
                 </Stack>
                 <div
                     style={{
