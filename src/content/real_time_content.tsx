@@ -1,10 +1,5 @@
 import Component from 'components/basics/component';
-import {
-    Facility,
-    GenerationDatum,
-    GenerationMetaData,
-    GenerationSummary,
-} from 'schema/schema_gen_types';
+import {Facility, GenerationDatum} from 'schema/schema_gen_types';
 import Worm from 'components/worm/worm';
 import PlaceholderWorm from 'components/worm/placeholder_worm';
 import {
@@ -32,7 +27,7 @@ interface RealTimeContent {
 }
 
 const RealTimeContent = ({
-    facility: {generationMetaData, summary, location},
+    facility: {generationMetaData, generationTotals, earningsTotals, location},
     generation,
     dataStale,
     message = '',
@@ -97,7 +92,7 @@ const RealTimeContent = ({
                         ></LiveWeather>
                         <EarningsCumulativeImpact
                             cumulativeData={multiplyObject(
-                                summaryToCumulativeImpact(summary),
+                                summaryToCumulativeImpact(earningsTotals),
                                 generationMetaData.dollar_per_kWh,
                             )}
                             live={true}
@@ -115,7 +110,7 @@ const RealTimeContent = ({
 
                         <GenerationCumulativeImpact
                             cumulativeData={multiplyObject(
-                                summaryToCumulativeImpact(summary),
+                                summaryToCumulativeImpact(generationTotals),
                                 1,
                             )}
                             live={true}
@@ -137,7 +132,7 @@ const RealTimeContent = ({
 
                         <CarbonCumulativeImpact
                             cumulativeData={multiplyObject(
-                                summaryToCumulativeImpact(summary),
+                                summaryToCumulativeImpact(generationTotals),
                                 generationMetaData.co2_per_kWh,
                             )}
                             live={true}

@@ -57,6 +57,10 @@ export const carbonEnglish: Unit = {
     title: 'Carbon Aversion',
     color: 'skyBlue',
     format: (u: number, includeUnit: boolean = true, width?: number) => {
+        if (u > 2000 && includeUnit) {
+            return `${numberFormatter(u / 2000, width, true)} tons`;
+        }
+
         if (includeUnit) {
             return `${numberFormatter(u, width, true)} LBS`;
         } else {

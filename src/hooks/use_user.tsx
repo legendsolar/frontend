@@ -166,17 +166,51 @@ export const useProvideUser = (): useUserReturnType => {
                     make
                     panel_count
                 }
-                summary {
+                generationTotals {
                     totalGeneration_kWh
-                    pastYearGeneration_kWh
-                    pastMonthGeneration_kWh
-                    twentyFourHourGeneration_kWh
-                    yearToDate_kWh
-                    monthToDate_kWh
-                    pastWeek_kWh
-                    day_kWh
-                    uptime_percentage
-                    performance_ratio
+                    pastYearGeneration_kWh {
+                        current
+                        best
+                        average
+                    }
+                    pastMonthGeneration_kWh {
+                        current
+                        best
+                        average
+                    }
+                    pastWeek_kWh {
+                        current
+                        best
+                        average
+                    }
+                    twentyFourHourGeneration_kWh {
+                        current
+                        best
+                        average
+                    }
+                }
+                earningsTotals {
+                    totalEarnings_Dollars
+                    pastYearEarnings_Dollars {
+                        current
+                        best
+                        average
+                    }
+                    pastMonthEarnings_Dollars {
+                        current
+                        best
+                        average
+                    }
+                    pastWeekEarnings_Dollars {
+                        current
+                        best
+                        average
+                    }
+                    twentyFourHourEarnings_Dollars {
+                        current
+                        best
+                        average
+                    }
                 }
                 economics {
                     ppaDuration

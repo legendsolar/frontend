@@ -4,13 +4,29 @@ import PropTypes from 'prop-types';
 import {useState} from 'react';
 import Component from 'components/basics/component';
 import {UnitOpts} from 'components/gauges/metric_gauge';
-import {defined, mapFunction} from 'utils/object_utils';
+import {defined, mapFunction, mapRecursive} from 'utils/object_utils';
 
 export interface CumulativeData {
-    day: number;
-    week: number;
-    month: number;
-    year: number;
+    day: {
+        average: number;
+        current: number;
+        best: number;
+    };
+    week: {
+        average: number;
+        current: number;
+        best: number;
+    };
+    month: {
+        average: number;
+        current: number;
+        best: number;
+    };
+    year: {
+        average: number;
+        current: number;
+        best: number;
+    };
 }
 
 interface Props {
@@ -21,10 +37,11 @@ interface Props {
 const CumulativeImpact = ({cumulativeData, unitOpts}: Props) => {
     const [historyState, setHistoryState] = useState('week');
 
-    const parsedCumulativeData = mapFunction<CumulativeData>(
-        cumulativeData,
-        (val) => (defined(val) ? val.toFixed(2) : '-'),
+    const parsedCumulativeData = mapRecursive<string>(cumulativeData, (val) =>
+        defined(val) ? unitOpts.unitFormatter(val, false) : '-',
     );
+
+    console.log({parsedCumulativeData});
 
     return (
         <Component shadow resize={true}>
@@ -49,7 +66,7 @@ const CumulativeImpact = ({cumulativeData, unitOpts}: Props) => {
                         </Typography>
 
                         <Typography variant="subtitle1" align="center">
-                            -
+                            {`${parsedCumulativeData[historyState].average}`}
                         </Typography>
                     </Stack>
                     <VertDivider></VertDivider>
@@ -61,7 +78,7 @@ const CumulativeImpact = ({cumulativeData, unitOpts}: Props) => {
                             }}
                             align="center"
                         >
-                            {`${parsedCumulativeData[historyState]}`}
+                            {`${parsedCumulativeData[historyState].current}`}
                         </Typography>
 
                         <Typography variant="body1" align="center">
@@ -79,7 +96,7 @@ const CumulativeImpact = ({cumulativeData, unitOpts}: Props) => {
                         </Typography>
 
                         <Typography variant="subtitle1" align="center">
-                            -
+                            {`${parsedCumulativeData[historyState].best}`}
                         </Typography>
                     </Stack>
                 </Stack>

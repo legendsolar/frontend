@@ -20,3 +20,17 @@ export const mapFunction = <T>(object: T, fn: (val: any) => any): T => {
         Object.entries(object).map(([key, value]) => [key, fn(value)]),
     ) as unknown as T;
 };
+
+export const mapRecursive = <T>(object: any, fn: (v: any) => T) => {
+    const arr = Object.entries(object).map(([k, v]) => {
+        if (typeof v === 'object') {
+            return [k, mapRecursive(v, fn)];
+        } else if (!k.startsWith('_')) {
+            return [k, fn(v)];
+        } else {
+            return [k, v];
+        }
+    });
+
+    return Object.fromEntries(arr);
+};

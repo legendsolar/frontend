@@ -111,10 +111,13 @@ export const usePortfolio = (): usePortfolioReturnType => {
         facilityData: facilityData
             ? {
                   ...facilityData,
-                  summary: {
-                      ...facilityData.summary,
-                      day_kWh: calculatedDayKWh,
-                      twentyFourHourGeneration_kWh: calculatedDayKWh,
+                  generationTotals: {
+                      ...facilityData.generationTotals,
+                      twentyFourHourGeneration_kWh: {
+                          ...facilityData.generationTotals
+                              .twentyFourHourGeneration_kWh,
+                          current: calculatedDayKWh,
+                      },
                   },
               }
             : undefined,

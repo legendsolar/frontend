@@ -123,6 +123,15 @@ export enum DwollaUserStatus {
     Verified = 'VERIFIED',
 }
 
+export type EarningsTotals = {
+    __typename?: 'EarningsTotals';
+    pastMonthEarnings_Dollars: TotalOverTime;
+    pastWeekEarnings_Dollars: TotalOverTime;
+    pastYearEarnings_Dollars: TotalOverTime;
+    totalEarnings_Dollars: Scalars['Float'];
+    twentyFourHourEarnings_Dollars: TotalOverTime;
+};
+
 export type EconomicsSummary = {
     __typename?: 'EconomicsSummary';
     cost_dollars: Scalars['Float'];
@@ -134,12 +143,13 @@ export type Facility = {
     __typename?: 'Facility';
     address: Address;
     created: Scalars['String'];
+    earningsTotals: EarningsTotals;
     economics: EconomicsSummary;
     generationMetaData: GenerationMetaData;
+    generationTotals: GenerationTotals;
     id: Scalars['ID'];
     location: Location;
     name: Scalars['String'];
-    summary: GenerationSummary;
 };
 
 export type GenerationDatum = {
@@ -152,32 +162,43 @@ export type GenerationMetaData = {
     __typename?: 'GenerationMetaData';
     co2_per_kWh: Scalars['Float'];
     dollar_per_kWh: Scalars['Float'];
+    generationBasedEarnings: Scalars['Boolean'];
     make?: Maybe<Scalars['String']>;
     max_kW: Scalars['Float'];
     panel_count: Scalars['Int'];
 };
 
-export type GenerationSummary = {
-    __typename?: 'GenerationSummary';
-    day_kWh: Scalars['Float'];
-    monthToDate_kWh: Scalars['Float'];
-    pastMonthGeneration_kWh: Scalars['Float'];
-    pastWeek_kWh: Scalars['Float'];
-    pastYearGeneration_kWh: Scalars['Float'];
-    performance_ratio: Scalars['Float'];
+export type GenerationTotals = {
+    __typename?: 'GenerationTotals';
+    pastMonthGeneration_kWh: TotalOverTime;
+    pastWeek_kWh: TotalOverTime;
+    pastYearGeneration_kWh: TotalOverTime;
     totalGeneration_kWh: Scalars['Float'];
-    twentyFourHourGeneration_kWh: Scalars['Float'];
-    uptime_percentage: Scalars['Float'];
-    yearToDate_kWh: Scalars['Float'];
+    twentyFourHourGeneration_kWh: TotalOverTime;
 };
 
 export type KbaSession = {
     __typename?: 'KbaSession';
-    todo?: Maybe<Scalars['String']>;
+    id: Scalars['ID'];
+    questions: Array<KbaSessionQuestion>;
+};
+
+export type KbaSessionAnswer = {
+    __typename?: 'KbaSessionAnswer';
+    id: Scalars['ID'];
+    text: Scalars['String'];
 };
 
 export type KbaSessionInput = {
-    todo?: InputMaybe<Scalars['String']>;
+    answerId: Scalars['ID'];
+    questionId: Scalars['ID'];
+};
+
+export type KbaSessionQuestion = {
+    __typename?: 'KbaSessionQuestion';
+    answers: Array<KbaSessionAnswer>;
+    id: Scalars['ID'];
+    text: Scalars['String'];
 };
 
 export type Location = {
@@ -193,8 +214,8 @@ export type Mutation = {
     createTransfer?: Maybe<Transfer>;
     createUserDwollaAccount: UpdateUserMutationResponse;
     removeAccount?: Maybe<BankAccount>;
-    submitIdVerificationDocument: SubmitIdVerifDocMutResp;
-    submitKbaSession: SubmitKbaSessionMutResp;
+    submitIdVerificationDocument: UpdateUserMutationResponse;
+    submitKbaSession: UpdateUserMutationResponse;
     updateUser: UpdateUserMutationResponse;
 };
 
@@ -223,7 +244,7 @@ export type MutationSubmitIdVerificationDocumentArgs = {
 };
 
 export type MutationSubmitKbaSessionArgs = {
-    input?: InputMaybe<KbaSessionInput>;
+    input?: InputMaybe<SubmitKbaSessionInput>;
 };
 
 export type MutationUpdateUserArgs = {
@@ -320,11 +341,23 @@ export type SubmitIdVerifDocMutResp = {
     success: Scalars['Boolean'];
 };
 
+export type SubmitKbaSessionInput = {
+    id: Scalars['ID'];
+    questionAnswers: Array<KbaSessionInput>;
+};
+
 export type SubmitKbaSessionMutResp = {
     __typename?: 'SubmitKbaSessionMutResp';
     code: Scalars['String'];
     message: Scalars['String'];
     success: Scalars['Boolean'];
+};
+
+export type TotalOverTime = {
+    __typename?: 'TotalOverTime';
+    average: Scalars['Float'];
+    best: Scalars['Float'];
+    current: Scalars['Float'];
 };
 
 export type Transfer = {

@@ -5,10 +5,27 @@ const TestCumulativeImpact = () => {
     return (
         <CumulativeImpact
             cumulativeData={{
-                day: 1,
-                week: 10,
-                month: 100,
-                year: 1000,
+                day: {
+                    current: 1,
+                    best: 1,
+                    average: 1,
+                },
+                month: {
+                    current: 1,
+                    best: 1,
+                    average: 1,
+                },
+
+                week: {
+                    current: 1,
+                    best: 1,
+                    average: 1,
+                },
+                year: {
+                    current: 1,
+                    best: 1,
+                    average: 1,
+                },
             }}
             unitOpts={unitOpts}
         ></CumulativeImpact>
