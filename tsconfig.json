@@ -1,23 +1,30 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "noFallthroughCasesInSwitch": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": false,
-        "noImplicitAny": false,
-    
-        "noEmit": true,
-        "jsx": "preserve",
-        "baseUrl": "./src"
+      "target": "es5",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "ESNext"
+      ],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noEmit": true,
+      "esModuleInterop": true,
+      "module": "ESNext",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "jsx": "react"
     },
-    "include": ["src", "custom.d.ts", "lib/src/schema", "lib/src/components/worm", "lib/src/utils/fake_data.ts"],
-}
+    "exclude": [
+      "node_modules"
+    ],
+    "include": [
+      "next-env.d.ts",
+      "**/*.ts",
+      "**/*.tsx",
+      "types.d.ts"
+    ]
+  }
