@@ -1,0 +1,9 @@
+export const legendaryGreen = '#345D34';
+export const whiteHaze = '#F4F5F5';
+export const whiteFog = '#EBEBEB';
+export const blackDusk = '#2D3436';
+export const blackDawn = '#636E72';
+export const skyBlue = '#477FB2';
+export const grassGreen = '#30A462';
+export const pencilYellow = '#EAB31E';
+export const eraserRed = '#B4615F';

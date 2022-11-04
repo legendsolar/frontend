@@ -10,6 +10,7 @@
     "typescript": "*",
     "@mui/material": "*",
     "@emotion/react": "*",
-    "@emotion/styled": "*"
+    "@emotion/styled": "*",
+    "@juggle/resize-observer": "*"
   }
 }
