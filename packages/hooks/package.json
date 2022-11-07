@@ -1,0 +1,13 @@
+{
+  "name": "@project/hooks",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "peerDependencies": {
+    "classnames": "*",
+    "react": "*",
+    "typescript": "*",
+    "@juggle/resize-observer": "*",
+    "airtable": "^0.11.5"
+  }
+}
