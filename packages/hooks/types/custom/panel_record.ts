@@ -1,4 +1,4 @@
-import { UnitEnum } from "../utils/units";
+import { UnitEnum } from "./units";
 
 export interface PanelRecord {
     panelCount: number;

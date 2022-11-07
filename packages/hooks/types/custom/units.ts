@@ -1,5 +1,5 @@
-import {numberToWords} from './number_utils';
-import {currencyFormatter, numberFormatter} from './number_formatter';
+import {numberToWords} from '../../utils/number_utils';
+import {currencyFormatter, numberFormatter} from '../../utils/number_formatter';
 
 export enum UnitEnum {
     DOLLARS = 'DOLLARS',
