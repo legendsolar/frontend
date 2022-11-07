@@ -1,15 +1,20 @@
-import { TestButton, Header } from '@project/components';
+import { Worm, WormProps, defaultChartDisplayParams} from '@project/components';
+import { Component, generateFakeProductionData} from '@project/components';
 
 export default function Index() {
+
+    
+
   return (
     <div>
-
-    <Header>
-      Header goes here
-    </Header>
-
-    <TestButton text={"hello"}
-    ></TestButton>
+        <Worm
+            rawData={generateFakeProductionData(7,3000)} 
+            loading={false}
+            error={false}
+            styleOptions={defaultChartDisplayParams}
+            max_W={3000}
+            sx= {{}}
+        ></Worm>
     </div>
   );
 }
