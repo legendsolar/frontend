@@ -3,7 +3,7 @@ import {Meta, Story} from '@storybook/react';
 import {
     BarChart,
     BarChartProps,
-    defaultChartDisplayParams,
+    defaultBarChartDisplayParams,
 } from '@project/components/charts';
 import {generateFakeProductionData} from '@project/components';
 
@@ -44,8 +44,8 @@ const Template: Story<BarChartProps> = (args) => <BarChart {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-    rawData: generateFakeProductionData(2, 3000),
+    rawData: generateFakeProductionData(7, 3000, 0),
+    options: defaultBarChartDisplayParams,
     loading: false,
     error: false,
-    options: defaultChartDisplayParams,
 } as BarChartProps;

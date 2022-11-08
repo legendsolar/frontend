@@ -10,6 +10,7 @@ export const yAccessor = (d: GenerationDatum) => d.wattage;
 export const xAccessor = (d: GenerationDatum) => parseDate(d.time);
 
 export const dateToNumber = (d: Date) => d.getTime();
+export const dStringToNumber = (d: string) => dateToNumber(parseDate(d));
 
 interface useLineChartDataProps {
     rawData: Array<GenerationDatum>;
@@ -83,6 +84,18 @@ const useLineChartData = ({
     return data;
 };
 
+interface useBarChartDataProps {
+    rawData: Array<GenerationDatum>;
+    dms: BoundedDimentions;
+    loading: boolean;
+    error: boolean;
+    pixelsPerUnit: number;
+    minUnitsDisplayed: number;
+    maxUnitsDisplayed: number;
+    subUnit(d: Date, u: number): Date;
+    interpolateData: boolean;
+}
+
 export const useBarChartData = ({
     rawData,
     dms,
@@ -92,7 +105,8 @@ export const useBarChartData = ({
     minUnitsDisplayed,
     maxUnitsDisplayed,
     subUnit,
-}: useLineChartDataProps) => {
+    interpolateData,
+}: useBarChartDataProps) => {
     const data = useMemo<Array<GenerationDatum>>(() => {
         if (loading || error) {
             return [];
@@ -141,7 +155,67 @@ export const useBarChartData = ({
 
         console.log({binnedData});
 
-        const averagedBinData = binnedData.map(
+        const interpolatedBinData = interpolateData
+            ? binnedData.map((arr, i: number) => {
+                  if (arr.length === 0) {
+                      const leftDataPoint = binnedData
+                          .slice(0, i)
+                          .reverse()
+                          .find((arr) => arr.length);
+                      const rightDataPoint = binnedData
+                          .slice(i)
+                          .find((arr) => arr.length);
+
+                      const time = new Date((arr.x0 + arr.x1) / 2);
+
+                      if (!leftDataPoint) {
+                          return [
+                              {
+                                  wattage: rightDataPoint[0].wattage,
+
+                                  time: new Date(
+                                      (arr.x0 + arr.x1) / 2,
+                                  ).toISOString(),
+                              },
+                          ];
+                      }
+
+                      if (!rightDataPoint) {
+                          return [
+                              {
+                                  wattage: leftDataPoint[0].wattage,
+
+                                  time: time.toISOString(),
+                              },
+                          ];
+                      }
+
+                      const interp = d3.interpolateNumber(
+                          leftDataPoint[0].wattage,
+                          rightDataPoint[0].wattage,
+                      );
+
+                      const deltaT =
+                          dStringToNumber(rightDataPoint[0].time) -
+                          dStringToNumber(leftDataPoint[0].time);
+
+                      return [
+                          {
+                              wattage: interp(
+                                  (time.getTime() -
+                                      dStringToNumber(leftDataPoint[0].time)) /
+                                      deltaT,
+                              ),
+                              time: time.toISOString(),
+                          },
+                      ];
+                  }
+
+                  return arr;
+              })
+            : binnedData;
+
+        const averagedBinData = interpolatedBinData.map(
             (arr: Array<GenerationDatum>, i: number): GenerationDatum => ({
                 time: thresholds[i].toISOString(),
                 wattage:
@@ -153,7 +227,7 @@ export const useBarChartData = ({
         return averagedBinData;
     }, [rawData, loading, error, dms.boundedWidth]);
 
-    const max = Math.max.apply(data);
+    const max = Math.max(...data.map(yAccessor));
 
     return {data, max};
 };
