@@ -102,6 +102,17 @@ export const PlusIcon = ({sx = {}}) => {
     return (
         <Box
             sx={{
+                position: "relative",
+                width: '25px',
+                height: '25px',
+            }}
+        >
+
+        <Box
+            sx={{
+                position: "absolute",
+                top: "0px",
+                left: "0px",
                 width: '25px',
                 height: '8px',
                 color: 'blackDawn',
@@ -109,6 +120,20 @@ export const PlusIcon = ({sx = {}}) => {
                 ...sx,
             }}
         />
+
+        <Box
+            sx={{
+                position: "absolute",
+                top: "0px",
+                left: "0px",
+                width: '8px',
+                height: '25px',
+                color: 'blackDawn',
+                backgroundColor: 'blackDawn.main',
+                ...sx,
+            }}
+        />
+        </Box>
     );
 };
 
