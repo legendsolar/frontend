@@ -27,24 +27,13 @@ import {
     panels as panelsUnit,
     Unit,
     UnitEnum,
-    PanelRecord
+    PanelRecord,
 } from '@project/hooks/types';
 
 import {Component} from '../basics/component';
 import {paletteOptions} from '../theme/theme';
-import {
-    CashIcon,
-    LeafIcon,
-    PowerIcon,
-    SunIcon,
-} from '../icons/emoji_icons';
-import {
-    MinusIcon,
-    PlusIcon,
-    RoundedBoxIcon,
-} from '../icons/icons';
-
-
+import {CashIcon, LeafIcon, PowerIcon, SunIcon} from '../icons/emoji_icons';
+import {MinusIcon, PlusIcon, RoundedBoxIcon} from '../icons/icons';
 
 ChartJS.register(
     CategoryScale,
@@ -54,29 +43,6 @@ ChartJS.register(
     Tooltip,
     Legend,
 );
-ChartJS.register({
-    /* Adjust axis labelling font size according to chart size */
-    id: 'responsiveXlabels',
-    afterDatasetDraw(chart, args, options) {
-        const {
-            ctx,
-            scales: {x, y},
-        } = chart;
-
-        ctx.textAlign = 'center';
-        ctx.fillStyle = paletteOptions.palette.white.main;
-        ctx.font = `bold 13px Be Vietnam Pro`;
-
-        chart.data.labels?.map((l, i) => {
-            ctx.fillText(
-                l as string,
-                x.getPixelForValue(i),
-                y.getPixelForValue(0) - 5,
-            );
-        });
-    },
-});
-
 
 interface CustomSunThumbProps extends React.HTMLAttributes<unknown> {}
 
@@ -99,6 +65,29 @@ export const ReturnsCalculator = ({
     panels,
     setPanels,
 }: ReturnsCalculatorProps) => {
+    ChartJS.register({
+        /* Adjust axis labelling font size according to chart size */
+        id: 'responsiveXlabels',
+        afterDatasetDraw(chart, args, options) {
+            const {
+                ctx,
+                scales: {x, y},
+            } = chart;
+
+            ctx.textAlign = 'center';
+            ctx.fillStyle = paletteOptions.palette.white.main;
+            ctx.font = `bold 13px Be Vietnam Pro`;
+
+            chart.data.labels?.map((l, i) => {
+                ctx.fillText(
+                    l as string,
+                    x.getPixelForValue(i),
+                    y.getPixelForValue(0) - 5,
+                );
+            });
+        },
+    });
+
     const theme = useTheme();
 
     const options = {

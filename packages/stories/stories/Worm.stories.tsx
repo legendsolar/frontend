@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import {Worm, defaultChartDisplayParams, WormProps } from '@project/components';
+import {Worm, defaultChartDisplayParams, WormProps } from '@project/components/charts';
 import { Component, generateFakeProductionData} from '@project/components';
 
 const generationFunctions = {

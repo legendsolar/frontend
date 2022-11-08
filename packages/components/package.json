@@ -3,7 +3,7 @@
   "name": "@project/components",
   "version": "1.0.0",
   "license": "SEE LICENSE IN ../../LICENSE",
-  "main": "src/index.ts",
+  "main": "index.ts",
   "peerDependencies": {
     "classnames": "*",
     "react": "*",

@@ -4,5 +4,4 @@ export * from './gauges/metric_gauge';
 export * from './static/units';
 export * from './theme/theme';
 export * from './utils/fake_data';
-export * from './worm/worm';
 export * from './calculator/returns_calculator'
