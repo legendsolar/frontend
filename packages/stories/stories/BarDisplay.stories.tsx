@@ -4,6 +4,7 @@ import {
     BarChart,
     BarChartProps,
     defaultBarChartDisplayParams,
+    TimeUnit,
 } from '@project/components/charts';
 import {generateFakeProductionData} from '@project/components';
 
@@ -48,4 +49,5 @@ Default.args = {
     options: defaultBarChartDisplayParams,
     loading: false,
     error: false,
+    unit: TimeUnit.HOUR,
 } as BarChartProps;

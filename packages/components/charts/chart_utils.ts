@@ -225,7 +225,7 @@ export const useBarChartData = ({
         );
 
         return averagedBinData;
-    }, [rawData, loading, error, dms.boundedWidth]);
+    }, [rawData, loading, error, dms.boundedWidth, subUnit]);
 
     const max = Math.max(...data.map(yAccessor));
 

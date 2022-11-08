@@ -2,8 +2,8 @@ import {Box} from '@mui/material';
 import * as d3 from 'd3';
 import {useChartDimensions} from '../hooks/use_chart_dimensions';
 import {useMemo} from 'react';
-import WormAxis from './worm_axis';
-import {format, subDays, subHours} from 'date-fns';
+import Axis from './axis';
+import {format, subDays, subHours, subMonths} from 'date-fns';
 import {useTheme} from '@mui/material';
 import {Stack} from '@mui/material';
 import {GenerationDatum} from '../schema/schema_gen_types';
@@ -21,8 +21,15 @@ import {
 } from 'chart.js';
 import {Bar} from 'react-chartjs-2';
 import {useThemeColor} from '../utils/use_color';
+import {color} from '@mui/system';
 
 var tinycolor = require('tinycolor2');
+
+export enum TimeUnit {
+    HOUR,
+    DAY,
+    MONTH,
+}
 
 export const defaultBarChartDisplayParams = {
     chartMarginSettings: {
@@ -31,13 +38,24 @@ export const defaultBarChartDisplayParams = {
         marginTop: 30,
         marginBottom: 60,
     },
-    barColor: 'pencilYellow',
-    interpolateData: true,
+
+    chartSettings: {
+        barSpacingPx: 5,
+        barWidthPx: 10,
+        stackedBarSpacingPx: 10,
+        barCornerPx: 5,
+        minDisplayBarPx: 10,
+    },
+    lowerBarColor: 'grassGreen',
+    upperBarColor: 'whiteHaze',
+    nightBarColor: 'blackDusk',
+    interpolateData: false,
     minWattageToDisplay: 10,
 };
 
 export interface BarChartProps {
     rawData: Array<GenerationDatum>;
+    unit: TimeUnit;
     options: typeof defaultBarChartDisplayParams;
 
     loading: boolean;
@@ -53,7 +71,13 @@ ChartJS.register(
     Legend,
 );
 
-export const BarChart = ({rawData, loading, error, options}: BarChartProps) => {
+export const BarChart = ({
+    rawData,
+    loading,
+    error,
+    options,
+    unit,
+}: BarChartProps) => {
     console.log({rawData});
 
     const chartSettings = options.chartMarginSettings;
@@ -70,7 +94,11 @@ export const BarChart = ({rawData, loading, error, options}: BarChartProps) => {
         pixelsPerUnit: 4,
         minUnitsDisplayed: 24,
         maxUnitsDisplayed: 24 * 3,
-        subUnit: subHours,
+        subUnit: {
+            [TimeUnit.HOUR]: subHours,
+            [TimeUnit.DAY]: subDays,
+            [TimeUnit.MONTH]: subMonths,
+        }[unit],
         interpolateData: options.interpolateData,
     });
 
@@ -86,7 +114,9 @@ export const BarChart = ({rawData, loading, error, options}: BarChartProps) => {
     console.log({topBar, max, gapData});
 
     const colors = {
-        bar: useThemeColor(options.barColor),
+        lowerBar: useThemeColor(options.lowerBarColor),
+        upperBar: useThemeColor(options.upperBarColor),
+        nightBar: useThemeColor(options.nightBarColor),
     };
 
     const borderRadius = 50;
@@ -97,73 +127,84 @@ export const BarChart = ({rawData, loading, error, options}: BarChartProps) => {
         bottomRight: borderRadius,
     };
 
+    const yScale = useMemo(
+        () => d3.scaleLinear().domain([0, max]).range([dms.boundedHeight, 0]),
+        [dms.boundedHeight, data],
+    );
+
+    const xScale = useMemo(
+        () =>
+            d3
+                .scaleTime()
+                .domain(d3.extent(data, xAccessor) as any)
+                .range([0, dms.boundedWidth]),
+        [dms.boundedWidth, data],
+    );
+
+    const renderBar = (d: GenerationDatum) => {
+        if (
+            Math.abs(dms.boundedHeight - yScale(yAccessor(d))) >
+            options.chartSettings.minDisplayBarPx
+        ) {
+            return (
+                <g>
+                    <rect
+                        width={options.chartSettings.barWidthPx}
+                        height={yScale(yAccessor(d))}
+                        rx={options.chartSettings.barCornerPx}
+                        x={xScale(xAccessor(d))}
+                        y={0}
+                        style={{fill: colors.upperBar}}
+                    ></rect>
+
+                    <rect
+                        width={options.chartSettings.barWidthPx}
+                        height={
+                            dms.boundedHeight -
+                            yScale(yAccessor(d)) -
+                            options.chartSettings.barSpacingPx
+                        }
+                        rx={5}
+                        x={xScale(xAccessor(d))}
+                        y={
+                            yScale(yAccessor(d)) +
+                            options.chartSettings.barSpacingPx
+                        }
+                        style={{fill: colors.lowerBar}}
+                    ></rect>
+                </g>
+            );
+        } else {
+            return (
+                <g>
+                    <rect
+                        width={options.chartSettings.barWidthPx}
+                        height={dms.boundedHeight}
+                        rx={options.chartSettings.barCornerPx}
+                        x={xScale(xAccessor(d))}
+                        y={0}
+                        style={{fill: colors.nightBar}}
+                    ></rect>
+                </g>
+            );
+        }
+    };
+
     return (
         <div ref={ref as any} style={{height: '400px'}}>
-            <Bar
-                options={{
-                    events: [],
-                    hover: {mode: undefined},
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false,
-                        },
-                    },
-                    scales: {
-                        y: {
-                            ticks: {
-                                display: false,
-                            },
-                            grid: {
-                                display: false,
-                                drawBorder: false,
-                            },
-                            stacked: true,
-                        },
-                        x: {
-                            ticks: {
-                                display: false,
-                            },
-                            grid: {
-                                display: false,
-                                drawBorder: false,
-                            },
-                            stacked: true,
-                        },
-                    },
-                }}
-                data={{
-                    labels,
-                    datasets: [
-                        {
-                            label: 'bottom',
-                            data: yData,
-                            borderWidth: 0,
-                            borderRadius: borderRadiusAllCorners,
-                            borderSkipped: false,
-                            backgroundColor: colors.bar,
-                        },
-                        {
-                            label: 'gap',
-                            data: gapData,
-                            borderWidth: 0,
-                            borderRadius: 0,
-                            borderSkipped: false,
-                            backgroundColor: 'rgba(1,1,1,0)',
-                        },
-                        {
-                            label: 'top',
-                            data: topBar,
-                            borderWidth: 5,
-                            borderRadius: borderRadiusAllCorners,
-                            borderSkipped: false,
-                            backgroundColor: '#EDEDED',
-                            borderColor: '#EDEDED',
-                        },
-                    ],
-                }}
-            ></Bar>
+            <svg width={dms.width} height={dms.height}>
+                {data.map(renderBar)}
+
+                <g transform={`translate(${[0, dms.boundedHeight].join(',')})`}>
+                    <Axis
+                        domain={xScale.domain() as any}
+                        range={xScale.range()}
+                        data={data}
+                        xAccessor={xAccessor as any}
+                        yAccessor={yAccessor as any}
+                    />
+                </g>
+            </svg>
         </div>
     );
 };
