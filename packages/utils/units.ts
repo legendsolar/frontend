@@ -1,8 +1,5 @@
-import {numberToWords} from '../../../utils/number_utils';
-import {
-    currencyFormatter,
-    numberFormatter,
-} from '../../../utils/number_formatter';
+import {numberToWords} from './number_utils';
+import {currencyFormatter, numberFormatter} from './number_formatter';
 
 export enum UnitEnum {
     DOLLARS = 'DOLLARS',
@@ -38,10 +35,10 @@ export const dollars: Unit = {
 };
 
 export const energy: Unit = {
-    unit: 'KWH',
+    unit: 'WH',
     enum: UnitEnum.ENERGY,
     unitSubHeading: '',
-    unitDescription: 'Kilowatts',
+    unitDescription: 'Wh',
     title: 'Generation',
     color: 'pencilYellow',
     format: (u: number, includeUnit: boolean = true, width?: number) => {
@@ -52,6 +49,22 @@ export const energy: Unit = {
         }
     },
 };
+
+export class UnitaryValue {
+    public value: number = 0;
+    public unitStr: string = '';
+
+    constructor(value: number, unitStr: string) {
+        this.value = value;
+        this.unitStr = unitStr;
+    }
+
+    public toString = (): string => {
+        return this.value + this.unitStr;
+    };
+}
+
+const test = new UnitaryValue(10, 'kWh');
 
 export const carbonEnglish: Unit = {
     unit: 'LBS',

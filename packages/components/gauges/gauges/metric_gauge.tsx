@@ -1,45 +1,53 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Stack from '@mui/material/Stack';
-import {Typography} from '@mui/material';
-import {LivePill} from '../pills/live_pill';
-import {useChartDimensions} from '../hooks/use_chart_dimensions';
-import {Component} from '../basics/component';
-import {Unit} from '@p/utils/units';
-import {useThemeColor} from '../utils/use_color';
+import {Typography, useTheme} from '@mui/material';
+import LivePill from 'components/pills/live_pill';
+import {useChartDimensions} from 'hooks/use_chart_dimensions';
+import Component from 'components/basics/component';
+import {Unit} from 'static/units';
 
-export interface MetricGaugeProps {
+export interface UnitOpts {
+    title: string;
+    unit: string;
+    unitDescription: string;
+    unitSubHeading?: string;
+    strokeColor: string;
+    unitFormatter(u: number, includeUnit?: boolean, width?: number): string;
+}
+
+interface Props {
     min: number;
     max: number;
     currentValue: number;
-    title: string;
-    unit: Unit;
-
+    message?: string;
+    unitOpts: Unit;
+    circleRadius?: number;
     arcWidth?: number;
     gaugeAngleTravel?: number;
     error: string;
-    message?: string;
 }
 
-export const MetricGauge = ({
+const MetricGauge = ({
     min,
     max,
     currentValue,
-    unit,
+    unitOpts,
     message = '',
     circleRadius = 150 - 45,
     arcWidth = 90,
     gaugeAngleTravel = 180,
+
     error,
-    title,
-}: MetricGaugeProps) => {
-    const {ref, dms} = useChartDimensions({
+}: Props) => {
+    const theme = useTheme();
+
+    const [ref, dms] = useChartDimensions({
         marginLeft: 0,
         marginRight: 0,
         marginTop: 0,
         marginBottom: 0,
     });
-
-    const color = useThemeColor(unit.color);
 
     const normalizedCurrentValue = error
         ? 0.5
@@ -68,12 +76,20 @@ export const MetricGauge = ({
     const strokeCurrentLength =
         normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
 
+    console.log({
+        height: dms.height,
+        width: dms.width,
+        currentCircleOuterRadius,
+        currentCircleInnerRadius,
+
+        radiusFromHeight,
+        radiusFromWidth,
+    });
+
     const getGaugeNumber = () => {
         if (currentCircleInnerRadius > 20) {
-            return error ? '--' : unit.format(currentValue, false, 3);
+            return error ? '--' : unitOpts.format(currentValue, false, 3);
         }
-
-        return '';
     };
 
     return (
@@ -86,7 +102,7 @@ export const MetricGauge = ({
                     sx={{mb: 3, width: '100%'}}
                 >
                     <Typography variant={'smallHeadline' as any}>
-                        {title}
+                        {unitOpts.title}
                     </Typography>
                     <LivePill error={error}></LivePill>
                 </Stack>
@@ -103,7 +119,7 @@ export const MetricGauge = ({
                     }}
                 >
                     <svg
-                        ref={ref as any}
+                        ref={ref}
                         style={{
                             width: '100%',
                             maxWidth: '300px',
@@ -128,7 +144,7 @@ export const MetricGauge = ({
                                     r={currentCircleRadius}
                                 />
                                 <circle
-                                    stroke={color}
+                                    stroke={theme.palette[unitOpts.color].main}
                                     r={currentCircleRadius}
                                     stroke-dasharray={`${strokeCurrentLength} ${strokeTotalLength}`}
                                 />
@@ -181,23 +197,23 @@ export const MetricGauge = ({
                     }}
                 >
                     <Typography variant={'subtitle3' as any}>
-                        {error ? `${unit.unit}-` : unit.format(min)}
+                        {error ? `${unitOpts.unit}-` : unitOpts.format(min)}
                     </Typography>
 
                     <Stack alignItems={'center'} justifyContent={'flex-start'}>
                         <Typography variant="subtitle1">
-                            {unit.unitDescription}
+                            {unitOpts.unitDescription}
                         </Typography>
 
-                        {unit.unitSubHeading && (
+                        {unitOpts.unitSubHeading && (
                             <Typography variant={'label' as any}>
-                                {unit.unitSubHeading}
+                                {unitOpts.unitSubHeading}
                             </Typography>
                         )}
                     </Stack>
 
                     <Typography variant={'subtitle3' as any}>
-                        {error ? `${unit.unit}-` : unit.format(max)}
+                        {error ? `${unitOpts.unit}-` : unitOpts.format(max)}
                     </Typography>
                 </Stack>
 
@@ -217,3 +233,33 @@ export const MetricGauge = ({
         </Component>
     );
 };
+
+MetricGauge.propTypes = {
+    min: PropTypes.number.isRequired,
+    max: PropTypes.number.isRequired,
+    currentValue: PropTypes.number.isRequired,
+    unitOpts: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        liveMessage: PropTypes.string.isRequired,
+        unit: PropTypes.string.isRequired,
+        unitDescription: PropTypes.string.isRequired,
+        strokeColor: PropTypes.string.isRequired,
+    }).isRequired,
+    // Optional
+    circleRadius: PropTypes.number,
+    arcWidth: PropTypes.number,
+    gaugeAngleTravel: PropTypes.number,
+    componentWidth: PropTypes.number,
+
+    error: PropTypes.bool,
+};
+
+MetricGauge.defaultProps = {
+    circleRadius: 90 + 45,
+    arcWidth: 90,
+    componentWidth: 360,
+    gaugeAngleTravel: 180,
+    error: false,
+};
+
+export default MetricGauge;

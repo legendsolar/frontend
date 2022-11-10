@@ -5,6 +5,7 @@
   "license": "SEE LICENSE IN ../../LICENSE",
   "main": "index.ts",
   "dependencies": {
+    "@p/utils": "*",
     "@juggle/resize-observer": "^3.4.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.13",
