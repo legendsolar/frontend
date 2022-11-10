@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "nextjs-typescript-yarn-workspaces",
+  "name": "frontend",
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",

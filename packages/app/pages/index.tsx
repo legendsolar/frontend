@@ -1,9 +1,15 @@
 import React, {useState} from 'react';
-import {LivePill, ReactFromModule} from '@project/components/pills';
+
+import {useTheme} from '@mui/material';
+import {Test} from '@project/components/basics';
 
 export default function Index() {
-    console.log(React === ReactFromModule);
-
     const [state, setState] = useState('test');
-    return <div>{state}</div>;
+    const theme = useTheme();
+    return (
+        <div>
+            {theme.palette.primary.main}
+            <Test></Test>
+        </div>
+    );
 }

@@ -3,4 +3,5 @@ node_modules
 .DS_Store
 packages/web-app/.next
 .next
+.log
 build-storybook.log
