@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": false,
+        "noImplicitAny": false,
+    
+        "noEmit": true,
+        "jsx": "preserve",
+        "baseUrl": "./src"
+    },
+    "include": ["src", "custom.d.ts", "lib/src/schema", "lib/src/components/worm", "lib/src/utils/fake_data.ts"],
+}
