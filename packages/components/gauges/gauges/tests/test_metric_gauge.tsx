@@ -1,7 +1,7 @@
 import MetricGauge from '../metric_gauge';
 import {unitOpts} from './defaults';
 
-const TestMetricGauge = () => {
+export const TestMetricGauge = () => {
     return (
         <MetricGauge
             min={0}
@@ -12,5 +12,3 @@ const TestMetricGauge = () => {
         ></MetricGauge>
     );
 };
-
-export default TestMetricGauge;

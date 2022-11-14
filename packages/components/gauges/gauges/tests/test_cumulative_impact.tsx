@@ -1,7 +1,7 @@
 import CumulativeImpact from '../../cumulative_impact';
 import {unitOpts} from './defaults';
 
-const TestCumulativeImpact = () => {
+export const TestCumulativeImpact = () => {
     return (
         <CumulativeImpact
             cumulativeData={{
@@ -14,5 +14,3 @@ const TestCumulativeImpact = () => {
         ></CumulativeImpact>
     );
 };
-
-export default TestCumulativeImpact;

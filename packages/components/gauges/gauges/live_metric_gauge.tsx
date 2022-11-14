@@ -1,4 +1,4 @@
-import MetricGauge from 'components/gauges/metric_gauge';
+import MetricGauge from '../gauges/metric_gauge';
 import React from 'react';
 import {
     carbonUnitOpts,
@@ -6,7 +6,7 @@ import {
     generationUnitOpts,
 } from './live_cumulative_impact';
 
-const CarbonGauge = ({max, currentValue_unit, message}) => {
+export const CarbonGauge = ({max, currentValue_unit, message}) => {
     return (
         <MetricGauge
             unitOpts={carbonUnitOpts}
@@ -18,7 +18,7 @@ const CarbonGauge = ({max, currentValue_unit, message}) => {
     );
 };
 
-const GenerationGauge = ({max, currentValue_unit, message}) => {
+export const GenerationGauge = ({max, currentValue_unit, message}) => {
     return (
         <MetricGauge
             unitOpts={generationUnitOpts}
@@ -30,7 +30,7 @@ const GenerationGauge = ({max, currentValue_unit, message}) => {
     );
 };
 
-const EarningsGauge = ({max, currentValue_unit, message}) => {
+export const EarningsGauge = ({max, currentValue_unit, message}) => {
     return (
         <MetricGauge
             unitOpts={earningsUnitOpts}

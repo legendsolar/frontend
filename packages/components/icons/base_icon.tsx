@@ -1,7 +1,7 @@
 import {Box} from '@mui/material';
 import {ImgHTMLAttributes} from 'react';
 
-const BaseIcon = ({sx = {}, src, alt = 'image'}) => {
+export const BaseIcon = ({sx = {}, src, alt = 'image'}) => {
     return (
         <Box
             src={src}
@@ -11,5 +11,3 @@ const BaseIcon = ({sx = {}, src, alt = 'image'}) => {
         ></Box>
     );
 };
-
-export default BaseIcon;

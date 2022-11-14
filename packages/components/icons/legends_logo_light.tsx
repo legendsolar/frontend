@@ -1,6 +1,6 @@
-import BaseLogo from 'components/icons/base_logo';
+import BaseLogo from '../icons/base_logo';
 
-const LegendsLogoLight = () => {
+export const LegendsLogoLight = () => {
     const solarColor = '#fcc531';
     const legendsColor = '#FFF';
     return (
@@ -10,5 +10,3 @@ const LegendsLogoLight = () => {
         ></BaseLogo>
     );
 };
-
-export default LegendsLogoLight;

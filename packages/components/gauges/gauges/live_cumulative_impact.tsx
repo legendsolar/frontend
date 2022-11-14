@@ -1,7 +1,7 @@
 import {ref} from 'firebase/database';
 import PropTypes from 'prop-types';
-import CumulativeImpact from 'components/gauges/cumulative_impact';
-import LoadingComponent from 'components/basics/loading_component';
+import CumulativeImpact from '../gauges/cumulative_impact';
+import LoadingComponent from '../basics/loading_component';
 import {useDatabase, useDatabaseObjectData} from 'reactfire';
 import {UnitOpts} from './metric_gauge';
 import {currencyFormatter, numberFormatter} from 'utils/number_formatter';
@@ -51,7 +51,7 @@ export const carbonUnitOpts: UnitOpts = {
     },
 };
 
-const EarningsCumulativeImpact = ({cumulativeData, live}) => {
+export const EarningsCumulativeImpact = ({cumulativeData, live}) => {
     return (
         <CumulativeImpact
             cumulativeData={cumulativeData}
@@ -60,7 +60,7 @@ const EarningsCumulativeImpact = ({cumulativeData, live}) => {
     );
 };
 
-const CarbonCumulativeImpact = ({cumulativeData, live}) => {
+export const CarbonCumulativeImpact = ({cumulativeData, live}) => {
     const unitOpts = {};
 
     return (
@@ -71,7 +71,7 @@ const CarbonCumulativeImpact = ({cumulativeData, live}) => {
     );
 };
 
-const GenerationCumulativeImpact = ({cumulativeData, live}) => {
+export const GenerationCumulativeImpact = ({cumulativeData, live}) => {
     return (
         <CumulativeImpact
             cumulativeData={cumulativeData}

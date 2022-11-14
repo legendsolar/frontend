@@ -5,7 +5,7 @@ import {GenerationDatum} from '../schema/schema_gen_types';
 
 import * as d3 from 'd3';
 
-const parseDate = (date: string) => new Date(date);
+export const parseDate = (date: string) => new Date(date);
 export const yAccessor = (d: GenerationDatum) => d.wattage;
 export const xAccessor = (d: GenerationDatum) => parseDate(d.time);
 
@@ -28,7 +28,7 @@ interface useLineChartDataProps {
  *
  * @returns filtered data
  */
-const useLineChartData = ({
+export const useLineChartData = ({
     rawData,
     dms,
     loading,

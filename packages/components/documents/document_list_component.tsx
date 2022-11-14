@@ -4,15 +4,13 @@ import {useStorage} from 'reactfire';
 import {ref, getDownloadURL} from 'firebase/storage';
 import {useTheme} from '@mui/material';
 import Divider from '../basics/divider';
-import {Document} from './types';
-
-export interface DocumentListComponentProps {
-    documents: Array<Document>;
-}
+import {Document} from '../documents/types';
 
 export const DocumentListComponent = ({
     documents,
-}: DocumentListComponentProps) => {
+}: {
+    documents: Array<Document>;
+}) => {
     const theme = useTheme();
 
     const colorName = (documentObject) => {

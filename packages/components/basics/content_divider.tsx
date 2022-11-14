@@ -6,7 +6,7 @@ interface ContentDividerProps {
     color?: string;
 }
 
-const ContentDivider = ({
+export const ContentDivider = ({
     sx = {},
     children = <></>,
     color = 'whiteFog',
@@ -42,4 +42,4 @@ const ContentDivider = ({
     );
 };
 
-export default ContentDivider;
+ContentDivider;

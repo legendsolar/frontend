@@ -1,6 +1,6 @@
 import Divider from './divider';
 
-const ComponentDivider = ({sx = {}}) => {
+export const ComponentDivider = ({sx = {}}) => {
     return (
         <Divider
             sx={{
@@ -11,5 +11,3 @@ const ComponentDivider = ({sx = {}}) => {
         ></Divider>
     );
 };
-
-export default ComponentDivider;

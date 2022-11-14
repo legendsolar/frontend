@@ -1,4 +1,4 @@
-const BaseLogo = ({
+export const BaseLogo = ({
     solarColor,
     legendsColor,
 }: {
@@ -45,5 +45,3 @@ const BaseLogo = ({
         </svg>
     );
 };
-
-export default BaseLogo;

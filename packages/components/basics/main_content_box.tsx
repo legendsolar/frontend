@@ -11,7 +11,7 @@ export const fromViewportPadding = () => {
     };
 };
 
-const MainContentBox = ({children, passedRef = null}) => (
+export const MainContentBox = ({children, passedRef = null}) => (
     <Box
         sx={{
             maxWidth: {
@@ -40,4 +40,3 @@ const MainContentBox = ({children, passedRef = null}) => (
         </div>
     </Box>
 );
-export default MainContentBox;

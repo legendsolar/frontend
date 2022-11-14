@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Stack from '@mui/material/Stack';
 import {Typography, useTheme} from '@mui/material';
-import LivePill from 'components/pills/live_pill';
+import LivePill from '../pills/live_pill';
 import {useChartDimensions} from 'hooks/use_chart_dimensions';
-import Component from 'components/basics/component';
+import Component from '../basics/component';
 import {Unit} from 'static/units';
 
 export interface UnitOpts {
@@ -28,7 +28,7 @@ interface Props {
     error: string;
 }
 
-const MetricGauge = ({
+export const MetricGauge = ({
     min,
     max,
     currentValue,
@@ -261,5 +261,3 @@ MetricGauge.defaultProps = {
     gaugeAngleTravel: 180,
     error: false,
 };
-
-export default MetricGauge;

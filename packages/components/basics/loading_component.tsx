@@ -1,10 +1,10 @@
-import { Box, CircularProgress } from "@mui/material";
+import {Box, CircularProgress} from '@mui/material';
 
-const LoadingComponent = () => {
+export const LoadingComponent = () => {
     return (
         <Box
             sx={{
-                display: "flex",
+                display: 'flex',
             }}
             justifyContent="center"
             alignItems="center"
@@ -13,5 +13,3 @@ const LoadingComponent = () => {
         </Box>
     );
 };
-
-export default LoadingComponent;

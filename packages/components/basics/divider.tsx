@@ -4,7 +4,7 @@ interface DividerProps {
     sx?: any;
 }
 
-const Divider = ({sx = {}}: DividerProps) => {
+export const Divider = ({sx = {}}: DividerProps) => {
     return (
         <div>
             <Box
@@ -19,5 +19,3 @@ const Divider = ({sx = {}}: DividerProps) => {
         </div>
     );
 };
-
-export default Divider;

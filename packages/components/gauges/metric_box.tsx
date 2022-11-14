@@ -2,7 +2,7 @@ import {Component} from '../basics';
 import {Stack, Typography} from '@mui/material';
 import {typographyOptions} from '../theme';
 
-const MetricBox = ({metric, title, icon}) => {
+export const MetricBox = ({metric, title, icon}) => {
     return (
         <Component
             standardWidth={false}
@@ -30,5 +30,3 @@ const MetricBox = ({metric, title, icon}) => {
         </Component>
     );
 };
-
-export default MetricBox;

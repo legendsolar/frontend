@@ -15,7 +15,7 @@ export interface AxisProps {
     timeUnit: TimeUnit;
 }
 
-const Axis = ({
+export const Axis = ({
     domain = [0, 100],
     range = [10, 290],
     data = [],
@@ -105,5 +105,3 @@ const Axis = ({
         </svg>
     );
 };
-
-export default Axis;

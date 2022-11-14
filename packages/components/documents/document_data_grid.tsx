@@ -12,7 +12,7 @@ interface DocumentDataGridProps {
     sx?: any;
 }
 
-const DocumentDataGrid = ({
+export const DocumentDataGrid = ({
     documents,
     loading,
     viewPortOverrideWidthPx = undefined,
@@ -85,5 +85,3 @@ const DocumentDataGrid = ({
         ></StyledDataGrid>
     );
 };
-
-export default DocumentDataGrid;
