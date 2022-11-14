@@ -1,7 +1,7 @@
-import TransferGrid from '../transfer_grid';
+import {TransferGrid} from '../transfer_grid';
 import {testDisplayTransfers} from 'static/placeholder_transfers';
 import {useState} from 'react';
-import {Transfer} from 'schema/schema_gen_types';
+import {Transfer} from '@p/schema';
 
 export const TestTransactionComponent = () => {
     return (

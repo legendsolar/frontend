@@ -1,11 +1,25 @@
-import {ROUTES} from 'routes/routes';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {NavBarProps} from '../utils/nav_bar';
-import {useAuth} from 'hooks/use_auth';
-import {useUser} from 'hooks/use_user';
+import {useAuth} from './use_auth';
+import {useUser} from './use_user';
 import {useAccount} from './use_accounts';
 import {useMemo} from 'react';
 import {useMediaQuery, useTheme} from '@mui/material';
+
+export enum ROUTES {
+    SIGN_IN = '/sign_in',
+    CREATE_ACCOUNT = '/create',
+    COMPLETE_ACCOUNT = '/complete-account',
+    TERMS_AND_CONDITIONS = '/terms-conditions',
+    PRIVACY_POLICY = '/privacy',
+    USER_HOME = '/rooftop',
+    DISCOVER = '/discover',
+    DOCUMENTS = '/documents',
+    TRANSACTIONS = '/transactions',
+    ACCOUNT = '/account',
+    WALLET = '/wallet',
+    PLAID_OATH_COMPLETE = '/oath-complete',
+    ACTION_LINK = '/action-link',
+}
 
 const useNavBar = () => {
     const navigate = useNavigate();
@@ -37,7 +51,7 @@ const useNavBar = () => {
 
     const walletBalance = wallet?.amount ? wallet.amount : '-';
 
-    const props: NavBarProps = {
+    const props = {
         loading: statusLoading || walletLoading,
         userIsAuthenticated: authenticated,
         userVerified: status?.verified || false,

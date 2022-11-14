@@ -2,14 +2,14 @@ import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from './use_auth';
 import {useLocation} from 'react-router-dom';
-import {authErrorHandler} from 'utils/auth_error_translator';
+import {authErrorHandler} from '@p/utils/auth_error_translator';
 import {
     throwInternalStateError,
     throwSystemError,
     throwValidationError,
 } from '@p/utils/errors';
 import {useUser} from './use_user';
-import {ROUTES} from 'routes/routes';
+import {ROUTES} from './use_nav_bar';
 import {boolean} from 'yup';
 import {RecaptchaVerifier} from 'firebase/auth';
 

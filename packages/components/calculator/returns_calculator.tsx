@@ -8,7 +8,7 @@ import {
     Legend,
 } from 'chart.js';
 import {Bar} from 'react-chartjs-2';
-import Slider, {SliderThumb} from '@mui/material/Slider';
+import {Slider}, {SliderThumb} from '@mui/material/Slider';
 import {
     Button,
     Stack,

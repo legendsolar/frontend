@@ -1,4 +1,4 @@
-import AccountListComponent from '../account_list_component';
+import {AccountListComponent} from '../account_list_component';
 import {accounts} from './defaults';
 
 export const TestAccountList = () => (

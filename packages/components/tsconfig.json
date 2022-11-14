@@ -24,5 +24,5 @@
     "include": [
       "**/*.ts",
       "**/*.tsx"
-    ]
+, "../hooks/transformers/transfer_transforms.ts", "../app_react/src/routes/logged_in_toolbar.tsx"    ]
   }

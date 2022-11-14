@@ -1,9 +1,9 @@
 import {Stack, Typography, Checkbox, Button, Link} from '@mui/material';
-import ScrollBottomToComplete from '../utils/scroller.js';
+import {ScrollBottomToComplete} from '../utils/scroller.js';
 import PrivacyPolicy from 'assets/legal/privacy.js';
 import TermsAndConditions from 'assets/legal/termsAndConditions.js';
 import scrollToPosition from 'utils/scroll_to_position';
-import LoadingComponent from '../basics/loading_component';
+import {LoadingComponent} from '../basics/loading_component';
 import {useUser} from 'hooks/use_user';
 import {useState} from 'react';
 

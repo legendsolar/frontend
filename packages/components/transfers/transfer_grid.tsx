@@ -1,6 +1,6 @@
 import {Grid, Typography, Paper, CircularProgress} from '@mui/material';
-import TransferComponent from '../transfers/transfer_component';
-import {DisplayTransfer} from './transfer_transforms';
+import {TransferComponent} from '../transfers/transfer_component';
+import {DisplayTransfer} from '@project/hooks/transformers/transfer_transforms';
 
 export const TransferGrid = ({
     transfers,

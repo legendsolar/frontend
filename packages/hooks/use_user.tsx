@@ -10,8 +10,8 @@ import {
     UserStatus,
     UpdateUserInput,
     UserDwollaAccountData,
-} from 'schema/schema_gen_types';
-import {removeNullObjectValues} from 'utils/object_utils';
+} from '@p/schema';
+import {removeNullObjectValues} from '@p/utils/object_utils';
 
 interface useUserReturnType {
     useGetUserStatus(skip?: boolean): {

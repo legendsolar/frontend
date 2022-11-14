@@ -1,5 +1,5 @@
 import {Typography} from '@mui/material';
-import CompleteStepComponent from '../complete_step_component';
+import {CompleteStepComponent} from '../complete_step_component';
 
 export default () => (
     <CompleteStepComponent

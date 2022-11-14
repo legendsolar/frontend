@@ -1,5 +1,5 @@
 import {Grid, Typography, Box, Stack, Button} from '@mui/material';
-import {EXTERNAL_LINKS} from 'webflow/webflowLinking';
+import {EXTERNAL_LINKS} from '@p/utils/webflow/webflowLinking';
 
 export const Footer = () => {
     return (

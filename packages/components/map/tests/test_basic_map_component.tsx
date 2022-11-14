@@ -1,4 +1,4 @@
-import BasicMap from '../basic_map_component';
+import {BasicMap} from '../basic_map_component';
 
 export default () => (
     <BasicMap

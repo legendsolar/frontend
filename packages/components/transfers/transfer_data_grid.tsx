@@ -1,7 +1,7 @@
 import {GridColumns} from '@mui/x-data-grid';
 import {Chip} from '@mui/material';
-import StyledDataGrid from '../data_grid/styled_data_grid';
-import {paletteOptions} from 'app_theme';
+import {StyledDataGrid} from '../data_grid/styled_data_grid';
+import {paletteOptions} from '../theme';
 
 var tinycolor = require('tinycolor2');
 interface TransferDataGridProps {

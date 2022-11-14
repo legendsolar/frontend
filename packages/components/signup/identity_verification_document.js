@@ -1,5 +1,5 @@
 import {Stack} from '@mui/material';
-import ImageUpload from '../signup/image_upload';
+import {ImageUpload} from '../signup/image_upload';
 
 export const IdentityVerificationDocument = ({onSubmit}) => {
     return (

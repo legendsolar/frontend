@@ -1,4 +1,4 @@
-import SignUpProcessBarComponent from '../sign_up_process_bar_component';
+import {SignUpProcessBarComponent} from '../sign_up_process_bar_component';
 import {Typography} from '@mui/material';
 
 export const TEST_PROCESS_ITEMS = [

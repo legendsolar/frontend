@@ -1,5 +1,4 @@
-import settings from 'app_settings';
-import useInterval from 'hooks/use_interval';
+import useInterval from '@project/hooks/use_interval';
 import {useRef, useState, useEffect, useCallback} from 'react';
 import Map from 'react-map-gl';
 
@@ -48,7 +47,7 @@ export const MapTerrain3D = ({
             maxPitch={85}
             ref={mapRef}
             style={{width, height}}
-            mapStyle={settings.mapBoxStyleUrl}
+            mapStyle={'mapbox://styles/lassorfeasley/cl83yjanv002z15mvq9wu36io'}
             dragPan={false}
             dragRotate={false}
             touchZoomRotate={false}

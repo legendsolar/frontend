@@ -1,4 +1,4 @@
-import CreateTransferComponent from '../create_transfer_component';
+import {CreateTransferComponent} from '../create_transfer_component';
 import {accounts} from './defaults';
 
 export const TestCreateTransfer = () => {

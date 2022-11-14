@@ -37,7 +37,6 @@ interface PortfolioContentProps {
     dataStale: boolean;
     generation: Array<GenerationDatum>;
 }
-
 const PortfolioContent = ({
     loading = false,
     title = '',
@@ -55,9 +54,13 @@ const PortfolioContent = ({
 
     const nonNullFacility = facility as unknown as Facility;
 
-    const {generationMetaData, location, economics, summary} = nonNullFacility;
-
-    console.log(transfers);
+    const {
+        generationMetaData,
+        location,
+        economics,
+        generationTotals,
+        earningsTotals,
+    } = nonNullFacility;
 
     return (
         <div>
@@ -131,8 +134,9 @@ const PortfolioContent = ({
                                             color={'legendaryGreen.main' as any}
                                         >
                                             {currencyFormatter(
-                                                summary.twentyFourHourGeneration_kWh *
-                                                    generationMetaData.dollar_per_kWh,
+                                                earningsTotals
+                                                    .twentyFourHourEarnings_Dollars
+                                                    .current,
                                             )}
                                         </Typography>
                                         <Typography
@@ -195,8 +199,7 @@ const PortfolioContent = ({
                                         metric={
                                             '$' +
                                             numberFormatter(
-                                                summary.totalGeneration_kWh *
-                                                    generationMetaData.dollar_per_kWh,
+                                                earningsTotals.totalEarnings_Dollars,
                                                 2,
                                             )
                                         }
@@ -208,7 +211,7 @@ const PortfolioContent = ({
                                 <Grid item lg={4} xs={4}>
                                     <MetricBox
                                         metric={numberFormatter(
-                                            summary.totalGeneration_kWh *
+                                            generationTotals.totalGeneration_kWh *
                                                 generationMetaData.co2_per_kWh,
                                             3,
                                         )}
@@ -220,7 +223,7 @@ const PortfolioContent = ({
                                 <Grid item lg={4} xs={4}>
                                     <MetricBox
                                         metric={numberFormatter(
-                                            summary.totalGeneration_kWh,
+                                            generationTotals.totalGeneration_kWh,
                                             3,
                                         )}
                                         icon={<PowerIcon />}

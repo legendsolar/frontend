@@ -19,5 +19,7 @@
         "jsx": "preserve",
         "baseUrl": "./src"
     },
-    "include": ["src", "custom.d.ts", "lib/src/schema", "lib/src/components/worm", "lib/src/utils/fake_data.ts"],
+    "include": ["src", "custom.d.ts", "lib/src/schema", "lib/src/components/worm", "lib/src/utils/fake_data.ts",
+    "../../node_modules/@project"
+],
 }

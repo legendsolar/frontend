@@ -19,13 +19,13 @@ import {multiplyObject} from '@p/utils/object_utils';
 
 interface RealTimeContent {
     facility: Facility;
-    generation: Array<GenerationDatum>;
+    generation: Array<GenerationDatum> | undefined;
     dataStale: boolean;
     message?: string;
 }
 
 const RealTimeContent = ({
-    facility: {generationMetaData, summary, location},
+    facility: {generationMetaData, generationTotals, earningsTotals, location},
     generation,
     dataStale,
     message = '',
@@ -68,16 +68,18 @@ const RealTimeContent = ({
                 overflow: 'hidden',
             }}
         >
-            <Worm
-                rawData={generation}
-                loading={false}
-                error={false}
-                nightThreshold_W={(generationMetaData.max_kW * 1000) / 3}
-                max_W={generationMetaData.max_kW * 1000}
-                sx={{
-                    backgroundColor: 'whiteFog.main',
-                }}
-            ></Worm>
+            {generation && (
+                <Worm
+                    rawData={generation}
+                    loading={false}
+                    error={false}
+                    nightThreshold_W={(generationMetaData.max_kW * 1000) / 3}
+                    max_W={generationMetaData.max_kW * 1000}
+                    sx={{
+                        backgroundColor: 'whiteFog.main',
+                    }}
+                ></Worm>
+            )}
 
             {/* <Grid container rowSpacing={4} sx={{pl: {md: 4, xs: 0}, pb: 4}}>
                 <Grid item xs={12} lg={6}>
@@ -88,7 +90,7 @@ const RealTimeContent = ({
                         ></LiveWeather>
                         <EarningsCumulativeImpact
                             cumulativeData={multiplyObject(
-                                summaryToCumulativeImpact(summary),
+                                summaryToCumulativeImpact(earningsTotals),
                                 generationMetaData.dollar_per_kWh,
                             )}
                             live={true}
@@ -106,7 +108,7 @@ const RealTimeContent = ({
 
                         <GenerationCumulativeImpact
                             cumulativeData={multiplyObject(
-                                summaryToCumulativeImpact(summary),
+                                summaryToCumulativeImpact(generationTotals),
                                 1,
                             )}
                             live={true}
@@ -128,7 +130,7 @@ const RealTimeContent = ({
 
                         <CarbonCumulativeImpact
                             cumulativeData={multiplyObject(
-                                summaryToCumulativeImpact(summary),
+                                summaryToCumulativeImpact(generationTotals),
                                 generationMetaData.co2_per_kWh,
                             )}
                             live={true}

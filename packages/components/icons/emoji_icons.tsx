@@ -1,4 +1,4 @@
-import BaseIcon from '../icons/base_icon';
+import {BaseIcon} from '../icons/base_icon';
 import BankAccountIconPng from '../assets/icons/bank_account_icon.png';
 import CalendarIconPng from '../assets/icons/calendar_icon.png';
 import CashIconPng from '../assets/icons/cash_icon.png';

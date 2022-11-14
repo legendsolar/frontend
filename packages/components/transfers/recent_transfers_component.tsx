@@ -1,8 +1,8 @@
-import Component from '../basics/component';
+import {Component} from '../basics/component';
 import {Typography, Box} from '@mui/material';
 import {TransferGrid} from './transfer_grid';
 import {loadingOrEmptyTransfers} from 'static/placeholder_transfers';
-import {DisplayTransfer} from './transfer_transforms';
+import {DisplayTransfer} from '@project/hooks/transformers/transfer_transforms';
 
 interface Props {
     transfers: Array<DisplayTransfer>;

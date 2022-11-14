@@ -1,4 +1,4 @@
-import IdentityVerificationDocument from '../identity_verification_document';
+import {IdentityVerificationDocument} from '../identity_verification_document';
 
 export const TestIdentityVerificationDocument = () => {
     return (

@@ -1,5 +1,5 @@
 import {format} from 'date-fns';
-import StyledDataGrid from '../styled_data_grid';
+import {StyledDataGrid} from '../styled_data_grid';
 
 export default () => {
     const count = 20;

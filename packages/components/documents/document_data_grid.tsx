@@ -1,7 +1,7 @@
 import {GridColumns} from '@mui/x-data-grid';
 import {Chip} from '@mui/material';
 
-import StyledDataGrid from '../data_grid/styled_data_grid';
+import {StyledDataGrid} from '../data_grid/styled_data_grid';
 import {format} from 'date-fns';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 

@@ -1,7 +1,7 @@
 import {Paper, List, ListItemButton, Typography} from '@mui/material/';
 import scrollToEl from '@p/utils/scroll_to_el';
-import SideBar from './sidebar_component';
-import Divider from '../basics/divider';
+import {SideBar} from './sidebar_component';
+import {Divider} from '../basics/divider';
 
 export const ScrollToSidebar = ({
     header,

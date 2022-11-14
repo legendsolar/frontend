@@ -12,7 +12,7 @@ import {BasicGlobe} from '@project/components/map/basic_globe_component';
 import {Component} from '@project/components/basics/component';
 import {useState} from 'react';
 import {Marker} from '@project/components/map/marker';
-import {ProspectiveAsset} from '@project/components/discover/types';
+import {ProspectiveAsset} from '@project/components/discovery/types';
 import {currencyFormatter, numberFormatter} from '@p/utils/number_formatter';
 import SideBarView from '../views/side_bar_view';
 import {

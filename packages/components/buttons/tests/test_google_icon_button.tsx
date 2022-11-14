@@ -1,5 +1,5 @@
 import {Stack} from '@mui/material';
-import IconButton from '../icon_button';
+import {IconButton} from '../icon_button';
 import {GoogleIcon} from '../icons/icons';
 
 export const TestGoogleIconButton = () => {

@@ -3,7 +3,7 @@
 import {useMemo} from 'react';
 import * as d3 from 'd3';
 import {isToday, format} from 'date-fns';
-import {GenerationDatum} from 'schema/schema_gen_types';
+import {GenerationDatum} from '@p/schema';
 import {TimeUnit} from './bar_chart';
 
 export interface AxisProps {

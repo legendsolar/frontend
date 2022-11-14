@@ -11,19 +11,18 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import {useState, useReducer} from 'react';
-import ErrorComponent from '../errors/error_component';
+import {ErrorComponent} from '../errors/error_component';
 
-import {validateTransferAmount} from 'validation/transaction_validation';
-import TransferComponent from '../transfers/transfer_component';
-import MultiSelect from '../inputs/multiselect';
+import {validateTransferAmount} from '@p/utils/validation/transaction_validation';
+import {TransferComponent} from './transfer_component';
+import {MultiSelect} from '../inputs/multiselect';
 import {LoadingText} from '../utils/loading_text';
-import {
-    Account,
-    CreateTransferInput,
-    TransferType,
-} from 'schema/schema_gen_types';
+import {Account, CreateTransferInput, TransferType} from '@p/schema';
 import {currencyFormatter} from 'utils/number_formatter';
-import {createdDate, DisplayTransfer} from './transfer_transforms';
+import {
+    createdDate,
+    DisplayTransfer,
+} from '@project/hooks/transformers/transfer_transforms';
 
 interface CreateTransferComponentProps {
     accounts: Array<Account>;

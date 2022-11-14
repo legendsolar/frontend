@@ -4,8 +4,8 @@ import {typographyOptions} from 'app_theme';
 
 import {WalletIcon, PanelIcon} from '../icons/icons';
 import {BankIcon} from '../icons/emoji_icons';
-import {Transfer} from 'schema/schema_gen_types';
-import {DisplayTransfer} from './transfer_transforms';
+import {Transfer} from '@p/schema';
+import {DisplayTransfer} from '@project/hooks/transformers/transfer_transforms';
 
 export const accountToIcon = (account) => {
     switch (account.type) {

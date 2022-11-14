@@ -1,7 +1,7 @@
 import {Typography, Stack, Box, Button} from '@mui/material';
-import Component from '../basics/component';
-import NeraPNG from 'assets/icons/nera.png';
-import {EXTERNAL_LINKS} from 'webflow/webflowLinking';
+import {Component} from '../basics/component';
+import NeraPNG from '../assets/icons/nera.png';
+import {EXTERNAL_LINKS} from '@p/utils/webflow/webflowLinking';
 import {CalendarIcon, EnvelopeIcon} from '../icons/emoji_icons';
 interface InvestmentSupportComponentProps {
     title: string;

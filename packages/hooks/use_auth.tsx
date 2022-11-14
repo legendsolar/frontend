@@ -21,8 +21,7 @@ import {
 } from 'firebase/auth';
 
 import {GoogleAuthProvider} from 'firebase/auth';
-import settings from 'app_settings';
-import {authErrorHandler} from 'utils/auth_error_translator';
+import {authErrorHandler} from '@p/utils/auth_error_translator';
 import {
     ErrorTypes,
     throwAuthenticationError,

@@ -1,5 +1,5 @@
 import {Typography, Stack, Button, CircularProgress} from '@mui/material';
-import MultiSelect from '../inputs/multiselect';
+import {MultiSelect} from '../inputs/multiselect';
 import {LoadingText} from '../utils/loading_text';
 import {useEffect, useState} from 'react';
 

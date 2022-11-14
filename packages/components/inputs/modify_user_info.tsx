@@ -10,7 +10,7 @@ import {
 
 import {TextField} from '../inputs/text_field';
 
-import {states} from 'utils/static_lists';
+import {states} from '../utils/static_lists';
 import {
     validateCity,
     validateFirstName,

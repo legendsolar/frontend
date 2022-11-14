@@ -1,4 +1,4 @@
-import {GenerationSummary} from 'schema/schema_gen_types';
+import {GenerationSummary} from '@p/schema';
 import {CumulativeData} from './cumulative_impact';
 
 export const summaryToCumulativeImpact = (

@@ -17,8 +17,8 @@ import {
     StorageReference,
     FullMetadata,
 } from 'firebase/storage';
-import {useAuth} from 'hooks/use_auth';
-import {Document} from '../documents/types';
+import {useAuth} from './use_auth';
+import {Document} from '@project/components/documents/types';
 import {boolean} from 'yup';
 
 const storageContext = createContext<useStorageReturnType>(

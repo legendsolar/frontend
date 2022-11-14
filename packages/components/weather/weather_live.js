@@ -1,4 +1,4 @@
-import Weather from '../weather/weather';
+import {Weather} from '../weather/weather';
 import {useState, useEffect} from 'react';
 
 const openWeatherApiKey = '8891a27f5e9762cd6d64fd19264db5d6';

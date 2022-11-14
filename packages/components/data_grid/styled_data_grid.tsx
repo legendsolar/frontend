@@ -3,7 +3,7 @@ import {Box} from '@mui/material';
 import {useState} from 'react';
 import {fromViewportPadding} from '../utils/main_content_box';
 
-interface DataGridProps {
+export interface StyledDataGridProps {
     columns: GridColumns;
     rows: Array<any>;
     loading: boolean;
@@ -13,7 +13,7 @@ interface DataGridProps {
     sx?: any;
 }
 
-const StyledDataGrid = ({
+export const StyledDataGrid = ({
     columns,
     rows,
     loading,
@@ -98,5 +98,3 @@ const StyledDataGrid = ({
         />
     );
 };
-
-export default StyledDataGrid;

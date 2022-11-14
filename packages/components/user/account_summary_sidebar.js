@@ -2,7 +2,7 @@ import React from 'react';
 import {useTheme} from '@mui/material';
 import {Paper, Stack, Divider, Box} from '@mui/material';
 import {Typography} from '@mui/material';
-import Component from '../basics/component';
+import {Component} from '../basics/component';
 import PropTypes from 'prop-types';
 
 export const AccountSummarySidebar = ({

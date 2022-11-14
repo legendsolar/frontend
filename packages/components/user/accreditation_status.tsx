@@ -1,6 +1,6 @@
 import {Button, Stack, Typography} from '@mui/material';
 import {AccreditationOption} from 'content/verify_accreditation_content';
-import ComponentDivider from '../basics/component_divider';
+import {ComponentDivider} from '../basics/component_divider';
 
 export const AccreditationStatus = ({
     options,

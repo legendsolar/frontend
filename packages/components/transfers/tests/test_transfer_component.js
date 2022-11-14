@@ -1,4 +1,4 @@
-import TransferComponent from '../transfer_component';
+import {TransferComponent} from '../transfer_component';
 import {transferPageTransfers} from 'static/placeholder_transfers';
 
 export const TestTransactionComponent = () => (

@@ -1,10 +1,10 @@
 import {Typography, Box, Stack, Button, Link} from '@mui/material';
 import {EnvelopeIcon} from '../icons/emoji_icons';
 import {GoogleIcon} from '../icons/icons';
-import IconButton from '../buttons/icon_button';
-import ContentDivider from '../basics/content_divider';
+import {IconButton} from '../buttons/icon_button';
+import {ContentDivider} from '../basics/content_divider';
 import PropTypes from 'prop-types';
-import Divider from '../basics/divider';
+import {Divider} from '../basics/divider';
 
 export const SignUpOptionComponent = ({
     onSignUpWithGoogle,

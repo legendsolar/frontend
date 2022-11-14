@@ -1,4 +1,4 @@
-import {DisplayTransfer} from '../transfers/transfer_transforms';
+import {DisplayTransfer} from '@project/components/transfers/types';
 import {AccountType, Transfer, TransferStatus, TransferType} from '@p/schema';
 
 export const transferPageTransfers: Array<any> = [

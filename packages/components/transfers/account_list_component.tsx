@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import ComponentDivider from '../basics/component_divider';
+import {ComponentDivider} from '../basics/component_divider';
 import {
     Account,
     BankAccount,
     DwollaAccountStatus,
     PlaidAccountStatus,
-} from 'schema/schema_gen_types';
+} from '@p/schema';
 
 const accountNumberString = '•••• •••• •••• ';
 

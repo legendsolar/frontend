@@ -1,4 +1,4 @@
-import SignUpOptionComponent from '../sign_up_option_component';
+import {SignUpOptionComponent} from '../sign_up_option_component';
 
 export const TestSignUpOptionComponent = () => {
     return (

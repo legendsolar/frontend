@@ -4,7 +4,7 @@ import {
     throwSystemError,
     throwValidationError,
     ErrorTypes,
-} from '../app_react/utils/errors';
+} from './errors';
 
 /**
  * Attempts to transform Firebase related error

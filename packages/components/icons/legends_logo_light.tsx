@@ -1,4 +1,4 @@
-import BaseLogo from '../icons/base_logo';
+import {BaseLogo} from '../icons/base_logo';
 
 export const LegendsLogoLight = () => {
     const solarColor = '#fcc531';

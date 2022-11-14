@@ -1,15 +1,11 @@
 import {useState} from 'react';
-import {Facility, GenerationDatum, Transfer} from 'schema/schema_gen_types';
-import {
-    generateFakeProductionData,
-    useAnimatedProductionData,
-} from 'utils/fake_data';
+import {Facility, GenerationDatum, Transfer} from '@p/schema';
 import useFacilities from './use_facilities';
 import {subDays} from 'date-fns';
 
-import {useTransfer} from 'hooks/use_transfer';
+import {useTransfer} from './use_transfer';
 import {useUser} from './use_user';
-import {Document} from '../documents/types';
+import {Document} from '@project/components/documents/types';
 import {useStorage} from './use_storage';
 
 export interface usePortfolioReturnType {

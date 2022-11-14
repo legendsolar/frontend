@@ -1,4 +1,4 @@
-import IdentityVerificationKBA from '../identity_verification_kba';
+import {IdentityVerificationKBA} from '../identity_verification_kba';
 
 export const TestIdentityVerificationKBA = () => {
     return (

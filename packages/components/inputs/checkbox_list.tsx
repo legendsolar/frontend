@@ -14,7 +14,7 @@ interface CheckboxListProps<T extends CheckboxListItem> {
     disabled: boolean;
 }
 
-const CheckboxList = <T extends CheckboxListItem>({
+export const CheckboxList = <T extends CheckboxListItem>({
     items,
     onInputChange,
     disabled,

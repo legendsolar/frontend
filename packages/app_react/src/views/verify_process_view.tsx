@@ -1,8 +1,9 @@
 import {Container, Grid, Box, Stack, Typography} from '@mui/material';
 import {BackButton} from '@project/components/buttons/back_button';
-import SignUpProcessBarComponent, {
+import {
     SignUpProcessItem,
-} from '../signup/sign_up_process_bar_component';
+    SignUpProcessBarComponent,
+} from '@project/components/signup/sign_up_process_bar_component';
 import DualPaneView from './dual_pane_view';
 
 interface VerifyProcessViewProps {

@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
-import {useAuth} from 'hooks/use_auth';
+import {useAuth} from '@project/hooks/use_auth';
 import {RecaptchaVerifier as FirebaseRecaptchaVerifier} from 'firebase/auth';
 
 /**

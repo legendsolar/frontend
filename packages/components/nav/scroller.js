@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Box, Button, Typography, Stack} from '@mui/material';
 
-const Scroller = ({onComplete, children, sx}) => {
+export const Scroller = ({onComplete, children, sx}) => {
     const [completeScroll, setCompleteScroll] = useState(false);
 
     const onScroll = (event) => {
@@ -30,5 +30,3 @@ const Scroller = ({onComplete, children, sx}) => {
         </Box>
     );
 };
-
-export default Scroller;

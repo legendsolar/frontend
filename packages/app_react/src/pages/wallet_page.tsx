@@ -22,7 +22,7 @@ import {
     transformPlaidVerificationStatus,
 } from '../transformers/plaid_api_transformers';
 import {RecentTransfersComponent} from '@project/components/transfers/recent_transfers_component';
-import {transferTransformer} from '@project/components/transfers/transfer_transforms';
+import {transferTransformer} from '@project/hooks/transformers/transfer_transforms';
 import {usePlaid} from '@project/hooks/use_plaid';
 
 const WalletPage = () => {

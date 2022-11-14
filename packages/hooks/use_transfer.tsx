@@ -4,14 +4,14 @@ import {
     deconstructQueryCacheKey,
 } from './query_cache_utils';
 import {format} from 'date-fns';
-import {transferTransformer} from '../transfers/transfer_transforms';
+import {transferTransformer} from './transformers/transfer_transforms';
 import {useQuery, gql, useMutation, ApolloError} from '@apollo/client';
 import {
     CreateTransferInput,
     Transfer,
     TransferStatus,
     TransferType,
-} from 'schema/schema_gen_types';
+} from '@p/schema';
 
 interface useTransferReturnType {
     useTransfersByType(

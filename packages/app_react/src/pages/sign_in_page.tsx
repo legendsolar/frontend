@@ -10,8 +10,6 @@ import {Component} from '@project/components/basics/component';
 import {States} from '@project/hooks/use_sign_in';
 import {Typography} from '@mui/material';
 
-import {EXTERNAL_LINKS, redirectToHomePage} from 'webflow/webflowLinking';
-
 interface SignInPageProps extends useSignInReturnType {}
 
 const SignInPage = ({

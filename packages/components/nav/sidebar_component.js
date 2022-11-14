@@ -1,4 +1,4 @@
-import Component from '../basics/component';
+import {Component} from '../basics/component';
 
 export const SideBar = ({children, sx = {}}) => {
     return (

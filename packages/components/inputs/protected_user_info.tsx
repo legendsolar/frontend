@@ -11,7 +11,7 @@ import {
 import {TextField} from '../inputs/text_field';
 
 import {useEffect} from 'react';
-import {months} from 'utils/static_lists';
+import {months} from '../utils/static_lists';
 import {
     validateMonth,
     validateDay,

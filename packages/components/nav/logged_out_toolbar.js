@@ -1,6 +1,6 @@
 import {Stack, Button, Typography, useTheme} from '@mui/material';
 
-const LoggedOutToolbar = ({}) => {
+export const LoggedOutToolbar = ({}) => {
     const navigateTo = (url) => {};
 
     const theme = useTheme();
@@ -60,5 +60,3 @@ const LoggedOutToolbar = ({}) => {
         </Stack>
     );
 };
-
-export default LoggedOutToolbar;
