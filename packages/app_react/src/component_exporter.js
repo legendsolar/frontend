@@ -1,5 +1,5 @@
 import {ThemeProvider} from '@mui/material/styles';
-import {appTheme} from 'app_theme';
+import {appTheme} from '@project/components/theme';
 import {lazy, Suspense} from 'react';
 
 const ComponentExporter = () => {

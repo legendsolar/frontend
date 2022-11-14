@@ -1,4 +1,3 @@
-import {whiteHaze} from 'static/colors';
 import {LegendsLogoDark} from '@project/components/icons/legends_logo_dark';
 
 const UnexpectedErrorPage = () => {
@@ -10,7 +9,7 @@ const UnexpectedErrorPage = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: whiteHaze,
+                backgroundColor: '#FFF',
             }}
         >
             <div

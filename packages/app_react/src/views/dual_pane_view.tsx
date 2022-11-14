@@ -1,9 +1,9 @@
 import {Container, Grid, Box, Stack} from '@mui/material';
-import DefaultView from 'views/default_view';
+import DefaultView from '../views/default_view';
 import {ErrorBoundary} from '@sentry/react';
 import {DefaultErrorBoundary} from '@project/components/errors/default_error_boundary';
-import LegendsTypemarkSVG from 'assets/logos/typemark_dark.svg';
-import {whiteHaze} from 'static/colors';
+import LegendsTypemarkSVG from '@project/components/assets/logos/typemark_dark.svg';
+import {whiteHaze} from '../static/colors';
 
 interface DualPaneViewProps {
     leftPane?: JSX.Element;
@@ -50,7 +50,7 @@ const DualPaneView = ({
             <Box
                 sx={{
                     position: {
-                        xs: 'static',
+                        xs: '../static',
                         lg: 'absolute',
                     },
                     top: '40px',

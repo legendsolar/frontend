@@ -1,4 +1,4 @@
-import {Document} from '../documents/types';
+import {Document} from '@project/components/documents/types';
 
 export const placeholderDocumentPageDocuments = [
     {

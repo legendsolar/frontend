@@ -1,4 +1,4 @@
-import {ProspectiveAsset} from '../discovery/types';
+import {ProspectiveAsset} from '@project/components/discover/types';
 
 const assetData: Array<ProspectiveAsset> = [
     {

@@ -2,28 +2,28 @@ import {Typography, Stack, Box, Grid, Slider} from '@mui/material';
 import {ContentDivider} from '@project/components/basics/content_divider';
 import {TransferDataGrid} from '@project/components/transfers/transfer_data_grid';
 import {Component} from '@project/components/basics/component';
-import RealTimeContent from 'content/real_time_content';
-import SideBarView from 'views/side_bar_view';
-import {Facility, GenerationDatum, Transfer} from 'schema/schema_gen_types';
+import RealTimeContent from './real_time_content';
+import SideBarView from '../views/side_bar_view';
+import {Facility, GenerationDatum, Transfer} from '@p/schema';
 import {InvestmentSupportComponent} from '@project/components/invest/investment_support_component';
-import IconAccordian from 'utils/icon_accordian';
-import {SideBar} from '@project/components/utils/sidebar_component';
-import {MetricList} from '@project/components/summary/metric_list';
-import SmallPanelDisplaySVG from 'assets/images/small_panel_display.svg';
+import IconAccordian from '@project/components/utils/icon_accordian';
+import {SideBar} from '@project/components/nav/sidebar_component';
+import {MetricList} from '@project/components/metrics/metric_list';
+import SmallPanelDisplaySVG from '@project/components/assets/images/small_panel_display.svg';
 import {DocumentListComponent} from '@project/components/documents/document_list_component';
-import {numberFormatter, currencyFormatter} from 'utils/number_formatter';
-import LoadingContent from 'content/loading_content';
-import {Document} from '../documents/types';
+import {numberFormatter, currencyFormatter} from '@p/utils/number_formatter';
+import LoadingContent from './loading_content';
+import {Document} from '@project/components/documents/types';
 import EmptyContent from './empty_content';
 import {
     CalendarIcon,
     CashIcon,
     LeafIcon,
     PowerIcon,
-} from '../icons/emoji_icons';
+} from '@project/components/icons/emoji_icons';
 import {MetricBox} from '@project/components/gauges/metric_box';
-import {siteCopy} from 'static/copy';
-import {MetricComponent} from 'utils/metric_component';
+import {siteCopy} from '../static/copy';
+import {MetricComponent} from '@project/components/metrics/metric_component';
 import {MapTerrain3D} from '@project/components/map/map_terrain_3d';
 import {TooltipMarker} from '@project/components/map/tooltip_marker';
 interface PortfolioContentProps {

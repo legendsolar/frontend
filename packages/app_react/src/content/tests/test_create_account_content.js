@@ -1,2 +1,2 @@
-import CreateAccountContent from 'content/create_account_content';
+import CreateAccountContent from './create_account_content';
 export default () => <CreateAccountContent c></CreateAccountContent>;

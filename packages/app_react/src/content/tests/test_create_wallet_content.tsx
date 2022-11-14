@@ -1,6 +1,6 @@
-import CreateWalletContent from 'content/create_wallet_content';
-import {UserDwollaAccountData} from 'schema/schema_gen_types';
-import delay from 'utils/delay';
+import CreateWalletContent from './create_wallet_content';
+import {UserDwollaAccountData} from '@p/schema';
+import delay from '@p/utils/delay';
 export default () => (
     <CreateWalletContent
         onSubmit={(input) => {

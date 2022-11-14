@@ -1,4 +1,4 @@
-import termsAndConditions from 'assets/legal/termsAndConditions';
+import termsAndConditions from '@project/components/assets/legal/termsAndConditions';
 
 // TODO autogenerate this...
 interface GlobalSiteCopy {

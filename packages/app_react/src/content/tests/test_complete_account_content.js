@@ -1,4 +1,4 @@
-import CompleteAccountContent from 'content/complete_account_content';
+import CompleteAccountContent from './complete_account_content';
 import {Typography} from '@mui/material';
 export default () => (
     <CompleteAccountContent

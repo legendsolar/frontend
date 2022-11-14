@@ -1,4 +1,4 @@
-import VerifyAccreditationContent from 'content/verify_accreditation_content';
+import VerifyAccreditationContent from './verify_accreditation_content';
 export default () => (
     <VerifyAccreditationContent
         onAccreditationStatusSubmit={(items) => {

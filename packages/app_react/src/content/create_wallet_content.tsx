@@ -7,12 +7,8 @@ import {Divider} from '@project/components/basics/divider';
 import {ModifyUserInfo} from '@project/components/inputs/modify_user_info';
 import {ProtectedUserInfo} from '@project/components/inputs/protected_user_info';
 import {ErrorTypes} from '@p/utils/errors';
-import {Error} from 'utils/error_types';
-import {
-    Address,
-    AddressInput,
-    UserDwollaAccountData,
-} from 'schema/schema_gen_types';
+import {Error} from '@p/utils/error_types';
+import {Address, AddressInput, UserDwollaAccountData} from '@p/schema';
 import {Component} from '@project/components/basics/component';
 import {LoadingText} from '@project/components/utils/loading_text';
 import {CheckboxItem} from '@project/components/inputs/checkbox_item';

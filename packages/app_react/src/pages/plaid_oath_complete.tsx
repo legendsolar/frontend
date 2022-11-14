@@ -2,14 +2,14 @@ import useNavBar from '@project/hooks/use_nav_bar';
 import {useEffect, useCallback} from 'react';
 import {usePlaidLink} from 'react-plaid-link';
 import {useNavigate} from 'react-router-dom';
-import {ROUTES} from 'routes/routes';
-import {LOCAL_STORAGE_KEYS} from 'storage/local_storage_keys';
+import {ROUTES} from '../routes/routes';
+import {LOCAL_STORAGE_KEYS} from '../storage/local_storage_keys';
 import {useAccount} from '@project/hooks/use_accounts';
-import {CreateAccountInput} from 'schema/schema_gen_types';
+import {CreateAccountInput} from '@p/schema';
 import {
     transformPlaidDataToCreateAccountInput,
     transformPlaidVerificationStatus,
-} from 'transformers/plaid_api_transformers';
+} from '../transformers/plaid_api_transformers';
 
 const OAuthLink = () => {
     const navigate = useNavigate();

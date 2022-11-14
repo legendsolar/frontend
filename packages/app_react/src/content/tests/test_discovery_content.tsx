@@ -1,5 +1,5 @@
-import DiscoveryContent from 'content/discovery_content';
-import assetData from 'static/assets';
+import DiscoveryContent from './discovery_content';
+import assetData from '../static/assets';
 
 export default () => (
     <DiscoveryContent

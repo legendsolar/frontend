@@ -1,13 +1,13 @@
-import DefaultView from 'views/default_view';
-import {NavBar} from '@project/components/utils/nav_bar';
+import DefaultView from '../views/default_view';
+import {NavBar} from '@project/components/nav/nav_bar';
 import useNavBar from '@project/hooks/use_nav_bar';
-import PortfolioContent from 'content/portfolio_content';
-import {Facility, GenerationDatum} from 'schema/schema_gen_types';
+import PortfolioContent from '../content/portfolio_content';
+import {Facility, GenerationDatum} from '@p/schema';
 import {
     usePortfolio,
     usePortfolioReturnType,
 } from '@project/hooks/use_portfolio';
-import {dateDifferenceHumanReadable} from 'utils/date_formatter';
+import {dateDifferenceHumanReadable} from '@p/utils/date_formatter';
 import useEmptyContent from '@project/hooks/use_empty_content';
 import {differenceInDays} from 'date-fns';
 import {useState} from 'react';

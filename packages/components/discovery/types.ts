@@ -1,5 +1,5 @@
 import {Address, Location} from '@p/schema';
-import {Metric} from '../summary/metric_list';
+import {Metric} from '../metrics/metric_list';
 import {Document} from '../documents/types';
 
 export interface AssetDocument {

@@ -1,9 +1,9 @@
 import {Component} from '@project/components/basics/component';
-import DualPaneView from 'views/dual_pane_view';
-import WomanPanelsSVG from 'assets/images/women_panel.svg';
-import LegendsTypemark from 'assets/logos/typemark_dark.png';
-import LegendsTypemarkSVG from 'assets/logos/typemark_dark.svg';
-import PanelInfinitySVG from 'assets/images/panel_infinity.svg';
+import DualPaneView from '../views/dual_pane_view';
+import WomanPanelsSVG from '@project/components/assets/images/women_panel.svg';
+import LegendsTypemark from '@project/components/assets/logos/typemark_dark.png';
+import LegendsTypemarkSVG from '@project/components/assets/logos/typemark_dark.svg';
+import PanelInfinitySVG from '@project/components/assets/images/panel_infinity.svg';
 import {Typography} from '@mui/material';
 
 const TestDualPaneView = () => {

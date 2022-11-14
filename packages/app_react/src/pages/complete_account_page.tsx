@@ -5,24 +5,24 @@ import {useNavigate} from 'react-router-dom';
 import {useUser} from '@project/hooks/use_user';
 import {useState} from 'react';
 import {Component} from '@project/components/basics/component';
-import delay from 'utils/delay';
-import DualPaneView from 'views/dual_pane_view';
+import delay from '@p/utils/delay';
+import DualPaneView from '../views/dual_pane_view';
 
-import PanelInfinitySVG from 'assets/images/panel_infinity.svg';
-import PanelPersonGreenSVG from 'assets/images/panel_person_green.svg';
-import PanelPersonBlueSVG from 'assets/images/panel_person_blue.svg';
-import PanelPersonPinkSVG from 'assets/images/panel_person_pink.svg';
-import PanelPersonRedSVG from 'assets/images/panel_person_red.svg';
-import PanelPersonYellowSVG from 'assets/images/panel_person_yellow.svg';
+import PanelInfinitySVG from '@project/components/assets/images/panel_infinity.svg';
+import PanelPersonGreenSVG from '@project/components/assets/images/panel_person_green.svg';
+import PanelPersonBlueSVG from '@project/components/assets/images/panel_person_blue.svg';
+import PanelPersonPinkSVG from '@project/components/assets/images/panel_person_pink.svg';
+import PanelPersonRedSVG from '@project/components/assets/images/panel_person_red.svg';
+import PanelPersonYellowSVG from '@project/components/assets/images/panel_person_yellow.svg';
 
-import {ROUTES} from 'routes/routes';
-import CompleteAccountContent from 'content/complete_account_content';
-import VerifyEmailContent from 'content/verify_email_content';
-import VerifyMfaContent from 'content/verify_mfa_content';
-import VerifyAccreditationContent from 'content/verify_accreditation_content';
+import {ROUTES} from '../routes/routes';
+import CompleteAccountContent from '../content/complete_account_content';
+import VerifyEmailContent from '../content/verify_email_content';
+import VerifyMfaContent from '../content/verify_mfa_content';
+import VerifyAccreditationContent from '../content/verify_accreditation_content';
 import CreateWalletContent, {
     transformFormValuesToUserDwollaAccountData,
-} from 'content/create_wallet_content';
+} from '../content/create_wallet_content';
 import {BackButton} from '@project/components/buttons/back_button';
 import {LoadingComponent} from '@project/components/basics/loading_component';
 import {RecaptchaVerifier as FirebaseRecaptchaVerifier} from 'firebase/auth';
@@ -32,10 +32,10 @@ import {
     EnvelopeIcon,
     PhoneIcon,
     UserDataIcon,
-} from '../icons/emoji_icons';
+} from '@project/components/icons/emoji_icons';
 
-import {CheckIcon} from '../icons/icons';
-import UserInformationContent from 'content/user_information_content';
+import {CheckIcon} from '@project/components/icons/icons';
+import UserInformationContent from '../content/user_information_content';
 import {sign} from 'crypto';
 
 enum States {

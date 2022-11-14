@@ -1,6 +1,6 @@
 import {Typography, List, ListItemButton} from '@mui/material';
 import PropTypes from 'prop-types';
-import SideBarView from 'views/side_bar_view';
+import SideBarView from '../views/side_bar_view';
 import {SideBar} from '@project/components/utils/sidebar_component';
 import {useReducer} from 'react';
 import {Component} from '@project/components/basics/component';

@@ -1,5 +1,5 @@
-import VerifyMfaContent from 'content/verify_mfa_content';
-import delay from 'utils/delay';
+import VerifyMfaContent from './verify_mfa_content';
+import delay from '@p/utils/delay';
 export default () => (
     <VerifyMfaContent
         onChangePhoneRequested={(newPhone) => {

@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {Component} from '@project/components/basics/component';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {Typography, Stack, Box, Link} from '@mui/material';
-import {ROUTES} from 'routes/routes';
+import {ROUTES} from '../routes/routes';
 
 const CreateAccountContent = ({
     onSignUpWithGoogle,

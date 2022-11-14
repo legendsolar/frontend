@@ -1,5 +1,5 @@
-import AccountCreateInfoContent from 'content/account_create_info_content';
-import delay from 'utils/delay';
+import AccountCreateInfoContent from './account_create_info_content';
+import delay from '@p/utils/delay';
 export default () => (
     <AccountCreateInfoContent
         color={'light'}

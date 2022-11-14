@@ -7,7 +7,7 @@ import {
     useTheme,
     Breakpoint,
 } from '@mui/material';
-import DefaultView from 'views/default_view';
+import DefaultView from '../views/default_view';
 import {ErrorBoundary} from '@sentry/react';
 import {DefaultErrorBoundary} from '@project/components/errors/default_error_boundary';
 

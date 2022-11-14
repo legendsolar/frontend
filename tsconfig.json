@@ -19,12 +19,12 @@
       "jsx": "react-jsx"
     },
     "exclude": [
-      "node_modules"
+      "node_modules",
     ],
     "include": [
       "next-env.d.ts",
       "**/*.ts",
       "**/*.tsx",
-      "types.d.ts"
+      "types.d.ts",
     ]
   }

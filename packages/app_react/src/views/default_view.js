@@ -1,7 +1,6 @@
 import {Box} from '@mui/material';
 import {useAuth} from '@project/hooks/use_auth';
-import {Footer} from '@project/components/utils/footer';
-import {NavBarUserContext} from '@project/components/utils/nav_bar_user_context';
+import {Footer} from '@project/components/footer';
 import MainContentBox from '@project/components/utils/main_content_box';
 
 const DefaultView = ({

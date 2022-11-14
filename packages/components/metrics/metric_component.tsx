@@ -1,7 +1,7 @@
-import {Component} from '@project/components/basics/component';
-import MetricList, {Metric} from '../summary/metric_list';
+import {Component} from '../basics/component';
+import {Metric, MetricList} from './metric_list';
 import {Typography} from '@mui/material';
-import {ComponentDivider} from '@project/components/basics/component_divider';
+import {ComponentDivider} from '../basics/component_divider';
 
 export const MetricComponent = ({
     title,

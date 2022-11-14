@@ -1,5 +1,5 @@
 import {Box, Typography, Button, Stack} from '@mui/material';
-import WomanPanelsSVG from 'assets/images/women_panel.svg';
+import WomanPanelsSVG from '@project/components/assets/images/women_panel.svg';
 import useEmptyContent from '@project/hooks/use_empty_content';
 
 export interface EmptyContentProps {

@@ -1,14 +1,14 @@
-import DocumentGridContent from 'content/document_grid_content';
+import DocumentGridContent from './document_grid_content';
 import {
     differenceInMonths,
     differenceInQuarters,
     differenceInWeeks,
 } from 'date-fns';
-import delay from 'utils/delay';
+import delay from '@p/utils/delay';
 
-import {DataGridDateRange} from 'utils/date_range';
+import {DataGridDateRange} from '@p/utils/date_range';
 import {useState} from 'react';
-import {documents as testDocuments} from 'static/placeholder_documents';
+import {documents as testDocuments} from '../static/placeholder_documents';
 
 const TestTransferDataGrid = () => {
     const [documents, setDocuments] = useState<Array<any>>(testDocuments);

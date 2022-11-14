@@ -2,7 +2,7 @@ import {
     currencyFormatter,
     numberFormatter,
     integerWidth,
-} from 'utils/number_formatter';
+} from '@p/utils/number_formatter';
 
 test('properly calculates number width in chars', () => {
     expect(integerWidth(0.001)).toBe(1);

@@ -1,4 +1,4 @@
-import PortfolioContent from 'content/portfolio_content';
+import PortfolioContent from './portfolio_content';
 
 export default () => (
     <></>

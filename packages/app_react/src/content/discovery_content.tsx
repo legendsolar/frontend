@@ -12,14 +12,18 @@ import {BasicGlobe} from '@project/components/map/basic_globe_component';
 import {Component} from '@project/components/basics/component';
 import {useState} from 'react';
 import {Marker} from '@project/components/map/marker';
-import {ProspectiveAsset} from '../discovery/types';
-import {currencyFormatter, numberFormatter} from 'utils/number_formatter';
-import SideBarView from 'views/side_bar_view';
-import {CalendarIcon, CashIcon, PowerIcon} from '../icons/emoji_icons';
-import {Location} from 'schema/schema_gen_types';
-import settings from 'app_settings';
-import {paletteOptions} from 'app_theme';
-import {PanelIcon} from '../icons/icons';
+import {ProspectiveAsset} from '@project/components/discover/types';
+import {currencyFormatter, numberFormatter} from '@p/utils/number_formatter';
+import SideBarView from '../views/side_bar_view';
+import {
+    CalendarIcon,
+    CashIcon,
+    PowerIcon,
+} from '@project/components/icons/emoji_icons';
+import {Location} from '@p/schema';
+import settings from '../app_settings';
+import {paletteOptions} from '@project/components/theme';
+import {PanelIcon} from '@project/components/icons/icons';
 
 interface DiscoveryContentProps {
     assets: Array<ProspectiveAsset>;

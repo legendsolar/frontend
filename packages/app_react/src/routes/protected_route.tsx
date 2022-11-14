@@ -2,10 +2,10 @@ import {useAuth} from '@project/hooks/use_auth';
 import {useEffect} from 'react';
 import {Navigate, useNavigate} from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
-import LoadingView from 'views/loading_view';
+import LoadingView from '../views/loading_view';
 import {useUser} from '@project/hooks/use_user';
-import {UserStatus} from 'schema/schema_gen_types';
-import {ROUTES} from 'routes/routes';
+import {UserStatus} from '@p/schema';
+import {ROUTES} from '../routes/routes';
 import UnexpectedErrorPage from 'pages/unexpected_error_page';
 
 interface ProtectedRouteProps {

@@ -1,7 +1,7 @@
 import {Box, Typography, Stack} from '@mui/material';
-import DefaultView from 'views/default_view';
-import WomenPanelSVG from 'assets/images/women_panel.svg';
-import {NavBar} from '@project/components/utils/nav_bar';
+import DefaultView from '../views/default_view';
+import WomenPanelSVG from '@project/components/assets/images/women_panel.svg';
+import {NavBar} from '@project/components/nav/nav_bar';
 
 const NotFoundPage = ({}) => {
     return (

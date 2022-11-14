@@ -1,5 +1,5 @@
-import VerifyEmailContent from 'content/verify_email_content';
-import delay from 'utils/delay';
+import VerifyEmailContent from './verify_email_content';
+import delay from '@p/utils/delay';
 export default () => (
     <VerifyEmailContent
         color="light"

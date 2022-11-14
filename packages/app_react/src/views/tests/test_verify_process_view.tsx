@@ -1,4 +1,4 @@
-import VerifyProcessView from 'views/verify_process_view';
+import VerifyProcessView from '../views/verify_process_view';
 import {Typography} from '@mui/material';
 import {TEST_PROCESS_ITEMS} from '../signup/tests/test_sign_up_process_bar_component';
 

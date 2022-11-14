@@ -1,12 +1,12 @@
 import {Button, Typography} from '@mui/material';
-import DualPaneView from 'views/dual_pane_view';
+import DualPaneView from '../views/dual_pane_view';
 
-import WomanPanelsSVG from 'assets/images/women_panel.svg';
-import {Scroller} from '@project/components/utils/scroller';
+import WomanPanelsSVG from '@project/components/assets/images/women_panel.svg';
+import {Scroller} from '@project/components/nav/scroller';
 import {Component} from '@project/components/basics/component';
 
 import {useNavigate} from 'react-router-dom';
-import {ROUTES} from 'routes/routes';
+import {ROUTES} from '../routes/routes';
 
 const TermsConditionsPage = () => {
     const navigate = useNavigate();

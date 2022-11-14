@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
-import {NavBar} from '@project/components/utils/nav_bar';
+import {NavBar} from '@project/components/nav';
 import {useAuth} from '@project/hooks/use_auth';
 import {useAccount} from '@project/hooks/use_accounts';
 import {useTransfer} from '@project/hooks/use_transfer';
@@ -14,31 +14,33 @@ import {
     useMediaQuery,
     useTheme,
 } from '@mui/material';
-import Divider from '@project/components/basics';
-import SideBarNavView from 'views/side_bar_view';
-import {ScrollToSidebar} from '@project/components/utils/scroll_to_sidebar';
+import SideBarNavView from '../views/side_bar_view';
+import {ScrollToSidebar} from '@project/components/nav';
 import {MemberHeader} from '@project/components/user/member_header';
 import {TransferGrid} from '@project/components/transfers/transfer_grid';
 import {useUser} from '@project/hooks/use_user';
 import {Component} from '@project/components/basics/component';
-import ModifyUserInfo, {Values} from '../inputs/modify_user_info';
+import {
+    Values,
+    ModifyUserInfo,
+} from '@project/components/inputs/modify_user_info';
 import {LoadingComponent} from '@project/components/basics/loading_component';
 import {AccountListComponent} from '@project/components/transfers/account_list_component';
 import useNavBar from '@project/hooks/use_nav_bar';
-import DefaultView from 'views/default_view';
+import DefaultView from '../views/default_view';
 import {ComponentDivider} from '@project/components/basics/component_divider';
 import {AccreditationStatus} from '@project/components/user/accreditation_status';
-import {ACCREDITATION_OPTIONS} from 'content/verify_accreditation_content';
+import {ACCREDITATION_OPTIONS} from '../content/verify_accreditation_content';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import {transformValuesToUserAddress} from 'content/create_wallet_content';
+import {transformValuesToUserAddress} from '../content/create_wallet_content';
 import {LoadingText} from '@project/components/utils/loading_text';
-import {BankAccount, CreateAccountInput} from 'schema/schema_gen_types';
+import {BankAccount, CreateAccountInput} from '@p/schema';
 import {
     transformPlaidDataToCreateAccountInput,
     transformPlaidVerificationStatus,
-} from 'transformers/plaid_api_transformers';
+} from '../transformers/plaid_api_transformers';
 import {usePlaid} from '@project/hooks/use_plaid';
 
 const AccountPage = () => {

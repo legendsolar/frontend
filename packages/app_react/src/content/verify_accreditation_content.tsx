@@ -1,8 +1,10 @@
 import {Component} from '@project/components/basics/component';
 import {useState} from 'react';
-import CheckboxList, {CheckboxListItem} from '../inputs/checkbox_list';
+import CheckboxList, {
+    CheckboxListItem,
+} from '@project/components/inputs/checkbox_list';
 import {Button, Typography, CircularProgress} from '@mui/material';
-import {AccreditationOptions} from 'schema/schema_gen_types';
+import {AccreditationOptions} from '@p/schema';
 import {LoadingText} from '@project/components/utils/loading_text';
 import {ContentDivider} from '@project/components/basics/content_divider';
 

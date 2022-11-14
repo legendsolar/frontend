@@ -1,6 +1,6 @@
-import {ROUTES} from 'routes/routes';
-import {Location} from 'schema/schema_gen_types';
-import {defaultIfNull} from 'utils/default_if_null';
+import {ROUTES} from './routes/routes';
+import {Location} from '@p/schema';
+import {defaultIfNull} from '@p/utils';
 
 export interface APP_SETTINGS {
     sentry: {

@@ -2,11 +2,11 @@ import {useRef, useEffect, useState} from 'react';
 import {useAuth} from '@project/hooks/use_auth';
 
 import {Paper, Stack, Button, Typography} from '@mui/material';
-import SideBarNavView from 'views/side_bar_view';
+import SideBarNavView from '../views/side_bar_view';
 
 import {CreateTransferComponent} from '@project/components/transfers/create_transfer_component';
 import {Component} from '@project/components/basics/component';
-import {SideBar} from '@project/components/utils/sidebar_component';
+import {SideBar} from '@project/components/nav/sidebar_component';
 import {TransferGrid} from '@project/components/transfers/transfer_grid';
 import {AccountListComponent} from '@project/components/transfers/account_list_component';
 
@@ -14,19 +14,15 @@ import {useTransfer} from '@project/hooks/use_transfer';
 import {useAccount} from '@project/hooks/use_accounts';
 
 import useNavBar from '@project/hooks/use_nav_bar';
-import {NavBar} from '@project/components/utils/nav_bar';
-import DefaultView from 'views/default_view';
-import {
-    BankAccount,
-    CreateAccountInput,
-    CreateTransferInput,
-} from 'schema/schema_gen_types';
+import {NavBar} from '@project/components/nav/nav_bar';
+import DefaultView from '../views/default_view';
+import {BankAccount, CreateAccountInput, CreateTransferInput} from '@p/schema';
 import {
     transformPlaidDataToCreateAccountInput,
     transformPlaidVerificationStatus,
-} from 'transformers/plaid_api_transformers';
+} from '../transformers/plaid_api_transformers';
 import {RecentTransfersComponent} from '@project/components/transfers/recent_transfers_component';
-import {transferTransformer} from '../transfers/transfer_transforms';
+import {transferTransformer} from '@project/components/transfers/transfer_transforms';
 import {usePlaid} from '@project/hooks/use_plaid';
 
 const WalletPage = () => {

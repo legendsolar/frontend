@@ -11,7 +11,7 @@ import {
     Chip,
 } from '@mui/material';
 import {TransferDataGrid} from '@project/components/transfers/transfer_data_grid';
-import {DataGridDateRange} from 'utils/date_range';
+import {DataGridDateRange} from '@p/utils/date_range';
 import {LoadingText} from '@project/components/utils/loading_text';
 import MainContentBox from '@project/components/utils/main_content_box';
 import {useChartDimensions} from '@project/hooks/use_chart_dimensions';

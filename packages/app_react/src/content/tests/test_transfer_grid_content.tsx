@@ -1,14 +1,14 @@
 import {TransferGridContent} from '@project/components/transfer_grid_content';
-import {testTransfers} from 'static/placeholder_transfers';
+import {testTransfers} from '../static/placeholder_transfers';
 import {
     differenceInMonths,
     differenceInQuarters,
     differenceInWeeks,
 } from 'date-fns';
-import delay from 'utils/delay';
+import delay from '@p/utils/delay';
 
 import {useState} from 'react';
-import {DataGridDateRange} from 'utils/date_range';
+import {DataGridDateRange} from '@p/utils/date_range';
 
 const TestTransferDataGrid = () => {
     const [transfers, setTransfers] = useState<Array<any>>(testTransfers);

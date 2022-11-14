@@ -11,7 +11,7 @@ import appSettings from './app_settings';
 import smoothscroll from 'smoothscroll-polyfill';
 import {ApolloProvider} from '@apollo/client';
 
-import {client} from 'apollo_client_init';
+import {client} from './apollo_client_init';
 
 if (appSettings.sentry.enabled)
     Sentry.init({

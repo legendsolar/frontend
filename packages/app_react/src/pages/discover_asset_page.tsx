@@ -1,12 +1,12 @@
 import {useTheme} from '@mui/material';
 import {Navigate, useLocation, useParams} from 'react-router-dom';
-import DefaultView from 'views/default_view';
-import {NavBar} from '@project/components/utils/nav_bar';
+import DefaultView from '../views/default_view';
+import {NavBar} from '@project/components/nav/nav_bar';
 import {useSolarFacilities} from '@project/hooks/airtable/use_solar_facilities';
 import useNavBar from '@project/hooks/use_nav_bar';
-import LoadingView from 'views/loading_view';
-import {ROUTES} from 'routes/routes';
-import DiscoverAssetContent from 'content/discover_asset_content';
+import LoadingView from '../views/loading_view';
+import {ROUTES} from '../routes/routes';
+import DiscoverAssetContent from '../content/discover_asset_content';
 
 const DiscoverAssetPage = () => {
     const location = useLocation();

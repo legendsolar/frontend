@@ -1,10 +1,5 @@
 import {DisplayTransfer} from '../transfers/transfer_transforms';
-import {
-    AccountType,
-    Transfer,
-    TransferStatus,
-    TransferType,
-} from 'schema/schema_gen_types';
+import {AccountType, Transfer, TransferStatus, TransferType} from '@p/schema';
 
 export const transferPageTransfers: Array<any> = [
     {

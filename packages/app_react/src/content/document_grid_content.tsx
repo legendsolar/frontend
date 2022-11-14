@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import {useState} from 'react';
 import {DocumentDataGrid} from '@project/components/documents/document_data_grid';
-import {DataGridDateRange} from 'utils/date_range';
+import {DataGridDateRange} from '@p/utils/date_range';
 
 import {useChartDimensions} from '@project/hooks/use_chart_dimensions';
 import MainContentBox from '@project/components/utils/main_content_box';

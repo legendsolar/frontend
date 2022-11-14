@@ -1,8 +1,4 @@
-import {
-    AccountType,
-    CreateAccountInput,
-    PlaidAccountStatus,
-} from 'schema/schema_gen_types';
+import {AccountType, CreateAccountInput, PlaidAccountStatus} from '@p/schema';
 
 export const transformPlaidVerificationStatus = (
     status: String | undefined,

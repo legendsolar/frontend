@@ -1,7 +1,7 @@
 import {Stack, Typography, Box, Grid} from '@mui/material';
 import {ComponentDivider} from '@project/components/basics/component_divider';
 import {Divider} from '@project/components/basics/divider';
-import {legendaryGreen} from 'static/colors';
+import {legendaryGreen} from '../static/colors';
 
 interface TimelineStep {
     title: string;

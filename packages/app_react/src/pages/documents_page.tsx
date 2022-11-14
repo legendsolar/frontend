@@ -1,22 +1,22 @@
-import DefaultView from 'views/default_view';
-import {NavBar} from '@project/components/utils/nav_bar';
+import DefaultView from '../views/default_view';
+import {NavBar} from '@project/components/nav/nav_bar';
 import useNavBar from '@project/hooks/use_nav_bar';
-import DocumentGridContent from 'content/document_grid_content';
-import {DataGridDateRange} from 'utils/date_range';
+import DocumentGridContent from '../content/document_grid_content';
+import {DataGridDateRange} from '@p/utils/date_range';
 import {useEffect, useState} from 'react';
-import {documents} from 'static/placeholder_documents';
-import FullPageView from 'views/full_page_view';
+import {documents} from '../static/placeholder_documents';
+import FullPageView from '../views/full_page_view';
 
-import EmptyContent from 'content/empty_content';
+import EmptyContent from '../content/empty_content';
 import {
     differenceInMonths,
     differenceInQuarters,
     differenceInWeeks,
 } from 'date-fns';
-import delay from 'utils/delay';
-import {documents as testDocuments} from 'static/placeholder_documents';
+import delay from '@p/utils/delay';
+import {documents as testDocuments} from '../static/placeholder_documents';
 import {useStorage} from '@project/hooks/use_storage';
-import {Document} from '../documents/types';
+import {Document} from '@project/components/documents/types';
 
 const DocumentPage = () => {
     const navBarProps = useNavBar();

@@ -807,8 +807,6 @@ export const themeOptions = {
     },
 };
 
-const appTheme = createTheme(
+export const appTheme = createTheme(
     deepmerge(themeOptions, deepmerge(paletteOptions, typographyOptions)),
 );
-
-export {appTheme};

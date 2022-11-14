@@ -1,28 +1,21 @@
 import {Component} from '@project/components/basics/component';
-import {
-    Facility,
-    GenerationDatum,
-    GenerationMetaData,
-    GenerationSummary,
-} from 'schema/schema_gen_types';
-import {Worm} from '@project/components/worm/worm';
-import {PlaceholderWorm} from '@project/components/worm/placeholder_worm';
-import {
-    CarbonGauge,
-    EarningsGauge,
-    GenerationGauge,
-} from '../gauges/live_metric_gauge';
+import {Facility, GenerationDatum} from '@p/schema';
+import {Worm} from '@project/components/charts/worm';
+// import {
+//     CarbonGauge,
+//     EarningsGauge,
+//     GenerationGauge,
+// } from '@project/components/gauges/live_metric_gauge';
 import {Stack, Typography, Grid} from '@mui/material';
-import {
-    CarbonCumulativeImpact,
-    EarningsCumulativeImpact,
-    GenerationCumulativeImpact,
-} from '../gauges/live_cumulative_impact';
-import {summaryToCumulativeImpact} from '../gauges/transformers';
-import {LiveWeather} from '@project/components/weather/weather_live';
-import {themeOptions} from 'app_theme';
-import {eraserRed} from 'static/colors';
-import {multiplyObject} from 'utils/object_utils';
+// import {
+//     CarbonCumulativeImpact,
+//     EarningsCumulativeImpact,
+//     GenerationCumulativeImpact,
+// } from '@project/components/gauges/live_cumulative_impact';
+import {summaryToCumulativeImpact} from '@project/components/gauges/transformers';
+import {themeOptions} from '@project/components/theme';
+import {eraserRed} from '@project/components/static/colors';
+import {multiplyObject} from '@p/utils/object_utils';
 
 interface RealTimeContent {
     facility: Facility;
@@ -86,7 +79,7 @@ const RealTimeContent = ({
                 }}
             ></Worm>
 
-            <Grid container rowSpacing={4} sx={{pl: {md: 4, xs: 0}, pb: 4}}>
+            {/* <Grid container rowSpacing={4} sx={{pl: {md: 4, xs: 0}, pb: 4}}>
                 <Grid item xs={12} lg={6}>
                     <Stack spacing={4}>
                         <LiveWeather
@@ -148,7 +141,7 @@ const RealTimeContent = ({
                         ></GenerationGauge>
                     </Stack>
                 </Grid>
-            </Grid>
+            </Grid> */}
         </Component>
     );
 };
