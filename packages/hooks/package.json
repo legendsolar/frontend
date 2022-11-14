@@ -6,7 +6,7 @@
   "dependencies": {
     "@juggle/resize-observer": "^3.4.0",
     "airtable": "^0.11.5",
-    "react": "^18.2.0",
+    "react": "*",
     "typescript": "^4.8.4"
   }
 }
