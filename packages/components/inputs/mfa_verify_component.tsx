@@ -8,9 +8,9 @@ import {
     Typography,
 } from '@mui/material';
 import {validateMfaVerifyCode} from '@p/utils/validation';
-import LoadingText from '../utils/loading_text';
+import {LoadingText} from '../utils/loading_text';
 
-import TextField from '../inputs/text_field';
+import {TextField} from '../inputs/text_field';
 
 import {ErrorTypes} from '@p/utils/errors';
 import {useFormik} from 'formik';

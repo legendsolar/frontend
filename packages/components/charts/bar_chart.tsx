@@ -2,7 +2,7 @@ import {Box} from '@mui/material';
 import * as d3 from 'd3';
 import {useChartDimensions} from '../hooks/use_chart_dimensions';
 import {useMemo} from 'react';
-import Axis from './axis';
+import {Axis} from './axis';
 import {format, subDays, subHours, subMonths} from 'date-fns';
 import {useTheme} from '@mui/material';
 import {Stack} from '@mui/material';

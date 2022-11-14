@@ -9,7 +9,7 @@ import {
     Typography,
 } from '@mui/material';
 
-import TextField from './text_field';
+import {TextField} from './text_field';
 
 import {validatePhoneNumber} from '@p/utils/validation';
 

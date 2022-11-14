@@ -3,7 +3,7 @@ import {Typography, Stack, Box, Button, CircularProgress} from '@mui/material';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 
-import TextField from '../inputs/text_field';
+import {TextField} from '../inputs/text_field';
 import {LoadingText} from '../utils/loading_text';
 import {validateEmail} from '@p/utils/validation';
 import {ErrorTypes} from '@p/utils/errors';

@@ -8,7 +8,7 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
-import TextField from '../inputs/text_field';
+import {TextField} from '../inputs/text_field';
 
 import {validateMfaVerifyCode, validatePhoneNumber} from '@p/utils/validation';
 
@@ -17,7 +17,7 @@ import {useEffect} from 'react';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 import {transformPhoneNumber} from 'transformers/user_input_transformers';
-import LoadingText from '../utils/loading_text';
+import {LoadingText} from '../utils/loading_text';
 
 export const MfaCreationComponent = ({
     initialPhoneNumberValues,

@@ -1,6 +1,6 @@
 import {Stack, Typography, Tooltip} from '@mui/material';
-import ComponentDivider from '../basics/component_divider';
-import Divider from '../basics/divider';
+import {ComponentDivider} from '../basics/component_divider';
+import {Divider} from '../basics/divider';
 import {nanoid} from 'nanoid';
 
 export interface Metric {

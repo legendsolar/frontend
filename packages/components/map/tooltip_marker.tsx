@@ -1,7 +1,7 @@
 import {Facility, Location} from 'schema/schema_gen_types';
 import Component from '../basics/component';
 import {Typography} from '@mui/material';
-import Marker from './marker';
+import {Marker} from './marker';
 
 interface Props {
     location: Location;

@@ -1,4 +1,4 @@
-import Divider from './divider';
+import {Divider} from './divider';
 
 export const ComponentDivider = ({sx = {}}) => {
     return (

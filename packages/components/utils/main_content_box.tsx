@@ -1,5 +1,5 @@
 import {Box} from '@mui/material';
-import {themeOptions} from 'app_theme';
+import {themeOptions} from '../theme/theme';
 
 export const fromViewportPadding = () => {
     return {

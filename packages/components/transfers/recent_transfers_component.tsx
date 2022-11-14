@@ -1,6 +1,6 @@
 import Component from '../basics/component';
 import {Typography, Box} from '@mui/material';
-import TransferGrid from './transfer_grid';
+import {TransferGrid} from './transfer_grid';
 import {loadingOrEmptyTransfers} from 'static/placeholder_transfers';
 import {DisplayTransfer} from './transfer_transforms';
 

@@ -16,7 +16,7 @@ import ErrorComponent from '../errors/error_component';
 import {validateTransferAmount} from 'validation/transaction_validation';
 import TransferComponent from '../transfers/transfer_component';
 import MultiSelect from '../inputs/multiselect';
-import LoadingText from '../utils/loading_text';
+import {LoadingText} from '../utils/loading_text';
 import {
     Account,
     CreateTransferInput,

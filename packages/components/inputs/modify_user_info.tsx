@@ -8,7 +8,7 @@ import {
     FormHelperText,
 } from '@mui/material';
 
-import TextField from '../inputs/text_field';
+import {TextField} from '../inputs/text_field';
 
 import {states} from 'utils/static_lists';
 import {

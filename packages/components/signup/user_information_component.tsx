@@ -9,7 +9,7 @@ import {
     Stack,
 } from '@mui/material';
 
-import TextField from '../inputs/text_field';
+import {TextField} from '../inputs/text_field';
 
 import {
     validateConfirmPassword,
@@ -23,7 +23,7 @@ import {ErrorTypes} from '@p/utils/errors';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 import {useState} from 'react';
-import LoadingText from '../utils/loading_text';
+import {LoadingText} from '../utils/loading_text';
 
 interface Values {
     firstName: string;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import {Alert, Grid, Box, Button, Stack} from '@mui/material';
 
-import TextField from './text_field';
+import {TextField} from './text_field';
 
 import {validateEmail} from '@p/utils/validation';
 import {ErrorTypes} from '@p/utils/errors';

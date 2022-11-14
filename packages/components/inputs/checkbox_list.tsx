@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {Box, Checkbox, Stack, Typography} from '@mui/material';
-import Divider from '../basics/divider';
-import CheckboxItem, {CheckboxItemInterface} from '../inputs/checkbox_item';
+import {Divider} from '../basics/divider';
+import {CheckboxItem, CheckboxItemInterface} from '../inputs/checkbox_item';
 
 export interface CheckboxListItem extends CheckboxItemInterface {
     exclusive?: boolean;
