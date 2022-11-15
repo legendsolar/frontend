@@ -31,12 +31,13 @@ interface PortfolioContentProps {
     title?: string;
     address?: string;
     subtitle?: string;
-    facility: Facility | null;
+    facility: Facility | undefined;
     transfers: Array<Transfer>;
     documents: Array<Document>;
     dataStale: boolean;
-    generation: Array<GenerationDatum>;
+    generation: Array<GenerationDatum> | undefined;
 }
+
 const PortfolioContent = ({
     loading = false,
     title = '',
