@@ -38,8 +38,6 @@ const TransferGridContent = ({
         marginBottom: 0,
     });
 
-    console.log(ref, dms);
-
     return (
         <Box sx={{mt: {lg: '30px', md: '45px', sm: '50px'}}}>
             <MainContentBox passedRef={ref}>

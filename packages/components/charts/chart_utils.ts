@@ -115,8 +115,6 @@ export const useBarChartData = ({
       (a, b) => xAccessor(a).getTime() - xAccessor(b).getTime()
     );
 
-    console.log({ sortedData });
-
     const unitsAllowed = Math.min(
       Math.max(
         Math.floor(
@@ -127,16 +125,12 @@ export const useBarChartData = ({
       maxUnitsDisplayed
     );
 
-    console.log({ unitsAllowed });
-
     if (unitsAllowed <= 0) {
       return [];
     }
 
     const maxDate = xAccessor(sortedData[sortedData.length - 1]);
     const minDate = subUnit(maxDate, unitsAllowed);
-
-    console.log({ minDate, maxDate });
 
     const thresholds = eachHourOfInterval({
       start: minDate,

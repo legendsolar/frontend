@@ -63,6 +63,10 @@ const PortfolioContent = ({
         earningsTotals,
     } = nonNullFacility;
 
+    console.log({
+        calculatedDayKWh: generationTotals.twentyFourHourGeneration_kWh,
+    });
+
     return (
         <div>
             <Stack sx={{mb: 3}}>
@@ -135,9 +139,10 @@ const PortfolioContent = ({
                                             color={'legendaryGreen.main' as any}
                                         >
                                             {currencyFormatter(
-                                                earningsTotals
-                                                    .twentyFourHourEarnings_Dollars
-                                                    .current,
+                                                generationTotals
+                                                    .twentyFourHourGeneration_kWh
+                                                    .current *
+                                                    generationMetaData.dollar_per_kWh,
                                             )}
                                         </Typography>
                                         <Typography

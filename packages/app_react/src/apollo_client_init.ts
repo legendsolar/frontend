@@ -49,7 +49,6 @@ const authLink = setContext(async (_, {headers}) => {
 
 // TODO is this causing capcha errors?
 const errorLink = onError(({networkError, graphQLErrors}) => {
-    console.log('here');
     if (graphQLErrors)
         graphQLErrors.forEach(({message, locations, path}) => {
             if (message.includes('Context creation failed')) {

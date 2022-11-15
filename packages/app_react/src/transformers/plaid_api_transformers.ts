@@ -27,8 +27,6 @@ export const transformPlaidDataToCreateAccountInput = (
 ): CreateAccountInput => {
     const account = metadata.account;
 
-    console.log({publicToken, metadata});
-
     const institution = metadata?.institution?.name
         ? metadata.institution.name
         : 'Unknown';

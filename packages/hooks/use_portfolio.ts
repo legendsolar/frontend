@@ -97,6 +97,8 @@ export const usePortfolio = (): usePortfolioReturnType => {
       1000
     : 0;
 
+  console.log({ calculatedDayKWh, generationData });
+
   return {
     loading,
     facilityData: facilityData
@@ -107,6 +109,15 @@ export const usePortfolio = (): usePortfolioReturnType => {
             twentyFourHourGeneration_kWh: {
               ...facilityData.generationTotals.twentyFourHourGeneration_kWh,
               current: calculatedDayKWh,
+            },
+          },
+          earningsTotals: {
+            ...facilityData.earningsTotals,
+            twentyFourHourEarnings_Dollars: {
+              ...facilityData.earningsTotals.twentyFourHourEarnings_Dollars,
+              current:
+                calculatedDayKWh *
+                facilityData.generationMetaData.dollar_per_kWh,
             },
           },
         }
