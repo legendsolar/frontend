@@ -63,10 +63,6 @@ const PortfolioContent = ({
         earningsTotals,
     } = nonNullFacility;
 
-    console.log({
-        calculatedDayKWh: generationTotals.twentyFourHourGeneration_kWh,
-    });
-
     return (
         <div>
             <Stack sx={{mb: 3}}>
@@ -116,6 +112,7 @@ const PortfolioContent = ({
             <Stack sx={{mt: 4}}>
                 <SideBarView
                     drawerPosition={'right'}
+                    constrainedDrawerPostion={'none'}
                     drawer={
                         <SideBar
                             sx={{

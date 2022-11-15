@@ -86,7 +86,6 @@ const WalletPage = () => {
     } = useCreateLinkToken();
 
     const onCompleteAccountLink = async (account: BankAccount) => {
-        console.log(account.plaid.accessToken);
         await createLinkToken(account.plaid.accessToken);
         setOpenRequested(true);
         // open();

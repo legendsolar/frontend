@@ -75,7 +75,7 @@ const RealTimeContent = ({
 
             <Grid container rowSpacing={4} sx={{pl: {md: 4, xs: 0}, pb: 4}}>
                 <Grid item xs={12} lg={6}>
-                    <Stack spacing={4}>
+                    <Stack spacing={4} sx={{ml: 'auto', mr: 'auto'}}>
                         <WeatherLive
                             lat={location?.lat || 40.712778}
                             lng={location?.lng || -74.006111}
@@ -138,7 +138,7 @@ const RealTimeContent = ({
                         ></CumulativeImpact>
 
                         <MetricGauge
-                            title="Carbon"
+                            title="Generation"
                             min={0}
                             max={generationMetaData.max_kW}
                             currentValue={current_kW}

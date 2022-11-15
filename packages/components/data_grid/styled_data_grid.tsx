@@ -33,8 +33,6 @@ export const StyledDataGrid = ({
 
   columns[0].headerClassName = "first-column";
 
-  console.log(viewPortOverrideWidthPx);
-
   if (defined(viewPortOverrideWidthPx)) {
     // attempt to match mui's cacl: https://mui.com/x/react-data-grid/column-dimensions/
     var remainingWidth = viewPortOverrideWidthPx + 1;
@@ -73,8 +71,6 @@ export const StyledDataGrid = ({
       ...sx,
     };
   }
-
-  console.log(columns);
 
   return (
     <DataGrid

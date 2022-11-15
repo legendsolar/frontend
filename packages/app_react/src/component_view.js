@@ -529,7 +529,6 @@ const ComponentView = () => {
                             base.type === 'components'
                                 ? `./${base.type}/${base.name}/tests/${test.name}`
                                 : `./${base.type}/tests/${test.name}`;
-                        console.log(path);
                         const Component = await lazyImport(path);
                         return <Component key={nanoid()} />;
                     }

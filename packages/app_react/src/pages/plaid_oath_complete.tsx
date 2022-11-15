@@ -49,7 +49,6 @@ const OAuthLink = () => {
     const onExit = (err, metadata) => {
         // handle error...
 
-        console.log(err, metadata);
         navigate(ROUTES.ACCOUNT);
     };
 
@@ -61,7 +60,6 @@ const OAuthLink = () => {
     };
     const {open, ready, error} = usePlaidLink(config);
 
-    console.log({plaidError: error});
     // automatically reinitialize Link
     useEffect(() => {
         if (ready) {

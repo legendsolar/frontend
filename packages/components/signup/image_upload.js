@@ -8,9 +8,6 @@ export const ImageUpload = ({onComplete}) => {
     const [alertMessage, setAlertMessage] = useState(null);
 
     const onChange = (event) => {
-        // console.log('uploaded?');
-        // console.log(event.target.value);
-        // console.log(event.target.files[0]);
         setSelectedFile(event.target.files[0]);
     };
 

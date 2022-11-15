@@ -78,13 +78,9 @@ export const BarChart = ({
   options,
   unit,
 }: BarChartProps) => {
-  console.log({ rawData });
-
   const chartSettings = options.chartMarginSettings;
 
   const { ref, dms } = useChartDimensions(chartSettings);
-
-  console.log({ dms });
 
   const { data, max } = useBarChartData({
     rawData,
@@ -110,8 +106,6 @@ export const BarChart = ({
   const yData = data.map((d: GenerationDatum) => yAccessor(d));
   const topBar = data.map((d: GenerationDatum) => max - yAccessor(d) - gap);
   const gapData = data.map((d: GenerationDatum) => gap);
-
-  console.log({ topBar, max, gapData });
 
   const colors = {
     lowerBar: useThemeColor(options.lowerBarColor),

@@ -99,7 +99,6 @@ const AccountPage = () => {
     }, [ready, openRequested]);
 
     const onCompleteAccountLink = async (account: BankAccount) => {
-        console.log(account.plaid.accessToken);
         await createLinkToken(account.plaid.accessToken);
         setOpenRequested(true);
         // open();
@@ -141,8 +140,6 @@ const AccountPage = () => {
         error: accountsError,
         accounts,
     } = useAccounts();
-
-    console.log({accounts});
 
     const [userDataEditMode, setUserDataEditMode] = useState<boolean>(false);
     const [userDataEditValid, setUserDataEditValid] = useState<boolean>(false);

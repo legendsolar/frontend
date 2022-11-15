@@ -97,8 +97,6 @@ export const usePortfolio = (): usePortfolioReturnType => {
       1000
     : 0;
 
-  console.log({ calculatedDayKWh, generationData });
-
   return {
     loading,
     facilityData: facilityData

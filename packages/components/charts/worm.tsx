@@ -85,8 +85,6 @@ export const Worm = ({
 
   const { ref, dms } = useChartDimensions(chartSettings);
 
-  console.log({ dms });
-
   const data = useMemo<Array<GenerationDatum>>(() => {
     if (loading || error) {
       return [
