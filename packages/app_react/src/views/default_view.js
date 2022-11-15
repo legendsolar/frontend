@@ -1,7 +1,7 @@
 import {Box} from '@mui/material';
 import {useAuth} from '@project/hooks/use_auth';
 import {Footer} from '@project/components/footer';
-import MainContentBox from '@project/components/utils/main_content_box';
+import {MainContentBox} from '@project/components/basics';
 
 const DefaultView = ({
     children,

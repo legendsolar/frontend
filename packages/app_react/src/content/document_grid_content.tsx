@@ -15,7 +15,7 @@ import {DocumentDataGrid} from '@project/components/documents/document_data_grid
 import {DataGridDateRange} from '@p/utils/date_range';
 
 import {useChartDimensions} from '@project/hooks/use_chart_dimensions';
-import MainContentBox from '@project/components/utils/main_content_box';
+import {MainContentBox} from '@project/components/basics';
 interface DocumentDataGridProps {
     loading: boolean;
     documents: Array<any>;
@@ -37,7 +37,7 @@ const DocumentGridContent = ({
     onChangeDateRange,
     onChangeAsset,
 }: DocumentDataGridProps) => {
-    const [ref, dms] = useChartDimensions({
+    const {ref, dms} = useChartDimensions({
         marginLeft: 0,
         marginRight: 0,
         marginTop: 0,

@@ -13,7 +13,7 @@ import {
 import {TransferDataGrid} from '@project/components/transfers/transfer_data_grid';
 import {DataGridDateRange} from '@p/utils/date_range';
 import {LoadingText} from '@project/components/utils/loading_text';
-import MainContentBox from '@project/components/utils/main_content_box';
+import {MainContentBox} from '@project/components/basics';
 import {useChartDimensions} from '@project/hooks/use_chart_dimensions';
 interface TransferGridContentProps {
     loading: boolean;
@@ -31,12 +31,14 @@ const TransferGridContent = ({
     transfers,
     onDownloadCsv,
 }: TransferGridContentProps) => {
-    const [ref, dms] = useChartDimensions({
+    const {ref, dms} = useChartDimensions({
         marginLeft: 0,
         marginRight: 0,
         marginTop: 0,
         marginBottom: 0,
     });
+
+    console.log(ref, dms);
 
     return (
         <Box sx={{mt: {lg: '30px', md: '45px', sm: '50px'}}}>

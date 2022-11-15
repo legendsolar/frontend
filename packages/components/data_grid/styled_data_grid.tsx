@@ -1,6 +1,7 @@
 import { DataGrid, GridColumns, GridSortModel } from "@mui/x-data-grid";
 import { useState } from "react";
-import { fromViewportPadding } from "../utils/main_content_box";
+import { fromViewportPadding } from "../basics";
+import { defined } from "@p/utils/object_utils";
 
 export interface StyledDataGridProps {
   columns: GridColumns;
@@ -20,7 +21,7 @@ export const StyledDataGrid = ({
   viewPortOverrideWidthPx = undefined,
   autoHeight = false,
   sx = {},
-}: DataGridProps) => {
+}: StyledDataGridProps) => {
   const [sortModel, setSortModel] = useState<GridSortModel | undefined>(
     defaultSortModel
       ? defaultSortModel
@@ -32,9 +33,11 @@ export const StyledDataGrid = ({
 
   columns[0].headerClassName = "first-column";
 
-  if (viewPortOverrideWidthPx) {
+  console.log(viewPortOverrideWidthPx);
+
+  if (defined(viewPortOverrideWidthPx)) {
     // attempt to match mui's cacl: https://mui.com/x/react-data-grid/column-dimensions/
-    var remainingWidth = viewPortOverrideWidthPx;
+    var remainingWidth = viewPortOverrideWidthPx + 1;
 
     const totalFlex = columns.reduce(
       (total, column) => total + (column?.flex || 0),
@@ -71,6 +74,8 @@ export const StyledDataGrid = ({
     };
   }
 
+  console.log(columns);
+
   return (
     <DataGrid
       loading={loading}
@@ -83,11 +88,10 @@ export const StyledDataGrid = ({
       disableSelectionOnClick
       disableColumnMenu
       sortModel={sortModel}
+      showColumnRightBorder={false}
       onSortModelChange={(model) => setSortModel(model as GridSortModel)}
       autoHeight={autoHeight}
       sx={{
-        // height: '80vh',
-
         "& .MuiDataGrid-row:hover": {
           backgroundColor: "none",
         },

@@ -1,6 +1,6 @@
 import {Box, Stack, Paper, Grid, Container} from '@mui/material';
 import {Footer} from '@project/components/footer';
-import MainContentBox from '@project/components/utils/main_content_box';
+import {MainContentBox} from '@project/components/basics';
 
 const FullPageView = ({children, navBar}) => {
     return (

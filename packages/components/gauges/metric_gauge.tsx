@@ -2,7 +2,7 @@ import React from "react";
 import Stack from "@mui/material/Stack";
 import { Typography } from "@mui/material";
 import { LivePill } from "../pills/live_pill";
-import { useChartDimensions } from "../hooks/use_chart_dimensions";
+import { useChartDimensions } from "@project/hooks/use_chart_dimensions";
 import { Component } from "../basics/component";
 import { Unit } from "@p/utils/units";
 import { useThemeColor } from "../utils/use_color";

@@ -27,8 +27,6 @@ const TransactionPage = () => {
         transfers: recentTransfers,
     } = useRecentTransfers(25);
 
-    console.log({recentTransfers, recentTransfersLoading});
-
     const content =
         (!recentTransfers && !recentTransfersLoading) || recentError ? (
             <EmptyContent
