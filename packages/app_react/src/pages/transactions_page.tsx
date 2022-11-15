@@ -27,8 +27,10 @@ const TransactionPage = () => {
         transfers: recentTransfers,
     } = useRecentTransfers(25);
 
+    console.log({recentTransfers, recentTransfersLoading});
+
     const content =
-        !loading && recentTransfers?.length <= 0 ? (
+        (!recentTransfers && !recentTransfersLoading) || recentError ? (
             <EmptyContent
                 messageOverride={`You haven't received any transactions yet`}
             ></EmptyContent>

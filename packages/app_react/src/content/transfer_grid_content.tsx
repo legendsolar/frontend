@@ -17,7 +17,7 @@ import MainContentBox from '@project/components/utils/main_content_box';
 import {useChartDimensions} from '@project/hooks/use_chart_dimensions';
 interface TransferGridContentProps {
     loading: boolean;
-    transfers: Array<any>;
+    transfers: Array<any> | undefined;
     assetStates: Array<string>;
     assetState: string;
     dateRange: DataGridDateRange;
@@ -65,7 +65,7 @@ const TransferGridContent = ({
                 </Stack>
             </MainContentBox>
             <TransferDataGrid
-                transfers={transfers}
+                transfers={transfers ? transfers : []}
                 loading={loading}
                 viewPortOverrideWidthPx={dms.width}
                 sx={{

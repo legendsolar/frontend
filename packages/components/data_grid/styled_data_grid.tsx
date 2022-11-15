@@ -1,100 +1,99 @@
-import {DataGrid, GridColumns, GridSortModel} from '@mui/x-data-grid';
-import {Box} from '@mui/material';
-import {useState} from 'react';
-import {fromViewportPadding} from '../utils/main_content_box';
+import { DataGrid, GridColumns, GridSortModel } from "@mui/x-data-grid";
+import { useState } from "react";
+import { fromViewportPadding } from "../utils/main_content_box";
 
 export interface StyledDataGridProps {
-    columns: GridColumns;
-    rows: Array<any>;
-    loading: boolean;
-    defaultSortModel?: GridSortModel;
-    viewPortOverrideWidthPx?: number;
-    autoHeight?: boolean;
-    sx?: any;
+  columns: GridColumns;
+  rows: Array<any>;
+  loading: boolean;
+  defaultSortModel?: GridSortModel;
+  viewPortOverrideWidthPx?: number;
+  autoHeight?: boolean;
+  sx?: any;
 }
 
 export const StyledDataGrid = ({
-    columns,
-    rows,
-    loading,
-    defaultSortModel = undefined,
-    viewPortOverrideWidthPx = undefined,
-    autoHeight = false,
-    sx = {},
+  columns,
+  rows,
+  loading,
+  defaultSortModel = undefined,
+  viewPortOverrideWidthPx = undefined,
+  autoHeight = false,
+  sx = {},
 }: DataGridProps) => {
-    const [sortModel, setSortModel] = useState<GridSortModel | undefined>(
-        defaultSortModel
-            ? defaultSortModel
-            : ({
-                  field: columns[0].field,
-                  sort: 'asc',
-              } as any as GridSortModel),
+  const [sortModel, setSortModel] = useState<GridSortModel | undefined>(
+    defaultSortModel
+      ? defaultSortModel
+      : ({
+          field: columns[0].field,
+          sort: "asc",
+        } as any as GridSortModel)
+  );
+
+  columns[0].headerClassName = "first-column";
+
+  if (viewPortOverrideWidthPx) {
+    // attempt to match mui's cacl: https://mui.com/x/react-data-grid/column-dimensions/
+    var remainingWidth = viewPortOverrideWidthPx;
+
+    const totalFlex = columns.reduce(
+      (total, column) => total + (column?.flex || 0),
+      0
     );
 
-    columns[0].headerClassName = 'first-column';
+    columns.map((column) => {
+      if (column?.width) {
+        remainingWidth -= column.width;
+        return column;
+      }
 
-    if (viewPortOverrideWidthPx) {
-        // attempt to match mui's cacl: https://mui.com/x/react-data-grid/column-dimensions/
-        var remainingWidth = viewPortOverrideWidthPx;
+      if (!column?.flex) {
+        return column;
+      }
 
-        const totalFlex = columns.reduce(
-            (total, column) => total + (column?.flex || 0),
-            0,
-        );
+      const flex = column.flex;
+      delete column.flex;
 
-        columns.map((column) => {
-            if (column?.width) {
-                remainingWidth -= column.width;
-                return column;
-            }
+      column.width = (remainingWidth * flex) / totalFlex;
+    });
 
-            if (!column?.flex) {
-                return column;
-            }
+    sx = {
+      "& .MuiDataGrid-row": {
+        paddingLeft: fromViewportPadding(),
+        paddingRight: fromViewportPadding(),
+      },
 
-            const flex = column.flex;
-            delete column.flex;
+      "& .MuiDataGrid-columnHeadersInner": {
+        paddingLeft: fromViewportPadding(),
+        paddingRight: fromViewportPadding(),
+      },
+      ...sx,
+    };
+  }
 
-            column.width = (remainingWidth * flex) / totalFlex;
-        });
+  return (
+    <DataGrid
+      loading={loading}
+      rows={rows}
+      columns={columns}
+      autoPageSize
+      headerHeight={38}
+      rowHeight={118}
+      disableExtendRowFullWidth
+      disableSelectionOnClick
+      disableColumnMenu
+      sortModel={sortModel}
+      onSortModelChange={(model) => setSortModel(model as GridSortModel)}
+      autoHeight={autoHeight}
+      sx={{
+        // height: '80vh',
 
-        sx = {
-            '& .MuiDataGrid-row': {
-                paddingLeft: fromViewportPadding(),
-                paddingRight: fromViewportPadding(),
-            },
+        "& .MuiDataGrid-row:hover": {
+          backgroundColor: "none",
+        },
 
-            '& .MuiDataGrid-columnHeadersInner': {
-                paddingLeft: fromViewportPadding(),
-                paddingRight: fromViewportPadding(),
-            },
-            ...sx,
-        };
-    }
-
-    return (
-        <DataGrid
-            loading={loading}
-            rows={rows}
-            columns={columns}
-            autoPageSize
-            headerHeight={38}
-            rowHeight={118}
-            disableExtendRowFullWidth
-            disableSelectionOnClick
-            disableColumnMenu
-            sortModel={sortModel}
-            onSortModelChange={(model) => setSortModel(model as GridSortModel)}
-            autoHeight={autoHeight}
-            sx={{
-                // height: '80vh',
-
-                '& .MuiDataGrid-row:hover': {
-                    backgroundColor: 'none',
-                },
-
-                ...sx,
-            }}
-        />
-    );
+        ...sx,
+      }}
+    />
+  );
 };
