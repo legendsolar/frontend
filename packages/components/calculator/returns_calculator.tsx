@@ -101,7 +101,7 @@ export const ReturnsCalculator = ({
   const years = Array.from({ length: maxYears }, (x, i) => i);
   const labels = years.map((y: number) => "Y" + (y + 1));
 
-  const fakePanelFunction = (y, panels) => (1.3 * (y + 1) * panels) / 2 + 4;
+  const fakePanelFunction = (y, panels) => (1.3 * (y + 1) * panels) / 2 + 10;
 
   const displayData = false
     ? years.map((y) => 1.3 ** y * panels)
@@ -617,8 +617,8 @@ export const ReturnsCalculator = ({
             margin: "auto",
             width: "100%",
             height: {
-              xs: "400px",
-              lg: "300px",
+              xs: "300px",
+              lg: "320px",
             },
             justifyContent: "flex-end",
             display: "flex",
@@ -692,7 +692,7 @@ export const ReturnsCalculator = ({
             sx={{
               width: "100%",
               height: {
-                xs: "250px",
+                xs: "150px",
                 lg: "300px",
               },
             }}
