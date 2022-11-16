@@ -610,6 +610,9 @@ export const ReturnsCalculator = ({
           pb: 2,
           pt: 0,
         }}
+        style={{
+          marginTop: "15px",
+        }}
       >
         <Box
           sx={{

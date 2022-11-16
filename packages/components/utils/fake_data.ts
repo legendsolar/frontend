@@ -25,7 +25,7 @@ export const timeToWattage = (date: Date, max_W: number): number => {
 
   const wattage = sig * max_W * 1000 * (Math.random() / 2 + 0.5);
 
-  console.log({ noon, msFromNoon, factor, sig, wattage });
+  //   console.log({ noon, msFromNoon, factor, sig, wattage });
 
   return wattage;
 };

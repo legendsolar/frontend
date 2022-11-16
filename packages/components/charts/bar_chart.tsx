@@ -55,13 +55,9 @@ export const BarChart = ({
   error,
   options,
 }: BarChartProps) => {
-  console.log({ rawData });
-
   const chartSettings = options.chartMarginSettings;
 
   const { ref, dms } = useChartDimensions(chartSettings);
-
-  console.log({ dms });
 
   const { data, max } = useBarChartData({
     rawData,
@@ -75,16 +71,12 @@ export const BarChart = ({
     interpolateData: options.interpolateData,
   });
 
-  console.log({ data });
-
   const gap = 100;
 
   const labels = data.map((d: GenerationDatum) => format(xAccessor(d), "p"));
   const yData = data.map((d: GenerationDatum) => yAccessor(d));
   const topBar = data.map((d: GenerationDatum) => max - yAccessor(d) - gap);
   const gapData = data.map((d: GenerationDatum) => gap);
-
-  console.log({ topBar, max, gapData });
 
   const colors = {
     bar: useThemeColor(options.barColor),
