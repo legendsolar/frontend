@@ -90,7 +90,7 @@
         "test": "env-cmd -f ./.env.test react-app-rewired test --watchAll=false",
         "test:watch": "env-cmd -f ./.env.test react-app-rewired test --watchAll",
         "deploy:dev": "firebase use development && firebase deploy --only hosting:dev-app",
-        "deploy:demo": "npm run build:demo && firebase use development && firebase deploy --only hosting:demo"
+        "deploy:demo": "yarn build:demo && firebase use development && firebase deploy --only hosting:demo"
     },
     "eslintConfig": {
         "extends": [
