@@ -61,10 +61,14 @@ const LoggedInToolbar = ({
     },
   ];
 
-  const renderHeader = (header) => {
+  const renderHeader = (header, id) => {
     if (header.wallet && !constrained) {
       return (
-        <Stack sx={{ width: "175px", alignItems: "flex-end" }} spacing={1}>
+        <Stack
+          key={id}
+          sx={{ width: "175px", alignItems: "flex-end" }}
+          spacing={1}
+        >
           <Typography
             display="inline"
             variant={
@@ -98,6 +102,7 @@ const LoggedInToolbar = ({
 
     return (
       <Button
+        key={id}
         variant={
           header.outline && !constrained
             ? ("header-outlined" as any)

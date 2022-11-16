@@ -15,6 +15,7 @@
     "@mui/material": "^5.10.12",
     "@mui/x-data-grid": "^5.17.11",
     "@project/components": "*",
+    "@project/hooks": "*",
     "@storybook/react": "^6.5.13",
     "chart.js": "^3.9.1",
     "d3": "^7.6.1",

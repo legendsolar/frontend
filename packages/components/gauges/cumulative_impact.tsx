@@ -43,8 +43,6 @@ export const CumulativeImpact = ({
     defined(val) ? unit.format(val, false) : "-"
   );
 
-  console.log({ parsedCumulativeData });
-
   return (
     <Component shadow resize={true}>
       <Stack justifyContent="space-between" spacing={8}>
