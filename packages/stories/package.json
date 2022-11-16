@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "name": "@project/stories",
+  "version": "1.0.0",
+  "license": "SEE LICENSE IN ../../LICENSE",
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=f23515c3ecfa"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@juggle/resize-observer": "^3.4.0",
+    "@mui/material": "^5.10.12",
+    "@mui/x-data-grid": "^5.17.11",
+    "@project/components": "*",
+    "@project/hooks": "*",
+    "@storybook/react": "^6.5.13",
+    "chart.js": "^3.9.1",
+    "d3": "^7.6.1",
+    "formik": "^2.2.9",
+    "react": "*",
+    "react-chartjs-2": "^4.3.1",
+    "react-dom": "*",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "chromatic": "^6.11.4"
+  }
+}
