@@ -77,7 +77,7 @@
         "serve": "live-server",
         "build": "parcel build src/index.tsx --target default",
         "watch": "parcel watch src/index.tsx --target default & yarn run serve",
-        "deploy": "yarn:build && firebase deploy --only hosting",
+        "deploy": "yarn run build && firebase deploy --only hosting",
         "preview": "yarn run build && firebase hosting:channel:deploy preview_calc"
     },
     "default": "dist/index.js",
