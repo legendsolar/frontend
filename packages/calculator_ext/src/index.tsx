@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import * as ReactDOM from "react-dom";
 
-import { ReturnsCalculator } from "@project/components/calculator";
+import { ReturnsCalculator } from "@project/components/calculator/returns_calculator";
 import { appTheme } from "@project/components/theme";
 import { ThemeProvider } from "@mui/material";
 import { ProvideAirtable, useReturnCalculator } from "@project/hooks/airtable";
@@ -62,6 +62,5 @@ ReactDOM.render(
       <App />
     </ProvideAirtable>
   </ThemeProvider>,
-
   document.getElementById("root")
 );
