@@ -10,7 +10,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.1",
     "@project/components": "*",
+    "@types/jsonwebtoken": "^8.5.9",
+    "i": "^0.3.7",
+    "jsonwebtoken": "^8.5.1",
     "next": "^12.1.6",
     "next-compose-plugins": "^2.2.0",
     "next-transpile-modules": "^9.0.0",
