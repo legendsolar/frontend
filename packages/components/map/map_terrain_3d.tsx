@@ -1,6 +1,7 @@
 import { useInterval } from "@project/hooks/use_interval";
 import { useRef, useState, useEffect, useCallback } from "react";
 import Map from "react-map-gl";
+import mapboxGlSupported from "@mapbox/mapbox-gl-supported";
 
 interface MapTerrain3DProps {
   width: string;
@@ -10,6 +11,10 @@ interface MapTerrain3DProps {
   zoom: number;
   markers?: Array<JSX.Element>;
   initBearing: number;
+  animation?: {
+    enabled: boolean;
+    degreesPerSecond: number;
+  };
 }
 
 export const MapTerrain3D = ({
@@ -20,18 +25,39 @@ export const MapTerrain3D = ({
   zoom,
   markers,
   initBearing,
+  animation = {
+    enabled: true,
+    degreesPerSecond: 1,
+  },
 }: MapTerrain3DProps) => {
   const mapRef: any = useRef();
 
-  const time = 1000;
-
-  const [bearing, setBearing] = useState(initBearing);
-
-  useInterval(() => setBearing((bearing + 1) % 360), time);
+  const [animationEnabled, setAnimationEnabled] = useState(false);
 
   useEffect(() => {
-    if (mapRef.current) {
-      mapRef.current.easeTo({ bearing, duration: time, easing: (x) => x });
+    const hardwareAccelerated = mapboxGlSupported.supported({
+      failIfMajorPerformanceCaveat: true,
+    });
+
+    if (hardwareAccelerated) {
+      setAnimationEnabled(animation.enabled);
+    } else {
+      setAnimationEnabled(false);
+    }
+  }, [animation.enabled]);
+
+  const time = 1000;
+  const [bearing, setBearing] = useState(initBearing);
+
+  useInterval(
+    () => setBearing((bearing + animation.degreesPerSecond) % 360),
+    animationEnabled ? time : undefined,
+    true
+  );
+
+  useEffect(() => {
+    if (mapRef.current && animationEnabled) {
+      mapRef.current.easeTo({ bearing, duration: 1000, easing: (x) => x });
     }
   }, [bearing]);
 

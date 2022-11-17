@@ -3,7 +3,7 @@ import { Meta, Story } from "@storybook/react";
 import { useInterval } from "@project/hooks/use_interval";
 
 const meta: Meta = {
-  title: "Delta Time",
+  title: "Interval Test",
   argTypes: {
     children: {
       control: {
@@ -28,10 +28,21 @@ const Template: Story<{ deltaTime: number }> = ({ deltaTime }) => {
     setCounter(counter + 1);
   }, deltaTime);
 
+  const [counterTab, setCounterTab] = useState(0);
+
+  useInterval(
+    () => {
+      setCounterTab(counterTab + 1);
+    },
+    deltaTime,
+    true
+  );
+
   return (
     <div>
       <div>{`updates every ${deltaTime}ms`}</div>
-      <div>{`counter: ${counter}`}</div>
+      <div>{`counter, doesn't care about tabs: ${counter}`}</div>
+      <div>{`counter, does care about tabs: ${counterTab}`}</div>
     </div>
   );
 };
@@ -39,5 +50,5 @@ const Template: Story<{ deltaTime: number }> = ({ deltaTime }) => {
 export const Default = Template.bind({});
 
 Default.args = {
-  deltaTime: 1000,
+  deltaTime: 500,
 };
