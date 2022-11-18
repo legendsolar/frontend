@@ -1,5 +1,5 @@
 import {Box, Typography, Stack} from '@mui/material';
-import DefaultView from '../views/default_view';
+import DefaultView from '@project/components/views/default_view';
 import WomenPanelSVG from '@project/components/assets/images/women_panel.svg';
 import {NavBar} from '@project/components/nav/nav_bar';
 

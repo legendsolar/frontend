@@ -2,7 +2,7 @@ import {Typography, Stack, Box, Button, Grid} from '@mui/material';
 import {ContentDivider} from '@project/components/basics/content_divider';
 import {BasicMap} from '@project/components/map/basic_map_component';
 import {Component} from '@project/components/basics/component';
-import SideBarView from '../views/side_bar_view';
+import SideBarView from '@project/components/views/side_bar_view';
 import {InvestmentSupportComponent} from '@project/components/invest/investment_support_component';
 import {IconAccordian} from '@project/components/utils/icon_accordian';
 import {SideBar} from '@project/components/nav/sidebar_component';
@@ -248,7 +248,8 @@ const DiscoverAssetContent = ({
                             <TimelineComponent
                                 steps={[
                                     {
-                                        title: 'We identify a solar project to fund',
+                                        title:
+                                            'We identify a solar project to fund',
                                         description:
                                             'We select solar projects based on their risk profile and quality of construction.',
                                         linkBubble: (
@@ -281,7 +282,8 @@ const DiscoverAssetContent = ({
                                             'After reviewing the prospectus, you can commit to an investment & enter your bank info.',
                                     },
                                     {
-                                        title: 'Complete Investment Transaction',
+                                        title:
+                                            'Complete Investment Transaction',
                                         description:
                                             "Once the investment is fully subscribed, you'll receive your 'panel' shares.",
                                         linkBubble: (
@@ -302,7 +304,8 @@ const DiscoverAssetContent = ({
                                         ),
                                     },
                                     {
-                                        title: 'View Productivity and Dividends',
+                                        title:
+                                            'View Productivity and Dividends',
                                         description:
                                             "You'll  see your investment's real time impact and receive dividends from your holding. ",
 

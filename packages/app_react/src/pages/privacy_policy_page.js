@@ -1,5 +1,5 @@
 import {Button, Typography} from '@mui/material';
-import DualPaneView from '../views/dual_pane_view';
+import DualPaneView from '@project/components/views/dual_pane_view';
 
 import WomanPanelsSVG from '@project/components/assets/images/women_panel.svg';
 import {Scroller} from '@project/components/nav/scroller';

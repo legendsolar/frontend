@@ -13,7 +13,7 @@ const getLocallySignedToken = () => {
       "https://hasura.io/jwt/claims": {
         "x-hasura-allowed-roles": ["editor", "user", "mod"],
         "x-hasura-default-role": "user",
-        "x-hasura-user-id": "1234567890",
+        "x-hasura-user-id": "asdfasdfa",
         "x-hasura-org-id": "123",
         "x-hasura-custom": "custom-value",
       },

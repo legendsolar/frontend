@@ -1,4 +1,4 @@
-import DefaultView from '../views/default_view';
+import DefaultView from '@project/components/views/default_view';
 import {NavBar} from '@project/components/nav/nav_bar';
 import useNavBar from '@project/hooks/use_nav_bar';
 import {testTransfers} from '../static/placeholder_transfers';
@@ -6,7 +6,7 @@ import TransferGridContent from '../content/transfer_grid_content';
 import {DataGridDateRange} from '@p/utils/date_range';
 import EmptyContent from '../content/empty_content';
 import delay from '@p/utils/delay';
-import FullPageView from '../views/full_page_view';
+import FullPageView from '@project/components/views/full_page_view';
 import {useEffect, useState} from 'react';
 import {useTransfer} from '@project/hooks/use_transfer';
 import {useCloudFunctions} from '@project/hooks/use_cloud_functions';
@@ -47,11 +47,11 @@ const TransactionPage = () => {
                         setLoading(false);
                     }
                 }}
-                onChangeDateRange={(range) => {
+                onChangeDateRange={range => {
                     setDateRange(range);
                     return Promise.resolve();
                 }}
-                onChangeAsset={(asset) => {
+                onChangeAsset={asset => {
                     setAsset(asset);
                     return delay(1000).then(() => {
                         return Promise.resolve();

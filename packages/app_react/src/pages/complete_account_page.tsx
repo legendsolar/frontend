@@ -6,7 +6,7 @@ import {useUser} from '@project/hooks/use_user';
 import {useState} from 'react';
 import {Component} from '@project/components/basics/component';
 import delay from '@p/utils/delay';
-import DualPaneView from '../views/dual_pane_view';
+import DualPaneView from '@project/components/views/dual_pane_view';
 
 import PanelInfinitySVG from '@project/components/assets/images/panel_infinity.svg';
 import PanelPersonGreenSVG from '@project/components/assets/images/panel_person_green.svg';
@@ -104,8 +104,10 @@ const CompleteAccountPage = () => {
         error: createDwollaAccountError,
     } = useCreateDwollaAccount();
 
-    const {update: updateAccreditation, loading: accreditationUpdateLoading} =
-        useUpdateUserAccreditation();
+    const {
+        update: updateAccreditation,
+        loading: accreditationUpdateLoading,
+    } = useUpdateUserAccreditation();
 
     const loading = statusLoading || userDataLoading;
 
@@ -256,7 +258,7 @@ const CompleteAccountPage = () => {
                     <VerifyEmailContent
                         color="light"
                         email={user?.email ? user.email : ''}
-                        onChangeEmailAddressRequested={(email) => {
+                        onChangeEmailAddressRequested={email => {
                             return delay(1000);
                         }}
                         onSendVerificationEmailAgain={sendEmailVerify}
@@ -268,7 +270,7 @@ const CompleteAccountPage = () => {
                         {/** Don't render captcha until MFA verification */}
                         <VerifyMfaContent
                             captchaComplete={setCaptcha}
-                            onChangePhoneRequested={async (phone) => {
+                            onChangePhoneRequested={async phone => {
                                 // Mutate user data to new phone
                                 // This should change the phone field
                                 // and re run enrollUserMfa when it completes
@@ -276,7 +278,7 @@ const CompleteAccountPage = () => {
                                     phone,
                                 });
                             }}
-                            onMfaCodeSubmit={async (code) => {
+                            onMfaCodeSubmit={async code => {
                                 await enrollWithMfaCode(code);
                                 statusRefetch();
                                 setState(States.STEPS_TO_INVEST);
@@ -288,7 +290,7 @@ const CompleteAccountPage = () => {
             case States.ACCREDITATION:
                 return (
                     <VerifyAccreditationContent
-                        onAccreditationStatusSubmit={async (accreditation) => {
+                        onAccreditationStatusSubmit={async accreditation => {
                             updateAccreditation(accreditation);
                             setState(States.STEPS_TO_INVEST);
                         }}
@@ -298,7 +300,7 @@ const CompleteAccountPage = () => {
             case States.WALLET:
                 return (
                     <CreateWalletContent
-                        onSubmit={async (input) => {
+                        onSubmit={async input => {
                             await createDwollaAccount({
                                 firstName,
                                 lastName,

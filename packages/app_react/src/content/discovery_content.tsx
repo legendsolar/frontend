@@ -14,7 +14,7 @@ import {useState} from 'react';
 import {Marker} from '@project/components/map/marker';
 import {ProspectiveAsset} from '@project/components/discovery/types';
 import {currencyFormatter, numberFormatter} from '@p/utils/number_formatter';
-import SideBarView from '../views/side_bar_view';
+import SideBarView from '@project/components/views/side_bar_view';
 import {
     CalendarIcon,
     CashIcon,
@@ -38,7 +38,7 @@ const DiscoveryContent = ({assets, onAssetClick}: DiscoveryContentProps) => {
         : settings.defaultDiscoveryPageMapLocation;
 
     const assetMarkerArray = [
-        ...assets.filter((asset) => asset !== selectedAsset),
+        ...assets.filter(asset => asset !== selectedAsset),
     ];
 
     if (selectedAsset) {
@@ -69,7 +69,7 @@ const DiscoveryContent = ({assets, onAssetClick}: DiscoveryContentProps) => {
                         zoom={selectedAsset ? 5 : 3}
                         width="100%"
                         height="70vh"
-                        markers={assetMarkerArray.map((asset) => (
+                        markers={assetMarkerArray.map(asset => (
                             <Marker
                                 lng={asset.location.lng}
                                 lat={asset.location.lat}

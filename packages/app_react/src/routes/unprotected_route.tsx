@@ -1,6 +1,6 @@
 import {useAuth} from '@project/hooks/use_auth';
 import {Navigate} from 'react-router-dom';
-import LoadingView from '../views/loading_view';
+import LoadingView from '@project/components/views/loading_view';
 import {ROUTES} from '../routes/routes';
 
 interface UnprotectedRouteProps {

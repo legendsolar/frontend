@@ -1,4 +1,4 @@
-import DefaultView from '../views/default_view';
+import DefaultView from '@project/components/views/default_view';
 import {NavBar} from '@project/components/nav/nav_bar';
 import useNavBar from '@project/hooks/use_nav_bar';
 import PortfolioContent from '../content/portfolio_content';

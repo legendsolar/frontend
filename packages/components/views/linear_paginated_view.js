@@ -1,10 +1,10 @@
 import {Typography, List, ListItemButton} from '@mui/material';
 import PropTypes from 'prop-types';
 import SideBarView from '../views/side_bar_view';
-import {SideBar} from '@project/components/utils/sidebar_component';
+import {SideBar} from '../utils/sidebar_component';
 import {useReducer} from 'react';
-import {Component} from '@project/components/basics/component';
-import {PageinatedComponent} from '@project/components/utils/paginated_component';
+import {Component} from '../basics/component';
+import {PageinatedComponent} from '../utils/paginated_component';
 
 const LinearPageinatedView = ({pageContent, header, pageIndex}) => {
     const titles = pageContent.map((content, index) => {

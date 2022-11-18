@@ -1,20 +1,13 @@
-import DefaultView from '../views/default_view';
+import DefaultView from '@project/components/views/default_view';
 import {NavBar} from '@project/components/nav/nav_bar';
 import useNavBar from '@project/hooks/use_nav_bar';
 import DocumentGridContent from '../content/document_grid_content';
 import {DataGridDateRange} from '@p/utils/date_range';
 import {useEffect, useState} from 'react';
-import {documents} from '../static/placeholder_documents';
-import FullPageView from '../views/full_page_view';
+import FullPageView from '@project/components/views/full_page_view';
 
 import EmptyContent from '../content/empty_content';
-import {
-    differenceInMonths,
-    differenceInQuarters,
-    differenceInWeeks,
-} from 'date-fns';
 import delay from '@p/utils/delay';
-import {documents as testDocuments} from '../static/placeholder_documents';
 import {useStorage} from '@project/hooks/use_storage';
 import {Document} from '@project/components/documents/types';
 
@@ -32,9 +25,9 @@ const DocumentPage = () => {
 
     useEffect(() => {
         setLoading(true);
-        getUserFilesWithMetaData().then((data) => {
+        getUserFilesWithMetaData().then(data => {
             setDocuments(
-                data.map((file) => {
+                data.map(file => {
                     return {
                         id: file?.metadata?.fullPath,
                         name:
@@ -63,11 +56,11 @@ const DocumentPage = () => {
                 loading={loading}
                 documents={documents}
                 onDownloadDocument={() => delay(1000)}
-                onChangeDateRange={(range) => {
+                onChangeDateRange={range => {
                     setDateRange(range);
                     return delay(1000).then(() => {});
                 }}
-                onChangeAsset={(asset) => {
+                onChangeAsset={asset => {
                     setAsset(asset);
                     return delay(1000).then(() => {});
                 }}

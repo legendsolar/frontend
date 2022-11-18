@@ -14,7 +14,7 @@ import {
     useMediaQuery,
     useTheme,
 } from '@mui/material';
-import SideBarNavView from '../views/side_bar_view';
+import SideBarNavView from '@project/components/views/side_bar_view';
 import {ScrollToSidebar} from '@project/components/nav';
 import {MemberHeader} from '@project/components/user/member_header';
 import {TransferGrid} from '@project/components/transfers/transfer_grid';
@@ -27,7 +27,7 @@ import {
 import {LoadingComponent} from '@project/components/basics/loading_component';
 import {AccountListComponent} from '@project/components/transfers/account_list_component';
 import useNavBar from '@project/hooks/use_nav_bar';
-import DefaultView from '../views/default_view';
+import DefaultView from '@project/components/views/default_view';
 import {ComponentDivider} from '@project/components/basics/component_divider';
 import {AccreditationStatus} from '@project/components/user/accreditation_status';
 import {ACCREDITATION_OPTIONS} from '../content/verify_accreditation_content';
@@ -199,7 +199,7 @@ const AccountPage = () => {
 
                         <Component
                             standardWidth={false}
-                            ref={(el) => (contentRefs.current[0] = el)}
+                            ref={el => (contentRefs.current[0] = el)}
                         >
                             <Stack
                                 direction={'row'}
@@ -237,11 +237,11 @@ const AccountPage = () => {
                                 <ModifyUserInfo
                                     initialValues={userInfoInitial}
                                     onSubmit={() => {}}
-                                    isValid={(valid) =>
+                                    isValid={valid =>
                                         setUserDataEditValid(valid)
                                     }
                                     disabled={!userDataEditMode}
-                                    handleChange={(values) => setValues(values)}
+                                    handleChange={values => setValues(values)}
                                 ></ModifyUserInfo>
                             )}
 
@@ -263,7 +263,7 @@ const AccountPage = () => {
                         <Component
                             disabled={false}
                             standardWidth={false}
-                            ref={(el) => (contentRefs.current[1] = el)}
+                            ref={el => (contentRefs.current[1] = el)}
                         >
                             <Typography variant={'smallHeadline' as any}>
                                 Accreditation
@@ -271,13 +271,12 @@ const AccountPage = () => {
 
                             <ComponentDivider></ComponentDivider>
                             <AccreditationStatus
-                                options={ACCREDITATION_OPTIONS.filter(
-                                    (option) =>
-                                        accreditation
-                                            ? accreditation?.includes(
-                                                  option.accreditationOption,
-                                              )
-                                            : false,
+                                options={ACCREDITATION_OPTIONS.filter(option =>
+                                    accreditation
+                                        ? accreditation?.includes(
+                                              option.accreditationOption,
+                                          )
+                                        : false,
                                 )}
                             ></AccreditationStatus>
                         </Component>
@@ -285,12 +284,12 @@ const AccountPage = () => {
                         <Component
                             disabled={false}
                             standardWidth={false}
-                            ref={(el) => (contentRefs.current[2] = el)}
+                            ref={el => (contentRefs.current[2] = el)}
                         >
                             {!accountsLoading && (
                                 <AccountListComponent
                                     accounts={accounts}
-                                    onCreateTransfer={(account) => {}}
+                                    onCreateTransfer={account => {}}
                                     onAddAccount={
                                         ready ? () => open() : () => {}
                                     }

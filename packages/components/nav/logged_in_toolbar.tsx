@@ -1,15 +1,11 @@
 import { Stack, Button, Typography, SwipeableDrawer } from "@mui/material";
-import { WalletIcon } from "@project/components/icons/icons";
+import { WalletIcon } from "../icons/icons";
 import { ROUTES } from "../../app_react/src/routes/routes";
-import { LoadingText } from "@project/components/utils/loading_text";
 import { useState } from "react";
 import MenuSharpIcon from "@mui/icons-material/MenuSharp";
 import CancelSharpIcon from "@mui/icons-material/CancelSharp";
-import { CircledIcon } from "@project/components/icons/icons";
-import { IconButton } from "@mui/material";
-import { BankIcon } from "@project/components/icons/emoji_icons";
-
-import { TypewriterText } from "@project/components/utils/typewriter_text";
+import { CircledIcon } from "../icons/icons";
+import { TypewriterText } from "../utils/typewriter_text";
 
 const LoggedInToolbar = ({
   loading,

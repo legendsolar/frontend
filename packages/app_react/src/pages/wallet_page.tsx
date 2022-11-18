@@ -2,7 +2,7 @@ import {useRef, useEffect, useState} from 'react';
 import {useAuth} from '@project/hooks/use_auth';
 
 import {Paper, Stack, Button, Typography} from '@mui/material';
-import SideBarNavView from '../views/side_bar_view';
+import SideBarNavView from '@project/components/views/side_bar_view';
 
 import {CreateTransferComponent} from '@project/components/transfers/create_transfer_component';
 import {Component} from '@project/components/basics/component';
@@ -15,7 +15,7 @@ import {useAccount} from '@project/hooks/use_accounts';
 
 import useNavBar from '@project/hooks/use_nav_bar';
 import {NavBar} from '@project/components/nav/nav_bar';
-import DefaultView from '../views/default_view';
+import DefaultView from '@project/components/views/default_view';
 import {BankAccount, CreateAccountInput, CreateTransferInput} from '@p/schema';
 import {
     transformPlaidDataToCreateAccountInput,
@@ -27,8 +27,12 @@ import {usePlaid} from '@project/hooks/use_plaid';
 
 const WalletPage = () => {
     const navBarProps = useNavBar();
-    const {useAccounts, useWallet, useCreateLinkToken, useDeleteAccount} =
-        useAccount();
+    const {
+        useAccounts,
+        useWallet,
+        useCreateLinkToken,
+        useDeleteAccount,
+    } = useAccount();
 
     const {useRecentTransfers, useCreateTransfer} = useTransfer();
     const [tokenRequested, setTokenRequested] = useState(false);
@@ -72,7 +76,7 @@ const WalletPage = () => {
         createTransfer(newTransfer);
     };
 
-    const onDeleteAccount = (account) => {
+    const onDeleteAccount = account => {
         return deleteAccount({
             accountId: account?.id,
         });
@@ -157,12 +161,12 @@ const WalletPage = () => {
 
                         <Component
                             standardWidth={false}
-                            ref={(el) => (contentRefs.current[1] = el)}
+                            ref={el => (contentRefs.current[1] = el)}
                         >
                             {!accountsLoading && (
                                 <AccountListComponent
                                     accounts={accounts}
-                                    onCreateTransfer={(account) => {}}
+                                    onCreateTransfer={account => {}}
                                     onAddAccount={
                                         ready ? () => open() : () => {}
                                     }

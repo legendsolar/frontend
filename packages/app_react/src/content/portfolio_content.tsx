@@ -3,7 +3,7 @@ import {ContentDivider} from '@project/components/basics/content_divider';
 import {TransferDataGrid} from '@project/components/transfers/transfer_data_grid';
 import {Component} from '@project/components/basics/component';
 import RealTimeContent from './real_time_content';
-import SideBarView from '../views/side_bar_view';
+import SideBarView from '@project/components/views/side_bar_view';
 import {Facility, GenerationDatum, Transfer} from '@p/schema';
 import {InvestmentSupportComponent} from '@project/components/invest/investment_support_component';
 import IconAccordian from '@project/components/utils/icon_accordian';
@@ -53,7 +53,7 @@ const PortfolioContent = ({
 
     if (!facility) return <EmptyContent />;
 
-    const nonNullFacility = facility as unknown as Facility;
+    const nonNullFacility = (facility as unknown) as Facility;
 
     const {
         generationMetaData,

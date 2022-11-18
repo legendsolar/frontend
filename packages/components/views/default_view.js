@@ -1,8 +1,12 @@
-import {Box, Stack, Paper, Grid, Container} from '@mui/material';
-import {Footer} from '@project/components/footer';
-import {MainContentBox} from '@project/components/basics';
+import {Box} from '@mui/material';
+import {Footer} from '../footer';
+import {MainContentBox} from '../basics';
 
-const FullPageView = ({children, navBar}) => {
+const DefaultView = ({
+    children,
+    navBar,
+    backgroundColor = 'whiteHaze.main',
+}) => {
     return (
         <Box
             justifyContent="center"
@@ -22,7 +26,7 @@ const FullPageView = ({children, navBar}) => {
                 sx={{
                     width: '100%',
                     height: '100%',
-                    backgroundColor: 'white.main',
+                    backgroundColor: backgroundColor,
                     zIndex: -2,
                     transform: 'translate3d(0, 0, -10px)',
                 }}
@@ -38,15 +42,14 @@ const FullPageView = ({children, navBar}) => {
                     transform: 'translate3d(0, 0, -5px)',
                 }}
             ></Box>
-
-            <MainContentBox>{navBar}</MainContentBox>
-            <Box sx={{minHeight: '100vh'}}>{children}</Box>
-
             <MainContentBox>
+                {navBar}
+                <Box sx={{minHeight: '100vh'}}>{children}</Box>
+
                 <Footer></Footer>
             </MainContentBox>
         </Box>
     );
 };
 
-export default FullPageView;
+export default DefaultView;

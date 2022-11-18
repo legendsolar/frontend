@@ -6,7 +6,7 @@ import {useUser} from '@project/hooks/use_user';
 import useSignIn from '@project/hooks/use_sign_in';
 import {useState} from 'react';
 
-import DualPaneView from '../views/dual_pane_view';
+import DualPaneView from '@project/components/views/dual_pane_view';
 import WomanPanelsSVG from '@project/components/assets/images/women_panel.svg';
 import PanelInfinitySVG from '@project/components/assets/images/panel_infinity.svg';
 import {SignUpOptionComponent} from '@project/components/signup/sign_up_option_component';

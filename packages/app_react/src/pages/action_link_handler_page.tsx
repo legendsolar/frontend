@@ -1,11 +1,9 @@
 import useNavBar from '@project/hooks/use_nav_bar';
 import {useEffect, useCallback} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {useState} from 'react';
 import {ROUTES} from '../routes/routes';
-import {LOCAL_STORAGE_KEYS} from '../storage/local_storage_keys';
 import WomanPanelsSVG from '@project/components/assets/images/women_panel.svg';
-import DualPaneView from '../views/dual_pane_view';
+import DualPaneView from '@project/components/views/dual_pane_view';
 import {Typography, Link} from '@mui/material';
 import {
     getAuth,
@@ -17,15 +15,6 @@ import {ChangeEmailComponent} from '@project/components/inputs/change_email_comp
 import {Component} from '@project/components/basics/component';
 import {BackButton} from '@project/components/buttons/back_button';
 import {authErrorHandler} from '@p/utils/auth_error_translator';
-
-const emailParam = (url: string) => {
-    const objUrl = new URL(url);
-    if (objUrl.searchParams.has('email')) {
-        return objUrl.searchParams.get('email');
-    }
-
-    return null;
-};
 
 const ActionLinkHandlerPage = () => {
     const app = useFirebaseApp();

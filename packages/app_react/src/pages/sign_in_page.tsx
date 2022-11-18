@@ -5,7 +5,7 @@ import {MfaVerifyComponent} from '@project/components/inputs/mfa_verify_componen
 import {RecaptchaVerifier} from '@project/components/invisible/recaptcha_verifier';
 import WomanPanelsSVG from '@project/components/assets/images/women_panel.svg';
 import {BackButton} from '@project/components/buttons/back_button';
-import DualPaneView from '../views/dual_pane_view';
+import DualPaneView from '@project/components/views/dual_pane_view';
 import {Component} from '@project/components/basics/component';
 import {States} from '@project/hooks/use_sign_in';
 import {Typography} from '@mui/material';
