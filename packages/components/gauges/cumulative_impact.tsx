@@ -2,6 +2,7 @@ import { Typography, Chip, Stack } from "@mui/material";
 import { useState } from "react";
 import { Component, VertDivider } from "../basics";
 import { Unit, defined, mapRecursive } from "@p/utils";
+import { useThemeColor } from "../utils";
 
 export interface CumulativeImpactProps {
   title: string;
@@ -43,6 +44,8 @@ export const CumulativeImpact = ({
     defined(val) ? unit.format(val, false) : "-"
   );
 
+  const unitColor = useThemeColor(unit.color);
+
   return (
     <Component shadow resize={true}>
       <Stack justifyContent="space-between" spacing={8}>
@@ -57,13 +60,18 @@ export const CumulativeImpact = ({
         <Stack direction="row" justifyContent="space-evenly">
           <Stack
             justifyContent={"center"}
-            sx={{ display: { xs: "none", md: "inline" } }}
+            alignItems={"center"}
+            sx={{ display: { xs: "none", md: "flex" } }}
           >
             <Typography variant={"label" as any} align="center">
               AVG
             </Typography>
 
-            <Typography variant="subtitle1" align="center">
+            <Typography
+              variant="subtitle1"
+              align="center"
+              sx={{ "&&": { mt: 0 } }}
+            >
               {`${parsedCumulativeData[historyState].average}`}
             </Typography>
           </Stack>
@@ -72,7 +80,7 @@ export const CumulativeImpact = ({
             <Typography
               variant={"headline1" as any}
               sx={{
-                color: unit.color,
+                color: unitColor,
               }}
               align="center"
             >
@@ -87,13 +95,17 @@ export const CumulativeImpact = ({
 
           <Stack
             justifyContent={"center"}
-            sx={{ display: { xs: "none", md: "inline" } }}
+            sx={{ display: { xs: "none", md: "flex" } }}
           >
             <Typography align="center" variant={"label" as any}>
               BEST
             </Typography>
 
-            <Typography variant="subtitle1" align="center">
+            <Typography
+              variant="subtitle1"
+              align="center"
+              sx={{ "&&": { mt: 0 } }}
+            >
               {`${parsedCumulativeData[historyState].best}`}
             </Typography>
           </Stack>

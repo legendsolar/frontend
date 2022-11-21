@@ -4,15 +4,23 @@ import {
   CumulativeImpact,
   CumulativeImpactProps,
 } from "@project/components/gauges";
-import { energy } from "@p/utils";
+import { energy, carbonEnglish, dollars } from "@p/utils";
+
+const unitOptions = {
+  energy,
+  carbonEnglish,
+  dollars,
+};
 
 const meta: Meta = {
   title: "Cumulative Impact",
   component: CumulativeImpact,
   argTypes: {
-    children: {
+    unit: {
+      options: Object.keys(unitOptions),
+      mapping: unitOptions,
       control: {
-        type: "text",
+        type: "select",
       },
     },
   },
