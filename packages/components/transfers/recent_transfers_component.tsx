@@ -1,15 +1,26 @@
 import { Component } from "../basics/component";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Stack, Button } from "@mui/material";
 import { TransferGrid } from "./transfer_grid";
-import { loadingOrEmptyTransfers } from "static/placeholder_transfers";
+import { loadingOrEmptyTransfers } from "./placeholders";
 import { DisplayTransfer } from "./types";
 
-interface Props {
+interface RecentTransfersComponentProps {
   transfers: Array<DisplayTransfer>;
   loading: boolean;
+  widgetMode?: boolean;
+  maxTransferNumberToDisplay: number;
+  title: string;
+  onViewAllTransfers: () => void | undefined;
 }
 
-export const RecentTransfersComponent = ({ transfers, loading }: Props) => {
+export const RecentTransfersComponent = ({
+  transfers,
+  loading,
+  widgetMode = false,
+  maxTransferNumberToDisplay = 2,
+  title = "Recent Transfers",
+  onViewAllTransfers = undefined,
+}: RecentTransfersComponentProps) => {
   const emptyOrNull = !transfers || transfers?.length === 0;
 
   const emptyOrNullOrLoading = emptyOrNull || loading;
@@ -19,9 +30,9 @@ export const RecentTransfersComponent = ({ transfers, loading }: Props) => {
     : transfers;
 
   return (
-    <Component standardWidth={false}>
+    <Component standardWidth={widgetMode} shadow={widgetMode}>
       <Typography variant={"smallHeadline" as any} sx={{ opacity: 1 }}>
-        {emptyOrNull && !loading ? "No transfers yet" : "Recent Transfers"}
+        {emptyOrNull && !loading ? "No transfers yet" : title}
       </Typography>
 
       {emptyOrNullOrLoading ? (
@@ -38,15 +49,29 @@ export const RecentTransfersComponent = ({ transfers, loading }: Props) => {
           }
         >
           <TransferGrid
-            transfers={renderTransfers}
+            transfers={renderTransfers.slice(0, maxTransferNumberToDisplay)}
             loading={false}
           ></TransferGrid>
         </Box>
       ) : (
         <TransferGrid
-          transfers={renderTransfers}
+          transfers={renderTransfers.slice(0, maxTransferNumberToDisplay)}
           loading={false}
         ></TransferGrid>
+      )}
+
+      {onViewAllTransfers && (
+        <Stack direction={"row"} justifyContent="flex-end">
+          <Button variant="text" onClick={onViewAllTransfers}>
+            <Typography
+              variant={"smallLabel" as any}
+              color="legendaryGreen.main"
+              sx={{ ml: 1 }}
+            >
+              {"View All"}
+            </Typography>
+          </Button>
+        </Stack>
       )}
     </Component>
   );

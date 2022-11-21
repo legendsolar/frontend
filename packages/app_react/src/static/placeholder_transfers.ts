@@ -28,49 +28,6 @@ export const transferPageTransfers: Array<any> = [
     },
 ];
 
-export const loadingOrEmptyTransfers: Array<DisplayTransfer> = [
-    {
-        amount: '$--.--',
-        date: '6/10/2022',
-        title: 'Dividend Payment',
-        destinationName: 'Legends Wallet',
-        sourceName: 'Solar Holdings',
-        color: 'blackDusk',
-        statusName: '--',
-        type: TransferType.Dividend,
-    },
-    {
-        amount: '$--.--',
-        date: '6/10/2022',
-        title: 'Dividend Payment',
-        destinationName: 'Legends Wallet',
-        sourceName: 'Solar Holdings',
-        color: 'blackDusk',
-        statusName: '--',
-        type: TransferType.Dividend,
-    },
-    {
-        amount: '$--.--',
-        date: '6/10/2022',
-        title: 'Dividend Payment',
-        destinationName: 'Legends Wallet',
-        sourceName: 'Solar Holdings',
-        color: 'blackDusk',
-        statusName: '--',
-        type: TransferType.Dividend,
-    },
-    {
-        amount: '$--.--',
-        date: '6/10/2022',
-        title: 'Dividend Payment',
-        destinationName: 'Legends Wallet',
-        sourceName: 'Solar Holdings',
-        color: 'blackDusk',
-        statusName: '--',
-        type: TransferType.Dividend,
-    },
-];
-
 export const testDisplayTransfers: Array<DisplayTransfer> = [
     {
         amount: '$59.15',
