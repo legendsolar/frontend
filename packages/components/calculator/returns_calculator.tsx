@@ -600,19 +600,25 @@ export const ReturnsCalculator = ({
       <Stack
         sx={{
           pl: {
-            xs: 2,
+            xs: 0,
             md: 4,
           },
           pr: {
-            xs: 2,
+            xs: 0,
             md: 4,
           },
           pb: 2,
           pt: 0,
+          "&&": {
+            marginTop: {
+              xs: "0px",
+              md: "15px",
+            },
+          },
         }}
-        style={{
-          marginTop: "15px",
-        }}
+        // style={{
+        //   marginTop: "15px",
+        // }}
       >
         <Box
           sx={{
@@ -634,7 +640,7 @@ export const ReturnsCalculator = ({
               margin: "auto",
               top: "0px",
               marginTop: {
-                xs: "10px",
+                xs: "0px",
                 lg: "20px",
               },
               width: {
@@ -647,11 +653,23 @@ export const ReturnsCalculator = ({
           >
             <Stack
               sx={{
-                p: 2,
-                pr: 3,
-                pl: 3,
+                p: {
+                  xs: 2,
+                  md: 2,
+                },
+                pr: {
+                  xs: 4,
+                  md: 3,
+                },
+                pl: {
+                  xs: 4,
+                  md: 3,
+                },
                 backgroundColor: "whiteFog.main",
-                borderRadius: "5px",
+                borderRadius: {
+                  xs: "0px",
+                  md: "5px",
+                },
               }}
               alignItems="start"
               spacing={1}
