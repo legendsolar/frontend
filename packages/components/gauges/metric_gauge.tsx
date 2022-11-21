@@ -128,7 +128,7 @@ export const MetricGauge = ({
           >
             <g
               style={{
-                transform: `translate(${currentCircleOuterRadius}px,120%)`,
+                transform: `translate(${currentCircleOuterRadius}px,${dms.height}px)`,
               }}
             >
               <g
