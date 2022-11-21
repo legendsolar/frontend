@@ -1,10 +1,10 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
 import { MetricGauge, MetricGaugeProps } from "@project/components";
-import { energy, carbonEnglish, dollars } from "@p/utils";
+import { watts_kW, carbonEnglish, dollars } from "@p/utils";
 
 const unitOptions = {
-  energy,
+  watts_kW,
   carbonEnglish,
   dollars,
 };
@@ -40,7 +40,7 @@ Default.args = {
   min: 0,
   max: 10,
   currentValue: 5,
-  unit: energy,
+  unit: watts_kW,
   error: "",
   inactiveGaugeColor: "#F4F5F5",
   maxArcWidth: 360,

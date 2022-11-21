@@ -7,13 +7,6 @@ import { Component } from "../basics/component";
 import { Unit } from "@p/utils/units";
 import { useThemeColor } from "../utils/use_color";
 
-export const MetricGaugeDefaults = {
-  arcWidth: 90,
-  minFontDisplaySize: 26,
-  maxFontSize: 60,
-  maxArcWidth: 360,
-  inactiveGaugeColor: "#F4F5F5",
-};
 export interface MetricGaugeProps {
   min: number;
   max: number;
@@ -26,10 +19,10 @@ export interface MetricGaugeProps {
   error?: string;
   message?: string;
 
-  minFontDisplaySize: 26;
-  maxFontSize: 60;
-  maxArcWidth: 360;
-  inactiveGaugeColor: "#F4F5F5";
+  minFontDisplaySize?: number;
+  maxFontSize?: number;
+  maxArcWidth?: number;
+  inactiveGaugeColor?: string;
 }
 
 export const MetricGauge = ({

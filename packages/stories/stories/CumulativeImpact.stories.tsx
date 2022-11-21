@@ -4,10 +4,10 @@ import {
   CumulativeImpact,
   CumulativeImpactProps,
 } from "@project/components/gauges";
-import { energy, carbonEnglish, dollars } from "@p/utils";
+import { energy_kWh, carbonEnglish, dollars } from "@p/utils";
 
 const unitOptions = {
-  energy,
+  energy_kWh,
   carbonEnglish,
   dollars,
 };
@@ -63,5 +63,5 @@ Default.args = {
       best: 1000,
     },
   },
-  unit: energy,
+  unit: energy_kWh,
 } as CumulativeImpactProps;

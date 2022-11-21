@@ -5,7 +5,7 @@ import {
     ChangeEmailComponent,
     ChangeEmailComponentProps,
 } from '@project/components/inputs';
-import {energy} from '@p/utils';
+import {energy_kWh} from '@p/utils';
 
 const meta: Meta = {
     title: 'Change Email Component',

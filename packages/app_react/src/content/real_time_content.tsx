@@ -6,7 +6,7 @@ import {CumulativeImpact, MetricGauge} from '@project/components/gauges';
 import {summaryToCumulativeImpact} from '@project/components/gauges/transformers';
 import {eraserRed} from '@project/components/static/colors';
 import {multiplyObject} from '@p/utils/object_utils';
-import {carbonEnglish, dollars, energy} from '@p/utils';
+import {carbonEnglish, dollars, energy_kWh} from '@p/utils';
 import {WeatherLive} from '@project/components/weather';
 
 interface RealTimeContent {
@@ -108,7 +108,7 @@ const RealTimeContent = ({
                                 summaryToCumulativeImpact(generationTotals),
                                 1,
                             )}
-                            unit={energy}
+                            unit={energy_kWh}
                         ></CumulativeImpact>
                     </Stack>
                 </Grid>
@@ -143,7 +143,7 @@ const RealTimeContent = ({
                             max={generationMetaData.max_kW}
                             currentValue={current_kW}
                             message={message}
-                            unit={energy}
+                            unit={energy_kWh}
                         ></MetricGauge>
                     </Stack>
                 </Grid>

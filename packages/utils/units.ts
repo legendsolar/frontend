@@ -3,7 +3,8 @@ import { currencyFormatter, numberFormatter } from "./number_formatter";
 
 export enum UnitEnum {
   DOLLARS = "DOLLARS",
-  ENERGY = "ENERGY",
+  ENERGY_KWH = "ENERGY_KWH",
+  WATTS_KW = "WATTS_KW",
   CARBON = "CARBON",
   PANELS = "PANELS",
 }
@@ -34,9 +35,9 @@ export const dollars: Unit = {
   },
 };
 
-export const energy: Unit = {
+export const energy_kWh: Unit = {
   unit: "KWH",
-  enum: UnitEnum.ENERGY,
+  enum: UnitEnum.ENERGY_KWH,
   unitSubHeading: "",
   unitDescription: "KWh",
   title: "Generation",
@@ -44,6 +45,22 @@ export const energy: Unit = {
   format: (u: number, includeUnit: boolean = true, width?: number) => {
     if (includeUnit) {
       return `${numberFormatter(1000 * u, width, true)}Wh`;
+    } else {
+      return `${numberFormatter(u, width, true)}`;
+    }
+  },
+};
+
+export const watts_kW: Unit = {
+  unit: "KW",
+  enum: UnitEnum.WATTS_KW,
+  unitSubHeading: "",
+  unitDescription: "KW",
+  title: "Generation",
+  color: "pencilYellow",
+  format: (u: number, includeUnit: boolean = true, width?: number) => {
+    if (includeUnit) {
+      return `${numberFormatter(1000 * u, width, true)}W`;
     } else {
       return `${numberFormatter(u, width, true)}`;
     }

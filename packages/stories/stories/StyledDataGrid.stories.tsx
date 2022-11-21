@@ -5,7 +5,7 @@ import {
   StyledDataGrid,
   StyledDataGridProps,
 } from "@project/components/data_grid";
-import { energy } from "@p/utils";
+import { energy_kWh } from "@p/utils";
 
 const meta: Meta = {
   title: "Styled Data Grid",

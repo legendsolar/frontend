@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const openWeatherApiKey = "8891a27f5e9762cd6d64fd19264db5d6";
 
-function loadWeatherPromise(apiKey, lat, long) {
+function loadWeatherPromise(apiKey: string, lat: number, long: number) {
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=imperial`;
   return fetch(url)
     .then((response) => {
@@ -14,7 +14,12 @@ function loadWeatherPromise(apiKey, lat, long) {
     });
 }
 
-export const WeatherLive = ({ lat, lng }) => {
+export interface WeatherLiveProps {
+  lat: number;
+  lng: number;
+}
+
+export const WeatherLive = ({ lat, lng }: WeatherLiveProps) => {
   const [weatherObj, setWeatherObj] = useState<any>({});
 
   useEffect(() => {
