@@ -7,6 +7,13 @@ import { Component } from "../basics/component";
 import { Unit } from "@p/utils/units";
 import { useThemeColor } from "../utils/use_color";
 
+export const MetricGaugeDefaults = {
+  arcWidth: 90,
+  minFontDisplaySize: 26,
+  maxFontSize: 60,
+  maxArcWidth: 360,
+  inactiveGaugeColor: "#F4F5F5",
+};
 export interface MetricGaugeProps {
   min: number;
   max: number;
@@ -14,10 +21,15 @@ export interface MetricGaugeProps {
   title: string;
   unit: Unit;
 
+  circleRadius?: number;
   arcWidth?: number;
-  gaugeAngleTravel?: number;
   error?: string;
   message?: string;
+
+  minFontDisplaySize: 26;
+  maxFontSize: 60;
+  maxArcWidth: 360;
+  inactiveGaugeColor: "#F4F5F5";
 }
 
 export const MetricGauge = ({
@@ -26,11 +38,14 @@ export const MetricGauge = ({
   currentValue,
   unit,
   message = "",
-  circleRadius = 150 - 45,
+  circleRadius = 180 - 45,
   arcWidth = 90,
-  gaugeAngleTravel = 180,
   error,
   title,
+  inactiveGaugeColor = "#F4F5F5",
+  maxArcWidth = 360,
+  maxFontSize = 60,
+  minFontDisplaySize = 26,
 }: MetricGaugeProps) => {
   const { ref, dms } = useChartDimensions({
     marginLeft: 0,
@@ -39,7 +54,10 @@ export const MetricGauge = ({
     marginBottom: 0,
   });
 
+  const gaugeAngleTravel = 180;
+
   const color = useThemeColor(unit.color);
+  const inactiveColor = useThemeColor(inactiveGaugeColor);
 
   const normalizedCurrentValue = error
     ? 0.5
@@ -66,11 +84,21 @@ export const MetricGauge = ({
     normalizedCurrentValue * strokeTotalLength * (gaugeAngleTravel / 360.0);
 
   const getGaugeNumber = () => {
-    if (currentCircleInnerRadius > 20) {
+    if (currentCircleInnerRadius > minFontDisplaySize) {
       return error ? "--" : unit.format(currentValue, false, 3);
     }
 
     return "";
+  };
+
+  const getFontSize = () => {
+    const calc = currentCircleInnerRadius - 6;
+
+    if (calc > maxFontSize) {
+      return maxFontSize;
+    }
+
+    return calc;
   };
 
   return (
@@ -89,8 +117,9 @@ export const MetricGauge = ({
           style={{
             position: "relative",
             width: "100%",
-            height: 150,
-
+            height: maxArcWidth / 2 + "px",
+            maxWidth: maxArcWidth + "px",
+            minWidth: arcWidth * 2 + "px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "end",
@@ -98,15 +127,15 @@ export const MetricGauge = ({
           }}
         >
           <svg
-            ref={ref as any}
             style={{
               width: "100%",
-              maxWidth: "300px",
+              height: "100%",
             }}
+            ref={ref as any}
           >
             <g
               style={{
-                transform: `translate(${currentCircleOuterRadius}px,100%)`,
+                transform: `translate(${currentCircleOuterRadius}px,120%)`,
               }}
             >
               <g
@@ -118,7 +147,7 @@ export const MetricGauge = ({
               >
                 <circle
                   style={{
-                    stroke: "#F4F5f5",
+                    stroke: inactiveColor,
                   }}
                   r={currentCircleRadius}
                 />
@@ -157,8 +186,8 @@ export const MetricGauge = ({
               variant={"headline1" as any}
               sx={{
                 mt: "auto",
-                lineHeight: currentCircleInnerRadius - 10 + "px",
-                fontSize: currentCircleInnerRadius - 3 + "px",
+                lineHeight: getFontSize() - 10 + "px",
+                fontSize: getFontSize() + "px",
               }}
             >
               {getGaugeNumber()}
@@ -171,7 +200,7 @@ export const MetricGauge = ({
           sx={{
             mt: 1,
             width: "100%",
-            maxWidth: "300px",
+            maxWidth: maxArcWidth + "px",
           }}
         >
           <Typography variant={"subtitle3" as any}>
