@@ -17,6 +17,13 @@ export interface Unit {
   unitSubHeading?: string;
   color: string;
   format(u: number, includeUnit?: boolean, width?: number): string;
+  formatWithUnit(
+    u: number,
+    width?: number
+  ): {
+    value: string;
+    unit: string;
+  };
 }
 
 export const dollars: Unit = {
@@ -32,6 +39,12 @@ export const dollars: Unit = {
     } else {
       return `${numberFormatter(u, width, false)}`;
     }
+  },
+  formatWithUnit: (u: number, width?: number) => {
+    return {
+      value: `${numberFormatter(u, width, false)}`,
+      unit: "$",
+    };
   },
 };
 
@@ -49,6 +62,26 @@ export const energy_kWh: Unit = {
       return `${numberFormatter(u, width, true)}`;
     }
   },
+  formatWithUnit: (u: number, width?: number) => {
+    const number = numberFormatter(u, width, true);
+    const matches = number.match(/([\d.]+)(\w+)/);
+
+    if (matches && matches.length === 2) {
+      if (matches[1] === "K") {
+        matches[1] = "k";
+      }
+
+      return {
+        value: matches[0],
+        unit: matches[1] + "Wh",
+      };
+    } else {
+      return {
+        value: "-",
+        unit: "kWh",
+      };
+    }
+  },
 };
 
 export const watts_kW: Unit = {
@@ -63,6 +96,27 @@ export const watts_kW: Unit = {
       return `${numberFormatter(1000 * u, width, true)}W`;
     } else {
       return `${numberFormatter(u, width, true)}`;
+    }
+  },
+
+  formatWithUnit: (u: number, width?: number) => {
+    const number = numberFormatter(u, width, true);
+    const matches = number.match(/([\d.]+)(\w+)/);
+
+    if (matches && matches.length === 2) {
+      if (matches[1] === "K") {
+        matches[1] = "k";
+      }
+
+      return {
+        value: matches[0],
+        unit: matches[1] + "W",
+      };
+    } else {
+      return {
+        value: "-",
+        unit: "kW",
+      };
     }
   },
 };
@@ -101,6 +155,19 @@ export const carbonEnglish: Unit = {
       return `${numberFormatter(u, width, true)}`;
     }
   },
+  formatWithUnit: (u: number, width?: number) => {
+    if (u > 2000) {
+      return {
+        value: numberFormatter(u / 2000, width, false),
+        unit: "tons",
+      };
+    } else {
+      return {
+        value: numberFormatter(u, width, false),
+        unit: "lbs",
+      };
+    }
+  },
 };
 
 export const panels: Unit = {
@@ -121,5 +188,11 @@ export const panels: Unit = {
     } else {
       return `${number.charAt(0).toUpperCase() + number.slice(1)} panels`;
     }
+  },
+  formatWithUnit: (u: number, width?: number) => {
+    return {
+      value: numberFormatter(u, width, false),
+      unit: "panels",
+    };
   },
 };
