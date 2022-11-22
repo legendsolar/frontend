@@ -8,9 +8,9 @@ interface RecentTransfersComponentProps {
   transfers: Array<DisplayTransfer>;
   loading: boolean;
   widgetMode?: boolean;
-  maxTransferNumberToDisplay: number;
+  maxTransferNumberToDisplay?: number;
   title: string;
-  onViewAllTransfers: () => void | undefined;
+  onViewAllTransfers?: () => void | undefined;
 }
 
 export const RecentTransfersComponent = ({
@@ -51,12 +51,14 @@ export const RecentTransfersComponent = ({
           <TransferGrid
             transfers={renderTransfers.slice(0, maxTransferNumberToDisplay)}
             loading={false}
+            constrained={widgetMode}
           ></TransferGrid>
         </Box>
       ) : (
         <TransferGrid
           transfers={renderTransfers.slice(0, maxTransferNumberToDisplay)}
           loading={false}
+          constrained={widgetMode}
         ></TransferGrid>
       )}
 

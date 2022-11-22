@@ -27,12 +27,8 @@ import {usePlaid} from '@project/hooks/use_plaid';
 
 const WalletPage = () => {
     const navBarProps = useNavBar();
-    const {
-        useAccounts,
-        useWallet,
-        useCreateLinkToken,
-        useDeleteAccount,
-    } = useAccount();
+    const {useAccounts, useWallet, useCreateLinkToken, useDeleteAccount} =
+        useAccount();
 
     const {useRecentTransfers, useCreateTransfer} = useTransfer();
     const [tokenRequested, setTokenRequested] = useState(false);
@@ -76,7 +72,7 @@ const WalletPage = () => {
         createTransfer(newTransfer);
     };
 
-    const onDeleteAccount = account => {
+    const onDeleteAccount = (account) => {
         return deleteAccount({
             accountId: account?.id,
         });
@@ -157,16 +153,18 @@ const WalletPage = () => {
                         <RecentTransfersComponent
                             transfers={displayTransfers}
                             loading={recentTransfersLoading}
+                            title={'Recent Transfers'}
+                            maxTransferNumberToDisplay={4}
                         ></RecentTransfersComponent>
 
                         <Component
                             standardWidth={false}
-                            ref={el => (contentRefs.current[1] = el)}
+                            ref={(el) => (contentRefs.current[1] = el)}
                         >
                             {!accountsLoading && (
                                 <AccountListComponent
                                     accounts={accounts}
-                                    onCreateTransfer={account => {}}
+                                    onCreateTransfer={(account) => {}}
                                     onAddAccount={
                                         ready ? () => open() : () => {}
                                     }

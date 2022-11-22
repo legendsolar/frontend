@@ -1,5 +1,5 @@
 import {Component} from '@project/components/basics/component';
-import {Facility, GenerationDatum} from '@p/schema';
+import {Facility, GenerationDatum, TransferType} from '@p/schema';
 import {Worm} from '@project/components/charts/worm';
 import {Stack, Typography, Grid} from '@mui/material';
 import {CumulativeImpact, MetricGauge} from '@project/components/gauges';
@@ -8,9 +8,12 @@ import {eraserRed} from '@project/components/static/colors';
 import {multiplyObject} from '@p/utils/object_utils';
 import {carbonEnglish, dollars, energy_kWh} from '@p/utils';
 import {WeatherLive} from '@project/components/weather';
+import {RecentTransfersComponent} from '@project/components/transfers';
+import {DisplayTransfer} from '@project/components/transfers/types';
 
 interface RealTimeContent {
     facility: Facility;
+    transfers: Array<DisplayTransfer> | undefined;
     generation: Array<GenerationDatum> | undefined;
     dataStale: boolean;
     message?: string;
@@ -18,6 +21,7 @@ interface RealTimeContent {
 
 const RealTimeContent = ({
     facility: {generationMetaData, generationTotals, earningsTotals, location},
+    transfers,
     generation,
     dataStale,
     message = '',
@@ -127,6 +131,17 @@ const RealTimeContent = ({
                             message={message}
                             unit={carbonEnglish}
                         ></MetricGauge>
+
+                        {transfers && (
+                            <RecentTransfersComponent
+                                transfers={transfers.filter(
+                                    (t) => t.type === TransferType.Dividend,
+                                )}
+                                loading={false}
+                                title={'Dividends'}
+                                widgetMode={true}
+                            ></RecentTransfersComponent>
+                        )}
 
                         <CumulativeImpact
                             title={'Carbon'}

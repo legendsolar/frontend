@@ -26,6 +26,7 @@ import {siteCopy} from '../static/copy';
 import {MetricComponent} from '@project/components/metrics/metric_component';
 import {MapTerrain3D} from '@project/components/map/map_terrain_3d';
 import {TooltipMarker} from '@project/components/map/tooltip_marker';
+import {transferTransformer} from '@project/hooks/transformers/transfer_transforms';
 interface PortfolioContentProps {
     loading?: boolean;
     title?: string;
@@ -53,7 +54,7 @@ const PortfolioContent = ({
 
     if (!facility) return <EmptyContent />;
 
-    const nonNullFacility = (facility as unknown) as Facility;
+    const nonNullFacility = facility as unknown as Facility;
 
     const {
         generationMetaData,
@@ -245,6 +246,7 @@ const PortfolioContent = ({
 
                             <RealTimeContent
                                 facility={nonNullFacility}
+                                transfers={transfers.map(transferTransformer)}
                                 generation={generation}
                                 dataStale={dataStale}
                                 message={subtitle}
