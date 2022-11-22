@@ -51,7 +51,7 @@ export const dollars: Unit = {
 export const energy_kWh: Unit = {
   unit: "KWH",
   enum: UnitEnum.ENERGY_KWH,
-  unitSubHeading: "",
+  unitSubHeading: "per hour",
   unitDescription: "KWh",
   title: "Generation",
   color: "pencilYellow",
@@ -87,8 +87,8 @@ export const energy_kWh: Unit = {
 export const watts_kW: Unit = {
   unit: "KW",
   enum: UnitEnum.WATTS_KW,
-  unitSubHeading: "",
-  unitDescription: "Kilowatts",
+  unitSubHeading: "per hour",
+  unitDescription: "Watts",
   title: "Generation",
   color: "pencilYellow",
   format: (u: number, includeUnit: boolean = true, width?: number) => {

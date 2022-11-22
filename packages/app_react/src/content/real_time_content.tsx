@@ -6,7 +6,7 @@ import {CumulativeImpact, MetricGauge} from '@project/components/gauges';
 import {summaryToCumulativeImpact} from '@project/components/gauges/transformers';
 import {eraserRed} from '@project/components/static/colors';
 import {multiplyObject} from '@p/utils/object_utils';
-import {carbonEnglish, dollars, energy_kWh} from '@p/utils';
+import {carbonEnglish, dollars, energy_kWh, watts_kW} from '@p/utils';
 import {WeatherLive} from '@project/components/weather';
 import {RecentTransfersComponent} from '@project/components/transfers';
 import {DisplayTransfer} from '@project/components/transfers/types';
@@ -85,7 +85,7 @@ const RealTimeContent = ({
                             lng={location?.lng || -74.006111}
                         ></WeatherLive>
                         <CumulativeImpact
-                            title="Earnings"
+                            title="Cash earned"
                             cumulativeData={multiplyObject(
                                 summaryToCumulativeImpact(earningsTotals),
                                 generationMetaData.dollar_per_kWh,
@@ -93,7 +93,7 @@ const RealTimeContent = ({
                             unit={dollars}
                         ></CumulativeImpact>
                         <MetricGauge
-                            title="Earnings"
+                            title="Cash earned"
                             min={0}
                             max={
                                 generationMetaData.max_kW *
@@ -107,7 +107,7 @@ const RealTimeContent = ({
                         ></MetricGauge>
 
                         <CumulativeImpact
-                            title="Generation"
+                            title="Electricity generated"
                             cumulativeData={multiplyObject(
                                 summaryToCumulativeImpact(generationTotals),
                                 1,
@@ -119,7 +119,7 @@ const RealTimeContent = ({
                 <Grid item xs={12} lg={6}>
                     <Stack spacing={4}>
                         <MetricGauge
-                            title="Carbon"
+                            title="Carbon averted"
                             min={0}
                             max={
                                 generationMetaData.max_kW *
@@ -144,7 +144,7 @@ const RealTimeContent = ({
                         )}
 
                         <CumulativeImpact
-                            title={'Carbon'}
+                            title={'Carbon averted'}
                             cumulativeData={multiplyObject(
                                 summaryToCumulativeImpact(generationTotals),
                                 generationMetaData.co2_per_kWh,
@@ -153,12 +153,12 @@ const RealTimeContent = ({
                         ></CumulativeImpact>
 
                         <MetricGauge
-                            title="Generation"
+                            title="Electricity generated"
                             min={0}
                             max={generationMetaData.max_kW}
                             currentValue={current_kW}
                             message={message}
-                            unit={energy_kWh}
+                            unit={watts_kW}
                         ></MetricGauge>
                     </Stack>
                 </Grid>
