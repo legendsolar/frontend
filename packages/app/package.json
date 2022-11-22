@@ -12,6 +12,9 @@
   "dependencies": {
     "@apollo/client": "^3.7.1",
     "@project/components": "*",
+    "@project/hooks": "*",
+    "@p/schema": "*",
+    "@p/utils": "*",
     "@types/jsonwebtoken": "^8.5.9",
     "i": "^0.3.7",
     "jsonwebtoken": "^8.5.1",

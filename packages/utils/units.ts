@@ -88,7 +88,7 @@ export const watts_kW: Unit = {
   unit: "KW",
   enum: UnitEnum.WATTS_KW,
   unitSubHeading: "",
-  unitDescription: "KW",
+  unitDescription: "Kilowatts",
   title: "Generation",
   color: "pencilYellow",
   format: (u: number, includeUnit: boolean = true, width?: number) => {
