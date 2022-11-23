@@ -66,7 +66,7 @@ export const energy_kWh: Unit = {
     const number = numberFormatter(u, width, true);
     const matches = number.match(/([\d.]+)(\w+)/);
 
-    if (matches && matches.length === 2) {
+    if (matches && matches.length >= 2) {
       if (matches[1] === "K") {
         matches[1] = "k";
       }
