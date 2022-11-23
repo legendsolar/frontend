@@ -1,9 +1,8 @@
 import {ErrorBoundary} from '@sentry/react';
-import React, {useState, useEffect, lazy, useCallback} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {nanoid} from 'nanoid';
 import qs from 'query-string';
-import {Component} from '@project/components/basics/component';
-import {Stack, Typography} from '@mui/material';
+import {Stack} from '@mui/material';
 import DualPaneView from '../views/dual_pane_view';
 import PersonPanelPinkSVG from '@project/components/assets/images/panel_person_pink.svg';
 import DefaultView from '../views/default_view';
