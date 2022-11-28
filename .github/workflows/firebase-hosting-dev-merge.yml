@@ -28,4 +28,5 @@ jobs:
           channelId: live
           projectId: legends-dev-362321
           target: dev-app
+          entryPoint: 'packages/app_react'
 
