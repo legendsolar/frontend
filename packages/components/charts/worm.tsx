@@ -33,7 +33,7 @@ export const defaultChartDisplayParams = {
   worm: {
     dayColor: tinycolor("#30A462").toRgbString(),
     nightColor: tinycolor("rgb(33,30,32)").toRgbString(),
-    nightThreshold_W: 500,
+    nightThreshold_W: 1000,
     width: 6.3,
   },
 

@@ -27,6 +27,8 @@ const TransactionPage = () => {
         transfers: recentTransfers,
     } = useRecentTransfers(25);
 
+    const {downloadAllTransfers} = useCloudFunctions();
+
     const content =
         (!recentTransfers && !recentTransfersLoading) || recentError ? (
             <EmptyContent
@@ -39,19 +41,20 @@ const TransactionPage = () => {
                 onDownloadCsv={async () => {
                     try {
                         setLoading(true);
-                        const out: any = await downloadAllTransfers();
-                        window.open(out.downloadLink);
+                        const link = await downloadAllTransfers();
+
+                        window.open(link);
                         setLoading(false);
                         return;
                     } catch (e) {
                         setLoading(false);
                     }
                 }}
-                onChangeDateRange={range => {
+                onChangeDateRange={(range) => {
                     setDateRange(range);
                     return Promise.resolve();
                 }}
-                onChangeAsset={asset => {
+                onChangeAsset={(asset) => {
                     setAsset(asset);
                     return delay(1000).then(() => {
                         return Promise.resolve();
@@ -62,8 +65,6 @@ const TransactionPage = () => {
                 dateRange={dateRange}
             ></TransferGridContent>
         );
-
-    const {downloadAllTransfers} = useCloudFunctions();
 
     return (
         <FullPageView navBar={<NavBar {...navBarProps}></NavBar>}>

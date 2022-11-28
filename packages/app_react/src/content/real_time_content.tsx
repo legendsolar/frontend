@@ -97,10 +97,15 @@ const RealTimeContent = ({
                             min={0}
                             max={
                                 generationMetaData.max_kW *
-                                generationMetaData.dollar_per_kWh
+                                (generationMetaData.dollar_per_kWh
+                                    ? generationMetaData.dollar_per_kWh
+                                    : 0.15)
                             }
                             currentValue={
-                                current_kW * generationMetaData.dollar_per_kWh
+                                current_kW *
+                                (generationMetaData.dollar_per_kWh
+                                    ? generationMetaData.dollar_per_kWh
+                                    : 0.15)
                             }
                             message={message}
                             unit={dollars}
