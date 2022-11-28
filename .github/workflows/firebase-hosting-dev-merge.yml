@@ -19,7 +19,8 @@ jobs:
       - name: Run Build 
         uses: borales/actions-yarn@v4
         with:
-          cmd: build:dev # will run `yarn build:dev` command
+          cmd: build:dev 
+          dir: 'packages/app_react'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
