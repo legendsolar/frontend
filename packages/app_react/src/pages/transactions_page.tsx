@@ -15,6 +15,7 @@ const TransactionPage = () => {
     const navBarProps = useNavBar();
     const [asset, setAsset] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const [link, setLink] = useState<string | undefined>(undefined);
     const [dateRange, setDateRange] = useState<DataGridDateRange>(
         DataGridDateRange.NONE,
     );
@@ -29,6 +30,10 @@ const TransactionPage = () => {
 
     const {downloadAllTransfers} = useCloudFunctions();
 
+    useEffect(() => {
+        downloadAllTransfers().then((link) => setLink(link));
+    }, []);
+
     const content =
         (!recentTransfers && !recentTransfersLoading) || recentError ? (
             <EmptyContent
@@ -38,18 +43,13 @@ const TransactionPage = () => {
             <TransferGridContent
                 loading={recentTransfersLoading || loading}
                 transfers={recentTransfers}
-                onDownloadCsv={async () => {
-                    try {
-                        setLoading(true);
-                        const link = await downloadAllTransfers();
-
-                        window.open(link);
-                        setLoading(false);
-                        return;
-                    } catch (e) {
-                        setLoading(false);
-                    }
-                }}
+                onDownloadCsv={
+                    link
+                        ? () => {
+                              window.open(link);
+                          }
+                        : undefined
+                }
                 onChangeDateRange={(range) => {
                     setDateRange(range);
                     return Promise.resolve();

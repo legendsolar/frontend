@@ -21,7 +21,7 @@ interface TransferGridContentProps {
     assetStates: Array<string>;
     assetState: string;
     dateRange: DataGridDateRange;
-    onDownloadCsv(): Promise<any>;
+    onDownloadCsv: undefined | (() => void);
     onChangeDateRange(range: DataGridDateRange): Promise<any>;
     onChangeAsset(asset: string): Promise<any>;
 }
@@ -54,9 +54,11 @@ const TransferGridContent = ({
                         <Button
                             variant={'secondary' as any}
                             color={'light' as any}
-                            disabled={loading}
+                            disabled={loading || !onDownloadCsv}
                             onClick={() => {
-                                onDownloadCsv();
+                                if (onDownloadCsv) {
+                                    onDownloadCsv();
+                                }
                             }}
                         >
                             {loading ? <LoadingText></LoadingText> : 'Download'}
