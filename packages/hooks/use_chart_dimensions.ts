@@ -1,4 +1,5 @@
 import { ResizeObserver } from "@juggle/resize-observer";
+import { defined } from "@p/utils";
 import { useRef, useState, useEffect } from "react";
 
 interface Dimentions {
@@ -24,10 +25,6 @@ export interface BoundedDimentions {
 const combineChartDimensions = (dimensions: Dimentions): BoundedDimentions => {
   const parsedDimensions = {
     ...dimensions,
-    marginTop: dimensions.marginTop || 10,
-    marginRight: dimensions.marginRight || 0,
-    marginBottom: dimensions.marginBottom || 40,
-    marginLeft: dimensions.marginLeft || 0,
   };
 
   return {

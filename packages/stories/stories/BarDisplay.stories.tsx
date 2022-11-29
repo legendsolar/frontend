@@ -54,30 +54,30 @@ Default.args = {
   error: false,
 } as BarChartProps;
 
-const AnimatedTemplate: Story<BarChartProps> = (args) => {
-  const [time, setTime] = useState(new Date());
-  const [data, setData] = useState(args.rawData);
+// const AnimatedTemplate: Story<BarChartProps> = (args) => {
+//   const [time, setTime] = useState(new Date());
+//   const [data, setData] = useState(args.rawData);
 
-  useInterval(() => {
-    const newDatum = {
-      time: time.toISOString(),
-      wattage: timeToWattage(time, 3000),
-    } as GenerationDatum;
+//   useInterval(() => {
+//     const newDatum = {
+//       time: time.toISOString(),
+//       wattage: timeToWattage(time, 3000),
+//     } as GenerationDatum;
 
-    const newData = [...data.slice(1), newDatum];
+//     const newData = [...data.slice(1), newDatum];
 
-    setData(newData);
-    setTime(addHours(time, 1));
-  }, 500);
+//     setData(newData);
+//     setTime(addHours(time, 1));
+//   }, 500);
 
-  return <BarChart {...{ ...args, rawData: data }} />;
-};
+//   return <BarChart {...{ ...args, rawData: data }} />;
+// };
 
-export const Animated = AnimatedTemplate.bind({});
+// export const Animated = AnimatedTemplate.bind({});
 
-Animated.args = {
-  rawData: generateFakeProductionData(7, 3000, 0),
-  options: defaultBarChartDisplayParams,
-  loading: false,
-  error: false,
-} as BarChartProps;
+// Animated.args = {
+//   rawData: generateFakeProductionData(7, 3000, 0),
+//   options: defaultBarChartDisplayParams,
+//   loading: false,
+//   error: false,
+// } as BarChartProps;
