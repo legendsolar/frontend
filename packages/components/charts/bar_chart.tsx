@@ -12,8 +12,6 @@ import SunUp from "../assets/sun_up.svg";
 import SunDown from "../assets/sun_down.svg";
 import SunnyWeatherPng from "../assets/sunny_weather.png";
 
-var tinycolor = require("tinycolor2");
-
 export const defaultBarChartDisplayParams = {
   chartMarginSettings: {
     marginLeft: 0,
@@ -36,12 +34,7 @@ export interface BarChartProps {
   error: boolean;
 }
 
-export const BarChart = ({
-  rawData,
-  loading,
-  error,
-  options,
-}: BarChartProps) => {
+export const BarChart = ({ options, rawData }: BarChartProps) => {
   //   const { data, max } = useBarChartData({
   //     rawData,
   //     dms,
@@ -56,27 +49,43 @@ export const BarChart = ({
 
   return (
     <Stack direction={"row"} width="100%">
-      <BarChartDay options={options} day={"Sunday"} total={320}></BarChartDay>
+      <BarChartDay
+        data={rawData}
+        options={options}
+        day={"Sunday"}
+        total={320}
+      ></BarChartDay>
       <NightBlock />
-      <BarChartDay options={options} day={"Monday"} total={240}></BarChartDay>
+      <BarChartDay
+        data={rawData}
+        options={options}
+        day={"Monday"}
+        total={240}
+      ></BarChartDay>
       <NightBlock />
-      <BarChartDay options={options} day={"Today"} total={32}></BarChartDay>
+      <BarChartDay
+        data={rawData}
+        options={options}
+        day={"Today"}
+        total={32}
+      ></BarChartDay>
     </Stack>
   );
 };
 
 export interface BarChartDayProps {
+  data: Array<GenerationDatum>;
   options: typeof defaultBarChartDisplayParams;
   day: string;
   total: number;
 }
 
-const BarChartDay = ({ options, day, total }: BarChartDayProps) => {
+const BarChartDay = ({ options, day, total, data }: BarChartDayProps) => {
   const N = 14;
 
-  const data = Array.from({ length: N }).map((_, i) => ({
+  const xFormedData = Array.from({ length: 14 }).map((_, i) => ({
     x: i,
-    y: Math.random() * 10,
+    y: data[i],
   }));
 
   console.log({ data });
@@ -93,16 +102,16 @@ const BarChartDay = ({ options, day, total }: BarChartDayProps) => {
 
   const yScale = useMemo(
     () => d3.scaleLinear().domain([0, 10]).range([dms.boundedHeight, 0]),
-    [dms.boundedHeight, data]
+    [dms.boundedHeight, xFormedData]
   );
 
   const xScale = useMemo(
     () =>
       d3
         .scaleTime()
-        .domain(d3.extent(data, xAccessor) as any)
+        .domain(d3.extent(xFormedData, xAccessor) as any)
         .range([0, dms.boundedWidth]),
-    [dms.boundedWidth, data]
+    [dms.boundedWidth, xFormedData]
   );
 
   console.log({ y: yScale(0) });
@@ -131,7 +140,7 @@ const BarChartDay = ({ options, day, total }: BarChartDayProps) => {
         <Divider></Divider>
         <svg ref={ref as any} style={{ width: "100%", height: "140px" }}>
           <g transform={`translate(${dms.marginLeft}, ${dms.marginTop})`}>
-            {data.map((d) => (
+            {xFormedData.map((d) => (
               <rect
                 x={xScale(xAccessor(d))}
                 width={options.barWidthPx}
