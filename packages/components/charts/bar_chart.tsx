@@ -1,25 +1,33 @@
 import { Stack, Box, useColorScheme, Typography } from "@mui/material";
 import { useChartDimensions } from "@project/hooks/use_chart_dimensions";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { GenerationDatum } from "../schema/schema_gen_types";
 
+import PartlyCloudyLottieJson from "../assets/weather_icons/partly_cloudy_day/data.json";
+import CloudyLottieJson from "../assets/weather_icons/cloudy/data.json";
+import SunnyLottieJson from "../assets/weather_icons/sunny/data.json";
 import * as d3 from "d3";
 import { useThemeColor } from "../utils/use_color";
 import { Divider } from "../basics";
+
+import { Player } from "@lottiefiles/react-lottie-player";
 
 import MoonSvg from "../assets/moon_solid.svg";
 import SunUp from "../assets/sun_up.svg";
 import SunDown from "../assets/sun_down.svg";
 import SunnyWeatherPng from "../assets/sunny_weather.png";
+import { defined } from "@p/utils";
 
 export const defaultBarChartDisplayParams = {
   chartMarginSettings: {
     marginLeft: 0,
     marginRight: 0,
-    marginTop: 0,
+    marginTop: 15,
     marginBottom: 0,
   },
   barColor: "grassGreen",
+  textColor: "blackDawn",
+  nonHighlightedOpacity: 0.5,
   interpolateData: true,
   minWattageToDisplay: 10,
   barWidthPx: 8,
@@ -35,6 +43,18 @@ export interface BarChartProps {
 }
 
 export const BarChart = ({ options, rawData }: BarChartProps) => {
+  const charts = ["Sunday", "Monday", "Today"];
+  const [highlightedChartState, setHighlightedChartState] = useState<number>(
+    charts.length - 1
+  );
+
+  const handleChartEnter = (chartIdx: number) => {
+    setHighlightedChartState(chartIdx);
+  };
+  const handleChartLeave = (chartIdx: number) => {
+    setHighlightedChartState(charts.length - 1);
+  };
+
   //   const { data, max } = useBarChartData({
   //     rawData,
   //     dms,
@@ -48,27 +68,24 @@ export const BarChart = ({ options, rawData }: BarChartProps) => {
   //   });
 
   return (
-    <Stack direction={"row"} width="100%">
-      <BarChartDay
-        data={rawData}
-        options={options}
-        day={"Sunday"}
-        total={320}
-      ></BarChartDay>
-      <NightBlock />
-      <BarChartDay
-        data={rawData}
-        options={options}
-        day={"Monday"}
-        total={240}
-      ></BarChartDay>
-      <NightBlock />
-      <BarChartDay
-        data={rawData}
-        options={options}
-        day={"Today"}
-        total={32}
-      ></BarChartDay>
+    <Stack direction={"row"}>
+      {charts.map((chart, i) => (
+        <Stack direction={"row"}>
+          <BarChartDay
+            data={rawData}
+            options={options}
+            day={chart}
+            total={30 * (i + 1)}
+            defaultHighlightMostRecentBar={
+              i === highlightedChartState && i === charts.length - 1
+            }
+            highlighted={i === highlightedChartState}
+            onMouseEnter={() => handleChartEnter(i)}
+            onMouseLeave={() => handleChartLeave(i)}
+          ></BarChartDay>
+          {i !== charts.length - 1 && <NightBlock />}
+        </Stack>
+      ))}
     </Stack>
   );
 };
@@ -78,17 +95,32 @@ export interface BarChartDayProps {
   options: typeof defaultBarChartDisplayParams;
   day: string;
   total: number;
+  highlighted: boolean;
+  defaultHighlightMostRecentBar: boolean;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
 }
 
-const BarChartDay = ({ options, day, total, data }: BarChartDayProps) => {
+const BarChartDay = ({
+  options,
+  day,
+  total,
+  data,
+  highlighted,
+  defaultHighlightMostRecentBar,
+  onMouseEnter,
+  onMouseLeave,
+}: BarChartDayProps) => {
   const N = 14;
+
+  const [barHoverState, setBarHoverState] = useState<number | undefined>(
+    defaultHighlightMostRecentBar ? N - 1 : undefined
+  );
 
   const xFormedData = Array.from({ length: 14 }).map((_, i) => ({
     x: i,
-    y: data[i],
+    y: data[i].wattage,
   }));
-
-  console.log({ data });
 
   const yAccessor = (d) => d.y;
   const xAccessor = (d) => d.x;
@@ -101,7 +133,7 @@ const BarChartDay = ({ options, day, total, data }: BarChartDayProps) => {
   const { ref, dms } = useChartDimensions(settings);
 
   const yScale = useMemo(
-    () => d3.scaleLinear().domain([0, 10]).range([dms.boundedHeight, 0]),
+    () => d3.scaleLinear().domain([0, 1]).range([dms.boundedHeight, 0]),
     [dms.boundedHeight, xFormedData]
   );
 
@@ -114,9 +146,44 @@ const BarChartDay = ({ options, day, total, data }: BarChartDayProps) => {
     [dms.boundedWidth, xFormedData]
   );
 
-  console.log({ y: yScale(0) });
-
   const barColor = useThemeColor(options.barColor);
+  const textColor = useThemeColor(options.textColor);
+
+  const renderHighlightText = (xPos: number) => {
+    const renderTextWidth = 80; // this is a hack, i should prerender text to find width
+    const rightJustify = Math.abs(dms.boundedWidth - xPos) > renderTextWidth;
+
+    return (
+      <g
+        transform={`translate(
+                        ${
+                          xPos +
+                          (rightJustify
+                            ? options.barWidthPx
+                            : -options.barWidthPx)
+                        }, ${dms.marginTop})`}
+      >
+        <text
+          style={{
+            fontSize: "10px",
+            fontFamily: "Be Vietnam Pro",
+            textAnchor: rightJustify ? "start" : "end",
+            fontWeight: 500,
+          }}
+          fill={textColor}
+        >
+          {"11am - 11:30am"}
+        </text>
+        <circle
+          fill={barColor}
+          r={3}
+          cy={-3}
+          cx={rightJustify ? renderTextWidth : -renderTextWidth}
+        ></circle>
+      </g>
+    );
+  };
+
   return (
     <Stack>
       <Stack
@@ -129,42 +196,97 @@ const BarChartDay = ({ options, day, total, data }: BarChartDayProps) => {
           <Typography variant={"label" as any}> KWH Total</Typography>
         </Typography>
 
-        <Box
-          sx={{ width: "24.8px", height: "20px" }}
-          style={{ marginBottom: "3px" }}
-          src={SunnyWeatherPng}
-          component="img"
-        ></Box>
+        <Player
+          autoplay
+          loop
+          speed={0.5}
+          src={PartlyCloudyLottieJson}
+          style={{ height: "30px", width: "34.8px" }}
+        ></Player>
       </Stack>
-      <Stack spacing={"2px"}>
+      <Stack
+        spacing={"2px"}
+        sx={{ opacity: highlighted ? 1 : options.nonHighlightedOpacity }}
+        style={{ marginTop: "0px" }}
+      >
         <Divider></Divider>
-        <svg ref={ref as any} style={{ width: "100%", height: "140px" }}>
-          <g transform={`translate(${dms.marginLeft}, ${dms.marginTop})`}>
-            {xFormedData.map((d) => (
-              <rect
-                x={xScale(xAccessor(d))}
-                width={options.barWidthPx}
-                height={dms.boundedHeight - yScale(yAccessor(d))}
-                y={yScale(yAccessor(d))}
-                rx={options.barRadiusPx}
-                ry={options.barRadiusPx}
-                fill={barColor}
-              ></rect>
+        <svg
+          ref={ref as any}
+          style={{ width: "100%", height: "140px" }}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          <g transform={`translate(${dms.marginLeft}, 0)`}>
+            {xFormedData.map((d, i) => (
+              <g
+                key={i}
+                onMouseEnter={() => {
+                  setBarHoverState(i);
+                }}
+                onMouseLeave={() => {
+                  setBarHoverState(undefined);
+                }}
+              >
+                {(barHoverState === i ||
+                  (defaultHighlightMostRecentBar &&
+                    i === xFormedData.length - 1 &&
+                    !defined(barHoverState))) && (
+                  <g>
+                    <line
+                      x1={xScale(xAccessor(d)) + options.barWidthPx / 2}
+                      x2={xScale(xAccessor(d)) + options.barWidthPx / 2}
+                      y1={0}
+                      y2={dms.height}
+                      stroke={textColor}
+                      strokeWidth={1}
+                      strokeLinecap={"round"}
+                    ></line>
+                    {renderHighlightText(xScale(xAccessor(d)))}
+                  </g>
+                )}
+
+                <rect
+                  transform={`translate(0, ${dms.marginTop})`}
+                  x={xScale(xAccessor(d))}
+                  width={options.barWidthPx}
+                  height={dms.boundedHeight - yScale(yAccessor(d))}
+                  y={yScale(yAccessor(d))}
+                  rx={options.barRadiusPx}
+                  ry={options.barRadiusPx}
+                  fill={barColor}
+                  opacity={
+                    barHoverState === i || !highlighted
+                      ? 1
+                      : options.nonHighlightedOpacity
+                  }
+                ></rect>
+
+                <rect
+                  x={xScale(xAccessor(d))}
+                  width={dms.boundedWidth / xFormedData.length + 1}
+                  height={dms.height}
+                  y={0}
+                  fill={
+                    barHoverState === i ? "rgba(0,0,0,0.0)" : "rgba(0,0,0,0)"
+                  }
+                ></rect>
+              </g>
             ))}
           </g>
         </svg>
         <Divider></Divider>
-      </Stack>
 
-      <Stack
-        direction={"row"}
-        alignItems={"center"}
-        justifyContent={"space-between"}
-      >
-        <Box src={SunUp} component="img"></Box>
-        <Typography variant={"label" as any}>{day}</Typography>
+        <Stack
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          style={{ marginTop: "4px" }}
+        >
+          <Box src={SunUp} component="img"></Box>
+          <Typography variant={"label" as any}>{day}</Typography>
 
-        <Box src={SunDown} component="img"></Box>
+          <Box src={SunDown} component="img"></Box>
+        </Stack>
       </Stack>
     </Stack>
   );
@@ -181,7 +303,7 @@ const NightBlock = () => (
       justifyContent: "center",
       alignItems: "center",
     }}
-    style={{ marginTop: "45px" }}
+    style={{ marginTop: "34px" }}
   >
     <Box src={MoonSvg} component="img"></Box>
   </Box>

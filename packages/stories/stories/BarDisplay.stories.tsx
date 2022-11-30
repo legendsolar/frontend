@@ -48,7 +48,7 @@ const Template: Story<BarChartProps> = (args) => <BarChart {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  rawData: generateFakeProductionData(7, 3000, 0),
+  rawData: generateFakeProductionData(7, 3000, 0, 0),
   options: defaultBarChartDisplayParams,
   loading: false,
   error: false,

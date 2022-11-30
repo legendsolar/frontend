@@ -23,9 +23,7 @@ export const timeToWattage = (date: Date, max_W: number): number => {
   const c = 20;
   const sig = 1 / (1 + Math.exp(-c * (factor - 0.75)));
 
-  const wattage = sig * max_W * 1000 * (Math.random() / 2 + 0.5);
-
-  //   console.log({ noon, msFromNoon, factor, sig, wattage });
+  const wattage = sig * (Math.random() / 2 + 0.5);
 
   return wattage;
 };
@@ -40,9 +38,11 @@ export const generateFakeProductionData = (
 
   const startDate = subDays(endDate, daysBefore);
 
-  const N = Math.floor(
-    differenceInMinutes(endDate, startDate) / resolution_minutes
-  );
+  //   const N = Math.floor(
+  //     differenceInMinutes(endDate, startDate) / resolution_minutes
+  //   );
+
+  const N = 15;
 
   return Array.from({ length: N }, (_, i) => {
     const date = addMinutes(startDate, i * resolution_minutes);
