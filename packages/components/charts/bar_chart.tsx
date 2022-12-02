@@ -15,8 +15,9 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import MoonSvg from "../assets/moon_solid.svg";
 import SunUp from "../assets/sun_up.svg";
 import SunDown from "../assets/sun_down.svg";
-import SunnyWeatherPng from "../assets/sunny_weather.png";
 import { defined } from "@p/utils";
+import { Bar, useBarChartData } from "./chart_utils";
+import { format } from "date-fns";
 
 export const defaultBarChartDisplayParams = {
   chartMarginSettings: {
@@ -43,47 +44,50 @@ export interface BarChartProps {
 }
 
 export const BarChart = ({ options, rawData }: BarChartProps) => {
-  const charts = ["Sunday", "Monday", "Today"];
+  const { dayBars, max } = useBarChartData({
+    rawData,
+    loading: false,
+    error: false,
+    daysToDisplay: 3,
+    barsPerDay: 14,
+    location: {
+      lat: 41.375094,
+      lng: -74.692663,
+    },
+    timezone: "-5:00",
+  });
+
   const [highlightedChartState, setHighlightedChartState] = useState<number>(
-    charts.length - 1
+    dayBars.length - 1
   );
 
   const handleChartEnter = (chartIdx: number) => {
     setHighlightedChartState(chartIdx);
   };
   const handleChartLeave = (chartIdx: number) => {
-    setHighlightedChartState(charts.length - 1);
+    setHighlightedChartState(dayBars.length - 1);
   };
 
-  //   const { data, max } = useBarChartData({
-  //     rawData,
-  //     dms,
-  //     loading,
-  //     error,
-  //     pixelsPerUnit: 4,
-  //     minUnitsDisplayed: 24,
-  //     maxUnitsDisplayed: 24 * 3,
-  //     subUnit: subHours,
-  //     interpolateData: options.interpolateData,
-  //   });
+  console.log({ dayBars });
 
   return (
     <Stack direction={"row"}>
-      {charts.map((chart, i) => (
-        <Stack direction={"row"}>
+      {dayBars.map(({ bars, day }, i) => (
+        <Stack direction={"row"} key={i}>
           <BarChartDay
-            data={rawData}
+            data={bars}
             options={options}
-            day={chart}
+            day={format(day, "EEEE")}
             total={30 * (i + 1)}
+            max={max}
             defaultHighlightMostRecentBar={
-              i === highlightedChartState && i === charts.length - 1
+              i === highlightedChartState && i === dayBars.length - 1
             }
             highlighted={i === highlightedChartState}
             onMouseEnter={() => handleChartEnter(i)}
             onMouseLeave={() => handleChartLeave(i)}
           ></BarChartDay>
-          {i !== charts.length - 1 && <NightBlock />}
+          {i !== dayBars.length - 1 && <NightBlock />}
         </Stack>
       ))}
     </Stack>
@@ -91,9 +95,10 @@ export const BarChart = ({ options, rawData }: BarChartProps) => {
 };
 
 export interface BarChartDayProps {
-  data: Array<GenerationDatum>;
+  data: Array<Bar>;
   options: typeof defaultBarChartDisplayParams;
   day: string;
+  max: number;
   total: number;
   highlighted: boolean;
   defaultHighlightMostRecentBar: boolean;
@@ -106,6 +111,7 @@ const BarChartDay = ({
   day,
   total,
   data,
+  max,
   highlighted,
   defaultHighlightMostRecentBar,
   onMouseEnter,
@@ -113,13 +119,18 @@ const BarChartDay = ({
 }: BarChartDayProps) => {
   const N = 14;
 
+  const lastNonUndefinedValue = data.findIndex(
+    (bar, i) => defined(bar.wattage) && !defined(data[i + 1]?.wattage)
+  );
+
   const [barHoverState, setBarHoverState] = useState<number | undefined>(
-    defaultHighlightMostRecentBar ? N - 1 : undefined
+    defaultHighlightMostRecentBar ? lastNonUndefinedValue : undefined
   );
 
   const xFormedData = Array.from({ length: 14 }).map((_, i) => ({
     x: i,
     y: data[i].wattage,
+    ...data[i],
   }));
 
   const yAccessor = (d) => d.y;
@@ -133,7 +144,7 @@ const BarChartDay = ({
   const { ref, dms } = useChartDimensions(settings);
 
   const yScale = useMemo(
-    () => d3.scaleLinear().domain([0, 1]).range([dms.boundedHeight, 0]),
+    () => d3.scaleLinear().domain([0, max]).range([dms.boundedHeight, 0]),
     [dms.boundedHeight, xFormedData]
   );
 
@@ -149,19 +160,18 @@ const BarChartDay = ({
   const barColor = useThemeColor(options.barColor);
   const textColor = useThemeColor(options.textColor);
 
-  const renderHighlightText = (xPos: number) => {
-    const renderTextWidth = 80; // this is a hack, i should prerender text to find width
+  const renderHighlightText = (d: Bar) => {
+    const xPos = xScale(xAccessor(d));
+
+    const renderTextWidth = 75; // this is a hack, i should prerender text to find width
     const rightJustify = Math.abs(dms.boundedWidth - xPos) > renderTextWidth;
 
     return (
       <g
         transform={`translate(
-                        ${
-                          xPos +
-                          (rightJustify
-                            ? options.barWidthPx
-                            : -options.barWidthPx)
-                        }, ${dms.marginTop})`}
+                        ${xPos + (rightJustify ? options.barWidthPx : 0)}, ${
+          dms.marginTop - 3
+        })`}
       >
         <text
           style={{
@@ -172,7 +182,7 @@ const BarChartDay = ({
           }}
           fill={textColor}
         >
-          {"11am - 11:30am"}
+          {`${format(d.startTime, "haaa")}-${format(d.endTime, "h:maaa")}`}
         </text>
         <circle
           fill={barColor}
@@ -229,7 +239,7 @@ const BarChartDay = ({
               >
                 {(barHoverState === i ||
                   (defaultHighlightMostRecentBar &&
-                    i === xFormedData.length - 1 &&
+                    i === lastNonUndefinedValue &&
                     !defined(barHoverState))) && (
                   <g>
                     <line
@@ -241,7 +251,7 @@ const BarChartDay = ({
                       strokeWidth={1}
                       strokeLinecap={"round"}
                     ></line>
-                    {renderHighlightText(xScale(xAccessor(d)))}
+                    {renderHighlightText(d)}
                   </g>
                 )}
 
@@ -255,7 +265,11 @@ const BarChartDay = ({
                   ry={options.barRadiusPx}
                   fill={barColor}
                   opacity={
-                    barHoverState === i || !highlighted
+                    barHoverState === i ||
+                    !highlighted ||
+                    (defaultHighlightMostRecentBar &&
+                      i === lastNonUndefinedValue &&
+                      !defined(barHoverState))
                       ? 1
                       : options.nonHighlightedOpacity
                   }

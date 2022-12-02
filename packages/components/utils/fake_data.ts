@@ -38,17 +38,15 @@ export const generateFakeProductionData = (
 
   const startDate = subDays(endDate, daysBefore);
 
-  //   const N = Math.floor(
-  //     differenceInMinutes(endDate, startDate) / resolution_minutes
-  //   );
-
-  const N = 15;
+  const N = Math.floor(
+    differenceInMinutes(endDate, startDate) / resolution_minutes
+  );
 
   return Array.from({ length: N }, (_, i) => {
     const date = addMinutes(startDate, i * resolution_minutes);
     return {
       time: date.toISOString(),
-      wattage: timeToWattage(date, max_W),
+      wattage: timeToWattage(date, max_W) * amplitude,
     };
   });
 };

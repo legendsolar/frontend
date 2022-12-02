@@ -1,0 +1,3241 @@
+{
+  "data": {
+    "facilityGenerationByDate": [
+      {
+        "time": "2022-11-25T15:25:00.000Z",
+        "wattage": 162,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T15:35:00.000Z",
+        "wattage": 498,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T15:55:00.000Z",
+        "wattage": 116,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T16:10:00.000Z",
+        "wattage": 78,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T16:25:00.000Z",
+        "wattage": 11,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T16:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T16:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T17:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T17:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T17:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T17:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T18:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T18:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T18:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T19:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T19:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T19:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T19:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T19:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T20:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T20:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T21:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T21:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T22:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T22:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T22:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T22:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T22:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T23:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-25T23:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T00:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T00:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T00:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T01:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T01:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T01:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T01:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T02:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T02:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T03:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T03:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T03:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T04:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T04:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T04:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T04:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T04:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T05:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T05:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T06:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T06:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T06:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T06:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T07:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T07:25:00.000Z",
+        "wattage": 4,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T07:40:00.000Z",
+        "wattage": 32,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T07:50:00.000Z",
+        "wattage": 44,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T08:05:00.000Z",
+        "wattage": 59,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T08:20:00.000Z",
+        "wattage": 73,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T08:40:00.000Z",
+        "wattage": 105,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T08:55:00.000Z",
+        "wattage": 156,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T09:05:00.000Z",
+        "wattage": 560,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T09:25:00.000Z",
+        "wattage": 1987,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T09:40:00.000Z",
+        "wattage": 3355,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T09:55:00.000Z",
+        "wattage": 3541,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T10:10:00.000Z",
+        "wattage": 3707,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T10:20:00.000Z",
+        "wattage": 3824,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T10:40:00.000Z",
+        "wattage": 3986,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T10:55:00.000Z",
+        "wattage": 4070,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T11:05:00.000Z",
+        "wattage": 4135,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T11:25:00.000Z",
+        "wattage": 4223,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T11:40:00.000Z",
+        "wattage": 4290,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T11:50:00.000Z",
+        "wattage": 4344,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T12:10:00.000Z",
+        "wattage": 4113,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T12:25:00.000Z",
+        "wattage": 4176,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T12:35:00.000Z",
+        "wattage": 4227,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T12:50:00.000Z",
+        "wattage": 4135,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T13:10:00.000Z",
+        "wattage": 4079,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T13:25:00.000Z",
+        "wattage": 3641,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T13:50:00.000Z",
+        "wattage": 3674,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T14:10:00.000Z",
+        "wattage": 3356,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T14:25:00.000Z",
+        "wattage": 3210,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T14:35:00.000Z",
+        "wattage": 3049,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T14:55:00.000Z",
+        "wattage": 2647,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T15:10:00.000Z",
+        "wattage": 2045,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T15:20:00.000Z",
+        "wattage": 1696,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T15:35:00.000Z",
+        "wattage": 1299,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T15:50:00.000Z",
+        "wattage": 928,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T16:10:00.000Z",
+        "wattage": 376,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T16:25:00.000Z",
+        "wattage": 82,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T16:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T16:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T17:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T17:20:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T17:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T17:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T18:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T18:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T18:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T19:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T19:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T19:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T19:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T19:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T20:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T20:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T21:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T21:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T22:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T22:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T22:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T22:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T22:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T23:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-26T23:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T00:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T00:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T00:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T01:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T01:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T01:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T01:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T01:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T02:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T02:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T03:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T03:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T03:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T04:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T04:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T04:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T04:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T04:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T05:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T05:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T06:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T06:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T06:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T06:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T07:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T07:20:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T07:35:00.000Z",
+        "wattage": 22,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T07:50:00.000Z",
+        "wattage": 57,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T08:10:00.000Z",
+        "wattage": 55,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T08:25:00.000Z",
+        "wattage": 259,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T08:40:00.000Z",
+        "wattage": 379,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T08:50:00.000Z",
+        "wattage": 751,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T09:10:00.000Z",
+        "wattage": 348,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T09:25:00.000Z",
+        "wattage": 240,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T09:40:00.000Z",
+        "wattage": 338,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T09:50:00.000Z",
+        "wattage": 400,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T10:05:00.000Z",
+        "wattage": 466,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T10:20:00.000Z",
+        "wattage": 337,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T10:40:00.000Z",
+        "wattage": 311,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T10:55:00.000Z",
+        "wattage": 324,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T11:10:00.000Z",
+        "wattage": 292,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T11:25:00.000Z",
+        "wattage": 227,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T11:35:00.000Z",
+        "wattage": 301,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T11:50:00.000Z",
+        "wattage": 349,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T12:10:00.000Z",
+        "wattage": 179,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T12:25:00.000Z",
+        "wattage": 127,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T12:40:00.000Z",
+        "wattage": 192,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T12:50:00.000Z",
+        "wattage": 185,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T13:10:00.000Z",
+        "wattage": 157,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T13:25:00.000Z",
+        "wattage": 80,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T13:35:00.000Z",
+        "wattage": 106,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T14:05:00.000Z",
+        "wattage": 24,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T14:20:00.000Z",
+        "wattage": 37,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T14:35:00.000Z",
+        "wattage": 24,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T14:50:00.000Z",
+        "wattage": 30,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T15:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T15:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T15:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T15:55:00.000Z",
+        "wattage": 17,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T16:10:00.000Z",
+        "wattage": 1,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T16:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T16:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T16:50:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T17:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T17:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T17:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T17:30:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T18:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T18:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T18:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T19:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T19:00:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T19:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T19:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T19:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T19:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T20:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T22:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-27T23:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T01:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T02:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T04:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T05:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T06:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T06:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T06:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T06:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T07:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T07:25:00.000Z",
+        "wattage": 20,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T07:35:00.000Z",
+        "wattage": 24,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T07:55:00.000Z",
+        "wattage": 185,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T08:10:00.000Z",
+        "wattage": 319,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T08:25:00.000Z",
+        "wattage": 238,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T08:35:00.000Z",
+        "wattage": 265,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T08:50:00.000Z",
+        "wattage": 269,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T09:05:00.000Z",
+        "wattage": 383,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T09:25:00.000Z",
+        "wattage": 723,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T09:40:00.000Z",
+        "wattage": 2140,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T09:55:00.000Z",
+        "wattage": 1045,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T10:05:00.000Z",
+        "wattage": 657,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T10:20:00.000Z",
+        "wattage": 664,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T10:35:00.000Z",
+        "wattage": 1473,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T10:50:00.000Z",
+        "wattage": 495,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T11:05:00.000Z",
+        "wattage": 130,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T11:25:00.000Z",
+        "wattage": 334,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T11:40:00.000Z",
+        "wattage": 307,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T11:55:00.000Z",
+        "wattage": 587,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T12:05:00.000Z",
+        "wattage": 1073,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T12:25:00.000Z",
+        "wattage": 300,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T12:40:00.000Z",
+        "wattage": 860,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T12:55:00.000Z",
+        "wattage": 708,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T13:05:00.000Z",
+        "wattage": 499,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T13:20:00.000Z",
+        "wattage": 276,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T13:35:00.000Z",
+        "wattage": 168,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T13:55:00.000Z",
+        "wattage": 161,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T14:10:00.000Z",
+        "wattage": 217,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T14:25:00.000Z",
+        "wattage": 432,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T14:35:00.000Z",
+        "wattage": 441,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T14:55:00.000Z",
+        "wattage": 325,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T15:10:00.000Z",
+        "wattage": 367,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T15:25:00.000Z",
+        "wattage": 217,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T15:40:00.000Z",
+        "wattage": 144,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T15:55:00.000Z",
+        "wattage": 54,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T16:10:00.000Z",
+        "wattage": 2,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T16:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T16:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T16:50:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T17:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T17:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T17:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T17:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T18:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T18:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T18:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T19:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T20:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T20:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T20:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T22:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-28T23:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T01:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T02:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T04:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T05:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T06:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T06:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T06:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T07:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T07:20:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T07:35:00.000Z",
+        "wattage": 14,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T07:55:00.000Z",
+        "wattage": 47,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T08:05:00.000Z",
+        "wattage": 77,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T08:20:00.000Z",
+        "wattage": 85,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T08:40:00.000Z",
+        "wattage": 157,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T08:55:00.000Z",
+        "wattage": 198,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T09:10:00.000Z",
+        "wattage": 250,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T09:25:00.000Z",
+        "wattage": 329,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T09:35:00.000Z",
+        "wattage": 366,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T09:50:00.000Z",
+        "wattage": 348,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T10:10:00.000Z",
+        "wattage": 418,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T10:25:00.000Z",
+        "wattage": 554,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T10:35:00.000Z",
+        "wattage": 625,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T10:55:00.000Z",
+        "wattage": 639,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T11:10:00.000Z",
+        "wattage": 395,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T11:25:00.000Z",
+        "wattage": 704,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T11:40:00.000Z",
+        "wattage": 749,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T11:55:00.000Z",
+        "wattage": 665,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T12:05:00.000Z",
+        "wattage": 632,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T12:25:00.000Z",
+        "wattage": 653,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T12:40:00.000Z",
+        "wattage": 761,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T12:55:00.000Z",
+        "wattage": 815,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T13:05:00.000Z",
+        "wattage": 623,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T13:20:00.000Z",
+        "wattage": 524,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T13:35:00.000Z",
+        "wattage": 742,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T13:50:00.000Z",
+        "wattage": 685,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T14:05:00.000Z",
+        "wattage": 1172,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T14:25:00.000Z",
+        "wattage": 614,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T14:40:00.000Z",
+        "wattage": 412,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T14:55:00.000Z",
+        "wattage": 397,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T15:05:00.000Z",
+        "wattage": 472,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T15:20:00.000Z",
+        "wattage": 740,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T15:40:00.000Z",
+        "wattage": 262,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T15:55:00.000Z",
+        "wattage": 457,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T16:05:00.000Z",
+        "wattage": 132,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T16:20:00.000Z",
+        "wattage": 19,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T16:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T16:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T17:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T17:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T17:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T17:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T18:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T18:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T18:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T19:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T20:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T20:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T20:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T22:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-29T23:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T01:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T02:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T04:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T06:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T06:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T06:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T07:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T07:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T07:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T07:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T08:10:00.000Z",
+        "wattage": 34,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T08:25:00.000Z",
+        "wattage": 32,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T08:35:00.000Z",
+        "wattage": 39,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T08:55:00.000Z",
+        "wattage": 53,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T09:10:00.000Z",
+        "wattage": 70,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T09:20:00.000Z",
+        "wattage": 108,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T09:35:00.000Z",
+        "wattage": 276,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T09:55:00.000Z",
+        "wattage": 243,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T10:10:00.000Z",
+        "wattage": 306,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T10:20:00.000Z",
+        "wattage": 216,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T10:35:00.000Z",
+        "wattage": 224,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T10:55:00.000Z",
+        "wattage": 296,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T11:10:00.000Z",
+        "wattage": 254,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T11:25:00.000Z",
+        "wattage": 154,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T11:40:00.000Z",
+        "wattage": 273,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T11:50:00.000Z",
+        "wattage": 152,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T12:05:00.000Z",
+        "wattage": 67,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T12:25:00.000Z",
+        "wattage": 215,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T12:40:00.000Z",
+        "wattage": 65,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T12:50:00.000Z",
+        "wattage": 67,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T13:05:00.000Z",
+        "wattage": 51,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T13:25:00.000Z",
+        "wattage": 95,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T13:40:00.000Z",
+        "wattage": 121,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T13:55:00.000Z",
+        "wattage": 64,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T14:05:00.000Z",
+        "wattage": 47,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T14:25:00.000Z",
+        "wattage": 62,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T14:40:00.000Z",
+        "wattage": 103,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T14:50:00.000Z",
+        "wattage": 59,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T15:05:00.000Z",
+        "wattage": 26,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T15:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T15:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T15:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T16:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T16:20:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T16:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T16:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T17:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T17:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T17:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T17:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T18:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T18:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T19:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T20:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T20:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T20:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T22:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-11-30T23:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T01:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T02:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T04:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T05:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T06:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T06:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T06:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T06:55:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T07:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T07:20:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T07:35:00.000Z",
+        "wattage": 15,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T07:55:00.000Z",
+        "wattage": 61,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T08:10:00.000Z",
+        "wattage": 111,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T08:25:00.000Z",
+        "wattage": 160,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T08:40:00.000Z",
+        "wattage": 221,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T08:55:00.000Z",
+        "wattage": 266,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T09:10:00.000Z",
+        "wattage": 478,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T09:25:00.000Z",
+        "wattage": 415,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T09:35:00.000Z",
+        "wattage": 376,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T09:55:00.000Z",
+        "wattage": 208,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T10:10:00.000Z",
+        "wattage": 319,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T10:25:00.000Z",
+        "wattage": 450,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T10:40:00.000Z",
+        "wattage": 433,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T10:50:00.000Z",
+        "wattage": 484,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T11:10:00.000Z",
+        "wattage": 820,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T11:25:00.000Z",
+        "wattage": 652,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T11:40:00.000Z",
+        "wattage": 827,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T11:50:00.000Z",
+        "wattage": 954,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T12:10:00.000Z",
+        "wattage": 1499,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T12:25:00.000Z",
+        "wattage": 2406,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T12:40:00.000Z",
+        "wattage": 3643,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T12:55:00.000Z",
+        "wattage": 4339,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T13:10:00.000Z",
+        "wattage": 1862,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T13:25:00.000Z",
+        "wattage": 4221,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T13:40:00.000Z",
+        "wattage": 3900,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T13:55:00.000Z",
+        "wattage": 3829,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T14:05:00.000Z",
+        "wattage": 3283,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T14:20:00.000Z",
+        "wattage": 1854,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T14:35:00.000Z",
+        "wattage": 3401,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T14:55:00.000Z",
+        "wattage": 2185,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T15:10:00.000Z",
+        "wattage": 2190,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T15:25:00.000Z",
+        "wattage": 1602,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T15:35:00.000Z",
+        "wattage": 1358,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T15:55:00.000Z",
+        "wattage": 798,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T16:10:00.000Z",
+        "wattage": 333,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T16:25:00.000Z",
+        "wattage": 41,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T16:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T16:50:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T17:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T17:20:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T17:20:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T17:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T18:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T18:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T18:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T18:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T19:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T19:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T20:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T20:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T20:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T21:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T21:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T22:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T22:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T23:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-01T23:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T00:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T00:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T01:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T01:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T02:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T02:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T03:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T03:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T04:15:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T04:35:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T05:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T05:45:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T06:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T06:05:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T06:40:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T06:50:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T07:10:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T07:25:00.000Z",
+        "wattage": 0,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T07:35:00.000Z",
+        "wattage": 24,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T07:55:00.000Z",
+        "wattage": 54,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T08:10:00.000Z",
+        "wattage": 77,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T08:25:00.000Z",
+        "wattage": 127,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T08:40:00.000Z",
+        "wattage": 121,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T08:50:00.000Z",
+        "wattage": 145,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T09:05:00.000Z",
+        "wattage": 212,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T09:20:00.000Z",
+        "wattage": 355,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T09:40:00.000Z",
+        "wattage": 3106,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T09:55:00.000Z",
+        "wattage": 3489,
+        "__typename": "GenerationDatum"
+      },
+      {
+        "time": "2022-12-02T10:05:00.000Z",
+        "wattage": 3588,
+        "__typename": "GenerationDatum"
+      }
+    ]
+  }
+}

@@ -5,15 +5,15 @@ import {
   BarChartProps,
   defaultBarChartDisplayParams,
 } from "@project/components/charts";
-import { useInterval } from "@project/hooks/use_interval";
 
 import { generateFakeProductionData, timeToWattage } from "@project/components";
-import { GenerationDatum } from "@project/components/schema/schema_gen_types";
-import { addHours } from "date-fns";
+
+import TestRawData from "../data/test_raw_data.json";
+import FullRawData from "../data/barnyard_raw_data_12_2022.json";
 
 const generationFunctions = {
-  variableProduction: generateFakeProductionData(7, 3000),
-  sinusoid: generateFakeProductionData(7, 3000, 0),
+  barnyardSolarData: FullRawData.data.facilityGenerationByDate,
+  spottyTestData: TestRawData.data.facilityGenerationByDate,
   flat: generateFakeProductionData(7, 3000, 0, 0),
 };
 
@@ -27,9 +27,9 @@ const meta: Meta = {
       control: {
         type: "select",
         labels: {
-          variableProduction: "Variable Production",
-          sinusoid: "Sinusoidal Production",
-          flat: "Flat Production",
+          barnyardSolarData: "Barnyard Solar Data 12/2022",
+          spottyTestData: "Spotty Test Data",
+          flat: "Flat",
         },
       },
     },
@@ -48,7 +48,7 @@ const Template: Story<BarChartProps> = (args) => <BarChart {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  rawData: generateFakeProductionData(7, 3000, 0, 0),
+  rawData: FullRawData.data.facilityGenerationByDate,
   options: defaultBarChartDisplayParams,
   loading: false,
   error: false,

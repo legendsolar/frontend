@@ -12,13 +12,18 @@
     "@mui/x-data-grid": "^5.17.11",
     "@p/schema": "*",
     "@p/utils": "*",
+    "@types/suncalc": "^1.9.0",
+    "@types/tz-lookup": "^6.1.0",
     "chart.js": "^3.9.1",
     "d3": "^7.6.1",
+    "date-fns-tz": "^1.3.7",
     "formik": "^2.2.9",
     "react": "*",
     "react-chartjs-2": "^4.3.1",
     "react-map-gl": "^7.0.19",
+    "suncalc": "^1.9.0",
     "typescript": "^4.8.4",
+    "tz-lookup": "^6.1.25",
     "yup": "^0.32.11"
   }
 }
