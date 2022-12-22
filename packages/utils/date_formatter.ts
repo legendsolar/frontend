@@ -1,22 +1,25 @@
 import {
-    differenceInMinutes,
-    differenceInHours,
-    differenceInDays,
-} from 'date-fns';
+  differenceInMinutes,
+  differenceInHours,
+  differenceInDays,
+} from "date-fns";
 
 export const dateDifferenceHumanReadable = (
-    left: Date,
-    right: Date,
+  left: Date,
+  right: Date
 ): string => {
-    const minutes = differenceInMinutes(left, right);
+  const minutes = differenceInMinutes(left, right);
 
-    if (minutes < 60) return `${minutes} minute` + (minutes === 1 ? '' : 's');
+  if (minutes < 60) return `${minutes} minute` + (minutes === 1 ? "" : "s");
 
-    const hours = differenceInHours(left, right);
+  const hours = differenceInHours(left, right);
 
-    if (hours < 25) return `${hours} hour` + (hours === 1 ? '' : 's');
+  if (hours < 25) return `${hours} hour` + (hours === 1 ? "" : "s");
 
-    const days = differenceInDays(left, right);
+  const days = differenceInDays(left, right);
 
-    return `${days} day` + (days === 1 ? '' : 's');
+  return `${days} day` + (days === 1 ? "" : "s");
+};
+export const differenceInHoursFloat = (start: Date, end: Date): number => {
+  return (end.getTime() - start.getTime()) / 1000 / 60 / 60;
 };

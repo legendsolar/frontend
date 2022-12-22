@@ -101,16 +101,21 @@ export const watts_kW: Unit = {
 
   formatWithUnit: (u: number, width?: number) => {
     const number = numberFormatter(u, width, true);
-    const matches = number.match(/([\d.]+)(\w+)/);
+    const matches = number.match(/([\d.]+)([a-zA-Z]+)?/);
 
-    if (matches && matches.length === 2) {
-      if (matches[1] === "K") {
-        matches[1] = "k";
+    if (matches?.length === 3 && !!matches[2]) {
+      if (matches[2] === "K") {
+        matches[2] = "k";
       }
 
       return {
-        value: matches[0],
-        unit: matches[1] + "W",
+        value: matches[1],
+        unit: matches[2] + "W",
+      };
+    } else if (matches?.length === 3 && !matches[2]) {
+      return {
+        value: matches[1],
+        unit: "kW",
       };
     } else {
       return {
