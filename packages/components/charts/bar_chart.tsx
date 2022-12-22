@@ -1,7 +1,7 @@
 import { Stack, Box, useColorScheme, Typography } from "@mui/material";
 import { useChartDimensions } from "@project/hooks/use_chart_dimensions";
 import { useMemo, useState } from "react";
-import { GenerationDatum } from "../schema/schema_gen_types";
+import { GenerationDatum, Location } from "../schema/schema_gen_types";
 
 import PartlyCloudyLottieJson from "../assets/weather_icons/partly_cloudy_day/data.json";
 import CloudyLottieJson from "../assets/weather_icons/cloudy/data.json";
@@ -15,7 +15,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import MoonSvg from "../assets/moon_solid.svg";
 import SunUp from "../assets/sun_up.svg";
 import SunDown from "../assets/sun_down.svg";
-import { defined } from "@p/utils";
+import { defined, numberFormatter, watts_kW } from "@p/utils";
 import { Bar, useBarChartData } from "./chart_utils";
 import { format } from "date-fns";
 
@@ -37,23 +37,20 @@ export const defaultBarChartDisplayParams = {
 
 export interface BarChartProps {
   rawData: Array<GenerationDatum>;
+  location: Location;
   options: typeof defaultBarChartDisplayParams;
-
   loading: boolean;
   error: boolean;
 }
 
-export const BarChart = ({ options, rawData }: BarChartProps) => {
+export const BarChart = ({ options, rawData, location }: BarChartProps) => {
   const { dayBars, max } = useBarChartData({
     rawData,
     loading: false,
     error: false,
     daysToDisplay: 3,
     barsPerDay: 14,
-    location: {
-      lat: 41.375094,
-      lng: -74.692663,
-    },
+    location: location,
     timezone: "-5:00",
   });
 
@@ -72,13 +69,13 @@ export const BarChart = ({ options, rawData }: BarChartProps) => {
 
   return (
     <Stack direction={"row"}>
-      {dayBars.map(({ bars, day }, i) => (
+      {dayBars.map(({ bars, day, total }, i) => (
         <Stack direction={"row"} key={i}>
           <BarChartDay
             data={bars}
             options={options}
             day={format(day, "EEEE")}
-            total={30 * (i + 1)}
+            total={total}
             max={max}
             defaultHighlightMostRecentBar={
               i === highlightedChartState && i === dayBars.length - 1
@@ -117,8 +114,6 @@ const BarChartDay = ({
   onMouseEnter,
   onMouseLeave,
 }: BarChartDayProps) => {
-  const N = 14;
-
   const lastNonUndefinedValue = data.findIndex(
     (bar, i) => defined(bar.wattage) && !defined(data[i + 1]?.wattage)
   );
@@ -194,6 +189,8 @@ const BarChartDay = ({
     );
   };
 
+  const totalFormatted = watts_kW.formatWithUnit(total * 1000);
+
   return (
     <Stack>
       <Stack
@@ -202,8 +199,11 @@ const BarChartDay = ({
         alignItems={"flex-end"}
       >
         <Typography variant={"smallHeadline" as any}>
-          {total}
-          <Typography variant={"label" as any}> KWH Total</Typography>
+          {totalFormatted.value}
+          <Typography variant={"label" as any}>
+            {" "}
+            {totalFormatted.unit}H Total
+          </Typography>
         </Typography>
 
         <Player
@@ -227,65 +227,70 @@ const BarChartDay = ({
           onMouseLeave={onMouseLeave}
         >
           <g transform={`translate(${dms.marginLeft}, 0)`}>
-            {xFormedData.map((d, i) => (
-              <g
-                key={i}
-                onMouseEnter={() => {
-                  setBarHoverState(i);
-                }}
-                onMouseLeave={() => {
-                  setBarHoverState(undefined);
-                }}
-              >
-                {(barHoverState === i ||
-                  (defaultHighlightMostRecentBar &&
-                    i === lastNonUndefinedValue &&
-                    !defined(barHoverState))) && (
-                  <g>
-                    <line
-                      x1={xScale(xAccessor(d)) + options.barWidthPx / 2}
-                      x2={xScale(xAccessor(d)) + options.barWidthPx / 2}
-                      y1={0}
-                      y2={dms.height}
-                      stroke={textColor}
-                      strokeWidth={1}
-                      strokeLinecap={"round"}
-                    ></line>
-                    {renderHighlightText(d)}
+            {xFormedData.map(
+              (d, i) =>
+                defined(d.wattage) && (
+                  <g
+                    key={i}
+                    onMouseEnter={() => {
+                      setBarHoverState(i);
+                    }}
+                    onMouseLeave={() => {
+                      setBarHoverState(undefined);
+                    }}
+                  >
+                    {(barHoverState === i ||
+                      (defaultHighlightMostRecentBar &&
+                        i === lastNonUndefinedValue &&
+                        !defined(barHoverState))) && (
+                      <g>
+                        <line
+                          x1={xScale(xAccessor(d)) + options.barWidthPx / 2}
+                          x2={xScale(xAccessor(d)) + options.barWidthPx / 2}
+                          y1={0}
+                          y2={dms.height}
+                          stroke={textColor}
+                          strokeWidth={1}
+                          strokeLinecap={"round"}
+                        ></line>
+                        {renderHighlightText(d)}
+                      </g>
+                    )}
+
+                    <rect
+                      transform={`translate(0, ${dms.marginTop})`}
+                      x={xScale(xAccessor(d))}
+                      width={options.barWidthPx}
+                      height={dms.boundedHeight - (yScale(yAccessor(d)) - 2)}
+                      y={yScale(yAccessor(d)) - 2}
+                      rx={options.barRadiusPx}
+                      ry={options.barRadiusPx}
+                      fill={barColor}
+                      opacity={
+                        barHoverState === i ||
+                        !highlighted ||
+                        (defaultHighlightMostRecentBar &&
+                          i === lastNonUndefinedValue &&
+                          !defined(barHoverState))
+                          ? 1
+                          : options.nonHighlightedOpacity
+                      }
+                    ></rect>
+
+                    <rect
+                      x={xScale(xAccessor(d))}
+                      width={dms.boundedWidth / xFormedData.length + 1}
+                      height={dms.height}
+                      y={0}
+                      fill={
+                        barHoverState === i
+                          ? "rgba(0,0,0,0.0)"
+                          : "rgba(0,0,0,0)"
+                      }
+                    ></rect>
                   </g>
-                )}
-
-                <rect
-                  transform={`translate(0, ${dms.marginTop})`}
-                  x={xScale(xAccessor(d))}
-                  width={options.barWidthPx}
-                  height={dms.boundedHeight - yScale(yAccessor(d))}
-                  y={yScale(yAccessor(d))}
-                  rx={options.barRadiusPx}
-                  ry={options.barRadiusPx}
-                  fill={barColor}
-                  opacity={
-                    barHoverState === i ||
-                    !highlighted ||
-                    (defaultHighlightMostRecentBar &&
-                      i === lastNonUndefinedValue &&
-                      !defined(barHoverState))
-                      ? 1
-                      : options.nonHighlightedOpacity
-                  }
-                ></rect>
-
-                <rect
-                  x={xScale(xAccessor(d))}
-                  width={dms.boundedWidth / xFormedData.length + 1}
-                  height={dms.height}
-                  y={0}
-                  fill={
-                    barHoverState === i ? "rgba(0,0,0,0.0)" : "rgba(0,0,0,0)"
-                  }
-                ></rect>
-              </g>
-            ))}
+                )
+            )}
           </g>
         </svg>
         <Divider></Divider>

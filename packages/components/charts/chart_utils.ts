@@ -13,6 +13,7 @@ import { Location } from "@p/schema";
 import { getTimes } from "suncalc";
 import tz_lookup from "tz-lookup";
 import { getTimezoneOffset } from "date-fns-tz";
+import { differenceInHoursFloat } from "@p/utils";
 
 export const parseDate = (date: string) => new Date(date);
 export const yAccessor = (d: GenerationDatum) => d.wattage;
@@ -111,23 +112,15 @@ export interface Bar {
 interface Day {
   bars: Array<Bar>;
   day: Date;
+  total: number;
 }
 
-export const getTimesTz = (
-  date: Date,
-  lat: number,
-  lng: number,
-  timezone: string
-) => {
+export const getTimesTz = (date: Date, lat: number, lng: number) => {
   const { sunrise, sunset } = getTimes(date, lat, lng);
 
-  const locationTz = tz_lookup(lat, lng);
-
-  const offset = getTimezoneOffset(locationTz, sunrise);
-
   return {
-    sunrise: new Date(sunrise.getTime() + offset),
-    sunset: new Date(sunset.getTime() + offset),
+    sunrise: new Date(sunrise.getTime()),
+    sunset: new Date(sunset.getTime()),
   };
 };
 
@@ -138,7 +131,6 @@ export const useBarChartData = ({
   daysToDisplay,
   barsPerDay,
   location,
-  timezone,
 }: useBarChartDataProps) => {
   const dayBars = useMemo<Array<Day>>(() => {
     if (loading || error) {
@@ -184,8 +176,7 @@ export const useBarChartData = ({
       const { sunrise, sunset } = getTimesTz(
         new Date(dayBin.x0),
         location.lat,
-        location.lng,
-        timezone
+        location.lng
       );
 
       console.log({ sunrise, sunset });
@@ -221,13 +212,19 @@ export const useBarChartData = ({
             : undefined,
       }));
 
-      console.log({ bars });
+      const total = bars.reduce(
+        (c, bar) =>
+          c +
+          (bar.wattage ? bar.wattage : 0) *
+            differenceInHoursFloat(bar.startTime, bar.endTime),
+        0
+      );
 
-      return { day, bars };
+      return { day, bars, total };
     });
 
     return dayBars;
-  }, [rawData, loading, error]);
+  }, [rawData, daysToDisplay, barsPerDay, loading, error]);
 
   const max = Math.max(...rawData.map(yAccessor));
 
