@@ -10,6 +10,10 @@ import {carbonEnglish, dollars, energy_kWh, watts_kW} from '@p/utils';
 import {WeatherLive} from '@project/components/weather';
 import {RecentTransfersComponent} from '@project/components/transfers';
 import {DisplayTransfer} from '@project/components/transfers/types';
+import {
+    defaultBarChartDisplayParams,
+    BarChart,
+} from '@project/components/charts';
 
 interface RealTimeContent {
     facility: Facility;
@@ -64,19 +68,18 @@ const RealTimeContent = ({
                 overflow: 'hidden',
             }}
         >
-            {generation && (
-                <Worm
-                    rawData={generation}
+            <Component standardWidth={false} sx={{m: 4, mb: 0}} shadow={true}>
+                <Typography variant={'smallHeadline' as any}>
+                    Energy Generated
+                </Typography>
+                <BarChart
+                    rawData={generation ? generation : []}
                     loading={false}
                     error={false}
-                    nightThreshold_W={(generationMetaData.max_kW * 1000) / 3}
-                    max_W={generationMetaData.max_kW * 1000}
-                    sx={{
-                        backgroundColor: 'whiteFog.main',
-                    }}
-                ></Worm>
-            )}
-
+                    options={defaultBarChartDisplayParams}
+                    location={location}
+                ></BarChart>
+            </Component>
             <Grid container rowSpacing={4} sx={{pl: {md: 4, xs: 0}, pb: 4}}>
                 <Grid item xs={12} lg={6}>
                     <Stack spacing={4} sx={{ml: 'auto', mr: 'auto'}}>

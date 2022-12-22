@@ -28,7 +28,7 @@ const meta: Meta = {
         type: "select",
         labels: {
           barnyardSolarData: "Barnyard Solar Data 12/2022",
-          spottyTestData: "Spotty Test Data",
+          spottyTestData: "Spotty / Zero Test Data",
           flat: "Flat",
         },
       },
@@ -50,6 +50,10 @@ export const Default = Template.bind({});
 Default.args = {
   rawData: FullRawData.data.facilityGenerationByDate,
   options: defaultBarChartDisplayParams,
+  location: {
+    lat: 41.373931,
+    lng: -74.680555,
+  },
   loading: false,
   error: false,
 } as BarChartProps;

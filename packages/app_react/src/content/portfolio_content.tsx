@@ -323,7 +323,9 @@ const PortfolioContent = ({
                                     {
                                         title: 'Investment Tax Credit',
                                         content: (
-                                            <Typography variant={'body' as any}>
+                                            <Typography
+                                                variant={'description' as any}
+                                            >
                                                 {
                                                     siteCopy.aboutInvestmentTaxCredit
                                                 }
