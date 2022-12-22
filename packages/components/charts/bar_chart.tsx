@@ -44,11 +44,20 @@ export interface BarChartProps {
 }
 
 export const BarChart = ({ options, rawData, location }: BarChartProps) => {
+  const { ref, dms } = useChartDimensions({
+    marginLeft: 0,
+    marginRight: 0,
+    marginTop: 0,
+    marginBottom: 0,
+  });
+
+  const daysToDisplay = Math.min(3, Math.floor(dms.boundedWidth / 190));
+
   const { dayBars, max } = useBarChartData({
     rawData,
     loading: false,
     error: false,
-    daysToDisplay: 3,
+    daysToDisplay,
     barsPerDay: 14,
     location: location,
     timezone: "-5:00",
@@ -68,7 +77,7 @@ export const BarChart = ({ options, rawData, location }: BarChartProps) => {
   console.log({ dayBars });
 
   return (
-    <Stack direction={"row"}>
+    <Stack direction={"row"} ref={ref}>
       {dayBars.map(({ bars, day, total }, i) => (
         <Stack direction={"row"} key={i}>
           <BarChartDay

@@ -68,7 +68,18 @@ const RealTimeContent = ({
                 overflow: 'hidden',
             }}
         >
-            <Component standardWidth={false} sx={{m: 4, mb: 0}} shadow={true}>
+            <Component
+                standardWidth={false}
+                sx={{
+                    m: 4,
+                    mb: 0,
+                    mr: {
+                        xl: 5,
+                        lg: 4,
+                    },
+                }}
+                shadow={true}
+            >
                 <Typography variant={'smallHeadline' as any}>
                     Energy Generated
                 </Typography>
