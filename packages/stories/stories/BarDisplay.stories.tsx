@@ -10,9 +10,11 @@ import { generateFakeProductionData, timeToWattage } from "@project/components";
 
 import TestRawData from "../data/test_raw_data.json";
 import FullRawData from "../data/barnyard_raw_data_12_2022.json";
+import IncompleteRawData from "../data/barnyard_raw_incomplete_12_2022.json";
 
 const generationFunctions = {
   barnyardSolarData: FullRawData.data.facilityGenerationByDate,
+  barnyardIncompleteData: IncompleteRawData.data.facilityGenerationByDate,
   spottyTestData: TestRawData.data.facilityGenerationByDate,
   flat: generateFakeProductionData(7, 3000, 0, 0),
 };
@@ -27,6 +29,7 @@ const meta: Meta = {
       control: {
         type: "select",
         labels: {
+          barnyardIncompleteData: "Barnyard Solar Mid Day 12/2022",
           barnyardSolarData: "Barnyard Solar Data 12/2022",
           spottyTestData: "Spotty / Zero Test Data",
           flat: "Flat",
@@ -48,7 +51,7 @@ const Template: Story<BarChartProps> = (args) => <BarChart {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  rawData: FullRawData.data.facilityGenerationByDate,
+  rawData: IncompleteRawData.data.facilityGenerationByDate,
   options: defaultBarChartDisplayParams,
   location: {
     lat: 41.373931,

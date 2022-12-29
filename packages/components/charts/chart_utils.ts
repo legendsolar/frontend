@@ -151,14 +151,10 @@ export const useBarChartData = ({
         ? minDisplayDate
         : xAccessor(sorted[0]);
 
-    console.log({ minDate, minDisplayDate });
-
     const days = eachDayOfInterval({
       start: minDate,
       end: maxDate,
     });
-
-    console.log({ days });
 
     const dayBinner = d3
       .bin()
@@ -169,8 +165,6 @@ export const useBarChartData = ({
     const daysBinned = dayBinner(sorted);
 
     const dayBars: Array<Day> = daysBinned.map((dayBin: any) => {
-      console.log({ dayBin });
-
       const day = new Date(dayBin.x0);
 
       const { sunrise, sunset } = getTimesTz(
@@ -179,15 +173,11 @@ export const useBarChartData = ({
         location.lng
       );
 
-      console.log({ sunrise, sunset });
-
       const deltaT_ms = (sunset.getTime() - sunrise.getTime()) / barsPerDay;
 
       const barThresholds = Array.from({ length: barsPerDay }).map(
         (_, i) => new Date(sunrise.getTime() + deltaT_ms * i)
       );
-
-      console.log({ barThresholds });
 
       const barBinner = d3
         .bin()
@@ -196,8 +186,6 @@ export const useBarChartData = ({
         .thresholds(barThresholds);
 
       const barBinnedData = barBinner(dayBin);
-
-      console.log({ barBinnedData });
 
       const bars: Array<Bar> = barBinnedData.map((barBinned: any) => ({
         startTime: new Date(barBinned.x0),
@@ -224,7 +212,7 @@ export const useBarChartData = ({
     });
 
     return dayBars;
-  }, [rawData, daysToDisplay, barsPerDay, loading, error]);
+  }, [rawData, daysToDisplay, barsPerDay, location, loading, error]);
 
   const max = Math.max(...rawData.map(yAccessor));
 
