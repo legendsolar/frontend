@@ -1,22 +1,8 @@
-import { Stack, Box, useColorScheme, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useChartDimensions } from "@project/hooks/use_chart_dimensions";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { GenerationDatum, Location } from "../schema/schema_gen_types";
-
-import PartlyCloudyLottieJson from "../assets/weather_icons/partly_cloudy_day/data.json";
-import CloudyLottieJson from "../assets/weather_icons/cloudy/data.json";
-import SunnyLottieJson from "../assets/weather_icons/sunny/data.json";
-import * as d3 from "d3";
-import { useThemeColor } from "../utils/use_color";
-import { Divider } from "../basics";
-
-import { Player } from "@lottiefiles/react-lottie-player";
-
-import MoonSvg from "../assets/moon_solid.svg";
-import SunUp from "../assets/sun_up.svg";
-import SunDown from "../assets/sun_down.svg";
-import { defined, numberFormatter, watts_kW } from "@p/utils";
-import { Bar, useBarChartData } from "./chart_utils";
+import { useBarChartData } from "./chart_utils";
 import { BarChartDay, NightBlock } from "./bar_chart_day";
 import { format } from "date-fns";
 
@@ -86,13 +72,13 @@ export const BarChart = ({ options, rawData, location }: BarChartProps) => {
 
   return (
     <Stack direction={"row"} ref={ref}>
-      {dayBars.map(({ bars, day, total }, i) => (
+      {dayBars.map(({ bars, day, total_kWh }, i) => (
         <Stack direction={"row"} key={i}>
           <BarChartDay
             data={bars}
             options={options}
             day={format(day, "EEEE")}
-            total={total}
+            total_kWh={total_kWh}
             max={max}
             defaultHighlightMostRecentBar={
               i === highlightedChartState && i === dayBars.length - 1

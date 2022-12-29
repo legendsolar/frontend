@@ -112,7 +112,7 @@ export interface Bar {
 interface Day {
   bars: Array<Bar>;
   day: Date;
-  total: number;
+  total_kWh: number;
 }
 
 export const getTimesTz = (date: Date, lat: number, lng: number) => {
@@ -200,15 +200,16 @@ export const useBarChartData = ({
             : undefined,
       }));
 
-      const total = bars.reduce(
-        (c, bar) =>
-          c +
-          (bar.wattage ? bar.wattage : 0) *
-            differenceInHoursFloat(bar.startTime, bar.endTime),
-        0
-      );
+      const total_kWh =
+        bars.reduce(
+          (c, bar) =>
+            c +
+            (bar.wattage ? bar.wattage : 0) *
+              differenceInHoursFloat(bar.startTime, bar.endTime),
+          0
+        ) / 1000;
 
-      return { day, bars, total };
+      return { day, bars, total_kWh };
     });
 
     return dayBars;

@@ -1,11 +1,8 @@
-import { Stack, Box, useColorScheme, Typography } from "@mui/material";
+import { Stack, Box, Typography } from "@mui/material";
 import { useChartDimensions } from "@project/hooks/use_chart_dimensions";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import { GenerationDatum, Location } from "../schema/schema_gen_types";
 
 import PartlyCloudyLottieJson from "../assets/weather_icons/partly_cloudy_day/data.json";
-import CloudyLottieJson from "../assets/weather_icons/cloudy/data.json";
-import SunnyLottieJson from "../assets/weather_icons/sunny/data.json";
 import * as d3 from "d3";
 import { useThemeColor } from "../utils/use_color";
 import { Divider } from "../basics";
@@ -15,8 +12,8 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import MoonSvg from "../assets/moon_solid.svg";
 import SunUp from "../assets/sun_up.svg";
 import SunDown from "../assets/sun_down.svg";
-import { defined, numberFormatter, watts_kW } from "@p/utils";
-import { Bar, useBarChartData } from "./chart_utils";
+import { defined, watts_kW } from "@p/utils";
+import { Bar } from "./chart_utils";
 import { format } from "date-fns";
 import { defaultBarChartDisplayParams } from "./bar_chart";
 
@@ -25,7 +22,7 @@ export interface BarChartDayProps {
   options: typeof defaultBarChartDisplayParams;
   day: string;
   max: number;
-  total: number;
+  total_kWh: number;
   highlighted: boolean;
   defaultHighlightMostRecentBar: boolean;
   onMouseEnter: () => void;
@@ -35,7 +32,7 @@ export interface BarChartDayProps {
 export const BarChartDay = ({
   options,
   day,
-  total,
+  total_kWh,
   data,
   max,
   highlighted,
@@ -132,7 +129,7 @@ export const BarChartDay = ({
     );
   };
 
-  const totalFormatted = watts_kW.formatWithUnit(total * 1000);
+  const totalFormatted = watts_kW.formatWithUnit(total_kWh);
 
   const MouseOverDataDisplay = ({ d }: { d: Bar }) => {
     return (

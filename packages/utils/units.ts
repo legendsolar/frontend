@@ -93,7 +93,7 @@ export const watts_kW: Unit = {
   color: "pencilYellow",
   format: (u: number, includeUnit: boolean = true, width?: number) => {
     if (includeUnit) {
-      return `${numberFormatter(1000 * u, width, true)}W`;
+      return `${numberFormatter(u, width, true)}W`;
     } else {
       return `${numberFormatter(u, width, true)}`;
     }
