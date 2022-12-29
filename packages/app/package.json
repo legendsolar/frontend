@@ -10,18 +10,26 @@
     "start": "next start"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.1",
-    "@project/components": "*",
-    "@project/hooks": "*",
+    "@apollo/client": "^3.7.3",
+    "@emotion/cache": "^11.10.5",
+    "@emotion/react": "^11.10.5",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.2",
     "@p/schema": "*",
     "@p/utils": "*",
+    "@project/components": "*",
+    "@project/hooks": "*",
     "@types/jsonwebtoken": "^8.5.9",
+    "firebase": "^9.15.0",
+    "graphql": "^16.6.0",
     "i": "^0.3.7",
     "jsonwebtoken": "^8.5.1",
     "next": "^12.1.6",
     "next-compose-plugins": "^2.2.0",
     "next-transpile-modules": "^9.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "reactfire": "^4.2.2"
   }
 }

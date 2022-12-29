@@ -10,7 +10,7 @@ interface DualPaneViewProps {
   options?: any;
 }
 
-const DualPaneView = ({
+export const DualPaneView = ({
   leftPane,
   rightPane,
   upperLeftCorner,
