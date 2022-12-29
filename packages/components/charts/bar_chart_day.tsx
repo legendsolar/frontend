@@ -86,7 +86,9 @@ export const BarChartDay = ({
 
     const xPos = xScale(xAccessor(d));
 
-    const rightJustify = Math.abs(dms.boundedWidth - xPos) > textWidth;
+    const rightJustify =
+      Math.abs(dms.boundedWidth - xPos) >
+      textWidth + options.highlightedTextMarginPx + 3;
 
     const ref = useRef<SVGTextElement | undefined>(undefined);
 
@@ -113,7 +115,7 @@ export const BarChartDay = ({
           fill={textColor}
           ref={ref}
         >
-          {`${format(d.startTime, "haaa")}-${format(d.endTime, "h:maaa")}`}
+          {`${format(d.startTime, "haaa")}-${format(d.endTime, "h:mmaaa")}`}
         </text>
         <circle
           fill={barColor}
