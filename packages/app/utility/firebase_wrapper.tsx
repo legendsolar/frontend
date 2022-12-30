@@ -16,6 +16,7 @@ const FirebaseWrapper = () => {
   const app = useFirebaseApp();
   const database = getDatabase(app);
   const auth = getAuth(app);
+  auth.languageCode = "en";
   const functions = getFunctions(app);
   const storage = getStorage(app);
 

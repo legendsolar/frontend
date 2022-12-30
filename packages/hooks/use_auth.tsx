@@ -41,12 +41,13 @@ export const useAuth = (): useAuthReturnType => {
 
 interface useAuthReturnType {
   isAuthenticating: boolean;
+  setIsAuthenticating(authenticating: boolean): void;
   authenticated: boolean;
   user: User | null;
+  setUser(user: User): void;
   signin(email: string, password: string): Promise<void>;
   signup(email: string, password: string): Promise<UserCredential | undefined>;
   signout(): Promise<void>;
-  signInWithGoogle(): Promise<void>;
   resetPassword(email: string): Promise<void>;
   updateUserPassword(password: string): Promise<void>;
   sendEmailVerify(): Promise<void>;
@@ -124,20 +125,6 @@ const useProvideAuth = (): useAuthReturnType => {
       await signOut(auth);
 
       setUser(null);
-    } catch (error: any) {
-      authErrorHandler(error);
-    } finally {
-      setIsAuthenticating(false);
-    }
-  };
-
-  const signInWithGoogle = async () => {
-    setIsAuthenticating(true);
-    try {
-      const response = await signInWithPopup(auth, provider);
-      if (response) {
-        setUser(response.user);
-      }
     } catch (error: any) {
       authErrorHandler(error);
     } finally {
@@ -341,14 +328,15 @@ const useProvideAuth = (): useAuthReturnType => {
 
   return {
     isAuthenticating,
+    setIsAuthenticating,
     authenticated: !!user,
     user,
+    setUser,
     signin,
     signup,
     signout,
     resetPassword,
     updateUserPassword,
-    signInWithGoogle,
     sendEmailVerify,
     getRecaptchaVerifier,
     enrollUserMfa,
