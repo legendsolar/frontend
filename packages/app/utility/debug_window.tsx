@@ -3,7 +3,7 @@ import { useFirebaseApp } from "reactfire";
 
 export const DebugWindow = () => {
   const app = useFirebaseApp();
-  const { user } = useAuth();
+  const { user, isAuthenticating, signout } = useAuth();
 
   const emulator =
     !!process.env.NEXT_PUBLIC_FIREBASE_EMULATOR &&
@@ -15,11 +15,18 @@ export const DebugWindow = () => {
           fontSize: "10px",
           display: "flex",
           flexDirection: "column",
+          border: "solid 1px #FFF",
+          padding: "2px",
         }}
       >
         <div>{"emulator: " + emulator}</div>
-        <div>{"user logged in: " + !!user}</div>
-        <div>{app.options.projectId}</div>
+        <div>{"auth: " + !!user}</div>
+        <div>{"authenticating: " + isAuthenticating}</div>
+        <div>{"userId: " + user?.uid}</div>
+        <div>{"app: " + app.options.projectId}</div>
+        <button onClick={signout} disabled={!user}>
+          debug log out
+        </button>
       </div>
     </div>
   );

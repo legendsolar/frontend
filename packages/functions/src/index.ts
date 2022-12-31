@@ -29,6 +29,8 @@ export const beforeCreateUser = functions.auth
   .beforeCreate(async (user, context) => {
     console.log({ user, context });
 
+    const name = user.displayName;
+
     await axios.post(
       settings.hasura_url,
       {
@@ -42,7 +44,7 @@ export const beforeCreateUser = functions.auth
             }
         }
   `,
-        variables: { id: user.uid, created: new Date().toISOString() },
+        variables: { id: user.uid, name, created: new Date().toISOString() },
         operationName: "MyMutation",
       },
       {
@@ -67,12 +69,10 @@ export const beforeCreateUser = functions.auth
 export const fakeApiEndpoint = functions.https.onRequest((req, res) => {
   console.log({ req });
 
-  res
-    .status(200)
-    .send({
-      respData: "respData",
-      test: "hi",
-      headers: req.headers,
-      body: req.body,
-    });
+  res.status(200).send({
+    respData: "respData",
+    test: "hi",
+    headers: req.headers,
+    body: req.body,
+  });
 });

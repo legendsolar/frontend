@@ -1,0 +1,12 @@
+{
+  "name": "@p/hasura",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "bash hasura/scripts/local_start.sh"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

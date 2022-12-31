@@ -7,8 +7,10 @@ import { FirebaseAppProvider } from "reactfire";
 import FirebaseWrapper from "utility/firebase_wrapper";
 import { ProvideAuth } from "@project/hooks/use_auth";
 import { ApolloProvider } from "@apollo/client";
+
 import { client } from "../utility/apollo_client";
-import { DebugWindow } from "../utility/debug_window";
+
+import { DebugWindow } from "utility/debug_window";
 
 const lightTheme = createTheme({
   palette: {
