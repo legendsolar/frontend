@@ -1,0 +1,23 @@
+table:
+  name: users
+  schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_account
+        - name
+        - id
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_account
+        - name
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check: null

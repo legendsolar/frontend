@@ -1,0 +1,22 @@
+actions:
+  - name: sampleAction
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:5001/mfa-test-project-472ff/us-central1/fakeApiEndpoint
+      timeout: 10
+      request_transform:
+        body:
+          action: transform
+          template: |-
+            {
+              "data": {{$body.input.data}}
+            }
+        template_engine: Kriti
+        version: 2
+    comment: test api endpoint
+custom_types:
+  enums: []
+  input_objects: []
+  objects:
+    - name: TestOutput
+  scalars: []

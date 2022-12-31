@@ -3,7 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "firebase emulators:start" 
+  },
   "dependencies": {
-    "firebase-tools": "^11.19.0"
+    "firebase-tools": "^11.19.0",
+    "firebase-admin": "^10.2.0",
+    "firebase-functions": "^3.21.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4"
   }
 }
