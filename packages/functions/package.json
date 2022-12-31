@@ -1,10 +1,12 @@
 {
-  "name": "@p/stories",
+  "name": "@p/functions",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "lib/src/index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "firebase emulators:start" 
+    "dev": "yarn build:watch & firebase emulators:start",
+    "build": "tsc",
+    "build:watch": "tsc --watch"
   },
   "dependencies": {
     "firebase-tools": "^11.19.0",
