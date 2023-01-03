@@ -4,10 +4,12 @@ import DualPanelView from "@project/components/views/dual_pane_view";
 import { useFirebaseApp } from "reactfire";
 import { UserCard } from "components/user_card";
 import { useAuth } from "@project/hooks/use_auth";
+import { getAuth } from "firebase/auth";
 
 export default () => {
   const { signInWithGoogle, signInWithFacebook } = useAuthProviders();
-  const { user } = useAuth();
+  const user = getAuth().currentUser;
+  console.log({ signUpUser: user });
 
   return (
     <div>
@@ -23,7 +25,7 @@ export default () => {
 
         <Grid item xs={12}>
           <div>query:</div>
-          {user ? <UserCard uid={user?.uid} /> : <div>not logged in</div>}
+          {!!user ? <UserCard uid={user?.uid} /> : <div>not logged in</div>}
         </Grid>
       </Grid>
     </div>

@@ -1,0 +1,51 @@
+table:
+  name: panel_reservations
+  schema: public
+object_relationships:
+  - name: facility
+    using:
+      foreign_key_constraint_on: facility_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - user_id
+        - panel_reserved_count
+        - facility_id
+        - qouted_total_investment
+        - reservation_created
+        - reservation_last_updated
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - panel_reserved_count
+        - qouted_total_investment
+        - facility_id
+        - id
+        - user_id
+        - reservation_created
+        - reservation_last_updated
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - panel_reserved_count
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      backend_only: false
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id

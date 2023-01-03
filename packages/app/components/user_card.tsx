@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 
 export const UserCard = ({ uid }: { uid: string }) => {
-  console.log({ uid });
+  console.log({ render: uid });
 
   const userQuery = gql`
     query CurrentUserQuery($id: String) {
@@ -12,8 +12,10 @@ export const UserCard = ({ uid }: { uid: string }) => {
       }
     }
   `;
+
   const { data, loading, error } = useQuery(userQuery, {
     variables: { id: uid },
+    skip: !uid,
   });
 
   if (loading) {
@@ -26,8 +28,8 @@ export const UserCard = ({ uid }: { uid: string }) => {
     return <div>error: {error?.message}</div>;
   }
 
-  const userName = data.users[0].name;
-  const id = data.users[0].id;
+  const userName = data.users[0]?.name;
+  const id = data.users[0]?.id;
 
   return (
     <div>

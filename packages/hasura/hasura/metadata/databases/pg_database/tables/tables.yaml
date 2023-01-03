@@ -1,1 +1,3 @@
+- "!include public_facilities.yaml"
+- "!include public_panel_reservations.yaml"
 - "!include public_users.yaml"

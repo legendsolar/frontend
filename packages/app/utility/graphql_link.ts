@@ -2,6 +2,7 @@ import { HttpLink } from "@apollo/client";
 import * as jwt from "jsonwebtoken";
 import { setContext } from "@apollo/client/link/context";
 import { getAuth } from "firebase/auth";
+import { GraphQLError } from "graphql";
 
 // const authLink = setContext(async (_, { headers }) => {
 //   // get the authentication token from local storage if it exists
@@ -78,13 +79,16 @@ const isLocalEnvironment = () => {
 };
 
 const hasuraAuthMiddleware = setContext(async (_, { headers }) => {
-  console.log({ headers });
   // get the authentication token from local storage if it exists
 
   const user = getAuth().currentUser;
 
+  console.log({ contextUser: user });
+
   if (!user) {
-    throw "Cannot make GraphQL request, user not authenticated";
+    throw new GraphQLError(
+      "Cannot make GraphQL request, user not authenticated"
+    );
   }
 
   const token = await user?.getIdToken();

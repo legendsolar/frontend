@@ -1,6 +1,14 @@
 table:
   name: users
   schema: public
+array_relationships:
+  - name: panel_reservations
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: panel_reservations
+          schema: public
 select_permissions:
   - role: user
     permission:

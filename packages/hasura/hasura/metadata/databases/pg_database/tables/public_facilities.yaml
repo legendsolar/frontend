@@ -1,0 +1,32 @@
+table:
+  name: facilities
+  schema: public
+array_relationships:
+  - name: panel_reservations
+    using:
+      foreign_key_constraint_on:
+        column: facility_id
+        table:
+          name: panel_reservations
+          schema: public
+computed_fields:
+  - name: panels_reserved
+    definition:
+      function:
+        name: total_panels_reserved
+        schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - name
+        - address
+        - summary
+        - misc_spec
+        - location
+        - panel_cost
+        - panel_total
+      computed_fields:
+        - panels_reserved
+      filter: {}

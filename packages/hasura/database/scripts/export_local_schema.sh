@@ -1,0 +1,1 @@
+curl -d '{"opts": ["-O", "-x", "--schema-only", "--schema", "public"],"clean_output": true,"source": "pg_database"}' -H "x-hasura-admin-secret: myadminsecretkey" http://localhost:8080//v1alpha1/pg_dump > gen_schema.sql
