@@ -19,7 +19,6 @@ export const useAuthProviders = () => {
   const signInWithFacebook = async () => {
     const provider = new FacebookAuthProvider();
 
-    provider.addScope("user_birthday");
     setIsAuthenticating(true);
 
     const response = await signInWithPopup(auth, provider);
@@ -39,8 +38,6 @@ export const useAuthProviders = () => {
     console.log({
       provider,
     });
-
-    provider.addScope("user_birthday");
 
     setIsAuthenticating(true);
     try {

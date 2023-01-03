@@ -11,7 +11,7 @@ interface Settings {
 const settings: Settings =
   process.env?.NODE_ENV === "production"
     ? {
-        hasura_url: "https://moved-pheasant-62.hasura.app/v1/graphql",
+        hasura_url: "https://legends-public.hasura.app/v1/graphql",
         hasura_admin_secret:
           "wH7i2R1l1EyEKE7p7UdH8LZajea8R7WrhEDj3XNH6Qg2RJQ0PDthzN0j7x60vWyp",
       }
@@ -54,6 +54,8 @@ export const beforeCreateUser = functions.auth
         },
       }
     );
+
+    console.log("created hasura user");
 
     return {
       customClaims: {

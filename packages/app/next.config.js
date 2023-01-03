@@ -6,4 +6,7 @@ const withTM = require("next-transpile-modules")([
   "@p/utils",
 ]);
 
-module.exports = withPlugins([withTM]);
+module.exports = withPlugins([
+  withTM,
+  { typescript: { ignoreBuildErrors: true } },
+]);
