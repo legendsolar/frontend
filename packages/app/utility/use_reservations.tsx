@@ -15,6 +15,7 @@ const reservationsQueryGQL = gql`
       facility {
         name
         id
+        panels_reserved
       }
     }
   }
@@ -25,6 +26,10 @@ const deleteReservationMutationGQL = gql`
     delete_panel_reservations(where: { id: { _eq: $id } }) {
       returning {
         id
+        facility {
+          id
+          panels_reserved
+        }
       }
     }
   }
@@ -50,6 +55,7 @@ const updateReservationMutationGQL = gql`
         facility {
           name
           id
+          panels_reserved
         }
       }
     }

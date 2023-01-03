@@ -23,8 +23,9 @@ export const DebugWindow = () => {
         <div>{"auth: " + !!user}</div>
         <div>{"authenticating: " + isAuthenticating}</div>
         <div>{"userId: " + user?.uid}</div>
+        <div>{"auth provider: " + user?.providerId}</div>
         <div>{"app: " + app.options.projectId}</div>
-        <div>{"graphQL endpoint: " + process.env.NEXT_PUBLIC_GRAPH_QL_URL}</div>
+        <div>{"query endpoint: " + process.env.NEXT_PUBLIC_GRAPH_QL_URL}</div>
       </div>
     </div>
   );

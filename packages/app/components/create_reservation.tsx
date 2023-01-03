@@ -33,12 +33,18 @@ export const CreateReservation = ({ userId }: { userId: string }) => {
         }
       ) {
         id
-        facility_id
         panel_reserved_count
         qouted_total_investment
         reservation_created
         reservation_last_updated
-        user_id
+        user {
+          name
+          id
+        }
+        facility {
+          name
+          id
+        }
       }
     }
   `;
