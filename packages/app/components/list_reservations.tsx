@@ -1,101 +1,50 @@
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { FacilityCard } from "./facility_card";
 import { Stack, Box } from "@mui/material";
+import { useReservations } from "utility/use_reservations";
 
 export const ListReservations = ({ userId }) => {
-  const reservationsQuery = gql`
-    query MyQuery($uid: String = "") {
-      panel_reservations(where: { user_id: { _eq: $uid } }) {
-        id
-        panel_reserved_count
-        qouted_total_investment
-        user {
-          name
-        }
-        facility {
-          name
-        }
-      }
-    }
-  `;
-
-  const {
-    data: reservations,
-    loading,
-    error,
-  } = useQuery(reservationsQuery, {
-    variables: { uid: userId },
-  });
-
-  const deleteReservationMutation = gql`
-    mutation deleteReservationMutation($id: String = "") {
-      delete_panel_reservations(where: { id: { _eq: $id } }) {
-        returning {
-          id
-        }
-      }
-    }
-  `;
-
-  const updateReservationMutationGQL = gql`
-    mutation updateReservationMutation(
-      $id: String = ""
-      $panel_reserved_count: Int = 10
-    ) {
-      update_panel_reservations(
-        where: { id: { _eq: $id } }
-        _set: { panel_reserved_count: $panel_reserved_count }
-      ) {
-        returning {
-          id
-          panel_reserved_count
-        }
-      }
-    }
-  `;
-
-  const [deleteUserReservation] = useMutation(deleteReservationMutation);
-  const [updateReservationMutation] = useMutation(updateReservationMutationGQL);
-
-  if (loading) {
-    return <div>loading</div>;
-  }
+  const { reservations, deleteUserReservation, updateReservationMutation } =
+    useReservations();
 
   console.log({ reservations });
 
-  if (!reservations || error || reservations.panel_reservations.length <= 0) {
+  if (!reservations || reservations.length <= 0) {
     return <div>no reservations </div>;
   }
 
-  console.log({ reservations: reservations.panel_reservations });
+  console.log({ reservations: reservations });
 
   return (
     <Stack>
-      {reservations.panel_reservations.map(
-        ({ id, user, facility, panel_reserved_count }, i) => (
-          <Stack direction={"row"}>
+      {reservations.map(({ id, user, facility, panel_reserved_count }, i) => (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            const panelCount = (e.target as any)["panel_count"].value;
+            updateReservationMutation({
+              variables: { id, panel_reserved_count: panelCount },
+            });
+          }}
+        >
+          <Stack direction={"row"} justifyContent="space-between">
             <p
               key={id}
             >{`${user.name} has ${panel_reserved_count} panel(s) reserved on ${facility.name}`}</p>
 
-            <label>{`new panel count:`}</label>
-            <input type={"number"} name="panel_count"></input>
-
+            <div>
+              <p>{`new panel count:`}</p>
+              <input type={"number"} name="panel_count"></input>
+              <button type="submit">{`update`}</button>
+            </div>
             <button
               onClick={() => {
-                updateReservationMutation({
-                  variables: { id, panel_reserved_count: 10 },
-                });
+                deleteUserReservation(id);
               }}
-            >{`update`}</button>
-            <button
-              onClick={() => {
-                deleteUserReservation({ variables: { id } });
-              }}
-            >{`remove`}</button>
+            >{`delete`}</button>
           </Stack>
-        )
-      )}
+        </form>
+      ))}
     </Stack>
   );
 };

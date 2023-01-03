@@ -9,58 +9,66 @@ import { FacilityCard } from "components/facility_card";
 import { ListFacilities } from "components/list_facilities";
 import { CreateReservation } from "components/create_reservation";
 import { ListReservations } from "components/list_reservations";
+import { ProvideReservations } from "utility/use_reservations";
+import { userInfo } from "os";
 
-const renderAuthView = (userId: string | undefined) => {
-  if (userId) {
+const renderAuthView = () => {
+  const { signInWithGoogle, signInWithFacebook } = useAuthProviders();
+  const { user, signout } = useAuth();
+  console.log({ signUpUser: user });
+  if (user?.uid) {
     return (
-      <div>
-        <hr />
-        <Grid item xs={12}>
-          <div>user:</div>
-          <UserCard uid={userId} />
-        </Grid>
+      <ProvideReservations>
+        <div style={{ width: "100%" }}>
+          <hr />
+          <Grid item xs={12}>
+            <div>user:</div>
+            <UserCard uid={user.uid} />
+          </Grid>
 
-        <hr />
-        <Grid item xs={12}>
-          <div>create new reservation:</div>
-          <CreateReservation userId={userId} />
-        </Grid>
-        <hr />
+          <hr />
+          <Grid item xs={12}>
+            <div>create new reservation:</div>
+            <CreateReservation userId={user.uid} />
+          </Grid>
+          <hr />
 
-        <Grid item xs={12}>
-          <div>current reservations</div>
-          <ListReservations userId={userId} />
-        </Grid>
-        <hr />
+          <Grid item xs={12}>
+            <div>your current reservations</div>
+            <ListReservations userId={user.uid} />
+          </Grid>
+          <hr />
 
-        <Grid item xs={12}>
-          <div>facilities:</div>
-          <ListFacilities />
-        </Grid>
-      </div>
+          <Grid item xs={12}>
+            <div>list of facilities:</div>
+            <ListFacilities />
+          </Grid>
+
+          <button onClick={() => signout()} disabled={!user}>
+            log out
+          </button>
+        </div>
+      </ProvideReservations>
     );
   } else {
-    return <div>not authenticated</div>;
+    return (
+      <Grid item xs={12}>
+        <Typography>Sign up with:</Typography>
+        <Button onClick={signInWithGoogle}>Google</Button>
+        <Button onClick={signInWithFacebook}>Facebook</Button>
+        <Button>Apple</Button>
+        <Button>Microsoft</Button>
+        <Button>Twitter?</Button>
+      </Grid>
+    );
   }
 };
 
 export default () => {
-  const { signInWithGoogle, signInWithFacebook } = useAuthProviders();
-  const user = getAuth().currentUser;
-  console.log({ signUpUser: user });
-
   return (
     <div>
       <Grid container sx={{ mt: 30 }}>
-        <Grid item xs={12}>
-          <Typography>Sign up with:</Typography>
-          <Button onClick={signInWithGoogle}>Google</Button>
-          <Button onClick={signInWithFacebook}>Facebook</Button>
-          <Button>Apple</Button>
-          <Button>Microsoft</Button>
-          <Button>Twitter?</Button>
-        </Grid>
-        {renderAuthView(user?.uid)}
+        {renderAuthView()}
       </Grid>
     </div>
   );

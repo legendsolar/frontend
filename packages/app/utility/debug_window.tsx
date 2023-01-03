@@ -24,9 +24,7 @@ export const DebugWindow = () => {
         <div>{"authenticating: " + isAuthenticating}</div>
         <div>{"userId: " + user?.uid}</div>
         <div>{"app: " + app.options.projectId}</div>
-        <button onClick={signout} disabled={!user}>
-          debug log out
-        </button>
+        <div>{"graphQL endpoint: " + process.env.NEXT_PUBLIC_GRAPH_QL_URL}</div>
       </div>
     </div>
   );

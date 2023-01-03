@@ -44,7 +44,10 @@ export const CreateReservation = ({ userId }: { userId: string }) => {
   `;
 
   const [createNewReservation, { data: newReservationData }] = useMutation(
-    createReservationMutation
+    createReservationMutation,
+    {
+      refetchQueries: ["PanelReservationQuery"],
+    }
   );
 
   console.log({ newReservationData });

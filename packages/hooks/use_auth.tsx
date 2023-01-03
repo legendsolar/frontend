@@ -119,6 +119,8 @@ const useProvideAuth = (): useAuthReturnType => {
   };
 
   const signout = async () => {
+    console.log("signout called");
+
     setIsAuthenticating(true);
 
     try {

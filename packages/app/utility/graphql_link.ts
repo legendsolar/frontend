@@ -85,6 +85,7 @@ const hasuraAuthMiddleware = setContext(async (_, { headers }) => {
 
   console.log({ contextUser: user });
 
+  // this is fucking shit up when it fails
   if (!user) {
     throw new GraphQLError(
       "Cannot make GraphQL request, user not authenticated"
