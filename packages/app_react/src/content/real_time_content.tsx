@@ -93,7 +93,10 @@ const RealTimeContent = ({
             </Component>
             <Grid container rowSpacing={4} sx={{pl: {md: 4, xs: 0}, pb: 4}}>
                 <Grid item xs={12} lg={6}>
-                    <Stack spacing={4} sx={{ml: 'auto', mr: 'auto'}}>
+                    <Stack
+                        spacing={4}
+                        sx={{ml: {md: 'auto', xs: 4}, mr: {md: 'auto', xs: 4}}}
+                    >
                         <WeatherLive
                             lat={location?.lat || 40.712778}
                             lng={location?.lng || -74.006111}
@@ -136,7 +139,10 @@ const RealTimeContent = ({
                     </Stack>
                 </Grid>
                 <Grid item xs={12} lg={6}>
-                    <Stack spacing={4}>
+                    <Stack
+                        spacing={4}
+                        sx={{ml: {md: 'auto', xs: 4}, mr: {md: 'auto', xs: 4}}}
+                    >
                         <MetricGauge
                             title="Carbon averted"
                             min={0}
@@ -158,7 +164,7 @@ const RealTimeContent = ({
                                 )}
                                 loading={false}
                                 title={'Dividends'}
-                                widgetMode={true}
+                                widgetMode={false}
                             ></RecentTransfersComponent>
                         )}
 
