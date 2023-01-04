@@ -2,7 +2,9 @@ import {
   eachHourOfInterval,
   eachDayOfInterval,
   subMinutes,
+  addHours,
   subDays,
+  parseISO,
 } from "date-fns";
 import { useMemo } from "react";
 import { BoundedDimentions } from "@project/hooks/use_chart_dimensions";
@@ -16,6 +18,14 @@ import { getTimezoneOffset } from "date-fns-tz";
 import { differenceInHoursFloat } from "@p/utils";
 
 export const parseDate = (date: string) => new Date(date);
+
+export const setDateToMidnight = (date: Date) => {
+  date.setHours(0);
+  date.setMinutes(0);
+  date.setSeconds(0);
+  date.setMilliseconds(0);
+};
+
 export const yAccessor = (d: GenerationDatum) => d.wattage;
 export const xAccessor = (d: GenerationDatum) => parseDate(d.time);
 
@@ -131,9 +141,10 @@ export const useBarChartData = ({
   daysToDisplay,
   barsPerDay,
   location,
+  timezone,
 }: useBarChartDataProps) => {
   const dayBars = useMemo<Array<Day>>(() => {
-    if (loading || error) {
+    if (loading || error || daysToDisplay === 0) {
       return [];
     }
 
@@ -141,10 +152,14 @@ export const useBarChartData = ({
       (a, b) => xAccessor(a).getTime() - xAccessor(b).getTime()
     );
 
+    console.log({ sorted });
+
     // bin data into days
 
     const maxDate = xAccessor(sorted[sorted.length - 1]);
     const minDisplayDate = subDays(maxDate, daysToDisplay);
+
+    setDateToMidnight(minDisplayDate);
 
     const minDate =
       xAccessor(sorted[0]) < minDisplayDate
@@ -158,9 +173,9 @@ export const useBarChartData = ({
 
     const dayBinner = d3
       .bin()
-      .value((d: GenerationDatum) => xAccessor(d).getTime())
-      .domain([dateToNumber(minDate), dateToNumber(maxDate)])
-      .thresholds(days.map(dateToNumber));
+      .value((d: GenerationDatum) => xAccessor(d))
+      .domain([minDate, maxDate])
+      .thresholds(days);
 
     const daysBinned = dayBinner(sorted);
 
@@ -168,7 +183,7 @@ export const useBarChartData = ({
       const day = new Date(dayBin.x0);
 
       const { sunrise, sunset } = getTimesTz(
-        new Date(dayBin.x0),
+        addHours(day, 1),
         location.lat,
         location.lng
       );
@@ -181,8 +196,8 @@ export const useBarChartData = ({
 
       const barBinner = d3
         .bin()
-        .value((d: GenerationDatum) => xAccessor(d).getTime())
-        .domain([dateToNumber(sunrise), dateToNumber(sunset)])
+        .value((d: GenerationDatum) => xAccessor(d))
+        .domain([sunrise, sunset])
         .thresholds(barThresholds);
 
       const barBinnedData = barBinner(dayBin);

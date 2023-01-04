@@ -70,6 +70,8 @@ export const BarChart = ({ options, rawData, location }: BarChartProps) => {
     setHighlightedChartState(dayBars.length - 1);
   };
 
+  console.log({ dayBars, max });
+
   return (
     <Stack direction={"row"} ref={ref}>
       {dayBars.map(({ bars, day, total_kWh }, i) => (
