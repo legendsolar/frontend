@@ -32,7 +32,7 @@ export const RecentTransfersComponent = ({
   return (
     <Component
       standardWidth={widgetMode}
-      shadow={widgetMode}
+      shadow={true}
       sx={{ width: { md: "400px", xs: "100%" } }}
     >
       <Typography variant={"smallHeadline" as any} sx={{ opacity: 1 }}>
