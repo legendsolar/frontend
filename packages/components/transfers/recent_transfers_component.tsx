@@ -30,7 +30,11 @@ export const RecentTransfersComponent = ({
     : transfers;
 
   return (
-    <Component standardWidth={widgetMode} shadow={widgetMode}>
+    <Component
+      standardWidth={widgetMode}
+      shadow={widgetMode}
+      sx={{ width: { md: "400px", xs: "100%" } }}
+    >
       <Typography variant={"smallHeadline" as any} sx={{ opacity: 1 }}>
         {emptyOrNull && !loading ? "No transfers yet" : title}
       </Typography>
@@ -51,14 +55,14 @@ export const RecentTransfersComponent = ({
           <TransferGrid
             transfers={renderTransfers.slice(0, maxTransferNumberToDisplay)}
             loading={false}
-            constrained={widgetMode}
+            constrained={true}
           ></TransferGrid>
         </Box>
       ) : (
         <TransferGrid
           transfers={renderTransfers.slice(0, maxTransferNumberToDisplay)}
           loading={false}
-          constrained={widgetMode}
+          constrained={true}
         ></TransferGrid>
       )}
 
