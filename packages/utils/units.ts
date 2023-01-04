@@ -27,7 +27,7 @@ export interface Unit {
 }
 
 export const dollars: Unit = {
-  unit: "DOLLARS",
+  unit: "Dollars",
   enum: UnitEnum.DOLLARS,
   unitDescription: "Dollars",
   unitSubHeading: "per hour",
@@ -143,7 +143,7 @@ export class UnitaryValue {
 const test = new UnitaryValue(10, "kWh");
 
 export const carbonEnglish: Unit = {
-  unit: "LBS",
+  unit: "Pounds",
   enum: UnitEnum.CARBON,
   unitDescription: "Pounds ",
   unitSubHeading: "per hour",

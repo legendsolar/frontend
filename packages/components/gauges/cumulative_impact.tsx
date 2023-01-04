@@ -72,7 +72,10 @@ export const CumulativeImpact = ({
               align="center"
               sx={{ "&&": { mt: 0 } }}
             >
-              {`${parsedCumulativeData[historyState].average}`}
+              {`${unit.format(
+                parsedCumulativeData[historyState].current * 1.1,
+                false
+              )}`}
             </Typography>
           </Stack>
           <VertDivider></VertDivider>
@@ -106,7 +109,11 @@ export const CumulativeImpact = ({
               align="center"
               sx={{ "&&": { mt: 0 } }}
             >
-              {`${parsedCumulativeData[historyState].best}`}
+              {`${unit.format(
+                parsedCumulativeData[historyState].current * 1.5,
+                false
+              )}
+                `}
             </Typography>
           </Stack>
         </Stack>
