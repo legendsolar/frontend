@@ -65,11 +65,5 @@ const renderAuthView = () => {
 };
 
 export default () => {
-  return (
-    <div>
-      <Grid container sx={{ mt: 30 }}>
-        {renderAuthView()}
-      </Grid>
-    </div>
-  );
+  return <Typography>hello</Typography>;
 };

@@ -1,12 +1,9 @@
-const withPlugins = require("next-compose-plugins");
-const withTM = require("next-transpile-modules")([
-  "@project/components",
-  "@project/hooks",
-  "@p/schema",
-  "@p/utils",
-]);
-
-module.exports = withPlugins([
-  withTM,
-  { typescript: { ignoreBuildErrors: true } },
-]);
+module.exports = {
+  transpilePackages: [
+    "@project/components",
+    "@project/hooks",
+    "@p/schema",
+    "@p/utils",
+  ],
+  typescript: { ignoreBuildErrors: true },
+};

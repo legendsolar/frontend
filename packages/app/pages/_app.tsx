@@ -2,23 +2,22 @@ import { AppProps } from "next/app";
 import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@emotion/react";
 import { createEmotionCache } from "utility/createCache";
-import { createTheme, CssBaseline } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { FirebaseAppProvider } from "reactfire";
 import FirebaseWrapper from "utility/firebase_wrapper";
 import { ProvideAuth } from "@project/hooks/use_auth";
 import { ApolloProvider } from "@apollo/client";
-
 import { client } from "../utility/apollo_client";
+import { appTheme } from "@project/components/theme";
 
-import { DebugWindow } from "utility/debug_window";
-
-const lightTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
+import { Be_Vietnam_Pro } from "@next/font/google";
 
 const clientSideCache = createEmotionCache();
+
+const beVietnam = Be_Vietnam_Pro({
+  subsets: ["latin"],
+  weight: ["100", "200", "400", "500", "600", "700", "900"],
+});
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -36,15 +35,13 @@ const App = ({ Component, pageProps }: AppProps) => {
     <ApolloProvider client={client}>
       <FirebaseAppProvider firebaseConfig={firebaseConfig}>
         <FirebaseWrapper />
-        <CacheProvider value={clientSideCache}>
-          <ThemeProvider theme={lightTheme}>
-            <ProvideAuth>
-              <CssBaseline />
-              <DebugWindow />
-              <Component {...pageProps} />;
-            </ProvideAuth>
-          </ThemeProvider>
-        </CacheProvider>
+        <ThemeProvider
+          theme={appTheme({ beVietnamName: beVietnam.style.fontFamily })}
+        >
+          <ProvideAuth>
+            <Component {...pageProps} />;
+          </ProvideAuth>
+        </ThemeProvider>
       </FirebaseAppProvider>
     </ApolloProvider>
   );
