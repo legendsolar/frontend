@@ -1,3 +1,4 @@
+import { carbonEnglish, dollars, energy_kWh, watts_kW } from "@p/utils";
 import { Button, Stack, Typography, Grid, Divider } from "@mui/material";
 import { useAuthProviders } from "@project/hooks/use_auth_providers";
 import DualPanelView from "@project/components/views/dual_pane_view";
@@ -10,7 +11,10 @@ import { ListFacilities } from "components/list_facilities";
 import { CreateReservation } from "components/create_reservation";
 import { ListReservations } from "components/list_reservations";
 import { ProvideReservations } from "utility/use_reservations";
+
+import { CumulativeImpact, MetricGauge } from "@project/components/gauges";
 import { userInfo } from "os";
+import { useTheme } from "@mui/material/styles";
 
 const renderAuthView = () => {
   const { signInWithGoogle, signInWithFacebook } = useAuthProviders();
@@ -65,5 +69,17 @@ const renderAuthView = () => {
 };
 
 export default () => {
-  return <Typography>hello</Typography>;
+  const theme = useTheme();
+  return (
+    <div>
+      <MetricGauge
+        title="Electricity generated"
+        min={0}
+        max={100}
+        currentValue={50}
+        message={"hi"}
+        unit={watts_kW}
+      ></MetricGauge>
+    </div>
+  );
 };

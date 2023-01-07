@@ -2,6 +2,7 @@ import { getAuth, connectAuthEmulator } from "firebase/auth"; // Firebase v9+
 import { getDatabase, connectDatabaseEmulator } from "firebase/database"; // Firebase v9+
 import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
 import { connectStorageEmulator, getStorage } from "firebase/storage";
+import { useTheme } from "@mui/material";
 
 import {
   FirebaseAppProvider,

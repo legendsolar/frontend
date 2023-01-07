@@ -1,8 +1,6 @@
 import { AppProps } from "next/app";
-import { CacheProvider } from "@emotion/react";
-import { ThemeProvider } from "@emotion/react";
+import { ThemeProvider } from "@mui/material";
 import { createEmotionCache } from "utility/createCache";
-import { CssBaseline } from "@mui/material";
 import { FirebaseAppProvider } from "reactfire";
 import FirebaseWrapper from "utility/firebase_wrapper";
 import { ProvideAuth } from "@project/hooks/use_auth";
@@ -33,13 +31,22 @@ const firebaseConfig = {
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ApolloProvider client={client}>
+      <style jsx global>{`
+        #__next {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+      `}</style>
       <FirebaseAppProvider firebaseConfig={firebaseConfig}>
         <FirebaseWrapper />
         <ThemeProvider
           theme={appTheme({ beVietnamName: beVietnam.style.fontFamily })}
         >
           <ProvideAuth>
-            <Component {...pageProps} />;
+            <Component {...pageProps} />
           </ProvideAuth>
         </ThemeProvider>
       </FirebaseAppProvider>
