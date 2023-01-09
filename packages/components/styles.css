@@ -1,13 +1,36 @@
-@keyframes opacityAnimation { 
-    0% {
-      opacity: 0.3;
-    }
-  
-    50% {
-      opacity: 0.6;
-    }
-  
-    100% {
-      opacity: 0.3;
-    }
+@keyframes opacityAnimation {
+  0% {
+    opacity: 0.3;
   }
+
+  50% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}
+
+/** this is a tricky bit of code 
+-> it inverts the xform matrix of the panels,
+-> then xforms it back with a y offset to sim
+-> z-axis changes
+**/
+
+@keyframes panelAnimation {
+  0% {
+    transform: matrix(1.0638, 0, -0.404255, 1, 0, 0)
+      matrix(0.94, 0, 0.38, 1, 0, -5);
+  }
+
+  50% {
+    transform: matrix(1.0638, 0, -0.404255, 1, 0, 0)
+      matrix(0.94, 0, 0.38, 1, 0, -10);
+  }
+
+  100% {
+    transform: matrix(1.0638, 0, -0.404255, 1, 0, 0)
+      matrix(0.94, 0, 0.38, 1, 0, -5);
+  }
+}

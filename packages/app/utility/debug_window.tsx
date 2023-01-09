@@ -9,7 +9,7 @@ export const DebugWindow = () => {
     !!process.env.NEXT_PUBLIC_FIREBASE_EMULATOR &&
     process.env.NEXT_PUBLIC_FIREBASE_EMULATOR == "TRUE";
   return (
-    <div style={{ position: "absolute", top: "0px", left: "0px" }}>
+    <div style={{ position: "absolute", top: "0px", right: "0px" }}>
       <div
         style={{
           fontSize: "10px",

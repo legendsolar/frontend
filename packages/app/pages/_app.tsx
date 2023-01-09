@@ -9,8 +9,8 @@ import { client } from "../utility/apollo_client";
 import { appTheme } from "@project/components/theme";
 
 import { Be_Vietnam_Pro } from "@next/font/google";
-
-const clientSideCache = createEmotionCache();
+import { ProvideReservations } from "utility/use_reservations";
+import { DebugWindow } from "utility/debug_window";
 
 const beVietnam = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -46,7 +46,10 @@ const App = ({ Component, pageProps }: AppProps) => {
           theme={appTheme({ beVietnamName: beVietnam.style.fontFamily })}
         >
           <ProvideAuth>
-            <Component {...pageProps} />
+            <ProvideReservations>
+              <Component {...pageProps} />
+            </ProvideReservations>
+            <DebugWindow />
           </ProvideAuth>
         </ThemeProvider>
       </FirebaseAppProvider>

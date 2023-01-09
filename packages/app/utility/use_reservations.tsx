@@ -62,6 +62,19 @@ const updateReservationMutationGQL = gql`
   }
 `;
 
+const facilityQueryGQL = gql`
+  query FacilityQuery($id: String) {
+    facilities(where: { id: { _eq: $id } }) {
+      id
+      name
+      panel_cost
+      panels_reserved
+      panel_total
+      address
+    }
+  }
+`;
+
 const reservationContext = createContext<useReservationsReturnType>(
   {} as useReservationsReturnType
 );
@@ -81,6 +94,8 @@ export const useReservations = (): useReservationsReturnType => {
 interface useReservationsReturnType {}
 
 const useProvideReservations = (): useReservationsReturnType => {
+  const [currentPanels, setCurrentPanels] = useState(5);
+
   const { user } = useAuth();
 
   const userId = user?.uid;
@@ -93,12 +108,25 @@ const useProvideReservations = (): useReservationsReturnType => {
     variables: { uid: userId },
   });
 
+  const { data: facilityPlaceholderData } = useQuery(facilityQueryGQL, {
+    variables: { id: "legends-res-panel-placeholder" },
+  });
+
+  const facility = facilityPlaceholderData?.facilities[0];
+
+  console.log({ facility });
+
   const [deleteUserReservation] = useMutation(deleteReservationMutationGQL);
   const [updateReservationMutation] = useMutation(updateReservationMutationGQL);
 
-  console.log({ panelReservationData });
-
   return {
+    loading,
+    currentPanels,
+    setCurrentPanels,
+    user,
+    currentReservedPanels: facility?.panels_reserved,
+    maxPanelReservations: facility?.panel_total,
+    costPerPanel: facility?.panel_cost,
     reservations: panelReservationData?.panel_reservations
       ? panelReservationData.panel_reservations
       : [],
