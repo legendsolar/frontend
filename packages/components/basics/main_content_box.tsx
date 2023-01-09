@@ -1,14 +1,14 @@
 import { Box } from "@mui/material";
 import React, { MutableRefObject } from "react";
-import { themeOptions } from "../theme";
+import { breakpoints } from "../theme";
 
 export const fromViewportPadding = () => {
   return {
-    xs: `calc((100vw - ${themeOptions.breakpoints.values.xs}px-20px) / 2)`,
-    sm: `calc((100vw - ${themeOptions.breakpoints.values.sm}px-20px) / 2)`,
-    md: `calc((100vw - ${themeOptions.breakpoints.values.md}px) / 2)`,
-    lg: `calc((100vw - ${themeOptions.breakpoints.values.lg}px) / 2)`,
-    xl: `calc((100vw - ${themeOptions.breakpoints.values.xl}px) / 2)`,
+    xs: `calc((100vw - ${breakpoints.values.xs}px-20px) / 2)`,
+    sm: `calc((100vw - ${breakpoints.values.sm}px-20px) / 2)`,
+    md: `calc((100vw - ${breakpoints.values.md}px) / 2)`,
+    lg: `calc((100vw - ${breakpoints.values.lg}px) / 2)`,
+    xl: `calc((100vw - ${breakpoints.values.xl}px) / 2)`,
   };
 };
 
@@ -22,9 +22,9 @@ export const MainContentBox = ({
   <Box
     sx={{
       maxWidth: {
-        md: themeOptions.breakpoints.values.md + "px",
-        lg: themeOptions.breakpoints.values.lg + "px", // about
-        xl: themeOptions.breakpoints.values.xl + "px",
+        md: breakpoints.values.md + "px",
+        lg: breakpoints.values.lg + "px", // about
+        xl: breakpoints.values.xl + "px",
       },
       pl: {
         sm: "0px",

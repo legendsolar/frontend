@@ -1,5 +1,4 @@
 // @ts-nocheck -> hack for now
-
 import { createTheme } from "@mui/material/styles";
 import { deepmerge } from "@mui/utils";
 import {
@@ -20,6 +19,16 @@ import {
  */
 
 export const spacing = (s) => `${s * 5}px`;
+
+export const breakpoints = {
+  values: {
+    xs: 0,
+    sm: 320, // webflow phone
+    md: 478, // webflow landscape phone
+    lg: 860, // webflow tablet 820 + 40
+    xl: 1280 + 40, // desktop 1240 + 40 + 40
+  },
+};
 
 export const paletteOptions = {
   palette: {
@@ -257,16 +266,8 @@ export const appTheme = ({ beVietnamName }) => {
    */
 
   const themeOptions = {
-    spacing: spacing,
-    breakpoints: {
-      values: {
-        xs: 0,
-        sm: 320, // webflow phone
-        md: 478, // webflow landscape phone
-        lg: 860, // webflow tablet 820 + 40
-        xl: 1280 + 40, // desktop 1240 + 40 + 40
-      },
-    },
+    spacing,
+    breakpoints: breakpoints,
     components: {
       // Careful, MuiPaper is used for non-obvious components like AppBar ect
       MuiPaper: {
@@ -812,8 +813,6 @@ export const appTheme = ({ beVietnamName }) => {
   const theme = createTheme(
     deepmerge(themeOptions, deepmerge(paletteOptions, typographyOptions))
   );
-
-  console.log({ themePalette: theme.palette });
 
   return theme;
 };

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import { useAuth } from "@project/hooks/use_auth";
 import { gql, useQuery, useMutation } from "@apollo/client";
+import { useAuthQuery } from "./use_authenticated_query";
+import { clamp } from "@p/utils";
 
 const reservationsQueryGQL = gql`
   query PanelReservationQuery($uid: String = "") {
@@ -104,17 +106,21 @@ const useProvideReservations = (): useReservationsReturnType => {
     data: panelReservationData,
     loading,
     error,
-  } = useQuery(reservationsQueryGQL, {
+  } = useAuthQuery(reservationsQueryGQL, {
     variables: { uid: userId },
   });
 
-  const { data: facilityPlaceholderData } = useQuery(facilityQueryGQL, {
+  const {
+    data: facilityData,
+    loading: facilityLoading,
+    error: facilityError,
+  } = useAuthQuery(facilityQueryGQL, {
     variables: { id: "legends-res-panel-placeholder" },
   });
 
-  const facility = facilityPlaceholderData?.facilities[0];
+  const facility = facilityData?.facilities[0];
 
-  console.log({ facility });
+  console.log({ facility, facilityLoading, facilityError });
 
   const [deleteUserReservation] = useMutation(deleteReservationMutationGQL);
   const [updateReservationMutation] = useMutation(updateReservationMutationGQL);
@@ -122,7 +128,9 @@ const useProvideReservations = (): useReservationsReturnType => {
   return {
     loading,
     currentPanels,
-    setCurrentPanels,
+    setCurrentPanels: (newPanels: number) => {
+      setCurrentPanels(clamp(0, 30, newPanels));
+    },
     user,
     currentReservedPanels: facility?.panels_reserved,
     maxPanelReservations: facility?.panel_total,

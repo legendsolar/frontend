@@ -97,14 +97,8 @@ export const ReservePanelPage = () => {
             <Component background shadow standardWidth={false}>
               <Stack>
                 <LinearGauge
-                  current={
-                    5000
-                    // currentReservedPanels + currentPanels}
-                  }
-                  max={
-                    20000
-                    //     maxPanelReservations
-                  }
+                  current={currentReservedPanels + currentPanels}
+                  max={maxPanelReservations}
                   color={"legendaryGreen.main"}
                 />
                 <PanelDisplay

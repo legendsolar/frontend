@@ -3,15 +3,18 @@ import { useEffect, useState } from "react";
 import { PanelArray } from "./panels";
 
 export interface PanelDisplayProps {
+  panelWidth: number;
+  panelRows: number;
   currentPanelSelectedCount: number;
+  hidePanels: boolean;
 }
 
 export const PanelDisplay = ({
+  panelWidth,
+  panelRows,
   currentPanelSelectedCount,
+  hidePanels,
 }: PanelDisplayProps) => {
-  const panelWidth = 10;
-  const panelRows = 3;
-
   const [selectedArray, setSelectedArray] = useState(
     Array.from(Array(panelRows), () => new Array(panelWidth))
   );
@@ -67,7 +70,13 @@ export const PanelDisplay = ({
         marginLeft: "-20px",
       }}
     >
-      <div style={{ position: "absolute", left: "-0px", top: "20px" }}>
+      <div
+        style={{
+          position: "absolute",
+          left: hidePanels ? "-45px" : "20px",
+          top: "20px",
+        }}
+      >
         <PanelArray
           width={panelWidth}
           height={panelRows}

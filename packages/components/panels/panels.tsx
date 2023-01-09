@@ -51,6 +51,10 @@ const Panel = ({
   selected,
   setSelected,
 }) => {
+  const [mouseOver, setMouseOver] = useState(false);
+
+  const hover = mouseOver || selected;
+
   return (
     <Box
       style={{}}
@@ -58,20 +62,26 @@ const Panel = ({
         width: "34.19px",
         height: "52.21px",
         position: "relative",
-        animationName: selected ? "panelAnimation" : "none",
+        animationName: hover ? "panelAnimation" : "none",
         animationDuration: "2s",
-        animationIterationCount: selected ? "infinite" : "0",
-        animationTimingFunction: selected ? "ease-in-out" : "0",
+        animationIterationCount: hover ? "infinite" : "0",
+        animationTimingFunction: hover ? "ease-in-out" : "0",
         // transform: selected
         //   ? "matrix(1.0638, 0, -0.404255, 1, 0, 0) matrix(0.94, 0, 0.38, 1, 0, -10)"
         //   : "none",
-        zIndex: selected ? 100 : 99,
-        filter: selected
+        zIndex: hover ? 100 : 99,
+        filter: hover
           ? "drop-shadow(0px 0px 25px rgba(99, 110, 114, 0.25))"
           : "none",
       }}
       onClick={() => {
         setSelected(!selected);
+      }}
+      onMouseOver={() => {
+        setMouseOver(true);
+      }}
+      onMouseLeave={() => {
+        setMouseOver(false);
       }}
       onAnimationStart={(evt) => {
         const anims = evt.target?.getAnimations();
