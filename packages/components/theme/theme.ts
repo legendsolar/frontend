@@ -413,6 +413,15 @@ export const appTheme = ({ beVietnamName }) => {
       MuiButton: {
         variants: [
           {
+            props: { variant: "plusMinus" },
+            style: {
+              color: paletteOptions.palette.blackDusk.main,
+              backgroundColor: paletteOptions.palette.whiteFog.main,
+              height: "50px",
+            },
+          },
+
+          {
             props: { color: "light" },
             style: {
               color: paletteOptions.palette.blackDusk.main,

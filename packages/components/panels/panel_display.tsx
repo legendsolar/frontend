@@ -69,7 +69,7 @@ export const PanelDisplay = ({
       <div
         style={{
           position: "absolute",
-          left: hidePanels ? "-45px" : "20px",
+          left: hidePanels ? "-40px" : "28px",
           top: "20px",
         }}
       >
@@ -78,6 +78,7 @@ export const PanelDisplay = ({
           height={panelRows}
           selectedArray={selectedArray}
           setSelected={setSelected}
+          renderHiddenPanels={hidePanels}
         />
       </div>
     </div>

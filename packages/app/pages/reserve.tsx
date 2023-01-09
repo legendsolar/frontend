@@ -1,5 +1,6 @@
 import { WebflowView } from "@project/components/views/webflow_view";
 import { MetricList } from "@project/components/metrics/metric_list";
+import { PlusMinusNumber } from "@project/components/inputs/plus_minus_number";
 import { LinearGauge } from "@project/components/gauges/linear_gauge";
 import { Stack, Typography, Box, Grid, Button } from "@mui/material";
 import { ContentDivider } from "@project/components/basics/content_divider";
@@ -68,7 +69,15 @@ export const ReservePanelPage = () => {
                 <MetricList
                   valuePairs={[
                     {
-                      metric: "Cost",
+                      metric: (
+                        <Typography
+                          variant={"subtitle3" as any}
+                          color="blackDawn.main"
+                        >
+                          {"Cost Per Panel"}
+                        </Typography>
+                      ),
+
                       value: currencyFormatter(costPerPanel),
                     },
                     {
@@ -78,14 +87,12 @@ export const ReservePanelPage = () => {
                   ]}
                 ></MetricList>
 
-                <Stack direction={"row"}>
-                  <Button onClick={() => setCurrentPanels(currentPanels - 1)}>
-                    -
-                  </Button>
-                  <Typography>{currentPanels}</Typography>
-                  <Button onClick={() => setCurrentPanels(currentPanels + 1)}>
-                    +
-                  </Button>
+                <Stack alignItems={"center"}>
+                  <PlusMinusNumber
+                    state={currentPanels}
+                    incState={() => setCurrentPanels(currentPanels + 1)}
+                    decState={() => setCurrentPanels(currentPanels - 1)}
+                  />
                 </Stack>
 
                 <Button variant={"primary" as any}>Reserve Panels</Button>
@@ -102,6 +109,9 @@ export const ReservePanelPage = () => {
                   color={"legendaryGreen.main"}
                 />
                 <PanelDisplay
+                  panelRows={3}
+                  panelWidth={10}
+                  hidePanels={true}
                   currentPanelSelectedCount={currentPanels}
                 ></PanelDisplay>
                 <ContentDivider>

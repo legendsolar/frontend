@@ -20,7 +20,7 @@ export const DebugWindow = () => {
         }}
       >
         <div>{"emulator: " + emulator}</div>
-        <div>{"auth: " + !!user}</div>
+        <div>{"authenticated: " + !!user}</div>
         <div>{"authenticating: " + isAuthenticating}</div>
         <div>{"userId: " + user?.uid}</div>
         <div>{"auth provider: " + user?.providerId}</div>

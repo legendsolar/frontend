@@ -4,13 +4,13 @@ import { Stack } from "@mui/material";
 import "../styles.css";
 
 export const PanelArray = ({
-  width,
-  height,
   selectedArray,
   setSelected,
+  renderHiddenPanels = false,
 }: {
   selectedArray: Array<Array<boolean>>;
   setSelected(x: number, y: number, selected: boolean): void;
+  renderHiddenPanels: boolean;
 }) => {
   const [startTime, setStartTime] = useState(undefined);
 
@@ -27,6 +27,28 @@ export const PanelArray = ({
       <Stack spacing={0}>
         {Array.from({ length: selectedArray.length }).map((_, x: number) => (
           <Stack direction={"row"} spacing={0}>
+            {renderHiddenPanels && (
+              <Panel
+                key={`hidden_0_${x}`}
+                onAnimationStart={() => {}}
+                animationSyncTime={0}
+                setSelected={() => {}}
+                selected={false}
+                selectable={false}
+              ></Panel>
+            )}
+
+            {renderHiddenPanels && (
+              <Panel
+                key={`hidden_1_${x}`}
+                onAnimationStart={() => {}}
+                animationSyncTime={0}
+                setSelected={() => {}}
+                selected={false}
+                selectable={false}
+              ></Panel>
+            )}
+
             {Array.from({ length: selectedArray[0]?.length }).map(
               (_, y: number) => (
                 <Panel
@@ -35,6 +57,7 @@ export const PanelArray = ({
                   animationSyncTime={startTime}
                   setSelected={(selected) => setSelected(x, y, selected)}
                   selected={selectedArray[x][y]}
+                  selectable={true}
                 ></Panel>
               )
             )}
@@ -50,10 +73,11 @@ const Panel = ({
   onAnimationStart,
   selected,
   setSelected,
+  selectable,
 }) => {
   const [mouseOver, setMouseOver] = useState(false);
 
-  const hover = mouseOver || selected;
+  const hover = (mouseOver || selected) && selectable;
 
   return (
     <Box
