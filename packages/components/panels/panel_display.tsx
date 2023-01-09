@@ -7,6 +7,7 @@ export interface PanelDisplayProps {
   panelRows: number;
   currentPanelSelectedCount: number;
   hidePanels: boolean;
+  onPanelCountUpdate(newPanelCount: number): void;
 }
 
 export const PanelDisplay = ({
@@ -14,15 +15,25 @@ export const PanelDisplay = ({
   panelRows,
   currentPanelSelectedCount,
   hidePanels,
+  onPanelCountUpdate,
 }: PanelDisplayProps) => {
   const [selectedArray, setSelectedArray] = useState(
     Array.from(Array(panelRows), () => new Array(panelWidth))
   );
 
-  const setSelected = (x, y, selected) => {
+  const setSelected = (x, y, selected, propigate = true) => {
     const newArray = [...selectedArray];
     newArray[x][y] = selected;
+
+    const count = newArray.flat().filter((s) => !!s).length;
+
+    console.log("set : " + count);
+
     setSelectedArray(newArray);
+
+    if (propigate) {
+      onPanelCountUpdate(count);
+    }
   };
 
   const selectNext = (select) => {
@@ -33,16 +44,28 @@ export const PanelDisplay = ({
 
     console.log({ idx, x, y });
     if (x >= 0 && y >= 0) {
-      setSelected(x, y, select);
-    } else {
+      setSelected(x, y, select, false);
     }
   };
+
+  //   useEffect(() => {
+  //     const selected = selectedArray.flat().filter((s) => !!s).length;
+  //     const diff = currentPanelSelectedCount - selected;
+
+  //     console.log({ diffInit: diff });
+
+  //     if (diff > 0) {
+  //       Array.from({ length: diff }).map(() => selectNext(true));
+  //     } else if (diff < 0) {
+  //       Array.from({ length: -diff }).map(() => selectNext(false));
+  //     }
+  //   }, []);
 
   useEffect(() => {
     const selected = selectedArray.flat().filter((s) => !!s).length;
     const diff = currentPanelSelectedCount - selected;
 
-    console.log(diff);
+    console.log({ diff });
 
     if (diff > 0) {
       Array.from({ length: diff }).map(() => selectNext(true));
@@ -51,9 +74,9 @@ export const PanelDisplay = ({
     }
   }, [currentPanelSelectedCount]);
 
-  useEffect(() => {
-    setSelectedArray(Array.from(Array(panelRows), () => new Array(panelWidth)));
-  }, [panelRows, panelWidth]);
+  //   useEffect(() => {
+  //     setSelectedArray(Array.from(Array(panelRows), () => new Array(panelWidth)));
+  //   }, [panelRows, panelWidth]);
 
   return (
     <div
@@ -74,8 +97,6 @@ export const PanelDisplay = ({
         }}
       >
         <PanelArray
-          width={panelWidth}
-          height={panelRows}
           selectedArray={selectedArray}
           setSelected={setSelected}
           renderHiddenPanels={hidePanels}

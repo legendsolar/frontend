@@ -440,6 +440,7 @@ export const appTheme = ({ beVietnamName }) => {
                 backgroundColor: paletteOptions.palette.legendaryGreen.main,
                 boxShadow: "0px 0px 25px rgba(99, 110, 114, 0.45)",
               },
+              borderRadius: "5px",
             },
           },
           // Disabled "Green Button"

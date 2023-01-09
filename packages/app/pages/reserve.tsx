@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { WebflowView } from "@project/components/views/webflow_view";
 import { MetricList } from "@project/components/metrics/metric_list";
 import { PlusMinusNumber } from "@project/components/inputs/plus_minus_number";
@@ -23,6 +24,9 @@ import { Component, Divider } from "@project/components/basics";
 import { MetricBox } from "@project/components/gauges/metric_box";
 import { useReservations } from "utility/use_reservations";
 
+import { faInfoCircle } from "@fortawesome/pro-solid-svg-icons";
+import { useThemeColor } from "@project/components/utils";
+
 export const ReservePanelPage = () => {
   const {
     loading,
@@ -43,8 +47,13 @@ export const ReservePanelPage = () => {
     <WebflowView>
       <Stack>
         <Stack>
-          <Typography>Reserve Panels to Claim Early Access</Typography>
-          <Typography>
+          <Typography variant={"headline2" as any}>
+            Reserve Panels to Claim Early Access
+          </Typography>
+          <Typography
+            variant={"subtitle1" as any}
+            sx={{ fontWeight: 300, color: "blackDawn.main", fontSize: 24 }}
+          >
             We expect to have online solar investments available within the next
             3 months. Until then, you can reserve panels and be first to invest
             once we launch.
@@ -62,7 +71,9 @@ export const ReservePanelPage = () => {
                 standardWidth={false}
                 sx={{ width: "100%" }}
               >
-                <Typography>Reserve Panels</Typography>
+                <Typography variant={"smallHeadline" as any}>
+                  Reserve Panels
+                </Typography>
 
                 <Divider />
 
@@ -70,12 +81,18 @@ export const ReservePanelPage = () => {
                   valuePairs={[
                     {
                       metric: (
-                        <Typography
-                          variant={"subtitle3" as any}
-                          color="blackDawn.main"
-                        >
-                          {"Cost Per Panel"}
-                        </Typography>
+                        <Stack direction="row">
+                          <Typography
+                            variant={"subtitle3" as any}
+                            color="blackDawn.main"
+                          >
+                            {"Cost Per Panel"}
+                          </Typography>
+                          <FontAwesomeIcon
+                            icon={faInfoCircle}
+                            style={{ color: useThemeColor("blackDawn") }}
+                          />
+                        </Stack>
                       ),
 
                       value: currencyFormatter(costPerPanel),
@@ -96,7 +113,15 @@ export const ReservePanelPage = () => {
                 </Stack>
 
                 <Button variant={"primary" as any}>Reserve Panels</Button>
-                <Typography>{"You won't be charged yet"}</Typography>
+
+                <Stack alignItems={"center"}>
+                  <Typography
+                    variant={"subtitle3" as any}
+                    color={"blackDawn.main"}
+                  >
+                    {"You won't be charged yet"}
+                  </Typography>
+                </Stack>
               </Component>
             </Stack>
           }
@@ -113,6 +138,7 @@ export const ReservePanelPage = () => {
                   panelWidth={10}
                   hidePanels={true}
                   currentPanelSelectedCount={currentPanels}
+                  onPanelCountUpdate={(newCount) => setCurrentPanels(newCount)}
                 ></PanelDisplay>
                 <ContentDivider>
                   <Typography
@@ -125,7 +151,7 @@ export const ReservePanelPage = () => {
                 <Grid container>
                   <Grid item lg={4} xs={4}>
                     <MetricBox
-                      metric={"$" + numberFormatter(100, 2)}
+                      metric={"$" + numberFormatter(currentPanels * 10, 2)}
                       icon={<CashIcon></CashIcon>}
                       title={"USD Dividends Earned"}
                     ></MetricBox>
@@ -133,7 +159,7 @@ export const ReservePanelPage = () => {
 
                   <Grid item lg={4} xs={4}>
                     <MetricBox
-                      metric={numberFormatter(100, 3)}
+                      metric={numberFormatter(currentPanels * 10, 3)}
                       icon={<LeafIcon />}
                       title={"LBS Carbon Averted"}
                     ></MetricBox>
@@ -141,7 +167,7 @@ export const ReservePanelPage = () => {
 
                   <Grid item lg={4} xs={4}>
                     <MetricBox
-                      metric={numberFormatter(100, 3)}
+                      metric={numberFormatter(currentPanels * 10, 3)}
                       icon={<PowerIcon />}
                       title={"kWh Generated"}
                     ></MetricBox>

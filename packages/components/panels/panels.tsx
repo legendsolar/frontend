@@ -100,8 +100,9 @@ const Panel = ({
       }}
       onClick={() => {
         setSelected(!selected);
+        setMouseOver(false);
       }}
-      onMouseOver={() => {
+      onMouseEnter={() => {
         setMouseOver(true);
       }}
       onMouseLeave={() => {

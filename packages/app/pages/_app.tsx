@@ -49,7 +49,6 @@ const App = ({ Component, pageProps }: AppProps) => {
             <ProvideReservations>
               <Component {...pageProps} />
             </ProvideReservations>
-            <DebugWindow />
           </ProvideAuth>
         </ThemeProvider>
       </FirebaseAppProvider>

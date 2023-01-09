@@ -5,8 +5,17 @@ import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.svg";
 import LoggedInToolbar from "./logged_in_toolbar";
 import { MagGlassIcon } from "../icons/emoji_icons";
 import { Image } from "../utils/image";
+import { BackButton } from "../buttons/back_button";
+
+export enum States {
+  RESERVE_PANEL,
+  LOGGED_OUT,
+  LOGGED_IN_NO_PANELS,
+  LOGGED_IN_PANELS,
+}
 
 export interface WebflowNavBarProps {
+  state: States;
   constrained: boolean;
   onToHomepage(): void;
   onHowItWorks(): void;
@@ -16,6 +25,7 @@ export interface WebflowNavBarProps {
 }
 
 export const WebflowNavBar = ({
+  state,
   constrained,
   onToHomepage,
   onHowItWorks,
@@ -23,6 +33,19 @@ export const WebflowNavBar = ({
   onTheTeam,
   onFAQs,
 }: WebflowNavBarProps) => {
+  const leftOfLogo = (state: States): JSX.Element => {
+    switch (state) {
+      case States.RESERVE_PANEL:
+        return <BackButton label="Back to Legends"></BackButton>;
+      case States.LOGGED_OUT:
+        return <></>;
+      case States.LOGGED_IN_NO_PANELS:
+        return <></>;
+      case States.LOGGED_IN_PANELS:
+        return <></>;
+    }
+  };
+
   const headers = [
     {
       text: "How It Works",
@@ -53,6 +76,8 @@ export const WebflowNavBar = ({
       <Box
         sx={{
           width: "100%",
+          ml: "30px",
+          mr: "30px",
         }}
         display="flex"
         justifyContent={"center"}
@@ -74,7 +99,9 @@ export const WebflowNavBar = ({
         >
           <Stack
             direction="row"
-            justifyContent="flex-start"
+            justifyContent={
+              state === States.RESERVE_PANEL ? "space-between" : "flex-start"
+            }
             alignItems={"center"}
             spacing={"40px"}
             sx={{
@@ -90,7 +117,7 @@ export const WebflowNavBar = ({
               }}
             ></Image>
 
-            {headers.map(renderHeader)}
+            {leftOfLogo(state)}
           </Stack>
         </Box>
       </Box>
@@ -110,6 +137,7 @@ const renderHeader = (header, id) => {
 export default () => (
   <WebflowNavBar
     {...{
+      state: States.RESERVE_PANEL,
       constrained: false,
       onToHomepage: () => {},
       onHowItWorks: () => {},
