@@ -9,8 +9,6 @@ export const PanelArray = ({
   selectedArray,
   setSelected,
 }: {
-  width: number;
-  height: number;
   selectedArray: Array<Array<boolean>>;
   setSelected(x: number, y: number, selected: boolean): void;
 }) => {
@@ -27,17 +25,19 @@ export const PanelArray = ({
       }}
     >
       <Stack spacing={0}>
-        {Array.from({ length: height }).map((_, x: number) => (
+        {Array.from({ length: selectedArray.length }).map((_, x: number) => (
           <Stack direction={"row"} spacing={0}>
-            {Array.from({ length: width }).map((_, y: number) => (
-              <Panel
-                key={`${y}_${x}`}
-                onAnimationStart={onAnimationStart}
-                animationSyncTime={startTime}
-                setSelected={(selected) => setSelected(x, y, selected)}
-                selected={selectedArray[x][y]}
-              ></Panel>
-            ))}
+            {Array.from({ length: selectedArray[0]?.length }).map(
+              (_, y: number) => (
+                <Panel
+                  key={`${y}_${x}`}
+                  onAnimationStart={onAnimationStart}
+                  animationSyncTime={startTime}
+                  setSelected={(selected) => setSelected(x, y, selected)}
+                  selected={selectedArray[x][y]}
+                ></Panel>
+              )
+            )}
           </Stack>
         ))}
       </Stack>

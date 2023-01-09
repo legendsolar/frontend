@@ -27,37 +27,33 @@ export const PanelDisplay = ({
 
   const selectNext = (select) => {
     const flat = [].concat(...selectedArray);
-    const idx = flat.findLastIndex((x) => !!x);
+    const idx = flat.findIndex((x) => (select ? !x : !!x));
     const x = Math.floor(idx / panelWidth);
     const y = idx % panelWidth;
-    console.log({ x, y });
+
+    console.log({ idx, x, y });
     if (x >= 0 && y >= 0) {
-      if (x < selectedArray[0].length - 1) {
-        setSelected(x + 1, y, select);
-        return;
-      }
-      if (y < selectedArray.length - 1) {
-        setSelected(0, y + 1, select);
-        return;
-      }
+      setSelected(x, y, select);
     } else {
-      return setSelected(0, 0, select);
     }
   };
 
-  const selected = selectedArray.flat().filter((s) => !!s).length;
-
   useEffect(() => {
+    const selected = selectedArray.flat().filter((s) => !!s).length;
     const diff = currentPanelSelectedCount - selected;
 
     console.log(diff);
 
-    // if (diff > 0) {
-    //   Array.from({ length: diff }).map(() => selectNext(true));
-    // } else if (diff < 0) {
-    //   Array.from({ length: -diff }).map(() => selectNext(false));
-    // }
+    if (diff > 0) {
+      Array.from({ length: diff }).map(() => selectNext(true));
+    } else if (diff < 0) {
+      Array.from({ length: -diff }).map(() => selectNext(false));
+    }
   }, [currentPanelSelectedCount]);
+
+  useEffect(() => {
+    setSelectedArray(Array.from(Array(panelRows), () => new Array(panelWidth)));
+  }, [panelRows, panelWidth]);
 
   return (
     <div
