@@ -43,6 +43,8 @@ const SideBarView = ({
     return drawerPosition;
   };
 
+  console.log({ constrained });
+
   const getDrawerPosition = (position: string) => {
     if (position === currentDisplayPosition())
       switch (drawerPosition) {

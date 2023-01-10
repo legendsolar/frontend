@@ -3,26 +3,32 @@ import { boolean } from "yup";
 
 interface IconButtonProps {
   label: string;
-  onClick(): void;
   icon: JSX.Element;
-  color: string;
-  disabled: boolean;
-  variant: string;
+  color?: string;
+  disabled?: boolean;
+  variant?: string;
+  href?: string;
+  target?: string;
+  onClick?(): void;
 }
 
 export const IconButton = ({
   label,
   onClick,
   icon,
-  color,
-  disabled,
-  variant,
+  color = "white",
+  disabled = false,
+  variant = "primary",
+  href,
+  target,
 }: IconButtonProps) => {
   return (
     <Button
       variant={variant as any}
       disabled={disabled}
       onClick={onClick}
+      href={href}
+      target={target}
       sx={{
         backgroundColor: color + ".main",
         color: color + ".contrastText",

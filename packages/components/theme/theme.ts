@@ -114,11 +114,10 @@ export const paletteOptions = {
   },
 };
 
-export const appTheme = ({ beVietnamName }) => {
-  if (!beVietnamName) {
-    beVietnamName = "Be Vietnam Pro";
-  }
-
+export const appTheme = (
+  { beVietnamName } = { beVietnamName: "Be Vietnam Pro" }
+) => {
+  console.log(beVietnamName);
   const typographyOptions = {
     typography: {
       fontFamily: beVietnamName,
@@ -132,13 +131,6 @@ export const appTheme = ({ beVietnamName }) => {
         lineHeight: "65px",
         color: paletteOptions.palette.blackDusk.main,
       },
-      subtitle1: {
-        fontFamily: beVietnamName,
-        fontWeight: 600,
-        fontSize: "20px",
-        lineHeight: "25px",
-        color: paletteOptions.palette.blackDusk.main,
-      },
       body: {
         fontFamily: beVietnamName,
         fontSize: "20px",
@@ -148,30 +140,23 @@ export const appTheme = ({ beVietnamName }) => {
       },
       body1: {
         fontFamily: beVietnamName,
-        fontSize: "20px",
-        lineHeight: "20px",
+        fontSize: "16px",
+        lineHeight: "25px",
         color: paletteOptions.palette.blackDusk.main,
       },
       headline2: {
         fontWeight: "bold",
         fontFamily: beVietnamName,
         fontSize: "36px",
-        lineHeight: "45.54px",
-        color: paletteOptions.palette.blackDusk.main,
-      },
-      subtitle2: {
-        fontFamily: beVietnamName,
-        fontWeight: 600,
-        fontSize: "18px",
-        lineHeight: "23px",
+        lineHeight: "56px",
         color: paletteOptions.palette.blackDusk.main,
       },
       body2: {
         fontFamily: beVietnamName,
-        fontWeight: "normal",
+        fontWeight: 500,
         fontSize: "18px",
         color: paletteOptions.palette.blackDusk.main,
-        lineHeight: "22.77px",
+        lineHeight: "25px",
       },
       description: {
         fontFamily: beVietnamName,
@@ -182,17 +167,31 @@ export const appTheme = ({ beVietnamName }) => {
       smallHeadline: {
         fontFamily: beVietnamName,
         fontSize: "24px",
+        lineHeight: "30px",
         fontWeight: "bold",
         fontWeight: 700,
         color: paletteOptions.palette.blackDusk.main,
-        lineHeight: "30px",
+      },
+      subtitle1: {
+        fontFamily: beVietnamName,
+        fontWeight: 600,
+        fontSize: "20px",
+        lineHeight: "25px",
+        color: paletteOptions.palette.blackDusk.main,
+      },
+      subtitle2: {
+        fontFamily: beVietnamName,
+        fontWeight: 600,
+        fontSize: "16px",
+        lineHeight: "20px",
+        color: paletteOptions.palette.blackDusk.main,
       },
       subtitle3: {
         fontFamily: beVietnamName,
         fontSize: "14px",
         fontWeight: 600,
         color: paletteOptions.palette.blackDusk.main,
-        lineHeight: "17.71px",
+        lineHeight: "18px",
       },
       label: {
         fontFamily: beVietnamName,
@@ -476,7 +475,9 @@ export const appTheme = ({ beVietnamName }) => {
             style: {
               height: "55px",
               width: "180px",
-              backgroundColor: paletteOptions.palette.blackDawn.main,
+              borderRadius: "5px",
+              border: "1px solid black",
+              backgroundColor: paletteOptions.palette.white.main,
               color: paletteOptions.palette.blackDawn.contrastText,
 
               ...typographyOptions.typography.subtitle2,
@@ -486,6 +487,24 @@ export const appTheme = ({ beVietnamName }) => {
               },
             },
           },
+
+          {
+            props: { variant: "multiselect" },
+            style: {
+              height: "55px",
+              width: "100%",
+              borderRadius: "5px",
+              backgroundColor: paletteOptions.palette.white.main,
+              color: paletteOptions.palette.blackDawn.contrastText,
+
+              ...typographyOptions.typography.subtitle2,
+
+              "&:hover": {
+                boxShadow: "0px 0px 25px rgba(99, 110, 114, 0.25)",
+              },
+            },
+          },
+
           {
             props: { variant: "secondary", disabled: true },
             style: {
@@ -733,7 +752,7 @@ export const appTheme = ({ beVietnamName }) => {
         styleOverrides: {
           root: {
             ...typographyOptions.typography.subtitle2,
-            borderRadius: "0px",
+            borderRadius: "5px",
             backgroundColor: paletteOptions.palette.whiteHaze.main,
             color: paletteOptions.palette.blackDusk.main,
 

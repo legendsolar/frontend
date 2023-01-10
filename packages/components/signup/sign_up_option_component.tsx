@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { Divider } from "../basics/divider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { UserInformationComponent } from "./user_information_component";
 
 export const SignUpOptionComponent = ({
   onSignUpWithGoogle,
@@ -32,13 +33,7 @@ export const SignUpOptionComponent = ({
       </Typography>
     </ContentDivider>
 
-    {/* <IconButton
-            variant="small"
-            label="Sign up with email"
-            color="legendaryGreen"
-            icon={<EnvelopeIcon></EnvelopeIcon>}
-            onClick={onSignUpWithEmail}
-        ></IconButton> */}
+    <UserInformationComponent color="light"></UserInformationComponent>
 
     <Stack direction="row" justifyContent={"center"} spacing={0}>
       <Typography variant="subtitle3" color={"blackDawn.main"}>

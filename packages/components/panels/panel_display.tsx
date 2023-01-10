@@ -65,30 +65,40 @@ export const PanelDisplay = ({
   //     setSelectedArray(Array.from(Array(panelRows), () => new Array(panelWidth)));
   //   }, [panelRows, panelWidth]);
 
-  return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "230px",
-        overflowX: "hidden",
-        overflowY: "visible",
-        marginLeft: "0px",
-      }}
-    >
+  if (hidePanels) {
+    return (
       <div
         style={{
-          position: "absolute",
-          left: hidePanels ? "-40px" : "28px",
-          top: "20px",
+          position: "relative",
+          width: "100%",
+          height: "230px",
+          overflowX: "hidden",
+          overflowY: "visible",
+          marginLeft: "0px",
         }}
       >
-        <PanelArray
-          selectedArray={selectedArray}
-          setSelected={setSelected}
-          renderHiddenPanels={hidePanels}
-        />
+        <div
+          style={{
+            position: "absolute",
+            left: "-40px",
+            top: "20px",
+          }}
+        >
+          <PanelArray
+            selectedArray={selectedArray}
+            setSelected={setSelected}
+            renderHiddenPanels={hidePanels}
+          />
+        </div>
       </div>
-    </div>
+    );
+  }
+
+  return (
+    <PanelArray
+      selectedArray={selectedArray}
+      setSelected={setSelected}
+      renderHiddenPanels={hidePanels}
+    />
   );
 };
