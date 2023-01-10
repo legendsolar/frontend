@@ -85,23 +85,21 @@ const hasuraAuthMiddleware = setContext(async (_, { headers }) => {
 
   console.log({ contextUser: user });
 
-  // this is fucking shit up when it fails
-  if (!user) {
-    throw new GraphQLError(
-      "Cannot make GraphQL request, user not authenticated"
-    );
-  }
-
   const token = await user?.getIdToken();
 
   const localEnv = isLocalEnvironment();
 
   console.warn({ localEnv });
 
+  if (token) {
+    headers.Authorization = `Bearer ${
+      localEnv ? locallySignedToken(token) : token
+    }`;
+  }
+
   return {
     headers: {
       ...headers,
-      Authorization: `Bearer ${localEnv ? locallySignedToken(token) : token}`,
     },
   };
 });

@@ -1,9 +1,10 @@
 import { Typography, Stack, Box, Button } from "@mui/material";
 import { Component } from "../basics/component";
-import NeraPNG from "../assets/icons/nera.png";
+import NeraPNG from "../../assets/people/headshots/nera.png";
 import { EXTERNAL_LINKS } from "@p/utils/webflow/webflowLinking";
-import { CalendarIcon, EnvelopeIcon } from "../icons/emoji_icons";
 import { Image } from "../utils/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDays, faEnvelope } from "@fortawesome/pro-solid-svg-icons";
 interface InvestmentSupportComponentProps {
   title: string;
   subtitle: string;
@@ -21,7 +22,11 @@ export const InvestmentSupportComponent = ({
     <Component shadow sx={{ ...sx, p: 0, width: "100%" }}>
       <Stack sx={{ m: 4 }}>
         <Stack direction="row" justifyContent={"space-between"}>
-          <Stack direction="row" justifyContent={"space-between"}>
+          <Stack
+            direction="row"
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
             <Image
               style={{
                 width: "52px",
@@ -30,43 +35,15 @@ export const InvestmentSupportComponent = ({
               }}
               src={NeraPNG}
             ></Image>
-            <Stack justifyContent={"flex-end"}>
+            <Stack spacing={0}>
               <Typography variant={"smallHeadline" as any}>{title}</Typography>
-              <Typography variant={"monoButton" as any}>{subtitle}</Typography>
+              <Typography
+                variant={"monoButton" as any}
+                color={"legendaryGreen.main"}
+              >
+                {subtitle}
+              </Typography>
             </Stack>
-          </Stack>
-
-          <Stack direction="row" justifyContent={"flex-end"}>
-            <Button
-              href={EXTERNAL_LINKS.TEAM.NERA}
-              variant="text"
-              target={"_blank"}
-              sx={{
-                justifyContent: "space-between",
-                alignItems: "center",
-                flexDirection: "column",
-                mt: 1,
-                mb: 1,
-              }}
-            >
-              <CalendarIcon />
-              <Typography variant={"monoButton" as any}>Meet</Typography>
-            </Button>
-
-            <Button
-              href={EXTERNAL_LINKS.MAILTO.NERA}
-              variant="text"
-              target={"_blank"}
-              style={{ marginTop: "5px", marginBottom: "5px" }}
-              sx={{
-                justifyContent: "space-between",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
-            >
-              <EnvelopeIcon />
-              <Typography variant={"monoButton" as any}>Email</Typography>
-            </Button>
           </Stack>
         </Stack>
         <Typography variant={"body" as any}>{description}</Typography>
@@ -76,13 +53,37 @@ export const InvestmentSupportComponent = ({
           backgroundColor: "whiteHaze.main",
           height: "45px",
           pr: 4,
+          pl: 4,
         }}
         display={"flex"}
-        justifyContent={"flex-end"}
+        justifyContent={"space-between"}
         alignItems={"center"}
       >
+        <Stack direction={"row"}>
+          <Button href={EXTERNAL_LINKS.TEAM.NERA} variant="text">
+            <Typography
+              variant={"monoButton" as any}
+              color={"legendaryGreen.main"}
+            >
+              {"Meet "}
+              <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
+            </Typography>
+          </Button>
+
+          <Button href={EXTERNAL_LINKS.TEAM.NERA} variant="text">
+            <Typography
+              variant={"monoButton" as any}
+              color={"legendaryGreen.main"}
+            >
+              {"Email "}
+              <FontAwesomeIcon icon={faCalendarDays}></FontAwesomeIcon>
+            </Typography>
+          </Button>
+        </Stack>
         <Button href={EXTERNAL_LINKS.TEAM.NERA} variant="text">
-          <Typography variant={"monoButton" as any}>Biography</Typography>
+          <Typography variant={"monoButton" as any} color={"blackDawn.main"}>
+            Biography
+          </Typography>
         </Button>
       </Box>
     </Component>

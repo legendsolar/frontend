@@ -48,19 +48,6 @@ export const PanelDisplay = ({
     }
   };
 
-  //   useEffect(() => {
-  //     const selected = selectedArray.flat().filter((s) => !!s).length;
-  //     const diff = currentPanelSelectedCount - selected;
-
-  //     console.log({ diffInit: diff });
-
-  //     if (diff > 0) {
-  //       Array.from({ length: diff }).map(() => selectNext(true));
-  //     } else if (diff < 0) {
-  //       Array.from({ length: -diff }).map(() => selectNext(false));
-  //     }
-  //   }, []);
-
   useEffect(() => {
     const selected = selectedArray.flat().filter((s) => !!s).length;
     const diff = currentPanelSelectedCount - selected;
@@ -86,7 +73,7 @@ export const PanelDisplay = ({
         height: "230px",
         overflowX: "hidden",
         overflowY: "visible",
-        marginLeft: "-20px",
+        marginLeft: "0px",
       }}
     >
       <div

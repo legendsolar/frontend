@@ -1,4 +1,10 @@
-import { Typography, Accordion, AccordionSummary, Stack } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  Stack,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Divider } from "../basics/divider";
 import { Component } from "../basics/component";
@@ -34,15 +40,7 @@ export const IconAccordian = ({ items }: { items: Array<Item> }) => {
           </Stack>
         </AccordionSummary>
 
-        <Component
-          standardWidth={false}
-          background
-          sx={{
-            backgroundColor: "whiteFog.main",
-          }}
-        >
-          {content}
-        </Component>
+        <Box>{content}</Box>
       </Accordion>
       {idx !== items.length - 1 && <Divider></Divider>}
     </div>

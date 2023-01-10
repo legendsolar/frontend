@@ -1,50 +1,38 @@
-import {Typography, Box, Stack, Button, Link} from '@mui/material';
-import {EnvelopeIcon} from '../icons/emoji_icons';
-import {GoogleIcon} from '../icons/icons';
-import {IconButton} from '../buttons/icon_button';
-import {ContentDivider} from '../basics/content_divider';
-import PropTypes from 'prop-types';
-import {Divider} from '../basics/divider';
+import { Typography, Box, Stack, Button, Link } from "@mui/material";
+import { EnvelopeIcon } from "../icons/emoji_icons";
+import { GoogleIcon } from "../icons/icons";
+import { IconButton } from "../buttons/icon_button";
+import { ContentDivider } from "../basics/content_divider";
+import PropTypes from "prop-types";
+import { Divider } from "../basics/divider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 export const SignUpOptionComponent = ({
-    onSignUpWithGoogle,
-    onSignUpWithEmail,
-    onNavigateToSignIn,
+  onSignUpWithGoogle,
+  onSignUpWithEmail,
+  onNavigateToSignIn,
 }) => (
-    <Stack spacing={4}>
-        <Typography variant="smallHeadline" sx={{mb: 6}}>
-            Create Account
-        </Typography>
+  <Stack spacing={4}>
+    <Typography variant="smallHeadline" sx={{ mb: 6 }}>
+      Create Account to Reserve Panels
+    </Typography>
 
-        <Typography variant={'description'}>
-            Legends Solar is currently in closed beta. Please{' '}
-            <Typography
-                variant={'link'}
-                component={Link}
-                target={'_blank'}
-                sx={{textTransform: 'none'}}
-                href={'https://www.legends.solar/get-early-access'}
-            >
-                join our waitlist
-            </Typography>{' '}
-            to reserve your place when we launch to the public.
-        </Typography>
+    <IconButton
+      variant="primary"
+      label="Sign up with Google"
+      color="legendaryGreen"
+      icon={<FontAwesomeIcon icon={faGoogle} />}
+      onClick={onSignUpWithGoogle}
+    ></IconButton>
 
-        {/* <IconButton
-            variant="small"
-            label="Sign up with Google"
-            color="white"
-            icon={<GoogleIcon />}
-            onClick={onSignUpWithEmail}
-        ></IconButton> */}
+    <ContentDivider color={"white"}>
+      <Typography variant="label" color={"blackDawn.main"}>
+        or sign up with email
+      </Typography>
+    </ContentDivider>
 
-        <Divider />
-
-        {/* <ContentDivider>
-            <Typography variant="label">OR </Typography>
-        </ContentDivider> */}
-
-        {/* <IconButton
+    {/* <IconButton
             variant="small"
             label="Sign up with email"
             color="legendaryGreen"
@@ -52,25 +40,24 @@ export const SignUpOptionComponent = ({
             onClick={onSignUpWithEmail}
         ></IconButton> */}
 
-        <Stack direction="row" justifyContent={'space-between'}>
-            <Typography variant="smallLabel">
-                {'Already have an account?'}
-            </Typography>
-            <Button variant="text" onClick={onNavigateToSignIn}>
-                <Typography
-                    variant="smallLabel"
-                    color="legendaryGreen.main"
-                    sx={{ml: 1}}
-                >
-                    {' Login'}
-                </Typography>
-            </Button>
-        </Stack>
+    <Stack direction="row" justifyContent={"center"} spacing={0}>
+      <Typography variant="subtitle3" color={"blackDawn.main"}>
+        {"Already have an account?"}
+      </Typography>
+      <Typography
+        variant="subtitle3"
+        color="legendaryGreen.main"
+        sx={{ ml: 1 }}
+        onClick={onNavigateToSignIn}
+      >
+        {"Login"}
+      </Typography>
     </Stack>
+  </Stack>
 );
 
 SignUpOptionComponent.propTypes = {
-    onSignUpWithGoogle: PropTypes.func.isRequired,
-    onSignUpWithEmail: PropTypes.func.isRequired,
-    onNavigateToSignIn: PropTypes.func.isRequired,
+  onSignUpWithGoogle: PropTypes.func.isRequired,
+  onSignUpWithEmail: PropTypes.func.isRequired,
+  onNavigateToSignIn: PropTypes.func.isRequired,
 };

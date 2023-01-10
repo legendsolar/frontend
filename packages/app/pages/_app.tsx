@@ -11,6 +11,7 @@ import { appTheme } from "@project/components/theme";
 import { Be_Vietnam_Pro } from "@next/font/google";
 import { ProvideReservations } from "utility/use_reservations";
 import { DebugWindow } from "utility/debug_window";
+import { UserStateMachine } from "utility/user_state_machine";
 
 const beVietnam = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           theme={appTheme({ beVietnamName: beVietnam.style.fontFamily })}
         >
           <ProvideAuth>
+            <DebugWindow />
             <ProvideReservations>
               <Component {...pageProps} />
             </ProvideReservations>

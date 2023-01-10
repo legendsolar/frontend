@@ -1,3 +1,4 @@
+import { TimelineComponent } from "@project/components/timeline/timeline_component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { WebflowView } from "@project/components/views/webflow_view";
 import { MetricList } from "@project/components/metrics/metric_list";
@@ -22,7 +23,10 @@ import { PanelDisplay } from "@project/components/panels/panel_display";
 import { siteCopy } from "../utility/copy";
 import { Component, Divider } from "@project/components/basics";
 import { MetricBox } from "@project/components/gauges/metric_box";
-import { useReservations } from "utility/use_reservations";
+import {
+  localStorePanelsReserved,
+  useReservations,
+} from "utility/use_reservations";
 
 import { faInfoCircle } from "@fortawesome/pro-solid-svg-icons";
 import { useThemeColor } from "@project/components/utils";
@@ -35,6 +39,7 @@ export const ReservePanelPage = () => {
     costPerPanel,
     currentReservedPanels,
     maxPanelReservations,
+    confirmPanels,
   } = useReservations();
 
   console.log({ loading, currentReservedPanels });
@@ -112,7 +117,9 @@ export const ReservePanelPage = () => {
                   />
                 </Stack>
 
-                <Button variant={"primary" as any}>Reserve Panels</Button>
+                <Button variant={"primary" as any} onClick={confirmPanels}>
+                  Reserve Panels
+                </Button>
 
                 <Stack alignItems={"center"}>
                   <Typography
@@ -212,6 +219,16 @@ export const ReservePanelPage = () => {
                 </Typography>
               </ContentDivider>
 
+              <Stack>
+                <Typography variant={"body" as any}>
+                  With Legends, you’ll purchase solar panels on a commercial
+                  solar farm - think warehouse rooftop (not a suburban home) and
+                  earn cash as you generate and sell electricity. Online solar
+                  investing with Legends will be available in the next few
+                  months. Reserve panels today to get early access.
+                </Typography>
+              </Stack>
+
               <IconAccordian
                 items={[
                   {
@@ -245,8 +262,85 @@ export const ReservePanelPage = () => {
               ></IconAccordian>
 
               <ContentDivider>
-                <Typography variant={"monoButton" as any}>Details</Typography>
+                <Typography
+                  variant={"monoButton" as any}
+                  color="legendaryGreen.main"
+                >
+                  Timeline
+                </Typography>
               </ContentDivider>
+
+              <TimelineComponent
+                steps={[
+                  {
+                    title: "We identify a solar project to fund",
+                    description:
+                      "We select solar projects based on their risk profile and quality of construction.",
+                    linkBubble: (
+                      <Button
+                        variant={"mini" as any}
+                        href={"https://www.legends.solar/learn/selection"}
+                        target="_blank"
+                        sx={{
+                          width: "fit-content",
+                          backgroundColor: "whiteHaze.main",
+                        }}
+                      >
+                        Asset Selection Process
+                      </Button>
+                    ),
+                  },
+
+                  {
+                    title: "Review Offering Prospectus",
+                    description:
+                      "Once we are ready to subscribe a solar facility, we'll publish a prospectus and other documents.",
+                  },
+
+                  {
+                    title: "Subscribe to Solar Offering",
+                    description:
+                      "After reviewing the prospectus, you can commit to an investment & enter your bank info.",
+                  },
+                  {
+                    title: "Complete Investment Transaction",
+                    description:
+                      "Once the investment is fully subscribed, you'll receive your 'panel' shares.",
+                    linkBubble: (
+                      <Button
+                        variant={"mini" as any}
+                        href={"https://www.legends.solar/learn/cost"}
+                        target="_blank"
+                        sx={{
+                          width: "fit-content",
+                          backgroundColor: "whiteHaze.main",
+                        }}
+                      >
+                        Shares on Legends Solar
+                      </Button>
+                    ),
+                  },
+                  {
+                    title: "View Productivity and Dividends",
+                    description:
+                      "You'll  see your investment's real time impact and receive dividends from your holding. ",
+
+                    linkBubble: (
+                      <Button
+                        variant={"mini" as any}
+                        href={"https://www.legends.solar/learn/legends-solar"}
+                        target="_blank"
+                        sx={{
+                          width: "fit-content",
+                          backgroundColor: "whiteHaze.main",
+                        }}
+                      >
+                        Legends Rooftop
+                      </Button>
+                    ),
+                  },
+                ]}
+              ></TimelineComponent>
             </Stack>
           }
         ></SideBarView>
