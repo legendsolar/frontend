@@ -16,6 +16,23 @@ computed_fields:
         name: total_panels_reserved
         schema: public
 select_permissions:
+  - role: public
+    permission:
+      columns:
+        - panel_total
+        - address
+        - location
+        - misc_spec
+        - panel_cost
+        - id
+        - name
+        - summary
+      computed_fields:
+        - panels_reserved
+      filter:
+        id:
+          _eq: legends-res-panel-placeholder
+      limit: 1
   - role: user
     permission:
       columns:
