@@ -23,10 +23,10 @@ export const spacing = (s) => `${s * 5}px`;
 export const breakpoints = {
   values: {
     xs: 0,
-    sm: 320, // webflow phone
-    md: 478, // webflow landscape phone
-    lg: 860, // webflow tablet 820 + 40
-    xl: 1280 + 40, // desktop 1240 + 40 + 40
+    sm: 0, // webflow phone
+    md: 0, // webflow landscape phone
+    lg: 1072, // webflow tablet 820 + 40
+    // xl: , // desktop 1240 + 40 + 40
   },
 };
 
@@ -232,7 +232,7 @@ export const appTheme = (
         lineHeight: "14px",
         fontWeight: 600,
         color: paletteOptions.palette.legendaryGreen.main,
-        textTransform: "uppercase",
+        textDecoration: "none",
       },
       meduimEmoji: {
         fontFamily: beVietnamName,
@@ -421,6 +421,13 @@ export const appTheme = (
           },
 
           {
+            props: { color: "white" },
+            style: {
+              backgroundColor: paletteOptions.palette.white.main,
+            },
+          },
+
+          {
             props: { color: "light" },
             style: {
               color: paletteOptions.palette.blackDusk.main,
@@ -479,6 +486,23 @@ export const appTheme = (
               border: "1px solid black",
               backgroundColor: paletteOptions.palette.white.main,
               color: paletteOptions.palette.blackDawn.contrastText,
+
+              ...typographyOptions.typography.subtitle2,
+
+              "&:hover": {
+                boxShadow: "0px 0px 25px rgba(99, 110, 114, 0.25)",
+              },
+            },
+          },
+
+          {
+            props: { variant: "signup" },
+            style: {
+              height: "55px",
+              width: "100%",
+              borderRadius: "5px",
+              backgroundColor: paletteOptions.palette.legendaryGreen.main,
+              color: paletteOptions.palette.legendaryGreen.contrastText,
 
               ...typographyOptions.typography.subtitle2,
 
@@ -551,17 +575,13 @@ export const appTheme = (
           {
             props: { variant: "bubble" },
             style: {
-              ...typographyOptions.body2,
-              height: "43px",
+              ...typographyOptions.subtitle2,
+              color: paletteOptions.palette.blackDawn.main,
+              height: "40px",
               width: "fit-content",
               paddingLeft: "20px",
               paddingRight: "20px",
               borderRadius: "40px",
-              border: "1.5px solid",
-              backgroundColor: "transparent",
-              "&:hover": {
-                backgroundColor: "transparent",
-              },
             },
           },
 
@@ -799,7 +819,8 @@ export const appTheme = (
       MuiFormHelperText: {
         styleOverrides: {
           root: {
-            ...typographyOptions.typography.smallLabel,
+            ...typographyOptions.typography.label,
+            marginLeft: "0px",
           },
         },
       },

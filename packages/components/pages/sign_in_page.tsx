@@ -13,12 +13,13 @@ export const SignInPage = () => {
   return (
     <DualPaneView
       leftPane={
-        <Stack spacing={"32px"}>
+        <Stack spacing={"32px"} sx={{ maxWidth: "500px", width: "500px" }}>
           <Typography variant="smallHeadline">Login</Typography>
           <IconButton
-            variant="primary"
+            variant="signup"
             label="Login with Google"
             color="legendaryGreen"
+            iconJustify="flex-start"
             icon={<FontAwesomeIcon icon={faGoogle} />}
             onClick={() => {}}
           ></IconButton>

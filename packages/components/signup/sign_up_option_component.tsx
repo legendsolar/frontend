@@ -20,7 +20,7 @@ export const SignUpOptionComponent = ({
     </Typography>
 
     <IconButton
-      variant="primary"
+      variant="signup"
       label="Sign up with Google"
       color="legendaryGreen"
       icon={<FontAwesomeIcon icon={faGoogle} />}
@@ -46,6 +46,30 @@ export const SignUpOptionComponent = ({
         onClick={onNavigateToSignIn}
       >
         {"Login"}
+      </Typography>
+    </Stack>
+
+    <Stack direction="row" justifyContent={"center"} spacing={0}>
+      <Typography variant={"subtitle3" as any}>
+        {"Signing up for an account means you agree to our "}
+        <Typography
+          variant={"link" as any}
+          component={Link}
+          target={"_blank"}
+          href={"https://www.legends.solar/legal/privacy-policy"}
+          // onClick={onNavigateToPrivacyPolicy}
+        >
+          privacy policy
+        </Typography>{" "}
+        and{" "}
+        <Typography
+          variant={"link" as any}
+          component={Link}
+          target={"_blank"}
+          href={"https://www.legends.solar/legal/terms-and-conditions"}
+        >
+          terms of service
+        </Typography>
       </Typography>
     </Stack>
   </Stack>

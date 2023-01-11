@@ -14,7 +14,7 @@ import { DefaultErrorBoundary } from "../errors/default_error_boundary";
 interface SideBarViewProps {
   drawer?: JSX.Element;
   mainContent?: JSX.Element;
-  header?: JSX.Element;
+  header?: JSX.Element | undefined;
   drawerPosition?: "left" | "right" | "top" | "bottom" | "none";
   constrainedDrawerPostion?: "left" | "right" | "top" | "bottom" | "none";
   constrainedBreakpoint?: Breakpoint;
@@ -24,7 +24,7 @@ interface SideBarViewProps {
 const SideBarView = ({
   drawer = <></>,
   mainContent = <></>,
-  header = <></>,
+  header = undefined,
   drawerPosition = "left",
   constrainedDrawerPostion = "top",
   constrainedBreakpoint = "xl",
@@ -43,25 +43,20 @@ const SideBarView = ({
     return drawerPosition;
   };
 
-  console.log({ constrained });
-
   const getDrawerPosition = (position: string) => {
     if (position === currentDisplayPosition())
       switch (drawerPosition) {
         case "left":
           return (
-            <Grid item xl={drawerGridSize} xs={12}>
-              <Box
-                sx={{
-                  height: "max-content",
-                  top: "20px",
-                  position: "sticky",
-                  width: "100%",
-                }}
-              >
-                <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
-              </Box>
-            </Grid>
+            <Box
+              sx={{
+                height: "max-content",
+                top: "20px",
+                position: "sticky",
+              }}
+            >
+              <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
+            </Box>
           );
         case "top":
           return (
@@ -71,8 +66,7 @@ const SideBarView = ({
                 pl: 0,
                 pr: 0,
                 mb: {
-                  sm: 4,
-                  md: 0,
+                  md: 4,
                 },
               }}
             >
@@ -82,18 +76,15 @@ const SideBarView = ({
 
         case "right":
           return (
-            <Grid item xl={drawerGridSize} xs={12}>
-              <Box
-                sx={{
-                  height: "max-content",
-                  top: "20px",
-                  position: "sticky",
-                  width: "100%",
-                }}
-              >
-                <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
-              </Box>
-            </Grid>
+            <Box
+              sx={{
+                height: "max-content",
+                top: "20px",
+                position: "sticky",
+              }}
+            >
+              <DefaultErrorBoundary>{drawer}</DefaultErrorBoundary>
+            </Box>
           );
 
         case "bottom":
@@ -104,8 +95,7 @@ const SideBarView = ({
                 pl: 0,
                 pr: 0,
                 mb: {
-                  sm: 4,
-                  md: 0,
+                  md: 4,
                 },
               }}
             >
@@ -117,36 +107,30 @@ const SideBarView = ({
     return null;
   };
 
+  const renderHeader = () => {
+    if (header) {
+      return (
+        <DefaultErrorBoundary>
+          <Box sx={{ mb: 4 }}> {header}</Box>
+        </DefaultErrorBoundary>
+      );
+    }
+  };
+
   return (
     <div>
-      <Grid container columnSpacing={4}>
-        {getDrawerPosition("left")}
-        <Grid item xl={12 - drawerGridSize} xs={12}>
-          <Stack
-            sx={{
-              width: "100%",
-            }}
-          >
-            <Box>
-              {getDrawerPosition("top")}
+      <Stack>
+        {getDrawerPosition("top")}
+        <Stack direction={"row"} spacing={11}>
+          {getDrawerPosition("left")}
+          {renderHeader()}
 
-              {!!header && (
-                <DefaultErrorBoundary>
-                  <Box sx={{ mb: 4 }}> {header}</Box>
-                </DefaultErrorBoundary>
-              )}
+          {mainContent}
 
-              <DefaultErrorBoundary>
-                <Box sx={{ mt: { xs: 4, md: 0 } }}>{mainContent}</Box>
-              </DefaultErrorBoundary>
-
-              {getDrawerPosition("bottom")}
-            </Box>
-          </Stack>
-        </Grid>
-
-        {getDrawerPosition("right")}
-      </Grid>
+          {getDrawerPosition("right")}
+        </Stack>
+        {getDrawerPosition("bottom")}
+      </Stack>
     </div>
   );
 };

@@ -5,9 +5,10 @@ import {
   AccordionSummary,
   Stack,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { faAngleDown } from "@fortawesome/pro-solid-svg-icons";
 import { Divider } from "../basics/divider";
 import { Component } from "../basics/component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Item {
   title: string;
@@ -29,7 +30,7 @@ export const IconAccordian = ({ items }: { items: Array<Item> }) => {
         defaultExpanded={false}
       >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<FontAwesomeIcon icon={faAngleDown} />}
           sx={{
             height: "105px",
           }}

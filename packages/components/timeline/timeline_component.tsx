@@ -11,9 +11,13 @@ export interface TimelineStep {
 
 export interface TimelineComponentProps {
   steps: Array<TimelineStep>;
+  sx?: any;
 }
 
-export const TimelineComponent = ({ steps }: TimelineComponentProps) => {
+export const TimelineComponent = ({
+  steps,
+  sx = {},
+}: TimelineComponentProps) => {
   return (
     <Box
       style={{
@@ -23,6 +27,7 @@ export const TimelineComponent = ({ steps }: TimelineComponentProps) => {
         position: "relative",
         p: 0,
         borderRadius: "5px",
+        ...sx,
       }}
     >
       {steps.map((step, idx) => (

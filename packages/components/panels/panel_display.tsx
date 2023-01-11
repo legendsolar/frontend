@@ -8,6 +8,7 @@ export interface PanelDisplayProps {
   currentPanelSelectedCount: number;
   hidePanels: boolean;
   onPanelCountUpdate(newPanelCount: number): void;
+  interaction?: boolean;
 }
 
 export const PanelDisplay = ({
@@ -16,6 +17,7 @@ export const PanelDisplay = ({
   currentPanelSelectedCount,
   hidePanels,
   onPanelCountUpdate,
+  interaction = true,
 }: PanelDisplayProps) => {
   const [selectedArray, setSelectedArray] = useState(
     Array.from(Array(panelRows), () => new Array(panelWidth))
@@ -86,8 +88,9 @@ export const PanelDisplay = ({
         >
           <PanelArray
             selectedArray={selectedArray}
-            setSelected={setSelected}
+            setSelected={interaction ? setSelected : () => {}}
             renderHiddenPanels={hidePanels}
+            interaction={interaction}
           />
         </div>
       </div>
@@ -97,8 +100,9 @@ export const PanelDisplay = ({
   return (
     <PanelArray
       selectedArray={selectedArray}
-      setSelected={setSelected}
+      setSelected={interaction ? setSelected : () => {}}
       renderHiddenPanels={hidePanels}
+      interaction={interaction}
     />
   );
 };

@@ -111,7 +111,7 @@ export const UserInformationComponent = ({
             />
           </Grid>
 
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} lg={12}>
             <TextField
               color={color}
               error={formik.touched.email && Boolean(formik.errors.email)}
@@ -126,7 +126,7 @@ export const UserInformationComponent = ({
             />
           </Grid>
 
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} lg={12}>
             <TextField
               color={color}
               error={formik.touched.password && Boolean(formik.errors.password)}

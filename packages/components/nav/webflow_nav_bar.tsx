@@ -5,7 +5,9 @@ import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.svg";
 import LoggedInToolbar from "./logged_in_toolbar";
 import { MagGlassIcon } from "../icons/emoji_icons";
 import { Image } from "../utils/image";
-import { BackButton } from "../buttons/back_button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconButton } from "../buttons/icon_button";
+import { faArrowLeft } from "@fortawesome/pro-solid-svg-icons";
 
 export enum States {
   RESERVE_PANEL,
@@ -36,7 +38,14 @@ export const WebflowNavBar = ({
   const leftOfLogo = (state: States): JSX.Element => {
     switch (state) {
       case States.RESERVE_PANEL:
-        return <BackButton label="Back to Legends"></BackButton>;
+        return (
+          <IconButton
+            variant="bubble"
+            color="white"
+            label=" Back to Legends"
+            icon={<FontAwesomeIcon icon={faArrowLeft} />}
+          ></IconButton>
+        );
       case States.LOGGED_OUT:
         return <></>;
       case States.LOGGED_IN_NO_PANELS:

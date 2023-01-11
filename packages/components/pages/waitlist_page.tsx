@@ -27,6 +27,7 @@ import { MetricBox } from "@project/components/gauges/metric_box";
 import { faInfoCircle } from "@fortawesome/pro-solid-svg-icons";
 import { useThemeColor } from "@project/components/utils";
 import { ShareSocial } from "../share/share_social";
+import { ClickToCopyButton } from "../buttons/click_to_copy_button";
 
 export interface WaitlistPageProps {
   waitlistPosn: number;
@@ -69,14 +70,7 @@ export const WaitlistPage = ({
           </Typography>
         </ContentDivider>
 
-        <Stack sx={{ p: "16px", backgroundColor: "white.main" }}>
-          <Typography variant={"smallHeadline" as any}>
-            {"Click to copy"}
-          </Typography>
-          <Typography variant={"smallHeadline" as any} color={"skyBlue.main"}>
-            {referralLink}
-          </Typography>
-        </Stack>
+        <ClickToCopyButton copyText={referralLink} />
 
         <Typography variant={"smallHeadline" as any}>
           {

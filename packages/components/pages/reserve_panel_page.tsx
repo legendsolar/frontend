@@ -5,6 +5,7 @@ import { MetricList } from "@project/components/metrics/metric_list";
 import { PlusMinusNumber } from "@project/components/inputs/plus_minus_number";
 import { LinearGauge } from "@project/components/gauges/linear_gauge";
 import { Stack, Typography, Box, Grid, Button } from "@mui/material";
+import { IconButton } from "../buttons/icon_button";
 import { ContentDivider } from "@project/components/basics/content_divider";
 import SideBarView from "@project/components/views/side_bar_view";
 import { InvestmentSupportComponent } from "@project/components/invest/investment_support_component";
@@ -15,6 +16,7 @@ import {
   CashIcon,
   PowerIcon,
   LeafIcon,
+  MagGlassIcon,
 } from "@project/components/icons/emoji_icons";
 
 import { PanelDisplay } from "@project/components/panels/panel_display";
@@ -22,7 +24,7 @@ import { PanelDisplay } from "@project/components/panels/panel_display";
 import { Component, Divider } from "@project/components/basics";
 import { MetricBox } from "@project/components/gauges/metric_box";
 
-import { faInfoCircle } from "@fortawesome/pro-solid-svg-icons";
+import { faInfoCircle, faArrowRight } from "@fortawesome/pro-solid-svg-icons";
 import { useThemeColor } from "@project/components/utils";
 import { siteCopy } from "../content/copy";
 
@@ -45,7 +47,7 @@ export const ReservePanelPage = ({
 }: ReservePanelPageProps) => {
   return (
     <WebflowView>
-      <Stack>
+      <Stack spacing={6}>
         <Stack>
           <Typography variant={"headline2" as any}>
             Reserve Panels to Claim Early Access
@@ -62,9 +64,18 @@ export const ReservePanelPage = ({
 
         <SideBarView
           drawerPosition={"right"}
-          constrainedBreakpoint="md"
+          constrainedBreakpoint="lg"
+          constrainedDrawerPostion="bottom"
           drawer={
-            <Stack>
+            <Stack
+              sx={{
+                minWidth: "440px",
+                width: {
+                  lg: "440px",
+                  md: "100%",
+                },
+              }}
+            >
               <Component
                 shadow
                 background
@@ -128,7 +139,12 @@ export const ReservePanelPage = ({
             </Stack>
           }
           mainContent={
-            <Component background shadow standardWidth={false}>
+            <Component
+              background
+              shadow
+              standardWidth={false}
+              sx={{ width: "100%" }}
+            >
               <Stack>
                 <LinearGauge
                   current={currentReservedPanels + currentPanels}
@@ -142,39 +158,42 @@ export const ReservePanelPage = ({
                   currentPanelSelectedCount={currentPanels}
                   onPanelCountUpdate={(newCount) => setCurrentPanels(newCount)}
                 ></PanelDisplay>
-                <ContentDivider>
-                  <Typography
-                    variant={"monoButton" as any}
-                    color="legendaryGreen.main"
-                  >
-                    Estimated Impact
-                  </Typography>
-                </ContentDivider>
-                <Grid container>
-                  <Grid item lg={4} xs={4}>
-                    <MetricBox
-                      metric={"$" + numberFormatter(currentPanels * 10, 2)}
-                      icon={<CashIcon></CashIcon>}
-                      title={"USD Dividends Earned"}
-                    ></MetricBox>
-                  </Grid>
 
-                  <Grid item lg={4} xs={4}>
-                    <MetricBox
-                      metric={numberFormatter(currentPanels * 10, 3)}
-                      icon={<LeafIcon />}
-                      title={"LBS Carbon Averted"}
-                    ></MetricBox>
-                  </Grid>
+                <Box sx={{ display: { md: "none", lg: "inline" } }}>
+                  <ContentDivider>
+                    <Typography
+                      variant={"monoButton" as any}
+                      color="legendaryGreen.main"
+                    >
+                      Estimated Impact
+                    </Typography>
+                  </ContentDivider>
+                  <Grid container>
+                    <Grid item lg={4} xs={4}>
+                      <MetricBox
+                        metric={"$" + numberFormatter(currentPanels * 10, 2)}
+                        icon={<CashIcon></CashIcon>}
+                        title={"USD Dividends Earned"}
+                      ></MetricBox>
+                    </Grid>
 
-                  <Grid item lg={4} xs={4}>
-                    <MetricBox
-                      metric={numberFormatter(currentPanels * 10, 3)}
-                      icon={<PowerIcon />}
-                      title={"kWh Generated"}
-                    ></MetricBox>
+                    <Grid item lg={4} xs={4}>
+                      <MetricBox
+                        metric={numberFormatter(currentPanels * 10, 3)}
+                        icon={<LeafIcon />}
+                        title={"LBS Carbon Averted"}
+                      ></MetricBox>
+                    </Grid>
+
+                    <Grid item lg={4} xs={4}>
+                      <MetricBox
+                        metric={numberFormatter(currentPanels * 10, 3)}
+                        icon={<PowerIcon />}
+                        title={"kWh Generated"}
+                      ></MetricBox>
+                    </Grid>
                   </Grid>
-                </Grid>
+                </Box>
               </Stack>
             </Component>
           }
@@ -183,8 +202,9 @@ export const ReservePanelPage = ({
         <SideBarView
           drawerPosition={"left"}
           constrainedBreakpoint="lg"
+          constrainedDrawerPostion="bottom"
           drawer={
-            <Box sx={{ mt: 4 }}>
+            <Box>
               <ContentDivider>
                 <Typography
                   variant={"monoButton" as any}
@@ -218,123 +238,149 @@ export const ReservePanelPage = ({
                 <Typography variant={"body" as any}>
                   With Legends, you’ll purchase solar panels on a commercial
                   solar farm - think warehouse rooftop (not a suburban home) and
-                  earn cash as you generate and sell electricity. Online solar
-                  investing with Legends will be available in the next few
-                  months. Reserve panels today to get early access.
+                  earn cash as you generate and sell electricity.
+                </Typography>
+                <Typography variant={"body" as any}>
+                  Online solar investing with Legends will be available in the
+                  next few months. Reserve panels today to get early access.
                 </Typography>
               </Stack>
               <IconAccordian
                 items={[
                   {
-                    title: "7 year term",
+                    title: "Carefully selected solar panels",
                     content: (
-                      <Typography variant={"description" as any}>
-                        {siteCopy.aboutSevenYearTerm}
-                      </Typography>
+                      <Stack>
+                        <Typography variant={"description" as any}>
+                          {siteCopy.aboutSevenYearTerm}
+                        </Typography>
+                        <IconButton
+                          iconPosition="right"
+                          variant="bubble"
+                          label="How does Legends Solar Choose solar panels?"
+                          icon={<FontAwesomeIcon icon={faArrowRight} />}
+                        />
+                      </Stack>
                     ),
-                    icon: <CalendarIcon></CalendarIcon>,
+                    icon: <MagGlassIcon />,
                   },
                   {
-                    title: "Legends Rooftop monitoring",
+                    title: "Monthly cash earnings",
                     content: (
                       <Typography variant={"description" as any}>
                         {siteCopy.aboutRooftopMonitoring}
                       </Typography>
                     ),
-                    icon: <PowerIcon></PowerIcon>,
-                  },
-                  {
-                    title: "Investment Tax Credit",
-                    content: (
-                      <Typography variant={"description" as any}>
-                        {siteCopy.aboutInvestmentTaxCredit}
-                      </Typography>
-                    ),
-                    icon: <CashIcon></CashIcon>,
+                    icon: <CashIcon />,
                   },
                 ]}
               ></IconAccordian>
 
-              <ContentDivider>
-                <Typography
-                  variant={"monoButton" as any}
-                  color="legendaryGreen.main"
-                >
-                  Timeline
+              <Stack
+                sx={{
+                  display: {
+                    md: "none",
+                    lg: "inline",
+                  },
+                }}
+                spacing={6}
+              >
+                <ContentDivider>
+                  <Typography
+                    variant={"monoButton" as any}
+                    color="legendaryGreen.main"
+                  >
+                    Timeline
+                  </Typography>
+                </ContentDivider>
+
+                <div></div>
+
+                <Typography variant={"smallHeadline" as any}>
+                  Solar panels will be available in 3-6 months
                 </Typography>
-              </ContentDivider>
 
-              <TimelineComponent
-                steps={[
-                  {
-                    title: "We identify a solar project to fund",
-                    description:
-                      "We select solar projects based on their risk profile and quality of construction.",
-                    linkBubble: (
-                      <Button
-                        variant={"mini" as any}
-                        href={"https://www.legends.solar/learn/selection"}
-                        target="_blank"
-                        sx={{
-                          width: "fit-content",
-                          backgroundColor: "whiteHaze.main",
-                        }}
-                      >
-                        Asset Selection Process
-                      </Button>
-                    ),
-                  },
+                <div></div>
 
-                  {
-                    title: "Review Offering Prospectus",
-                    description:
-                      "Once we are ready to subscribe a solar facility, we'll publish a prospectus and other documents.",
-                  },
+                <Typography variant={"body" as any}>
+                  Get Early Access to be first to know when we have available
+                  solar panels. It’s no commitment — before you invest, you’ll
+                  be provided a detailed finance overview with forecast returns
+                  and other important information.
+                </Typography>
 
-                  {
-                    title: "Subscribe to Solar Offering",
-                    description:
-                      "After reviewing the prospectus, you can commit to an investment & enter your bank info.",
-                  },
-                  {
-                    title: "Complete Investment Transaction",
-                    description:
-                      "Once the investment is fully subscribed, you'll receive your 'panel' shares.",
-                    linkBubble: (
-                      <Button
-                        variant={"mini" as any}
-                        href={"https://www.legends.solar/learn/cost"}
-                        target="_blank"
-                        sx={{
-                          width: "fit-content",
-                          backgroundColor: "whiteHaze.main",
-                        }}
-                      >
-                        Shares on Legends Solar
-                      </Button>
-                    ),
-                  },
-                  {
-                    title: "View Productivity and Dividends",
-                    description:
-                      "You'll  see your investment's real time impact and receive dividends from your holding. ",
+                <TimelineComponent
+                  steps={[
+                    {
+                      title: "We identify a solar project to fund",
+                      description:
+                        "We select solar projects based on their risk profile and quality of construction.",
+                      linkBubble: (
+                        <Button
+                          variant={"mini" as any}
+                          href={"https://www.legends.solar/learn/selection"}
+                          target="_blank"
+                          sx={{
+                            width: "fit-content",
+                            backgroundColor: "whiteHaze.main",
+                          }}
+                        >
+                          Asset Selection Process
+                        </Button>
+                      ),
+                    },
 
-                    linkBubble: (
-                      <Button
-                        variant={"mini" as any}
-                        href={"https://www.legends.solar/learn/legends-solar"}
-                        target="_blank"
-                        sx={{
-                          width: "fit-content",
-                          backgroundColor: "whiteHaze.main",
-                        }}
-                      >
-                        Legends Rooftop
-                      </Button>
-                    ),
-                  },
-                ]}
-              ></TimelineComponent>
+                    {
+                      title: "Review Offering Prospectus",
+                      description:
+                        "Once we are ready to subscribe a solar facility, we'll publish a prospectus and other documents.",
+                    },
+
+                    {
+                      title: "Subscribe to Solar Offering",
+                      description:
+                        "After reviewing the prospectus, you can commit to an investment & enter your bank info.",
+                    },
+                    {
+                      title: "Complete Investment Transaction",
+                      description:
+                        "Once the investment is fully subscribed, you'll receive your 'panel' shares.",
+                      linkBubble: (
+                        <Button
+                          variant={"mini" as any}
+                          href={"https://www.legends.solar/learn/cost"}
+                          target="_blank"
+                          sx={{
+                            width: "fit-content",
+                            backgroundColor: "whiteHaze.main",
+                          }}
+                        >
+                          Shares on Legends Solar
+                        </Button>
+                      ),
+                    },
+                    {
+                      title: "View Productivity and Dividends",
+                      description:
+                        "You'll  see your investment's real time impact and receive dividends from your holding. ",
+
+                      linkBubble: (
+                        <Button
+                          variant={"mini" as any}
+                          href={"https://www.legends.solar/learn/legends-solar"}
+                          target="_blank"
+                          sx={{
+                            width: "fit-content",
+                            backgroundColor: "whiteHaze.main",
+                          }}
+                        >
+                          Legends Rooftop
+                        </Button>
+                      ),
+                    },
+                  ]}
+                ></TimelineComponent>
+              </Stack>
             </Stack>
           }
         ></SideBarView>

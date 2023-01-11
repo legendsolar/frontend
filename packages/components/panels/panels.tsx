@@ -7,10 +7,12 @@ export const PanelArray = ({
   selectedArray,
   setSelected,
   renderHiddenPanels = false,
+  interaction = true,
 }: {
   selectedArray: Array<Array<boolean>>;
   setSelected(x: number, y: number, selected: boolean): void;
   renderHiddenPanels: boolean;
+  interaction?: boolean;
 }) => {
   const [startTime, setStartTime] = useState(undefined);
 
@@ -57,7 +59,7 @@ export const PanelArray = ({
                   animationSyncTime={startTime}
                   setSelected={(selected) => setSelected(x, y, selected)}
                   selected={selectedArray[x][y]}
-                  selectable={true}
+                  selectable={interaction}
                 ></Panel>
               )
             )}
@@ -77,7 +79,7 @@ const Panel = ({
 }) => {
   const [mouseOver, setMouseOver] = useState(false);
 
-  const hover = (mouseOver || selected) && selectable;
+  const hover = (mouseOver && selectable) || selected;
 
   return (
     <Box

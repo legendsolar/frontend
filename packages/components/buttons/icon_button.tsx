@@ -7,6 +7,8 @@ interface IconButtonProps {
   color?: string;
   disabled?: boolean;
   variant?: string;
+  iconPosition: "left" | "right";
+  iconJustify: string;
   href?: string;
   target?: string;
   onClick?(): void;
@@ -19,6 +21,8 @@ export const IconButton = ({
   color = "white",
   disabled = false,
   variant = "primary",
+  iconPosition = "left",
+  iconJustify = "center",
   href,
   target,
 }: IconButtonProps) => {
@@ -38,16 +42,23 @@ export const IconButton = ({
         },
       }}
     >
-      {icon}
       <Stack
         direction="row"
         sx={{
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: iconJustify,
           width: "100%",
         }}
       >
-        <Box display="flex" justifyContent={"center"} alignItems="center">
+        {iconPosition === "left" && icon}
+        <Box
+          display="flex"
+          justifyContent={"center"}
+          alignItems="center"
+          sx={{
+            width: "100%",
+          }}
+        >
           <Typography
             justifyContent="center"
             variant={"subtitle2" as any}
@@ -56,6 +67,7 @@ export const IconButton = ({
             {label}
           </Typography>
         </Box>
+        {iconPosition === "right" && icon}
       </Stack>
     </Button>
   );

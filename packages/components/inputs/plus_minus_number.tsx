@@ -28,11 +28,39 @@ export const PlusMinusNumber = ({
         p: 0,
       }}
     >
-      <Button onClick={decState} variant={"plusMinus" as any}>
+      <Button
+        onClick={decState}
+        variant={"plusMinus" as any}
+        sx={{
+          width: "105px",
+          "&:hover": {
+            backgroundColor: "blackDawn.main",
+            color: "white.main",
+          },
+          "&:active": {
+            backgroundColor: "eraserRed.main",
+            color: "white.main",
+          },
+        }}
+      >
         <FontAwesomeIcon icon={faMinus} />
       </Button>
-      <Typography>{state}</Typography>
-      <Button onClick={incState} variant={"plusMinus" as any}>
+      <Typography variant="smallHeadline">{state}</Typography>
+      <Button
+        onClick={incState}
+        variant={"plusMinus" as any}
+        sx={{
+          width: "105px",
+          "&:hover": {
+            backgroundColor: "blackDawn.main",
+            color: "white.main",
+          },
+          "&:active": {
+            backgroundColor: "grassGreen.main",
+            color: "white.main",
+          },
+        }}
+      >
         <FontAwesomeIcon icon={faPlus} />
       </Button>
     </Stack>
