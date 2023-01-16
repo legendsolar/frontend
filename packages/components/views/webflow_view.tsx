@@ -5,7 +5,7 @@ import { MainContentBox } from "../basics";
 
 export const WebflowView = ({ children }) => {
   return (
-    <Box sx={{ backgroundColor: "whiteHaze.main" }}>
+    <Box sx={{ backgroundColor: "whiteHaze.main", overscrollBehavior: "none" }}>
       <WebflowNavBar />
 
       <MainContentBox>

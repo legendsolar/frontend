@@ -6,26 +6,7 @@ import { PlusMinusNumber } from "@project/components/inputs/plus_minus_number";
 import { LinearGauge } from "@project/components/gauges/linear_gauge";
 import { Stack, Typography, Box, Grid, Button } from "@mui/material";
 import { ContentDivider } from "@project/components/basics/content_divider";
-import SideBarView from "@project/components/views/side_bar_view";
-import { InvestmentSupportComponent } from "@project/components/invest/investment_support_component";
-import IconAccordian from "@project/components/utils/icon_accordian";
-import { DocumentListComponent } from "@project/components/documents/document_list_component";
-import { numberFormatter, currencyFormatter } from "@p/utils/number_formatter";
-import {
-  CalendarIcon,
-  CashIcon,
-  PowerIcon,
-  LeafIcon,
-  SunIcon,
-} from "@project/components/icons/emoji_icons";
-
-import { PanelDisplay } from "@project/components/panels/panel_display";
-
-import { Component, Divider } from "@project/components/basics";
-import { MetricBox } from "@project/components/gauges/metric_box";
-
-import { faInfoCircle } from "@fortawesome/pro-solid-svg-icons";
-import { useThemeColor } from "@project/components/utils";
+import { SunIcon } from "@project/components/icons/emoji_icons";
 import { ShareSocial } from "../share/share_social";
 import { ClickToCopyButton } from "../buttons/click_to_copy_button";
 

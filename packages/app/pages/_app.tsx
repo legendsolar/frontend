@@ -33,6 +33,8 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ApolloProvider client={client}>
       <style jsx global>{`
+        body {
+        }
         #__next {
           position: absolute;
           top: 0;
@@ -48,13 +50,14 @@ const App = ({ Component, pageProps }: AppProps) => {
         >
           <ProvideAuth>
             <DebugWindow />
-            <ProvideReservations>
-              <ProvideViralLoops
-                viralLoopsCampaignId={"kij42YdL37aNYEwJ75xCnqKBGzg"}
-              >
+
+            <ProvideViralLoops
+              viralLoopsCampaignId={"kij42YdL37aNYEwJ75xCnqKBGzg"}
+            >
+              <ProvideReservations>
                 <Component {...pageProps} />
-              </ProvideViralLoops>
-            </ProvideReservations>
+              </ProvideReservations>
+            </ProvideViralLoops>
           </ProvideAuth>
         </ThemeProvider>
       </FirebaseAppProvider>

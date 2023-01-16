@@ -3,25 +3,16 @@ import { useAuth } from "@project/hooks/use_auth";
 import { useAuthProviders } from "@project/hooks/use_auth_providers";
 import { useRouter } from "next/router";
 import { useReservations } from "utility/use_reservations";
+import { parseUserDisplayName } from "@p/utils/google_utils";
 
 export default () => {
-  const { signInWithGoogle } = useAuthProviders();
-  const { signup } = useAuth();
-
-  const { updateUser } = useReservations();
+  const { onSignInWithGoogle, onSignUpWithEmail } = useReservations();
   const router = useRouter();
 
   return (
     <SignUpPage
-      signInWithGoogle={signInWithGoogle}
-      onSignUpWithEmail={async (values) => {
-        console.log({ values });
-        await signup(values.email, values.password);
-        updateUser({
-          firstName: values.firstName,
-          lastName: values.lastName,
-        });
-      }}
+      signInWithGoogle={onSignInWithGoogle}
+      onSignUpWithEmail={onSignUpWithEmail}
       onNavigateToSignIn={() => router.push("./sign_in")}
     />
   );

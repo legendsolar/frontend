@@ -16,22 +16,6 @@ export const useAuthProviders = () => {
   const auth = getAuth(app);
   const { isAuthenticating, setIsAuthenticating, setUser } = useAuth();
 
-  const signInWithFacebook = async () => {
-    const provider = new FacebookAuthProvider();
-
-    setIsAuthenticating(true);
-
-    const response = await signInWithPopup(auth, provider);
-    // const credential = GoogleAuthProvider.credentialFromResult(response);
-    // const token = credential?.accessToken;
-
-    // if (response) {
-    //   setUser(response.user);
-    // }
-
-    setIsAuthenticating(false);
-  };
-
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
 
@@ -42,12 +26,12 @@ export const useAuthProviders = () => {
     setIsAuthenticating(true);
     try {
       const response = await signInWithPopup(auth, provider);
-      //   const credential = GoogleAuthProvider.credentialFromResult(response);
-      //   const token = credential?.accessToken;
 
-      //   if (response) {
-      //     setUser(response.user);
-      //   }
+      if (response) {
+        setUser(response.user);
+      }
+
+      return response.user;
     } catch (error: any) {
       console.error({ error });
     } finally {
@@ -57,6 +41,5 @@ export const useAuthProviders = () => {
 
   return {
     signInWithGoogle,
-    signInWithFacebook,
   };
 };

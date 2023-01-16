@@ -1,17 +1,24 @@
-import { createContext, useContext } from "react";
+import React, { createContext, ReactElement, useContext } from "react";
 import {
   createReferralLink,
   getParticipantMetaData,
   getViralLoopsStoredData,
   identifyViralLoopsUser,
   NewViralLoopsUserInput,
+  ViralLoopsUser,
 } from "./viral_loops";
 
 const viralLoopsContext = createContext<useViralLoopsReturnType>(
   {} as useViralLoopsReturnType
 );
 
-export function ProvideViralLoops({ children, viralLoopsCampaignId }) {
+export function ProvideViralLoops({
+  children,
+  viralLoopsCampaignId,
+}: {
+  children: ReactElement;
+  viralLoopsCampaignId: string;
+}) {
   const vl = useProvideViralLoops(viralLoopsCampaignId);
   return (
     <viralLoopsContext.Provider value={vl}>
@@ -23,7 +30,14 @@ export const useViralLoops = (): useViralLoopsReturnType => {
   return useContext(viralLoopsContext);
 };
 
-interface useViralLoopsReturnType {}
+interface useViralLoopsReturnType {
+  getStoredData: () => ViralLoopsUser | undefined;
+  createNewViralLoopsUser(
+    user: NewViralLoopsUserInput
+  ): ReturnType<typeof identifyViralLoopsUser>;
+  getUserData(email: string): ReturnType<typeof getParticipantMetaData>;
+  getReferralLink(baseUrl: string, code: string): string;
+}
 
 const useProvideViralLoops = (
   viralLoopsCampaignId: string

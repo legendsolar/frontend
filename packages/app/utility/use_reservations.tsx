@@ -1,10 +1,23 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  createContext,
+  useMemo,
+} from "react";
 import { useAuth } from "@project/hooks/use_auth";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { useAuthQuery } from "./use_authenticated_query";
 import { clamp } from "@p/utils";
 import { useRouter } from "next/router";
-import { getAuth } from "firebase/auth";
+import { getAuth, User } from "firebase/auth";
+import { useViralLoops } from "@project/hooks/viral_loops/use_viral_loops";
+import {
+  NewViralLoopsUserInput,
+  ViralLoopsUser,
+} from "@project/hooks/viral_loops/viral_loops";
+import { useAuthProviders } from "@project/hooks/use_auth_providers";
+import { parseUserDisplayName } from "@p/utils/google_utils";
 
 const updateUserMutationGQL = gql`
   mutation CreateNewUserMutation(
@@ -151,7 +164,7 @@ export function ProvideReservations({ children }) {
 
   const { state } = reservation;
 
-  useEffect(() => {
+  useMemo(() => {
     switch (state) {
       case States.NO_PANELS_RESERVED: {
         router.push("./reserve");
@@ -186,19 +199,41 @@ export const useReservations = (): useReservationsReturnType => {
   return useContext(reservationContext);
 };
 
-interface useReservationsReturnType {}
+interface useReservationsReturnType {
+  state: States;
+  loading: boolean;
+  currentPanels: number;
+  setCurrentPanels: (newPanels: number) => void;
+  confirmPanels: () => void;
+  user: User | null;
+  onSignInWithGoogle: () => Promise<void>;
+  onSignUpWithEmail(input: {
+    email: string;
+    firstName: string;
+    password: string;
+    lastName: string;
+  }): Promise<void>;
+  currentReservedPanels: number | undefined;
+  maxPanelReservations: number | undefined;
+  costPerPanel: number | undefined;
+  reservations: Array<any>;
+  deleteUserReservation: (id: number) => void;
+}
 
 const useProvideReservations = (): useReservationsReturnType => {
   const [state, setState] = useState(States.LOADING);
   const [currentPanels, setCurrentPanels] = useState(5);
+  const [loading, setLoading] = useState(false);
 
-  const { user, isAuthenticating } = useAuth();
+  const { createNewViralLoopsUser } = useViralLoops();
+  const { user, isAuthenticating, signup } = useAuth();
+  const { signInWithGoogle } = useAuthProviders();
 
   const userId = user?.uid;
 
   const {
     data: panelReservationData,
-    loading,
+    loading: panelReservationLoading,
     error,
   } = useAuthQuery(reservationsQueryGQL, {
     variables: { uid: userId },
@@ -220,7 +255,7 @@ const useProvideReservations = (): useReservationsReturnType => {
   const [updateReservationMutation] = useMutation(updateReservationMutationGQL);
   const [updateUserData] = useMutation(updateUserMutationGQL);
 
-  useEffect(() => {
+  useMemo(() => {
     setState(
       userState({
         loadingOrIsAuthenticating: isAuthenticating || loading,
@@ -242,6 +277,20 @@ const useProvideReservations = (): useReservationsReturnType => {
 
   console.log({ state });
 
+  const onCreateNewUser = async (user: NewViralLoopsUserInput) => {
+    return await createNewViralLoopsUser(user);
+  };
+
+  const updateUser = async ({ firstName, lastName }) => {
+    await updateUserData({
+      variables: {
+        uid: getAuth().currentUser?.uid,
+        last_name: lastName,
+        first_name: firstName,
+      },
+    });
+  };
+
   return {
     state,
     loading,
@@ -254,14 +303,38 @@ const useProvideReservations = (): useReservationsReturnType => {
       transition();
     },
     user,
-    updateUser: ({ firstName, lastName }) => {
-      return updateUserData({
-        variables: {
-          uid: getAuth().currentUser?.uid,
-          last_name: lastName,
-          first_name: firstName,
-        },
-      });
+    onSignInWithGoogle: async () => {
+      try {
+        setLoading(true);
+        const user = await signInWithGoogle();
+
+        if (user && user.email) {
+          const { firstName, lastName } = parseUserDisplayName(
+            user.displayName as string | undefined
+          );
+
+          await onCreateNewUser({
+            email: user.email,
+            firstName,
+            lastName,
+          });
+        }
+      } finally {
+        setLoading(false);
+      }
+    },
+    onSignUpWithEmail: async ({ email, firstName, password, lastName }) => {
+      try {
+        setLoading(true);
+        await signup(email, password);
+        await onCreateNewUser({ email, firstName, lastName });
+        await updateUser({
+          firstName: firstName,
+          lastName: lastName,
+        });
+      } finally {
+        setLoading(false);
+      }
     },
     currentReservedPanels: facility?.panels_reserved,
     maxPanelReservations: facility?.panel_total,
@@ -299,7 +372,6 @@ const useProvideReservations = (): useReservationsReturnType => {
         },
       });
     },
-    updateReservationMutation,
   };
 };
 
