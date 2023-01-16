@@ -7,6 +7,7 @@ export const SignUpPage = ({
   signInWithGoogle,
   onNavigateToSignIn,
   onSignUpWithEmail,
+  panelsSelected,
 }) => {
   return (
     <DualPaneView
@@ -17,7 +18,7 @@ export const SignUpPage = ({
             sx={{ display: { md: "inline", lg: "none" } }}
           >
             <Typography variant="headline2" color={"legendaryGreen.main"}>
-              {4} panels{" "}
+              {panelsSelected} panels{" "}
             </Typography>
             selected{" "}
           </Typography>
@@ -36,7 +37,7 @@ export const SignUpPage = ({
             sx={{ display: { md: "none", lg: "inline" } }}
           >
             <Typography variant="headline2" color={"legendaryGreen.main"}>
-              {4} panels{" "}
+              {panelsSelected} panels{" "}
             </Typography>
             selected{" "}
           </Typography>
@@ -44,7 +45,7 @@ export const SignUpPage = ({
             panelRows={3}
             panelWidth={10}
             hidePanels={false}
-            currentPanelSelectedCount={4}
+            currentPanelSelectedCount={panelsSelected}
             onPanelCountUpdate={() => {}}
             interaction={false}
           ></PanelDisplay>

@@ -40,6 +40,7 @@ export const WebflowNavBar = ({
       case States.RESERVE_PANEL:
         return (
           <IconButton
+            href="https://legends.solar"
             variant="bubble"
             color="white"
             label=" Back to Legends"

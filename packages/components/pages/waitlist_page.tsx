@@ -53,7 +53,7 @@ export const WaitlistPage = ({
 
         <ClickToCopyButton copyText={referralLink} />
 
-        <Typography variant={"smallHeadline" as any}>
+        <Typography variant={"smallHeadline" as any} sx={{ mt: "20px" }}>
           {
             "Once we are ready to launch, we’ll be in touch and you’ll be first to know."
           }

@@ -9,7 +9,13 @@ import { IconButton } from "../buttons/icon_button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ContentDivider } from "../basics/content_divider";
 
-export const SignInPage = () => {
+export const SignInPage = ({
+  onLogInWithEmailPassword,
+  onLogInWithGoogle,
+  onCreateNewAccount,
+  onForgotPassword,
+  onLegacySignIn,
+}) => {
   return (
     <DualPaneView
       leftPane={
@@ -21,7 +27,7 @@ export const SignInPage = () => {
             color="legendaryGreen"
             iconJustify="flex-start"
             icon={<FontAwesomeIcon icon={faGoogle} />}
-            onClick={() => {}}
+            onClick={onLogInWithGoogle}
           ></IconButton>
 
           <ContentDivider color={"white"}>
@@ -29,7 +35,11 @@ export const SignInPage = () => {
               or login with email
             </Typography>
           </ContentDivider>
-          <SignInComponent color="light"></SignInComponent>
+          <SignInComponent
+            onSubmit={onLogInWithEmailPassword}
+            onForgotPassword={onForgotPassword}
+            color="light"
+          ></SignInComponent>
 
           <Stack direction="row" justifyContent={"center"} spacing={0}>
             <Typography variant="subtitle3" color={"blackDawn.main"}>
@@ -39,6 +49,7 @@ export const SignInPage = () => {
               variant="subtitle3"
               color="legendaryGreen.main"
               sx={{ ml: 1 }}
+              onClick={onCreateNewAccount}
             >
               {"Reserve panels to sign up"}
             </Typography>
@@ -52,6 +63,7 @@ export const SignInPage = () => {
               variant="subtitle2"
               color="legendaryGreen.main"
               sx={{ ml: 1 }}
+              onClick={onLegacySignIn}
             >
               {"Legacy sign in"}
             </Typography>

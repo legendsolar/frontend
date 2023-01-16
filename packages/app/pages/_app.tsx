@@ -49,8 +49,6 @@ const App = ({ Component, pageProps }: AppProps) => {
           theme={appTheme({ beVietnamName: beVietnam.style.fontFamily })}
         >
           <ProvideAuth>
-            <DebugWindow />
-
             <ProvideViralLoops
               viralLoopsCampaignId={"kij42YdL37aNYEwJ75xCnqKBGzg"}
             >

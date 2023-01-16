@@ -6,7 +6,8 @@ import { useReservations } from "utility/use_reservations";
 import { parseUserDisplayName } from "@p/utils/google_utils";
 
 export default () => {
-  const { onSignInWithGoogle, onSignUpWithEmail } = useReservations();
+  const { onSignInWithGoogle, onSignUpWithEmail, currentPanels } =
+    useReservations();
   const router = useRouter();
 
   return (
@@ -14,6 +15,7 @@ export default () => {
       signInWithGoogle={onSignInWithGoogle}
       onSignUpWithEmail={onSignUpWithEmail}
       onNavigateToSignIn={() => router.push("./sign_in")}
+      panelsSelected={currentPanels}
     />
   );
 };

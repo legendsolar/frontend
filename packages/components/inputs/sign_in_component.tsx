@@ -103,18 +103,6 @@ export const SignInComponent = ({
               "Login"
             )}
           </Button>
-
-          <Stack direction={"row"} justifyContent={"space-between"}>
-            <Button variant={"text" as any} onClick={onForgotPassword}>
-              <Typography
-                variant={"smallLabel" as any}
-                color="legendaryGreen.main"
-                sx={{ ml: 1 }}
-              >
-                {"Forgot Password"}
-              </Typography>
-            </Button>
-          </Stack>
         </Stack>
       </form>
     </Box>
