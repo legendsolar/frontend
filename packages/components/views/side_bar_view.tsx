@@ -121,7 +121,7 @@ const SideBarView = ({
     <div>
       <Stack>
         {getDrawerPosition("top")}
-        <Stack direction={"row"} spacing={11}>
+        <Stack direction={"row"} spacing={8}>
           {getDrawerPosition("left")}
           {renderHeader()}
 

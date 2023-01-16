@@ -14,8 +14,9 @@ select_permissions:
     permission:
       columns:
         - id
-        - name
+        - first_name
         - created_account
+        - last_name
       filter:
         id:
           _eq: X-Hasura-User-Id
@@ -24,8 +25,9 @@ update_permissions:
     permission:
       columns:
         - created_account
+        - first_name
         - id
-        - name
+        - last_name
       filter:
         id:
           _eq: X-Hasura-User-Id

@@ -54,6 +54,7 @@ export const InvestmentSupportComponent = ({
           height: "45px",
           pr: 4,
           pl: 4,
+          borderRadius: "0px 0px 5px 5px",
         }}
         display={"flex"}
         justifyContent={"space-between"}

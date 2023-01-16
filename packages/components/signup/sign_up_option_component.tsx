@@ -33,7 +33,12 @@ export const SignUpOptionComponent = ({
       </Typography>
     </ContentDivider>
 
-    <UserInformationComponent color="light"></UserInformationComponent>
+    <UserInformationComponent
+      onSubmit={(values) => {
+        onSignUpWithEmail(values);
+      }}
+      color="light"
+    ></UserInformationComponent>
 
     <Stack direction="row" justifyContent={"center"} spacing={0}>
       <Typography variant="subtitle3" color={"blackDawn.main"}>
@@ -42,8 +47,12 @@ export const SignUpOptionComponent = ({
       <Typography
         variant="subtitle3"
         color="legendaryGreen.main"
-        sx={{ ml: 1 }}
+        sx={{
+          ml: 1,
+          textDecoration: "none",
+        }}
         onClick={onNavigateToSignIn}
+        component={Link}
       >
         {"Login"}
       </Typography>

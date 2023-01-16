@@ -1,6 +1,9 @@
 import { useAuth } from "@project/hooks/use_auth";
 import { useFirebaseApp } from "reactfire";
-import { getLocalStorePanelsReserved } from "./use_reservations";
+import {
+  clearLocalStorePanelsReserved,
+  getLocalStorePanelsReserved,
+} from "./use_reservations";
 import DisabledSSR from "./disable_ssr";
 
 export const DebugWindow = () => {
@@ -10,6 +13,7 @@ export const DebugWindow = () => {
   const emulator =
     !!process.env.NEXT_PUBLIC_FIREBASE_EMULATOR &&
     process.env.NEXT_PUBLIC_FIREBASE_EMULATOR == "TRUE";
+
   return (
     <DisabledSSR>
       <div
@@ -34,11 +38,15 @@ export const DebugWindow = () => {
           <div>{"authenticated: " + !!user}</div>
           <div>{"authenticating: " + isAuthenticating}</div>
           <div>{"userId: " + user?.uid}</div>
+          <div>{"email: " + user?.email}</div>
           <div>{"auth provider: " + user?.providerId}</div>
           <div>{"app: " + app.options.projectId}</div>
           <div>{"panel state: " + getLocalStorePanelsReserved()}</div>
           <div>{"query endpoint: " + process.env.NEXT_PUBLIC_GRAPH_QL_URL}</div>
           <button onClick={signout}>sign out</button>
+          <button onClick={clearLocalStorePanelsReserved}>
+            clear panel selected
+          </button>
         </div>
       </div>
     </DisabledSSR>

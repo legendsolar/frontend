@@ -32,7 +32,7 @@ export const TimelineComponent = ({
     >
       {steps.map((step, idx) => (
         <Grid container>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <Box
               sx={{
                 width: "100%",
@@ -50,7 +50,7 @@ export const TimelineComponent = ({
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={9} sx={{ p: 4 }}>
+          <Grid item xs={10} sx={{ pt: 4, pb: 4, pr: 4 }}>
             <Stack
               sx={{
                 justifyContent: "center",

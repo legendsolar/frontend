@@ -4,6 +4,26 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 import { useAuthQuery } from "./use_authenticated_query";
 import { clamp } from "@p/utils";
 import { useRouter } from "next/router";
+import { getAuth } from "firebase/auth";
+
+const updateUserMutationGQL = gql`
+  mutation CreateNewUserMutation(
+    $uid: String = ""
+    $last_name: String = ""
+    $first_name: String = ""
+  ) {
+    update_users(
+      where: { id: { _eq: $uid } }
+      _set: { first_name: $first_name, last_name: $last_name }
+    ) {
+      returning {
+        id
+        last_name
+        first_name
+      }
+    }
+  }
+`;
 
 const reservationsQueryGQL = gql`
   query PanelReservationQuery($uid: String = "") {
@@ -198,6 +218,7 @@ const useProvideReservations = (): useReservationsReturnType => {
 
   const [deleteUserReservation] = useMutation(deleteReservationMutationGQL);
   const [updateReservationMutation] = useMutation(updateReservationMutationGQL);
+  const [updateUserData] = useMutation(updateUserMutationGQL);
 
   useEffect(() => {
     setState(
@@ -233,6 +254,15 @@ const useProvideReservations = (): useReservationsReturnType => {
       transition();
     },
     user,
+    updateUser: ({ firstName, lastName }) => {
+      return updateUserData({
+        variables: {
+          uid: getAuth().currentUser?.uid,
+          last_name: lastName,
+          first_name: firstName,
+        },
+      });
+    },
     currentReservedPanels: facility?.panels_reserved,
     maxPanelReservations: facility?.panel_total,
     costPerPanel: facility?.panel_cost,
@@ -271,6 +301,11 @@ const useProvideReservations = (): useReservationsReturnType => {
     },
     updateReservationMutation,
   };
+};
+
+export const clearLocalStorePanelsReserved = () => {
+  typeof window !== "undefined" &&
+    localStorage.removeItem("panel-reserved-count");
 };
 
 export const localStorePanelsReserved = (panelsReserved: number) => {

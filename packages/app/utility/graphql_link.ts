@@ -81,6 +81,10 @@ const isLocalEnvironment = () => {
 const hasuraAuthMiddleware = setContext(async (_, { headers }) => {
   // get the authentication token from local storage if it exists
 
+  if (!headers) {
+    headers = {};
+  }
+
   const user = getAuth().currentUser;
 
   console.log({ contextUser: user });
@@ -92,7 +96,7 @@ const hasuraAuthMiddleware = setContext(async (_, { headers }) => {
   console.warn({ localEnv });
 
   if (token) {
-    headers.Authorization = `Bearer ${
+    headers["Authorization"] = `Bearer ${
       localEnv ? locallySignedToken(token) : token
     }`;
   }

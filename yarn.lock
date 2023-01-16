@@ -5648,6 +5648,11 @@
     "@typescript-eslint/types" "5.48.1"
     eslint-visitor-keys "^3.3.0"
 
+"@viral-loops/widgets@^0.4.35":
+  version "0.4.35"
+  resolved "https://registry.yarnpkg.com/@viral-loops/widgets/-/widgets-0.4.35.tgz#202febdb241cb1e0d8488f9d897809fada88d6c3"
+  integrity sha512-HRA5qsrnBWKv1SpgV8Y1S6wnAQLrZX5+QWTyfNQ39Y9asDm83NNdqtTmoAV98qQOycnDxcc4JuPpKmXdDXHVXQ==
+
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.11.1.tgz#2bfd767eae1a6996f432ff7e8d7fc75679c0b6a7"

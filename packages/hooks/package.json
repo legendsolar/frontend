@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@juggle/resize-observer": "^3.4.0",
+    "@viral-loops/widgets": "^0.4.35",
     "airtable": "^0.11.5",
     "react": "*",
     "typescript": "^4.8.4"

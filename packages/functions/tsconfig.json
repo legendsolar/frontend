@@ -8,7 +8,9 @@
     "strict": true,
     "target": "es2017",
     "resolveJsonModule": true,
-    "esModuleInterop":true
+    "esModuleInterop":true,
+    "skipLibCheck": true,
+    "types": []
   },
   "compileOnSave": true,
   "include": [

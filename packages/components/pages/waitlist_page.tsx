@@ -30,7 +30,7 @@ import { ShareSocial } from "../share/share_social";
 import { ClickToCopyButton } from "../buttons/click_to_copy_button";
 
 export interface WaitlistPageProps {
-  waitlistPosn: number;
+  waitlistPosn: string;
   referralLink: string;
 }
 
@@ -47,7 +47,7 @@ export const WaitlistPage = ({
         </Typography>
         <Typography variant={"headline2" as any}>
           <Typography variant={"headline2" as any} color={"grassGreen.main"}>
-            {numberFormatter(waitlistPosn)}
+            {waitlistPosn}
           </Typography>
           {" people ahead of you."}
         </Typography>

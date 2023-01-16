@@ -3,7 +3,11 @@ import { SignUpOptionComponent } from "../signup/sign_up_option_component";
 import { PanelDisplay } from "@project/components/panels/panel_display";
 import { Box, Stack, Typography } from "@mui/material";
 
-export const SignUpPage = ({ signInWithGoogle, onNavigateToSignIn }) => {
+export const SignUpPage = ({
+  signInWithGoogle,
+  onNavigateToSignIn,
+  onSignUpWithEmail,
+}) => {
   return (
     <DualPaneView
       leftPane={
@@ -20,6 +24,7 @@ export const SignUpPage = ({ signInWithGoogle, onNavigateToSignIn }) => {
 
           <SignUpOptionComponent
             onSignUpWithGoogle={signInWithGoogle}
+            onSignUpWithEmail={onSignUpWithEmail}
             onNavigateToSignIn={onNavigateToSignIn}
           ></SignUpOptionComponent>
         </Stack>

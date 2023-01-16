@@ -1,3 +1,4 @@
+import { faArrowLeft } from "@fortawesome/pro-solid-svg-icons";
 import { TimelineComponent } from "@project/components/timeline/timeline_component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { WebflowView } from "@project/components/views/webflow_view";
@@ -273,6 +274,15 @@ export const ReservePanelPage = ({
                     ),
                     icon: <CashIcon />,
                   },
+                  {
+                    title: "Real-time monitoring",
+                    content: (
+                      <Typography variant={"description" as any}>
+                        {siteCopy.aboutRooftopMonitoring}
+                      </Typography>
+                    ),
+                    icon: <PowerIcon />,
+                  },
                 ]}
               ></IconAccordian>
 
@@ -312,21 +322,19 @@ export const ReservePanelPage = ({
                 <TimelineComponent
                   steps={[
                     {
-                      title: "We identify a solar project to fund",
+                      title: "We identify a solar project to purchase",
                       description:
                         "We select solar projects based on their risk profile and quality of construction.",
                       linkBubble: (
-                        <Button
-                          variant={"mini" as any}
-                          href={"https://www.legends.solar/learn/selection"}
+                        <IconButton
+                          href={"https://www.legends.solar/learn/cost"}
                           target="_blank"
-                          sx={{
-                            width: "fit-content",
-                            backgroundColor: "whiteHaze.main",
-                          }}
-                        >
-                          Asset Selection Process
-                        </Button>
+                          variant="bubble"
+                          color="whiteHaze"
+                          label="Panel selection process"
+                          iconPosition="right"
+                          icon={<FontAwesomeIcon icon={faArrowRight} />}
+                        ></IconButton>
                       ),
                     },
 
@@ -335,47 +343,37 @@ export const ReservePanelPage = ({
                       description:
                         "Once we are ready to subscribe a solar facility, we'll publish a prospectus and other documents.",
                     },
-
                     {
-                      title: "Subscribe to Solar Offering",
-                      description:
-                        "After reviewing the prospectus, you can commit to an investment & enter your bank info.",
-                    },
-                    {
-                      title: "Complete Investment Transaction",
+                      title: "Invest in solar panels",
                       description:
                         "Once the investment is fully subscribed, you'll receive your 'panel' shares.",
                       linkBubble: (
-                        <Button
-                          variant={"mini" as any}
+                        <IconButton
                           href={"https://www.legends.solar/learn/cost"}
                           target="_blank"
-                          sx={{
-                            width: "fit-content",
-                            backgroundColor: "whiteHaze.main",
-                          }}
-                        >
-                          Shares on Legends Solar
-                        </Button>
+                          variant="bubble"
+                          color="whiteHaze"
+                          label="Panels on Legends Solar"
+                          iconPosition="right"
+                          icon={<FontAwesomeIcon icon={faArrowRight} />}
+                        ></IconButton>
                       ),
                     },
                     {
-                      title: "View Productivity and Dividends",
+                      title: "Monitor your productivity",
                       description:
                         "You'll  see your investment's real time impact and receive dividends from your holding. ",
 
                       linkBubble: (
-                        <Button
-                          variant={"mini" as any}
-                          href={"https://www.legends.solar/learn/legends-solar"}
+                        <IconButton
+                          href={"https://www.legends.solar/learn/cost"}
                           target="_blank"
-                          sx={{
-                            width: "fit-content",
-                            backgroundColor: "whiteHaze.main",
-                          }}
-                        >
-                          Legends Rooftop
-                        </Button>
+                          variant="bubble"
+                          color="whiteHaze"
+                          label="Legends Rooftop Dashboard"
+                          iconPosition="right"
+                          icon={<FontAwesomeIcon icon={faArrowRight} />}
+                        ></IconButton>
                       ),
                     },
                   ]}

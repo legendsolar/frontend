@@ -29,22 +29,33 @@ export const beforeCreateUser = functions.auth
   .beforeCreate(async (user, context) => {
     console.log({ user, context });
 
-    const name = user.displayName;
+    const name = user?.displayName;
+
+    const firstLast = name?.split(" ").length
+      ? name?.split(" ").length >= 2
+      : false;
+
+    const firstName = firstLast ? name?.split(" ")[0] : undefined;
+    const lastName = firstLast ? name?.split(" ")[1] : undefined;
 
     await axios.post(
       settings.hasura_url,
       {
         query: `
-        mutation MyMutation($id: String, $name: String, $created: date) {
-            insert_users(objects: {id: $id, name: $name, created_account: $created}) {
+        mutation MyMutation($id: String, $first_name: String, $last_name: String, $created: date) {
+            insert_users(objects: {id: $id, first_name: $first_name, last_name: $last_name, created_account: $created}) {
                 returning {
                 id
-                name
                 }
             }
         }
   `,
-        variables: { id: user.uid, name, created: new Date().toISOString() },
+        variables: {
+          id: user.uid,
+          first_name: firstName,
+          last_name: lastName,
+          created: new Date().toISOString(),
+        },
         operationName: "MyMutation",
       },
       {

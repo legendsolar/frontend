@@ -4,6 +4,7 @@ import { createEmotionCache } from "utility/createCache";
 import { FirebaseAppProvider } from "reactfire";
 import FirebaseWrapper from "utility/firebase_wrapper";
 import { ProvideAuth } from "@project/hooks/use_auth";
+import { ProvideViralLoops } from "@project/hooks/viral_loops/use_viral_loops";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "../utility/apollo_client";
 import { appTheme } from "@project/components/theme";
@@ -11,7 +12,6 @@ import { appTheme } from "@project/components/theme";
 import { Be_Vietnam_Pro } from "@next/font/google";
 import { ProvideReservations } from "utility/use_reservations";
 import { DebugWindow } from "utility/debug_window";
-import { UserStateMachine } from "utility/user_state_machine";
 
 const beVietnam = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -49,7 +49,11 @@ const App = ({ Component, pageProps }: AppProps) => {
           <ProvideAuth>
             <DebugWindow />
             <ProvideReservations>
-              <Component {...pageProps} />
+              <ProvideViralLoops
+                viralLoopsCampaignId={"kij42YdL37aNYEwJ75xCnqKBGzg"}
+              >
+                <Component {...pageProps} />
+              </ProvideViralLoops>
             </ProvideReservations>
           </ProvideAuth>
         </ThemeProvider>
