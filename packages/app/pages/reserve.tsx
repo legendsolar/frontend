@@ -1,5 +1,4 @@
 import { useReservations } from "utility/use_reservations";
-
 import { ReservePanelPage } from "@project/components/pages/reserve_panel_page";
 
 export default () => {
@@ -13,20 +12,14 @@ export default () => {
     confirmPanels,
   } = useReservations();
 
-  console.log({ loading, currentReservedPanels });
-
-  if (loading) {
-    return <div></div>;
-  }
-
   return (
     <ReservePanelPage
       currentPanels={currentPanels}
       setCurrentPanels={setCurrentPanels}
       confirmPanels={confirmPanels}
-      currentReservedPanels={currentReservedPanels}
-      costPerPanel={costPerPanel}
-      maxPanelReservations={maxPanelReservations}
+      currentReservedPanels={currentReservedPanels ? currentReservedPanels : 0}
+      costPerPanel={costPerPanel ? costPerPanel : 250}
+      maxPanelReservations={maxPanelReservations ? maxPanelReservations : 1000}
     />
   );
 };

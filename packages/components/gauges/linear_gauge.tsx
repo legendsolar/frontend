@@ -26,8 +26,10 @@ export const LinearGauge = ({ current, max, color }) => {
       </Stack>
 
       <Stack direction={"row"} justifyContent={"space-between"}>
-        <Typography color={color}>{current}</Typography>
-        <Typography color={"blackDawn.main"}>{max - current}</Typography>
+        <Typography color={color}>{max - current} panels available</Typography>
+        <Typography color={"blackDawn.main"}>
+          {current} panels reserved
+        </Typography>
       </Stack>
     </Stack>
   );

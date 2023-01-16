@@ -162,17 +162,14 @@ export const ReservePanelPage = ({
 
                 <Box sx={{ display: { md: "none", lg: "inline" } }}>
                   <ContentDivider>
-                    <Typography
-                      variant={"monoButton" as any}
-                      color="legendaryGreen.main"
-                    >
-                      Estimated Impact
+                    <Typography variant={"subtitle3" as any}>
+                      Estimated Annual Impact
                     </Typography>
                   </ContentDivider>
                   <Grid container>
                     <Grid item lg={4} xs={4}>
                       <MetricBox
-                        metric={"$" + numberFormatter(currentPanels * 10, 2)}
+                        metric={"$" + numberFormatter(currentPanels * 46, 2)}
                         icon={<CashIcon></CashIcon>}
                         title={"USD Dividends Earned"}
                       ></MetricBox>
@@ -180,7 +177,7 @@ export const ReservePanelPage = ({
 
                     <Grid item lg={4} xs={4}>
                       <MetricBox
-                        metric={numberFormatter(currentPanels * 10, 3)}
+                        metric={numberFormatter(currentPanels * 370, 3)}
                         icon={<LeafIcon />}
                         title={"LBS Carbon Averted"}
                       ></MetricBox>
@@ -188,7 +185,7 @@ export const ReservePanelPage = ({
 
                     <Grid item lg={4} xs={4}>
                       <MetricBox
-                        metric={numberFormatter(currentPanels * 10, 3)}
+                        metric={numberFormatter(currentPanels * 440, 3)}
                         icon={<PowerIcon />}
                         title={"kWh Generated"}
                       ></MetricBox>
@@ -207,10 +204,7 @@ export const ReservePanelPage = ({
           drawer={
             <Box>
               <ContentDivider>
-                <Typography
-                  variant={"monoButton" as any}
-                  color="legendaryGreen.main"
-                >
+                <Typography variant={"subtitle3" as any}>
                   Your Support Team
                 </Typography>
               </ContentDivider>
@@ -227,12 +221,7 @@ export const ReservePanelPage = ({
           mainContent={
             <Stack>
               <ContentDivider>
-                <Typography
-                  variant={"monoButton" as any}
-                  color="legendaryGreen.main"
-                >
-                  Summary
-                </Typography>
+                <Typography variant={"subtitle3" as any}>Summary</Typography>
               </ContentDivider>
 
               <Stack>
@@ -296,12 +285,7 @@ export const ReservePanelPage = ({
                 spacing={6}
               >
                 <ContentDivider>
-                  <Typography
-                    variant={"monoButton" as any}
-                    color="legendaryGreen.main"
-                  >
-                    Timeline
-                  </Typography>
+                  <Typography variant={"subtitle3" as any}>Timeline</Typography>
                 </ContentDivider>
 
                 <div></div>

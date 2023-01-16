@@ -214,7 +214,6 @@ export const appTheme = (
         lineHeight: "14px",
         fontWeight: 600,
         color: paletteOptions.palette.blackDusk.main,
-        textTransform: "uppercase",
       },
 
       monoButtonBold: {

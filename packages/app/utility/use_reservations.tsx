@@ -18,6 +18,7 @@ import {
 } from "@project/hooks/viral_loops/viral_loops";
 import { useAuthProviders } from "@project/hooks/use_auth_providers";
 import { parseUserDisplayName } from "@p/utils/google_utils";
+import WebflowView from "@project/components/views/webflow_view";
 
 const updateUserMutationGQL = gql`
   mutation CreateNewUserMutation(
@@ -164,36 +165,40 @@ export function ProvideReservations({ children }) {
 
   const { state } = reservation;
 
+  console.log({ state });
+
   useMemo(() => {
     switch (state) {
       case States.NO_PANELS_RESERVED: {
         router.push("./reserve");
-        return;
+        break;
       }
 
       case States.PANELS_RESERVED: {
         router.push("./sign_up");
-        return;
+        break;
       }
 
       case States.LOGGED_IN_NOT_INVESTOR: {
         router.push("./waitlist");
-        return;
+        break;
       }
     }
   }, [state]);
 
-  //   switch (state) {
-  //     case States.LOADING: {
-  //       return <>loading</>;
-  //     }
-  //   }
-
-  return (
-    <reservationContext.Provider value={reservation}>
-      {children}
-    </reservationContext.Provider>
-  );
+  if (state === States.LOADING) {
+    return (
+      <WebflowView>
+        <div></div>
+      </WebflowView>
+    );
+  } else {
+    return (
+      <reservationContext.Provider value={reservation}>
+        {children}
+      </reservationContext.Provider>
+    );
+  }
 }
 export const useReservations = (): useReservationsReturnType => {
   return useContext(reservationContext);
