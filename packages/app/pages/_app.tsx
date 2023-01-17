@@ -7,7 +7,7 @@ import { ProvideAuth } from "@project/hooks/use_auth";
 import { ProvideViralLoops } from "@project/hooks/viral_loops/use_viral_loops";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "../utility/apollo_client";
-import { appTheme } from "@project/components/theme";
+import { appTheme, paletteOptions } from "@project/components/theme";
 
 import { Be_Vietnam_Pro } from "@next/font/google";
 import { ProvideReservations } from "utility/use_reservations";
@@ -34,13 +34,10 @@ const App = ({ Component, pageProps }: AppProps) => {
     <ApolloProvider client={client}>
       <style jsx global>{`
         body {
+          background-color: ${paletteOptions.palette.whiteHaze.main};
+          margin: 0px;
         }
         #__next {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
         }
       `}</style>
       <FirebaseAppProvider firebaseConfig={firebaseConfig}>

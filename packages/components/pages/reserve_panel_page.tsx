@@ -241,7 +241,18 @@ export const ReservePanelPage = ({
                   next few months. Reserve panels today to get early access.
                 </Typography>
 
-                <Stack direction={"row"} alignItems="flex-end">
+                <Stack
+                  sx={{
+                    flexDirection: {
+                      lg: "row",
+                      md: "column",
+                    },
+                    alignItems: {
+                      lg: "flex-end",
+                      md: "flex-start",
+                    },
+                  }}
+                >
                   <Image
                     src={FactorySolar}
                     style={{

@@ -26,16 +26,21 @@ export const MainContentBox = ({
       minWidth: {
         lg: "971px",
       },
+
+      width: "100%",
+      height: "100%",
+
+      // TODO this breaks the sticky sidebar
+      //   overflowX: {
+      //     lg: "scroll",
+      //     md: "hidden",
+      //   },
       mr: "auto",
       ml: "auto",
       ...sx,
     }}
   >
-    <div
-      id="MainContentBox"
-      ref={passedRef}
-      style={{ width: "100%", height: "100%" }}
-    >
+    <div id="MainContentBox" ref={passedRef}>
       {children}
     </div>
   </Box>
