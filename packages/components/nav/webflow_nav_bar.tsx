@@ -13,7 +13,13 @@ import { CreateAccountToolbar } from "./create_account_toolbar";
 import { LoggedOutToolbar } from "./logged_out_toolbar";
 import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.svg";
 import LoggedInToolbar from "./logged_in_toolbar";
-import { MagGlassIcon } from "../icons/emoji_icons";
+import {
+  CupIcon,
+  GearIcon,
+  MagGlassIcon,
+  PinIcon,
+  PushPinIcon,
+} from "../icons/emoji_icons";
 import { Image } from "../utils/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconButton } from "../buttons/icon_button";
@@ -21,8 +27,11 @@ import {
   faArrowLeft,
   faBars,
   faHamburger,
+  faX,
+  faXmark,
 } from "@fortawesome/pro-solid-svg-icons";
 import { useState } from "react";
+import { ComponentDivider } from "../basics";
 
 export enum States {
   RESERVE_PANEL,
@@ -33,7 +42,6 @@ export enum States {
 
 export interface WebflowNavBarProps {
   state: States;
-  constrained: boolean;
   onToHomepage(): void;
   onHowItWorks(): void;
   onAboutUs(): void;
@@ -43,19 +51,47 @@ export interface WebflowNavBarProps {
 
 export const WebflowNavBar = ({
   state,
-  constrained,
   onToHomepage,
   onHowItWorks,
   onAboutUs,
   onTheTeam,
   onFAQs,
 }: WebflowNavBarProps) => {
+  const theme = useTheme();
+  const constrained = useMediaQuery(theme.breakpoints.down("lg"));
+
   const [expanded, setExpanded] = useState(false);
 
-  const leftOfLogo = (state: States): JSX.Element => {
+  const headers = [
+    {
+      text: "How It Works",
+      icon: <GearIcon />,
+      onClick: onHowItWorks,
+    },
+
+    {
+      text: "About Us",
+      icon: <PushPinIcon />,
+      onClick: onAboutUs,
+    },
+    {
+      text: "The Team",
+      icon: <CupIcon />,
+      onClick: onTheTeam,
+    },
+    {
+      text: "FAQS",
+      icon: <MagGlassIcon />,
+      onClick: onFAQs,
+    },
+  ];
+
+  const renderState = (state: States, constrained: boolean): JSX.Element => {
     switch (state) {
       case States.RESERVE_PANEL:
-        return (
+        return constrained ? (
+          renderConstrainedHeaders()
+        ) : (
           <IconButton
             href="https://legends.solar"
             variant="bubble"
@@ -64,34 +100,44 @@ export const WebflowNavBar = ({
             icon={<FontAwesomeIcon icon={faArrowLeft} />}
           ></IconButton>
         );
+
       case States.LOGGED_OUT:
-        return <></>;
+        return constrained ? renderConstrainedHeaders() : <div></div>;
       case States.LOGGED_IN_NO_PANELS:
-        return <></>;
+        return constrained ? renderConstrainedHeaders() : <div></div>;
       case States.LOGGED_IN_PANELS:
-        return <></>;
+        return constrained ? renderConstrainedHeaders() : <div></div>;
     }
   };
 
-  const headers = [
-    {
-      text: "How It Works",
-      onClick: onHowItWorks,
-    },
+  const renderConstrainedHeaders = () => {
+    return (
+      <Stack sx={{ width: "100%" }}>
+        {headers.map((header) => (
+          <Box>
+            <Button
+              sx={{
+                height: "80px",
+                pl: "32px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "15px",
+              }}
+              onClick={header.onClick}
+            >
+              {header.icon}
+              <Typography variant="monoButton">{header.text}</Typography>
+            </Button>
 
-    {
-      text: "About Us",
-      onClick: onAboutUs,
-    },
-    {
-      text: "The Team",
-      onClick: onTheTeam,
-    },
-    {
-      text: "FAQS",
-      onClick: onFAQs,
-    },
-  ];
+            <ComponentDivider
+              sx={{ backgroundColor: "white.main" }}
+            ></ComponentDivider>
+          </Box>
+        ))}
+      </Stack>
+    );
+  };
 
   const constrainedHeader = () => {
     return (
@@ -120,7 +166,7 @@ export const WebflowNavBar = ({
           }}
           onClick={() => setExpanded(!expanded)}
         >
-          <FontAwesomeIcon icon={faBars} />
+          <FontAwesomeIcon icon={expanded ? faXmark : faBars} />
         </Button>
       </Box>
     );
@@ -172,7 +218,7 @@ export const WebflowNavBar = ({
               }}
             ></Image>
 
-            {leftOfLogo(state)}
+            {renderState(state, constrained)}
           </Stack>
         </Box>
       </Box>
@@ -194,10 +240,12 @@ export const WebflowNavBar = ({
         sx={{
           height: "100%",
           width: "100vw",
-          pt: "18px",
+          pt: "88.7px",
           backgroundColor: "whiteFog.main",
         }}
-      ></Stack>
+      >
+        {renderState(state, constrained)}
+      </Stack>
     </SwipeableDrawer>
   );
 
@@ -218,21 +266,4 @@ export const WebflowNavBar = ({
   );
 };
 
-export default () => {
-  const theme = useTheme();
-  const constrained = useMediaQuery(theme.breakpoints.down("lg"));
-
-  return (
-    <WebflowNavBar
-      {...{
-        state: States.RESERVE_PANEL,
-        constrained,
-        onToHomepage: () => {},
-        onHowItWorks: () => {},
-        onAboutUs: () => {},
-        onTheTeam: () => {},
-        onFAQs: () => {},
-      }}
-    ></WebflowNavBar>
-  );
-};
+export default WebflowNavBar;

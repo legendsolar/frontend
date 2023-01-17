@@ -19,6 +19,7 @@ import {
 import { useAuthProviders } from "@project/hooks/use_auth_providers";
 import { parseUserDisplayName } from "@p/utils/google_utils";
 import WebflowView from "@project/components/views/webflow_view";
+import { States as NavStates } from "@project/components/nav/webflow_nav_bar";
 
 const updateUserMutationGQL = gql`
   mutation CreateNewUserMutation(
@@ -121,6 +122,23 @@ export enum States {
   LOGGED_IN_NOT_INVESTOR = "logged_in",
   LOGGED_IN_INVESTOR = "logged_in_investor",
 }
+
+export const navBarStateXForm = (state: States): NavStates => {
+  switch (state) {
+    case States.LOADING:
+      return NavStates.LOGGED_OUT;
+    case States.NO_PANELS_RESERVED:
+      return NavStates.RESERVE_PANEL;
+    case States.PANELS_RESERVED:
+      return NavStates.LOGGED_OUT;
+    case States.LOGGED_OUT:
+      return NavStates.LOGGED_OUT;
+    case States.LOGGED_IN_NOT_INVESTOR:
+      return NavStates.LOGGED_IN_NO_PANELS;
+    case States.LOGGED_IN_INVESTOR:
+      return NavStates.LOGGED_IN_PANELS;
+  }
+};
 
 export const userState = ({
   loadingOrIsAuthenticating,

@@ -33,7 +33,7 @@ import { useThemeColor } from "@project/components/utils";
 import { siteCopy } from "../content/copy";
 import { Image } from "../utils/image";
 import { BorderRight } from "@mui/icons-material";
-
+import { States } from "../nav/webflow_nav_bar";
 export interface ReservePanelPageProps {
   currentPanels: number;
   setCurrentPanels(panels: number): void;
@@ -52,7 +52,7 @@ export const ReservePanelPage = ({
   costPerPanel,
 }: ReservePanelPageProps) => {
   return (
-    <WebflowView>
+    <WebflowView state={States.RESERVE_PANEL}>
       <Stack spacing={6}>
         <Stack>
           <Typography variant={"headline2" as any}>
