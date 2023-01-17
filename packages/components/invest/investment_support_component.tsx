@@ -26,7 +26,7 @@ export const InvestmentSupportComponent = ({
         p: 0,
         width: {
           md: "100%",
-          lg: "100%",
+          lg: "450px",
         },
         maxWidth: {
           lg: "450px",
