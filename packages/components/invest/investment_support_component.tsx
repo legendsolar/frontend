@@ -61,7 +61,11 @@ export const InvestmentSupportComponent = ({
         alignItems={"center"}
       >
         <Stack direction={"row"}>
-          <Button href={EXTERNAL_LINKS.TEAM.NERA} variant="text">
+          <Button
+            href={EXTERNAL_LINKS.TEAM.NERA}
+            target={"_blank"}
+            variant="text"
+          >
             <Typography
               variant={"monoButton" as any}
               color={"legendaryGreen.main"}
@@ -71,7 +75,11 @@ export const InvestmentSupportComponent = ({
             </Typography>
           </Button>
 
-          <Button href={EXTERNAL_LINKS.TEAM.NERA} variant="text">
+          <Button
+            href={EXTERNAL_LINKS.TEAM.NERA}
+            target={"_blank"}
+            variant="text"
+          >
             <Typography
               variant={"monoButton" as any}
               color={"legendaryGreen.main"}
@@ -81,7 +89,11 @@ export const InvestmentSupportComponent = ({
             </Typography>
           </Button>
         </Stack>
-        <Button href={EXTERNAL_LINKS.TEAM.NERA} variant="text">
+        <Button
+          href={EXTERNAL_LINKS.TEAM.NERA}
+          target={"_blank"}
+          variant="text"
+        >
           <Typography variant={"monoButton" as any} color={"blackDawn.main"}>
             Biography
           </Typography>
