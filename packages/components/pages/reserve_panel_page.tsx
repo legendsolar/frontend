@@ -70,7 +70,6 @@ export const ReservePanelPage = ({
           drawer={
             <Stack
               sx={{
-                minWidth: "440px",
                 width: {
                   lg: "440px",
                   md: "100%",
@@ -212,7 +211,7 @@ export const ReservePanelPage = ({
                 title={"Nera Lerner"}
                 subtitle={"Solar Investing Specialist"}
                 description={
-                  "Nera is here to share the basics of online solar investing. You’ll have a specilist for the term of your investment. "
+                  "Ask me about the financial profile, risks, and benefits of online solar investing."
                 }
                 sx={{ mt: 4 }}
               ></InvestmentSupportComponent>

@@ -21,7 +21,7 @@ export const PlusMinusNumber = ({
       sx={{
         backgroundColor: "whiteHaze.main",
         maxWidth: "350px",
-        width: "350px",
+        width: "100%",
         height: "50px",
         borderRadius: "4px",
         overflow: "hidden",

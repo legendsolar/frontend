@@ -68,6 +68,7 @@ export const InvestmentSupportComponent = ({
           >
             <Typography
               variant={"monoButton" as any}
+              sx={{ textTransform: "uppercase" }}
               color={"legendaryGreen.main"}
             >
               {"Meet "}
@@ -81,6 +82,7 @@ export const InvestmentSupportComponent = ({
             variant="text"
           >
             <Typography
+              sx={{ textTransform: "uppercase" }}
               variant={"monoButton" as any}
               color={"legendaryGreen.main"}
             >
@@ -93,6 +95,7 @@ export const InvestmentSupportComponent = ({
           href={EXTERNAL_LINKS.TEAM.NERA}
           target={"_blank"}
           variant="text"
+          sx={{ textTransform: "uppercase" }}
         >
           <Typography variant={"monoButton" as any} color={"blackDawn.main"}>
             Biography

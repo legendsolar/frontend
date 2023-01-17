@@ -25,7 +25,7 @@ export const breakpoints = {
     xs: 0,
     sm: 0, // webflow phone
     md: 0, // webflow landscape phone
-    lg: 1072, // webflow tablet 820 + 40
+    lg: 971, // webflow tablet 820 + 40
     // xl: , // desktop 1240 + 40 + 40
   },
 };

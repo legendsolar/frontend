@@ -1,4 +1,14 @@
-import { Button, Stack, Typography, Toolbar, Box, AppBar } from "@mui/material";
+import {
+  Button,
+  Stack,
+  Typography,
+  Toolbar,
+  Box,
+  AppBar,
+  useTheme,
+  useMediaQuery,
+  SwipeableDrawer,
+} from "@mui/material";
 import { CreateAccountToolbar } from "./create_account_toolbar";
 import { LoggedOutToolbar } from "./logged_out_toolbar";
 import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.svg";
@@ -7,7 +17,12 @@ import { MagGlassIcon } from "../icons/emoji_icons";
 import { Image } from "../utils/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconButton } from "../buttons/icon_button";
-import { faArrowLeft } from "@fortawesome/pro-solid-svg-icons";
+import {
+  faArrowLeft,
+  faBars,
+  faHamburger,
+} from "@fortawesome/pro-solid-svg-icons";
+import { useState } from "react";
 
 export enum States {
   RESERVE_PANEL,
@@ -35,6 +50,8 @@ export const WebflowNavBar = ({
   onTheTeam,
   onFAQs,
 }: WebflowNavBarProps) => {
+  const [expanded, setExpanded] = useState(false);
+
   const leftOfLogo = (state: States): JSX.Element => {
     switch (state) {
       case States.RESERVE_PANEL:
@@ -76,13 +93,41 @@ export const WebflowNavBar = ({
     },
   ];
 
-  return (
-    <Toolbar
-      style={{
-        padding: 0,
-        width: "100%",
-      }}
-    >
+  const constrainedHeader = () => {
+    return (
+      <Box
+        sx={{
+          width: "100%",
+          pl: "16px",
+          pr: "16px",
+          height: "68.63px",
+          backgroundColor: "white.main",
+        }}
+        display="flex"
+        alignItems={"center"}
+        justifyContent={"space-between"}
+      >
+        <Image
+          src={TypemarkSolarSVG}
+          style={{
+            width: "100px",
+          }}
+        ></Image>
+
+        <Button
+          sx={{
+            minWidth: "30px",
+          }}
+          onClick={() => setExpanded(!expanded)}
+        >
+          <FontAwesomeIcon icon={faBars} />
+        </Button>
+      </Box>
+    );
+  };
+
+  const nonConstrainedHeader = () => {
+    return (
       <Box
         sx={{
           width: "100%",
@@ -131,29 +176,62 @@ export const WebflowNavBar = ({
           </Stack>
         </Box>
       </Box>
+    );
+  };
+
+  const drawer = () => (
+    <SwipeableDrawer
+      anchor="right"
+      open={expanded}
+      onClose={() => {
+        setExpanded(false);
+      }}
+      onOpen={() => {}}
+    >
+      <Stack
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        sx={{
+          height: "100%",
+          width: "100vw",
+          pt: "18px",
+          backgroundColor: "whiteFog.main",
+        }}
+      ></Stack>
+    </SwipeableDrawer>
+  );
+
+  return (
+    <Toolbar
+      style={{
+        padding: 0,
+      }}
+      sx={{
+        width: "100%",
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+      }}
+    >
+      {constrained ? constrainedHeader() : nonConstrainedHeader()}
+      {drawer()}
     </Toolbar>
   );
 };
 
-const renderHeader = (header, id) => {
+export default () => {
+  const theme = useTheme();
+  const constrained = useMediaQuery(theme.breakpoints.down("lg"));
+
   return (
-    <Button key={id} onClick={header.onClick} sx={{ alignItems: "center" }}>
-      <MagGlassIcon sx={{ width: "16px", height: "16px" }} />
-      <Typography variant={"monoButton" as any}>{header.text}</Typography>
-    </Button>
+    <WebflowNavBar
+      {...{
+        state: States.RESERVE_PANEL,
+        constrained,
+        onToHomepage: () => {},
+        onHowItWorks: () => {},
+        onAboutUs: () => {},
+        onTheTeam: () => {},
+        onFAQs: () => {},
+      }}
+    ></WebflowNavBar>
   );
 };
-
-export default () => (
-  <WebflowNavBar
-    {...{
-      state: States.RESERVE_PANEL,
-      constrained: false,
-      onToHomepage: () => {},
-      onHowItWorks: () => {},
-      onAboutUs: () => {},
-      onTheTeam: () => {},
-      onFAQs: () => {},
-    }}
-  ></WebflowNavBar>
-);
