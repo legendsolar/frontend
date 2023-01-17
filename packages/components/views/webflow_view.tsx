@@ -5,10 +5,24 @@ import { MainContentBox } from "../basics";
 
 export const WebflowView = ({ children }) => {
   return (
-    <Box sx={{ backgroundColor: "whiteHaze.main", overscrollBehavior: "none" }}>
+    <MainContentBox sx={{ backgroundColor: "whiteFog.main" }}>
       <WebflowNavBar />
-
-      <MainContentBox>
+      <Box
+        sx={{
+          pl: {
+            sm: "0px",
+            md: "10px",
+            lg: "20px",
+            xl: "20px",
+          },
+          pr: {
+            sm: "0px",
+            md: "10px",
+            lg: "20px",
+            xl: "20px",
+          },
+        }}
+      >
         <Box
           sx={{
             minHeight: "100vh",
@@ -18,8 +32,8 @@ export const WebflowView = ({ children }) => {
         </Box>
 
         <Footer></Footer>
-      </MainContentBox>
-    </Box>
+      </Box>
+    </MainContentBox>
   );
 };
 

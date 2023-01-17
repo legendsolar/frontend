@@ -12,29 +12,23 @@ export const fromViewportPadding = () => {
 export const MainContentBox = ({
   children,
   passedRef,
+  sx = {},
 }: {
   children: JSX.Element;
   passedRef: MutableRefObject<HTMLElement | undefined>;
+  sx?: any;
 }) => (
   <Box
     sx={{
       maxWidth: {
         lg: "1250px", // about
       },
-      pl: {
-        sm: "0px",
-        md: "10px",
-        lg: "20px",
-        xl: "20px",
-      },
-      pr: {
-        sm: "0px",
-        md: "10px",
-        lg: "20px",
-        xl: "20px",
+      minWidth: {
+        lg: "971px",
       },
       mr: "auto",
       ml: "auto",
+      ...sx,
     }}
   >
     <div

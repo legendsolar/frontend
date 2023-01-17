@@ -17,15 +17,23 @@ export const MetricBox = ({ metric, title, icon }) => {
           variant={"headline1" as any}
           sx={{
             fontSize: {
-              xs: 25,
-              md: 35,
-              lg: 60,
+              md: 25,
+              lg: 32,
             },
+            fontWeight: "700",
           }}
         >
           {metric}
         </Typography>
-        <Typography variant={"monoButton" as any}>{title}</Typography>
+        <Typography
+          variant={"monoButton" as any}
+          sx={{
+            textTransform: "uppercase",
+            fontSize: "12px",
+          }}
+        >
+          {title}
+        </Typography>
       </Stack>
     </Component>
   );

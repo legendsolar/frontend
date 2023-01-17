@@ -20,6 +20,9 @@ import {
   MagGlassIcon,
 } from "@project/components/icons/emoji_icons";
 
+import FactorySolar from "@project/components/assets/images/factory_solar.png";
+import ParkingSolar from "@project/components/assets/images/parking_lot_solar.png";
+
 import { PanelDisplay } from "@project/components/panels/panel_display";
 
 import { Component, Divider } from "@project/components/basics";
@@ -28,6 +31,8 @@ import { MetricBox } from "@project/components/gauges/metric_box";
 import { faInfoCircle, faArrowRight } from "@fortawesome/pro-solid-svg-icons";
 import { useThemeColor } from "@project/components/utils";
 import { siteCopy } from "../content/copy";
+import { Image } from "../utils/image";
+import { BorderRight } from "@mui/icons-material";
 
 export interface ReservePanelPageProps {
   currentPanels: number;
@@ -143,7 +148,9 @@ export const ReservePanelPage = ({
               background
               shadow
               standardWidth={false}
-              sx={{ width: "100%" }}
+              sx={{
+                width: "100%",
+              }}
             >
               <Stack>
                 <LinearGauge
@@ -218,7 +225,7 @@ export const ReservePanelPage = ({
             </Box>
           }
           mainContent={
-            <Stack>
+            <Stack spacing={6}>
               <ContentDivider>
                 <Typography variant={"subtitle3" as any}>Summary</Typography>
               </ContentDivider>
@@ -233,7 +240,37 @@ export const ReservePanelPage = ({
                   Online solar investing with Legends will be available in the
                   next few months. Reserve panels today to get early access.
                 </Typography>
+
+                <Stack direction={"row"} alignItems="flex-end">
+                  <Image
+                    src={FactorySolar}
+                    style={{
+                      width: "260px",
+                      height: "260px",
+
+                      borderRadius: "5px",
+                    }}
+                  />
+
+                  <Image
+                    src={ParkingSolar}
+                    style={{
+                      width: "260px",
+                      height: "260px",
+                      borderRadius: "5px",
+                    }}
+                  />
+
+                  <Typography variant={"body" as any}>
+                    Your panels will be similar to the ones pictured
+                  </Typography>
+                </Stack>
               </Stack>
+
+              <ContentDivider>
+                <Typography variant={"subtitle3" as any}>Features</Typography>
+              </ContentDivider>
+
               <IconAccordian
                 items={[
                   {

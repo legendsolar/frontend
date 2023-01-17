@@ -1,4 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
+import { numberFormatter } from "@p/utils";
 
 export const LinearGauge = ({ current, max, color }) => {
   const percent = (current / max) * 100;
@@ -26,9 +27,11 @@ export const LinearGauge = ({ current, max, color }) => {
       </Stack>
 
       <Stack direction={"row"} justifyContent={"space-between"}>
-        <Typography color={color}>{max - current} panels available</Typography>
+        <Typography color={color}>
+          {numberFormatter(max - current)} panels available
+        </Typography>
         <Typography color={"blackDawn.main"}>
-          {current} panels reserved
+          {numberFormatter(current)} panels reserved
         </Typography>
       </Stack>
     </Stack>

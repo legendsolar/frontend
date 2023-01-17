@@ -61,6 +61,7 @@ export const IconButton = ({
         >
           <Typography
             justifyContent="center"
+            display={"inline"}
             variant={"subtitle2" as any}
             color={color + ".contrastText"}
           >

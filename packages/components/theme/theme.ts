@@ -25,7 +25,7 @@ export const breakpoints = {
     xs: 0,
     sm: 0, // webflow phone
     md: 0, // webflow landscape phone
-    lg: 971, // webflow tablet 820 + 40
+    lg: 740, // webflow tablet 820 + 40
     // xl: , // desktop 1240 + 40 + 40
   },
 };
@@ -133,7 +133,7 @@ export const appTheme = (
       },
       body: {
         fontFamily: beVietnamName,
-        fontSize: "20px",
+        fontSize: "16px",
         lineHeight: "25px",
         fontWeight: 400,
         color: paletteOptions.palette.blackDusk.main,

@@ -164,6 +164,55 @@ export const Footer = () => {
         </Grid>
       </Grid>
 
+      <div style={{ height: "40px" }}></div>
+
+      <Typography variant="smallHeadline">Disclaimer</Typography>
+      <div style={{ height: "20px" }}></div>
+      <Grid container spacing={4}>
+        <Grid item xs={12} lg={4}>
+          <Typography variant="label">
+            {`No offers to sell or solicitations of an offer to buy securities or
+            any other type of investment are being made or solicited by Legends
+            Incorporated at this time. No money or other consideration is being
+            solicited, and if sent in response, will not be accepted. We
+            anticipate that our initial offering will be conducted as a private
+            placement available only to accredited investors. From time to time,
+            we may seek to qualify additional offerings of securities under
+            Regulation A, promulgated under the Securities Act of 1933, as
+            amended (“Regulation A”). No offer to buy securities can be accepted
+            and no part of any purchase price can be received, and any such
+            offer to buy may be withdrawn or revoked, without obligation or
+            commitment of any kind, at any time before notice of its acceptance
+            in compliance with applicable securities laws and, with respect to
+            any offering under Regulation A, until an offering statement filed
+            with the Securities and Exchange Commission (the "SEC") relating to
+            that series has been qualified by the SEC. `}
+          </Typography>
+        </Grid>
+
+        <Grid item xs={12} lg={4}>
+          <Typography variant="label">
+            {`Any indication of interest that you may provide (including by submitting an email address at which you can be contacted or receive further information) involves no obligation or commitment of any kind.
+Legends Incorporated is not a registered broker-dealer, investment adviser, or crowdfunding portal and does not engage in any activities requiring any such registration. The information contained on this website is provided for informational and discussion purposes only and is not intended to be a recommendation to invest in, or purchase, sell, or hold, any securities, or to engage in any type of transaction. Any such offers will only be made pursuant to formal offering materials containing full details regarding risks, investment terms, and fees.
+Please consult with your legal and financial advisors before investing and do not invest unless you are able to sustain the risk of loss of your entire investment. Past performance is no guarantee of future results. Any historical returns, expected returns, or probability projections are forward looking statements and may not reflect actual future performance. All investments involve risk and may result in loss.
+`}
+          </Typography>
+        </Grid>
+
+        <Grid item xs={12} lg={4}>
+          <Typography variant="label">
+            {`This website contains forward-looking statements that are based on our beliefs and assumptions and on information currently available to us. In some cases, you can identify forward-looking statements by the following words: "estimated," “will,” “expect,” “would,” “intend,” “believe,” or other comparable terminology.
+Forward-looking statements in this website include, but are not limited to, statements about our business plan, potential investments in renewable energy projects, our market opportunities and beliefs, and our objectives for future operations. These statements involve risks, uncertainties, assumptions and other factors that may cause actual results or performance to be materially different. We cannot assure you that the forward-looking statements will prove to be accurate. These forward-looking statements speak only as of the date hereof. We disclaim any obligation to update these forward-looking statements. `}
+          </Typography>
+        </Grid>
+      </Grid>
+
+      <div style={{ height: "100px" }}></div>
+
+      <Typography variant="label" sx={{ fontWeight: "700" }}>
+        {`© 2022 Legends Incorporated. All rights reserved.`}
+      </Typography>
+
       <div style={{ height: "100px" }}></div>
     </Box>
   );

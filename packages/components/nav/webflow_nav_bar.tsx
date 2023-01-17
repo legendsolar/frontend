@@ -205,6 +205,7 @@ export const WebflowNavBar = ({
     <Toolbar
       style={{
         padding: 0,
+        marginBottom: "20px",
       }}
       sx={{
         width: "100%",
