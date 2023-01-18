@@ -38,35 +38,37 @@ export const WebflowView = ({
   };
 
   return (
-    <MainContentBox>
+    <Box>
       <WebflowNavBar {...navProps} />
-      <Box
-        sx={{
-          pl: {
-            sm: "0px",
-            md: "10px",
-            lg: "20px",
-            xl: "20px",
-          },
-          pr: {
-            sm: "0px",
-            md: "10px",
-            lg: "20px",
-            xl: "20px",
-          },
-        }}
-      >
+      <MainContentBox>
         <Box
           sx={{
-            minHeight: "100vh",
+            pl: {
+              sm: "0px",
+              md: "10px",
+              lg: "20px",
+              xl: "20px",
+            },
+            pr: {
+              sm: "0px",
+              md: "10px",
+              lg: "20px",
+              xl: "20px",
+            },
           }}
         >
-          {children}
-        </Box>
+          <Box
+            sx={{
+              minHeight: "100vh",
+            }}
+          >
+            {children}
+          </Box>
 
-        <Footer></Footer>
-      </Box>
-    </MainContentBox>
+          <Footer></Footer>
+        </Box>
+      </MainContentBox>
+    </Box>
   );
 };
 

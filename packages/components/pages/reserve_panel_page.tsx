@@ -161,7 +161,6 @@ export const ReservePanelPage = ({
           mainContent={
             <Component
               background
-              shadow
               standardWidth={false}
               sx={{
                 width: "100%",

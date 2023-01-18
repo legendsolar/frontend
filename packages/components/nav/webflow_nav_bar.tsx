@@ -255,6 +255,12 @@ export const WebflowNavBar = ({
         sx={{ mr: "40px" }}
       >
         <Stack direction={"row"} spacing="40px">
+          <Image
+            src={TypemarkSolarSVG}
+            style={{
+              width: "125px",
+            }}
+          ></Image>
           {headers.map((header) => (
             <Button
               sx={{
@@ -349,50 +355,22 @@ export const WebflowNavBar = ({
       <Box
         sx={{
           width: "100%",
-          ml: "30px",
-          mr: "30px",
-        }}
-        display="flex"
-        justifyContent={"center"}
-      >
-        <Box
-          sx={{
-            width: "100%",
-            mt: 10,
-            mb: 10,
-            ml: {
-              md: 0,
-              lg: 5,
-            },
-            mr: {
-              md: 0,
-              lg: 5,
-            },
-          }}
-        >
-          <Stack
-            direction="row"
-            justifyContent={
-              state === States.RESERVE_PANEL ? "space-between" : "flex-start"
-            }
-            alignItems={"center"}
-            spacing={"40px"}
-            sx={{
-              width: "100%",
-              zIndex: 1,
-              transform: "translate3d(0, 0, 0px)",
-            }}
-          >
-            <Image
-              src={TypemarkSolarSVG}
-              style={{
-                width: "125px",
-              }}
-            ></Image>
+          mt: "10px",
+          mb: "10px",
+          ml: {
+            md: 0,
+            lg: "32px",
+          },
+          mr: {
+            md: 0,
+            lg: "32px",
+          },
 
-            {renderTopState(state, constrained)}
-          </Stack>
-        </Box>
+          zIndex: 1,
+          transform: "translate3d(0, 0, 0px)",
+        }}
+      >
+        {renderTopState(state, constrained)}
       </Box>
     );
   };
