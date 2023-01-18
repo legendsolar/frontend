@@ -331,7 +331,7 @@ export const ReservePanelPage = ({
                     title: "Carefully selected solar panels",
                     content: (
                       <Stack spacing={"16px"}>
-                        <Typography variant={"description" as any}>
+                        <Typography variant={"body" as any}>
                           {siteCopy.aboutSevenYearTerm}
                         </Typography>
                         <IconButton
@@ -349,7 +349,7 @@ export const ReservePanelPage = ({
                   {
                     title: "Monthly cash earnings",
                     content: (
-                      <Typography variant={"description" as any}>
+                      <Typography variant={"body" as any}>
                         {`Each month, the cash earnings produced by your panels will be transferred to you. All dividend payments earned by your solar panels will be sent to your Legends Wallet. When you receive dividends from solar panels on Legends, it is like you literally \‘turned sunshine into cash\’ – since all the cash you earn comes from the sale of 100% renewable energy.`}
                       </Typography>
                     ),
@@ -358,7 +358,7 @@ export const ReservePanelPage = ({
                   {
                     title: "Real-time monitoring",
                     content: (
-                      <Typography variant={"description" as any}>
+                      <Typography variant={"body" as any}>
                         {`Your solar panels generate data on how much electricity they produce – we use Rooftop to make that data accessible to you. This information is put in context with your carbon impact and earnings, so you’ll always know what positive effect your investment is having in the world and how you are benefiting from it.`}
                       </Typography>
                     ),

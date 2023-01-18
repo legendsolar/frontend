@@ -268,7 +268,9 @@ export const WebflowNavBar = ({
               onClick={header.onClick}
             >
               {header.icon}
-              <Typography variant="monoButton">{header.text}</Typography>
+              <Typography variant="monoButton" noWrap>
+                {header.text}
+              </Typography>
             </Button>
           ))}
         </Stack>
@@ -295,7 +297,9 @@ export const WebflowNavBar = ({
               onClick={header.onClick}
             >
               {header.icon}
-              <Typography variant="monoButton">{header.text}</Typography>
+              <Typography variant="monoButton" noWrap>
+                {header.text}
+              </Typography>
             </Button>
 
             <ComponentDivider

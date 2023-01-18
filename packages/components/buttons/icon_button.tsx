@@ -70,6 +70,7 @@ export const IconButton = ({
             display={"inline"}
             variant={"subtitle2" as any}
             color={color + ".contrastText"}
+            noWrap
           >
             {label}
           </Typography>
