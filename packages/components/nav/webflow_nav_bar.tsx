@@ -99,25 +99,51 @@ export const WebflowNavBar = ({
   ];
 
   const renderTopState = (state: States, constrained: boolean): JSX.Element => {
+    const render = (leftJustify, rightJustify) => (
+      <Stack
+        direction={"row"}
+        justifyContent="space-between"
+        spacing={"40px"}
+        sx={{ mr: "40px" }}
+      >
+        <Stack direction={"row"} spacing="40px">
+          <Image
+            src={TypemarkSolarSVG}
+            style={{
+              width: "125px",
+            }}
+          ></Image>
+
+          {leftJustify}
+        </Stack>
+
+        {rightJustify}
+      </Stack>
+    );
+
     switch (state) {
       case States.LOGGED_OUT:
       case States.RESERVE_PANEL:
-        return constrained ? (
-          renderConstrainedHeaders()
-        ) : (
-          <IconButton
-            href="https://legends.solar"
-            variant="bubble"
-            color="white"
-            label=" Back to Legends"
-            icon={<FontAwesomeIcon icon={faArrowLeft} />}
-          ></IconButton>
-        );
+        return constrained
+          ? renderConstrainedHeaders()
+          : render(
+              <></>,
+              <IconButton
+                href="https://legends.solar"
+                variant="bubble"
+                color="white"
+                label=" Back to Legends"
+                icon={<FontAwesomeIcon icon={faArrowLeft} />}
+              ></IconButton>
+            );
       case States.LOGGED_IN_NO_PANELS:
       case States.LOGGED_IN_PANELS:
         return constrained
           ? renderConstrainedHeaders()
-          : renderNonConstrainedHeaders();
+          : render(
+              renderNonConstrainedHeaders(),
+              renderActionButtons(state, constrained)
+            );
     }
   };
 
@@ -247,43 +273,24 @@ export const WebflowNavBar = ({
   };
 
   const renderNonConstrainedHeaders = () => {
-    return (
-      <Stack
-        direction={"row"}
-        justifyContent="space-between"
-        spacing={"40px"}
-        sx={{ mr: "40px" }}
+    return headers.map((header) => (
+      <Button
+        sx={{
+          height: "80px",
+          pl: "32px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "15px",
+        }}
+        onClick={header.onClick}
       >
-        <Stack direction={"row"} spacing="40px">
-          <Image
-            src={TypemarkSolarSVG}
-            style={{
-              width: "125px",
-            }}
-          ></Image>
-          {headers.map((header) => (
-            <Button
-              sx={{
-                height: "80px",
-                pl: "32px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "15px",
-              }}
-              onClick={header.onClick}
-            >
-              {header.icon}
-              <Typography variant="monoButton" noWrap>
-                {header.text}
-              </Typography>
-            </Button>
-          ))}
-        </Stack>
-
-        {renderActionButtons(state, constrained)}
-      </Stack>
-    );
+        {header.icon}
+        <Typography variant="monoButton" noWrap>
+          {header.text}
+        </Typography>
+      </Button>
+    ));
   };
 
   const renderConstrainedHeaders = () => {
