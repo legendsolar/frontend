@@ -11,7 +11,7 @@ export const MetricBox = ({ metric, title, icon }) => {
         width: "100%",
       }}
     >
-      <Stack spacing={1}>
+      <Stack spacing={"4px"}>
         {icon}
         <Typography
           variant={"headline1" as any}
@@ -21,6 +21,7 @@ export const MetricBox = ({ metric, title, icon }) => {
               lg: 32,
             },
             fontWeight: "700",
+            lineHeight: "40px",
           }}
         >
           {metric}

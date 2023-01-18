@@ -96,9 +96,6 @@ const Panel = ({
         //   ? "matrix(1.0638, 0, -0.404255, 1, 0, 0) matrix(0.94, 0, 0.38, 1, 0, -10)"
         //   : "none",
         zIndex: hover ? 100 : 99,
-        filter: hover
-          ? "drop-shadow(0px 0px 25px rgba(99, 110, 114, 0.25))"
-          : "none",
       }}
       onClick={() => {
         setSelected(!selected);

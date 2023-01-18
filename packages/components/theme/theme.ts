@@ -176,7 +176,7 @@ export const appTheme = (
         fontFamily: beVietnamName,
         fontWeight: 600,
         fontSize: "20px",
-        lineHeight: "25px",
+        lineHeight: "30px",
         color: paletteOptions.palette.blackDusk.main,
       },
       subtitle2: {

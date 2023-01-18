@@ -26,6 +26,11 @@ export const EXTERNAL_LINKS = {
     INSTAGRAM: "https://www.instagram.com/legends.solar/",
     LINKED_IN: "https://www.linkedin.com/company/legendssolar/",
   },
+  LEARN: {
+    PANEL_SELECTION: "https://www.legends.solar/learn/selection",
+    ROOFTOP_DASHBOARD: "https://www.legends.solar/learn/legends-solar",
+    PANEL_COST: "https://www.legends.solar/learn/cost",
+  },
   LEGAL: {
     PRIVACY_POLICY: "https://www.legends.solar/legal/privacy-policy",
     TERMS_AND_CONDITIONS:

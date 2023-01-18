@@ -3,7 +3,7 @@ import { EXTERNAL_LINKS } from "@p/utils/webflow/webflowLinking";
 
 export const Footer = () => {
   return (
-    <Box sx={{ mt: 10 }}>
+    <Box sx={{ mt: "80px" }}>
       <Grid container spacing={4}>
         <Grid item xs={12} lg={8} order={{ md: 2, lg: 1 }}>
           <Stack>

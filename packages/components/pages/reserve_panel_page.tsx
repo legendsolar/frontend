@@ -34,6 +34,7 @@ import { siteCopy } from "../content/copy";
 import { Image } from "../utils/image";
 import { BorderRight } from "@mui/icons-material";
 import { States } from "../nav/webflow_nav_bar";
+import { EXTERNAL_LINKS } from "@p/utils/webflow/webflowLinking";
 export interface ReservePanelPageProps {
   currentPanels: number;
   setCurrentPanels(panels: number): void;
@@ -235,13 +236,14 @@ export const ReservePanelPage = ({
                   With Legends, you’ll purchase solar panels on a commercial
                   solar farm - think warehouse rooftop (not a suburban home) and
                   earn cash as you generate and sell electricity.
-                </Typography>
-                <Typography variant={"body" as any}>
+                  <br></br>
+                  <br></br>
                   Online solar investing with Legends will be available in the
                   next few months. Reserve panels today to get early access.
                 </Typography>
 
                 <Stack
+                  spacing={"16px"}
                   sx={{
                     flexDirection: {
                       lg: "row",
@@ -251,6 +253,10 @@ export const ReservePanelPage = ({
                       lg: "flex-end",
                       md: "flex-start",
                     },
+                    justifyContent: {
+                      lg: "flex-end",
+                    },
+                    gap: "16px",
                   }}
                 >
                   <Image
@@ -263,16 +269,39 @@ export const ReservePanelPage = ({
                     }}
                   />
 
-                  <Image
-                    src={ParkingSolar}
+                  <Box
                     style={{
-                      width: "260px",
-                      height: "260px",
-                      borderRadius: "5px",
-                    }}
-                  />
+                      marginTop: "0px",
+                      padding: "0px",
 
-                  <Typography variant={"body" as any}>
+                      height: "260px",
+                    }}
+                    sx={{
+                      display: {
+                        md: "none",
+                        lg: "inline",
+                      },
+                    }}
+                  >
+                    <Image
+                      src={ParkingSolar}
+                      style={{
+                        width: "260px",
+                        height: "260px",
+                        borderRadius: "5px",
+                      }}
+                    />
+                  </Box>
+
+                  <Typography
+                    variant={"body" as any}
+                    sx={{
+                      display: {
+                        md: "none",
+                        lg: "inline",
+                      },
+                    }}
+                  >
                     Your panels will be similar to the ones pictured
                   </Typography>
                 </Stack>
@@ -287,13 +316,15 @@ export const ReservePanelPage = ({
                   {
                     title: "Carefully selected solar panels",
                     content: (
-                      <Stack>
+                      <Stack spacing={"16px"}>
                         <Typography variant={"description" as any}>
                           {siteCopy.aboutSevenYearTerm}
                         </Typography>
                         <IconButton
                           iconPosition="right"
                           variant="bubble"
+                          target="_blank"
+                          href={EXTERNAL_LINKS.LEARN.PANEL_SELECTION}
                           label="How does Legends Solar Choose solar panels?"
                           icon={<FontAwesomeIcon icon={faArrowRight} />}
                         />
@@ -305,7 +336,7 @@ export const ReservePanelPage = ({
                     title: "Monthly cash earnings",
                     content: (
                       <Typography variant={"description" as any}>
-                        {siteCopy.aboutRooftopMonitoring}
+                        {`Each month, the cash earnings produced by your panels will be transferred to you. All dividend payments earned by your solar panels will be sent to your Legends Wallet. When you receive dividends from solar panels on Legends, it is like you literally \‘turned sunshine into cash\’ – since all the cash you earn comes from the sale of 100% renewable energy.`}
                       </Typography>
                     ),
                     icon: <CashIcon />,
@@ -314,7 +345,7 @@ export const ReservePanelPage = ({
                     title: "Real-time monitoring",
                     content: (
                       <Typography variant={"description" as any}>
-                        {siteCopy.aboutRooftopMonitoring}
+                        {`Your solar panels generate data on how much electricity they produce – we use Rooftop to make that data accessible to you. This information is put in context with your carbon impact and earnings, so you’ll always know what positive effect your investment is having in the world and how you are benefiting from it.`}
                       </Typography>
                     ),
                     icon: <PowerIcon />,
@@ -354,11 +385,10 @@ export const ReservePanelPage = ({
                   steps={[
                     {
                       title: "We identify a solar project to purchase",
-                      description:
-                        "We select solar projects based on their risk profile and quality of construction.",
+                      description: `We select solar projects based on their risk profile and quality of construction. Legends works with experienced finance partners to identify strong projects to acquire for Legends clients.`,
                       linkBubble: (
                         <IconButton
-                          href={"https://www.legends.solar/learn/cost"}
+                          href={EXTERNAL_LINKS.LEARN.PANEL_SELECTION}
                           target="_blank"
                           variant="bubble"
                           color="whiteHaze"
@@ -371,16 +401,14 @@ export const ReservePanelPage = ({
 
                     {
                       title: "Review Offering Prospectus",
-                      description:
-                        "Once we are ready to subscribe a solar facility, we'll publish a prospectus and other documents.",
+                      description: `Once panels are available, we’ll send you an investment overview with detailed information about the opportunity. You’ll have access to projected returns and other traits of the panels.`,
                     },
                     {
                       title: "Invest in solar panels",
-                      description:
-                        "Once the investment is fully subscribed, you'll receive your 'panel' shares.",
+                      description: `After reviewing the documentation we’ll provide, you’ll be able to purchase your first solar panels. Invest in one panel, or a whole rooftop’s worth!`,
                       linkBubble: (
                         <IconButton
-                          href={"https://www.legends.solar/learn/cost"}
+                          href={EXTERNAL_LINKS.LEARN.PANEL_COST}
                           target="_blank"
                           variant="bubble"
                           color="whiteHaze"
@@ -392,12 +420,10 @@ export const ReservePanelPage = ({
                     },
                     {
                       title: "Monitor your productivity",
-                      description:
-                        "You'll  see your investment's real time impact and receive dividends from your holding. ",
-
+                      description: `With Legends Rooftop, you’ll see your panel’s real time productivity — the cash you earn, the power you generate, and the carbon impact you create!`,
                       linkBubble: (
                         <IconButton
-                          href={"https://www.legends.solar/learn/cost"}
+                          href={EXTERNAL_LINKS.LEARN.ROOFTOP_DASHBOARD}
                           target="_blank"
                           variant="bubble"
                           color="whiteHaze"
