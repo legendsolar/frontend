@@ -9,18 +9,33 @@ import { ContentDivider } from "@project/components/basics/content_divider";
 import { SunIcon } from "@project/components/icons/emoji_icons";
 import { ShareSocial } from "../share/share_social";
 import { ClickToCopyButton } from "../buttons/click_to_copy_button";
+import { States } from "../nav/webflow_nav_bar";
 
 export interface WaitlistPageProps {
   waitlistPosn: string;
   referralLink: string;
+  onLogout(): void;
+  onLogin(): void;
+  onGetEarlyAccess(): void;
+  onCheckStatus(): void;
 }
 
 export const WaitlistPage = ({
   waitlistPosn,
   referralLink,
+  onLogout,
+  onLogin,
+  onGetEarlyAccess,
+  onCheckStatus,
 }: WaitlistPageProps) => {
   return (
-    <WebflowView>
+    <WebflowView
+      state={States.LOGGED_IN_NO_PANELS}
+      onCheckStatus={onCheckStatus}
+      onLogin={onLogin}
+      onLogout={onLogout}
+      onGetEarlyAccess={onGetEarlyAccess}
+    >
       <Stack>
         <SunIcon />
         <Typography variant={"headline2" as any}>

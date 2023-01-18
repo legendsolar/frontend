@@ -12,6 +12,8 @@ interface IconButtonProps {
   href?: string;
   target?: string;
   onClick?(): void;
+  sx?: any;
+  style?: any;
 }
 
 export const IconButton = ({
@@ -25,6 +27,8 @@ export const IconButton = ({
   iconJustify = "center",
   href,
   target,
+  sx = {},
+  style = {},
 }: IconButtonProps) => {
   return (
     <Button
@@ -33,6 +37,7 @@ export const IconButton = ({
       onClick={onClick}
       href={href}
       target={target}
+      style={style}
       sx={{
         backgroundColor: color + ".main",
         color: color + ".contrastText",
@@ -40,6 +45,7 @@ export const IconButton = ({
         ":hover": {
           backgroundColor: color + ".main",
         },
+        ...sx,
       }}
     >
       <Stack

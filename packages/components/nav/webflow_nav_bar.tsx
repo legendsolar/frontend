@@ -19,6 +19,7 @@ import {
   MagGlassIcon,
   PinIcon,
   PushPinIcon,
+  SunIcon,
 } from "../icons/emoji_icons";
 import { Image } from "../utils/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -32,6 +33,7 @@ import {
 } from "@fortawesome/pro-solid-svg-icons";
 import { useState } from "react";
 import { ComponentDivider } from "../basics";
+import { useThemeColor } from "../utils";
 
 export enum States {
   RESERVE_PANEL,
@@ -47,6 +49,10 @@ export interface WebflowNavBarProps {
   onAboutUs(): void;
   onTheTeam(): void;
   onFAQs(): void;
+  onLogout(): void;
+  onLogin(): void;
+  onGetEarlyAccess(): void;
+  onCheckStatus(): void;
 }
 
 export const WebflowNavBar = ({
@@ -56,11 +62,17 @@ export const WebflowNavBar = ({
   onAboutUs,
   onTheTeam,
   onFAQs,
+  onLogout,
+  onLogin,
+  onGetEarlyAccess,
+  onCheckStatus,
 }: WebflowNavBarProps) => {
   const theme = useTheme();
   const constrained = useMediaQuery(theme.breakpoints.down("lg"));
 
   const [expanded, setExpanded] = useState(false);
+
+  const legendaryGreen = useThemeColor("legendaryGreen.main");
 
   const headers = [
     {
@@ -86,8 +98,9 @@ export const WebflowNavBar = ({
     },
   ];
 
-  const renderState = (state: States, constrained: boolean): JSX.Element => {
+  const renderTopState = (state: States, constrained: boolean): JSX.Element => {
     switch (state) {
+      case States.LOGGED_OUT:
       case States.RESERVE_PANEL:
         return constrained ? (
           renderConstrainedHeaders()
@@ -100,14 +113,169 @@ export const WebflowNavBar = ({
             icon={<FontAwesomeIcon icon={faArrowLeft} />}
           ></IconButton>
         );
-
-      case States.LOGGED_OUT:
-        return constrained ? renderConstrainedHeaders() : <div></div>;
       case States.LOGGED_IN_NO_PANELS:
-        return constrained ? renderConstrainedHeaders() : <div></div>;
       case States.LOGGED_IN_PANELS:
-        return constrained ? renderConstrainedHeaders() : <div></div>;
+        return constrained
+          ? renderConstrainedHeaders()
+          : renderNonConstrainedHeaders();
     }
+  };
+
+  const renderActionButtons = (
+    state: States,
+    constrained: boolean
+  ): JSX.Element => {
+    const color = () => {
+      switch (state) {
+        case States.LOGGED_IN_NO_PANELS:
+        case States.LOGGED_IN_PANELS:
+          return "white";
+        case States.RESERVE_PANEL:
+        case States.LOGGED_OUT:
+        default:
+          return "legendaryGreen";
+      }
+    };
+
+    const text = () => {
+      switch (state) {
+        case States.LOGGED_IN_NO_PANELS:
+        case States.LOGGED_IN_PANELS:
+          return "Check Status";
+        case States.RESERVE_PANEL:
+        case States.LOGGED_OUT:
+        default:
+          return "Get Early Access";
+      }
+    };
+
+    const logInOut = () => {
+      switch (state) {
+        case States.LOGGED_IN_NO_PANELS:
+        case States.LOGGED_IN_PANELS:
+          return "Log out";
+        case States.RESERVE_PANEL:
+        case States.LOGGED_OUT:
+        default:
+          return "Log in";
+      }
+    };
+
+    const secondaryAction = () => {
+      switch (state) {
+        case States.LOGGED_IN_NO_PANELS:
+        case States.LOGGED_IN_PANELS:
+          return onLogout;
+        case States.RESERVE_PANEL:
+        case States.LOGGED_OUT:
+        default:
+          return onLogin;
+      }
+    };
+
+    const primaryAction = () => {
+      switch (state) {
+        case States.LOGGED_IN_NO_PANELS:
+        case States.LOGGED_IN_PANELS:
+          return onCheckStatus;
+        case States.RESERVE_PANEL:
+        case States.LOGGED_OUT:
+        default:
+          return onGetEarlyAccess;
+      }
+    };
+
+    if (!constrained) {
+      return (
+        <Stack direction={"row"} alignItems="center">
+          <Button
+            variant="secondary"
+            onClick={secondaryAction()}
+            sx={{
+              height: "56px",
+              background: "none",
+              border: "1px solid ",
+              color: legendaryGreen,
+            }}
+          >
+            {logInOut()}
+          </Button>
+          <IconButton
+            variant="primary"
+            color={color()}
+            onClick={primaryAction()}
+            label={text()}
+            icon={<SunIcon />}
+            iconJustify="center"
+            sx={{
+              height: "56px",
+              color: legendaryGreen,
+            }}
+          ></IconButton>
+        </Stack>
+      );
+    } else {
+      // this is super fucked
+      return (
+        <Stack sx={{ width: "100%" }}>
+          <Button
+            variant="secondary"
+            color="legendaryGreen.main"
+            sx={{
+              m: "32px",
+              mb: "0px",
+              width: "auto",
+            }}
+            onClick={secondaryAction()}
+          >
+            {logInOut()}
+          </Button>
+          <IconButton
+            variant="primary"
+            color={color()}
+            onClick={primaryAction()}
+            label={text()}
+            style={{
+              margin: "32px",
+            }}
+            icon={<SunIcon />}
+            iconJustify="center"
+          ></IconButton>
+        </Stack>
+      );
+    }
+  };
+
+  const renderNonConstrainedHeaders = () => {
+    return (
+      <Stack
+        direction={"row"}
+        justifyContent="space-between"
+        spacing={"40px"}
+        sx={{ mr: "40px" }}
+      >
+        <Stack direction={"row"} spacing="40px">
+          {headers.map((header) => (
+            <Button
+              sx={{
+                height: "80px",
+                pl: "32px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "15px",
+              }}
+              onClick={header.onClick}
+            >
+              {header.icon}
+              <Typography variant="monoButton">{header.text}</Typography>
+            </Button>
+          ))}
+        </Stack>
+
+        {renderActionButtons(state, constrained)}
+      </Stack>
+    );
   };
 
   const renderConstrainedHeaders = () => {
@@ -190,11 +358,11 @@ export const WebflowNavBar = ({
             mb: 10,
             ml: {
               md: 0,
-              sm: 5,
+              lg: 5,
             },
             mr: {
               md: 0,
-              sm: 5,
+              lg: 5,
             },
           }}
         >
@@ -218,7 +386,7 @@ export const WebflowNavBar = ({
               }}
             ></Image>
 
-            {renderState(state, constrained)}
+            {renderTopState(state, constrained)}
           </Stack>
         </Box>
       </Box>
@@ -233,18 +401,21 @@ export const WebflowNavBar = ({
         setExpanded(false);
       }}
       onOpen={() => {}}
+      PaperProps={{
+        sx: { width: "100%", overflowX: "hidden" },
+      }}
     >
       <Stack
         alignItems={"center"}
         justifyContent={"space-between"}
         sx={{
           height: "100%",
-          width: "100vw",
           pt: "88.7px",
           backgroundColor: "whiteFog.main",
         }}
       >
-        {renderState(state, constrained)}
+        {renderTopState(state, constrained)}
+        {renderActionButtons(state, constrained)}
       </Stack>
     </SwipeableDrawer>
   );

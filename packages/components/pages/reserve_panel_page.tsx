@@ -42,6 +42,10 @@ export interface ReservePanelPageProps {
   currentReservedPanels: number;
   maxPanelReservations: number;
   costPerPanel: number;
+  onLogout(): void;
+  onLogin(): void;
+  onGetEarlyAccess(): void;
+  onCheckStatus(): void;
 }
 
 export const ReservePanelPage = ({
@@ -51,9 +55,19 @@ export const ReservePanelPage = ({
   currentReservedPanels,
   maxPanelReservations,
   costPerPanel,
+  onLogout,
+  onLogin,
+  onGetEarlyAccess,
+  onCheckStatus,
 }: ReservePanelPageProps) => {
   return (
-    <WebflowView state={States.RESERVE_PANEL}>
+    <WebflowView
+      state={States.RESERVE_PANEL}
+      onCheckStatus={onCheckStatus}
+      onLogin={onLogin}
+      onLogout={onLogout}
+      onGetEarlyAccess={onGetEarlyAccess}
+    >
       <Stack spacing={6}>
         <Stack>
           <Typography variant={"headline2" as any}>
