@@ -76,7 +76,11 @@ export const ClickToCopyButton = ({
           <Typography
             variant={"smallHeadline" as any}
             color={hover ? "white.main" : "skyBlue.main"}
-            sx={{ textAlign: "left" }}
+            sx={{
+              textAlign: "left",
+              wordBreak: "break-word",
+              overflowWrap: "break-word",
+            }}
           >
             {copyText}
           </Typography>

@@ -239,20 +239,20 @@ export const ReservePanelPage = ({
             </Box>
           }
           mainContent={
-            <Stack spacing={6}>
+            <Stack spacing={6} sx={{ width: "100%" }}>
               <ContentDivider>
                 <Typography variant={"subtitle3" as any}>Summary</Typography>
               </ContentDivider>
 
-              <Stack>
-                <Typography variant={"body" as any}>
-                  With Legends, you’ll purchase solar panels on a commercial
+              <Stack sx={{ width: "100%" }}>
+                <Typography variant={"body" as any} sx={{ flexShrink: 1 }}>
+                  {`With Legends, you’ll purchase solar panels on a commercial
                   solar farm - think warehouse rooftop (not a suburban home) and
-                  earn cash as you generate and sell electricity.
+                  earn cash as you generate and sell electricity. `}
                   <br></br>
                   <br></br>
-                  Online solar investing with Legends will be available in the
-                  next few months. Reserve panels today to get early access.
+                  {`Online solar investing with Legends will be available in the
+                  next few months. Reserve panels today to get early access.`}
                 </Typography>
 
                 <Stack
