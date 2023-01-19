@@ -12,7 +12,7 @@ export default () => {
 
   return (
     <SignUpPage
-      signInWithGoogle={onSignInWithGoogle}
+      onSignUpWithGoogle={onSignInWithGoogle}
       onSignUpWithEmail={onSignUpWithEmail}
       onNavigateToSignIn={() => router.push("./sign_in")}
       panelsSelected={currentPanels}

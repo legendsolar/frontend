@@ -20,12 +20,14 @@ import {
   validatePhoneNumber,
 } from "@p/utils/validation";
 import { ErrorTypes } from "@p/utils/errors";
+import { Error } from "@p/utils/errors";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { LoadingText } from "../utils/loading_text";
+import { useAuth } from "@project/hooks/use_auth";
 
-interface Values {
+export interface Values {
   firstName: string;
   lastName: string;
   email: string;
@@ -37,8 +39,7 @@ interface Props {
   initialValues?: Values;
   onSubmit(values: Values): void;
   loading: boolean;
-  error: string | undefined;
-  valueErrorState?: Values;
+  error: Error | undefined;
   color?: "dark" | "light";
 }
 
@@ -48,7 +49,6 @@ export const UserInformationComponent = ({
   loading,
   error,
   color = "dark",
-  valueErrorState = {},
 }: Props) => {
   const formik = useFormik<Values>({
     initialValues: initialValues
@@ -70,10 +70,19 @@ export const UserInformationComponent = ({
         .oneOf([yup.ref("password"), null], "Password does not match")
         .required("Required"),
     }),
-    onSubmit: async (values, { setErrors }) => {
-      onSubmit(values);
-    },
+    onSubmit,
   });
+
+  useEffect(() => {
+    if (error?.source) {
+      formik.setErrors({
+        ...formik.errors,
+        ...{ [error.source]: error.message },
+      });
+    }
+  }, [error]);
+
+  console.log(formik.errors);
 
   const passwordHelper = "12 characters, 1 uppercase, 1 special or digit";
 
@@ -188,11 +197,41 @@ export const UserInformationComponent = ({
             )}
           </Button>
 
-          {error && <Alert severity="error">{error}</Alert>}
+          {!error?.source && error?.message && (
+            <Alert severity="error">{error.message}</Alert>
+          )}
         </Stack>
       </form>
     </Box>
   );
 };
 
-export const UserInformationComponentDefault = ({}) => {};
+export const UserInformationComponentDefault = ({
+  onSubmit,
+  color,
+}: {
+  onSubmit(values: Values): Promise<void>;
+  color?: "dark" | "light";
+}) => {
+  const { currentError, isAuthenticating } = useAuth();
+
+  const [loading, setLoading] = useState(false);
+
+  const onSubmitLoading = async (values: Values) => {
+    setLoading(true);
+    try {
+      await onSubmit(values);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const combinedProps: Props = {
+    onSubmit: onSubmitLoading,
+    error: currentError,
+    color,
+    loading: isAuthenticating || loading,
+  };
+
+  return <UserInformationComponent {...combinedProps} />;
+};

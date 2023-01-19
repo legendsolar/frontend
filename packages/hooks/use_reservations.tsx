@@ -348,7 +348,7 @@ const useProvideReservations = (): useReservationsReturnType => {
     },
     onSignUpWithEmail: async ({ email, firstName, password, lastName }) => {
       try {
-        setLoading(true);
+        // setLoading(true);
         await signup(email, password);
         await onCreateNewUser({ email, firstName, lastName });
         await updateUser({
@@ -356,7 +356,7 @@ const useProvideReservations = (): useReservationsReturnType => {
           lastName: lastName,
         });
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     },
     currentReservedPanels: facility?.panels_reserved,

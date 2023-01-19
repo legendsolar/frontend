@@ -44,6 +44,7 @@ interface useAuthReturnType {
   setIsAuthenticating(authenticating: boolean): void;
   authenticated: boolean;
   user: User | null;
+  currentError: any | undefined;
   setUser(user: User): void;
   signin(email: string, password: string): Promise<void>;
   signup(email: string, password: string): Promise<UserCredential | undefined>;
@@ -75,12 +76,24 @@ const useProvideAuth = (): useAuthReturnType => {
   const provider = new GoogleAuthProvider();
 
   const [user, setUser] = useState<User | null>(null);
+  const [currentError, setCurrentError] = useState<Error | undefined>(
+    undefined
+  );
 
   const [mfaVerificationId, setMfaVerificationId] = useState<string | null>(
     null
   );
 
   const [isAuthenticating, setIsAuthenticating] = useState<boolean>(true);
+
+  const errorHandler = (error: any) => {
+    try {
+      authErrorHandler(error);
+    } catch (transformedError: any) {
+      setCurrentError(transformedError);
+      throw error;
+    }
+  };
 
   const signin = async (email: string, password: string) => {
     // Removed to stop sign in components from unmounting
@@ -97,25 +110,17 @@ const useProvideAuth = (): useAuthReturnType => {
 
       throw error;
     }
-
-    // .finally(() => {
-    //     // setIsAuthenticating(false);
-    // });
   };
 
   const signup = async (email: string, password: string) => {
-    // setIsAuthenticating(true);
-
     try {
       const resp = await createUserWithEmailAndPassword(auth, email, password);
 
       return resp;
     } catch (error: any) {
-      authErrorHandler(error);
+      errorHandler(error);
+    } finally {
     }
-    // .finally(() => {
-    //     setIsAuthenticating(false);
-    // });
   };
 
   const signout = async () => {
@@ -128,7 +133,7 @@ const useProvideAuth = (): useAuthReturnType => {
 
       setUser(null);
     } catch (error: any) {
-      authErrorHandler(error);
+      errorHandler(error);
     } finally {
       setIsAuthenticating(false);
     }
@@ -138,7 +143,7 @@ const useProvideAuth = (): useAuthReturnType => {
     try {
       await sendPasswordResetEmail(auth, email);
     } catch (error) {
-      authErrorHandler(error);
+      errorHandler(error);
     }
   };
 
@@ -148,7 +153,7 @@ const useProvideAuth = (): useAuthReturnType => {
         await updatePassword(user, password);
       }
     } catch (error) {
-      authErrorHandler(error);
+      errorHandler(error);
     }
   };
 
@@ -175,7 +180,7 @@ const useProvideAuth = (): useAuthReturnType => {
         });
       }
     } catch (error: any) {
-      authErrorHandler(error);
+      errorHandler(error);
     }
   };
 
@@ -333,6 +338,7 @@ const useProvideAuth = (): useAuthReturnType => {
     setIsAuthenticating,
     authenticated: !!user,
     user,
+    currentError,
     setUser,
     signin,
     signup,

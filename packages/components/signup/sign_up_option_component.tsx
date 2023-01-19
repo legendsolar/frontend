@@ -7,13 +7,23 @@ import PropTypes from "prop-types";
 import { Divider } from "../basics/divider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { UserInformationComponent } from "./user_information_component";
+import {
+  UserInformationComponent,
+  UserInformationComponentDefault,
+  Values,
+} from "./user_information_component";
+
+export interface SignUpOptionComponentProps {
+  onSignUpWithGoogle: () => void;
+  onSignUpWithEmail: (values: Values) => Promise<void>;
+  onNavigateToSignIn: () => void;
+}
 
 export const SignUpOptionComponent = ({
   onSignUpWithGoogle,
   onSignUpWithEmail,
   onNavigateToSignIn,
-}) => (
+}: SignUpOptionComponentProps) => (
   <Stack spacing={4}>
     <Typography variant="smallHeadline" sx={{ mb: 6 }}>
       Create Account to Reserve Panels
@@ -33,12 +43,10 @@ export const SignUpOptionComponent = ({
       </Typography>
     </ContentDivider>
 
-    <UserInformationComponent
-      onSubmit={(values) => {
-        onSignUpWithEmail(values);
-      }}
+    <UserInformationComponentDefault
+      onSubmit={onSignUpWithEmail}
       color="light"
-    ></UserInformationComponent>
+    />
 
     <Stack direction="row" justifyContent={"center"} spacing={0}>
       <Typography variant="subtitle3" color={"blackDawn.main"}>
