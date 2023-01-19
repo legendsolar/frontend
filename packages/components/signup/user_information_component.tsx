@@ -79,9 +79,15 @@ export const UserInformationComponent = ({
         ...formik.errors,
         ...{ [error.source]: error.message },
       });
+
+      formik.setTouched({
+        ...formik.touched,
+        ...{ [error.source]: error.message },
+      });
     }
   }, [error]);
 
+  console.log(error);
   console.log(formik.errors);
 
   const passwordHelper = "12 characters, 1 uppercase, 1 special or digit";
@@ -197,7 +203,7 @@ export const UserInformationComponent = ({
             )}
           </Button>
 
-          {!error?.source && error?.message && (
+          {error?.source === "system" && error?.message && (
             <Alert severity="error">{error.message}</Alert>
           )}
         </Stack>

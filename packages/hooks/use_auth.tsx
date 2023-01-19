@@ -47,6 +47,7 @@ interface useAuthReturnType {
   currentError: any | undefined;
   setUser(user: User): void;
   signin(email: string, password: string): Promise<void>;
+  signInOrUpWithGoogle(): Promise<User | null>;
   signup(email: string, password: string): Promise<UserCredential | undefined>;
   signout(): Promise<void>;
   resetPassword(email: string): Promise<void>;
@@ -106,9 +107,32 @@ const useProvideAuth = (): useAuthReturnType => {
       if (error.code === "auth/multi-factor-auth-required") {
         const resolver = getMultiFactorResolver(auth, error);
         error.resolver = resolver;
+
+        throw error;
+      } else {
+        errorHandler(error);
+      }
+    }
+  };
+
+  const signInOrUpWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+
+    console.log({
+      provider,
+    });
+
+    try {
+      const response = await signInWithPopup(auth, provider);
+
+      if (response) {
+        setUser(response.user);
       }
 
-      throw error;
+      return response.user;
+    } catch (error: any) {
+      errorHandler(error);
+    } finally {
     }
   };
 
@@ -341,6 +365,7 @@ const useProvideAuth = (): useAuthReturnType => {
     currentError,
     setUser,
     signin,
+    signInOrUpWithGoogle,
     signup,
     signout,
     resetPassword,

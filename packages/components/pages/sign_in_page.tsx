@@ -1,7 +1,11 @@
 import { Typography, Box, Stack, Button, Link } from "@mui/material";
 
 import { DualPaneView } from "@project/components/views/dual_pane_view";
-import { SignInComponent } from "@project/components/inputs/sign_in_component";
+import {
+  SignInComponent,
+  SignInComponentDefault,
+  Values,
+} from "@project/components/inputs/sign_in_component";
 import { Image } from "../utils/image";
 import WomanPanelsSVG from "@project/components/assets/images/women_panel.svg";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -9,13 +13,21 @@ import { IconButton } from "../buttons/icon_button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ContentDivider } from "../basics/content_divider";
 
+interface SignInPageProps {
+  onLogInWithEmailPassword(values: Values): Promise<void>;
+  onLogInWithGoogle(): void;
+  onCreateNewAccount(): void;
+  onLegacySignIn(): void;
+  onForgotPassword(): void;
+}
+
 export const SignInPage = ({
   onLogInWithEmailPassword,
   onLogInWithGoogle,
   onCreateNewAccount,
   onForgotPassword,
   onLegacySignIn,
-}) => {
+}: SignInPageProps) => {
   return (
     <DualPaneView
       leftPane={
@@ -35,11 +47,11 @@ export const SignInPage = ({
               or login with email
             </Typography>
           </ContentDivider>
-          <SignInComponent
+          <SignInComponentDefault
             onSubmit={onLogInWithEmailPassword}
             onForgotPassword={onForgotPassword}
             color="light"
-          ></SignInComponent>
+          />
 
           <Stack direction="row" justifyContent={"center"} spacing={0}>
             <Typography variant="subtitle3" color={"blackDawn.main"}>

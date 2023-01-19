@@ -6,6 +6,7 @@ import {
   Button,
   CircularProgress,
   Link,
+  Alert,
 } from "@mui/material";
 import { useFormik } from "formik";
 import { TextField } from "./text_field";
@@ -17,25 +18,31 @@ import {
   validatePassword,
   validateSignInPassword,
 } from "@p/utils/validation";
-import { ErrorTypes } from "@p/utils/errors";
+import { Error, ErrorTypes } from "@p/utils/errors";
+import { LoadingText } from "../utils";
+import { useEffect, useState } from "react";
+import { useAuth } from "@project/hooks/use_auth";
 
+export interface Values {
+  email: string;
+  password: string;
+}
 interface SignInComponentProps {
-  initialValues?: {
-    email: string;
-    password: string;
-  };
-  onSubmit({ email, password }): Promise<void>;
+  initialValues?: Values;
+  onSubmit(values: Values): Promise<void>;
   onForgotPassword(): void;
-  onCreateNewAccount(): void;
-  color: string;
+  error: Error | undefined;
+  loading: boolean;
+  color?: "dark" | "light";
 }
 
 export const SignInComponent = ({
   initialValues = { email: "", password: "" },
   onSubmit,
   onForgotPassword,
-  onCreateNewAccount,
-  color,
+  error,
+  color = "dark",
+  loading,
 }: SignInComponentProps) => {
   const formik = useFormik({
     initialValues: initialValues,
@@ -43,16 +50,17 @@ export const SignInComponent = ({
       email: validateEmail(),
       password: validateSignInPassword(),
     }),
-    onSubmit: async (values, { setErrors }) => {
-      onSubmit(values).catch((error) => {
-        if (error.type === ErrorTypes.ValidationError) {
-          setErrors({
-            [error.source]: error.message,
-          });
-        }
-      });
-    },
+    onSubmit: onSubmit,
   });
+
+  useEffect(() => {
+    if (error?.source) {
+      formik.setErrors({
+        ...formik.errors,
+        ...{ [error.source]: error.message },
+      });
+    }
+  }, [error]);
 
   return (
     <Box>
@@ -97,14 +105,66 @@ export const SignInComponent = ({
             color={"legendaryGreen" as any}
             sx={{ width: "100%", mt: 4 }}
           >
-            {formik.isValidating || formik.isSubmitting ? (
-              <CircularProgress color={"light" as any}></CircularProgress>
+            {formik.isValidating || formik.isSubmitting || loading ? (
+              <LoadingText></LoadingText>
             ) : (
               "Login"
             )}
           </Button>
+
+          {error?.source === "system" && error?.message && (
+            <Alert severity="error">{error.message}</Alert>
+          )}
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              justifyContent: "center",
+            }}
+          >
+            <Button onClick={onForgotPassword}>
+              <Typography variant="subtitle2" color={"blackDawn.main"}>
+                {"Forgot Password?"}
+              </Typography>
+            </Button>
+          </Box>
         </Stack>
       </form>
     </Box>
   );
+};
+
+export const SignInComponentDefault = ({
+  onSubmit,
+  onForgotPassword,
+  color,
+}: {
+  onSubmit(values: Values): Promise<void>;
+  onForgotPassword(): void;
+  color?: "dark" | "light";
+}) => {
+  const { currentError, isAuthenticating } = useAuth();
+
+  const [loading, setLoading] = useState(false);
+
+  const onSubmitLoading = async (values: Values) => {
+    setLoading(true);
+    try {
+      await onSubmit(values);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const combinedProps: SignInComponentProps = {
+    onSubmit: onSubmitLoading,
+    onForgotPassword,
+    error: currentError,
+    color,
+    loading: isAuthenticating || loading,
+  };
+
+  return <SignInComponent {...combinedProps} />;
 };

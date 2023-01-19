@@ -16,7 +16,6 @@ import {
   NewViralLoopsUserInput,
   ViralLoopsUser,
 } from "@project/hooks/viral_loops/viral_loops";
-import { useAuthProviders } from "@project/hooks/use_auth_providers";
 import { parseUserDisplayName } from "@p/utils/google_utils";
 import WebflowView from "@project/components/views/webflow_view";
 import { States as NavStates } from "@project/components/nav/webflow_nav_bar";
@@ -249,8 +248,7 @@ const useProvideReservations = (): useReservationsReturnType => {
   const [loading, setLoading] = useState(false);
 
   const { createNewViralLoopsUser } = useViralLoops();
-  const { user, isAuthenticating, signup } = useAuth();
-  const { signInWithGoogle } = useAuthProviders();
+  const { user, isAuthenticating, signup, signInOrUpWithGoogle } = useAuth();
 
   const userId = user?.uid;
 
@@ -329,7 +327,7 @@ const useProvideReservations = (): useReservationsReturnType => {
     onSignInWithGoogle: async () => {
       try {
         setLoading(true);
-        const user = await signInWithGoogle();
+        const user = await signInOrUpWithGoogle();
 
         if (user && user.email) {
           const { firstName, lastName } = parseUserDisplayName(

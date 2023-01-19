@@ -1,11 +1,9 @@
 import { SignInPage } from "@project/components/pages/sign_in_page";
 import { useAuth } from "@project/hooks/use_auth";
-import { useAuthProviders } from "@project/hooks/use_auth_providers";
 import { useRouter } from "next/router";
 
 export default () => {
-  const { signin } = useAuth();
-  const { signInWithGoogle } = useAuthProviders();
+  const { signin, signInOrUpWithGoogle } = useAuth();
   const router = useRouter();
 
   return (
@@ -15,10 +13,10 @@ export default () => {
       }}
       onForgotPassword={() => {}}
       onLegacySignIn={() => {}}
-      onLogInWithEmailPassword={({ email, password }) => {
-        signin(email, password);
+      onLogInWithEmailPassword={async ({ email, password }) => {
+        await signin(email, password);
       }}
-      onLogInWithGoogle={signInWithGoogle}
+      onLogInWithGoogle={signInOrUpWithGoogle}
     ></SignInPage>
   );
 };
