@@ -4,10 +4,10 @@ import { EXTERNAL_LINKS } from "@p/utils/webflow/webflowLinking";
 export const Footer = () => {
   return (
     <Box sx={{ mt: "80px" }}>
-      <Grid container spacing={4}>
+      <Grid container spacing={4} rowSpacing={11}>
         <Grid item xs={12} lg={8} order={{ md: 2, lg: 1 }}>
           <Stack>
-            <Grid container spacing={2}>
+            <Grid container rowSpacing={11}>
               <Grid item xs={12} md={6} lg={3}>
                 <Stack>
                   <Typography variant={"smallHeadline" as any}>
