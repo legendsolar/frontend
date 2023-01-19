@@ -53,7 +53,7 @@ export const DualPaneView = ({
           top: "40px",
           left: "40px",
           p: {
-            xs: 5,
+            md: 5,
             lg: 0,
           },
         }}
@@ -64,6 +64,7 @@ export const DualPaneView = ({
         <Box
           sx={{
             width: "100%",
+            boxSizing: "border-box",
 
             minHeight: {
               xs: "100%",
@@ -73,10 +74,10 @@ export const DualPaneView = ({
               xs: paneToHide === "left" ? "none" : "flex",
               lg: "flex",
             },
-
+            pl: "16px",
+            pr: "16px",
             backgroundColor: "whiteHaze.main",
           }}
-          display="flex"
           justifyContent={leftPaneJustify}
           alignItems="center"
         >
