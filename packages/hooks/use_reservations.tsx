@@ -319,7 +319,7 @@ const useProvideReservations = (): useReservationsReturnType => {
     loading,
     currentPanels,
     setCurrentPanels: (newPanels: number) => {
-      setCurrentPanels(clamp(0, 30, newPanels));
+      setCurrentPanels(clamp(1, 30, newPanels));
     },
     confirmPanels: () => {
       localStorePanelsReserved(currentPanels);

@@ -10,7 +10,7 @@ import { client } from "../utility/apollo_client";
 import { appTheme, paletteOptions } from "@project/components/theme";
 
 import { Be_Vietnam_Pro } from "@next/font/google";
-import { ProvideReservations } from "utility/use_reservations";
+import { ProvideReservations } from "@project/hooks/use_reservations";
 import { DebugWindow } from "utility/debug_window";
 
 const beVietnam = Be_Vietnam_Pro({

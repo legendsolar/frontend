@@ -34,6 +34,13 @@ import {
 import { useState } from "react";
 import { ComponentDivider } from "../basics";
 import { useThemeColor } from "../utils";
+import { EXTERNAL_LINKS, redirect } from "@p/utils/webflow/webflowLinking";
+import {
+  navBarStateXForm,
+  useReservations,
+} from "@project/hooks/use_reservations";
+import { useRouter } from "next/router";
+import { useAuth } from "@project/hooks/use_auth";
 
 export enum States {
   RESERVE_PANEL,
@@ -44,6 +51,7 @@ export enum States {
 
 export interface WebflowNavBarProps {
   state: States;
+  constrained: boolean;
   onToHomepage(): void;
   onHowItWorks(): void;
   onAboutUs(): void;
@@ -57,6 +65,7 @@ export interface WebflowNavBarProps {
 
 export const WebflowNavBar = ({
   state,
+  constrained,
   onToHomepage,
   onHowItWorks,
   onAboutUs,
@@ -67,9 +76,6 @@ export const WebflowNavBar = ({
   onGetEarlyAccess,
   onCheckStatus,
 }: WebflowNavBarProps) => {
-  const theme = useTheme();
-  const constrained = useMediaQuery(theme.breakpoints.down("lg"));
-
   const [expanded, setExpanded] = useState(false);
 
   const legendaryGreen = useThemeColor("legendaryGreen.main");
@@ -424,6 +430,31 @@ export const WebflowNavBar = ({
       {drawer()}
     </Toolbar>
   );
+};
+
+export const WebflowNavBarDefault = () => {
+  const { state } = useReservations();
+  const router = useRouter();
+  const { signout } = useAuth();
+
+  const theme = useTheme();
+  const constrained = useMediaQuery(theme.breakpoints.down("lg"));
+
+  const props: WebflowNavBarProps = {
+    state: navBarStateXForm(state),
+    constrained,
+    onToHomepage: () => redirect(EXTERNAL_LINKS.HOME),
+    onAboutUs: () => redirect(EXTERNAL_LINKS.PAGES.ABOUT_US),
+    onFAQs: () => redirect(EXTERNAL_LINKS.PAGES.FAQS),
+    onHowItWorks: () => redirect(EXTERNAL_LINKS.PAGES.HOW_IT_WORKS),
+    onTheTeam: () => redirect(EXTERNAL_LINKS.PAGES.TEAM),
+    onLogout: signout,
+    onGetEarlyAccess: () => router.push("./reserve"),
+    onCheckStatus: () => router.push("./waitlist"),
+    onLogin: () => router.push("./sign_in"),
+  };
+
+  return <WebflowNavBar {...props}></WebflowNavBar>;
 };
 
 export default WebflowNavBar;

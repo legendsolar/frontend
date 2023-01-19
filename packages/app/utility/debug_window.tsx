@@ -3,7 +3,7 @@ import { useFirebaseApp } from "reactfire";
 import {
   clearLocalStorePanelsReserved,
   getLocalStorePanelsReserved,
-} from "./use_reservations";
+} from "@project/hooks/use_reservations";
 import DisabledSSR from "./disable_ssr";
 
 export const DebugWindow = () => {

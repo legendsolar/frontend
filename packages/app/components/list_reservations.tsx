@@ -1,7 +1,7 @@
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { FacilityCard } from "./facility_card";
 import { Stack, Box } from "@mui/material";
-import { useReservations } from "utility/use_reservations";
+import { useReservations } from "@project/hooks/use_reservations";
 
 export const ListReservations = ({ userId }) => {
   const { reservations, deleteUserReservation, updateReservationMutation } =

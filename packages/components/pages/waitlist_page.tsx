@@ -14,28 +14,14 @@ import { States } from "../nav/webflow_nav_bar";
 export interface WaitlistPageProps {
   waitlistPosn: string;
   referralLink: string;
-  onLogout(): void;
-  onLogin(): void;
-  onGetEarlyAccess(): void;
-  onCheckStatus(): void;
 }
 
 export const WaitlistPage = ({
   waitlistPosn,
   referralLink,
-  onLogout,
-  onLogin,
-  onGetEarlyAccess,
-  onCheckStatus,
 }: WaitlistPageProps) => {
   return (
-    <WebflowView
-      state={States.LOGGED_IN_NO_PANELS}
-      onCheckStatus={onCheckStatus}
-      onLogin={onLogin}
-      onLogout={onLogout}
-      onGetEarlyAccess={onGetEarlyAccess}
-    >
+    <WebflowView>
       <Stack>
         <SunIcon />
         <Typography variant={"headline2" as any}>

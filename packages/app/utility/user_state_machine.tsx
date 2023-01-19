@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@project/hooks/use_auth";
-import { useReservations } from "./use_reservations";
+import { useReservations } from "@project/hooks/use_reservations";
 
 export enum States {
   /** indeterminate state */

@@ -48,8 +48,6 @@ export default () => {
     }
   }, [isAuthenticating]);
 
-  const router = useRouter();
-
   return (
     <WaitlistPage
       waitlistPosn={rank ? numberFormatter(rank) : "Loading..."}
@@ -57,10 +55,6 @@ export default () => {
         "https://www.legends.solar/get-early-access",
         referallCode
       )}
-      onGetEarlyAccess={() => router.push("./reserve")}
-      onCheckStatus={() => router.push("./waitlist")}
-      onLogin={() => router.push("./sign_in")}
-      onLogout={signout}
     />
   );
 };

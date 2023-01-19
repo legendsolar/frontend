@@ -38,6 +38,7 @@ interface Props {
   onSubmit(values: Values): void;
   loading: boolean;
   error: string | undefined;
+  valueErrorState?: Values;
   color?: "dark" | "light";
 }
 
@@ -47,6 +48,7 @@ export const UserInformationComponent = ({
   loading,
   error,
   color = "dark",
+  valueErrorState = {},
 }: Props) => {
   const formik = useFormik<Values>({
     initialValues: initialValues
@@ -192,3 +194,5 @@ export const UserInformationComponent = ({
     </Box>
   );
 };
+
+export const UserInformationComponentDefault = ({}) => {};

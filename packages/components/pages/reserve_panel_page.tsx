@@ -5,7 +5,7 @@ import { WebflowView } from "@project/components/views/webflow_view";
 import { MetricList } from "@project/components/metrics/metric_list";
 import { PlusMinusNumber } from "@project/components/inputs/plus_minus_number";
 import { LinearGauge } from "@project/components/gauges/linear_gauge";
-import { Stack, Typography, Box, Grid, Button } from "@mui/material";
+import { Stack, Typography, Box, Grid, Button, Tooltip } from "@mui/material";
 import { IconButton } from "../buttons/icon_button";
 import { ContentDivider } from "@project/components/basics/content_divider";
 import SideBarView from "@project/components/views/side_bar_view";
@@ -42,10 +42,6 @@ export interface ReservePanelPageProps {
   currentReservedPanels: number;
   maxPanelReservations: number;
   costPerPanel: number;
-  onLogout(): void;
-  onLogin(): void;
-  onGetEarlyAccess(): void;
-  onCheckStatus(): void;
 }
 
 export const ReservePanelPage = ({
@@ -55,19 +51,9 @@ export const ReservePanelPage = ({
   currentReservedPanels,
   maxPanelReservations,
   costPerPanel,
-  onLogout,
-  onLogin,
-  onGetEarlyAccess,
-  onCheckStatus,
 }: ReservePanelPageProps) => {
   return (
-    <WebflowView
-      state={States.RESERVE_PANEL}
-      onCheckStatus={onCheckStatus}
-      onLogin={onLogin}
-      onLogout={onLogout}
-      onGetEarlyAccess={onGetEarlyAccess}
-    >
+    <WebflowView>
       <Stack spacing={6}>
         <Stack>
           <Typography variant={"headline2" as any}>
@@ -119,10 +105,22 @@ export const ReservePanelPage = ({
                           >
                             {"Cost Per Panel"}
                           </Typography>
-                          <FontAwesomeIcon
-                            icon={faInfoCircle}
-                            style={{ color: useThemeColor("blackDawn") }}
-                          />
+                          <Tooltip
+                            title={
+                              "Learn about cost per panel on Legends Solar"
+                            }
+                          >
+                            <Button
+                              href={EXTERNAL_LINKS.LEARN.PANEL_COST}
+                              target={"_blank"}
+                              style={{ fontSize: "18px" }}
+                            >
+                              <FontAwesomeIcon
+                                icon={faInfoCircle}
+                                style={{ color: useThemeColor("blackDawn") }}
+                              />
+                            </Button>
+                          </Tooltip>
                         </Stack>
                       ),
 
