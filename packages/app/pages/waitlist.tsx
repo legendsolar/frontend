@@ -1,6 +1,7 @@
 import { numberFormatter } from "@p/utils";
 import { WaitlistPage } from "@project/components/pages/waitlist_page";
 import { useAuth } from "@project/hooks/use_auth";
+import { useReservations } from "@project/hooks/use_reservations";
 import { useViralLoops } from "@project/hooks/viral_loops/use_viral_loops";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -48,6 +49,8 @@ export default () => {
     }
   }, [isAuthenticating]);
 
+  const { currentPanels } = useReservations();
+
   return (
     <WaitlistPage
       waitlistPosn={rank ? numberFormatter(rank) : "Loading..."}
@@ -55,6 +58,7 @@ export default () => {
         "https://www.legends.solar/get-early-access",
         referallCode
       )}
+      panelsReserved={currentPanels}
     />
   );
 };
