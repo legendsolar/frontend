@@ -13,6 +13,9 @@ import { Be_Vietnam_Pro } from "@next/font/google";
 import { ProvideReservations } from "@project/hooks/use_reservations";
 import SunFavicon from "@project/components/assets/favicon/sun/favicon.ico";
 
+import { config, dom } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
+
 import Head from "next/head";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -55,6 +58,8 @@ const App = ({ Component, pageProps }: AppProps) => {
         }
         #__next {
         }
+
+        ${dom.css()}
       `}</style>
       <FirebaseAppProvider firebaseConfig={firebaseConfig}>
         <FirebaseWrapper />

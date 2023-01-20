@@ -1,5 +1,5 @@
 import { Container, Grid, Box, Stack } from "@mui/material";
-import LegendsTypemarkSVG from "../assets/logos/typemark_dark.svg";
+import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.svg";
 import { Image } from "../utils/image";
 
 interface DualPaneViewProps {
@@ -22,7 +22,7 @@ export const DualPaneView = ({
   const defaultLowerRightCorner = lowerRightCorner ? (
     lowerRightCorner
   ) : (
-    <Image src={LegendsTypemarkSVG}></Image>
+    <Image src={TypemarkSolarSVG} style={{ width: "100px" }}></Image>
   );
 
   const leftPaneJustify = options?.leftPane?.justifyContent

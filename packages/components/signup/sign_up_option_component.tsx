@@ -33,7 +33,7 @@ export const SignUpOptionComponent = ({
       variant="signup"
       label="Sign up with Google"
       color="legendaryGreen"
-      icon={<FontAwesomeIcon icon={faGoogle} />}
+      icon={<FontAwesomeIcon icon={faGoogle} style={{ fontSize: "20px" }} />}
       onClick={onSignUpWithGoogle}
     ></IconButton>
 
@@ -52,18 +52,20 @@ export const SignUpOptionComponent = ({
       <Typography variant="subtitle3" color={"blackDawn.main"}>
         {"Already have an account?"}
       </Typography>
-      <Typography
-        variant="subtitle3"
-        color="legendaryGreen.main"
-        sx={{
-          ml: 1,
-          textDecoration: "none",
-        }}
-        onClick={onNavigateToSignIn}
-        component={Link}
-      >
-        {"Login"}
-      </Typography>
+      <Button>
+        <Typography
+          variant="subtitle3"
+          color="legendaryGreen.main"
+          sx={{
+            ml: 1,
+            textDecoration: "none",
+          }}
+          onClick={onNavigateToSignIn}
+          component={Link}
+        >
+          {"Login"}
+        </Typography>
+      </Button>
     </Stack>
 
     <Stack direction="row" justifyContent={"center"} spacing={0}>

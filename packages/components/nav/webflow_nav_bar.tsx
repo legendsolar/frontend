@@ -4,15 +4,11 @@ import {
   Typography,
   Toolbar,
   Box,
-  AppBar,
   useTheme,
   useMediaQuery,
   SwipeableDrawer,
 } from "@mui/material";
-import { CreateAccountToolbar } from "./create_account_toolbar";
-import { LoggedOutToolbar } from "./logged_out_toolbar";
 import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.svg";
-import LoggedInToolbar from "./logged_in_toolbar";
 import {
   CupIcon,
   GearIcon,
@@ -24,13 +20,7 @@ import {
 import { Image } from "../utils/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconButton } from "../buttons/icon_button";
-import {
-  faArrowLeft,
-  faBars,
-  faHamburger,
-  faX,
-  faXmark,
-} from "@fortawesome/pro-solid-svg-icons";
+import { faArrowLeft, faBars, faXmark } from "@fortawesome/pro-solid-svg-icons";
 import { useState } from "react";
 import { ComponentDivider } from "../basics";
 import { useThemeColor } from "../utils";
@@ -40,7 +30,6 @@ import {
   useReservations,
 } from "@project/hooks/use_reservations";
 import { useRouter } from "next/router";
-import { useAuth } from "@project/hooks/use_auth";
 
 export enum States {
   RESERVE_PANEL,
@@ -368,7 +357,7 @@ export const WebflowNavBar = ({
       <Box
         sx={{
           width: "100%",
-          mt: "10px",
+          mt: "25px",
           mb: "10px",
           ml: {
             md: 0,
