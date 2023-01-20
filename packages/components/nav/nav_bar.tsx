@@ -1,7 +1,7 @@
 import { Button, Stack, Typography, Toolbar, Box, AppBar } from "@mui/material";
 import { CreateAccountToolbar } from "./create_account_toolbar";
 import { LoggedOutToolbar } from "./logged_out_toolbar";
-import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.svg";
+import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.png";
 import LoggedInToolbar from "./logged_in_toolbar";
 
 export interface NavBarProps {

@@ -1,5 +1,5 @@
 import { Container, Grid, Box, Stack } from "@mui/material";
-import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.svg";
+import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.png";
 import { Image } from "../utils/image";
 
 interface DualPaneViewProps {

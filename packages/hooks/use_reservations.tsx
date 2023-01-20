@@ -192,7 +192,7 @@ export function ProvideReservations({ children }) {
       }
 
       case States.PANELS_RESERVED: {
-        router.push("./sign_up");
+        // router.push("./sign_up"); => let user go back to /reserve if they want
         break;
       }
 
@@ -245,12 +245,16 @@ interface useReservationsReturnType {
 
 const useProvideReservations = (): useReservationsReturnType => {
   const [state, setState] = useState(States.LOADING);
-  const [currentPanels, setCurrentPanels] = useState(5);
+  const [currentPanels, setCurrentPanels] = useState(
+    getLocalStorePanelsReserved() ? getLocalStorePanelsReserved() : 5
+  );
   const [loading, setLoading] = useState(false);
 
   const { createNewViralLoopsUser } = useViralLoops();
   const { user, isAuthenticating, signup, signInOrUpWithGoogle, signout } =
     useAuth();
+
+  const router = useRouter();
 
   const userId = user?.uid;
 
@@ -324,6 +328,7 @@ const useProvideReservations = (): useReservationsReturnType => {
     confirmPanels: () => {
       localStorePanelsReserved(currentPanels);
       transition();
+      router.push("./sign_up");
     },
     user,
     logout: () => {

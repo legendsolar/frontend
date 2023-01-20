@@ -8,7 +8,7 @@ import {
   useMediaQuery,
   SwipeableDrawer,
 } from "@mui/material";
-import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.svg";
+import TypemarkSolarSVG from "../assets/logos/typemark_solar_dark.png";
 import {
   CupIcon,
   GearIcon,

@@ -386,10 +386,10 @@ export const ReservePanelPage = ({
                 <div></div>
 
                 <Typography variant={"body" as any}>
-                  Get Early Access to be first to know when we have available
+                  {`Get early access to be first to know when we have available
                   solar panels. It’s no commitment — before you invest, you’ll
                   be provided a detailed finance overview with forecast returns
-                  and other important information.
+                  and other important information.`}
                 </Typography>
 
                 <TimelineComponent
