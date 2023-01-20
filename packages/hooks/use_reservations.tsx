@@ -59,6 +59,34 @@ const reservationsQueryGQL = gql`
   }
 `;
 
+const createReservationMutationGQL = gql`
+  mutation CreateReservationMutation(
+    $facility_id: String = ""
+    $panel_reserved_count: Int = 10
+    $qouted_total_investment: numeric = ""
+    $reservation_created: timestamp = ""
+    $reservation_last_updated: timestamp = ""
+    $user_id: String = ""
+  ) {
+    insert_panel_reservations_one(
+      object: {
+        qouted_total_investment: $qouted_total_investment
+        reservation_created: $reservation_created
+        reservation_last_updated: $reservation_last_updated
+        user_id: $user_id
+        panel_reserved_count: $panel_reserved_count
+        facility_id: $facility_id
+      }
+    ) {
+      id
+      panel_reserved_count
+      qouted_total_investment
+      reservation_created
+      reservation_last_updated
+    }
+  }
+`;
+
 const deleteReservationMutationGQL = gql`
   mutation deleteReservationMutation($id: String = "") {
     delete_panel_reservations(where: { id: { _eq: $id } }) {
@@ -261,6 +289,8 @@ const useProvideReservations = (): useReservationsReturnType => {
 
   const userId = user?.uid;
 
+  const fakeFacilityId = "legends-res-panel-placeholder";
+
   const {
     data: panelReservationData,
     loading: panelReservationLoading,
@@ -274,7 +304,7 @@ const useProvideReservations = (): useReservationsReturnType => {
     loading: facilityLoading,
     error: facilityError,
   } = useQuery(facilityQueryGQL, {
-    variables: { id: "legends-res-panel-placeholder" },
+    variables: { id: fakeFacilityId },
   });
 
   const facility = facilityData?.facilities[0];
@@ -282,7 +312,7 @@ const useProvideReservations = (): useReservationsReturnType => {
   console.log({ facility, facilityLoading, facilityError });
 
   const [deleteUserReservation] = useMutation(deleteReservationMutationGQL);
-  const [updateReservationMutation] = useMutation(updateReservationMutationGQL);
+  const [createNewReservation] = useMutation(createReservationMutationGQL);
   const [updateUserData] = useMutation(updateUserMutationGQL);
 
   useMemo(() => {
@@ -309,14 +339,40 @@ const useProvideReservations = (): useReservationsReturnType => {
 
   console.log({ state });
 
-  const onCreateNewUser = async (user: NewViralLoopsUserInput) => {
+  const onCreateNewUser = async (
+    userId: string,
+    user: NewViralLoopsUserInput
+  ) => {
+    const now = new Date().toISOString();
+
+    if (currentPanels) {
+      await createNewReservation({
+        variables: {
+          qouted_total_investment: facility?.panel_cost * currentPanels,
+          reservation_created: now,
+          reservation_last_updated: now,
+          user_id: userId,
+          panel_reserved_count: currentPanels,
+          facility_id: fakeFacilityId,
+        },
+      });
+    }
+
     return await createNewViralLoopsUser(user);
   };
 
-  const updateUser = async ({ firstName, lastName }) => {
+  const updateUser = async ({
+    userId,
+    firstName,
+    lastName,
+  }: {
+    userId: string;
+    firstName: string;
+    lastName: string;
+  }) => {
     await updateUserData({
       variables: {
-        uid: getAuth().currentUser?.uid,
+        uid: userId,
         last_name: lastName,
         first_name: firstName,
       },
@@ -330,8 +386,8 @@ const useProvideReservations = (): useReservationsReturnType => {
     setCurrentPanels: (newPanels: number) => {
       setCurrentPanels(clamp(1, 30, newPanels));
     },
-    confirmPanels: () => {
-      localStorePanelsReserved(currentPanels);
+    confirmPanels: async () => {
+      localStorePanelsReserved(currentPanels ? currentPanels : 0);
       transition();
       router.push("./sign_up");
     },
@@ -351,7 +407,7 @@ const useProvideReservations = (): useReservationsReturnType => {
             user.displayName as string | undefined
           );
 
-          await onCreateNewUser({
+          await onCreateNewUser(user.uid, {
             email: user.email,
             firstName,
             lastName,
@@ -364,12 +420,16 @@ const useProvideReservations = (): useReservationsReturnType => {
     onSignUpWithEmail: async ({ email, firstName, password, lastName }) => {
       try {
         setLoading(true);
-        await signup(email, password);
-        await onCreateNewUser({ email, firstName, lastName });
-        await updateUser({
-          firstName: firstName,
-          lastName: lastName,
-        });
+        const user = await signup(email, password);
+
+        if (user?.user.uid) {
+          await updateUser({
+            userId: user?.user.uid,
+            firstName: firstName,
+            lastName: lastName,
+          });
+          await onCreateNewUser(user.user.uid, { email, firstName, lastName });
+        }
       } finally {
         setLoading(false);
       }
@@ -377,9 +437,6 @@ const useProvideReservations = (): useReservationsReturnType => {
     currentReservedPanels: facility?.panels_reserved,
     maxPanelReservations: facility?.panel_total,
     costPerPanel: facility?.panel_cost,
-    reservations: panelReservationData?.panel_reservations
-      ? panelReservationData.panel_reservations
-      : [],
     deleteUserReservation: (id) => {
       deleteUserReservation({
         variables: { id },
