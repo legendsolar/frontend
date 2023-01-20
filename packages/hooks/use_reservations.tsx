@@ -336,9 +336,10 @@ const useProvideReservations = (): useReservationsReturnType => {
       router.push("./sign_up");
     },
     user,
-    logout: () => {
-      clearLocalStorePanelsReserved();
-      signout();
+    logout: async () => {
+      localStorage.clear();
+      setCurrentPanels(5);
+      await signout();
     },
     onSignInWithGoogle: async () => {
       try {
