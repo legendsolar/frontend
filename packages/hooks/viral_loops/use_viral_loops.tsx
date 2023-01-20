@@ -45,6 +45,7 @@ const useProvideViralLoops = (
   return {
     getStoredData: () => getViralLoopsStoredData(viralLoopsCampaignId),
     createNewViralLoopsUser: async (user: NewViralLoopsUserInput) => {
+      console.log({ createNewViralLoopsUser: user });
       return await identifyViralLoopsUser(viralLoopsCampaignId, user);
     },
     getUserData: async (email: string) => {

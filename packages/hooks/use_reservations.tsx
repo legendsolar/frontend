@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import { getAuth, User } from "firebase/auth";
 import { useViralLoops } from "@project/hooks/viral_loops/use_viral_loops";
 import {
+  getViralLoopsStoredData,
   NewViralLoopsUserInput,
   ViralLoopsUser,
 } from "@project/hooks/viral_loops/viral_loops";
@@ -140,10 +141,12 @@ export const navBarStateXForm = (state: States): NavStates => {
 };
 
 export const userState = ({
+  state,
   loadingOrIsAuthenticating,
   isAuthenticated,
   reservations,
 }: {
+  state: States;
   loadingOrIsAuthenticating: boolean;
   isAuthenticated: boolean;
   reservations: Array<any> | undefined;
@@ -157,7 +160,7 @@ export const userState = ({
   });
 
   if (loadingOrIsAuthenticating) {
-    return States.LOADING;
+    return state; // stay in current state
   }
 
   if (!localReservedPanels) {
@@ -285,6 +288,7 @@ const useProvideReservations = (): useReservationsReturnType => {
   useMemo(() => {
     setState(
       userState({
+        state,
         loadingOrIsAuthenticating: isAuthenticating || loading,
         isAuthenticated: !!user,
         reservations: [],
@@ -295,6 +299,7 @@ const useProvideReservations = (): useReservationsReturnType => {
   const transition = () => {
     setState(
       userState({
+        state,
         loadingOrIsAuthenticating: isAuthenticating || loading,
         isAuthenticated: isAuthenticating && !!user,
         reservations: [],
@@ -357,7 +362,7 @@ const useProvideReservations = (): useReservationsReturnType => {
     },
     onSignUpWithEmail: async ({ email, firstName, password, lastName }) => {
       try {
-        // setLoading(true);
+        setLoading(true);
         await signup(email, password);
         await onCreateNewUser({ email, firstName, lastName });
         await updateUser({
@@ -365,7 +370,7 @@ const useProvideReservations = (): useReservationsReturnType => {
           lastName: lastName,
         });
       } finally {
-        // setLoading(false);
+        setLoading(false);
       }
     },
     currentReservedPanels: facility?.panels_reserved,

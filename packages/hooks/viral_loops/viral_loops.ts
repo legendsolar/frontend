@@ -57,6 +57,8 @@ export const identifyViralLoopsUser = async (
 
   const data = await resp.json();
 
+  console.log({ identifyViralLoopsUser: data });
+
   storeViralLoopsStoredData(publicApiKey, JSON.stringify(data));
 
   return data;
@@ -89,7 +91,7 @@ export const getParticipantMetaData = async (
 
   const data = await resp.json();
 
-  console.log({ data });
+  console.log({ getParticipantMetaData: data });
 
   return {
     rank: data?.rank,
