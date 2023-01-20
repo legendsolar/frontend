@@ -57,6 +57,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             content="Invest in panels on operating commercial solar farms. Collect cash earnings when you generate and sell electricity."
           />
           <link rel="shortcut icon" href={SunFavicon.src} />
+          <link rel="mask-icon" href={SunFavicon.src} />
         </Head>
         <style jsx global>{`
           body {
