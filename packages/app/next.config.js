@@ -6,4 +6,7 @@ module.exports = {
     "@p/utils",
   ],
   typescript: { ignoreBuildErrors: true },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
 };
