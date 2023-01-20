@@ -146,9 +146,7 @@ export enum States {
   LOADING = "loading",
   NO_PANELS_RESERVED = "no_panels",
   PANELS_RESERVED = "panels",
-  LOGGED_OUT = "logged_out",
   LOGGED_IN_NOT_INVESTOR = "logged_in",
-  LOGGED_IN_INVESTOR = "logged_in_investor",
 }
 
 export const navBarStateXForm = (state: States): NavStates => {
@@ -159,12 +157,8 @@ export const navBarStateXForm = (state: States): NavStates => {
       return NavStates.RESERVE_PANEL;
     case States.PANELS_RESERVED:
       return NavStates.LOGGED_OUT;
-    case States.LOGGED_OUT:
-      return NavStates.LOGGED_OUT;
     case States.LOGGED_IN_NOT_INVESTOR:
       return NavStates.LOGGED_IN_NO_PANELS;
-    case States.LOGGED_IN_INVESTOR:
-      return NavStates.LOGGED_IN_PANELS;
   }
 };
 
@@ -213,7 +207,7 @@ export function ProvideReservations({ children }) {
 
   const { state } = reservation;
 
-  console.log({ state });
+  console.log({ state, path: router.pathname });
 
   useMemo(() => {
     switch (state) {
@@ -223,7 +217,10 @@ export function ProvideReservations({ children }) {
       }
 
       case States.PANELS_RESERVED: {
-        // router.push("./sign_up"); => let user go back to /reserve if they want
+        if (router.pathname !== "/reserve") {
+          //  let user go back to /reserve if they want
+          router.push("./sign_up");
+        }
         break;
       }
 
