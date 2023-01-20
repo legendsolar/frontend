@@ -57,14 +57,15 @@ export const SignInPage = ({
             <Typography variant="subtitle3" color={"blackDawn.main"}>
               {"Don't have an account?"}
             </Typography>
-            <Typography
-              variant="subtitle3"
-              color="legendaryGreen.main"
-              sx={{ ml: 1 }}
-              onClick={onCreateNewAccount}
-            >
-              {"Reserve panels to sign up"}
-            </Typography>
+            <Button onClick={onCreateNewAccount}>
+              <Typography
+                variant="subtitle3"
+                color="legendaryGreen.main"
+                sx={{ ml: 1 }}
+              >
+                {"Reserve panels to sign up"}
+              </Typography>
+            </Button>
           </Stack>
 
           <Stack direction="row" justifyContent={"center"} spacing={0}>
