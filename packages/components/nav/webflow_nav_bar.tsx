@@ -105,7 +105,10 @@ export const WebflowNavBar = ({
           <Image
             src={TypemarkSolarSVG}
             style={{
-              width: "125px",
+              maxWidth: "125px",
+              width: "auto",
+              height: "auto",
+              objectFit: "contain",
             }}
           ></Image>
 
