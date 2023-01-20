@@ -94,7 +94,7 @@ export const ReturnsCalculator = ({
     responsive: true,
   };
 
-  const [unitState, setUnitState] = useState<Unit>(energy);
+  const [unitState, setUnitState] = useState<Unit>(dollars);
 
   // const years = R.range(0, 10);
 

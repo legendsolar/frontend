@@ -15,7 +15,7 @@ const App = () => {
     maxYears: 10,
   };
 
-  const [panels, setPanelsInternal] = useState(1);
+  const [panels, setPanelsInternal] = useState(4);
 
   const { loading, records } = useReturnCalculator();
 
@@ -57,7 +57,7 @@ const App = () => {
 };
 
 ReactDOM.render(
-  <ThemeProvider theme={appTheme}>
+  <ThemeProvider theme={appTheme()}>
     <ProvideAirtable>
       <App />
     </ProvideAirtable>
