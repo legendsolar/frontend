@@ -12,5 +12,5 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "../hooks/use_reservations.tsx", "../hooks/use_authenticated_query.ts"  ]
+, "../hooks/use_reservations.tsx", "../hooks/use_authenticated_query.ts", "../hooks/use_analytics.tsx"  ]
 }

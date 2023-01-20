@@ -17,6 +17,7 @@ import { config, dom } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
 import Head from "next/head";
+import { ProvideAnalytics } from "@project/hooks/use_analytics";
 
 const beVietnam = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -36,48 +37,55 @@ const firebaseConfig = {
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <ApolloProvider client={client}>
-      <Head>
-        <title>Legends Solar</title>
-        <meta
-          name="description"
-          content="Invest in panels on operating commercial solar farms. Collect cash earnings when you generate and sell electricity."
-          key="desc"
-        />
-        <meta property="og:title" content="Legends Solar" />
-        <meta
-          name="og:description"
-          content="Invest in panels on operating commercial solar farms. Collect cash earnings when you generate and sell electricity."
-        />
-        <link rel="shortcut icon" href={SunFavicon.src} />
-      </Head>
-      <style jsx global>{`
-        body {
-          background-color: ${paletteOptions.palette.whiteHaze.main};
-          margin: 0px;
-        }
-        #__next {
-        }
+    <ProvideAnalytics
+      analyticsConfig={{
+        posthogApiUrl: "https://app.posthog.com",
+        postHogPubliKey: "phc_w00b0mzg6atkmwVvV0IT2ghW0qXq6KSUDXHMJLX6L1K",
+      }}
+    >
+      <ApolloProvider client={client}>
+        <Head>
+          <title>Legends Solar</title>
+          <meta
+            name="description"
+            content="Invest in panels on operating commercial solar farms. Collect cash earnings when you generate and sell electricity."
+            key="desc"
+          />
+          <meta property="og:title" content="Legends Solar" />
+          <meta
+            name="og:description"
+            content="Invest in panels on operating commercial solar farms. Collect cash earnings when you generate and sell electricity."
+          />
+          <link rel="shortcut icon" href={SunFavicon.src} />
+        </Head>
+        <style jsx global>{`
+          body {
+            background-color: ${paletteOptions.palette.whiteHaze.main};
+            margin: 0px;
+          }
+          #__next {
+          }
 
-        ${dom.css()}
-      `}</style>
-      <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-        <FirebaseWrapper />
-        <ThemeProvider
-          theme={appTheme({ beVietnamName: beVietnam.style.fontFamily })}
-        >
-          <ProvideAuth>
-            <ProvideViralLoops
-              viralLoopsCampaignId={"kij42YdL37aNYEwJ75xCnqKBGzg"}
-            >
-              <ProvideReservations>
-                <Component {...pageProps} />
-              </ProvideReservations>
-            </ProvideViralLoops>
-          </ProvideAuth>
-        </ThemeProvider>
-      </FirebaseAppProvider>
-    </ApolloProvider>
+          ${dom.css()}
+        `}</style>
+        <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+          <FirebaseWrapper />
+          <ThemeProvider
+            theme={appTheme({ beVietnamName: beVietnam.style.fontFamily })}
+          >
+            <ProvideAuth>
+              <ProvideViralLoops
+                viralLoopsCampaignId={"kij42YdL37aNYEwJ75xCnqKBGzg"}
+              >
+                <ProvideReservations>
+                  <Component {...pageProps} />
+                </ProvideReservations>
+              </ProvideViralLoops>
+            </ProvideAuth>
+          </ThemeProvider>
+        </FirebaseAppProvider>
+      </ApolloProvider>
+    </ProvideAnalytics>
   );
 };
 
