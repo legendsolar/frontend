@@ -3,6 +3,7 @@ import { SignUpOptionComponent } from "../signup/sign_up_option_component";
 import { PanelDisplay } from "@project/components/panels/panel_display";
 import { Box, Stack, Typography } from "@mui/material";
 import { Values } from "../signup/user_information_component";
+import Head from "next/head";
 
 export interface SignUpPageProps {
   onSignUpWithGoogle: () => void;

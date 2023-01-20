@@ -9,6 +9,7 @@ import { MainContentBox } from "../basics";
 import { ReactElement } from "react";
 import { EXTERNAL_LINKS, redirect } from "@p/utils/webflow/webflowLinking";
 import { red } from "@mui/material/colors";
+import Head from "next/head";
 
 export const WebflowView = ({ children }: { children: ReactElement }) => {
   return (

@@ -227,6 +227,7 @@ interface useReservationsReturnType {
   currentPanels: number;
   setCurrentPanels: (newPanels: number) => void;
   confirmPanels: () => void;
+  logout: () => void;
   user: User | null;
   onSignInWithGoogle: () => Promise<void>;
   onSignUpWithEmail(input: {
@@ -248,7 +249,8 @@ const useProvideReservations = (): useReservationsReturnType => {
   const [loading, setLoading] = useState(false);
 
   const { createNewViralLoopsUser } = useViralLoops();
-  const { user, isAuthenticating, signup, signInOrUpWithGoogle } = useAuth();
+  const { user, isAuthenticating, signup, signInOrUpWithGoogle, signout } =
+    useAuth();
 
   const userId = user?.uid;
 
@@ -324,6 +326,10 @@ const useProvideReservations = (): useReservationsReturnType => {
       transition();
     },
     user,
+    logout: () => {
+      clearLocalStorePanelsReserved();
+      signout();
+    },
     onSignInWithGoogle: async () => {
       try {
         setLoading(true);
