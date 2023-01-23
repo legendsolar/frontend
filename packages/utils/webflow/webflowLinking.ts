@@ -10,6 +10,7 @@ export { redirectToHomePage };
 
 export const EXTERNAL_LINKS = {
   HOME: "https://legends.solar",
+  SIGN_IN: "https://legends.solar/log-in",
   TEAM: {
     NERA: "https://www.legends.solar/team-members/nera",
   },
