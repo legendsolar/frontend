@@ -2,7 +2,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import { numberFormatter } from "@p/utils";
 
 export const LinearGauge = ({ current, max, color }) => {
-  const percent = (current / max) * 100;
+  const percent = (1 - current / max) * 100;
   const inactiveColor = "whiteFog.main";
 
   return (
