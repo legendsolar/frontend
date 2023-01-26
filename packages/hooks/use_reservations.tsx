@@ -200,6 +200,9 @@ const reservationContext = createContext<useReservationsReturnType>(
   {} as useReservationsReturnType
 );
 
+// hack
+const urlQueryState = {};
+
 export function ProvideReservations({ children }) {
   const reservation = useProvideReservations();
 
@@ -212,7 +215,10 @@ export function ProvideReservations({ children }) {
   useMemo(() => {
     switch (state) {
       case States.NO_PANELS_RESERVED: {
-        router.push("./reserve");
+        if (router.pathname !== "/sign_in") {
+          //  let the user nav straight to reserve
+          router.push("./reserve");
+        }
         break;
       }
 
@@ -225,7 +231,10 @@ export function ProvideReservations({ children }) {
       }
 
       case States.LOGGED_IN_NOT_INVESTOR: {
-        router.push("./waitlist");
+        router.push({
+          pathname: "./waitlist",
+          query: urlQueryState,
+        });
         break;
       }
     }
@@ -410,6 +419,8 @@ const useProvideReservations = (): useReservationsReturnType => {
             lastName,
           });
         }
+        // needed for firing gtag events
+        urlQueryState["reserveComplete"] = true;
       } finally {
         setLoading(false);
       }
@@ -427,6 +438,9 @@ const useProvideReservations = (): useReservationsReturnType => {
           });
           await onCreateNewUser(user.user.uid, { email, firstName, lastName });
         }
+
+        // needed for firing gtag events
+        urlQueryState["reserveComplete"] = true;
       } finally {
         setLoading(false);
       }

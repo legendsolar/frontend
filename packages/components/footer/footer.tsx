@@ -28,7 +28,7 @@ export const Footer = () => {
 
                   <Button href={EXTERNAL_LINKS.PAGES.TEAM} variant="text">
                     <Typography variant="body2" color={"blackDawn.main"}>
-                      The Team
+                      The team
                     </Typography>
                   </Button>
                 </Stack>
@@ -57,7 +57,7 @@ export const Footer = () => {
 
                   <Button href={EXTERNAL_LINKS.PAGES.NEWS_ROOM} variant="text">
                     <Typography variant="body2" color={"blackDawn.main"}>
-                      News Room
+                      News room
                     </Typography>
                   </Button>
                 </Stack>
