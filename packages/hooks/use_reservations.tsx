@@ -20,6 +20,7 @@ import {
 import { parseUserDisplayName } from "@p/utils/google_utils";
 import WebflowView from "@project/components/views/webflow_view";
 import { States as NavStates } from "@project/components/nav/webflow_nav_bar";
+import { useAnalytics } from "./use_analytics";
 
 const updateUserMutationGQL = gql`
   mutation CreateNewUserMutation(
@@ -291,6 +292,8 @@ const useProvideReservations = (): useReservationsReturnType => {
 
   const router = useRouter();
 
+  const { posthog } = useAnalytics();
+
   const userId = user?.uid;
 
   const fakeFacilityId = "legends-res-panel-placeholder";
@@ -367,7 +370,11 @@ const useProvideReservations = (): useReservationsReturnType => {
       Object.fromEntries(new URL(window.location.href).searchParams)
         ?.referralCode;
 
-    return await createNewViralLoopsUser(user, referallCode);
+    const ret = await createNewViralLoopsUser(user, referallCode);
+
+    posthog.capture("reserve_panel");
+
+    return ret;
   };
 
   const updateUser = async ({
@@ -415,17 +422,20 @@ const useProvideReservations = (): useReservationsReturnType => {
       setCurrentPanels(clamp(1, 30, newPanels));
     },
     confirmPanels: async () => {
+      posthog.capture("reserve_panel_attempt");
       localStorePanelsReserved(currentPanels ? currentPanels : 0);
       transition();
       redirect("./sign_up");
     },
     user,
     logout: async () => {
+      posthog.capture("logout");
       localStorage.clear();
       setCurrentPanels(5);
       await signout();
     },
     onSignInWithGoogle: async () => {
+      posthog.capture("onSignInWithGoogle");
       try {
         setLoading(true);
         const user = await signInOrUpWithGoogle();
@@ -448,6 +458,7 @@ const useProvideReservations = (): useReservationsReturnType => {
       }
     },
     onSignUpWithEmail: async ({ email, firstName, password, lastName }) => {
+      posthog.capture("onSignUpWithEmail");
       try {
         setLoading(true);
         const user = await signup(email, password);
