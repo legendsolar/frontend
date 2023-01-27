@@ -28,6 +28,7 @@ import {
   throwSystemError,
 } from "@p/utils/errors";
 import { useApolloClient } from "@apollo/client";
+import { useAnalytics } from "./use_analytics";
 
 const authContext = createContext<useAuthReturnType>({} as useAuthReturnType);
 
@@ -74,6 +75,7 @@ const useProvideAuth = (): useAuthReturnType => {
   const app = useFirebaseApp();
   const auth = getAuth(app);
   const client = useApolloClient();
+  const { posthog } = useAnalytics();
   const provider = new GoogleAuthProvider();
 
   const [user, setUser] = useState<User | null>(null);
@@ -88,6 +90,7 @@ const useProvideAuth = (): useAuthReturnType => {
   const [isAuthenticating, setIsAuthenticating] = useState<boolean>(true);
 
   const errorHandler = (error: any) => {
+    posthog.capture("auth_error", error);
     try {
       authErrorHandler(error);
     } catch (transformedError: any) {
