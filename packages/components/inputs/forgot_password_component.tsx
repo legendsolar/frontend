@@ -17,6 +17,7 @@ import { Error, ErrorTypes } from "@p/utils/errors";
 import { useEffect, useState } from "react";
 import { useAuth } from "@project/hooks/use_auth";
 import Router, { useRouter } from "next/router";
+import { useReservations } from "@project/hooks/use_reservations";
 
 export interface Values {
   email: string;
@@ -130,6 +131,8 @@ export const ForgotPasswordComponentDefault = ({
   const [loading, setLoading] = useState(false);
   const [resetLinkSent, setResetLinkSent] = useState(false);
 
+  const { redirect } = useReservations();
+
   const onSubmitLoading = async ({ email }: Values) => {
     setLoading(true);
     try {
@@ -147,7 +150,7 @@ export const ForgotPasswordComponentDefault = ({
     loading: isAuthenticating || loading,
     resetLinkSent,
     onBackToSignIn: () => {
-      router.push("./sign_in");
+      redirect("./sign_in");
     },
   };
 

@@ -55,7 +55,7 @@ export default () => {
     <WaitlistPage
       waitlistPosn={rank ? numberFormatter(rank) : "Loading..."}
       referralLink={getReferralLink(
-        "https://www.legends.solar/get-early-access",
+        "https://app.legends.solar/reserve",
         referallCode
       )}
       panelsReserved={currentPanels}

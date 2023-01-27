@@ -208,7 +208,7 @@ export function ProvideReservations({ children }) {
 
   const router = useRouter();
 
-  const { state } = reservation;
+  const { state, redirect } = reservation;
 
   console.log({ state, path: router.pathname });
 
@@ -217,7 +217,7 @@ export function ProvideReservations({ children }) {
       case States.NO_PANELS_RESERVED: {
         if (router.pathname !== "/sign_in") {
           //  let the user nav straight to reserve
-          router.push("./reserve");
+          redirect("./reserve");
         }
         break;
       }
@@ -225,16 +225,13 @@ export function ProvideReservations({ children }) {
       case States.PANELS_RESERVED: {
         if (router.pathname !== "/reserve") {
           //  let user go back to /reserve if they want
-          router.push("./sign_up");
+          redirect("./sign_up");
         }
         break;
       }
 
       case States.LOGGED_IN_NOT_INVESTOR: {
-        router.push({
-          pathname: "./waitlist",
-          query: urlQueryState,
-        });
+        redirect("./waitlist", urlQueryState);
         break;
       }
     }
@@ -278,6 +275,7 @@ interface useReservationsReturnType {
   costPerPanel: number | undefined;
   reservations: Array<any>;
   deleteUserReservation: (id: number) => void;
+  redirect: (newPath: string, params?: any) => void;
 }
 
 const useProvideReservations = (): useReservationsReturnType => {
@@ -364,7 +362,12 @@ const useProvideReservations = (): useReservationsReturnType => {
       });
     }
 
-    return await createNewViralLoopsUser(user);
+    const referallCode =
+      window &&
+      Object.fromEntries(new URL(window.location.href).searchParams)
+        ?.referralCode;
+
+    return await createNewViralLoopsUser(user, referallCode);
   };
 
   const updateUser = async ({
@@ -385,6 +388,25 @@ const useProvideReservations = (): useReservationsReturnType => {
     });
   };
 
+  const redirect = (newPath: string, addedParams = {}) => {
+    const windowParams = window
+      ? Object.fromEntries(new URL(window.location.href).searchParams)
+      : {};
+
+    const query = window
+      ? {
+          ...windowParams,
+          ...addedParams,
+        }
+      : addedParams;
+
+    console.log({ query, windowParams, url: window.location.href });
+    router.push({
+      pathname: newPath,
+      query,
+    });
+  };
+
   return {
     state,
     loading,
@@ -395,7 +417,7 @@ const useProvideReservations = (): useReservationsReturnType => {
     confirmPanels: async () => {
       localStorePanelsReserved(currentPanels ? currentPanels : 0);
       transition();
-      router.push("./sign_up");
+      redirect("./sign_up");
     },
     user,
     logout: async () => {
@@ -478,6 +500,7 @@ const useProvideReservations = (): useReservationsReturnType => {
         },
       });
     },
+    redirect,
   };
 };
 

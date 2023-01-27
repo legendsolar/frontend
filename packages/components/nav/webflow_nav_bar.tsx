@@ -425,7 +425,7 @@ export const WebflowNavBar = ({
 };
 
 export const WebflowNavBarDefault = () => {
-  const { state, logout } = useReservations();
+  const { state, logout, redirect } = useReservations();
   const router = useRouter();
 
   const theme = useTheme();
@@ -440,9 +440,9 @@ export const WebflowNavBarDefault = () => {
     onHowItWorks: () => redirect(EXTERNAL_LINKS.PAGES.HOW_IT_WORKS),
     onTheTeam: () => redirect(EXTERNAL_LINKS.PAGES.TEAM),
     onLogout: logout,
-    onGetEarlyAccess: () => router.push("./reserve"),
-    onCheckStatus: () => router.push("./waitlist"),
-    onLogin: () => router.push("./sign_in"),
+    onGetEarlyAccess: () => redirect("./reserve"),
+    onCheckStatus: () => redirect("./waitlist"),
+    onLogin: () => redirect("./sign_in"),
   };
 
   return <WebflowNavBar {...props}></WebflowNavBar>;

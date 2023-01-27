@@ -33,7 +33,8 @@ export const useViralLoops = (): useViralLoopsReturnType => {
 interface useViralLoopsReturnType {
   getStoredData: () => ViralLoopsUser | undefined;
   createNewViralLoopsUser(
-    user: NewViralLoopsUserInput
+    user: NewViralLoopsUserInput,
+    referralCode?: string
   ): ReturnType<typeof identifyViralLoopsUser>;
   getUserData(email: string): ReturnType<typeof getParticipantMetaData>;
   getReferralLink(baseUrl: string, code: string): string;
@@ -44,9 +45,16 @@ const useProvideViralLoops = (
 ): useViralLoopsReturnType => {
   return {
     getStoredData: () => getViralLoopsStoredData(viralLoopsCampaignId),
-    createNewViralLoopsUser: async (user: NewViralLoopsUserInput) => {
-      console.log({ createNewViralLoopsUser: user });
-      return await identifyViralLoopsUser(viralLoopsCampaignId, user);
+    createNewViralLoopsUser: async (
+      user: NewViralLoopsUserInput,
+      referralCode?: string
+    ) => {
+      console.log({ createNewViralLoopsUser: user, referralCode });
+      return await identifyViralLoopsUser(
+        viralLoopsCampaignId,
+        user,
+        referralCode
+      );
     },
     getUserData: async (email: string) => {
       return await getParticipantMetaData(viralLoopsCampaignId, email);

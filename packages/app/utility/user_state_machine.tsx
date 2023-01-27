@@ -51,7 +51,7 @@ export const userState = ({
 export const UserStateMachine = ({ children }) => {
   const router = useRouter();
   const { isAuthenticating, user } = useAuth();
-  const { loading, reservations } = useReservations();
+  const { loading, reservations, redirect } = useReservations();
 
   const state = userState({
     loadingOrIsAuthenticating: isAuthenticating || loading,
@@ -62,7 +62,7 @@ export const UserStateMachine = ({ children }) => {
   useEffect(() => {
     switch (state) {
       case States.NO_PANELS_RESERVED: {
-        router.push("./reserve");
+        redirect("./reserve");
       }
     }
   }, [state]);
