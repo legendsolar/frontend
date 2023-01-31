@@ -278,6 +278,11 @@ interface useReservationsReturnType {
   reservations: Array<any>;
   deleteUserReservation: (id: number) => void;
   redirect: (newPath: string, params?: any) => void;
+  onKeepMeInTheLoop: (input: {
+    firstName: string;
+    lastName: string;
+    email: string;
+  }) => Promise<void>;
 }
 
 const useProvideReservations = (): useReservationsReturnType => {
@@ -521,6 +526,8 @@ const useProvideReservations = (): useReservationsReturnType => {
       });
     },
     redirect,
+    onKeepMeInTheLoop: async (data) =>
+      await submitUserDataToHubspot({ ...data, panelCount: 0 }),
   };
 };
 

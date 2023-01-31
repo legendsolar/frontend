@@ -2,8 +2,6 @@ import { faArrowLeft } from "@fortawesome/pro-solid-svg-icons";
 import { TimelineComponent } from "@project/components/timeline/timeline_component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { WebflowView } from "@project/components/views/webflow_view";
-import { MetricList } from "@project/components/metrics/metric_list";
-import { PlusMinusNumber } from "@project/components/inputs/plus_minus_number";
 import { LinearGauge } from "@project/components/gauges/linear_gauge";
 import { Stack, Typography, Box, Grid, Button, Tooltip } from "@mui/material";
 import { IconButton } from "../buttons/icon_button";
@@ -35,6 +33,10 @@ import { Image } from "../utils/image";
 import { BorderRight } from "@mui/icons-material";
 import { States } from "../nav/webflow_nav_bar";
 import { EXTERNAL_LINKS } from "@p/utils/webflow/webflowLinking";
+import {
+  DefaultReservePanelComponent,
+  ReservePanelComponent,
+} from "../signup/reserve_panel_component";
 export interface ReservePanelPageProps {
   currentPanels: number;
   setCurrentPanels(panels: number): void;
@@ -82,78 +84,7 @@ export const ReservePanelPage = ({
                 },
               }}
             >
-              <Component
-                shadow
-                background
-                standardWidth={false}
-                sx={{ width: "100%" }}
-              >
-                <Typography variant={"smallHeadline" as any}>
-                  Reserve Panels
-                </Typography>
-
-                <Divider />
-
-                <MetricList
-                  valuePairs={[
-                    {
-                      metric: (
-                        <Stack direction="row">
-                          <Typography
-                            variant={"subtitle3" as any}
-                            color="blackDawn.main"
-                          >
-                            {"Cost Per Panel"}
-                          </Typography>
-                          <Tooltip
-                            title={
-                              "Learn about cost per panel on Legends Solar"
-                            }
-                          >
-                            <Button
-                              href={EXTERNAL_LINKS.LEARN.PANEL_COST}
-                              target={"_blank"}
-                              style={{ fontSize: "18px" }}
-                            >
-                              <FontAwesomeIcon
-                                icon={faInfoCircle}
-                                style={{ color: useThemeColor("blackDawn") }}
-                              />
-                            </Button>
-                          </Tooltip>
-                        </Stack>
-                      ),
-
-                      value: currencyFormatter(costPerPanel),
-                    },
-                    {
-                      metric: "Total Investment",
-                      value: currencyFormatter(currentPanels * costPerPanel),
-                    },
-                  ]}
-                ></MetricList>
-
-                <Stack alignItems={"center"}>
-                  <PlusMinusNumber
-                    state={currentPanels}
-                    incState={() => setCurrentPanels(currentPanels + 1)}
-                    decState={() => setCurrentPanels(currentPanels - 1)}
-                  />
-                </Stack>
-
-                <Button variant={"primary" as any} onClick={confirmPanels}>
-                  Reserve Panels
-                </Button>
-
-                <Stack alignItems={"center"}>
-                  <Typography
-                    variant={"subtitle3" as any}
-                    color={"blackDawn.main"}
-                  >
-                    {"You won't be charged yet"}
-                  </Typography>
-                </Stack>
-              </Component>
+              <DefaultReservePanelComponent />
             </Stack>
           }
           mainContent={

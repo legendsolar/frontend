@@ -2,7 +2,7 @@
 
 export const getHubspotUserId = () => {};
 
-export const submitUserDataToHubspot = ({
+export const submitUserDataToHubspot = async ({
   firstName,
   lastName,
   email,
@@ -17,14 +17,15 @@ export const submitUserDataToHubspot = ({
   const portalId = 20857852;
   const formGuid = "eb418990-8eaf-4483-b9f6-6d157c8c2080";
 
-  submit_hubspot_form(
+  const resp = await submit_hubspot_form(
     portalId,
     formGuid,
     email,
     firstName,
     lastName,
     panelCount
-  ).then((resp) => console.log({ hubspotResponse: resp }));
+  );
+  console.log({ hubspotResponse: resp });
 };
 
 export const submit_hubspot_form = async (

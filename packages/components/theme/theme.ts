@@ -472,7 +472,8 @@ export const appTheme = (
               opacity: 1,
 
               "&:hover": {
-                backgroundColor: paletteOptions.palette.whiteFog.main,
+                backgroundColor: paletteOptions.palette.whiteHaze.main,
+                boxShadow: "none",
               },
             },
           },
