@@ -8,6 +8,7 @@
     "@sentry/nextjs": "^7.34.0",
     "@viral-loops/widgets": "^0.4.35",
     "airtable": "^0.11.5",
+    "hubspot": "^2.3.14",
     "posthog-js": "^1.40.2",
     "react": "*",
     "typescript": "^4.8.4"

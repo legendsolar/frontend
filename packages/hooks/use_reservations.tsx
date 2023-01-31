@@ -21,6 +21,7 @@ import { parseUserDisplayName } from "@p/utils/google_utils";
 import WebflowView from "@project/components/views/webflow_view";
 import { States as NavStates } from "@project/components/nav/webflow_nav_bar";
 import { useAnalytics } from "./use_analytics";
+import { submitUserDataToHubspot } from "./hubspot/hubspot";
 
 const updateUserMutationGQL = gql`
   mutation CreateNewUserMutation(
@@ -364,6 +365,14 @@ const useProvideReservations = (): useReservationsReturnType => {
         },
       });
     }
+
+    // do not await on hubspot, just fire off request
+    submitUserDataToHubspot({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      panelCount: currentPanels,
+    });
 
     const referallCode =
       window &&
