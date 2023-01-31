@@ -40,7 +40,6 @@ export const useProvideAnalytics = ({
   postHogPubliKey,
 }: UseAnalyticsParams) => {
   // auto tracking
-
   const router = useRouter();
 
   useEffect(() => {
