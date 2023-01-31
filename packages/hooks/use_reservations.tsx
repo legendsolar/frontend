@@ -526,8 +526,10 @@ const useProvideReservations = (): useReservationsReturnType => {
       });
     },
     redirect,
-    onKeepMeInTheLoop: async (data) =>
-      await submitUserDataToHubspot({ ...data, panelCount: 0 }),
+    onKeepMeInTheLoop: async (data) => {
+      posthog.capture("onKeepMeInTheLoop");
+      await submitUserDataToHubspot({ ...data, panelCount: 0 });
+    },
   };
 };
 
