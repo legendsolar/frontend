@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { createContext, ReactElement, useContext, useEffect } from "react";
 import posthog, { PostHogConfig } from "posthog-js";
+import * as Sentry from "@sentry/nextjs";
 
 interface useAnalyticsReturnType {
   posthog: typeof posthog;
@@ -51,6 +52,18 @@ export const useProvideAnalytics = ({
         if (process.env.NODE_ENV === "development") posthog.opt_out_capturing();
       },
     });
+
+    const posthogClient = new Sentry.BrowserClient({
+      integrations: [
+        new posthog.SentryIntegration(
+          posthog,
+          "legends-6t",
+          "4504600179507200"
+        ),
+      ],
+    });
+
+    Sentry.getCurrentHub().bindClient(posthogClient);
 
     // Track page views
     const handleRouteChange = () => posthog.capture("$pageview");
