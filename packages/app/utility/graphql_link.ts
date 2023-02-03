@@ -4,49 +4,6 @@ import { setContext } from "@apollo/client/link/context";
 import { getAuth } from "firebase/auth";
 import { GraphQLError } from "graphql";
 
-// const authLink = setContext(async (_, { headers }) => {
-//   // get the authentication token from local storage if it exists
-
-//   const user = getAuth().currentUser;
-
-//   if (!user) {
-//     throwAuthenticationError({
-//       message: "Cannot make GraphQL request, user not authenticated",
-//     });
-//   }
-
-//   try {
-//     const token = await user?.getIdToken();
-
-//     // return the headers to the context so httpLink can read them
-//     return {
-//       headers: {
-//         ...headers,
-//         authorization: token ? `Bearer ${token}` : "",
-//         ["session-id"]: "test",
-//       },
-//     };
-//   } catch (e) {
-//     signOut(getAuth());
-//     throw e;
-//   }
-// });
-
-// // TODO is this causing capcha errors?
-// const errorLink = onError(({ networkError, graphQLErrors }) => {
-//   if (graphQLErrors)
-//     graphQLErrors.forEach(({ message, locations, path }) => {
-//       if (message.includes("Context creation failed")) {
-//         signOut(getAuth());
-//       }
-
-//       console.log(
-//         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-//       );
-//     });
-//   if (networkError) console.log(`[Network error]: ${networkError}`);
-// });
-
 const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_GRAPH_QL_URL,
 });
